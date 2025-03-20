@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "scripts": {
     "build": "turbo run build",
+    "build:handlebars": "turbo run build --filter=handlebars",
     "build:style-dictionary": "turbo run build --filter=style-dictionary"
   },
   "license": "MIT",

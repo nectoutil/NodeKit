@@ -1,4 +1,8 @@
+import packageJson from './package.json' with { type: 'json' };
+
 import copy from 'rollup-plugin-copy';
+import json from '@rollup/plugin-json';
+import replace from '@rollup/plugin-replace';
 import { terser } from 'rollup-plugin-terser';
 import resolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
@@ -12,6 +16,10 @@ export default {
   },
   external: ['style-dictionary'],
   plugins: [
+    replace({
+      __PACKAGE_NAME__: () => JSON.stringify(packageJson.name),
+    }),
+    json(),
     terser(),
     resolve(),
     typescript(),
@@ -20,5 +28,6 @@ export default {
         { src: 'src/filters/*', dest: 'dist/filters' }
       ]
     })
+
   ]
 };

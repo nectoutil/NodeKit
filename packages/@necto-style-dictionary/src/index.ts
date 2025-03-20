@@ -1,5 +1,6 @@
 import DefaultStyleDictionary from 'style-dictionary';
 
+// Filters
 import { isColor } from "./filters/isColor";
 import { isBorder } from "./filters/isBorder";
 import { isFromFile } from './filters/isFromFile';
@@ -9,6 +10,12 @@ import { isFontFamily } from './filters/isFontFamily';
 import { isFontWeight } from './filters/isFontWeight';
 import { isCubicBezier } from "./filters/isCubicBezier";
 import { isColorWithAlpha } from "./filters/isColorWithAlpha";
+
+// Transformers
+import { namePathToDotNotation } from './transformers/namePathToDotNotation';
+
+// Utilities
+import { getTokenValue } from './utilities/getTokenValue';
 
 // Declare the constant first
 const StyleDictionary = DefaultStyleDictionary;
@@ -31,6 +38,7 @@ const StyleDictionary = DefaultStyleDictionary;
 // Export extendable Style Dictionary
 export default StyleDictionary;
 
+// Filters
 export {
   isColor,
   isBorder,
@@ -38,3 +46,13 @@ export {
   isCubicBezier,
   isColorWithAlpha
 };
+
+// Transformers
+export {
+  namePathToDotNotation
+};
+
+// Utilities
+export {
+  getTokenValue
+}

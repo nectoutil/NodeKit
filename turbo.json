@@ -8,6 +8,10 @@
     "style-dictionary#build": {
       "dependsOn": ["^build"],
       "outputs": [".dist/**"]
+    },
+    "handlebars#build": {
+      "dependsOn": ["^build"],
+      "outputs": [".dist/**"]
     }
   }
 }
