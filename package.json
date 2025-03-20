@@ -8,5 +8,8 @@
     "build:package2": "task build:package2",
     "build:package3": "task build:package3"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "typescript": "^5.8.2"
+  }
 }

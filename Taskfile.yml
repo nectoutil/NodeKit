@@ -3,12 +3,11 @@ version: '3'
 tasks:
   build:all:
     cmds:
-      - task: build:package1
-      - task: build:package2
-      - task: build:package3
+      - task: build:style-dictionary
     desc: "Build all packages"
 
-  build:package1:
+  build:style-dictionary:
     cmds:
-      - cd packages/package1 && npm run build
+      - pnpm --filter @necto/styledictionary run build:ts
+      - pnpm --filter @necto/styledictionary run build:rollup
     desc: "Build Style Dictionary utilities and tools"

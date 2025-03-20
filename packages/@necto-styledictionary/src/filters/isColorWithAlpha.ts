@@ -1,4 +1,4 @@
-import { isColor } from './is-color';
+import { isColor } from './isColor';
 
 import type { TransformedToken } from 'style-dictionary/types';
 
