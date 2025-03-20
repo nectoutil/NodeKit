@@ -1,0 +1,28 @@
+header:
+  license:
+    spdx-id: MIT
+    copyright-owner: Corinvo # <3>
+    copyright-year: '' # <25>
+    software-name: skywalking-eyes # <4>
+    content: | # <5>
+      This is a test license file
+
+  paths:
+    - '**'
+
+  paths-ignore:
+    - 'dist'
+    - 'licenses'
+    - '**/*.md'
+    - '**/testdata/**'
+    - '**/go.mod'
+    - '**/go.sum'
+    - 'LICENSE'
+    - 'NOTICE'
+    - '**/assets/languages.yaml'
+    - '**/assets/assets.gen.go'
+
+  comment: on-failure
+
+  license-location-threshold: 80
+
