@@ -1,10 +1,10 @@
 import DefaultStyleDictionary from 'style-dictionary';
 
-import { isColor } from "./filters/color";
-import { isBorder } from "./filters/border";
-import { isDimension } from "./filters/dimension";
-import { isCubicBezier } from "./filters/cubic-bezier";
-import { isColorWithAlpha } from "./filters/color-with-alpha";
+import { isColor } from "./filters/isColor";
+import { isBorder } from "./filters/isBorder";
+import { isDimension } from "./filters/isDimension";
+import { isCubicBezier } from "./filters/isCubicBezier";
+import { isColorWithAlpha } from "./filters/isColorWithAlpha";
 
 // Filters
 [
