@@ -1,0 +1,14 @@
+version: '3'
+
+tasks:
+  build:all:
+    cmds:
+      - task: build:package1
+      - task: build:package2
+      - task: build:package3
+    desc: "Build all packages"
+
+  build:package1:
+    cmds:
+      - cd packages/package1 && npm run build
+    desc: "Build Style Dictionary utilities and tools"

@@ -1,0 +1,12 @@
+{
+  "private": true,
+  "name": "necto-monorepo",
+  "version": "0.0.0",
+  "scripts": {
+    "build": "task build:all",
+    "build:package1": "task build:package1",
+    "build:package2": "task build:package2",
+    "build:package3": "task build:package3"
+  },
+  "license": "MIT"
+}
