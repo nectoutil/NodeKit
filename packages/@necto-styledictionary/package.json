@@ -4,6 +4,7 @@
   "type": "module",
   "description": "Style Dictionary utilities and tools.",
   "scripts": {
+    "build": "npm run build:ts && npm run build:rollup",
     "build:ts": "npx tsc -p ./tsconfig.json",
     "build:rollup": "npx rollup -c"
   },

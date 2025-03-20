@@ -3,11 +3,12 @@
   "name": "necto-monorepo",
   "version": "0.0.0",
   "scripts": {
-    "build": "turbo build",
-    "build:style-dictionary": "task build:style-dictionary",
+    "build": "turbo run build",
+    "build:style-dictionary": "turbo run build --filter=style-dictionary"
   },
   "license": "MIT",
-  "dependencies": {
-    "typescript": "^5.8.2"
-  }
+  "devDependencies": {
+    "turbo": "^2.4.4"
+  },
+  "packageManager": "pnpm@9.15.3"
 }
