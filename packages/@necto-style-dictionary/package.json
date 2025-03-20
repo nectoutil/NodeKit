@@ -1,6 +1,6 @@
 {
-  "name": "@necto/styledictionary",
-  "version": "1.0.0",
+  "name": "@necto/style-dictionary",
+  "version": "1.0.1",
   "type": "module",
   "description": "Style Dictionary utilities and tools.",
   "scripts": {

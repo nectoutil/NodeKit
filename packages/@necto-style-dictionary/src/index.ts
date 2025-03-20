@@ -10,6 +10,9 @@ import { isFontWeight } from './filters/isFontWeight';
 import { isCubicBezier } from "./filters/isCubicBezier";
 import { isColorWithAlpha } from "./filters/isColorWithAlpha";
 
+// Declare the constant first
+const StyleDictionary = DefaultStyleDictionary;
+
 // Filters
 [
   { name: 'isColor', filter: isColor },
@@ -24,9 +27,6 @@ import { isColorWithAlpha } from "./filters/isColorWithAlpha";
 ].forEach(({ name, filter }) => {
   StyleDictionary.registerFilter({ name, filter});
 });
-
-// Declare the constant first
-const StyleDictionary = DefaultStyleDictionary;
 
 // Export extendable Style Dictionary
 export default StyleDictionary;
