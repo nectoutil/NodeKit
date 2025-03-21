@@ -1,6 +1,5 @@
 import packageJson from './package.json' with { type: 'json' };
 
-import copy from 'rollup-plugin-copy';
 import json from '@rollup/plugin-json';
 import replace from '@rollup/plugin-replace';
 import { terser } from 'rollup-plugin-terser';
@@ -22,12 +21,6 @@ export default {
     json(),
     terser(),
     resolve(),
-    typescript(),
-    copy({
-      targets: [
-        { src: 'src/filters/*', dest: 'dist/filters' }
-      ]
-    })
-
+    typescript()
   ]
 };

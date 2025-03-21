@@ -12,5 +12,5 @@ export const namePathToDotNotation: Transform = {
         .map((part: string) => camelCase(part))
         .join('.')
     )
-  },
+  }
 }

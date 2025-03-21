@@ -12,6 +12,7 @@
     ".": "./dist/index.js",
     "./filter/*": "./dist/filter/*"
   },
+  "main": "./dist/index.js",
   "files": [
     "dist/*"
   ],
@@ -26,7 +27,6 @@
     "@rollup/plugin-replace": "^6.0.2",
     "@rollup/plugin-typescript": "^12.1.2",
     "rollup": "^4.36.0",
-    "rollup-plugin-copy": "^3.5.0",
     "rollup-plugin-terser": "^7.0.2",
     "typescript": "^5.8.2"
   },

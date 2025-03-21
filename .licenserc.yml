@@ -1,10 +1,10 @@
 header:
   license:
     spdx-id: MIT
-    copyright-owner: Corinvo # <3>
-    copyright-year: '' # <25>
-    software-name: skywalking-eyes # <4>
-    content: | # <5>
+    copyright-owner: Corinvo
+    copyright-year: ''
+    software-name: skywalking-eyes
+    content: |
       This is a test license file
 
   paths:

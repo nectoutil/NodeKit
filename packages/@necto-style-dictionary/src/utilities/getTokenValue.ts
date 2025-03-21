@@ -6,7 +6,7 @@ const composeValuePropertyErrorMessage = (token: TransformedToken, property: str
   const originalValue = token.original.$value ?? token.original.value;
   const value = token.$value ?? token.value;
 
-  return `[__PACKAGE_NAME__] Invalid property "${property}" of token "${namePathToDotNotation.transform(token, {}, {})}" in file "${
+  return `[__PACKAGE_NAME__]: Invalid property "${property}" of token "${namePathToDotNotation.transform(token, {}, {})}" in file "${
     token.filePath
   }". Transformed property value: "${value?.[property]}". ${
     originalValue ? `Original value: "${originalValue?.[property]}" ` : ''

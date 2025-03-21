@@ -3,7 +3,11 @@ import DefaultStyleDictionary from 'style-dictionary';
 // Filters
 import { isColor } from "./filters/isColor";
 import { isBorder } from "./filters/isBorder";
+import { isNumber } from './filters/isNumber';
+import { isShadow } from './filters/isShadow';
+import { isSource } from './filters/isSource';
 import { isFromFile } from './filters/isFromFile';
+import { isGradient } from './filters/isGradient';
 import { isDuration } from "./filters/isDuration";
 import { isDimension } from "./filters/isDimension";
 import { isFontFamily } from './filters/isFontFamily';
@@ -24,6 +28,10 @@ const StyleDictionary = DefaultStyleDictionary;
 [
   { name: 'isColor', filter: isColor },
   { name: 'isBorder', filter: isBorder },
+  { name: 'isSource', filter: isSource },
+  { name: 'isShadow', filter: isShadow },
+  { name: 'isNumber', filter: isNumber },
+  { name: 'isGradient', filter: isGradient },
   { name: 'isDuration', filter: isDuration },
   // { name: 'isFromFile', filter: isFromFile },
   { name: 'isDimension', filter: isDimension },
@@ -42,6 +50,8 @@ export default StyleDictionary;
 export {
   isColor,
   isBorder,
+  isNumber,
+  isGradient,
   isDimension,
   isCubicBezier,
   isColorWithAlpha
