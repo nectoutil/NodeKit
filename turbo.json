@@ -5,6 +5,10 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**"]
     },
+    "color#build": {
+      "dependsOn": ["^build"],
+      "outputs": [".dist/**"]
+    },
     "style-dictionary#build": {
       "cache": false,
       "dependsOn": ["^build"],
