@@ -12,6 +12,8 @@ importers:
         specifier: ^2.4.4
         version: 2.4.4
 
+  packages/@necto-color: {}
+
   packages/@necto-handlebars:
     devDependencies:
       handlebars:
@@ -20,6 +22,9 @@ importers:
 
   packages/@necto-style-dictionary:
     dependencies:
+      '@necto/color':
+        specifier: workspace:*
+        version: link:../@necto-color
       change-case:
         specifier: ^5.4.4
         version: 5.4.4

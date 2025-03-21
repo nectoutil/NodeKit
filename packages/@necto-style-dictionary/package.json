@@ -31,6 +31,7 @@
     "typescript": "^5.8.2"
   },
   "dependencies": {
+    "@necto/color": "workspace:*",
     "change-case": "^5.4.4"
   }
 }

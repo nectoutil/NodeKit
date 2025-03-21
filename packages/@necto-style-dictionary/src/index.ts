@@ -16,6 +16,7 @@ import { isCubicBezier } from "./filters/isCubicBezier";
 import { isColorWithAlpha } from "./filters/isColorWithAlpha";
 
 // Transformers
+import { colorAlphaToCss } from './transformers/colorAlphaToCss';
 import { namePathToDotNotation } from './transformers/namePathToDotNotation';
 
 // Utilities
@@ -43,6 +44,14 @@ const StyleDictionary = DefaultStyleDictionary;
   StyleDictionary.registerFilter({ name, filter});
 });
 
+// Transformers
+[
+  colorAlphaToCss,
+  namePathToDotNotation
+].forEach((transformer) => {
+  StyleDictionary.registerTransform(transformer);
+});
+
 // Export extendable Style Dictionary
 export default StyleDictionary;
 
@@ -59,6 +68,7 @@ export {
 
 // Transformers
 export {
+  colorAlphaToCss,
   namePathToDotNotation
 };
 
