@@ -15,15 +15,15 @@ class Color {
     }
 
     if (typeof object === 'string') {
-      // if (!model) {
-      //   const parsed = colorString.get(object);
+      if (!model) {
+        const parsed = colorString.get(object);
 
-      //   if (parsed) {
-      //     model = parsed.model as ColorModel;
-      //   } else {
-      //     model = ColorModel.STRING;
-      //   }
-      // }
+        if (parsed) {
+          model = parsed.model as ColorModel;
+        } else {
+          model = ColorModel.STRING;
+        }
+      }
 
       switch (model) {
         case ColorModel.HEX:
