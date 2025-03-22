@@ -1,12 +1,19 @@
-import { ColorModel } from "./types";
 import toHex from "./converters/toHex";
+import toHexa from "./converters/toHexa";
 import toRgba from "./converters/toRgba";
+import toRgbaArray from "./converters/toRgbaArray";
 import toColorString from "./converters/toColorString";
 
-/**
- * @info Color class exports based on Quix-'s Color
- * npm package. This uses preterite converters and parsers export individually.
- */
+enum ColorModel {
+  HEX = 'hex',
+  HEXA = 'hexa',
+  RGB = 'rgb',
+  RGBA = 'rgba',
+  HSL = 'hsl',
+  CMYK = 'cmyk',
+  STRING = 'string'
+}
+
 class Color {
   static [key: string]: any;
   static [key: symbol]: any;
@@ -30,53 +37,57 @@ class Color {
         }
       }
 
-      switch (model) {
-        case ColorModel.HEX: {
-          this.value = object;
-          this.model = ColorModel.HEX;
-          this.toRgba = () => toRgba(this.value);
-          break;
-        }
-
-        default: {
-          this.value = object;
-          this.model = model || ColorModel.STRING;
-          this.toHex = () => toHex(this.value);
-          break;
-        }
-      }
+      this.value = object;
+      this.model = model || ColorModel.STRING;
     } else {
       this.value = object;
       this.model = model || ColorModel.STRING;
-      this.toHex = function() {
-        return toHex(this.value);
-      };
     }
   }
 
-  /**
-   * Static Hex constructor (static method) - named 'hex'
-   */
+  toHex(value: string): string {
+    return toHex(value || this.value);
+  }
+
+  toHexa(value: string): string {
+    return toHexa(value || this.value);
+  }
+
+  toRgba(value: string): string {
+    return toRgba(value || this.value);
+  }
+
+  toRgbaArray(value: string): number[] {
+    return toRgbaArray(value || this.value);
+  }
+
+  get hex(): string {
+    return this.toHex(this.value);
+  }
+
+  get hexa(): string {
+    return this.toHexa(this.value);
+  }
+
+  get rgba(): string {
+    return this.toRgba(this.value);
+  }
+
+  get rgbaArray(): number[] {
+    return this.toRgbaArray(this.value);
+  }
+
   static hex(hexString: string): Color {
     return new Color(hexString, ColorModel.HEX);
   }
 
-  /**
-   * Static RGBA constructor (static method) - named 'hex'
-   */
-  static rgba(rgbaString: string): Color {
-    return new Color(rgbaString, ColorModel.STRING);
+  static hexa(hexaString: string): Color {
+    return new Color(hexaString, ColorModel.HEXA);
   }
 
-  /**
-   * Hex conversion utility (instance method) - named 'hex' now
-   */
-  toHex?(): string;
-
-   /**
-   * Hex conversion utility (instance method) - named 'hex' now
-   */
-   toRgba?(): string;
+  static rgba(rgbaString: string): Color {
+    return new Color(rgbaString, ColorModel.RGBA);
+  }
 }
 
 function ColorFactory(object: any, model?: ColorModel): Color {
@@ -102,6 +113,9 @@ const ColorProxy = new Proxy(Color, {
 
 export {
   toHex,
+  toHexa,
+  toRgba,
+  toRgbaArray,
   toColorString
 };
 
