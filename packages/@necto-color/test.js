@@ -1,6 +1,5 @@
-import { toHex } from "./src";
 import Color from "./dist/index";
 
-const myColor = Color().toHex('#888');
+const color = Color.hex('#888');
 
-console.info(myColor)
+console.info(color.toRgba());

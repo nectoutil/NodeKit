@@ -5,7 +5,7 @@ function parseToRgba(color: string): Array<number> {
     throw new Error('[__PACKAGE_NAME__]: This is not a valid color');
   }
 
-  if (color.trim().toLowerCase() === 'transparent') return [0,0,0,0];
+  if (color.trim().toLowerCase() === 'transparent') return [0, 0, 0, 0];
 
   let normalizedColor = color.trim();
   normalizedColor = /^[a-z]+$/i.test(color) ? nameToHex(color) : color;
@@ -16,13 +16,29 @@ function parseToRgba(color: string): Array<number> {
       ...reducedHexMatch.slice(1, 4).map(char => parseInt(char + char, 16)),
       1
     ];
-  };
+  }
 
   const fullHexMatch = new RegExp(/^#([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})$/i).exec(normalizedColor);
   if (fullHexMatch) {
     return [
       ...fullHexMatch.slice(1, 4).map(hex => parseInt(hex, 16)),
       1
+    ];
+  }
+
+  const reducedHexWithAlphaMatch = new RegExp(/^#([a-f0-9])([a-f0-9])([a-f0-9])([a-f0-9])$/i).exec(normalizedColor);
+  if (reducedHexWithAlphaMatch) {
+    return [
+      ...reducedHexWithAlphaMatch.slice(1, 4).map(char => parseInt(char + char, 16)),
+      parseInt(reducedHexWithAlphaMatch[4] + reducedHexWithAlphaMatch[4], 16) / 255
+    ];
+  }
+
+  const hexWithAlphaMatch = new RegExp(/^#([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})$/i).exec(normalizedColor);
+  if (hexWithAlphaMatch) {
+    return [
+      ...hexWithAlphaMatch.slice(1, 4).map(hex => parseInt(hex, 16)),
+      parseInt(hexWithAlphaMatch[4], 16) / 255
     ];
   }
 
@@ -45,14 +61,14 @@ function parseToRgba(color: string): Array<number> {
 
 function nameToHex(color: string): string {
   const normalizedColorName = color.toLowerCase().trim();
-  const rgb = colorNames[normalizedColorName];
+  const rgb = colorNames[normalizedColorName as keyof typeof colorNames];
 
   if (!rgb) {
     throw new Error(`[__PACKAGE_NAME__]: This is not a valid color name: ${color}`);
   }
 
   return `#${((1 << 24) + (rgb[0] << 16) + (rgb[1] << 8) + rgb[2]).toString(16).slice(1)}`;
-};
+}
 
 function hslToRgb(hue: number, saturation: number, lightness: number): Array<number> {
   const l = lightness / 100;
