@@ -8,7 +8,8 @@
     "build:handlebars": "turbo run build --filter=@necto/handlebars",
     "build:style-dictionary": "turbo run build --filter=@necto/style-dictionary",
     "test": "pnpm exec vitest",
-    "test:color": "pnpm exec vitest --project @necto/color"
+    "test:color": "pnpm exec vitest --project @necto/color",
+    "test:style-dictionary": "pnpm exec vitest --project @necto/style-dictionary"
   },
   "license": "MIT",
   "devDependencies": {

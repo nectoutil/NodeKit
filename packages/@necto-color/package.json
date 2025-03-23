@@ -2,21 +2,19 @@
   "name": "@necto/color",
   "version": "1.0.0",
   "description": "Color conversion utilities and tools.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "type": "module",
   "scripts": {
     "build": "npm run build:rollup",
     "build:rollup": "npx rollup -c",
     "test": "pnpm exec vitest"
   },
-  "keywords": [],
   "author": "Corinvo OSS Team",
   "license": "MIT",
   "dependencies": {
-    "color": "^5.0.0",
+    "color-convert": "^3.0.1",
     "color-name": "^2.0.0",
-    "color-string": "^2.0.1",
-    "color2k": "^2.0.3"
+    "color-string": "^2.0.1"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.26.9",

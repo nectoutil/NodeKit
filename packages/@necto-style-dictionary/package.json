@@ -6,7 +6,8 @@
   "scripts": {
     "build": "npm run build:ts && npm run build:rollup",
     "build:ts": "npx tsc -p ./tsconfig.json",
-    "build:rollup": "npx rollup -c"
+    "build:rollup": "npx rollup -c",
+    "test": "pnpm exec vitest"
   },
   "exports": {
     ".": "./dist/index.js",
@@ -32,6 +33,7 @@
   },
   "dependencies": {
     "@necto/color": "workspace:*",
-    "change-case": "^5.4.4"
+    "change-case": "^5.4.4",
+    "color2k": "^2.0.3"
   }
 }

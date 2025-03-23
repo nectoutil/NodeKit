@@ -20,18 +20,15 @@ importers:
 
   packages/@necto-color:
     dependencies:
-      color:
-        specifier: ^5.0.0
-        version: 5.0.0
+      color-convert:
+        specifier: ^3.0.1
+        version: 3.0.1
       color-name:
         specifier: ^2.0.0
         version: 2.0.0
       color-string:
         specifier: ^2.0.1
         version: 2.0.1
-      color2k:
-        specifier: ^2.0.3
-        version: 2.0.3
     devDependencies:
       '@babel/preset-env':
         specifier: ^7.26.9
@@ -81,6 +78,9 @@ importers:
       change-case:
         specifier: ^5.4.4
         version: 5.4.4
+      color2k:
+        specifier: ^2.0.3
+        version: 2.0.3
       style-dictionary:
         specifier: ^4.3.3
         version: 4.3.3
@@ -1217,10 +1217,6 @@ packages:
 
   color2k@2.0.3:
     resolution: {integrity: sha512-zW190nQTIoXcGCaU08DvVNFTmQhUpnJfVuAKfWqUQkflXKpaDdpaYoM0iluLS9lgJNHyBF58KKA2FBEwkD7wog==}
-
-  color@5.0.0:
-    resolution: {integrity: sha512-16BlyiuyLq3MLxpRWyOTiWsO3ii/eLQLJUQXBSNcxMBBSnyt1ee9YUdaozQp03ifwm5woztEZGDbk9RGVuCsdw==}
-    engines: {node: '>=18'}
 
   commander@12.1.0:
     resolution: {integrity: sha512-Vw8qHK3bZM9y/P10u3Vib8o/DdkvA2OtPtZvD871QKjy74Wj1WSKFILMPRPSdUSx5RFK1arlJzEtA4PkFgnbuA==}
@@ -3295,11 +3291,6 @@ snapshots:
       color-name: 2.0.0
 
   color2k@2.0.3: {}
-
-  color@5.0.0:
-    dependencies:
-      color-convert: 3.0.1
-      color-string: 2.0.1
 
   commander@12.1.0: {}
 
