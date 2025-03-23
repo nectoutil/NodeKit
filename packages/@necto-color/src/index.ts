@@ -5,8 +5,9 @@ import toHexa from "./converters/toHexa";
 import toRgba from "./converters/toRgba";
 import toRgbaArray from "./converters/toRgbaArray";
 
+// This is a horrible and very shit color conversion library.
+//  DO NOT USE, it is build as a temp solution, it will be fixed later!
 class Color {
-  // Allow dynamic access if needed.
   static [key: string]: any;
   static [key: symbol]: any;
 
@@ -16,78 +17,66 @@ class Color {
   private model!: string;
 
   constructor(object: any, model?: string) {
-    // Allow calling without "new"
     if (!(this instanceof Color)) {
       return new Color(object, model);
     }
 
     if (object == null) {
-      this.model = 'rgb';
+      this.model = "rgb";
       this.color = [0, 0, 0];
       this.valpha = 1;
-      this.value = 'rgb(0, 0, 0)';
+      this.value = "rgb(0, 0, 0)";
     } else if (object instanceof Color) {
       this.model = object.model;
       this.valpha = object.valpha;
       this.color = [...object.color];
       this.value = object.value;
-    } else if (typeof object === 'string') {
+    } else if (typeof object === "string") {
       const parsed = colorString.get(object);
       if (parsed === null) {
         throw new Error(`[__PACKAGE_NAME__]: Unable to parse color from string: ${object}`);
       }
 
+      // Preserve the original input value
       this.value = object;
-      let detectedModel: string;
-      if (object.trim().startsWith('#')) {
-        const len = object.trim().length;
-        if (len === 5 || len === 9) {
-          detectedModel = 'hexa';
-        } else {
-          detectedModel = 'hex';
-        }
-      } else {
-        detectedModel = parsed.model;
+
+      // color-string’s 'parsed.model' might be "rgb" or "hsl" (etc.),
+      // and we want to see if there's an alpha channel
+      let detectedModel = parsed.model;
+      const numChannels = parsed.value.length;
+
+      // If we see "rgb" but there are 4 channels, treat it as "rgba" internally
+      // (But remember color-convert doesn’t have an 'rgba' section.)
+      if (detectedModel === "rgb" && numChannels === 4) {
+        detectedModel = "rgba" as any;
       }
 
-      // Special rule: if a model is forced via static method then validate.
-      // For an rgba request, allow a parsed "rgb" if the parsed value includes an alpha channel.
-      if (model) {
-        if (
-          !(model === 'rgba' &&
-            detectedModel === 'rgb' &&
-            parsed.value.length === 4)
-        ) {
-          if (model !== detectedModel) {
-            throw new Error(
-              `[__PACKAGE_NAME__]: Input color model (${detectedModel}) does not match the specified model (${model}).`
-            );
-          }
-        }
+      // If a specific model is provided, validate
+      if (model && model !== detectedModel) {
+        throw new Error(
+          `[__PACKAGE_NAME__]: Input color model (${detectedModel}) does not match the specified model (${model}).`
+        );
       }
 
+      // Save our user-facing model, e.g. "rgba"
       this.model = model || detectedModel;
 
-      const convModel = detectedModel === 'hexa' ? 'hex' : detectedModel;
-      const conv = (convert as any)[convModel];
-      const channels: number | undefined = conv && conv.channels;
-      if (!channels) {
-        throw new Error(`[__PACKAGE_NAME__]: Conversion for model ${detectedModel} is not supported.`);
-      }
+      // For color-convert lookups, revert "rgba" → "rgb"
+      // (Likewise for "hsla" → "hsl", etc.)
+      const colorConvertModel = detectedModel.replace("a", "");
 
+      // Now get channel count from color-convert. E.g. "rgb" → 3 channels
+      const channels = (convert as any)[colorConvertModel].channels;
       this.color = parsed.value.slice(0, channels);
-      this.valpha =
-        detectedModel === 'hex'
-          ? 1
-          : (detectedModel === 'hexa'
-              ? // For hexa inputs, force alpha to 1 if it isn't provided by color-string.
-                (typeof parsed.value[channels] === 'number' ? parsed.value[channels] : 1)
-              : (typeof parsed.value[channels] === 'number' ? parsed.value[channels] : 1));
 
-      // Internally, always store the color in RGB.
-      if (convModel !== 'rgb') {
-        const convertToRgb = conv && conv.rgb;
-        if (typeof convertToRgb === 'function') {
+      // If there's an alpha in parsed.value, store it. Otherwise default to 1.
+      this.valpha =
+        typeof parsed.value[channels] === "number" ? parsed.value[channels] : 1;
+
+      // Convert to RGB for internal usage
+      if (colorConvertModel !== "rgb") {
+        const convertToRgb = (convert as any)[colorConvertModel]?.rgb;
+        if (typeof convertToRgb === "function") {
           this.color = convertToRgb(this.color);
         } else {
           throw new Error(
@@ -95,29 +84,30 @@ class Color {
           );
         }
       }
+
     } else if (Array.isArray(object)) {
-      this.model = model || 'rgb';
+      this.model = model || "rgb";
       this.color = object.slice(0, 3);
-      this.valpha = typeof object[3] === 'number' ? object[3] : 1;
+      this.valpha = typeof object[3] === "number" ? object[3] : 1;
       this.value = `rgba(${this.color[0]}, ${this.color[1]}, ${this.color[2]}, ${this.valpha})`;
     } else {
       throw new Error(`[__PACKAGE_NAME__]: Unsupported color input type.`);
     }
   }
 
-  toHex(value?: string): string {
+  toHex(value: string): string {
     return toHex(value || this.value);
   }
 
-  toHexa(value?: string): string {
+  toHexa(value: string): string {
     return toHexa(value || this.value);
   }
 
-  toRgba(value?: string): string {
+  toRgba(value: string): string {
     return toRgba(value || this.value);
   }
 
-  toRgbaArray(value?: string): number[] {
+  toRgbaArray(value: string): number[] {
     return toRgbaArray(value || this.value);
   }
 
@@ -162,7 +152,6 @@ class Color {
   }
 }
 
-// Factory function and proxy to allow calling without `new`
 function ColorFactory(object: any, model?: string): Color {
   return new Color(object, model);
 }
@@ -179,5 +168,11 @@ const ColorProxy = new Proxy(Color, {
   }
 });
 
-export { toHex, toHexa, toRgba, toRgbaArray };
+export {
+  toHex,
+  toHexa,
+  toRgba,
+  toRgbaArray
+};
+
 export default ColorProxy;

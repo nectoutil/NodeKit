@@ -2,20 +2,20 @@ import Color from "@necto/color";
 import { isColor } from "../filters/isColor";
 import { getTokenValue } from "../utilities/getTokenValue";
 
-import type { PlatformConfig, Transform, TransformedToken } from 'style-dictionary/types';
+import type { Transform, TransformedToken } from 'style-dictionary/types';
 
 export const colorToHex: Transform = {
   name: 'color/hex',
-  type: 'value',
+  type: `value`,
   transitive: true,
   filter: isColor,
-  transform: (token: TransformedToken, config: PlatformConfig) => {
+  transform: (token: TransformedToken) => {
     const alphaValue = token.alpha;
     const color = new Color(getTokenValue(token));
     if (alphaValue === null || alphaValue === undefined || alphaValue === 1) {
       return color.toHex();
     }
-    color.setAlpha(alphaValue);
-    return color.toHex();
-  },
+
+    return color.alpha(alphaValue).hexa;
+  }
 }

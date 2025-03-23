@@ -1,3 +1,4 @@
+import copy from 'rollup-plugin-copy';
 import json from '@rollup/plugin-json';
 import babel from '@rollup/plugin-babel';
 import replace from '@rollup/plugin-replace';
@@ -29,5 +30,10 @@ export default {
     typescript({
       tsconfig: './tsconfig.json',
     }),
+    copy({
+      targets: [
+        { src: 'src/index.d.ts', dest: 'dist' },
+      ]
+    })
   ],
 };

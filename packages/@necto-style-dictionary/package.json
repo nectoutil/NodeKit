@@ -1,6 +1,6 @@
 {
   "name": "@necto/style-dictionary",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "type": "module",
   "description": "Style Dictionary utilities and tools.",
   "scripts": {
@@ -32,7 +32,7 @@
     "typescript": "^5.8.2"
   },
   "dependencies": {
-    "@necto/color": "workspace:*",
+    "@necto/color": "1.0.1",
     "change-case": "^5.4.4",
     "color2k": "^2.0.3"
   }

@@ -13,7 +13,7 @@ export default {
     format: 'esm',
     sourcemap: false,
   },
-  external: ['style-dictionary'],
+  external: ['style-dictionary', '@necto/color'],
   plugins: [
     replace({
       __PACKAGE_NAME__: () => JSON.stringify(packageJson.name),
