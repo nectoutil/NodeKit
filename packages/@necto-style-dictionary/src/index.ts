@@ -128,6 +128,8 @@ export {
   isColor,
   isBorder,
   isNumber,
+  isSource,
+  isDuration,
   isGradient,
   isDimension,
   isCubicBezier,

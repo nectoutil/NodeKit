@@ -10,6 +10,9 @@
   "docModel": {
     "enabled": true
   },
+  "tsdocMetadata": {
+    "enabled": false
+  },
   "dtsRollup": {
     "enabled": false
   }

@@ -1,6 +1,7 @@
 import packageJson from './package.json' with { type: 'json' };
 
 import json from '@rollup/plugin-json';
+import del from 'rollup-plugin-delete';
 import { dts } from "rollup-plugin-dts";
 import replace from '@rollup/plugin-replace';
 import { terser } from 'rollup-plugin-terser';
@@ -37,6 +38,12 @@ export default [
       file: 'dist/index.d.ts',
       format: 'es',
     },
-    plugins: [dts()],
+    plugins: [
+      dts(),
+      del({
+        verbose: true,
+        targets: 'dist/tsdoc-metadata.json'
+      })
+    ],
   },
 ]
