@@ -6,6 +6,7 @@ import { isBorder } from "./filters/isBorder";
 import { isNumber } from './filters/isNumber';
 import { isShadow } from './filters/isShadow';
 import { isSource } from './filters/isSource';
+import { isFromFile } from './filters/isFromFile';
 import { isGradient } from './filters/isGradient';
 import { isDuration } from "./filters/isDuration";
 import { isDimension } from "./filters/isDimension";
@@ -130,6 +131,7 @@ export {
   isNumber,
   isSource,
   isDuration,
+  isFromFile,
   isGradient,
   isDimension,
   isCubicBezier,

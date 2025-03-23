@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { isFontFamily } from '../src/filters/isFontFamily';
+import { isFontFamily } from '../../src/filters/isFontFamily';
 
 function getMockToken({
   $type,

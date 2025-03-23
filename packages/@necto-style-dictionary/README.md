@@ -1,1 +1,3 @@
-Tools and utilities for developing libraries and applications with [Style Dictionary](x).
+<div align="center">
+  <h1>Necto - Style Dictionary Utilities</h1>
+</div>
