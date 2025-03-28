@@ -1,0 +1,16 @@
+{
+  "name": "@necto/sass",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.scss",
+  "files": [
+    "dist",
+    "index.scss"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
