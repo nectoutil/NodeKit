@@ -1,0 +1,29 @@
+{
+  "name": "@necto/id",
+  "version": "1.1.0",
+  "description": "Necto's library for generating algorithmic ID's based on specified parameters.",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsup --minify",
+    "build:watch": "tsup --watch"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "package.json"
+  ],
+  "keywords": [
+    "necto",
+    "corinvo",
+    "nectoutil"
+  ],
+  "peerDependencies": {
+    "@necto/constants": "workspace:*"
+  },
+  "author": "Corinvo OSS Team",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.14.1",
+    "tsup": "^8.4.0"
+  }
+}

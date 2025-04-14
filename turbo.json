@@ -18,6 +18,14 @@
     "handlebars#build": {
       "dependsOn": ["^build"],
       "outputs": [".dist/**"]
+    },
+    "id#build": {
+      "dependsOn": ["^build"],
+      "outputs": [".dist/**"]
+    },
+    "constants#build": {
+      "dependsOn": ["^build"],
+      "outputs": [".dist/**"]
     }
   }
 }

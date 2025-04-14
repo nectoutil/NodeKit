@@ -3,8 +3,11 @@
   "name": "necto-monorepo",
   "version": "0.0.0",
   "scripts": {
+    "changeset": "changeset",
     "build": "turbo run build",
+    "build:id": "turbo run build --filter=@necto/id",
     "build:color": "turbo run build --filter=@necto/color",
+    "build:constants": "turbo run build --filter=@necto/constants",
     "build:handlebars": "turbo run build --filter=@necto/handlebars",
     "build:style-dictionary": "turbo run build --filter=@necto/style-dictionary",
     "test": "pnpm exec vitest",
@@ -13,6 +16,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@changesets/cli": "^2.28.1",
     "ts-node": "^10.9.2",
     "turbo": "^2.4.4",
     "vitest": "^3.0.9"
