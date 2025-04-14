@@ -87,10 +87,16 @@ importers:
       '@necto/constants':
         specifier: workspace:*
         version: link:../@necto-constants
+      randombytes:
+        specifier: ^2.1.0
+        version: 2.1.0
     devDependencies:
       '@types/node':
         specifier: ^22.14.1
         version: 22.14.1
+      '@types/randombytes':
+        specifier: ^2.0.3
+        version: 2.0.3
       tsup:
         specifier: ^8.4.0
         version: 8.4.0(@microsoft/api-extractor@7.52.1(@types/node@22.14.1))(postcss@8.5.3)(typescript@5.8.2)(yaml@2.7.0)
@@ -145,6 +151,12 @@ importers:
       typescript:
         specifier: ^5.8.2
         version: 5.8.2
+
+  test:
+    dependencies:
+      '@necto/id':
+        specifier: workspace:*
+        version: link:../packages/@necto-id
 
 packages:
 
@@ -1196,6 +1208,9 @@ packages:
 
   '@types/node@22.14.1':
     resolution: {integrity: sha512-u0HuPQwe/dHrItgHHpmw3N2fYCR6x4ivMNbPHRkBVP4CvN+kiRrKHWk3i8tXiO/joPwXLMYvF9TTF0eqgHIuOw==}
+
+  '@types/randombytes@2.0.3':
+    resolution: {integrity: sha512-+NRgihTfuURllWCiIAhm1wsJqzsocnqXM77V/CalsdJIYSRGEHMnritxh+6EsBklshC+clo1KgnN14qgSGeQdw==}
 
   '@types/resolve@1.20.2':
     resolution: {integrity: sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==}
@@ -4029,6 +4044,10 @@ snapshots:
   '@types/node@22.14.1':
     dependencies:
       undici-types: 6.21.0
+
+  '@types/randombytes@2.0.3':
+    dependencies:
+      '@types/node': 22.14.1
 
   '@types/resolve@1.20.2': {}
 

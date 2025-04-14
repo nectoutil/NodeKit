@@ -6,7 +6,7 @@
  *
  */
 
-import { webcrypto } from 'node:crypto';
+import randomBytes from 'randombytes';
 import { ALPHABET_COMBINED } from '@necto/constants';
 
 /**
@@ -21,8 +21,7 @@ export function id(length: number = 21, charset: string[] = ALPHABET_COMBINED): 
   }
 
   const charsetLength = charset.length;
-  const randomValues = new Uint8Array(length);
-  webcrypto.getRandomValues(randomValues);
+  const randomValues = randomBytes(length);
 
   return Array.from(randomValues)
     .map((value) => charset[value % charsetLength])
