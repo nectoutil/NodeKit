@@ -6,4 +6,5 @@
  *
  */
 
-export { useGlobalListeners } from "./useGlobalListeners";
+export { useHover } from './useHover';
+export { useGlobalListeners } from './useGlobalListeners';

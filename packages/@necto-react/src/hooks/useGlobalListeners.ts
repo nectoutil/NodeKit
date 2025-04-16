@@ -47,7 +47,7 @@ interface GlobalListeners {
  * A hook that provides utilities for managing global event listeners.
  * It allows adding, removing, and cleaning up event listeners on global targets like `window` or `document`.
  */
-export function useGlobalListeners(): GlobalListeners {
+function useGlobalListeners(): GlobalListeners {
   const globalListeners = useRef<Map<EventListenerOrEventListenerObject, { type: string; eventTarget: EventTarget; options?: boolean | AddEventListenerOptions }>>(new Map());
 
   const addGlobalListener = useCallback(
@@ -89,3 +89,5 @@ export function useGlobalListeners(): GlobalListeners {
 
   return { addGlobalListener, removeGlobalListener, removeAllGlobalListeners };
 }
+
+export { useGlobalListeners };

@@ -14,7 +14,8 @@
     "build:style-dictionary": "turbo run build --filter=@necto/style-dictionary",
     "test": "pnpm exec vitest",
     "test:color": "pnpm exec vitest --project @necto/color",
-    "test:style-dictionary": "pnpm exec vitest --project @necto/style-dictionary"
+    "test:style-dictionary": "pnpm exec vitest --project @necto/style-dictionary",
+    "postinstall": "echo '🚨 Corinvo CLI will be required soon! Install it now to keep developing smoothly. 🚀'"
   },
   "license": "MIT",
   "devDependencies": {
