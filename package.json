@@ -6,6 +6,8 @@
     "changeset": "changeset",
     "build": "turbo run build",
     "build:id": "turbo run build --filter=@necto/id",
+    "build:dom": "turbo run build --filter=@necto/dom",
+    "build:react": "turbo run build --filter=@necto/react",
     "build:color": "turbo run build --filter=@necto/color",
     "build:constants": "turbo run build --filter=@necto/constants",
     "build:handlebars": "turbo run build --filter=@necto/handlebars",

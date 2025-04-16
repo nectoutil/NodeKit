@@ -3,7 +3,7 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**"]
+      "outputs": ["dist/**", "cache/**"]
     },
     "color#build": {
       "cache": false,
@@ -25,7 +25,11 @@
     },
     "constants#build": {
       "dependsOn": ["^build"],
-      "outputs": [".dist/**"]
+      "outputs": ["dist/**"]
+    },
+    "constants#dom": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
     }
   }
 }

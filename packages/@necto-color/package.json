@@ -5,8 +5,8 @@
   "main": "dist/index.js",
   "type": "module",
   "scripts": {
-    "build": "npm run build:rollup",
-    "build:rollup": "npx rollup -c",
+    "build-disabled": "npm run build:rollup",
+    "build-disabled:rollup": "npx rollup -c",
     "test": "pnpm exec vitest"
   },
   "files": [
