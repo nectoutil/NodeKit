@@ -17,7 +17,7 @@ import { useGlobalListeners } from './useGlobalListeners';
 import { getOwnerDocument, nodeContains } from "@necto/dom";
 import { useState, useMemo, useRef, useEffect, useCallback } from 'react';
 
-import type { DOMAttributes, HoverEvent } from '../types';
+import type { DOMAttributes, HoverEvent } from '@necto-react/types';
 
 export interface HoverProps extends HoverEvent {
   isDisabled?: boolean;

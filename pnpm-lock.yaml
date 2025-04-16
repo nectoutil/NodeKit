@@ -21,7 +21,7 @@ importers:
         specifier: ^3.0.9
         version: 3.0.9(@types/node@22.14.1)(terser@5.39.0)(yaml@2.7.0)
 
-  packages/@necto-color:
+  packages/necto-color:
     dependencies:
       color-convert:
         specifier: ^3.0.1
@@ -70,13 +70,13 @@ importers:
         specifier: ^7.0.2
         version: 7.0.2(rollup@4.36.0)
 
-  packages/@necto-constants:
+  packages/necto-constants:
     devDependencies:
       tsup:
         specifier: ^8.4.0
         version: 8.4.0(@microsoft/api-extractor@7.52.1(@types/node@22.14.1))(@swc/core@1.11.21)(postcss@8.5.3)(typescript@5.8.2)(yaml@2.7.0)
 
-  packages/@necto-dom:
+  packages/necto-dom:
     devDependencies:
       '@types/node':
         specifier: ^22.14.1
@@ -85,17 +85,11 @@ importers:
         specifier: ^8.4.0
         version: 8.4.0(@microsoft/api-extractor@7.52.1(@types/node@22.14.1))(@swc/core@1.11.21)(postcss@8.5.3)(typescript@5.8.2)(yaml@2.7.0)
 
-  packages/@necto-handlebars:
-    devDependencies:
-      handlebars:
-        specifier: ^4.7.8
-        version: 4.7.8
-
-  packages/@necto-id:
+  packages/necto-id:
     dependencies:
       '@necto/constants':
         specifier: workspace:*
-        version: link:../@necto-constants
+        version: link:../necto-constants
       randombytes:
         specifier: ^2.1.0
         version: 2.1.0
@@ -110,11 +104,16 @@ importers:
         specifier: ^8.4.0
         version: 8.4.0(@microsoft/api-extractor@7.52.1(@types/node@22.14.1))(@swc/core@1.11.21)(postcss@8.5.3)(typescript@5.8.2)(yaml@2.7.0)
 
-  packages/@necto-react:
+  packages/necto-nuxt: {}
+
+  packages/necto-react-hooks:
     dependencies:
+      '@necto-react/types':
+        specifier: workspace:*
+        version: link:../necto-react-types
       '@necto/dom':
         specifier: workspace:*
-        version: link:../@necto-dom
+        version: link:../necto-dom
       react:
         specifier: ^19.1.0
         version: 19.1.0
@@ -162,9 +161,31 @@ importers:
         specifier: ^2.2.4
         version: 2.2.4(rollup@4.36.0)
 
-  packages/@necto-sass: {}
+  packages/necto-react-router: {}
 
-  packages/@necto-style-dictionary:
+  packages/necto-react-types:
+    dependencies:
+      react:
+        specifier: ^19.1.0
+        version: 19.1.0
+      react-dom:
+        specifier: ^19.1.0
+        version: 19.1.0(react@19.1.0)
+    devDependencies:
+      '@types/node':
+        specifier: ^22.14.1
+        version: 22.14.1
+      '@types/react':
+        specifier: ^19.1.2
+        version: 19.1.2
+      '@types/react-dom':
+        specifier: ^19.1.2
+        version: 19.1.2(@types/react@19.1.2)
+      tsup:
+        specifier: ^8.4.0
+        version: 8.4.0(@microsoft/api-extractor@7.52.1(@types/node@22.14.1))(@swc/core@1.11.21)(postcss@8.5.3)(typescript@5.8.2)(yaml@2.7.0)
+
+  packages/necto-style-dictionary:
     dependencies:
       '@necto/color':
         specifier: 1.0.1
@@ -212,6 +233,10 @@ importers:
       typescript:
         specifier: ^5.8.2
         version: 5.8.2
+
+  packages/necto-vue-components: {}
+
+  packages/necto-vue-hooks: {}
 
 packages:
 
@@ -1967,11 +1992,6 @@ packages:
   graceful-fs@4.2.11:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
 
-  handlebars@4.7.8:
-    resolution: {integrity: sha512-vafaFqs8MZkRrSX7sFVUdo3ap/eNiLnb4IakshzvP56X5Nr1iGKAIqdX6tMlm6HcNRIkr6AxO5jFEoJzzpT8aQ==}
-    engines: {node: '>=0.4.7'}
-    hasBin: true
-
   has-bigints@1.1.0:
     resolution: {integrity: sha512-R3pbpkcIqv2Pm3dUwgjclDRVmWpTJW2DcMzcIhEXEx1oh/CEMObMm3KLmRJOdvhM7o4uQBnwr8pzRK2sJWIqfg==}
     engines: {node: '>= 0.4'}
@@ -2368,9 +2388,6 @@ packages:
     resolution: {integrity: sha512-N8SpfPUnUp1bK+PMYW8qSWdl9U+wwNWI4QKxOYDy9JAro3WMX7p2OeVRF9v+347pnakNevPmiHhNmZ2HbFA76w==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
-
-  neo-async@2.6.2:
-    resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
 
   nice-try@1.0.5:
     resolution: {integrity: sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==}
@@ -3117,11 +3134,6 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
-  uglify-js@3.19.3:
-    resolution: {integrity: sha512-v3Xu+yuwBXisp6QYTcH4UbH+xYJXqnq2m/LtQVWKWzYc1iehYnLixoQDN9FH6/j9/oybfd6W9Ghwkl8+UMKTKQ==}
-    engines: {node: '>=0.8.0'}
-    hasBin: true
-
   unbox-primitive@1.1.0:
     resolution: {integrity: sha512-nWJ91DjeOkej/TA8pXQ3myruKpKEYgqvpw9lz4OPHj/NWFNluYrjbz9j01CJ8yKQd2g4jFoOkINCTW2I5LEEyw==}
     engines: {node: '>= 0.4'}
@@ -3290,9 +3302,6 @@ packages:
     resolution: {integrity: sha512-hUrmaWBdVDcxvYqnyh09zunKzROWjbZTiNy8dBEjkS7ehEDQibXJ7XvlmtbwuTclUiIyN+CyXQD4Vmko8fNm8w==}
     engines: {node: '>=8'}
     hasBin: true
-
-  wordwrap@1.0.0:
-    resolution: {integrity: sha512-gvVzJFlPycKc5dZN4yPkP8w7Dc37BtP1yczEneOb4uq34pXZcvrtRTmWV8W+Ume+XCxKgbjM+nevkyFPMybd4Q==}
 
   wrap-ansi@7.0.0:
     resolution: {integrity: sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==}
@@ -5357,15 +5366,6 @@ snapshots:
 
   graceful-fs@4.2.11: {}
 
-  handlebars@4.7.8:
-    dependencies:
-      minimist: 1.2.8
-      neo-async: 2.6.2
-      source-map: 0.6.1
-      wordwrap: 1.0.0
-    optionalDependencies:
-      uglify-js: 3.19.3
-
   has-bigints@1.1.0: {}
 
   has-flag@3.0.0: {}
@@ -5723,8 +5723,6 @@ snapshots:
       thenify-all: 1.6.0
 
   nanoid@3.3.11: {}
-
-  neo-async@2.6.2: {}
 
   nice-try@1.0.5: {}
 
@@ -6511,9 +6509,6 @@ snapshots:
 
   typescript@5.8.2: {}
 
-  uglify-js@3.19.3:
-    optional: true
-
   unbox-primitive@1.1.0:
     dependencies:
       call-bound: 1.0.4
@@ -6705,8 +6700,6 @@ snapshots:
     dependencies:
       siginfo: 2.0.0
       stackback: 0.0.2
-
-  wordwrap@1.0.0: {}
 
   wrap-ansi@7.0.0:
     dependencies:

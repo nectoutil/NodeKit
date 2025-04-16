@@ -1,0 +1,10 @@
+{
+  "name": "@necto/nuxt",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "echo \"Error: no test specified\""
+  },
+  "author": "Corinvo OSS Team",
+  "license": "MIT"
+}

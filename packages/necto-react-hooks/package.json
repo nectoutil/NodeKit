@@ -1,7 +1,7 @@
 {
-  "name": "@necto/react",
-  "version": "1.4.0",
-  "description": "Necto's library for providing hooks, components and types for React apps.",
+  "name": "@necto-react/hooks",
+  "version": "2.0.0",
+  "description": "Necto's library for providing utility hooks for React applications",
   "type": "module",
   "scripts": {
     "build": "npm-run-all build:*",
@@ -32,6 +32,7 @@
     "rollup-plugin-peer-deps-external": "^2.2.4"
   },
   "peerDependencies": {
+    "@necto-react/types": "workspace:*",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },

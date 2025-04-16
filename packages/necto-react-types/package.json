@@ -1,0 +1,20 @@
+{
+  "name": "@necto-react/types",
+  "version": "2.0.0",
+  "description": "",
+  "scripts": {
+    "build": "tsup --minify"
+  },
+  "author": "Corinvo OSS Team",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.14.1",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "tsup": "^8.4.0"
+  },
+  "peerDependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  }
+}

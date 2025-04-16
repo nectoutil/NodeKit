@@ -2,34 +2,7 @@
   "$schema": "https://turbo.build/schema.json",
   "tasks": {
     "build": {
-      "dependsOn": ["^build"],
       "outputs": ["dist/**", "cache/**"]
-    },
-    "color#build": {
-      "cache": false,
-      "dependsOn": ["^build"],
-      "outputs": [".dist/**"]
-    },
-    "style-dictionary#build": {
-      "cache": false,
-      "dependsOn": ["^build"],
-      "outputs": ["dist/**"]
-    },
-    "handlebars#build": {
-      "dependsOn": ["^build"],
-      "outputs": [".dist/**"]
-    },
-    "id#build": {
-      "dependsOn": ["^build"],
-      "outputs": [".dist/**"]
-    },
-    "constants#build": {
-      "dependsOn": ["^build"],
-      "outputs": ["dist/**"]
-    },
-    "constants#dom": {
-      "dependsOn": ["^build"],
-      "outputs": ["dist/**"]
     }
   }
 }
