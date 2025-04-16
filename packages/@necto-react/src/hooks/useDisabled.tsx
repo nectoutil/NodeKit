@@ -25,9 +25,12 @@ export function useDisabledFlags(): DisabledFlags {
   return useContext(DisabledContext) || {};
 };
 
-export function useDisabled(type: keyof DisabledFlags = 'general'): boolean {
-  const flags = useDisabledFlags();
-  return !!flags[type];
+export function useDisabled(
+  type: keyof DisabledFlags = 'general',
+  defaultFallback: boolean = false
+): boolean {
+  const flags = useContext(DisabledContext) || {};
+  return flags[type] ?? defaultFallback;
 }
 
 export function useDisabledProps(type: keyof DisabledFlags = 'general', extraProps: HTMLAttributes<HTMLElement> = {}): HTMLAttributes<HTMLElement> {
