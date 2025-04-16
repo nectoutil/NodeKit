@@ -33,7 +33,7 @@ export default defineConfig([
       }),
       commonjs(),
       swc(),
-     // terser(),
+     terser(),
       banner2(
         () => COPYRIGHT_BLOCK,
         {

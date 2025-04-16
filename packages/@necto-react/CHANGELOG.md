@@ -1,5 +1,11 @@
 # @necto/react
 
+## 1.4.0
+
+### Minor Changes
+
+- Fixed useDisabled hook
+
 ## 1.3.0
 
 ### Minor Changes

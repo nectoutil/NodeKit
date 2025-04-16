@@ -8,7 +8,7 @@
 
 'use strict';
 
-import { createContext, useContext, useMemo } from "react";
+import { createContext, createElement, useContext, useMemo } from "react";
 
 import type { HTMLAttributes, PropsWithChildren} from "react";
 
@@ -57,9 +57,9 @@ export function DisabledProvider({
   value,
   children,
 }: PropsWithChildren<{ value?: DisabledFlags }>) {
-  return (
-    <DisabledContext.Provider value={value || {}}>
-      {children}
-    </DisabledContext.Provider>
+  return createElement(
+    DisabledContext.Provider,
+    { value: value || {} },
+    children
   );
 }
