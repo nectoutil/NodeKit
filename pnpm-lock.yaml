@@ -106,6 +106,18 @@ importers:
 
   packages/necto-nuxt: {}
 
+  packages/necto-react-helpers:
+    dependencies:
+      '@necto/dom':
+        specifier: workspace:*
+        version: link:../necto-dom
+      react:
+        specifier: ^19.1.0
+        version: 19.1.0
+      react-dom:
+        specifier: ^19.1.0
+        version: 19.1.0(react@19.1.0)
+
   packages/necto-react-hooks:
     dependencies:
       '@necto-react/types':

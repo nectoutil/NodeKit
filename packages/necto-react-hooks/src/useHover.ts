@@ -21,6 +21,9 @@ import type { DOMAttributes, HoverEvent } from '@necto-react/types';
 
 export interface HoverProps extends HoverEvent {
   isDisabled?: boolean;
+  onHoverStart?: (event: HoverEvent) => void;
+  onHoverEnd?: (event: HoverEvent) => void;
+  onHoverChange?: (isHovered: boolean) => void;
 }
 
 export interface HoverResult {
@@ -33,7 +36,7 @@ export interface HoverResult {
 let globalIgnoreEmulatedMouseEvents = false;
 let hoverCount = 0;
 
-function setGlobalIgnoreEmulatedMouseEvents() {
+export function setGlobalIgnoreEmulatedMouseEvents() {
   globalIgnoreEmulatedMouseEvents = true;
 
   setTimeout(() => {

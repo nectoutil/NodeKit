@@ -7,5 +7,8 @@
  */
 
 export * from './useHover';
+export * from './useFocus';
 export * from './useDisabled';
+export * from './useFocusRing';
 export * from './useGlobalListeners';
+export * from './useSyntheticBlurEvent';

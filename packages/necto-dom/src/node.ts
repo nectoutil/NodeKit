@@ -47,3 +47,26 @@ export function nodeContains(
 
   return false;
 }
+
+export const getActiveElement = (doc: Document = document, supportShadowDOM: boolean = true): Element | null => {
+  if (!supportShadowDOM) {
+    return doc.activeElement;
+  }
+  let activeElement: Element | null = doc.activeElement;
+
+  while (activeElement && 'shadowRoot' in activeElement &&
+  activeElement.shadowRoot?.activeElement) {
+    activeElement = activeElement.shadowRoot.activeElement;
+  }
+
+  return activeElement;
+};
+
+export function getEventTarget<T extends Event>(event: T, supportShadowDOM: boolean = true): Element {
+  if (supportShadowDOM && (event.target as HTMLElement).shadowRoot) {
+    if (event.composedPath) {
+      return event.composedPath()[0] as Element;
+    }
+  }
+  return event.target as Element;
+}

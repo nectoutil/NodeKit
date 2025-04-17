@@ -28,3 +28,5 @@ export interface DOMAttributes<T = FocusableElement> extends AriaAttributes, Rea
   style?: CSSProperties | undefined,
   className?: string | undefined
 };
+
+export interface FocusableElement extends Element, HTMLOrSVGElement {};
