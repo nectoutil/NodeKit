@@ -1,17 +1,37 @@
+/**
+ * Copyright (c) Corinvo, LLC. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ * Portions of this code are based on the React Aria Spectrum library by Adobe,
+ * licensed under the Apache License, Version 2.0.
+ * See: https://github.com/adobe/react-spectrum
+ *
+ * Modifications have been made to adapt the code for use in this project.
+ */
+
 'use strict';
 
 import { useEffect } from "react";
-import { isKeyboardFocusEvent } from "@necto-react/helpers";
+import { isMac } from "@necto/platform";
 import { getOwnerWindow, getOwnerDocument } from "@necto/dom";
+import { isKeyboardFocusEvent, isVirtualClick } from "@necto-react/helpers";
 
 export type FocusVisibleHandler = (isFocusVisible: boolean) => void;
 interface GlobalListenerData {
-  focus: () => void
+  focus: () => void;
+  teardown: () => void;
 }
 
+// this should be modified by other functions
+export let ignoreFocusEvent = false;
+
+
+let hasBlurredWindowRecently = false;
 type HandlerEvent = PointerEvent | MouseEvent | KeyboardEvent | FocusEvent | null;
 type Handler = (modality: Modality, e: HandlerEvent) => void;
-export type Modality = 'keyboard' | 'pointer' | 'virtual';
+type Modality = 'keyboard' | 'pointer' | 'virtual';
 let changeHandlers = new Set<Handler>();
 let currentModality: null | Modality = null;
 let hasEventBeforeFocus = false;
@@ -26,15 +46,19 @@ function handleKeyboardEvent(e: KeyboardEvent) {
   hasEventBeforeFocus = true;
   if (isValidKey(e)) {
     currentModality = 'keyboard';
-    triggerChangeHandlers('keyboard', e);
+    for (let handler of changeHandlers) {
+      handler('keyboard', e);
+    }
   }
 }
 
-function handlePointerEvent(e: PointerEvent | MouseEvent) {
+function handlePointerEvent(e: Event) {
+  const pointerEvent = e as PointerEvent | MouseEvent;
   currentModality = 'pointer';
   if (e.type === 'mousedown' || e.type === 'pointerdown') {
-    hasEventBeforeFocus = true;
-    triggerChangeHandlers('pointer', e);
+    for (let handler of changeHandlers) {
+      handler('pointer', pointerEvent);
+    }
   }
 }
 
@@ -57,7 +81,9 @@ function handleFocusEvent(e: FocusEvent) {
   // This occurs, for example, when navigating a form with the next/previous buttons on iOS.
   if (!hasEventBeforeFocus && !hasBlurredWindowRecently) {
     currentModality = 'virtual';
-    triggerChangeHandlers('virtual', e);
+    for (let handler of changeHandlers) {
+      handler('virtual', e);
+    }
   }
 
   hasEventBeforeFocus = false;
@@ -105,13 +131,13 @@ function setupGlobalFocusEvents(element?: HTMLElement | null) {
 
   // Event listener configs
   const docEvents: [string, EventListenerOrEventListenerObject, boolean][] = [
-    ['keydown', handleKeyboardEvent, true],
-    ['keyup', handleKeyboardEvent, true],
-    ['click', handleClickEvent, true],
+    ['keydown', handleKeyboardEvent as EventListener, true],
+    ['keyup', handleKeyboardEvent as EventListener, true],
+    ['click', handleClickEvent as EventListener, true],
   ];
 
   const winEvents: [string, EventListenerOrEventListenerObject, boolean][] = [
-    ['focus', handleFocusEvent, true],
+    ['focus', handleFocusEvent as EventListener, true],
     ['blur', handleWindowBlur, false],
   ];
 
@@ -153,7 +179,7 @@ function setupGlobalFocusEvents(element?: HTMLElement | null) {
       windowObject.removeEventListener(type, handler, capture);
     });
 
-    windowObject.removeEventListener('beforeunload', teardown, { once: true });
+    windowObject.removeEventListener('beforeunload', teardown);
 
     hasSetupGlobalListeners.delete(windowObject);
   }

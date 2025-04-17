@@ -74,8 +74,7 @@ export function useFocus<Target extends FocusableElement = FocusableElement>(pro
   // Return focus props
   return {
     focusProps: {
-      onFocus: !isDisabled ? onFocus : undefined,
-      onBlur: !isDisabled ? onBlur : undefined,
-    },
+      ...(isDisabled ? {} : { onFocus, onBlur }),
+    } as DOMAttributes<Target>,
   };
 }

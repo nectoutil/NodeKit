@@ -1,28 +1,29 @@
 {
   "name": "@necto-react/helpers",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Necto's library for providing global helpers React applications",
   "type": "module",
   "scripts": {
-    "build": "npm-run-all build:*",
-    "build:rollup": "rollup -c"
+    "build": "tsup --minify"
   },
   "files": [
     "dist",
     "README.md"
   ],
   "types": "dist/index.d.ts",
-  "main": "./dist/index.js",
-  "module": "./dist/index.es.js",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
   "author": "Corinvo OSS Team",
   "license": "MIT",
   "devDependencies": {
+    "tsup": "^8.4.0"
   },
   "peerDependencies": {
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
   "dependencies": {
-    "@necto/dom": "workspace:*"
+    "@necto/dom": "workspace:*",
+    "@necto/platform": "workspace:*"
   }
 }

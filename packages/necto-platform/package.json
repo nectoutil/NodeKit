@@ -1,0 +1,20 @@
+{
+  "name": "@necto/platform",
+  "version": "1.1.0",
+  "description": "Necto's library for detecting platforms, devices, other device related information.",
+  "scripts": {
+    "build": "tsup --minify"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "types": "dist/index.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "author": "Corinvo OSS Team",
+  "license": "MIT",
+  "devDependencies": {
+    "tsup": "^8.4.0"
+  }
+}

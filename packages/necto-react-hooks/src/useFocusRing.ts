@@ -14,9 +14,14 @@
 'use strict';
 
 import { useFocus } from './useFocus';
+import { useFocusWithin } from './useFocusWithin';
 import { useCallback, useRef, useState } from 'react';
+import { useFocusVisibleListener } from "./useFocusVisibleListener";
 
 import type { DOMAttributes } from '@necto-react/types';
+
+export type Modality = 'keyboard' | 'pointer' | 'virtual';
+let currentModality: null | Modality = null;
 
 export interface FocusRingProps {
   within?: boolean;
@@ -24,13 +29,13 @@ export interface FocusRingProps {
   autoFocus?: boolean;
 }
 
-export interface FocusResult {
+export interface FocusRingResult {
   isFocused: boolean;
   isFocusVisible: boolean;
   focusProps: DOMAttributes;
 }
 
-export function useFocusRing(props: FocusRingProps = {}): FocusResult {
+export function useFocusRing(props: FocusRingProps = {}): FocusRingResult {
   let {
     autoFocus = false,
     isTextInput,
@@ -39,14 +44,14 @@ export function useFocusRing(props: FocusRingProps = {}): FocusResult {
 
   let state = useRef({
     isFocused: false,
-    isFocusVisible: autoFocus || isFocusVisible()
+    isFocusVisible: autoFocus || currentModality !== 'pointer'
   });
   let [isFocused, setFocused] = useState(false);
   let [isFocusVisibleState, setFocusVisible] = useState(() => state.current.isFocused && state.current.isFocusVisible);
 
   let updateState = useCallback(() => setFocusVisible(state.current.isFocused && state.current.isFocusVisible), []);
 
-  let onFocusChange = useCallback(isFocused => {
+  let onFocusChange = useCallback((isFocused: boolean): void => {
     state.current.isFocused = isFocused;
     setFocused(isFocused);
     updateState();

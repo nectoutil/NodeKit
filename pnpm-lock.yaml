@@ -106,26 +106,45 @@ importers:
 
   packages/necto-nuxt: {}
 
+  packages/necto-platform:
+    devDependencies:
+      tsup:
+        specifier: ^8.4.0
+        version: 8.4.0(@microsoft/api-extractor@7.52.1(@types/node@22.14.1))(@swc/core@1.11.21)(postcss@8.5.3)(typescript@5.8.2)(yaml@2.7.0)
+
   packages/necto-react-helpers:
     dependencies:
       '@necto/dom':
         specifier: workspace:*
         version: link:../necto-dom
+      '@necto/platform':
+        specifier: workspace:*
+        version: link:../necto-platform
       react:
         specifier: ^19.1.0
         version: 19.1.0
       react-dom:
         specifier: ^19.1.0
         version: 19.1.0(react@19.1.0)
+    devDependencies:
+      tsup:
+        specifier: ^8.4.0
+        version: 8.4.0(@microsoft/api-extractor@7.52.1(@types/node@22.14.1))(@swc/core@1.11.21)(postcss@8.5.3)(typescript@5.8.2)(yaml@2.7.0)
 
   packages/necto-react-hooks:
     dependencies:
+      '@necto-react/helpers':
+        specifier: workspace:*
+        version: link:../necto-react-helpers
       '@necto-react/types':
         specifier: workspace:*
         version: link:../necto-react-types
       '@necto/dom':
         specifier: workspace:*
         version: link:../necto-dom
+      '@necto/platform':
+        specifier: workspace:*
+        version: link:../necto-platform
       react:
         specifier: ^19.1.0
         version: 19.1.0

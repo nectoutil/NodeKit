@@ -10,7 +10,7 @@
 
 import { createContext, createElement, useContext, useMemo } from "react";
 
-import type { HTMLAttributes, PropsWithChildren} from "react";
+import type { HTMLAttributes, PropsWithChildren } from "react";
 
 type DisabledFlags = {
   general?: boolean;
