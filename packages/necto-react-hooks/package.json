@@ -1,8 +1,7 @@
 {
   "name": "@necto-react/hooks",
-  "version": "2.1.0",
+  "version": "2.6.0",
   "description": "Necto's library for providing utility hooks for React applications",
-  "type": "module",
   "scripts": {
     "build": "npm-run-all build:*",
     "build:rollup": "rollup -c"

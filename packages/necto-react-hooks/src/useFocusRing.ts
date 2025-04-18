@@ -35,46 +35,54 @@ export interface FocusRingResult {
   focusProps: DOMAttributes;
 }
 
-export function useFocusRing(props: FocusRingProps = {}): FocusRingResult {
-  let {
-    autoFocus = false,
-    isTextInput,
-    within
-  } = props;
-
-  let state = useRef({
+export function useFocusRing({
+  within = false,
+  isTextInput = false,
+  autoFocus = false,
+}: FocusRingProps = {}): FocusRingResult {
+  const state = useRef({
     isFocused: false,
-    isFocusVisible: autoFocus || currentModality !== 'pointer'
+    isFocusVisible: autoFocus || currentModality !== 'pointer',
   });
-  let [isFocused, setFocused] = useState(false);
-  let [isFocusVisibleState, setFocusVisible] = useState(() => state.current.isFocused && state.current.isFocusVisible);
 
-  let updateState = useCallback(() => setFocusVisible(state.current.isFocused && state.current.isFocusVisible), []);
+  const [isFocused, setFocused] = useState(false);
+  const [isFocusVisible, setFocusVisible] = useState(() => state.current.isFocused && state.current.isFocusVisible);
 
-  let onFocusChange = useCallback((isFocused: boolean): void => {
-    state.current.isFocused = isFocused;
-    setFocused(isFocused);
-    updateState();
-  }, [updateState]);
+  const updateFocusVisibleState = useCallback(() => {
+    setFocusVisible(state.current.isFocused && state.current.isFocusVisible);
+  }, []);
 
-  useFocusVisibleListener((isFocusVisible) => {
-    state.current.isFocusVisible = isFocusVisible;
-    updateState();
-  }, [], {isTextInput});
+  const handleFocusChange = useCallback(
+    (focused: boolean) => {
+      state.current.isFocused = focused;
+      setFocused(focused);
+      updateFocusVisibleState();
+    },
+    [updateFocusVisibleState]
+  );
 
-  let {focusProps} = useFocus({
+  useFocusVisibleListener(
+    (focusVisible) => {
+      state.current.isFocusVisible = focusVisible;
+      updateFocusVisibleState();
+    },
+    [],
+    { isTextInput }
+  );
+
+  const { focusProps } = useFocus({
     isDisabled: within,
-    onFocusChange
+    onFocusChange: handleFocusChange,
   });
 
-  let {focusWithinProps} = useFocusWithin({
+  const { focusWithinProps } = useFocusWithin({
     isDisabled: !within,
-    onFocusWithinChange: onFocusChange
+    onFocusWithinChange: handleFocusChange,
   });
 
   return {
     isFocused,
-    isFocusVisible: isFocusVisibleState,
-    focusProps: within ? focusWithinProps : focusProps
+    isFocusVisible,
+    focusProps: within ? focusWithinProps : focusProps,
   };
 }

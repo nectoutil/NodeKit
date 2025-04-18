@@ -1,0 +1,27 @@
+{
+  "name": "@necto/props-merge",
+  "version": "1.1.0",
+  "description": "",
+  "scripts": {
+    "build": "tsup --minify"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "types": "dist/index.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "keywords": [],
+  "author": "Corinvo OSS Team",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.14.1",
+    "@types/react": "^19.1.2",
+    "react": "^19.1.0",
+    "tsup": "^8.4.0"
+  },
+  "peerDependencies": {
+    "react": "^19.1.0"
+  }
+}

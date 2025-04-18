@@ -1,5 +1,35 @@
 # @necto-react/hooks
 
+## 2.6.0
+
+### Minor Changes
+
+- Added new pkg
+
+## 2.5.0
+
+### Minor Changes
+
+- Added new package
+
+## 2.4.0
+
+### Minor Changes
+
+- Fixed errors
+
+## 2.3.0
+
+### Minor Changes
+
+- Fixed some errors
+
+## 2.2.0
+
+### Minor Changes
+
+- Fixed some errors
+
 ## 2.1.0
 
 ### Minor Changes
