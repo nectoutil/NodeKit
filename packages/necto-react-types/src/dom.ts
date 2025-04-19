@@ -16,12 +16,6 @@ import {
 export interface FocusableElement extends Element, HTMLOrSVGElement {};
 
 export interface DOMAttributes<T = FocusableElement> extends AriaAttributes, ReactDOMAttributes<T> {
-  onMouseLeave: (event: any) => void;
-  onMouseEnter: (event: any) => void;
-  onTouchStart: () => void;
-  onPointerLeave: (event: any) => void;
-  onPointerEnter: (event: any) => void;
-
   id?: string | undefined,
   role?: AriaRole | undefined,
   tabIndex?: number | undefined,

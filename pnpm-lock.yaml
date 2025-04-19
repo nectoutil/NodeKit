@@ -112,6 +112,21 @@ importers:
         specifier: ^8.4.0
         version: 8.4.0(@microsoft/api-extractor@7.52.1(@types/node@22.14.1))(@swc/core@1.11.21)(postcss@8.5.3)(typescript@5.8.2)(yaml@2.7.0)
 
+  packages/necto-props-merge:
+    devDependencies:
+      '@types/node':
+        specifier: ^22.14.1
+        version: 22.14.1
+      '@types/react':
+        specifier: ^19.1.2
+        version: 19.1.2
+      react:
+        specifier: ^19.1.0
+        version: 19.1.0
+      tsup:
+        specifier: ^8.4.0
+        version: 8.4.0(@microsoft/api-extractor@7.52.1(@types/node@22.14.1))(@swc/core@1.11.21)(postcss@8.5.3)(typescript@5.8.2)(yaml@2.7.0)
+
   packages/necto-react-helpers:
     dependencies:
       '@necto/dom':
@@ -151,6 +166,9 @@ importers:
       react-dom:
         specifier: ^19.1.0
         version: 19.1.0(react@19.1.0)
+      std-env:
+        specifier: ^3.9.0
+        version: 3.9.0
     devDependencies:
       '@rollup/plugin-commonjs':
         specifier: ^28.0.3
@@ -212,6 +230,12 @@ importers:
       '@types/react-dom':
         specifier: ^19.1.2
         version: 19.1.2(@types/react@19.1.2)
+      tsup:
+        specifier: ^8.4.0
+        version: 8.4.0(@microsoft/api-extractor@7.52.1(@types/node@22.14.1))(@swc/core@1.11.21)(postcss@8.5.3)(typescript@5.8.2)(yaml@2.7.0)
+
+  packages/necto-strings:
+    devDependencies:
       tsup:
         specifier: ^8.4.0
         version: 8.4.0(@microsoft/api-extractor@7.52.1(@types/node@22.14.1))(@swc/core@1.11.21)(postcss@8.5.3)(typescript@5.8.2)(yaml@2.7.0)
@@ -2926,6 +2950,9 @@ packages:
 
   std-env@3.8.1:
     resolution: {integrity: sha512-vj5lIj3Mwf9D79hBkltk5qmkFI+biIKWS2IBxEyEU3AX1tUf7AoL8nSazCOiiqQsGKIq01SClsKEzweu34uwvA==}
+
+  std-env@3.9.0:
+    resolution: {integrity: sha512-UGvjygr6F6tpH7o2qyqR6QYpwraIjKSdtzyBdyytFOHmPZY917kwdwLG0RbOjWOnKmnm3PeHjaoLLMie7kPLQw==}
 
   stream@0.0.3:
     resolution: {integrity: sha512-aMsbn7VKrl4A2T7QAQQbzgN7NVc70vgF5INQrBXqn4dCXN1zy3L9HGgLO5s7PExmdrzTJ8uR/27aviW8or8/+A==}
@@ -6264,6 +6291,8 @@ snapshots:
   stackback@0.0.2: {}
 
   std-env@3.8.1: {}
+
+  std-env@3.9.0: {}
 
   stream@0.0.3:
     dependencies:

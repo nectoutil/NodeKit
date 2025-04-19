@@ -13,10 +13,12 @@
 
 'use strict';
 
+import { isTest } from 'std-env';
 import { useGlobalListeners } from './useGlobalListeners';
 import { getOwnerDocument, nodeContains } from "@necto/dom";
 import { useState, useMemo, useRef, useEffect, useCallback } from 'react';
 
+import type { PointerEvent, MouseEvent } from 'react';
 import type { DOMAttributes, HoverEvent } from '@necto-react/types';
 
 export interface HoverProps extends HoverEvent {
@@ -31,64 +33,82 @@ export interface HoverResult {
   isHovered: boolean;
 }
 
-// See https://github.com/adobe/react-spectrum/blob/main/packages/%40react-aria/interactions/src/useHover.ts#L33C1-L38C1
-// as well as https://bugs.webkit.org/show_bug.cgi?id=214609.
-let globalIgnoreEmulatedMouseEvents = false;
-let hoverCount = 0;
-
-export function setGlobalIgnoreEmulatedMouseEvents() {
-  globalIgnoreEmulatedMouseEvents = true;
-
-  setTimeout(() => {
-    globalIgnoreEmulatedMouseEvents = false;
-  }, 50);
-}
-
 export function useHover(props: HoverProps): HoverResult {
   const { onHoverStart, onHoverChange, onHoverEnd, isDisabled } = props;
 
   const [isHovered, setHovered] = useState(false);
-  const state = useRef<{
-    isHovered: boolean;
-    ignoreEmulatedMouseEvents: boolean;
-    pointerType: string;
-    target: EventTarget | null;
-  }>({
+  const globalRef = useRef({ hoverCount: 0, ignoreEmulated: false });
+  const state = useRef({
     isHovered: false,
     ignoreEmulatedMouseEvents: false,
     pointerType: '',
-    target: null,
-  });
+    target: null as EventTarget | null,
+  }).current;
 
   const { addGlobalListener, removeAllGlobalListeners } = useGlobalListeners();
 
-  const triggerHoverStart = useCallback(
-    (event: any, pointerType: string) => {
-      const currentState = state.current;
-      currentState.pointerType = pointerType;
+  const setGlobalIgnoreEmulatedMouseEvents = useCallback(() => {
+    globalRef.current.ignoreEmulated = true;
+    setTimeout(() => {
+      globalRef.current.ignoreEmulated = false;
+    }, 50);
+  }, []);
 
+  useEffect(() => {
+    const handleGlobalPointerEvent = (e: PointerEvent) => {
+      if (e.pointerType === 'touch') {
+        setGlobalIgnoreEmulatedMouseEvents();
+      }
+    };
+
+    if (typeof document === 'undefined') return;
+
+    const global = globalRef.current;
+    global.hoverCount++;
+
+    if (typeof PointerEvent !== 'undefined') {
+      document.addEventListener('pointerup', handleGlobalPointerEvent);
+    } else if (isTest) {
+      document.addEventListener('touchend', setGlobalIgnoreEmulatedMouseEvents);
+    }
+
+    return () => {
+      global.hoverCount--;
+      if (global.hoverCount === 0) {
+        if (typeof PointerEvent !== 'undefined') {
+          document.removeEventListener('pointerup', handleGlobalPointerEvent);
+        } else if (isTest) {
+          document.removeEventListener('touchend', setGlobalIgnoreEmulatedMouseEvents);
+        }
+      }
+    };
+  }, [setGlobalIgnoreEmulatedMouseEvents]);
+
+  const triggerHoverStart = useCallback(
+    (event: PointerEvent | MouseEvent, pointerType: string) => {
       if (
         isDisabled ||
         pointerType === 'touch' ||
-        currentState.isHovered ||
-        !event.currentTarget.contains(event.target)
+        state.isHovered ||
+        !(event.currentTarget && (event.currentTarget as Element).contains(event.target as Node))
       ) {
         return;
       }
 
-      currentState.isHovered = true;
-      currentState.target = event.currentTarget;
+      state.isHovered = true;
+      state.pointerType = pointerType;
+      state.target = event.currentTarget;
 
       addGlobalListener(
-        getOwnerDocument(event.target),
+        getOwnerDocument(event.target instanceof Element ? event.target : null),
         'pointerover',
-        (e: any) => {
+        (e: Event) => {
           if (
-            currentState.isHovered &&
-            currentState.target &&
-            !nodeContains(currentState.target, e.target as Element)
+            state.isHovered &&
+            state.target &&
+            !nodeContains(state.target as Element, e.target as Element)
           ) {
-            triggerHoverEnd(e, e.pointerType);
+            triggerHoverEnd(e as unknown as PointerEvent, (e as unknown as PointerEvent).pointerType);
           }
         },
         { capture: true }
@@ -107,16 +127,14 @@ export function useHover(props: HoverProps): HoverResult {
   );
 
   const triggerHoverEnd = useCallback(
-    (event: any, pointerType: string) => {
-      const currentState = state.current;
-
-      if (pointerType === 'touch' || !currentState.isHovered || !currentState.target) {
+    (event: PointerEvent | MouseEvent, pointerType: string) => {
+      if (pointerType === 'touch' || !state.isHovered || !state.target) {
         return;
       }
 
-      currentState.isHovered = false;
-      currentState.pointerType = '';
-      currentState.target = null;
+      state.isHovered = false;
+      state.pointerType = '';
+      state.target = null;
 
       removeAllGlobalListeners();
 
@@ -133,40 +151,34 @@ export function useHover(props: HoverProps): HoverResult {
   );
 
   const hoverProps = useMemo(() => {
-    const props: DOMAttributes = {
-      onMouseLeave: () => {},
-      onMouseEnter: () => {},
-      onTouchStart: () => {},
-      onPointerLeave: () => {},
-      onPointerEnter: () => {},
-    };
+    const props: DOMAttributes = {};
 
     if (typeof PointerEvent !== 'undefined') {
-      props.onPointerEnter = (e: any) => {
-        if (globalIgnoreEmulatedMouseEvents && e.pointerType === 'mouse') return;
-        triggerHoverStart(e, e.pointerType);
+      props.onPointerEnter = (e: PointerEvent<Element>) => {
+        if (globalRef.current.ignoreEmulated && e.pointerType === 'mouse') return;
+        triggerHoverStart(e as unknown as PointerEvent, e.pointerType);
       };
-      props.onPointerLeave = (e: any) => {
-        if (!isDisabled && e.currentTarget.contains(e.target as Element)) {
-          triggerHoverEnd(e, e.pointerType);
+
+      props.onPointerLeave = (e: PointerEvent<Element>) => {
+        if (!isDisabled && e.currentTarget instanceof Element && e.currentTarget.contains(e.target as Node)) {
+          triggerHoverEnd(e as unknown as PointerEvent, e.pointerType);
         }
       };
-    } else {
+    } else if (isTest) {
       props.onTouchStart = () => {
-        state.current.ignoreEmulatedMouseEvents = true;
+        state.ignoreEmulatedMouseEvents = true;
       };
-      props.onMouseEnter = (e: any) => {
-        if (
-          !state.current.ignoreEmulatedMouseEvents &&
-          !globalIgnoreEmulatedMouseEvents
-        ) {
-          triggerHoverStart(e, 'mouse');
+
+      props.onMouseEnter = (e: MouseEvent<Element>) => {
+        if (!state.ignoreEmulatedMouseEvents && !globalRef.current.ignoreEmulated) {
+          triggerHoverStart(e.nativeEvent as unknown as MouseEvent, 'mouse');
         }
-        state.current.ignoreEmulatedMouseEvents = false;
+        state.ignoreEmulatedMouseEvents = false;
       };
-      props.onMouseLeave = (e: any) => {
-        if (!isDisabled && e.currentTarget.contains(e.target as Element)) {
-          triggerHoverEnd(e, 'mouse');
+
+      props.onMouseLeave = (e: MouseEvent<Element, MouseEvent>) => {
+        if (!isDisabled && e.currentTarget.contains(e.target as Node)) {
+          triggerHoverEnd(e.nativeEvent, 'mouse');
         }
       };
     }
@@ -175,8 +187,8 @@ export function useHover(props: HoverProps): HoverResult {
   }, [isDisabled, triggerHoverStart, triggerHoverEnd]);
 
   useEffect(() => {
-    if (isDisabled && state.current.isHovered) {
-      triggerHoverEnd({ currentTarget: state.current.target }, state.current.pointerType);
+    if (isDisabled && state.isHovered) {
+      triggerHoverEnd({ currentTarget: state.target } as PointerEvent, state.pointerType);
     }
   }, [isDisabled, triggerHoverEnd]);
 

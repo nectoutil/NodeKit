@@ -3,6 +3,7 @@
   "name": "necto-monorepo",
   "version": "0.0.0",
   "scripts": {
+    "dev:react-hooks": "turbo run dev --filter=@necto-react/hooks",
     "changeset": "changeset",
     "build": "turbo run build",
     "build:color": "turbo run build --filter=@necto/color",

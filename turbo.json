@@ -3,6 +3,9 @@
   "tasks": {
     "build": {
       "outputs": ["dist/**", "cache/**"]
+    },
+    "dev": {
+      "cache": false
     }
   }
 }
