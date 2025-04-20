@@ -25,9 +25,6 @@ const registry =
       })
     : null;
 
-// Check if DOM is available
-const canUseDOM = typeof window !== "undefined" && !!window.document?.createElement;
-
 // Helper function to generate IDs
 function useNectoSafeId(defaultId?: string, customPrefix: string = "necto"): string {
   const id = typeof React.useId === "function" ? useReactId() : String(++defaultContext.current);
@@ -51,7 +48,7 @@ export function useId(prefix: string = "necto", defaultId?: string): string {
 
   // Update the idsUpdaterMap for tracking - this can be combined with the cleanup effect
   useEffect(() => {
-    if (canUseDOM) {
+    if (typeof window !== "undefined" && !!window.document?.createElement) {
       const cachedRefs = idsUpdaterMap.get(id) || [];
       const nextIdWrapper = { current: nextIdRef.current };
 

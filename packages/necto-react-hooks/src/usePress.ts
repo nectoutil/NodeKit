@@ -208,8 +208,8 @@ export function usePress(props: UsePressProps) {
         target: e.target,
       };
 
-      onPressEnd?.(evt);
-      onPressUp?.(evt);
+      onPressEnd?.(evt as any);
+      onPressUp?.(evt as any);
 
       // Check if touch ended over the target (not reliable across browsers)
       // We'll rely on the touchend event on the element itself for this
@@ -229,7 +229,7 @@ export function usePress(props: UsePressProps) {
         target: e.target,
       };
 
-      onPressEnd?.(evt);
+      onPressEnd?.(evt as any);
     },
     [onPressEnd, setIsPressed]
   );
