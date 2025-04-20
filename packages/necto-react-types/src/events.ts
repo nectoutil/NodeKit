@@ -21,3 +21,8 @@ export interface FocusEvent<Target = Element> {
   onBlur?: (e: ReactFocusEvent<Target>) => void,
   onFocusChange?: (isFocused: boolean) => void
 }
+
+export interface KeyboardEvents {
+  onKeyDown?: (e: KeyboardEvent) => void,
+  onKeyUp?: (e: KeyboardEvent) => void
+}

@@ -6,6 +6,7 @@
  *
  */
 
+export * from './useId';
 export * from './useDisabled';
 export * from './useEffectEvent';
 export * from './useFocus';
@@ -14,4 +15,5 @@ export * from './useFocusVisibleListener';
 export * from './useFocusWithin';
 export * from './useGlobalListeners';
 export * from './useHover';
+export * from './usePress';
 export * from './useSyntheticBlurEvent';

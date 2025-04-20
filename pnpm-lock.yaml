@@ -129,6 +129,9 @@ importers:
 
   packages/necto-react-helpers:
     dependencies:
+      '@necto-react/types':
+        specifier: workspace:*
+        version: link:../necto-react-types
       '@necto/dom':
         specifier: workspace:*
         version: link:../necto-dom
@@ -157,9 +160,15 @@ importers:
       '@necto/dom':
         specifier: workspace:*
         version: link:../necto-dom
+      '@necto/id':
+        specifier: workspace:*
+        version: link:../necto-id
       '@necto/platform':
         specifier: workspace:*
         version: link:../necto-platform
+      '@necto/props-merge':
+        specifier: workspace:*
+        version: link:../necto-props-merge
       react:
         specifier: ^19.1.0
         version: 19.1.0

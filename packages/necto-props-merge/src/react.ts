@@ -37,24 +37,28 @@ export function mergeReactProps<
 
   for (const props of listOfProps) {
     for (const prop in props) {
+      if (prop === 'children') continue;
+
       if (prop.startsWith('on') && typeof props[prop as keyof typeof props] === 'function') {
-        // Merge event listeners
         eventHandlers[prop] ??= [];
         eventHandlers[prop].push((props as Record<string, unknown>)[prop] as (...args: any[]) => void);
       } else {
-        // Override incoming prop
         (target as Record<string, unknown>)[prop] = props[prop as keyof typeof props];
       }
     }
   }
 
-  // Merge event handlers
   for (const eventName in eventHandlers) {
     (target as Record<string, unknown>)[eventName] = (...args: any[]) => {
       for (const handler of eventHandlers[eventName]) {
         handler?.(...args);
       }
     };
+  }
+
+  const lastProps = listOfProps[listOfProps.length - 1];
+  if ('children' in lastProps) {
+    (target as Record<string, unknown>)['children'] = lastProps.children;
   }
 
   return target as ComponentProps<TTag> & Overrides;

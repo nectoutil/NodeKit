@@ -67,7 +67,7 @@ export function useHover(props: HoverProps): HoverResult {
     global.hoverCount++;
 
     if (typeof PointerEvent !== 'undefined') {
-      document.addEventListener('pointerup', handleGlobalPointerEvent);
+      document.addEventListener('pointerup', handleGlobalPointerEvent as any); // cast to any or compiler errors
     } else if (isTest) {
       document.addEventListener('touchend', setGlobalIgnoreEmulatedMouseEvents);
     }
@@ -76,7 +76,7 @@ export function useHover(props: HoverProps): HoverResult {
       global.hoverCount--;
       if (global.hoverCount === 0) {
         if (typeof PointerEvent !== 'undefined') {
-          document.removeEventListener('pointerup', handleGlobalPointerEvent);
+          document.removeEventListener('pointerup', handleGlobalPointerEvent as any); // cast to any for compiler errors
         } else if (isTest) {
           document.removeEventListener('touchend', setGlobalIgnoreEmulatedMouseEvents);
         }
@@ -176,9 +176,9 @@ export function useHover(props: HoverProps): HoverResult {
         state.ignoreEmulatedMouseEvents = false;
       };
 
-      props.onMouseLeave = (e: MouseEvent<Element, MouseEvent>) => {
+      props.onMouseLeave = (e: MouseEvent<Element>) => {
         if (!isDisabled && e.currentTarget.contains(e.target as Node)) {
-          triggerHoverEnd(e.nativeEvent, 'mouse');
+          triggerHoverEnd(e.nativeEvent as unknown as MouseEvent, 'mouse');
         }
       };
     }

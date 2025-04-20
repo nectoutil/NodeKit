@@ -6,6 +6,12 @@
  *
  */
 
-export * from './dom';
-export * from './numeric';
-export * from './alphabet';
+export const ANCHOR_ELEMENT_PROPS = [
+  'href',
+  'hrefLang',
+  'target',
+  'rel',
+  'download',
+  'ping',
+  'referrerPolicy'
+];

@@ -41,7 +41,9 @@
     "@necto-react/helpers": "workspace:*",
     "@necto-react/types": "workspace:*",
     "@necto/dom": "workspace:*",
+    "@necto/id": "workspace:*",
     "@necto/platform": "workspace:*",
+    "@necto/props-merge": "workspace:*",
     "std-env": "^3.9.0"
   }
 }
