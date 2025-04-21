@@ -8,18 +8,16 @@
 
 'use strict';
 
-import { useCallback, useRef, useLayoutEffect} from "react";
+import { useCallback, useRef, useLayoutEffect, useEffect } from "react";
+
+const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 export function useEffectEvent<T extends (...args: any[]) => any>(fn: T): T {
   const fnRef = useRef(fn);
 
-  // Inline SSR-safe useLayoutEffect
-  (typeof document !== "undefined" ? useLayoutEffect : () => {})(
-    () => {
-      fnRef.current = fn;
-    },
-    [fn]
-  );
+  useIsomorphicLayoutEffect(() => {
+    fnRef.current = fn;
+  }, [fn]);
 
   return useCallback(((...args: Parameters<T>): ReturnType<T> => {
     return fnRef.current(...args);

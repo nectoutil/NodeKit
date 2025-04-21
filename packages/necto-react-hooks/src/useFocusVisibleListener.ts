@@ -151,6 +151,10 @@ export function useFocusVisibleListener(
   deps: ReadonlyArray<any>,
   opts?: { isTextInput?: boolean }
 ): void {
+  if (typeof window === 'undefined' || typeof document === 'undefined') {
+    return;
+  }
+
   setupGlobalFocusEvents();
 
   useEffect(() => {
@@ -162,6 +166,7 @@ export function useFocusVisibleListener(
     changeHandlers.add(handler);
     return () => {
       changeHandlers.delete(handler);
+      tearDownGlobalFocusEvents();
     };
   }, deps);
 }
