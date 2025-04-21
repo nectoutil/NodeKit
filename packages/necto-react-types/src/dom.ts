@@ -10,6 +10,8 @@ import {
   AriaRole,
   CSSProperties,
   AriaAttributes,
+  HTMLAttributeAnchorTarget,
+  HTMLAttributeReferrerPolicy,
   DOMAttributes as ReactDOMAttributes,
 } from "react";
 
@@ -24,3 +26,14 @@ export interface DOMAttributes<T = FocusableElement> extends AriaAttributes, Rea
 };
 
 export interface FocusableElement extends Element, HTMLOrSVGElement {};
+
+export interface LinkDOMProps {
+  href?: any,
+  hrefLang?: string,
+  target?: HTMLAttributeAnchorTarget,
+  rel?: string,
+  download?: boolean | string,
+  ping?: string,
+  referrerPolicy?: HTMLAttributeReferrerPolicy,
+  routerOptions?: any
+}
