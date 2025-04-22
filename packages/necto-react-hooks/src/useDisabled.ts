@@ -29,7 +29,7 @@ export function useDisabled(
   type: keyof DisabledFlags = 'general',
   defaultFallback: boolean = false
 ): boolean {
-  const flags = useContext(DisabledContext) || {};
+  const flags = useDisabledFlags();
   return flags[type] ?? defaultFallback;
 }
 
