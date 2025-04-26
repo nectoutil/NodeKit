@@ -8,6 +8,7 @@
 
 'use strict';
 
+import { getOwnerWindow } from "@necto/dom";
 import { useRef, useMemo, useState, useCallback, useEffect } from "react";
 
 import type { MouseEvent, RefObject, KeyboardEvent } from "react";
@@ -62,7 +63,7 @@ export function usePress(props: UsePressProps) {
     onPressUp,
     onClick,
     preventFocusOnPress,
-    ref,
+    ref: domRef,
   } = props;
 
   const [isPressed, setPressed] = useState(false);
@@ -347,6 +348,16 @@ export function usePress(props: UsePressProps) {
       onClickHandler,
     ]
   );
+
+  useEffect(() => {
+    let element = domRef?.current;
+    if (element && (element instanceof getOwnerWindow(element).Element)) {
+      let style = getOwnerWindow(element).getComputedStyle(element);
+      if (style.touchAction === 'auto') {
+        (element as HTMLElement).style.touchAction = 'pan-x pan-y pinch-zoom';
+      }
+    }
+  }, [domRef]);
 
   return { pressProps, isPressed };
 }

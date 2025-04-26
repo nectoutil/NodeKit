@@ -6,4 +6,4 @@
  *
  */
 
-export { mergeReactProps } from "./react";
+export type Key = string | number;

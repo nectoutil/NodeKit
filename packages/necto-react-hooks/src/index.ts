@@ -17,3 +17,4 @@ export * from './useGlobalListeners';
 export * from './useHover';
 export * from './usePress';
 export * from './useSyntheticBlurEvent';
+export * from './useContextProps';

@@ -11,7 +11,7 @@
  * Modifications have been made to adapt the code for use in this project.
  */
 
-import { LinkDOMProps } from '@necto-react/types';
+import type { LinkDOMProps } from '@necto-react/types';
 
 interface FilterOptions {
   includeLabelableProps?: boolean;

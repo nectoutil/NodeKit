@@ -43,7 +43,7 @@
     "@necto/dom": "workspace:*",
     "@necto/id": "workspace:*",
     "@necto/platform": "workspace:*",
-    "@necto/props-merge": "workspace:*",
+    "@necto/mergers": "workspace:*",
     "std-env": "^3.9.0"
   }
 }
