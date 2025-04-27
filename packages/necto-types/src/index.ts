@@ -6,7 +6,6 @@
  *
  */
 
-export type * from "./events";
 export type * from "./behaviors";
 export type * from "./keyboards";
 export type * from "./navigation";
