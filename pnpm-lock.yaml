@@ -228,6 +228,9 @@ importers:
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
         version: 2.2.4(rollup@4.36.0)
+      tsup:
+        specifier: ^8.4.0
+        version: 8.4.0(@microsoft/api-extractor@7.52.1(@types/node@22.14.1))(@swc/core@1.11.21(@swc/helpers@0.5.17))(postcss@8.5.3)(typescript@5.8.2)(yaml@2.7.0)
 
   packages/necto-react-router: {}
 

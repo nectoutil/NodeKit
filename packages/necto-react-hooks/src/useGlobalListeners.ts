@@ -68,6 +68,7 @@ function useGlobalListeners(): GlobalListeners {
   const removeGlobalListener = useCallback(
     (eventTarget: EventTarget, type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions) => {
       const storedListener = globalListeners.current.get(listener);
+      // @ts-ignore
       const fn = storedListener?.options?.once ? storedListener.fn : listener;
 
       eventTarget.removeEventListener(type, fn as EventListener, options);
@@ -77,6 +78,7 @@ function useGlobalListeners(): GlobalListeners {
   );
 
   const removeAllGlobalListeners = useCallback(() => {
+    // @ts-ignore
     globalListeners.current.forEach(({ type, eventTarget, options }: { type: string; eventTarget: EventTarget; options?: boolean | AddEventListenerOptions }, listener: EventListener) => {
       eventTarget.removeEventListener(type, listener as EventListener, options);
     });

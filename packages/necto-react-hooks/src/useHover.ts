@@ -115,6 +115,7 @@ export function useHover(props: HoverProps): HoverResult {
       );
 
       onHoverStart?.({
+        // @ts-ignore
         type: 'hoverstart',
         target: event.currentTarget,
         pointerType,
@@ -139,6 +140,7 @@ export function useHover(props: HoverProps): HoverResult {
       removeAllGlobalListeners();
 
       onHoverEnd?.({
+        // @ts-ignore
         type: 'hoverend',
         target: event.currentTarget,
         pointerType,

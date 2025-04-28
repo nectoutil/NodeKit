@@ -65,7 +65,8 @@ function useRenderProps<T>(props: RenderPropsHookProps<T>): RenderPropsHookResul
     className,
     style,
     children,
-    defaultClassName = 'Necto', // Default class name
+     // Default class name
+    defaultClassName = 'Necto',
     defaultChildren,
     defaultStyle,
     values,
@@ -76,7 +77,7 @@ function useRenderProps<T>(props: RenderPropsHookProps<T>): RenderPropsHookResul
     const computedClassName =
       typeof className === 'function'
         ? className({ ...values, defaultClassName })
-        : className ?? defaultClassName;
+        : `${defaultClassName} ${className}`;
 
     // Compute style
     const computedStyle =
