@@ -15,7 +15,6 @@ export * from './useFocusVisibleListener';
 export * from './useFocusWithin';
 export * from './useGlobalListeners';
 export * from './useHover';
-export * from './usePress';
 export * from './useSyntheticBlurEvent';
 export * from './useContextProps';
 export * from './useRenderProps';

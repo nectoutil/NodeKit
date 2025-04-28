@@ -6,6 +6,7 @@
  *
  */
 
+export type * from "./dom";
 export type * from "./behaviors";
 export type * from "./keyboards";
 export type * from "./navigation";

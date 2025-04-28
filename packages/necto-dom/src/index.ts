@@ -8,3 +8,4 @@
 
 export * from "./node";
 export * from "./owner";
+export * from "./html-elements";
