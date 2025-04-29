@@ -18,3 +18,4 @@ export * from './useHover';
 export * from './useSyntheticBlurEvent';
 export * from './useContextProps';
 export * from './useRenderProps';
+export * from './usePress';

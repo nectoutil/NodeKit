@@ -66,7 +66,7 @@ function useRenderProps<T>(props: RenderPropsHookProps<T>): RenderPropsHookResul
     style,
     children,
      // Default class name
-    defaultClassName = 'Necto',
+    defaultClassName = 'necto',
     defaultChildren,
     defaultStyle,
     values,
