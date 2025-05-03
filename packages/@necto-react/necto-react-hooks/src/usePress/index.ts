@@ -10,6 +10,7 @@
 
 import { getOwnerWindow } from "@necto/dom";
 import { useRef, useMemo, useState, useCallback, useEffect } from "react";
+import { disableTextSelection, restoreTextSelection } from "./textSelection";
 
 import type { MouseEvent, RefObject, KeyboardEvent } from "react";
 
@@ -34,6 +35,9 @@ export interface UsePressProps {
   onPressUp?: (e: PressEvent) => void;
   onClick?: (e: MouseEvent) => void;
   preventFocusOnPress?: boolean;
+
+  allowTextSelectionOnPress?: boolean;
+
   ref?: RefObject<HTMLElement>;
 }
 
@@ -63,6 +67,7 @@ export function usePress(props: UsePressProps) {
     onPressUp,
     onClick,
     preventFocusOnPress,
+    allowTextSelectionOnPress,
     ref: domRef,
   } = props;
 
@@ -71,7 +76,6 @@ export function usePress(props: UsePressProps) {
   const target = useRef<EventTarget | null>(null);
   const pressStarted = useRef(false);
 
-  // Helper to call onPressChange only when state changes
   const setIsPressed = useCallback(
     (pressed: boolean) => {
       if (isPressed !== pressed) {
@@ -82,15 +86,19 @@ export function usePress(props: UsePressProps) {
     [isPressed, onPressChange]
   );
 
-  // Mouse
   const onMouseDown = useCallback(
-    (e: React.MouseEvent) => {
+    (e: MouseEvent) => {
       if (isDisabled || e.button !== 0) return;
       if (ignoreEmulatedMouseEvents.current) return;
 
       // Prevent focus if requested
       if (preventFocusOnPress) {
         e.preventDefault();
+      }
+
+      // Disable text selection if not allowed
+      if (!allowTextSelectionOnPress) {
+        disableTextSelection(e.currentTarget as HTMLElement);
       }
 
       pressStarted.current = true;
@@ -100,11 +108,9 @@ export function usePress(props: UsePressProps) {
       const evt = createPressEvent("pressstart", "mouse", e);
       onPressStart?.(evt);
 
-      // Add global listeners
-      // @ts-ignore
-      window.addEventListener("mouseup", onMouseUpWin, { once: true });
+      window.addEventListener("mouseup", onMouseUpWin as any, { once: true });
     },
-    [isDisabled, onPressStart, preventFocusOnPress, setIsPressed]
+    [isDisabled, onPressStart, preventFocusOnPress, setIsPressed, allowTextSelectionOnPress]
   );
 
   const onMouseUpWin = useCallback(
@@ -119,7 +125,11 @@ export function usePress(props: UsePressProps) {
       pressStarted.current = false;
       setIsPressed(false);
 
-      // Create event
+      // Restore text selection
+      if (!allowTextSelectionOnPress && target.current instanceof HTMLElement) {
+        restoreTextSelection(target.current);
+      }
+
       const evt = {
         ...createPressEvent("pressend", "mouse", e),
         target: e.target,
@@ -128,12 +138,11 @@ export function usePress(props: UsePressProps) {
       onPressEnd?.(evt);
       onPressUp?.(evt);
 
-      // Only trigger press if released over the target
       if (isPressedOver) {
         onPress?.(evt);
       }
     },
-    [onPressEnd, onPressUp, onPress, setIsPressed]
+    [onPressEnd, onPressUp, onPress, setIsPressed, allowTextSelectionOnPress]
   );
 
   const onMouseUp = useCallback(
@@ -143,15 +152,20 @@ export function usePress(props: UsePressProps) {
       pressStarted.current = false;
       setIsPressed(false);
 
+      // Restore text selection
+      if (!allowTextSelectionOnPress && e.currentTarget instanceof HTMLElement) {
+        restoreTextSelection(e.currentTarget);
+      }
+
       const evt = createPressEvent("pressend", "mouse", e);
       onPressEnd?.(evt);
       onPressUp?.(evt);
 
-      if (e.currentTarget.contains(e.target as Node)) {
+      if (e.currentTarget instanceof Node && e.currentTarget.contains(e.target as Node)) {
         onPress?.(createPressEvent("press", "mouse", e));
       }
     },
-    [isDisabled, onPress, onPressEnd, onPressUp, setIsPressed]
+    [isDisabled, onPress, onPressEnd, onPressUp, setIsPressed, allowTextSelectionOnPress]
   );
 
   const onMouseLeave = useCallback(
@@ -159,9 +173,13 @@ export function usePress(props: UsePressProps) {
       if (isPressed) {
         setIsPressed(false);
         onPressEnd?.(createPressEvent("pressend", "mouse", e));
+        // Restore text selection if needed
+        if (!allowTextSelectionOnPress && e.currentTarget instanceof HTMLElement) {
+          restoreTextSelection(e.currentTarget);
+        }
       }
     },
-    [isPressed, setIsPressed, onPressEnd]
+    [isPressed, setIsPressed, onPressEnd, allowTextSelectionOnPress]
   );
 
   const onMouseEnter = useCallback(
@@ -179,6 +197,11 @@ export function usePress(props: UsePressProps) {
     (e: TouchEvent) => {
       if (isDisabled) return;
 
+      // Disable text selection if not allowed
+      if (!allowTextSelectionOnPress) {
+        disableTextSelection(e.currentTarget as HTMLElement);
+      }
+
       // Prevent emulated mouse events
       ignoreEmulatedMouseEvents.current = true;
       setTimeout(() => {
@@ -191,11 +214,10 @@ export function usePress(props: UsePressProps) {
 
       onPressStart?.(createPressEvent("pressstart", "touch", e));
 
-      // Add global listeners
-      window.addEventListener("touchend", onTouchEndWin, { once: true });
-      window.addEventListener("touchcancel", onTouchCancelWin, { once: true });
+      window.addEventListener("touchend", onTouchEndWin as any, { once: true });
+      window.addEventListener("touchcancel", onTouchCancelWin as any, { once: true });
     },
-    [isDisabled, onPressStart, setIsPressed]
+    [isDisabled, onPressStart, setIsPressed, allowTextSelectionOnPress]
   );
 
   const onTouchEndWin = useCallback(
@@ -205,6 +227,11 @@ export function usePress(props: UsePressProps) {
       pressStarted.current = false;
       setIsPressed(false);
 
+      // Restore text selection
+      if (!allowTextSelectionOnPress && target.current instanceof HTMLElement) {
+        restoreTextSelection(target.current);
+      }
+
       const evt = {
         ...createPressEvent("pressend", "touch", e),
         target: e.target,
@@ -212,11 +239,8 @@ export function usePress(props: UsePressProps) {
 
       onPressEnd?.(evt as any);
       onPressUp?.(evt as any);
-
-      // Check if touch ended over the target (not reliable across browsers)
-      // We'll rely on the touchend event on the element itself for this
     },
-    [onPressEnd, onPressUp, setIsPressed]
+    [onPressEnd, onPressUp, setIsPressed, allowTextSelectionOnPress]
   );
 
   const onTouchCancelWin = useCallback(
@@ -226,6 +250,11 @@ export function usePress(props: UsePressProps) {
       pressStarted.current = false;
       setIsPressed(false);
 
+      // Restore text selection
+      if (!allowTextSelectionOnPress && target.current instanceof HTMLElement) {
+        restoreTextSelection(target.current);
+      }
+
       const evt = {
         ...createPressEvent("pressend", "touch", e),
         target: e.target,
@@ -233,26 +262,30 @@ export function usePress(props: UsePressProps) {
 
       onPressEnd?.(evt as any);
     },
-    [onPressEnd, setIsPressed]
+    [onPressEnd, setIsPressed, allowTextSelectionOnPress]
   );
 
   const onTouchEnd = useCallback(
-    (e: React.TouchEvent) => {
+    (e: TouchEvent) => {
       if (isDisabled || !pressStarted.current) return;
 
       pressStarted.current = false;
       setIsPressed(false);
 
+      // Restore text selection
+      if (!allowTextSelectionOnPress && e.currentTarget instanceof HTMLElement) {
+        restoreTextSelection(e.currentTarget);
+      }
+
       const evt = createPressEvent("pressend", "touch", e);
       onPressEnd?.(evt);
       onPressUp?.(evt);
 
-      // Only trigger press if released over the target
-      if (e.currentTarget.contains(e.target as Node)) {
+      if (e.currentTarget instanceof Node && e.currentTarget.contains(e.target as Node)) {
         onPress?.(createPressEvent("press", "touch", e));
       }
     },
-    [isDisabled, onPress, onPressEnd, onPressUp, setIsPressed]
+    [isDisabled, onPress, onPressEnd, onPressUp, setIsPressed, allowTextSelectionOnPress]
   );
 
   // Keyboard
@@ -267,12 +300,17 @@ export function usePress(props: UsePressProps) {
           e.preventDefault();
         }
 
+        // Disable text selection if not allowed
+        if (!allowTextSelectionOnPress) {
+          disableTextSelection();
+        }
+
         setIsPressed(true);
         pressStarted.current = true;
         onPressStart?.(createPressEvent("pressstart", "keyboard", e));
       }
     },
-    [isDisabled, isPressed, onPressStart, setIsPressed]
+    [isDisabled, isPressed, onPressStart, setIsPressed, allowTextSelectionOnPress]
   );
 
   const onKeyUp = useCallback(
@@ -284,13 +322,18 @@ export function usePress(props: UsePressProps) {
         setIsPressed(false);
         pressStarted.current = false;
 
+        // Restore text selection if not allowed
+        if (!allowTextSelectionOnPress) {
+          restoreTextSelection();
+        }
+
         const evt = createPressEvent("pressend", "keyboard", e);
         onPressEnd?.(evt);
         onPressUp?.(createPressEvent("pressup", "keyboard", e));
         onPress?.(createPressEvent("press", "keyboard", e));
       }
     },
-    [isDisabled, isPressed, onPress, onPressEnd, onPressUp, setIsPressed]
+    [isDisabled, isPressed, onPress, onPressEnd, onPressUp, setIsPressed, allowTextSelectionOnPress]
   );
 
   // Click for compatibility
@@ -310,7 +353,6 @@ export function usePress(props: UsePressProps) {
     [isDisabled, onClick]
   );
 
-  // Clean up global listeners on unmount
   useEffect(() => {
     return () => {
       window.removeEventListener("mouseup", onMouseUpWin as any);

@@ -6,7 +6,10 @@
  *
  */
 
-// This is a horrible device detector code, DO NOT USE IN ANY PROD CODE!!!
+// WARNING: This code is not recommended for use.
+// It contains significant issues and may lead to unexpected behavior.
+// Please avoid using or referencing this implementation.
 
 export * from "./isMac";
 export * from "./isAndroid";
+export * from "./isIOS";

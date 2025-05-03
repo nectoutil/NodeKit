@@ -1,3 +1,7 @@
+// WARNING: This code is not recommended for use.
+// It contains significant issues and may lead to unexpected behavior.
+// Please avoid using or referencing this implementation.
+
 function testUserAgent(re: RegExp) {
   if (typeof window === 'undefined' || window.navigator == null) {
     return false;
