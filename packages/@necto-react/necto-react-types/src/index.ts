@@ -9,3 +9,4 @@
 export * from './dom';
 export * from './events';
 export * from "./components";
+export type * from "./props";

@@ -15,10 +15,11 @@
 
 import { useMemo } from 'react';
 
+import type { RenderProps } from '@necto-react/types';
 import type { ReactNode, CSSProperties } from 'react';
 
 // Props for the `useRenderProps` hook
-interface RenderPropsHookProps<T> {
+interface RenderPropsHookProps<T> extends RenderProps<T> {
   // Optional ID for the component.
   id?: string;
 
@@ -33,15 +34,6 @@ interface RenderPropsHookProps<T> {
 
   // Default inline styles for the component.
   defaultStyle?: CSSProperties;
-
-  // Custom class name or a function that generates a class name based on values.
-  className?: string | ((values: T & { defaultClassName?: string }) => string);
-
-  // Custom inline styles or a function that generates styles based on values.
-  style?: CSSProperties | ((values: T & { defaultStyle?: CSSProperties }) => CSSProperties);
-
-  // Custom children or a function that generates children based on values.
-  children?: ReactNode | ((values: T & { defaultChildren?: ReactNode }) => ReactNode);
 
   // Custom data attributes for the component.
   [dataAttr: `data-${string}`]: string | undefined;
@@ -69,7 +61,7 @@ function useRenderProps<T>(props: RenderPropsHookProps<T>): RenderPropsHookResul
     defaultClassName = 'necto',
     defaultChildren,
     defaultStyle,
-    values,
+    values
   } = props;
 
   return useMemo(() => {
@@ -100,7 +92,5 @@ function useRenderProps<T>(props: RenderPropsHookProps<T>): RenderPropsHookResul
 }
 
 export {
-  useRenderProps,
-  type RenderPropsHookProps,
-  type RenderPropsHookResults,
+  useRenderProps
 };
