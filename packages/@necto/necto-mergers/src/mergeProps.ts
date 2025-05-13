@@ -20,11 +20,11 @@
  * @returns A single object with merged properties.
  */
 export function mergeProps(...listOfObjects: Array<Record<string, any>>): Record<string, any> {
-  if (listOfObjects.length === 0) {
-    return {};
-  }
+  if (listOfObjects.length === 0) return {};
   if (listOfObjects.length === 1) {
-    return typeof listOfObjects[0] === 'object' && listOfObjects[0] !== null ? listOfObjects[0] : {};
+    return typeof listOfObjects[0] === 'object' && listOfObjects[0] !== null
+      ? listOfObjects[0]
+      : {};
   }
 
   const target: Record<string, any> = {};
