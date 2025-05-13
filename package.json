@@ -3,6 +3,7 @@
   "name": "necto-monorepo",
   "version": "0.0.0",
   "scripts": {
+    "clean": "find packages -type d \\( -name 'node_modules' -o -name '.turbo' -o -name 'dist' -o -name '.dist' \\) -prune -exec rm -rf '{}' + && rm -rf node_modules .turbo dist .dist",
     "dev:react-hooks": "turbo run dev --filter=@necto-react/hooks",
     "changeset": "changeset",
     "build": "turbo run build",

@@ -6,5 +6,5 @@
  *
  */
 
+export * from './mergeProps';
 export { mergeRefs } from "./merge-refs";
-export { mergeReactProps } from "./react";
