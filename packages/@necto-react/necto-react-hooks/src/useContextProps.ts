@@ -10,7 +10,7 @@
 
 import { useContext, useMemo } from "react";
 import { useObjectRef } from "./useObjectRef";
-import { mergeRefs, mergeReactProps } from "@necto/mergers";
+import { mergeRefs, mergeProps } from "@necto/mergers";
 
 import type { ForwardedRef, Context, RefObject } from "react";
 
@@ -52,7 +52,7 @@ export function useContextProps<T, U extends SlotProps, E extends Element>(props
   let ctx = useSlottedContext(context, props.slot) || {};
   let {ref: contextRef, ...contextProps} = ctx as any;
   let mergedRef = useObjectRef(useMemo(() => mergeRefs(ref, contextRef), [ref, contextRef]));
-  let mergedProps = mergeReactProps(contextProps, props) as unknown as T;
+  let mergedProps = mergeProps(contextProps, props) as unknown as T;
 
   if (
     'style' in contextProps &&
