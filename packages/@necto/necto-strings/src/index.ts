@@ -8,4 +8,4 @@
 
 'use strict';
 
-export { kebabCase } from './kebab-case';
+export { kebabCase } from './kebabCase';
