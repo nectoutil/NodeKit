@@ -6,8 +6,6 @@
  *
  */
 
-'use strict';
-
 import type { RefObject, Ref } from "react";
 
 export function mergeRefs<T>(...refs: Array<Ref<T> | RefObject<T> | null | undefined>): Ref<T> {

@@ -6,8 +6,6 @@
  *
  */
 
-'use strict';
-
 /**
  * Merges multiple objects, combining properties.
  * For properties starting with 'on' (conventionally event handlers),
