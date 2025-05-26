@@ -6,9 +6,7 @@
  *
  */
 
-'use strict';
-
-export function kebabCase(str: string, keepLeadingDash: boolean = true) {
+export function kebabCase(str: string, keepLeadingDash: boolean = false) {
   const result = str.replace(/\p{Lu}/gu, (match) => `-${match.toLowerCase()}`);
 
   if (keepLeadingDash) return result;
