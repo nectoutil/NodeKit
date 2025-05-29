@@ -2,8 +2,6 @@ import { describe, it, expect } from 'vitest';
 import { useId } from '@necto-react-hooks/useId';
 import { renderHook } from '@testing-library/react';
 
-import { useId as ariaID } from "@react-aria/utils";
-
 describe('useId Hook', () => {
   it('generates a unique ID with the default prefix if none is provided', () => {
     const { result } = renderHook(() => useId());
