@@ -9,13 +9,14 @@
 'use strict';
 
 import { isTest } from 'std-env';
-import React, { useRef, useState, useEffect, useId as useReactId } from "react";
+import React, { useRef, useState, useEffect, useId as useReactId } from 'react';
 
 const defaultContext = {
   prefix: String(Math.round(Math.random() * 1e10)),
   current: 0,
 };
-export const idsUpdaterMap = new Map<string, { current: string | null }[]>();
+
+const idsUpdaterMap = new Map<string, { current: string | null }[]>();
 
 // FinalizationRegistry for cleaning up unused IDs
 const registry =
@@ -25,28 +26,26 @@ const registry =
       })
     : null;
 
-// Helper function to generate IDs
-function useNectoSafeId(defaultId?: string, customPrefix: string = "necto"): string {
-  const id = typeof React.useId === "function" ? useReactId() : String(++defaultContext.current);
-  const prefix = isTest ? customPrefix : `${customPrefix}${defaultContext.prefix}`;
-  return defaultId || `${prefix}-${id}`;
-}
-
 /**
- * Generates a unique ID, optionally with a custom prefix.
- * @param prefix - Custom prefix for the ID (defaults to "necto").
- * @param defaultId - Default component ID.
+ * Generates a unique, stable ID for React components, optionally with a custom prefix.
+ *
+ * @param {string} [prefix="necto"] - Custom prefix for the generated ID.
+ * @param {string} [defaultId] - Optional default ID to use instead of generating one.
+ * @returns {string} The generated or provided unique ID.
  */
-export function useId(prefix: string = "necto", defaultId?: string): string {
+function useId(prefix: string = "necto", defaultId?: string): string {
   // Initialize state only once with a function to avoid unnecessary calculations
   const [value, setValue] = useState<string | undefined>(() => defaultId);
   const nextIdRef = useRef<string | null>(null);
   const cleanupRef = useRef<object>({});
 
-  // Generate the ID - memoize this if it's expensive
-  const id = useNectoSafeId(value, prefix);
+  const id = (() => {
+    if (defaultId) return defaultId;
+    const reactId = typeof React['useId'] === "function" ? useReactId() : String(++defaultContext.current);
+    const computedPrefix = isTest ? prefix : `${prefix}${defaultContext.prefix}`;
+    return `${computedPrefix}-${reactId}`;
+  })();
 
-  // Update the idsUpdaterMap for tracking - this can be combined with the cleanup effect
   useEffect(() => {
     if (typeof window !== "undefined" && !!window.document?.createElement) {
       const cachedRefs = idsUpdaterMap.get(id) || [];
@@ -57,12 +56,10 @@ export function useId(prefix: string = "necto", defaultId?: string): string {
       }
     }
 
-    // Register with FinalizationRegistry
     if (registry) {
       registry.register(cleanupRef.current, id);
     }
 
-    // Cleanup function
     return () => {
       if (registry) {
         registry.unregister(cleanupRef.current);
@@ -71,7 +68,6 @@ export function useId(prefix: string = "necto", defaultId?: string): string {
     };
   }, [id]);
 
-  // Handle updates to the ID - this can be simplified
   useEffect(() => {
     const newId = nextIdRef.current;
     if (newId) {
@@ -83,28 +79,4 @@ export function useId(prefix: string = "necto", defaultId?: string): string {
   return id;
 }
 
-/**
- * Merges two IDs. Different IDs will trigger a side-effect and re-render components hooked up with `useId`.
- * @param idA - First ID.
- * @param idB - Second ID.
- * @returns The merged ID.
- */
-export function mergeIds(idA: string, idB: string): string {
-  if (idA === idB) {
-    return idA;
-  }
-
-  const setIdsA = idsUpdaterMap.get(idA);
-  if (setIdsA?.length) {
-    setIdsA.forEach((ref) => (ref.current = idB));
-    return idB;
-  }
-
-  const setIdsB = idsUpdaterMap.get(idB);
-  if (setIdsB?.length) {
-    setIdsB.forEach((ref) => (ref.current = idA));
-    return idA;
-  }
-
-  return idB;
-}
+export { useId };

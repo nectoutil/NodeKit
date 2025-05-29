@@ -22,9 +22,7 @@
     "build:style-dictionary": "turbo run build --filter=@necto/style-dictionary",
     "build:vue-components": "turbo run build --filter=@necto-vue/components",
     "build:vue-hooks": "turbo run build --filter=@necto-vue/hooks",
-    "test": "pnpm exec vitest",
-    "test:color": "pnpm exec vitest --project @necto/color",
-    "test:style-dictionary": "pnpm exec vitest --project @necto/style-dictionary",
+    "test": "turbo run test",
     "postinstall": "echo '🚨 Corinvo CLI will be required soon! Install it now to keep developing smoothly. 🚀'"
   },
   "license": "MIT",

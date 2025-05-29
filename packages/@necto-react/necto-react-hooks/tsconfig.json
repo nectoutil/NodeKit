@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@necto-react-hooks/*": ["./src/*"]
+    },
     "target": "ESNext",
     "module": "ESNext",
     "jsx": "react-jsx",
@@ -15,7 +19,8 @@
     "skipLibCheck": true
   },
   "include": [
-    "src"
+    "src",
+    "__tests__"
   ],
   "exclude": [
     "node_modules",
