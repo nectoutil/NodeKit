@@ -7,6 +7,9 @@
  */
 
 export * from './useId';
+export * from './usePress';
+
+
 export * from './useDisabled';
 export * from './useEffectEvent';
 export * from './useFocus';
@@ -18,5 +21,4 @@ export * from './useHover';
 export * from './useSyntheticBlurEvent';
 export * from './useContextProps';
 export * from './useRenderProps';
-export * from './usePress';
 export * from './useElementVisibility';

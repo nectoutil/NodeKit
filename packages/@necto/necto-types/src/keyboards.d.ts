@@ -6,4 +6,7 @@
  *
  */
 
+/**
+ * Represents a keyboard key, which can be a string or a number.
+ */
 export type Key = string | number;

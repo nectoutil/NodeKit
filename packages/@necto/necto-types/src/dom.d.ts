@@ -6,8 +6,18 @@
  *
  */
 
+/**
+ * Maps string keys to valid HTMLElement tag names.
+ */
 export type HTMLElementsMap = Record<string, keyof HTMLElementTagNameMap>;
 
+/**
+ * Keys of the HTMLElementsMap.
+ */
 export type HTMLElementsKeys = keyof HTMLElementsMap;
 
+/**
+ * Type for a specific HTMLElement given its tag name.
+ * @template Tag - The tag name of the HTMLElement.
+ */
 export type HTMLElementType<Tag extends keyof HTMLElementTagNameMap> = HTMLElementTagNameMap[Tag];

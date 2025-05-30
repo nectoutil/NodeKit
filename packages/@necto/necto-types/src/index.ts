@@ -6,7 +6,8 @@
  *
  */
 
-export type * from "./dom";
-export type * from "./behaviors";
-export type * from "./keyboards";
-export type * from "./navigation";
+export type * from './dom';
+export type * from './focus';
+export type * from './events';
+export type * from './keyboards';
+export type * from './navigation';

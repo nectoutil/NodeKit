@@ -6,36 +6,23 @@
  *
  */
 
-'use strict';
-
 import { isTest } from 'std-env';
+import { registry, defaultContext, idsUpdaterMap} from './hookContext';
 import React, { useRef, useState, useEffect, useId as useReactId } from 'react';
 
-const defaultContext = {
-  prefix: String(Math.round(Math.random() * 1e10)),
-  current: 0,
-};
-
-const idsUpdaterMap = new Map<string, { current: string | null }[]>();
-
-// FinalizationRegistry for cleaning up unused IDs
-const registry =
-  typeof FinalizationRegistry !== "undefined"
-    ? new FinalizationRegistry<string>((id) => {
-        idsUpdaterMap.delete(id);
-      })
-    : null;
+import type { UseIdProps, UseIdReturn } from './types';
 
 /**
  * Generates a unique, stable ID for React components, optionally with a custom prefix.
  *
- * @param {string} [prefix="necto"] - Custom prefix for the generated ID.
- * @param {string} [defaultId] - Optional default ID to use instead of generating one.
- * @returns {string} The generated or provided unique ID.
+ * @param {UseIdProps} [props] - Optional props object. You can provide a custom prefix and/or a defaultId.
+ * @returns {UseIdReturns} The generated or provided unique ID.
  */
-function useId(prefix: string = "necto", defaultId?: string): string {
+export function useId(props?: UseIdProps): UseIdReturn {
+  const { prefix = 'necto', defaultId } = props || {};
+
   // Initialize state only once with a function to avoid unnecessary calculations
-  const [value, setValue] = useState<string | undefined>(() => defaultId);
+  const [_, setValue] = useState<string | undefined>(() => defaultId);
   const nextIdRef = useRef<string | null>(null);
   const cleanupRef = useRef<object>({});
 
@@ -77,6 +64,4 @@ function useId(prefix: string = "necto", defaultId?: string): string {
   }, []);
 
   return id;
-}
-
-export { useId };
+};

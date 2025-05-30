@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@necto-react-hooks/*": ["./src/*"]
+      "@necto-react-helpers/*": ["./src/*"]
     },
     "target": "ESNext",
     "module": "ESNext",

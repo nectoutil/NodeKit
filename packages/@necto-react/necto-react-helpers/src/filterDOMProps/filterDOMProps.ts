@@ -11,26 +11,18 @@
  * Modifications have been made to adapt the code for use in this project.
  */
 
-import type { LinkDOMProps } from '@necto-react/types';
+import type { FilterOptions, FilterDOMProps, FilterDOMReturn } from './types';
 
-interface FilterOptions {
-  includeLabelableProps?: boolean;
-  includeLinkProps?: boolean;
-  additionalAllowedProps?: Set<string>;
-  labelablePropsSet?: Set<string>;
-  linkPropsSet?: Set<string>;
-}
-
-export function filterDOMProps(
-  props: { id?: string } & LinkDOMProps,
-  options: FilterOptions = {}
-): { id?: string } {
+function filterDOMProps(
+  props: FilterDOMProps,
+  options: FilterOptions
+): FilterDOMReturn {
   const {
-    includeLabelableProps = false,
-    includeLinkProps = false,
-    additionalAllowedProps,
-    labelablePropsSet = new Set<string>(),
-    linkPropsSet = new Set<string>(),
+    allowLabelableProps = false,
+    allowLinkProps = false,
+    extraAllowedProps,
+    allowedLabelableProps = new Set<string>(),
+    allowedLinkProps = new Set<string>(),
   } = options;
 
   let allowedProps: Record<string, any> = {};
@@ -39,9 +31,9 @@ export function filterDOMProps(
     if (
       Object.prototype.hasOwnProperty.call(props, propName) && (
         new Set(['id']).has(propName) ||
-        (includeLabelableProps && labelablePropsSet.has(propName)) ||
-        (includeLinkProps && linkPropsSet.has(propName)) ||
-        additionalAllowedProps?.has(propName) ||
+        (allowLabelableProps && allowedLabelableProps.has(propName)) ||
+        (allowLinkProps && allowedLinkProps.has(propName)) ||
+        extraAllowedProps?.has(propName) ||
         new RegExp(/^(data-.*)$/).test(propName)
       )
     ) {
@@ -50,4 +42,7 @@ export function filterDOMProps(
   }
 
   return allowedProps;
-}
+};
+
+export { filterDOMProps };
+

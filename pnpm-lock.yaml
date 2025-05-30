@@ -63,6 +63,9 @@ importers:
       '@necto/platform':
         specifier: workspace:*
         version: link:../../@necto/necto-platform
+      '@necto/types':
+        specifier: workspace:*
+        version: link:../../@necto/necto-types
       react:
         specifier: ^19.1.0
         version: 19.1.0
@@ -145,10 +148,6 @@ importers:
       tsup:
         specifier: ^8.4.0
         version: 8.4.0(@swc/core@1.11.24(@swc/helpers@0.5.17))(postcss@8.5.3)(typescript@5.8.3)
-
-  packages/@necto-vue/necto-vue-components: {}
-
-  packages/@necto-vue/necto-vue-hooks: {}
 
   packages/@necto/necto-color:
     dependencies:

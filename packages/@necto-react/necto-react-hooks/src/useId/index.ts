@@ -6,5 +6,6 @@
  *
  */
 
-export type FocusStrategy = 'first' | 'last';
-export type DisabledBehavior = 'selection' | 'all';
+export { useId } from './useId';
+
+export type { UseIdProps, UseIdReturn } from './types';

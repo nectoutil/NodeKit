@@ -8,31 +8,34 @@
 
 import type { Key } from "./keyboards";
 
+/**
+ * Interface for keyboard navigation within a collection.
+ */
 export interface KeyboardDelegate {
-  // Moves focus to the next item below
+  /** Moves focus to the next item below. */
   getKeyBelow?(key: Key): Key | null;
 
-  // Moves focus to the next item above
+  /** Moves focus to the next item above. */
   getKeyAbove?(key: Key): Key | null;
 
-  // Moves focus to the next item on the left
+  /** Moves focus to the next item on the left. */
   getKeyLeftOf?(key: Key): Key | null;
 
-  // Moves focus to the next item on the right
+  /** Moves focus to the next item on the right. */
   getKeyRightOf?(key: Key): Key | null;
 
-  // Moves focus one page down (multiple items)
+  /** Moves focus one page down (multiple items). */
   getKeyPageBelow?(key: Key): Key | null;
 
-  // Moves focus one page up (multiple items)
+  /** Moves focus one page up (multiple items). */
   getKeyPageAbove?(key: Key): Key | null;
 
-  // Gets the first focusable item in the collection
+  /** Gets the first focusable item in the collection. */
   getFirstKey?(key?: Key | null, global?: boolean): Key | null;
 
-  // Gets the last focusable item in the collection
+  /** Gets the last focusable item in the collection. */
   getLastKey?(key?: Key | null, global?: boolean): Key | null;
 
-  // Finds next item matching search string
+  /** Finds the next item matching the search string. */
   getKeyForSearch?(search: string, fromKey?: Key | null): Key | null;
 }
