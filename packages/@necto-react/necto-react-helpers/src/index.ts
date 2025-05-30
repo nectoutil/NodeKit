@@ -6,7 +6,6 @@
  *
  */
 
-
 export * from './filterDOMProps';
 export * from "./isVirtualClick";
 export * from "./isKeyboardFocusEvent";
