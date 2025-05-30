@@ -8,7 +8,7 @@
  *
  * This file contains code licensed under:
  * - The MIT License (see LICENSE in the root directory) for Corinvo modifications.
- * - The Apache License, Version 2.0 (see cglicenses.json or LICENSE-APACHE in the root directory) for portions from Adobe.
+ * - The Apache License, Version 2.0 (see leonard.json in the root directory) for portions from Adobe.
  *
  * Modifications have been made to adapt the code for use in this project.
  */
