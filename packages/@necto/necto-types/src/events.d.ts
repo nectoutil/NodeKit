@@ -17,16 +17,22 @@ export type PointerType = "mouse" | "touch" | "keyboard" | "pen" | "virtual";
 export interface PressEvent {
   /** The type of press event (e.g., "pressstart", "pressend"). */
   type: string;
+  
   /** The pointer device type that triggered the event. */
   pointerType: PointerType;
+  
   /** The target element of the event. */
   target: EventTarget;
+  
   /** Whether the shift key was held during the event. */
   shiftKey: boolean;
+  
   /** Whether the control key was held during the event. */
   ctrlKey: boolean;
+  
   /** Whether the meta key was held during the event. */
   metaKey: boolean;
+  
   /** Whether the alt key was held during the event. */
   altKey: boolean;
 }
