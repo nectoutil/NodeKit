@@ -12,12 +12,12 @@ import type { PressEvent } from '@necto/types';
 /**
  * Text selection state
  */
-type TextSelectionStates = 'default' | 'disabled' | 'restoring';
+export type TextSelectionStates = 'default' | 'disabled' | 'restoring';
 
 /**
  * Props for the usePress hook.
  */
-interface UsePressProps {
+export interface UsePressProps {
   /** Whether the press interaction is disabled. */
   isDisabled?: boolean;
 
@@ -47,12 +47,12 @@ interface UsePressProps {
 
   /** Handler called on click events for compatibility. */
   onClick?: (e: MouseEvent) => void;
-}
+};
 
 /**
  * Return type for the usePress hook.
  */
-interface UsePressReturn {
+export interface UsePressReturn {
   /** Props to spread onto the target element to enable press interactions. */
   pressProps: {
     onMouseDown?: (e: MouseEvent) => void;
@@ -68,10 +68,4 @@ interface UsePressReturn {
 
   /** Whether the element is currently pressed. */
   isPressed: boolean;
-}
-
-export type {
-  UsePressProps,
-  UsePressReturn,
-  TextSelectionStates
-}
+};
