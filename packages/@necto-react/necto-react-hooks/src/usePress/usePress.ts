@@ -11,7 +11,7 @@ import { useState, useRef, useCallback, useEffect, useMemo } from 'react';
 import { disableTextSelection, restoreTextSelection } from './textSelection';
 
 import type { PointerType, PressEvent } from '@necto/types';
-import type { UsePressProps, UsePressReturn } from "./types";
+import type { UsePressProps, UsePressReturn } from './types';
 
 /**
  * Creates a standardized PressEvent object from a native event.
