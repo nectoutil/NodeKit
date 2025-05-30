@@ -1,18 +1,3 @@
-/**
- * Copyright (c) Corinvo, LLC. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- * Portions of this code are based on the React Aria Spectrum library by Adobe,
- * licensed under the Apache License, Version 2.0.
- * See: https://github.com/adobe/react-spectrum
- *
- * Modifications have been made to adapt the code for use in this project.
- */
-
-'use strict';
-
 import { useMemo } from 'react';
 
 import type { RenderProps } from '@necto-react/types';
@@ -52,12 +37,14 @@ interface RenderPropsHookResults {
 }
 
 // Hook to compute render props
-function useRenderProps<T>(props: RenderPropsHookProps<T>): RenderPropsHookResults {
+function useRenderProps<T>(
+  props: RenderPropsHookProps<T>
+): RenderPropsHookResults {
   const {
     className,
     style,
     children,
-     // Default class name
+    // Default class name
     defaultClassName = 'necto',
     defaultChildren,
     defaultStyle,
@@ -81,16 +68,22 @@ function useRenderProps<T>(props: RenderPropsHookProps<T>): RenderPropsHookResul
     const computedChildren =
       typeof children === 'function'
         ? children({ ...values, defaultChildren })
-        : children ?? defaultChildren;
+        : (children ?? defaultChildren);
 
     return {
       className: computedClassName,
       style: computedStyle,
-      children: computedChildren,
+      children: computedChildren
     };
-  }, [className, style, children, defaultClassName, defaultChildren, defaultStyle, values]);
+  }, [
+    className,
+    style,
+    children,
+    defaultClassName,
+    defaultChildren,
+    defaultStyle,
+    values
+  ]);
 }
 
-export {
-  useRenderProps
-};
+export { useRenderProps };

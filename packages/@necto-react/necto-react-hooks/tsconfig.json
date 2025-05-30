@@ -18,12 +18,6 @@
     "noEmit": false,
     "skipLibCheck": true
   },
-  "include": [
-    "src",
-    "__tests__"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+  "include": ["src", "__tests__"],
+  "exclude": ["node_modules", "dist"]
 }

@@ -6,12 +6,12 @@
  *
  */
 
-import type { ForwardedRef, ReactNode } from "react";
+import type { ForwardedRef } from 'react';
 
 export type SlottedContextValue<T, E = never> =
   | (T & {
-      slots?: Record<string | symbol, T>,
-      ref?: E extends never ? never : ForwardedRef<E>
+      slots?: Record<string | symbol, T>;
+      ref?: E extends never ? never : ForwardedRef<E>;
     })
   | null
   | undefined;

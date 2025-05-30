@@ -1,0 +1,11 @@
+colors: true
+skip_lfs: true
+
+pre-commit:
+  commands:
+    lint:
+      run: pnpm lint
+      stage_fixed: true
+    format:
+      run: pnpm format
+      stage_fixed: true

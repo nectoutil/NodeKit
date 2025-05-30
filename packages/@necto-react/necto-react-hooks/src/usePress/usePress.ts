@@ -24,16 +24,16 @@ import type { UsePressProps, UsePressReturn } from './types';
 function createPressEvent(
   type: string,
   pointerType: PointerType,
-  event: any
+  event: MouseEvent | TouchEvent | KeyboardEvent
 ): PressEvent {
   return {
     type,
     pointerType,
-    target: event.currentTarget || event.target,
+    target: (event.currentTarget ?? event.target) as EventTarget,
     shiftKey: event.shiftKey,
     ctrlKey: event.ctrlKey,
     metaKey: event.metaKey,
-    altKey: event.altKey,
+    altKey: event.altKey
   };
 }
 
@@ -81,7 +81,8 @@ export function usePress(props: UsePressProps): UsePressReturn {
     (e: MouseEvent) => {
       if (!pressStarted.current) return;
 
-      const isPressedOver = target.current &&
+      const isPressedOver =
+        target.current &&
         target.current instanceof Node &&
         e.target instanceof Node &&
         target.current.contains(e.target);
@@ -97,8 +98,8 @@ export function usePress(props: UsePressProps): UsePressReturn {
       // Ensure target is not null for PressEvent typing
       if (e.target) {
         const evt = {
-          ...createPressEvent("pressend", "mouse", e),
-          target: e.target as EventTarget,
+          ...createPressEvent('pressend', 'mouse', e),
+          target: e.target as EventTarget
         };
 
         onPressEnd?.(evt);
@@ -132,12 +133,19 @@ export function usePress(props: UsePressProps): UsePressReturn {
       target.current = e.currentTarget;
       setIsPressed(true);
 
-      const evt = createPressEvent("pressstart", "mouse", e);
+      const evt = createPressEvent('pressstart', 'mouse', e);
       onPressStart?.(evt);
 
-      window.addEventListener("mouseup", onMouseUpWin as any, { once: true });
+      window.addEventListener('mouseup', onMouseUpWin, { once: true });
     },
-    [isDisabled, onPressStart, preventFocusOnPress, setIsPressed, allowTextSelectionOnPress]
+    [
+      isDisabled,
+      preventFocusOnPress,
+      allowTextSelectionOnPress,
+      onPressStart,
+      setIsPressed,
+      onMouseUpWin
+    ]
   );
 
   // --- Mouse Up Handler ---
@@ -149,19 +157,32 @@ export function usePress(props: UsePressProps): UsePressReturn {
       setIsPressed(false);
 
       // Restore text selection
-      if (!allowTextSelectionOnPress && e.currentTarget instanceof HTMLElement) {
+      if (
+        !allowTextSelectionOnPress &&
+        e.currentTarget instanceof HTMLElement
+      ) {
         restoreTextSelection(e.currentTarget);
       }
 
-      const evt = createPressEvent("pressend", "mouse", e);
+      const evt = createPressEvent('pressend', 'mouse', e);
       onPressEnd?.(evt);
       onPressUp?.(evt);
 
-      if (e.currentTarget instanceof Node && e.currentTarget.contains(e.target as Node)) {
-        onPress?.(createPressEvent("press", "mouse", e));
+      if (
+        e.currentTarget instanceof Node &&
+        e.currentTarget.contains(e.target as Node)
+      ) {
+        onPress?.(createPressEvent('press', 'mouse', e));
       }
     },
-    [isDisabled, onPress, onPressEnd, onPressUp, setIsPressed, allowTextSelectionOnPress]
+    [
+      isDisabled,
+      onPress,
+      onPressEnd,
+      onPressUp,
+      setIsPressed,
+      allowTextSelectionOnPress
+    ]
   );
 
   // --- Mouse Leave Handler ---
@@ -169,9 +190,12 @@ export function usePress(props: UsePressProps): UsePressReturn {
     (e: MouseEvent) => {
       if (isPressed) {
         setIsPressed(false);
-        onPressEnd?.(createPressEvent("pressend", "mouse", e));
+        onPressEnd?.(createPressEvent('pressend', 'mouse', e));
         // Restore text selection if needed
-        if (!allowTextSelectionOnPress && e.currentTarget instanceof HTMLElement) {
+        if (
+          !allowTextSelectionOnPress &&
+          e.currentTarget instanceof HTMLElement
+        ) {
           restoreTextSelection(e.currentTarget);
         }
       }
@@ -180,11 +204,11 @@ export function usePress(props: UsePressProps): UsePressReturn {
   );
 
   // --- Mouse Enter Handler ---
-    const onMouseEnter = useCallback(
+  const onMouseEnter = useCallback(
     (e: MouseEvent) => {
       if (pressStarted.current && !isPressed) {
         setIsPressed(true);
-        onPressStart?.(createPressEvent("pressstart", "mouse", e));
+        onPressStart?.(createPressEvent('pressstart', 'mouse', e));
       }
     },
     [isPressed, onPressStart, setIsPressed]
@@ -204,12 +228,12 @@ export function usePress(props: UsePressProps): UsePressReturn {
       }
 
       const evt = {
-        ...createPressEvent("pressend", "touch", e),
-        target: e.target,
+        ...createPressEvent('pressend', 'touch', e),
+        target: e.target
       };
 
-      onPressEnd?.(evt as any);
-      onPressUp?.(evt as any);
+      onPressEnd?.(evt as PressEvent);
+      onPressUp?.(evt as PressEvent);
     },
     [onPressEnd, onPressUp, setIsPressed, allowTextSelectionOnPress]
   );
@@ -228,11 +252,11 @@ export function usePress(props: UsePressProps): UsePressReturn {
       }
 
       const evt = {
-        ...createPressEvent("pressend", "touch", e),
-        target: e.target,
+        ...createPressEvent('pressend', 'touch', e),
+        target: e.target
       };
 
-      onPressEnd?.(evt as any);
+      onPressEnd?.(evt as PressEvent);
     },
     [onPressEnd, setIsPressed, allowTextSelectionOnPress]
   );
@@ -257,16 +281,25 @@ export function usePress(props: UsePressProps): UsePressReturn {
       target.current = e.currentTarget;
       setIsPressed(true);
 
-      onPressStart?.(createPressEvent("pressstart", "touch", e));
+      onPressStart?.(createPressEvent('pressstart', 'touch', e));
 
-      window.addEventListener("touchend", onTouchEndWin as any, { once: true });
-      window.addEventListener("touchcancel", onTouchCancelWin as any, { once: true });
+      window.addEventListener('touchend', onTouchEndWin, { once: true });
+      window.addEventListener('touchcancel', onTouchCancelWin, {
+        once: true
+      });
     },
-    [isDisabled, onPressStart, setIsPressed, allowTextSelectionOnPress]
+    [
+      isDisabled,
+      onPressStart,
+      setIsPressed,
+      allowTextSelectionOnPress,
+      onTouchEndWin,
+      onTouchCancelWin
+    ]
   );
 
   // --- On Touch End Handler ---
-   const onTouchEnd = useCallback(
+  const onTouchEnd = useCallback(
     (e: TouchEvent) => {
       if (isDisabled || !pressStarted.current) return;
 
@@ -274,19 +307,32 @@ export function usePress(props: UsePressProps): UsePressReturn {
       setIsPressed(false);
 
       // Restore text selection
-      if (!allowTextSelectionOnPress && e.currentTarget instanceof HTMLElement) {
+      if (
+        !allowTextSelectionOnPress &&
+        e.currentTarget instanceof HTMLElement
+      ) {
         restoreTextSelection(e.currentTarget);
       }
 
-      const evt = createPressEvent("pressend", "touch", e);
+      const evt = createPressEvent('pressend', 'touch', e);
       onPressEnd?.(evt);
       onPressUp?.(evt);
 
-      if (e.currentTarget instanceof Node && e.currentTarget.contains(e.target as Node)) {
-        onPress?.(createPressEvent("press", "touch", e));
+      if (
+        e.currentTarget instanceof Node &&
+        e.currentTarget.contains(e.target as Node)
+      ) {
+        onPress?.(createPressEvent('press', 'touch', e));
       }
     },
-    [isDisabled, onPress, onPressEnd, onPressUp, setIsPressed, allowTextSelectionOnPress]
+    [
+      isDisabled,
+      onPress,
+      onPressEnd,
+      onPressUp,
+      setIsPressed,
+      allowTextSelectionOnPress
+    ]
   );
 
   // --- Keyboard Key Down Handler ---
@@ -294,10 +340,10 @@ export function usePress(props: UsePressProps): UsePressReturn {
     (e: KeyboardEvent) => {
       if (isDisabled) return;
 
-      const isValidKey = e.key === "Enter" || e.key === " ";
+      const isValidKey = e.key === 'Enter' || e.key === ' ';
       if (isValidKey && !isPressed) {
         // Prevent scrolling with spacebar
-        if (e.key === " ") {
+        if (e.key === ' ') {
           e.preventDefault();
         }
 
@@ -308,10 +354,16 @@ export function usePress(props: UsePressProps): UsePressReturn {
 
         setIsPressed(true);
         pressStarted.current = true;
-        onPressStart?.(createPressEvent("pressstart", "keyboard", e));
+        onPressStart?.(createPressEvent('pressstart', 'keyboard', e));
       }
     },
-    [isDisabled, isPressed, onPressStart, setIsPressed, allowTextSelectionOnPress]
+    [
+      isDisabled,
+      isPressed,
+      onPressStart,
+      setIsPressed,
+      allowTextSelectionOnPress
+    ]
   );
 
   // --- Keyboard Key Up Handler ---
@@ -319,7 +371,7 @@ export function usePress(props: UsePressProps): UsePressReturn {
     (e: KeyboardEvent) => {
       if (isDisabled) return;
 
-      const isValidKey = e.key === "Enter" || e.key === " ";
+      const isValidKey = e.key === 'Enter' || e.key === ' ';
       if (isValidKey && isPressed) {
         setIsPressed(false);
         pressStarted.current = false;
@@ -329,13 +381,21 @@ export function usePress(props: UsePressProps): UsePressReturn {
           restoreTextSelection();
         }
 
-        const evt = createPressEvent("pressend", "keyboard", e);
+        const evt = createPressEvent('pressend', 'keyboard', e);
         onPressEnd?.(evt);
-        onPressUp?.(createPressEvent("pressup", "keyboard", e));
-        onPress?.(createPressEvent("press", "keyboard", e));
+        onPressUp?.(createPressEvent('pressup', 'keyboard', e));
+        onPress?.(createPressEvent('press', 'keyboard', e));
       }
     },
-    [isDisabled, isPressed, onPress, onPressEnd, onPressUp, setIsPressed, allowTextSelectionOnPress]
+    [
+      isDisabled,
+      isPressed,
+      onPress,
+      onPressEnd,
+      onPressUp,
+      setIsPressed,
+      allowTextSelectionOnPress
+    ]
   );
 
   // --- Click Handler (for compatibility) ---
@@ -357,9 +417,9 @@ export function usePress(props: UsePressProps): UsePressReturn {
 
   useEffect(() => {
     return () => {
-      window.removeEventListener("mouseup", onMouseUpWin as any);
-      window.removeEventListener("touchend", onTouchEndWin as any);
-      window.removeEventListener("touchcancel", onTouchCancelWin as any);
+      window.removeEventListener('mouseup', onMouseUpWin);
+      window.removeEventListener('touchend', onTouchEndWin);
+      window.removeEventListener('touchcancel', onTouchCancelWin);
     };
   }, [onMouseUpWin, onTouchEndWin, onTouchCancelWin]);
 
@@ -374,10 +434,9 @@ export function usePress(props: UsePressProps): UsePressReturn {
       onTouchEnd,
       onKeyDown,
       onKeyUp,
-      onClick: onClickHandler,
+      onClick: onClickHandler
     }),
     [
-      isPressed,
       onMouseDown,
       onMouseUp,
       onMouseLeave,
@@ -386,14 +445,14 @@ export function usePress(props: UsePressProps): UsePressReturn {
       onTouchEnd,
       onKeyDown,
       onKeyUp,
-      onClickHandler,
+      onClickHandler
     ]
   );
 
   useEffect(() => {
-    let element = domRef?.current;
-    if (element && (element instanceof getOwnerWindow(element).Element)) {
-      let style = getOwnerWindow(element).getComputedStyle(element);
+    const element = domRef?.current;
+    if (element && element instanceof getOwnerWindow(element).Element) {
+      const style = getOwnerWindow(element).getComputedStyle(element);
       if (style.touchAction === 'auto') {
         (element as HTMLElement).style.touchAction = 'pan-x pan-y pinch-zoom';
       }
@@ -401,4 +460,4 @@ export function usePress(props: UsePressProps): UsePressReturn {
   }, [domRef]);
 
   return { pressProps, isPressed };
-};
+}

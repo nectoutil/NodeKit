@@ -1,25 +1,15 @@
-/**
- * Copyright (c) Corinvo, LLC. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- * Portions of this code are based on the React Aria Spectrum library by Adobe,
- * licensed under the Apache License, Version 2.0.
- * See: https://github.com/adobe/react-spectrum
- *
- * Modifications have been made to adapt the code for use in this project.
- */
+import { useEffect } from 'react';
+import { isMac } from '@necto/platform';
+import { isKeyboardFocusEvent } from '@necto-react/helpers';
+import { getOwnerWindow, getOwnerDocument } from '@necto/dom';
 
-'use strict';
-
-import { useEffect } from "react";
-import { isMac } from "@necto/platform";
-import { isKeyboardFocusEvent } from "@necto-react/helpers";
-import { getOwnerWindow, getOwnerDocument } from "@necto/dom";
-
-type Modality = "keyboard" | "pointer" | "virtual";
-type HandlerEvent = PointerEvent | MouseEvent | KeyboardEvent | FocusEvent | null;
+type Modality = 'keyboard' | 'pointer' | 'virtual';
+type HandlerEvent =
+  | PointerEvent
+  | MouseEvent
+  | KeyboardEvent
+  | FocusEvent
+  | null;
 type Handler = (modality: Modality, e: HandlerEvent) => void;
 export type FocusVisibleHandler = (isFocusVisible: boolean) => void;
 
@@ -38,23 +28,23 @@ function isValidKey(e: KeyboardEvent) {
     e.metaKey ||
     (!isMac() && e.altKey) ||
     e.ctrlKey ||
-    ["Control", "Shift", "Meta"].includes(e.key)
+    ['Control', 'Shift', 'Meta'].includes(e.key)
   );
 }
 
 function handleKeyboardEvent(e: KeyboardEvent) {
   if (isValidKey(e)) {
     hasEventBeforeFocus = true;
-    currentModality = "keyboard";
-    triggerChangeHandlers("keyboard", e);
+    currentModality = 'keyboard';
+    triggerChangeHandlers('keyboard', e);
   }
 }
 
 function handlePointerEvent(e: PointerEvent | MouseEvent) {
-  if (["mousedown", "pointerdown"].includes(e.type)) {
+  if (['mousedown', 'pointerdown'].includes(e.type)) {
     hasEventBeforeFocus = true;
-    currentModality = "pointer";
-    triggerChangeHandlers("pointer", e);
+    currentModality = 'pointer';
+    triggerChangeHandlers('pointer', e);
   }
 }
 
@@ -68,8 +58,8 @@ function handleFocusEvent(e: FocusEvent) {
   }
 
   if (!hasEventBeforeFocus && !hasBlurredWindowRecently) {
-    currentModality = "virtual";
-    triggerChangeHandlers("virtual", e);
+    currentModality = 'virtual';
+    triggerChangeHandlers('virtual', e);
   }
 
   hasEventBeforeFocus = false;
@@ -86,8 +76,8 @@ function setupGlobalFocusEvents(element?: HTMLElement | null) {
   const documentObject = getOwnerDocument(element);
 
   if (
-    typeof window === "undefined" ||
-    typeof document === "undefined" ||
+    typeof window === 'undefined' ||
+    typeof document === 'undefined' ||
     hasSetupGlobalListeners.has(windowObject)
   ) {
     return;
@@ -99,13 +89,13 @@ function setupGlobalFocusEvents(element?: HTMLElement | null) {
     originalFocus.apply(this, args);
   };
 
-  documentObject.addEventListener("keydown", handleKeyboardEvent, true);
-  documentObject.addEventListener("click", handlePointerEvent, true);
-  windowObject.addEventListener("focus", handleFocusEvent, true);
-  windowObject.addEventListener("blur", handleWindowBlur, false);
+  documentObject.addEventListener('keydown', handleKeyboardEvent, true);
+  documentObject.addEventListener('click', handlePointerEvent, true);
+  windowObject.addEventListener('focus', handleFocusEvent, true);
+  windowObject.addEventListener('blur', handleWindowBlur, false);
 
-  if (typeof PointerEvent !== "undefined") {
-    documentObject.addEventListener("pointerdown", handlePointerEvent, true);
+  if (typeof PointerEvent !== 'undefined') {
+    documentObject.addEventListener('pointerdown', handlePointerEvent, true);
   }
 
   hasSetupGlobalListeners.set(windowObject, { focus: originalFocus });
@@ -120,21 +110,23 @@ function tearDownGlobalFocusEvents(element?: HTMLElement | null) {
   const { focus } = hasSetupGlobalListeners.get(windowObject)!;
   windowObject.HTMLElement.prototype.focus = focus;
 
-  documentObject.removeEventListener("keydown", handleKeyboardEvent, true);
-  documentObject.removeEventListener("click", handlePointerEvent, true);
-  windowObject.removeEventListener("focus", handleFocusEvent, true);
-  windowObject.removeEventListener("blur", handleWindowBlur, false);
+  documentObject.removeEventListener('keydown', handleKeyboardEvent, true);
+  documentObject.removeEventListener('click', handlePointerEvent, true);
+  windowObject.removeEventListener('focus', handleFocusEvent, true);
+  windowObject.removeEventListener('blur', handleWindowBlur, false);
 
   hasSetupGlobalListeners.delete(windowObject);
 }
 
-export function addWindowFocusTracking(element?: HTMLElement | null): () => void {
+export function addWindowFocusTracking(
+  element?: HTMLElement | null
+): () => void {
   const documentObject = getOwnerDocument(element);
 
-  if (documentObject.readyState !== "loading") {
+  if (documentObject.readyState !== 'loading') {
     setupGlobalFocusEvents(element);
   } else {
-    documentObject.addEventListener("DOMContentLoaded", () =>
+    documentObject.addEventListener('DOMContentLoaded', () =>
       setupGlobalFocusEvents(element)
     );
   }
@@ -160,7 +152,7 @@ export function useFocusVisibleListener(
   useEffect(() => {
     const handler: Handler = (modality, e) => {
       if (!isKeyboardFocusEvent(!!opts?.isTextInput, modality, e)) return;
-      fn(currentModality !== "pointer");
+      fn(currentModality !== 'pointer');
     };
 
     changeHandlers.add(handler);

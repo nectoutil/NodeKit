@@ -33,4 +33,3 @@ describe('useId Hook', () => {
     expect(result1.current).not.toBe(result2.current);
   });
 });
-

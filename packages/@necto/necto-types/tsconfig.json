@@ -8,6 +8,6 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "removeComments": true,
-    "lib": ["ESNext"],
+    "lib": ["ESNext"]
   }
 }

@@ -34,27 +34,25 @@ function filterDOMProps(
     allowLinkProps = false,
     extraAllowedProps,
     allowedLabelableProps = new Set<string>(),
-    allowedLinkProps = new Set<string>(),
+    allowedLinkProps = new Set<string>()
   } = options;
 
-  let allowedProps: Record<string, any> = {};
+  const allowedProps: Record<string, unknown> = {};
 
   for (const propName in props) {
     if (
-      Object.prototype.hasOwnProperty.call(props, propName) && (
-        new Set(['id']).has(propName) ||
+      Object.hasOwn(props, propName) &&
+      (new Set(['id']).has(propName) ||
         (allowLabelableProps && allowedLabelableProps.has(propName)) ||
         (allowLinkProps && allowedLinkProps.has(propName)) ||
         extraAllowedProps?.has(propName) ||
-        new RegExp(/^(data-.*)$/).test(propName)
-      )
+        new RegExp(/^(data-.*)$/).test(propName))
     ) {
       allowedProps[propName] = props[propName as keyof typeof props];
     }
   }
 
   return allowedProps;
-};
+}
 
 export { filterDOMProps };
-

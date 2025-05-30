@@ -6,34 +6,36 @@
  *
  */
 
-import {
+import type {
   AriaRole,
   CSSProperties,
   AriaAttributes,
   HTMLAttributeAnchorTarget,
   HTMLAttributeReferrerPolicy,
-  DOMAttributes as ReactDOMAttributes,
-} from "react";
+  DOMAttributes as ReactDOMAttributes
+} from 'react';
 
-export interface FocusableElement extends Element, HTMLOrSVGElement {};
+export interface FocusableElement extends Element, HTMLOrSVGElement {}
 
-export interface DOMAttributes<T = FocusableElement> extends AriaAttributes, ReactDOMAttributes<T> {
-  id?: string | undefined,
-  role?: AriaRole | undefined,
-  tabIndex?: number | undefined,
-  style?: CSSProperties | undefined,
-  className?: string | undefined
-};
+export interface DOMAttributes<T = FocusableElement>
+  extends AriaAttributes,
+    ReactDOMAttributes<T> {
+  id?: string | undefined;
+  role?: AriaRole | undefined;
+  tabIndex?: number | undefined;
+  style?: CSSProperties | undefined;
+  className?: string | undefined;
+}
 
-export interface FocusableElement extends Element, HTMLOrSVGElement {};
+export interface FocusableElement extends Element, HTMLOrSVGElement {}
 
 export interface LinkDOMProps {
-  href?: any,
-  hrefLang?: string,
-  target?: HTMLAttributeAnchorTarget,
-  rel?: string,
-  download?: boolean | string,
-  ping?: string,
-  referrerPolicy?: HTMLAttributeReferrerPolicy,
-  routerOptions?: any
+  href?: string | undefined;
+  hrefLang?: string;
+  target?: HTMLAttributeAnchorTarget;
+  rel?: string;
+  download?: boolean | string;
+  ping?: string;
+  referrerPolicy?: HTMLAttributeReferrerPolicy;
+  routerOptions?: unknown;
 }

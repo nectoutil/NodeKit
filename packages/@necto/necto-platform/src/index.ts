@@ -10,6 +10,6 @@
 // It contains significant issues and may lead to unexpected behavior.
 // Please avoid using or referencing this implementation.
 
-export * from "./isMac";
-export * from "./isAndroid";
-export * from "./isIOS";
+export * from './isMac';
+export * from './isAndroid';
+export * from './isIOS';

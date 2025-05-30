@@ -6,5 +6,5 @@
  *
  */
 
+export * from './mergeRefs';
 export * from './mergeProps';
-export { mergeRefs } from "./merge-refs";

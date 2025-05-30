@@ -1,16 +1,6 @@
-/**
- * Copyright (c) Corinvo, LLC. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
+import { createContext, createElement, useContext, useMemo } from 'react';
 
-'use strict';
-
-import { createContext, createElement, useContext, useMemo } from "react";
-
-import type { HTMLAttributes, PropsWithChildren } from "react";
+import type { HTMLAttributes, PropsWithChildren } from 'react';
 
 type DisabledFlags = {
   general?: boolean;
@@ -19,21 +9,24 @@ type DisabledFlags = {
   [key: string]: boolean | undefined;
 };
 
-let DisabledContext = createContext<DisabledFlags>({});
+const DisabledContext = createContext<DisabledFlags>({});
 
 export function useDisabledFlags(): DisabledFlags {
   return useContext(DisabledContext) || {};
-};
+}
 
 export function useDisabled(
   type: keyof DisabledFlags = 'general',
-  defaultFallback: boolean = false
+  defaultFallback = false
 ): boolean {
   const flags = useDisabledFlags();
   return flags[type] ?? defaultFallback;
 }
 
-export function useDisabledProps(type: keyof DisabledFlags = 'general', extraProps: HTMLAttributes<HTMLElement> = {}): HTMLAttributes<HTMLElement> {
+export function useDisabledProps(
+  type: keyof DisabledFlags = 'general',
+  extraProps: HTMLAttributes<HTMLElement> = {}
+): HTMLAttributes<HTMLElement> {
   const isDisabled = useDisabled(type);
 
   return useMemo(() => {
@@ -44,18 +37,21 @@ export function useDisabledProps(type: keyof DisabledFlags = 'general', extraPro
     if (isDisabled) {
       props = {
         ...props,
-        ...(typeof extraProps.onClick === 'function' || typeof extraProps.onChange === 'function' ? { disabled: isDisabled } : {}),
+        ...(typeof extraProps.onClick === 'function' ||
+        typeof extraProps.onChange === 'function'
+          ? { disabled: isDisabled }
+          : {}),
         'aria-disabled': isDisabled
       };
     }
 
     return props;
   }, [isDisabled, extraProps]);
-};
+}
 
 export function DisabledProvider({
   value,
-  children,
+  children
 }: PropsWithChildren<{ value?: DisabledFlags }>) {
   return createElement(
     DisabledContext.Provider,

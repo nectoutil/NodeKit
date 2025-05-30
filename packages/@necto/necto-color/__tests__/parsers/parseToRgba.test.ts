@@ -43,7 +43,7 @@ describe('parseToRgba', () => {
       mediumblue: '0000cd',
       mediumorchid: 'ba55d3',
       mediumpurple: '9370db',
-      mediumseagreen: '3cb371',
+      mediumseagreen: '3cb371'
     };
 
     for (const [color, value] of Object.entries(namedColorMap)) {
@@ -180,7 +180,9 @@ describe('parseToRgba', () => {
         0.75,
       ]
     `);
-    expect(parseToRgba('hsla( 210 , 10% , 40% , 0.75 )')).toMatchInlineSnapshot(`
+    expect(
+      parseToRgba('hsla( 210 , 10% , 40% , 0.75 )')
+    ).toMatchInlineSnapshot(`
       [
         92,
         102,
@@ -199,7 +201,9 @@ describe('parseToRgba', () => {
         1,
       ]
     `);
-    expect(parseToRgba('hsla( 210 , 0.5% , 0.5% , 1.0 )')).toMatchInlineSnapshot(`
+    expect(
+      parseToRgba('hsla( 210 , 0.5% , 0.5% , 1.0 )')
+    ).toMatchInlineSnapshot(`
       [
         1,
         1,
@@ -218,7 +222,9 @@ describe('parseToRgba', () => {
         0,
       ]
     `);
-    expect(parseToRgba('hsla( 210 , 0.5% , 0.5% , 0.01 )')).toMatchInlineSnapshot(`
+    expect(
+      parseToRgba('hsla( 210 , 0.5% , 0.5% , 0.01 )')
+    ).toMatchInlineSnapshot(`
       [
         1,
         1,
@@ -240,7 +246,9 @@ describe('parseToRgba', () => {
     expect(() => {
       // @ts-ignore
       parseToRgba(12345);
-    }).toThrowErrorMatchingInlineSnapshot(`[Error: [__PACKAGE_NAME__]: This is not a valid color]`);
+    }).toThrowErrorMatchingInlineSnapshot(
+      `[Error: [__PACKAGE_NAME__]: This is not a valid color]`
+    );
   });
 
   it('throws an error if an invalid hsl string is provided', () => {

@@ -19,8 +19,8 @@ import { getOwnerDocument, runAfterTransition } from '@necto/dom';
 import type { TextSelectionStates } from './types';
 
 let state: TextSelectionStates = 'default';
-let savedUserSelect: string = '';
-let modifiedElementMap = new WeakMap<Element, string>();
+let savedUserSelect = '';
+const modifiedElementMap = new WeakMap<Element, string>();
 
 /**
  * Disables text selection for a given element, or for the entire document on iOS.
@@ -38,7 +38,7 @@ export function disableTextSelection(target?: Element): void {
   if (isIOS()) {
     if (state === 'default') {
       const doc = getOwnerDocument(target);
-      if (doc && doc.documentElement && typeof doc.documentElement.style.webkitUserSelect !== 'undefined') {
+      if (typeof doc?.documentElement?.style.webkitUserSelect !== 'undefined') {
         savedUserSelect = doc.documentElement.style.webkitUserSelect;
         doc.documentElement.style.webkitUserSelect = 'none';
         state = 'disabled';
@@ -55,7 +55,7 @@ export function disableTextSelection(target?: Element): void {
       style[prop] = 'none';
     }
   }
-};
+}
 
 /**
  * Restores text selection for a given element, or for the entire document on iOS.
@@ -82,11 +82,7 @@ export function restoreTextSelection(target?: Element): void {
         // Prevent race conditions
         if (state === 'restoring') {
           const doc = getOwnerDocument(target);
-          if (
-            doc &&
-            doc.documentElement &&
-            doc.documentElement.style.webkitUserSelect === 'none'
-          ) {
+          if (doc?.documentElement?.style.webkitUserSelect === 'none') {
             doc.documentElement.style.webkitUserSelect = savedUserSelect || '';
           }
           savedUserSelect = '';
@@ -113,4 +109,4 @@ export function restoreTextSelection(target?: Element): void {
       modifiedElementMap.delete(target);
     }
   }
-};
+}

@@ -6,7 +6,7 @@
  *
  */
 
-import type { LinkDOMProps } from "@necto-react/types";
+import type { LinkDOMProps } from '@necto-react/types';
 
 /**
  * Options for filtering DOM props.
@@ -43,8 +43,4 @@ interface FilterDOMReturn {
   /** The id attribute for the element. */
   id?: string;
 }
-export type {
-  FilterOptions,
-  FilterDOMProps,
-  FilterDOMReturn
-};
+export type { FilterOptions, FilterDOMProps, FilterDOMReturn };

@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest';
 
-import toHex from "../../src/converters/toHex";
+import toHex from '../../src/converters/toHex';
 
 describe('Color Conversion Tests', () => {
-  it("takes in any color and returns its hex code", () => {
+  it('takes in any color and returns its hex code', () => {
     expect(toHex('red')).toMatchInlineSnapshot(`"#ff0000"`);
   });
 

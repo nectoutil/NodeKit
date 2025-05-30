@@ -15,7 +15,7 @@ import { ALPHABET_COMBINED } from '@necto/constants';
  * @param charset - The character set to use for generating the ID (default: ALPHABET_COMBINED).
  * @returns A randomly generated ID string.
  */
-export function id(length: number = 21, charset: string[] = ALPHABET_COMBINED): string {
+export function id(length = 21, charset: string[] = ALPHABET_COMBINED): string {
   if (length <= 0) {
     throw new Error('Length must be a positive integer.');
   }

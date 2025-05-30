@@ -11,7 +11,7 @@
  * Modifications have been made to adapt the code for use in this project.
  */
 
-import { isAndroid } from "@necto/platform";
+import { isAndroid } from '@necto/platform';
 
 export function isVirtualClick(event: MouseEvent | PointerEvent): boolean {
   // JAWS/NVDA with Firefox.

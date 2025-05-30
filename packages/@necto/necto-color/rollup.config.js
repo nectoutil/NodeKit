@@ -1,7 +1,6 @@
 import copy from 'rollup-plugin-copy';
 import json from '@rollup/plugin-json';
 import babel from '@rollup/plugin-babel';
-import replace from '@rollup/plugin-replace';
 import { terser } from 'rollup-plugin-terser';
 import resolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
@@ -11,7 +10,7 @@ export default {
   output: {
     file: 'dist/index.js',
     format: 'esm',
-    sourcemap: false,
+    sourcemap: false
   },
   plugins: [
     resolve(),
@@ -22,18 +21,16 @@ export default {
       extensions: ['.ts'],
       presets: [
         ['@babel/preset-env', { targets: { node: 'current' } }],
-        '@babel/preset-typescript',
-      ],
+        '@babel/preset-typescript'
+      ]
     }),
     json(),
     terser(),
     typescript({
-      tsconfig: './tsconfig.json',
+      tsconfig: './tsconfig.json'
     }),
     copy({
-      targets: [
-        { src: 'src/index.d.ts', dest: 'dist' },
-      ]
+      targets: [{ src: 'src/index.d.ts', dest: 'dist' }]
     })
-  ],
+  ]
 };

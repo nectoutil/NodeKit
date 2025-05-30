@@ -22,7 +22,11 @@ function onTransitionStart(e: Event): void {
   if (!transitions) {
     transitions = new Set();
     transitionsByElement.set(e.target, transitions);
-    (e.target as Element).addEventListener('transitioncancel', onTransitionEnd, { once: true });
+    (e.target as Element).addEventListener(
+      'transitioncancel',
+      onTransitionEnd,
+      { once: true }
+    );
   }
   transitions.add((e as TransitionEvent).propertyName);
 }
@@ -40,12 +44,17 @@ function onTransitionEnd(e: Event): void {
   transitions.delete((e as TransitionEvent).propertyName);
 
   if (transitions.size === 0) {
-    (e.target as Element).removeEventListener('transitioncancel', onTransitionEnd);
+    (e.target as Element).removeEventListener(
+      'transitioncancel',
+      onTransitionEnd
+    );
     transitionsByElement.delete(e.target);
   }
 
   if (transitionsByElement.size === 0) {
-    transitionCallbacks.forEach(cb => cb());
+    for (const cb of transitionCallbacks) {
+      cb();
+    }
     transitionCallbacks.clear();
   }
 }
@@ -72,7 +81,10 @@ function runAfterTransition(callback: () => void): void {
   requestAnimationFrame(() => {
     // Inline cleanupDetachedElements logic
     for (const [eventTarget] of transitionsByElement) {
-      if ('isConnected' in eventTarget && !(eventTarget as Element).isConnected) {
+      if (
+        'isConnected' in eventTarget &&
+        !(eventTarget as Element).isConnected
+      ) {
         transitionsByElement.delete(eventTarget);
       }
     }

@@ -8,11 +8,10 @@ function testUserAgent(re: RegExp) {
   }
   return (
     //@ts-ignore
-    window.navigator['userAgentData']?.brands.some((brand: {brand: string, version: string}) => re.test(brand.brand))
-  ) ||
-  re.test(window.navigator.userAgent);
+    window.navigator.userAgentData?.brands.some(
+      (brand: { brand: string; version: string }) => re.test(brand.brand)
+    ) || re.test(window.navigator.userAgent)
+  );
 }
 
-export const isAndroid = function () {
-  return testUserAgent(/Android/i);
-};
+export const isAndroid = () => testUserAgent(/Android/i);

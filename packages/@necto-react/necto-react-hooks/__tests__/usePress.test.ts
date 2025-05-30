@@ -12,7 +12,11 @@ describe('usePress', () => {
     const onPressStart = vi.fn();
     const { result } = renderHook(() => usePress({ onPressStart }));
     act(() => {
-      result.current.pressProps.onMouseDown?.({ button: 0, currentTarget: document.body, preventDefault: () => {}, } as any);
+      result.current.pressProps.onMouseDown?.({
+        button: 0,
+        currentTarget: document.body,
+        preventDefault: () => {}
+      } as any);
     });
     expect(onPressStart).toHaveBeenCalled();
     expect(result.current.isPressed).toBe(true);
@@ -22,8 +26,16 @@ describe('usePress', () => {
     const onPressEnd = vi.fn();
     const { result } = renderHook(() => usePress({ onPressEnd }));
     act(() => {
-      result.current.pressProps.onMouseDown?.({ button: 0, currentTarget: document.body, preventDefault: () => {}, } as any);
-      result.current.pressProps.onMouseUp?.({ button: 0, currentTarget: document.body, target: document.body } as any);
+      result.current.pressProps.onMouseDown?.({
+        button: 0,
+        currentTarget: document.body,
+        preventDefault: () => {}
+      } as any);
+      result.current.pressProps.onMouseUp?.({
+        button: 0,
+        currentTarget: document.body,
+        target: document.body
+      } as any);
     });
     expect(onPressEnd).toHaveBeenCalled();
     expect(result.current.isPressed).toBe(false);
@@ -32,10 +44,20 @@ describe('usePress', () => {
   it('should not trigger press events if isDisabled is true', () => {
     const onPressStart = vi.fn();
     const onPressEnd = vi.fn();
-    const { result } = renderHook(() => usePress({ isDisabled: true, onPressStart, onPressEnd }));
+    const { result } = renderHook(() =>
+      usePress({ isDisabled: true, onPressStart, onPressEnd })
+    );
     act(() => {
-      result.current.pressProps.onMouseDown?.({ button: 0, currentTarget: document.body, preventDefault: () => {}, } as any);
-      result.current.pressProps.onMouseUp?.({ button: 0, currentTarget: document.body, target: document.body } as any);
+      result.current.pressProps.onMouseDown?.({
+        button: 0,
+        currentTarget: document.body,
+        preventDefault: () => {}
+      } as any);
+      result.current.pressProps.onMouseUp?.({
+        button: 0,
+        currentTarget: document.body,
+        target: document.body
+      } as any);
     });
     expect(onPressStart).not.toHaveBeenCalled();
     expect(onPressEnd).not.toHaveBeenCalled();
@@ -46,8 +68,16 @@ describe('usePress', () => {
     const onPress = vi.fn();
     const { result } = renderHook(() => usePress({ onPress }));
     act(() => {
-      result.current.pressProps.onMouseDown?.({ button: 0, currentTarget: document.body, preventDefault: () => {}, } as any);
-      result.current.pressProps.onMouseUp?.({ button: 0, currentTarget: document.body, target: document.body } as any);
+      result.current.pressProps.onMouseDown?.({
+        button: 0,
+        currentTarget: document.body,
+        preventDefault: () => {}
+      } as any);
+      result.current.pressProps.onMouseUp?.({
+        button: 0,
+        currentTarget: document.body,
+        target: document.body
+      } as any);
     });
     expect(onPress).toHaveBeenCalled();
   });
@@ -63,7 +93,9 @@ describe('usePress', () => {
 
   it('should prevent onClick if disabled', () => {
     const onClick = vi.fn();
-    const { result } = renderHook(() => usePress({ isDisabled: true, onClick }));
+    const { result } = renderHook(() =>
+      usePress({ isDisabled: true, onClick })
+    );
     const preventDefault = vi.fn();
     act(() => {
       result.current.pressProps.onClick?.({ preventDefault } as any);

@@ -6,16 +6,16 @@
  *
  */
 
-export function kebabCase(str: string, keepLeadingDash: boolean = false) {
+export function kebabCase(str: string, keepLeadingDash = false) {
   const result = str.replace(/\p{Lu}/gu, (match) => `-${match.toLowerCase()}`);
 
   if (keepLeadingDash) return result;
 
   if (result.startsWith('-')) return result.slice(1);
 
-  return result
-};
+  return result;
+}
 
 kebabCase.reverse = (str: string) => {
   return str.replace(/-\p{Ll}/gu, (match) => match.slice(1).toUpperCase());
-}
+};

@@ -6,23 +6,21 @@
  *
  */
 
-import type {
-  FocusEvent as ReactFocusEvent
-} from 'react';
+import type { FocusEvent as ReactFocusEvent } from 'react';
 
 export interface HoverEvent {
-  onHoverStart?: (event: HoverEvent) => void,
-  onHoverEnd?: (event: HoverEvent) => void,
-  onHoverChange?: (isHovering: boolean) => void
+  onHoverStart?: (event: HoverEvent) => void;
+  onHoverEnd?: (event: HoverEvent) => void;
+  onHoverChange?: (isHovering: boolean) => void;
 }
 
 export interface FocusEvent<Target = Element> {
-  onFocus?: (e: ReactFocusEvent<Target>) => void,
-  onBlur?: (e: ReactFocusEvent<Target>) => void,
-  onFocusChange?: (isFocused: boolean) => void
+  onFocus?: (e: ReactFocusEvent<Target>) => void;
+  onBlur?: (e: ReactFocusEvent<Target>) => void;
+  onFocusChange?: (isFocused: boolean) => void;
 }
 
 export interface KeyboardEvents {
-  onKeyDown?: (e: KeyboardEvent) => void,
-  onKeyUp?: (e: KeyboardEvent) => void
+  onKeyDown?: (e: KeyboardEvent) => void;
+  onKeyUp?: (e: KeyboardEvent) => void;
 }

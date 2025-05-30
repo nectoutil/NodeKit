@@ -47,7 +47,7 @@ export interface UsePressProps {
 
   /** Handler called on click events for compatibility. */
   onClick?: (e: MouseEvent) => void;
-};
+}
 
 /**
  * Return type for the usePress hook.
@@ -68,4 +68,4 @@ export interface UsePressReturn {
 
   /** Whether the element is currently pressed. */
   isPressed: boolean;
-};
+}

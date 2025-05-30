@@ -13,7 +13,7 @@
  */
 export const defaultContext = {
   prefix: String(Math.round(Math.random() * 1e10)),
-  current: 0,
+  current: 0
 };
 
 /**
@@ -26,9 +26,8 @@ export const idsUpdaterMap = new Map<string, { current: string | null }[]>();
  * FinalizationRegistry for cleaning up unused IDs from idsUpdaterMap.
  */
 export const registry =
-  typeof FinalizationRegistry !== "undefined"
+  typeof FinalizationRegistry !== 'undefined'
     ? new FinalizationRegistry<string>((id) => {
         idsUpdaterMap.delete(id);
       })
     : null;
-

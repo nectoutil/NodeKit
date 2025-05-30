@@ -7,7 +7,7 @@
  */
 
 import { isTest } from 'std-env';
-import { registry, defaultContext, idsUpdaterMap} from './hookContext';
+import { registry, defaultContext, idsUpdaterMap } from './hookContext';
 import React, { useRef, useState, useEffect, useId as useReactId } from 'react';
 
 import type { UseIdProps, UseIdReturn } from './types';
@@ -28,17 +28,22 @@ export function useId(props?: UseIdProps): UseIdReturn {
 
   const id = (() => {
     if (defaultId) return defaultId;
-    const reactId = typeof React['useId'] === "function" ? useReactId() : String(++defaultContext.current);
-    const computedPrefix = isTest ? prefix : `${prefix}${defaultContext.prefix}`;
+    const reactId =
+      typeof React['useId'] === 'function'
+        ? useReactId()
+        : String(++defaultContext.current);
+    const computedPrefix = isTest
+      ? prefix
+      : `${prefix}${defaultContext.prefix}`;
     return `${computedPrefix}-${reactId}`;
   })();
 
   useEffect(() => {
-    if (typeof window !== "undefined" && !!window.document?.createElement) {
+    if (typeof window !== 'undefined' && !!window.document?.createElement) {
       const cachedRefs = idsUpdaterMap.get(id) || [];
       const nextIdWrapper = { current: nextIdRef.current };
 
-      if (!cachedRefs.some(ref => ref === nextIdWrapper)) {
+      if (!cachedRefs.some((ref) => ref === nextIdWrapper)) {
         idsUpdaterMap.set(id, [...cachedRefs, nextIdWrapper]);
       }
     }
@@ -64,4 +69,4 @@ export function useId(props?: UseIdProps): UseIdReturn {
   }, []);
 
   return id;
-};
+}

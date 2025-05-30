@@ -12,11 +12,9 @@
 
 function testPlatform(re: RegExp) {
   return typeof window !== 'undefined' && window.navigator != null
-    //@ts-ignore
-    ? re.test(window.navigator['userAgentData']?.platform || window.navigator.platform)
+    ? //@ts-ignore
+      re.test(window.navigator.platform)
     : false;
 }
 
-export const isMac = function () {
-  return testPlatform(/^Mac/i);
-};
+export const isMac = () => testPlatform(/^Mac/i);

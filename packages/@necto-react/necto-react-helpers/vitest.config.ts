@@ -12,7 +12,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@necto-react-helpers': path.resolve(__dirname, 'src'),
+      '@necto-react-helpers': path.resolve(__dirname, 'src')
     }
   }
 });

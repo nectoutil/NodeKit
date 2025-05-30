@@ -6,7 +6,7 @@
  *
  */
 
-import type { Key } from "./keyboards";
+import type { Key } from './keyboards';
 
 /**
  * Interface for keyboard navigation within a collection.

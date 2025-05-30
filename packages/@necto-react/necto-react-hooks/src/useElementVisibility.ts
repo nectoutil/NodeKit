@@ -1,13 +1,3 @@
-/**
- * Copyright (c) Corinvo, LLC. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
-'use strict';
-
 import { useEffect, useRef, useState, useCallback } from 'react';
 
 import type { RefObject } from 'react';
@@ -30,12 +20,7 @@ function useElementVisibility<T extends Element = Element>(
   elementRef?: RefObject<T> | null,
   props: ElementVisibilityProps = {}
 ): [boolean, RefObject<T>] {
-  const {
-    threshold = 0,
-    rootMargin,
-    root = null,
-    once = false
-  } = props;
+  const { threshold = 0, rootMargin, root = null, once = false } = props;
 
   const internalRef = useRef<T>(null!);
   const ref = elementRef || internalRef;
@@ -66,7 +51,7 @@ function useElementVisibility<T extends Element = Element>(
     const observer = new window.IntersectionObserver(observerCallback, {
       threshold,
       root,
-      rootMargin,
+      rootMargin
     });
 
     observer.observe(node);
@@ -80,7 +65,4 @@ function useElementVisibility<T extends Element = Element>(
   return [isVisible, ref];
 }
 
-export {
-  useElementVisibility,
-  type ElementVisibilityProps
-};
+export { useElementVisibility, type ElementVisibilityProps };

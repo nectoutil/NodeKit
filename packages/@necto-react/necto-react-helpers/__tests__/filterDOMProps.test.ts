@@ -11,15 +11,27 @@ describe('filterDOMProps', () => {
   it('should allow extra allowed props', () => {
     const props = { id: 'foo', custom: 'bar' };
     const options = {
-      additionalAllowedProps: new Set(['custom']),
+      additionalAllowedProps: new Set(['custom'])
     };
-    expect(filterDOMProps(props, options)).toEqual({ id: 'foo', custom: 'bar' });
+    expect(filterDOMProps(props, options)).toEqual({
+      id: 'foo',
+      custom: 'bar'
+    });
   });
 
   it('should allow data-* attributes', () => {
-    const props = { id: 'foo', 'data-test': 'bar', 'data-foo': 'baz', notData: 'no' };
+    const props = {
+      id: 'foo',
+      'data-test': 'bar',
+      'data-foo': 'baz',
+      notData: 'no'
+    };
     const options = {};
-    expect(filterDOMProps(props, options)).toEqual({ id: 'foo', 'data-test': 'bar', 'data-foo': 'baz' });
+    expect(filterDOMProps(props, options)).toEqual({
+      id: 'foo',
+      'data-test': 'bar',
+      'data-foo': 'baz'
+    });
   });
 
   it('should not allow props not specified in options', () => {

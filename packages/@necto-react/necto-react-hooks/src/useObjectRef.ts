@@ -1,18 +1,13 @@
-/**
- * Copyright (c) Corinvo, LLC. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
-'use strict';
-
 import { useCallback, useMemo, useRef } from 'react';
 
 import type { RefObject } from 'react';
 
-export function useObjectRef<T>(ref?: ((instance: T | null) => (() => void) | void) | RefObject<T | null> | null): RefObject<T | null> {
+export function useObjectRef<T>(
+  ref?:
+    | ((instance: T | null) => (() => void) | void)
+    | RefObject<T | null>
+    | null
+): RefObject<T | null> {
   const objRef: RefObject<T | null> = useRef<T>(null);
   const cleanupRef: RefObject<(() => void) | void> = useRef(undefined);
 

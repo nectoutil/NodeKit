@@ -1,9 +1,9 @@
 import convert from 'color-convert';
 import colorString from 'color-string';
-import toHex from "./converters/toHex";
-import toHexa from "./converters/toHexa";
-import toRgba from "./converters/toRgba";
-import toRgbaArray from "./converters/toRgbaArray";
+import toHex from './converters/toHex';
+import toHexa from './converters/toHexa';
+import toRgba from './converters/toRgba';
+import toRgbaArray from './converters/toRgbaArray';
 
 // This is a horrible and very shit color conversion library.
 //  DO NOT USE, it is build as a temp solution, it will be fixed later!
@@ -22,19 +22,21 @@ class Color {
     }
 
     if (object == null) {
-      this.model = "rgb";
+      this.model = 'rgb';
       this.color = [0, 0, 0];
       this.valpha = 1;
-      this.value = "rgb(0, 0, 0)";
+      this.value = 'rgb(0, 0, 0)';
     } else if (object instanceof Color) {
       this.model = object.model;
       this.valpha = object.valpha;
       this.color = [...object.color];
       this.value = object.value;
-    } else if (typeof object === "string") {
+    } else if (typeof object === 'string') {
       const parsed = colorString.get(object);
       if (parsed === null) {
-        throw new Error(`[__PACKAGE_NAME__]: Unable to parse color from string: ${object}`);
+        throw new Error(
+          `[__PACKAGE_NAME__]: Unable to parse color from string: ${object}`
+        );
       }
 
       // Preserve the original input value
@@ -47,8 +49,8 @@ class Color {
 
       // If we see "rgb" but there are 4 channels, treat it as "rgba" internally
       // (But remember color-convert doesn’t have an 'rgba' section.)
-      if (detectedModel === "rgb" && numChannels === 4) {
-        detectedModel = "rgba" as any;
+      if (detectedModel === 'rgb' && numChannels === 4) {
+        detectedModel = 'rgba' as any;
       }
 
       // If a specific model is provided, validate
@@ -63,7 +65,7 @@ class Color {
 
       // For color-convert lookups, revert "rgba" → "rgb"
       // (Likewise for "hsla" → "hsl", etc.)
-      const colorConvertModel = detectedModel.replace("a", "");
+      const colorConvertModel = detectedModel.replace('a', '');
 
       // Now get channel count from color-convert. E.g. "rgb" → 3 channels
       const channels = (convert as any)[colorConvertModel].channels;
@@ -71,12 +73,12 @@ class Color {
 
       // If there's an alpha in parsed.value, store it. Otherwise default to 1.
       this.valpha =
-        typeof parsed.value[channels] === "number" ? parsed.value[channels] : 1;
+        typeof parsed.value[channels] === 'number' ? parsed.value[channels] : 1;
 
       // Convert to RGB for internal usage
-      if (colorConvertModel !== "rgb") {
+      if (colorConvertModel !== 'rgb') {
         const convertToRgb = (convert as any)[colorConvertModel]?.rgb;
-        if (typeof convertToRgb === "function") {
+        if (typeof convertToRgb === 'function') {
           this.color = convertToRgb(this.color);
         } else {
           throw new Error(
@@ -84,11 +86,10 @@ class Color {
           );
         }
       }
-
     } else if (Array.isArray(object)) {
-      this.model = model || "rgb";
+      this.model = model || 'rgb';
       this.color = object.slice(0, 3);
-      this.valpha = typeof object[3] === "number" ? object[3] : 1;
+      this.valpha = typeof object[3] === 'number' ? object[3] : 1;
       this.value = `rgba(${this.color[0]}, ${this.color[1]}, ${this.color[2]}, ${this.valpha})`;
     } else {
       throw new Error(`[__PACKAGE_NAME__]: Unsupported color input type.`);
@@ -168,11 +169,6 @@ const ColorProxy = new Proxy(Color, {
   }
 });
 
-export {
-  toHex,
-  toHexa,
-  toRgba,
-  toRgbaArray
-};
+export { toHex, toHexa, toRgba, toRgbaArray };
 
 export default ColorProxy;

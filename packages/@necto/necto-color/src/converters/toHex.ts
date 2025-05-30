@@ -1,10 +1,12 @@
-import parseToRgba from "../parsers/parseToRgba";
+import parseToRgba from '../parsers/parseToRgba';
 
 function toHex(color: string): string {
   const [r, g, b, a] = parseToRgba(color);
 
   const hex = (x: number): string => {
-    const hexValue = Math.min(Math.max(0, x), 255).toString(16).padStart(2, '0');
+    const hexValue = Math.min(Math.max(0, x), 255)
+      .toString(16)
+      .padStart(2, '0');
     return hexValue;
   };
 

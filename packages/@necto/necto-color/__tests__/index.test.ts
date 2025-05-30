@@ -59,11 +59,13 @@ describe('Color class', () => {
   });
 
   it('should throw an error for unsupported color input type', () => {
-    expect(() => new Color({})).toThrow('[__PACKAGE_NAME__]: Unsupported color input type.');
+    expect(() => new Color({})).toThrow(
+      '[__PACKAGE_NAME__]: Unsupported color input type.'
+    );
   });
 
   it('model should not change based on alpha hex', () => {
-    const myColor = new Color("#fff").alpha(0.3);
+    const myColor = new Color('#fff').alpha(0.3);
     expect(myColor.model).toBe('hex');
   });
 });

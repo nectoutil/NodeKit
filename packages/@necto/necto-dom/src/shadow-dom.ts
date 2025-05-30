@@ -6,10 +6,12 @@
  *
  */
 
-import { isNode } from "./node";
+import { isNode } from './node';
 
 export function isShadowRoot(node: Node | null): node is ShadowRoot {
-  return isNode(node) &&
+  return (
+    isNode(node) &&
     node.nodeType === Node.DOCUMENT_FRAGMENT_NODE &&
-    'host' in node;
+    'host' in node
+  );
 }
