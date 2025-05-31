@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://necto.dev">
-    <img alt="Necto Logo" style="border-radius: 22px; width: 100px; height: 100px;" src="https://avatars.githubusercontent.com/u/158605331?s=120&v=4">
+    <img alt="Necto Logo" src="https://avatars.githubusercontent.com/u/158605331?s=120&v=4">
   <a>
 
   <h1>
