@@ -1,11 +1,5 @@
 <div align="center">
-  <a href="https://necto.dev">
-    <img alt="Necto Logo" src="https://avatars.githubusercontent.com/u/158605331?s=120&v=4">
-  <a>
-
-  <h1>
-    <code>@necto-react/hooks</code>
-  </h1>
+  <h2>@necto-react/hooks</h2>
 
   <p>Necto's library for providing utility hooks for React applications.</p>
 
