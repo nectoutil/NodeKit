@@ -1,11 +1,5 @@
 <div align="center">
-  <a href="https://necto.dev">
-    <img alt="Necto Logo" style="border-radius: 22px; width: 100px; height: 100px;" src="https://avatars.githubusercontent.com/u/158605331?s=120&v=4">
-  <a>
-
-  <h1>
-    <code>@necto-react/helpers</code>
-  </h1>
+  <h1>Necto - React Helpers Library</h1>
 
   <p>Necto's library for providing global helpers React applications.</p>
 
