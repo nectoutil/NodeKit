@@ -1,5 +1,5 @@
 <div align="center">
-  <h2>@necto-react/hooks</h2>
+  <h2>Necto - React Hook's Library</h2>
 
   <p>Necto's library for providing utility hooks for React applications.</p>
 
