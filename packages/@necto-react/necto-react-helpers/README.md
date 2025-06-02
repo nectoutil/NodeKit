@@ -1,7 +1,7 @@
 <div align="center">
   <h1>Necto - React Helpers Library</h1>
 
-  <p>Necto's library for providing global helpers React applications.</p>
+  <p>Necto's library for providing global helpers for React applications.</p>
 
   <a aria-label="Corinvo" href="https://corinvo.github.io">
     <img src="https://img.shields.io/badge/Made%20by-Corinvo-black.svg?style=for-the-badge&color=black">
