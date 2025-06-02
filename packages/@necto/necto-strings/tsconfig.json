@@ -7,6 +7,6 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "lib": ["ESNext", "DOM", "node"]
+    "lib": ["ESNext", "DOM"]
   }
 }
