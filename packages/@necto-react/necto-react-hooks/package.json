@@ -2,7 +2,7 @@
   "name": "@necto-react/hooks",
   "version": "2.7.0",
   "type": "module",
-  "description": "Necto's library for providing utility hooks for React applications",
+  "description": "Necto's standard library for providing utility hooks for React applications.",
   "scripts": {
     "test": "vitest",
     "build": "tsup ./src/index.ts --minify --format esm,cjs,iife --dts",
