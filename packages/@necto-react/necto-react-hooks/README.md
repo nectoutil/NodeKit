@@ -12,7 +12,4 @@
   <a aria-label="License" href="https://github.com/corinvo/necto/blob/main/LICENSE">
     <img src="https://img.shields.io/badge/License-MIT-97CA25.svg?style=for-the-badge">
   </a>
-  <a aria-label="Github" href="https://github.com/nectoutil">
-    <img src="https://img.shields.io/badge/Join%20the%20Community-000000.svg?style=for-the-badge&logo=github">
-  </a>
 </div>
