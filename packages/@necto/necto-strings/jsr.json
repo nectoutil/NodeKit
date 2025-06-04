@@ -6,8 +6,6 @@
   },
   "license": "MIT",
   "publish": {
-    "include": [
-      "dist/"
-    ]
+    "include": ["dist/"]
   }
 }
