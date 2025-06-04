@@ -1,14 +1,12 @@
 {
   "name": "@necto-react/hooks",
-  "version": "0.0.3",
+  "version": "0.0.7",
   "exports": {
     ".": "./dist/index.js"
   },
   "license": "MIT",
   "publish": {
-    "include": [
-      "dist/"
-    ]
+    "include": ["dist/", "README.md"]
   },
   "imports": {
     "react": "npm:react@19.1.0",

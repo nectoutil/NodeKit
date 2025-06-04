@@ -155,6 +155,12 @@ importers:
         specifier: ^8.4.0
         version: 8.4.0(@swc/core@1.11.24(@swc/helpers@0.5.17))(postcss@8.5.3)(typescript@5.8.3)
 
+  packages/@necto/necto-assert:
+    devDependencies:
+      '@types/node':
+        specifier: ^22.14.1
+        version: 22.15.17
+
   packages/@necto/necto-color:
     dependencies:
       color-convert:
@@ -279,6 +285,10 @@ importers:
       tsup:
         specifier: ^8.4.0
         version: 8.4.0(@swc/core@1.11.24(@swc/helpers@0.5.17))(postcss@8.5.3)(typescript@5.8.3)
+
+  packages/@necto/necto-uuid: {}
+
+  packages/shared: {}
 
 packages:
 
