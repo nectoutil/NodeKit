@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>Necto - React Helpers Library</h1>
+  <h2>Necto - React Helpers Library</h2>
 
   <p>Necto's library for providing global helpers for React applications.</p>
 
