@@ -1,3 +1,5 @@
+// biome-ignore-all lint/correctness/useHookAtTopLevel: Conditional hook calls OK since it is for backwards compatibility.
+
 /**
  * Copyright (c) Corinvo, LLC. and affiliates.
  *

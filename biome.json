@@ -7,13 +7,9 @@
   },
   "files": {
     "ignoreUnknown": true,
-    "includes": [
-      "packages/**/*",
-      "!packages/**/node_modules/**",
-      "!packages/**/dist/**",
-      "!packages/**/.turbo/**",
-      "!packages/**/__tests__/**",
-      "!packages/@necto/necto-color/*"
+    "ignore": [
+      "**/*.yml",
+      "**/*.yaml"
     ]
   },
   "formatter": {

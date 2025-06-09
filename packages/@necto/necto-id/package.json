@@ -19,9 +19,6 @@
     "corinvo",
     "nectoutil"
   ],
-  "peerDependencies": {
-    "@necto/constants": "workspace:*"
-  },
   "author": "Corinvo OSS Team",
   "license": "MIT",
   "devDependencies": {
@@ -30,6 +27,7 @@
     "tsup": "^8.4.0"
   },
   "dependencies": {
-    "randombytes": "^2.1.0"
+    "randombytes": "^2.1.0",
+    "@necto/constants": "workspace:*"
   }
 }

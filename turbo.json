@@ -1,14 +1,23 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "tasks": {
-    "build": {
-      "outputs": ["dist/**", "cache/**"]
-    },
     "dev": {
       "cache": false
     },
     "test": {
       "dependsOn": ["build"]
+    },
+    "build": {
+      "outputs": ["dist/**", "cache/**"]
+    },
+    "build:@necto-react/hooks": {
+      "dependsOn": ["^build:@necto-react/types"]
+    },
+    "build:@necto/id": {
+      "dependsOn": ["^build:@necto/constants"]
+    },
+    "build:@necto-react/helpers": {
+      "dependsOn": ["^build:@necto/dom"]
     }
   }
 }

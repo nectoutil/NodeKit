@@ -270,8 +270,6 @@ importers:
         specifier: ^8.4.0
         version: 8.4.0(@swc/core@1.11.24(@swc/helpers@0.5.17))(jiti@2.4.2)(postcss@8.5.3)(typescript@5.8.3)
 
-  packages/@necto/necto-nuxt: {}
-
   packages/@necto/necto-platform:
     devDependencies:
       tsup:
