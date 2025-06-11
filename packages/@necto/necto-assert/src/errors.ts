@@ -9,6 +9,6 @@
 export class AssertionError extends Error {
   constructor(message: string, options?: ErrorOptions) {
     super(message, options);
-    this.name = 'AssertionError';
+    this.name = 'necto.AssertionError';
   }
 }
