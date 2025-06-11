@@ -13,10 +13,10 @@
   <a href="https://www.npmjs.com/package/@necto-react/helpers">
     <img alt="NPM version" src="https://img.shields.io/npm/v/@necto-react/helpers.svg?style=for-the-badge">
   </a>
-  <a aria-label="License" href="https://github.com/corinvo/necto/blob/main/LICENSE">
-    <img src="https://img.shields.io/badge/License-MIT-97CA25.svg?style=for-the-badge">
+  <a aria-label="License" href="https://jsr.io/@necto-react/helpers">
+    <img src="https://jsr.io/badges/@necto-react/helpers?style=for-the-badge">
   </a>
-  <a aria-label="Github" href="https://github.com/nectoutil">
-    <img src="https://img.shields.io/badge/Join%20the%20Community-000000.svg?style=for-the-badge&logo=github">
+  <a aria-label="License" href="https://github.com/nectoutil/NodeKit/blob/main/LICENSE">
+    <img src="https://img.shields.io/badge/License-MIT-97CA25.svg?style=for-the-badge">
   </a>
 </div>
