@@ -6,7 +6,7 @@
  *
  */
 
-export * from './dom';
-export * from './events';
-export * from './components';
+export type * from './dom';
 export type * from './props';
+export type * from './events';
+export type * from './components';

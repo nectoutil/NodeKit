@@ -10,7 +10,7 @@ import { useMemo } from 'react';
 import { useDisabled } from '../useDisabled';
 
 import type { HTMLAttributes } from 'react';
-import type { UseDisabledPropsProps, UseDisabledPropsReturn} from './types';
+import type { UseDisabledPropsProps, UseDisabledPropsReturn } from './types';
 
 /**
  * Returns HTML props with appropriate disabled attributes based on the disabled state.
@@ -18,8 +18,10 @@ import type { UseDisabledPropsProps, UseDisabledPropsReturn} from './types';
  * @param {UseDisabledPropsOptions} options - Options for the hook.
  * @returns {HTMLAttributes<HTMLElement>} The merged props including disabled and aria-disabled if applicable.
  */
-export function useDisabledProps(props: UseDisabledPropsProps = {}): UseDisabledPropsReturn {
-  const { type = 'general', extraProps = {}} = props;
+export function useDisabledProps(
+  props: UseDisabledPropsProps = {}
+): UseDisabledPropsReturn {
+  const { type = 'general', extraProps = {} } = props;
   const isDisabled = useDisabled({ type, defaultFallback: false });
 
   return useMemo(() => {

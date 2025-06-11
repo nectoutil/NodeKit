@@ -10,4 +10,8 @@ export { useDisabled } from './useDisabled';
 export { DisabledContext } from './disabledContext';
 export { DisabledProvider } from './disabledProvider';
 
-export type { DisabledFlags, UseDisabledProps, UseDisabledPropsReturn } from './types';
+export type {
+  DisabledFlags,
+  UseDisabledProps,
+  UseDisabledPropsReturn
+} from './types';

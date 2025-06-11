@@ -24,7 +24,7 @@ export function DisabledProvider({
 }: PropsWithChildren<{ value?: DisabledFlags }>) {
   return createElement(
     DisabledContext.Provider,
-    { value: value || new Object() as DisabledFlags },
+    { value: value || (new Object() as DisabledFlags) },
     children
   );
 }

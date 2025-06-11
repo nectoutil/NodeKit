@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.0.0-beta/schema.json",
   "vcs": {
     "enabled": false,
     "clientKind": "git",
@@ -7,9 +7,15 @@
   },
   "files": {
     "ignoreUnknown": true,
-    "ignore": [
-      "**/*.yml",
-      "**/*.yaml"
+    "includes": [
+      "packages/**/*",
+      "!**/*.yml",
+      "!**/*.json",
+      "!packages/**/node_modules/**",
+      "!packages/**/dist/**",
+      "!packages/**/.turbo/**",
+      "!packages/**/__tests__/**",
+      "!packages/@necto/necto-color/**"
     ]
   },
   "formatter": {

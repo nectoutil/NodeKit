@@ -18,7 +18,9 @@ import type { UseDisabledProps, UseDisabledPropsReturn } from './types';
  * @param {boolean} defaultFallback - The fallback value if the flag is not set. Defaults to false.
  * @returns {boolean} True if the specified type is disabled, otherwise the fallback value.
  */
-export function useDisabled(props: UseDisabledProps): UseDisabledPropsReturn {
+export function useDisabled(
+  props: UseDisabledProps = {}
+): UseDisabledPropsReturn {
   const { type = 'general', defaultFallback = false } = props;
   const flags = useContext(DisabledContext) || {};
   return flags[type] ?? defaultFallback;

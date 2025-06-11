@@ -7,7 +7,9 @@
  */
 
 export class UnsupportedEnvironmentError extends Error {
-   constructor() {
-    super("necto.UnsupportedEnvironmentError: Unsupported runtime environment.");
+  constructor() {
+    super(
+      'necto.UnsupportedEnvironmentError: Unsupported runtime environment.'
+    );
   }
 }

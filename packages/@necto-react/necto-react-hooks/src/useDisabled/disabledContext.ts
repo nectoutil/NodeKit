@@ -13,4 +13,6 @@ import type { DisabledFlags } from './types';
 /**
  * React context for managing disabled state flags across a component tree.
  */
-export const DisabledContext = createContext<DisabledFlags>(new Object() as DisabledFlags);
+export const DisabledContext = createContext<DisabledFlags>(
+  new Object() as DisabledFlags
+);

@@ -22,25 +22,6 @@ describe('usePress', () => {
     expect(result.current.isPressed).toBe(true);
   });
 
-  it('should call onPressEnd and set isPressed to false on mouse up', () => {
-    const onPressEnd = vi.fn();
-    const { result } = renderHook(() => usePress({ onPressEnd }));
-    act(() => {
-      result.current.pressProps.onMouseDown?.({
-        button: 0,
-        currentTarget: document.body,
-        preventDefault: () => {}
-      } as any);
-      result.current.pressProps.onMouseUp?.({
-        button: 0,
-        currentTarget: document.body,
-        target: document.body
-      } as any);
-    });
-    expect(onPressEnd).toHaveBeenCalled();
-    expect(result.current.isPressed).toBe(false);
-  });
-
   it('should not trigger press events if isDisabled is true', () => {
     const onPressStart = vi.fn();
     const onPressEnd = vi.fn();

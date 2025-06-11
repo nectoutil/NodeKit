@@ -24,7 +24,7 @@ export type DisabledFlags = {
 };
 
 /**
- * Options for the useDisabled hook.
+ * Props for the useDisabled hook.
  */
 export interface UseDisabledProps {
   /** The key of the disabled flag to check. Defaults to 'general'. */

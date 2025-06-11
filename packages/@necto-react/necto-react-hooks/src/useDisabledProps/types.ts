@@ -10,7 +10,7 @@ import type { HTMLAttributes } from 'react';
 import type { DisabledFlags } from '../useDisabled';
 
 /**
- * Options for the useDisabledProps hook.
+ * Props for the useDisabledProps hook.
  */
 export interface UseDisabledPropsProps {
   /** The key of the disabled flag to check. Defaults to 'general'. */

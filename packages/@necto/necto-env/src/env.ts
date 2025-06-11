@@ -15,43 +15,44 @@ import type { EnvObject } from '@necto/types';
 declare const Bun: { env: EnvObject };
 declare const Deno: {
   env: {
-    [x: string]: any; get(key: string): string | undefined
-  }
+    [x: string]: any;
+    get(key: string): string | undefined;
+  };
 };
 
-let globalEnvOptions: EnvOptions = {
+const globalEnvOptions: EnvOptions = {
   throwErrors: false,
-  logWarnings: true,
+  logWarnings: true
 };
 
 export function getEnv(key: string, options?: EnvOptions): string | undefined {
   const opts = { ...globalEnvOptions, ...options };
 
-  let currentRuntime: "deno" | "bun" | "node" | "unknown" = "unknown";
-  if (typeof Deno !== "undefined" && typeof Deno.env?.get === "function") {
-    currentRuntime = "deno";
-  } else if (typeof Bun !== "undefined" && Bun.env) {
-    currentRuntime = "bun";
-  } else if (typeof process !== "undefined" && process.env) {
-    currentRuntime = "node";
+  let currentRuntime: 'deno' | 'bun' | 'node' | 'unknown' = 'unknown';
+  if (typeof Deno !== 'undefined' && typeof Deno.env?.get === 'function') {
+    currentRuntime = 'deno';
+  } else if (typeof Bun !== 'undefined' && Bun.env) {
+    currentRuntime = 'bun';
+  } else if (typeof process !== 'undefined' && process.env) {
+    currentRuntime = 'node';
   }
 
   switch (currentRuntime) {
-    case "deno":
+    case 'deno':
       // @ts-ignore
       return Deno.env.get(key);
-    case "bun":
+    case 'bun':
       // @ts-ignore
       return Bun.env[key];
-    case "node":
+    case 'node':
       return process.env[key];
     default:
       if (opts.throwErrors) {
-        throw new Error("Unsupported environment");
+        throw new Error('Unsupported environment');
       }
 
       if (opts.logWarnings) {
-        console.warn("Unsupported runtime");
+        console.warn('Unsupported runtime');
       }
 
       return undefined;
@@ -66,11 +67,11 @@ export const env = new Proxy<EnvObject>({} as EnvObject, {
     return getEnv(prop) !== undefined;
   },
   set(_, prop: string, value: string) {
-    if (typeof process !== "undefined" && process.env) {
+    if (typeof process !== 'undefined' && process.env) {
       process.env[prop] = value;
       return true;
     }
-    if (typeof Bun !== "undefined" && Bun.env) {
+    if (typeof Bun !== 'undefined' && Bun.env) {
       Bun.env[prop] = value;
       return true;
     }
@@ -78,11 +79,11 @@ export const env = new Proxy<EnvObject>({} as EnvObject, {
     return false;
   },
   deleteProperty(_, prop: string) {
-    if (typeof process !== "undefined" && process.env) {
+    if (typeof process !== 'undefined' && process.env) {
       delete process.env[prop];
       return true;
     }
-    if (typeof Bun !== "undefined" && Bun.env) {
+    if (typeof Bun !== 'undefined' && Bun.env) {
       delete Bun.env[prop];
       return true;
     }
@@ -90,19 +91,22 @@ export const env = new Proxy<EnvObject>({} as EnvObject, {
     return false;
   },
   ownKeys() {
-    if (typeof Deno !== "undefined" && typeof Deno.env?.toObject === "function") {
+    if (
+      typeof Deno !== 'undefined' &&
+      typeof Deno.env?.toObject === 'function'
+    ) {
       // @ts-ignore
       return Object.keys(Deno.env.toObject());
     }
-    if (typeof Bun !== "undefined" && Bun.env) {
+    if (typeof Bun !== 'undefined' && Bun.env) {
       // @ts-ignore
       return Object.keys(Bun.env);
     }
-    if (typeof process !== "undefined" && process.env) {
+    if (typeof process !== 'undefined' && process.env) {
       return Object.keys(process.env);
     }
     return [];
-  },
+  }
 });
 
-export const nodeEnv = process?.env?.NODE_ENV ?? "";
+export const nodeEnv = process?.env?.NODE_ENV ?? '';

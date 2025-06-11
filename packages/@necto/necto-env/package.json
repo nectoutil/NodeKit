@@ -5,6 +5,7 @@
   "author": "The Corinvo OSS Team",
   "license": "MIT",
   "scripts": {
+    "test": "vitest",
     "build": "tsup --minify"
   },
   "dependencies": {
