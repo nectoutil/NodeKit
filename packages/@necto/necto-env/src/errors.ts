@@ -6,9 +6,8 @@
  *
  */
 
-export class AssertionError extends Error {
-  constructor(message: string, options?: ErrorOptions) {
-    super(message, options);
-    this.name = 'necto.AssertionError: Assertion failed.';
+export class UnsupportedEnvironmentError extends Error {
+   constructor() {
+    super("necto.UnsupportedEnvironmentError: Unsupported runtime environment.");
   }
 }

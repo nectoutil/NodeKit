@@ -6,9 +6,6 @@
  *
  */
 
-export type * from './env';
-export type * from './dom';
-export type * from './focus';
-export type * from './events';
-export type * from './keyboards';
-export type * from './navigation';
+import { nodeEnv, env } from './env';
+
+export const isTest = nodeEnv === 'test' || Boolean(env.TEST);

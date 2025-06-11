@@ -22,3 +22,19 @@ export type DisabledFlags = {
   /** Custom disabled flags for additional types of interactions. */
   [key: string]: boolean | undefined;
 };
+
+/**
+ * Options for the useDisabled hook.
+ */
+export interface UseDisabledProps {
+  /** The key of the disabled flag to check. Defaults to 'general'. */
+  type?: keyof DisabledFlags;
+
+  /** The fallback value if the flag is not set. Defaults to false. */
+  defaultFallback?: boolean;
+}
+
+/**
+ * Return type for the useDisabled hook.
+ */
+export type UseDisabledPropsReturn = boolean;

@@ -6,9 +6,5 @@
  *
  */
 
-export type * from './env';
-export type * from './dom';
-export type * from './focus';
-export type * from './events';
-export type * from './keyboards';
-export type * from './navigation';
+export * from './flags';
+export { nodeEnv } from './env';

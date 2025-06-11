@@ -1,0 +1,17 @@
+{
+  "name": "@necto/env",
+  "version": "1.0.0",
+  "description": "Necto's library for managing environment variables and configuration for Node applications.",
+  "author": "The Corinvo OSS Team",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsup --minify"
+  },
+  "dependencies": {
+    "@necto/types": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.1",
+    "tsup": "^8.4.0"
+  }
+}
