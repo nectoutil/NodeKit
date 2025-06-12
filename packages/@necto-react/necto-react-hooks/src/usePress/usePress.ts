@@ -44,7 +44,7 @@ function createPressEvent(
  * @param {UsePressProps} props - Configuration options and event handlers for the press interaction.
  * @returns {UsePressReturn} An object containing press event props to spread onto your element and the current pressed state.
  */
-export function usePress(props: UsePressProps): UsePressReturn {
+export function usePress(props: UsePressProps = {}): UsePressReturn {
   const {
     isDisabled,
     preventFocusOnPress,

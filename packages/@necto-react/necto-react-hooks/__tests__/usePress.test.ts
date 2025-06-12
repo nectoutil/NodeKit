@@ -3,7 +3,12 @@ import { usePress } from '@necto-react-hooks/usePress';
 import { renderHook, act } from '@testing-library/react';
 
 describe('usePress', () => {
-  it('should return isPressed as false initially', () => {
+  it('should return isPressed as false initially without empty object', () => {
+    const { result } = renderHook(() => usePress());
+    expect(result.current.isPressed).toBe(false);
+  });
+
+  it('should return isPressed as false initially with empty object', () => {
     const { result } = renderHook(() => usePress({}));
     expect(result.current.isPressed).toBe(false);
   });

@@ -1,26 +1,22 @@
+/**
+ * Copyright (c) Corinvo, LLC. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
 import { useCallback } from 'react';
-import { useSyntheticBlurEvent } from './useSyntheticBlurEvent';
+import { useSyntheticBlurEvent } from '../useSyntheticBlurEvent';
 import { getOwnerDocument, getEventTarget, getActiveElement } from '@necto/dom';
 
 import type { FocusEvent as ReactFocusEvent } from 'react';
-import type {
-  DOMAttributes,
-  FocusableElement,
-  FocusEvent
-} from '@necto-react/types';
+import type { UseFocusProps, UseFocusReturn } from './types';
+import type { FocusableElement, DOMAttributes } from '@necto-react/types';
 
-export interface FocusProps<Target = FocusableElement>
-  extends FocusEvent<Target> {
-  isDisabled?: boolean;
-}
-
-export interface FocusResult<Target = FocusableElement> {
-  focusProps: DOMAttributes<Target>;
-}
-
-export function useFocus<Target extends FocusableElement = FocusableElement>(
-  props: FocusProps<Target>
-): FocusResult<Target> {
+export function useFocus<T extends FocusableElement = FocusableElement>(
+  props: UseFocusProps<T> = {}
+): UseFocusReturn<T> {
   const {
     isDisabled,
     onFocus: onFocusProp,
@@ -30,7 +26,7 @@ export function useFocus<Target extends FocusableElement = FocusableElement>(
 
   // Unified handler for focus change
   const handleFocusChange = useCallback(
-    (isFocused: boolean, e: ReactFocusEvent<Target>) => {
+    (isFocused: boolean, e: ReactFocusEvent<T>) => {
       if (isFocused) {
         onFocusProp?.(e);
         onFocusChange?.(true);
@@ -42,9 +38,9 @@ export function useFocus<Target extends FocusableElement = FocusableElement>(
     [onFocusProp, onBlurProp, onFocusChange]
   );
 
-  // Blur handler
+  // --- Blur Handler ---
   const onBlur = useCallback(
-    (e: ReactFocusEvent<Target>) => {
+    (e: ReactFocusEvent<T>) => {
       if (e.target === e.currentTarget) {
         handleFocusChange(false, e);
       }
@@ -52,12 +48,12 @@ export function useFocus<Target extends FocusableElement = FocusableElement>(
     [handleFocusChange]
   );
 
-  // Synthetic focus handler
-  const onSyntheticFocus = useSyntheticBlurEvent<Target>(onBlur);
+  // --- Synthetic Focus Handler ---
+  const onSyntheticFocus = useSyntheticBlurEvent<T>(onBlur);
 
-  // Focus handler
+  // --- Focus Handler ---
   const onFocus = useCallback(
-    (e: ReactFocusEvent<Target>) => {
+    (e: ReactFocusEvent<T>) => {
       const ownerDocument = getOwnerDocument(e.target);
       const activeElement = ownerDocument
         ? getActiveElement(ownerDocument)
@@ -73,10 +69,9 @@ export function useFocus<Target extends FocusableElement = FocusableElement>(
     [handleFocusChange, onSyntheticFocus]
   );
 
-  // Return focus props
   return {
     focusProps: {
       ...(isDisabled ? {} : { onFocus, onBlur })
-    } as DOMAttributes<Target>
+    } as DOMAttributes<T>
   };
 }

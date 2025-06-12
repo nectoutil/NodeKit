@@ -11,15 +11,6 @@ import process from 'node:process';
 import type { EnvOptions } from './types';
 import type { EnvObject } from '@necto/types';
 
-// Declare global objects for cross-runtime support
-declare const Bun: { env: EnvObject };
-declare const Deno: {
-  env: {
-    [x: string]: any;
-    get(key: string): string | undefined;
-  };
-};
-
 const globalEnvOptions: EnvOptions = {
   throwErrors: false,
   logWarnings: true

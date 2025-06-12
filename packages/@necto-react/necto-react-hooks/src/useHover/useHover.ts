@@ -17,7 +17,7 @@ import type { PointerEvent, MouseEvent } from 'react';
 import type { DOMAttributes } from '@necto-react/types';
 import type { UseHoverProps, UseHoverReturn } from './types';
 
-export function useHover(props: UseHoverProps): UseHoverReturn {
+export function useHover(props: UseHoverProps = {}): UseHoverReturn {
   const { onHoverStart, onHoverChange, onHoverEnd, isDisabled } = props;
 
   const [isHovered, setHovered] = useState(false);
