@@ -22,7 +22,7 @@ import type { FilterOptions, FilterDOMProps, FilterDOMReturn } from './types';
  * @param {FilterOptions} options - Options to control which props are allowed.
  * @returns {FilterDOMReturn} An object containing only the allowed DOM props.
  */
-function filterDOMProps(
+export function filterDOMProps(
   props: FilterDOMProps,
   options: FilterOptions
 ): FilterDOMReturn {
@@ -51,5 +51,3 @@ function filterDOMProps(
 
   return allowedProps;
 }
-
-export { filterDOMProps };

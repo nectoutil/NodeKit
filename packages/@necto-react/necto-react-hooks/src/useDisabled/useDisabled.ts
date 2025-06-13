@@ -9,7 +9,7 @@
 import { useContext } from 'react';
 import { DisabledContext } from './disabledContext';
 
-import type { UseDisabledProps, UseDisabledPropsReturn } from './types';
+import type { UseDisabledProps, UseDisabledPropsReturn } from './useDisabled.types';
 
 /**
  * React hook to determine if a specific feature or component type is disabled.

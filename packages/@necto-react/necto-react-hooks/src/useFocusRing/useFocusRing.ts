@@ -20,6 +20,12 @@ import { useFocusVisibleListener } from '../useFocusVisibleListener';
 
 import type { UseFocusRingProps, UseFocusRingReturn, Modality } from './types';
 
+/**
+ * React hook that manages focus state and focus ring visibility for an element.
+ *
+ * @param {UseFocusRingProps} [props] - Options to control focus ring behavior.
+ * @returns {UseFocusRingReturn} An object containing focus state, focus visibility, and props to spread on the target element.
+ */
 export function useFocusRing(
   props: UseFocusRingProps = {}
 ): UseFocusRingReturn {

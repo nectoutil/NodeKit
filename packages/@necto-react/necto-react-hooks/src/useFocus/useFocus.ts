@@ -21,6 +21,13 @@ import type { FocusEvent as ReactFocusEvent } from 'react';
 import type { UseFocusProps, UseFocusReturn } from './types';
 import type { FocusableElement, DOMAttributes } from '@necto-react/types';
 
+/**
+ * React hook that manages focus and blur event handling for a focusable element.
+ *
+ * @template T The type of the focusable element.
+ * @param {UseFocusProps<T>} [props] - Options and event handlers for focus management.
+ * @returns {UseFocusReturn<T>} An object containing props to spread on the target element for focus management.
+ */
 export function useFocus<T extends FocusableElement = FocusableElement>(
   props: UseFocusProps<T> = {}
 ): UseFocusReturn<T> {

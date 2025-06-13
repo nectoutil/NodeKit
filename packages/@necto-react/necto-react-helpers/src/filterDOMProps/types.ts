@@ -11,7 +11,7 @@ import type { LinkDOMProps } from '@necto-react/types';
 /**
  * Options for filtering DOM props.
  */
-interface FilterOptions {
+export interface FilterOptions {
   /** Whether to allow labelable props (e.g., htmlFor, aria-label). */
   allowLabelableProps?: boolean;
 
@@ -31,7 +31,7 @@ interface FilterOptions {
 /**
  * Props allowed for DOM filtering, including link props and id.
  */
-interface FilterDOMProps extends LinkDOMProps {
+export interface FilterDOMProps extends LinkDOMProps {
   /** The id attribute for the element. */
   id?: string;
 }
@@ -39,8 +39,7 @@ interface FilterDOMProps extends LinkDOMProps {
 /**
  * Return type for filtered DOM props.
  */
-interface FilterDOMReturn {
+export interface FilterDOMReturn {
   /** The id attribute for the element. */
   id?: string;
 }
-export type { FilterOptions, FilterDOMProps, FilterDOMReturn };

@@ -24,6 +24,12 @@ import type { PointerEvent, MouseEvent } from 'react';
 import type { DOMAttributes } from '@necto-react/types';
 import type { UseHoverProps, UseHoverReturn } from './types';
 
+/**
+ * React hook that manages hover state and hover event handlers for an element.
+ *
+ * @param {UseHoverProps} [props] - Options to control hover behavior and event handlers.
+ * @returns {UseHoverReturn} An object containing hover state and props to spread on the target element.
+ */
 export function useHover(props: UseHoverProps = {}): UseHoverReturn {
   const { onHoverStart, onHoverChange, onHoverEnd, isDisabled } = props;
 
