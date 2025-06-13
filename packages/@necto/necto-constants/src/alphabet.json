@@ -1,0 +1,13 @@
+{
+  "ALPHABET_CAPITALIZED": [
+    "A","B","C","D","E","F","G","H","I","J","K","L","M",
+    "N","O","P","Q","R","S","T","U","V","W","X","Y","Z"
+  ],
+  "ALPHABET_LOWERCASE": [
+    "a","b","c","d","e","f","g","h","i","j","k","l","m",
+    "n","o","p","q","r","s","t","u","v","w","x","y","z"
+  ],
+  "VOWELS": [
+    "A","E","I","O","U","a","e","i","o","u"
+  ]
+}

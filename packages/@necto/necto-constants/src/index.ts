@@ -6,6 +6,10 @@
  *
  */
 
-export * from './dom';
+import * as dom from './dom.json';
+import * as chars from './characters.json';
+import * as alphabet from './alphabet.json';
+
 export * from './numeric';
 export * from './alphabet';
+export { chars, alphabet, dom };

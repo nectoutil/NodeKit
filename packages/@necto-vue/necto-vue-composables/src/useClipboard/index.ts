@@ -6,12 +6,3 @@
  *
  */
 
-export const ANCHOR_ELEMENT_PROPS = [
-  'href',
-  'hrefLang',
-  'target',
-  'rel',
-  'download',
-  'ping',
-  'referrerPolicy'
-];
