@@ -18,9 +18,6 @@ import type { FilterOptions, FilterDOMProps, FilterDOMReturn } from './types';
 /**
  * Filters a props object to include only allowed DOM props based on the provided options.
  *
- * Allows you to control which props are passed through, such as id, labelable props, link props,
- * extra custom props, and data-* attributes. Useful for sanitizing props before spreading them onto DOM elements.
- *
  * @param {FilterDOMProps} props - The props object to filter.
  * @param {FilterOptions} options - Options to control which props are allowed.
  * @returns {FilterDOMReturn} An object containing only the allowed DOM props.
