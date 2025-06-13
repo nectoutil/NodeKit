@@ -7,7 +7,7 @@
  */
 
 import type { HTMLAttributes } from 'react';
-import type { DisabledFlags } from '../useDisabled';
+import type { DisabledFlags } from '@necto-react/types';
 
 /**
  * Props for the useDisabledProps hook.

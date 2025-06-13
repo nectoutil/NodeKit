@@ -1,5 +1,8 @@
 {
   "material-icon-theme.files.associations": {
     "tsconfig.react.json": "tsconfig",
+  },
+  "editor.codeActionsOnSave": {
+    "source.organizeImports.biome": "never"
   }
 }

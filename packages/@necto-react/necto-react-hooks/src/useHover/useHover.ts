@@ -22,7 +22,7 @@ import { useRef, useState, useCallback, useEffect, useMemo } from 'react';
 
 import type { PointerEvent, MouseEvent } from 'react';
 import type { DOMAttributes } from '@necto-react/types';
-import type { UseHoverProps, UseHoverReturn } from './types';
+import type { UseHoverProps, UseHoverReturn } from './useHover.types';
 
 /**
  * React hook that manages hover state and hover event handlers for an element.

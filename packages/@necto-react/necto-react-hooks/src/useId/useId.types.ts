@@ -16,8 +16,3 @@ export interface UseIdProps {
   /** Optional default ID to use instead of generating one. */
   defaultId?: string;
 }
-
-/**
- * Return type for the useId hook.
- */
-export type UseIdReturn = string;

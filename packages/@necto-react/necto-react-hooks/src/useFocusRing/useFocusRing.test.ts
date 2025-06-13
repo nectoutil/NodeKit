@@ -1,6 +1,14 @@
+/**
+ * Copyright (c) Corinvo, LLC. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
+import { useFocusRing } from './useFocusRing';
 import { renderHook, act } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { useFocusRing } from '@necto-react-hooks/useFocusRing';
 
 describe('useFocusRing', () => {
   beforeEach(() => {

@@ -18,7 +18,7 @@ import { useSyntheticBlurEvent } from '../useSyntheticBlurEvent';
 import { getOwnerDocument, getEventTarget, getActiveElement } from '@necto/dom';
 
 import type { FocusEvent as ReactFocusEvent } from 'react';
-import type { UseFocusProps, UseFocusReturn } from './types';
+import type { UseFocusProps, UseFocusReturn } from './useFocus.types';
 import type { FocusableElement, DOMAttributes } from '@necto-react/types';
 
 /**

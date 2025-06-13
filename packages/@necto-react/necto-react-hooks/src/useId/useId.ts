@@ -1,3 +1,4 @@
+// biome-ignore-all lint/complexity/useLiteralKeys: Key literals are okay here for React backwards compatibility.
 // biome-ignore-all lint/correctness/useHookAtTopLevel: Conditional hook calls OK since it is for backwards compatibility.
 
 /**
@@ -12,7 +13,7 @@ import { isTest } from 'std-env';
 import { registry, defaultContext, idsUpdaterMap } from './hookContext';
 import React, { useRef, useState, useEffect, useId as useReactId } from 'react';
 
-import type { UseIdProps, UseIdReturn } from './types';
+import type { UseIdProps } from './useId.types';
 
 /**
  * Generates a unique, stable ID for React components, optionally with a custom prefix.
@@ -20,7 +21,7 @@ import type { UseIdProps, UseIdReturn } from './types';
  * @param {UseIdProps} [props] - Optional props object. You can provide a custom prefix and/or a defaultId.
  * @returns {UseIdReturns} The generated or provided unique ID.
  */
-export function useId(props?: UseIdProps): UseIdReturn {
+export function useId(props?: UseIdProps): string {
   const { prefix = 'necto', defaultId } = props || {};
 
   // Initialize state only once with a function to avoid unnecessary calculations

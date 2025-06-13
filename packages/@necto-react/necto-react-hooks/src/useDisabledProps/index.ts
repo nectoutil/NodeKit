@@ -8,4 +8,4 @@
 
 export { useDisabledProps } from './useDisabledProps';
 
-export type { UseDisabledPropsProps, UseDisabledPropsReturn } from './types';
+export type { UseDisabledPropsProps, UseDisabledPropsReturn } from './useDisabledProps.types';

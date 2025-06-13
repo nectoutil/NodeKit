@@ -63,13 +63,22 @@ importers:
       '@necto/platform':
         specifier: workspace:*
         version: link:../../@necto/necto-platform
+    devDependencies:
+      '@types/node':
+        specifier: ^22.14.1
+        version: 22.15.17
+      '@types/react':
+        specifier: ^19.1.2
+        version: 19.1.4
+      '@types/react-dom':
+        specifier: ^19.1.2
+        version: 19.1.4(@types/react@19.1.4)
       react:
         specifier: ^19.1.0
         version: 19.1.0
       react-dom:
         specifier: ^19.1.0
         version: 19.1.0(react@19.1.0)
-    devDependencies:
       tsup:
         specifier: ^8.4.0
         version: 8.4.0(@swc/core@1.11.24(@swc/helpers@0.5.17))(jiti@2.4.2)(postcss@8.5.3)(typescript@5.8.3)

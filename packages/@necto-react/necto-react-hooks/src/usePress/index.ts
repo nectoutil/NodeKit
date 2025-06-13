@@ -8,4 +8,4 @@
 
 export { usePress } from './usePress';
 
-export type { UsePressProps, UsePressReturn } from './types';
+export type { UsePressProps, UsePressReturn } from './usePress.types';

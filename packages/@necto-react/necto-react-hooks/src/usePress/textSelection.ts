@@ -13,10 +13,12 @@
  * Modifications have been made to adapt the code for use in this project.
  */
 
+// @botond-szabo move this to the @necto/dom library please as these are not react specific. These will be of great use later down the line.
+
 import { isIOS } from '@necto/platform';
 import { getOwnerDocument, runAfterTransition } from '@necto/dom';
 
-import type { TextSelectionStates } from './types';
+import type { TextSelectionStates } from './usePress.types';
 
 let state: TextSelectionStates = 'default';
 let savedUserSelect = '';

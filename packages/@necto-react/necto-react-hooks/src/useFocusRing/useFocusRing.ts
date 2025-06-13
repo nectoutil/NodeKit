@@ -18,7 +18,7 @@ import { useFocusWithin } from '../useFocusWithin';
 import { useRef, useState, useCallback } from 'react';
 import { useFocusVisibleListener } from '../useFocusVisibleListener';
 
-import type { UseFocusRingProps, UseFocusRingReturn, Modality } from './types';
+import type { UseFocusRingProps, UseFocusRingReturn, Modality } from './useFocusRing.types';
 
 /**
  * React hook that manages focus state and focus ring visibility for an element.

@@ -10,7 +10,7 @@ import { useMemo } from 'react';
 import { useDisabled } from '../useDisabled';
 
 import type { HTMLAttributes } from 'react';
-import type { UseDisabledPropsProps, UseDisabledPropsReturn } from './types';
+import type { UseDisabledPropsProps, UseDisabledPropsReturn } from './useDisabledProps.types';
 
 /**
  * Returns HTML props with appropriate disabled attributes based on the disabled state.
