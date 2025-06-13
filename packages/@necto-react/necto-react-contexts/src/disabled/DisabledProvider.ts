@@ -7,10 +7,10 @@
  */
 
 import { createElement } from 'react';
-import { DisabledContext } from './disabledContext';
+import { DisabledContext } from './DisabledContext';
 
-import type { DisabledFlags } from './types';
 import type { PropsWithChildren } from 'react';
+import type { DisabledFlags } from '@necto-react/types';
 
 /**
  * Generates a unique, stable ID for React components, optionally with a custom prefix.

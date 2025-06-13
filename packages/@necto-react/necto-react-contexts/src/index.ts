@@ -6,9 +6,4 @@
  *
  */
 
-export { useDisabled } from './useDisabled';
-
-export type {
-  UseDisabledProps,
-  UseDisabledPropsReturn
-} from './useDisabled.types';
+export * from './disabled';

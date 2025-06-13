@@ -8,7 +8,7 @@
 
 import { createContext } from 'react';
 
-import type { DisabledFlags } from './types';
+import type { DisabledFlags } from '@necto-react/types';
 
 /**
  * React context for managing disabled state flags across a component tree.

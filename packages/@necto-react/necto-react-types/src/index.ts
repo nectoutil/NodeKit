@@ -8,5 +8,6 @@
 
 export type * from './dom';
 export type * from './props';
+export type * from './flags';
 export type * from './events';
 export type * from './components';

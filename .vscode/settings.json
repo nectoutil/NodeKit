@@ -1,6 +1,5 @@
 {
   "material-icon-theme.files.associations": {
-    "swcrc.react.json": "swc",
-    "rollup.config.react.ts": "rollup"
+    "tsconfig.react.json": "tsconfig",
   }
 }

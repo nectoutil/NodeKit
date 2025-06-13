@@ -33,6 +33,7 @@
   "dependencies": {
     "@necto/types": "workspace:*",
     "@necto-react/helpers": "workspace:*",
+    "@necto-react/contexts": "workspace:*",
     "@necto-react/types": "workspace:*",
     "@necto/dom": "workspace:*",
     "@necto/id": "workspace:*",
