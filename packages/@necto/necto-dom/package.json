@@ -20,6 +20,7 @@
   "module": "./dist/index.mjs",
   "dependencies": {
     "@necto/types": "workspace:*",
+    "@necto/platform": "workspace:*",
     "html-tags": "^4.0.0"
   }
 }

@@ -9,14 +9,6 @@
 import type { Context } from 'react';
 
 /**
- * Props for components that support slotting.
- */
-export interface SlotProps {
-  /** The slot name to use for context-based prop injection. */
-  slot?: string | null;
-}
-
-/**
  * Props for the useSlottedContext hook.
  */
 export interface UseSlottedContextProps<T> {
@@ -24,10 +16,7 @@ export interface UseSlottedContextProps<T> {
    * The React context to consume, which may be a slotted context value or a direct value.
    */
   context: Context<
-    | { slots?: Record<string | symbol, T> }
-    | T
-    | null
-    | undefined
+    { slots?: Record<string | symbol, T> } | T | null | undefined
   >;
 
   /**

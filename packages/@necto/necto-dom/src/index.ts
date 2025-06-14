@@ -10,3 +10,4 @@ export * from './node';
 export * from './owner';
 export * from './transitions';
 export * from './html-elements';
+export * from './textSelection';

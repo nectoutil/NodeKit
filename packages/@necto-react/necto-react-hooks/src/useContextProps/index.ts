@@ -6,6 +6,9 @@
  *
  */
 
-export { useSyntheticBlurEvent } from './useSyntheticBlurEvent';
+export { useContextProps } from './useContextProps';
 
-export type { UseSyntheticBlurEventProps } from './useSyntheticBlurEvent.types';
+export type {
+  UseContextPropsProps,
+  UseContextPropsReturn
+} from './useContextProps.types';

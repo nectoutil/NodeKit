@@ -6,6 +6,7 @@
  *
  */
 
-export { useSyntheticBlurEvent } from './useSyntheticBlurEvent';
-
-export type { UseSyntheticBlurEventProps } from './useSyntheticBlurEvent.types';
+/**
+ * Text selection state
+ */
+export type TextSelectionStates = 'default' | 'disabled' | 'restoring';

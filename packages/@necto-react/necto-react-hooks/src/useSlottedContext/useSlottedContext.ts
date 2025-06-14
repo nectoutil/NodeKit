@@ -15,7 +15,10 @@
 
 import { useContext } from 'react';
 
-import type { UseSlottedContextProps, UseSlottedContextReturn } from './useSlottedContext.types';
+import type {
+  UseSlottedContextProps,
+  UseSlottedContextReturn
+} from './useSlottedContext.types';
 
 /**
  * Retrieves a value from a React context, optionally using a named slot.
@@ -25,7 +28,9 @@ import type { UseSlottedContextProps, UseSlottedContextReturn } from './useSlott
  * @param {UseSlottedContextProps<T>} props - The context and optional slot name.
  * @returns {UseSlottedContextReturn<T>} The value for the given slot, the direct context value, or null/undefined.
  */
-export function useSlottedContext<T>(props: UseSlottedContextProps<T>): UseSlottedContextReturn<T> {
+export function useSlottedContext<T>(
+  props: UseSlottedContextProps<T>
+): UseSlottedContextReturn<T> {
   const { context, slot } = props;
   const ctx = useContext(context);
 
@@ -39,9 +44,10 @@ export function useSlottedContext<T>(props: UseSlottedContextProps<T>): UseSlott
       const availableSlots = new Intl.ListFormat().format(
         Object.keys(ctx.slots).map((p) => `"${p}"`)
       );
+
       const errorMessage = slot
-        ? `@necto-react.useSlottedContext: Invalid slot "${slot}".`
-        : '@necto-react.useSlottedContext: A slot prop is required.';
+        ? `Invalid slot name: "${slot}".  This slot is not recognized.  Please refer to the component's documentation for valid slot names.`
+        : 'A slot prop is required.  You must provide a valid slot name to render content in this area.';
 
       throw new Error(
         `${errorMessage} Valid slot names are ${availableSlots}.`

@@ -1,4 +1,4 @@
-// biome-ignore-all lint/suspicious/noExplicitAny: Explicity any okay for tests.
+// biome-ignore-all lint/suspicious/noExplicitAny: Explicit any okay for tests.
 
 /**
  * Copyright (c) Corinvo, LLC. and affiliates.
@@ -13,48 +13,38 @@ import { renderHook, act } from '@testing-library/react';
 import { useSyntheticBlurEvent } from './useSyntheticBlurEvent';
 
 describe('useSyntheticBlurEvent', () => {
-  it('should call onBlur when a blur event occurs on a supported element', () => {
+  it('should call onBlur when a blur event occurs on a supported element', async () => {
     const onBlur = vi.fn();
-    const { result } = renderHook(() => useSyntheticBlurEvent({ onBlur: onBlur }));
+    const { result } = renderHook(() => useSyntheticBlurEvent({ onBlur }));
 
-    // Create a mock input element
     const input = document.createElement('input');
     document.body.appendChild(input);
 
-    // Simulate focus event
     act(() => {
       result.current({
         target: input,
         currentTarget: input,
-        nativeEvent: new FocusEvent('focus'),
+        nativeEvent: new FocusEvent('focus')
       } as any);
     });
 
-    // Simulate blur event
-    act(() => {
-      const blurEvent = new FocusEvent('focusout', { bubbles: true });
-      input.dispatchEvent(blurEvent);
-    });
+    expect(onBlur).not.toHaveBeenCalled();
 
-    expect(onBlur).not.toHaveBeenCalled(); // Not called unless disabled
-
-    // Now disable the input and trigger MutationObserver
     act(() => {
       input.disabled = true;
-      // MutationObserver callback is synchronous in JSDOM
-      const blurEvent = new FocusEvent('focusout', { bubbles: true });
-      input.dispatchEvent(blurEvent);
     });
 
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
     expect(onBlur).toHaveBeenCalled();
+
     document.body.removeChild(input);
   });
 
   it('does not call onBlur for unsupported elements', () => {
     const onBlur = vi.fn();
-    const { result } = renderHook(() => useSyntheticBlurEvent({ onBlur: onBlur }));
+    const { result } = renderHook(() => useSyntheticBlurEvent({ onBlur }));
 
-    // Create a div (not a supported element)
     const div = document.createElement('div');
     document.body.appendChild(div);
 
@@ -62,12 +52,12 @@ describe('useSyntheticBlurEvent', () => {
       result.current({
         target: div,
         currentTarget: div,
-        nativeEvent: new FocusEvent('focus'),
+        nativeEvent: new FocusEvent('focus')
       } as any);
     });
 
     act(() => {
-      const blurEvent = new FocusEvent('focusout', { bubbles: true });
+      const blurEvent = new FocusEvent('blur', { bubbles: true });
       div.dispatchEvent(blurEvent);
     });
 

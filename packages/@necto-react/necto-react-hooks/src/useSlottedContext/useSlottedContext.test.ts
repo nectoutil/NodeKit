@@ -13,7 +13,12 @@ import { useSlottedContext } from './useSlottedContext';
 
 describe('useSlottedContext', () => {
   it('returns the direct context value when no slots are present', () => {
-    const Context = createContext<{ label: string } | { slots?: Record<string | symbol, { label: string }> } | null | undefined>({ label: 'direct' });
+    const Context = createContext<
+      | { label: string }
+      | { slots?: Record<string | symbol, { label: string }> }
+      | null
+      | undefined
+    >({ label: 'direct' });
 
     const { result } = renderHook(() =>
       useSlottedContext({ context: Context })
@@ -23,7 +28,12 @@ describe('useSlottedContext', () => {
   });
 
   it('returns null when slot is explicitly null', () => {
-    const Context = createContext<{ label: string } | { slots?: Record<string | symbol, { label: string }> } | null | undefined>({ label: 'direct' });
+    const Context = createContext<
+      | { label: string }
+      | { slots?: Record<string | symbol, { label: string }> }
+      | null
+      | undefined
+    >({ label: 'direct' });
 
     const { result } = renderHook(() =>
       useSlottedContext({ context: Context, slot: null })
@@ -33,11 +43,16 @@ describe('useSlottedContext', () => {
   });
 
   it('returns the value for a valid slot', () => {
-    const Context = createContext<{ label: string } | { slots?: Record<string | symbol, { label: string }> } | null | undefined>({
+    const Context = createContext<
+      | { label: string }
+      | { slots?: Record<string | symbol, { label: string }> }
+      | null
+      | undefined
+    >({
       slots: {
         header: { label: 'header' },
-        footer: { label: 'footer' },
-      },
+        footer: { label: 'footer' }
+      }
     });
 
     const { result } = renderHook(() =>
@@ -48,28 +63,38 @@ describe('useSlottedContext', () => {
   });
 
   it('throws an error for an invalid slot', () => {
-    const Context = createContext<{ label: string } | { slots?: Record<string | symbol, { label: string }> } | null | undefined>({
+    const Context = createContext<
+      | { label: string }
+      | { slots?: Record<string | symbol, { label: string }> }
+      | null
+      | undefined
+    >({
       slots: {
-        header: { label: 'header' },
-      },
+        header: { label: 'header' }
+      }
     });
 
     expect(() =>
-      renderHook(() =>
-        useSlottedContext({ context: Context, slot: 'footer' })
-      )
-    ).toThrowError(/Invalid slot "footer"/);
+      renderHook(() => useSlottedContext({ context: Context, slot: 'footer' }))
+    ).toThrowError(
+      /Invalid slot name: "footer"\. {2}This slot is not recognized/
+    );
   });
 
-it('throws if slots exist but are empty', () => {
-  const Context = createContext<{ label: string } | { slots?: Record<string | symbol, { label: string }> } | null | undefined>({
-    slots: {},
-  });
+  it('throws if slots exist but are empty', () => {
+    const Context = createContext<
+      | { label: string }
+      | { slots?: Record<string | symbol, { label: string }> }
+      | null
+      | undefined
+    >({
+      slots: {}
+    });
 
-  expect(() =>
-    renderHook(() =>
-      useSlottedContext({ context: Context, slot: 'header' })
-    )
-  ).toThrowError(/Invalid slot "header"/);
-});
+    expect(() =>
+      renderHook(() => useSlottedContext({ context: Context, slot: 'header' }))
+    ).toThrowError(
+      /Invalid slot name: "header"\. {2}This slot is not recognized/
+    );
+  });
 });

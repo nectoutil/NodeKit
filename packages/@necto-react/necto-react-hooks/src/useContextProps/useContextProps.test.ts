@@ -1,3 +1,5 @@
+// biome-ignore-all lint/suspicious/noExplicitAny: Explicity any okay for tests.
+
 /**
  * Copyright (c) Corinvo, LLC. and affiliates.
  *
@@ -6,6 +8,3 @@
  *
  */
 
-export { useSyntheticBlurEvent } from './useSyntheticBlurEvent';
-
-export type { UseSyntheticBlurEventProps } from './useSyntheticBlurEvent.types';

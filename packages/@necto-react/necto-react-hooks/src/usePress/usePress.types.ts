@@ -10,11 +10,6 @@ import type { RefObject } from 'react';
 import type { PressEvent } from '@necto/types';
 
 /**
- * Text selection state
- */
-export type TextSelectionStates = 'default' | 'disabled' | 'restoring';
-
-/**
  * Props for the usePress hook.
  */
 export interface UsePressProps {
