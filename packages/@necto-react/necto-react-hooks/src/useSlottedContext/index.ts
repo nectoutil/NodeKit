@@ -8,4 +8,7 @@
 
 export { useSlottedContext } from './useSlottedContext';
 
-export type { UseSlottedContextProps, UseSlottedContextReturn } from './useSlottedContext.types';
+export type {
+  UseSlottedContextProps,
+  UseSlottedContextReturn
+} from './useSlottedContext.types';

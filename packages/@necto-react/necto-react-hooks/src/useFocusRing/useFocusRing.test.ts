@@ -35,10 +35,16 @@ describe('useFocusRing', () => {
   it('should update isFocused and isFocusVisible on focus change', () => {
     const { useFocus } = require('../useFocus');
     let onFocusChange: (focused: boolean) => void = () => {};
-    (useFocus as any).mockImplementation(({ onFocusChange: handler }: { onFocusChange: (focused: boolean) => void }) => {
-      onFocusChange = handler;
-      return { focusProps: {} };
-    });
+    (useFocus as any).mockImplementation(
+      ({
+        onFocusChange: handler
+      }: {
+        onFocusChange: (focused: boolean) => void;
+      }) => {
+        onFocusChange = handler;
+        return { focusProps: {} };
+      }
+    );
 
     const { result } = renderHook(() => useFocusRing());
 
@@ -56,9 +62,11 @@ describe('useFocusRing', () => {
   it('should update isFocusVisible when useFocusVisibleListener is triggered', () => {
     const { useFocusVisibleListener } = require('../useFocusVisibleListener');
     let focusVisibleListener: (focusVisible: boolean) => void = () => {};
-    (useFocusVisibleListener as any).mockImplementation((listener: (focusVisible: boolean) => void) => {
-      focusVisibleListener = listener;
-    });
+    (useFocusVisibleListener as any).mockImplementation(
+      (listener: (focusVisible: boolean) => void) => {
+        focusVisibleListener = listener;
+      }
+    );
 
     const { result } = renderHook(() => useFocusRing());
 
@@ -69,10 +77,16 @@ describe('useFocusRing', () => {
 
     const { useFocus } = require('../useFocus');
     let onFocusChange: (focused: boolean) => void = () => {};
-    (useFocus as any).mockImplementation(({ onFocusChange: handler }: { onFocusChange: (focused: boolean) => void }) => {
-      onFocusChange = handler;
-      return { focusProps: {} };
-    });
+    (useFocus as any).mockImplementation(
+      ({
+        onFocusChange: handler
+      }: {
+        onFocusChange: (focused: boolean) => void;
+      }) => {
+        onFocusChange = handler;
+        return { focusProps: {} };
+      }
+    );
 
     act(() => {
       onFocusChange(true);

@@ -12,7 +12,10 @@ import { describe, it, expect, vi } from 'vitest';
 import { renderHook, act } from '@testing-library/react';
 import { useHover } from '@necto-react-hooks/useHover';
 
-if (typeof window !== 'undefined' && typeof window.PointerEvent === 'undefined') {
+if (
+  typeof window !== 'undefined' &&
+  typeof window.PointerEvent === 'undefined'
+) {
   window.PointerEvent = class PointerEvent {
     constructor(type: string, eventInitDict?: PointerEventInit) {}
   } as any;
@@ -39,7 +42,7 @@ describe('useHover', () => {
       result.current.hoverProps.onPointerEnter?.({
         pointerType: 'mouse',
         currentTarget: document.body,
-        target: document.body,
+        target: document.body
       } as any);
     });
     expect(onHoverStart).toHaveBeenCalled();
@@ -57,12 +60,12 @@ describe('useHover', () => {
       result.current.hoverProps.onPointerEnter?.({
         pointerType: 'mouse',
         currentTarget: document.body,
-        target: document.body,
+        target: document.body
       } as any);
       result.current.hoverProps.onPointerLeave?.({
         pointerType: 'mouse',
         currentTarget: document.body,
-        target: document.body,
+        target: document.body
       } as any);
     });
     expect(onHoverEnd).toHaveBeenCalled();
@@ -80,12 +83,12 @@ describe('useHover', () => {
       result.current.hoverProps.onPointerEnter?.({
         pointerType: 'mouse',
         currentTarget: document.body,
-        target: document.body,
+        target: document.body
       } as any);
       result.current.hoverProps.onPointerLeave?.({
         pointerType: 'mouse',
         currentTarget: document.body,
-        target: document.body,
+        target: document.body
       } as any);
     });
     expect(onHoverStart).not.toHaveBeenCalled();
@@ -95,14 +98,12 @@ describe('useHover', () => {
 
   it('should not trigger hover for pointerType "touch"', () => {
     const onHoverStart = vi.fn();
-    const { result } = renderHook(() =>
-      useHover({ onHoverStart })
-    );
+    const { result } = renderHook(() => useHover({ onHoverStart }));
     act(() => {
       result.current.hoverProps.onPointerEnter?.({
         pointerType: 'touch',
         currentTarget: document.body,
-        target: document.body,
+        target: document.body
       } as any);
     });
     expect(onHoverStart).not.toHaveBeenCalled();

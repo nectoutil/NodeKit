@@ -8,7 +8,7 @@
  *
  */
 
-import  { useFocus } from '@necto-react-hooks/useFocus';
+import { useFocus } from '@necto-react-hooks/useFocus';
 import { renderHook, act } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
@@ -44,7 +44,7 @@ describe('useFocus', () => {
     const evt = {
       target: document.body,
       currentTarget: document.body,
-      nativeEvent: { target: document.body },
+      nativeEvent: { target: document.body }
     } as any;
     act(() => {
       result.current.focusProps?.onFocus?.(evt);
@@ -60,7 +60,7 @@ describe('useFocus', () => {
     const evt = {
       target: document.body,
       currentTarget: document.body,
-      nativeEvent: { target: document.body },
+      nativeEvent: { target: document.body }
     } as any;
     act(() => {
       result.current.focusProps?.onBlur?.(evt);
@@ -70,13 +70,11 @@ describe('useFocus', () => {
   });
 
   it('should not call onFocus if event.target !== event.currentTarget', () => {
-    const { result } = renderHook(() =>
-      useFocus({ onFocus, onFocusChange })
-    );
+    const { result } = renderHook(() => useFocus({ onFocus, onFocusChange }));
     const evt = {
       target: document.createElement('div'),
       currentTarget: document.body,
-      nativeEvent: { target: document.body },
+      nativeEvent: { target: document.body }
     } as any;
     act(() => {
       result.current.focusProps?.onFocus?.(evt);
@@ -86,13 +84,11 @@ describe('useFocus', () => {
   });
 
   it('should not call onBlur if event.target !== event.currentTarget', () => {
-    const { result } = renderHook(() =>
-      useFocus({ onBlur, onFocusChange })
-    );
+    const { result } = renderHook(() => useFocus({ onBlur, onFocusChange }));
     const evt = {
       target: document.createElement('div'),
       currentTarget: document.body,
-      nativeEvent: { target: document.body },
+      nativeEvent: { target: document.body }
     } as any;
     act(() => {
       result.current.focusProps?.onBlur?.(evt);

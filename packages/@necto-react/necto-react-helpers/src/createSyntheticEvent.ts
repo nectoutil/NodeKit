@@ -23,7 +23,7 @@ export function createSyntheticEvent<T extends SyntheticEvent>(
     nativeEvent,
     isDefaultPrevented: () => event.defaultPrevented,
     isPropagationStopped: () => (event as unknown as Event).cancelBubble,
-    persist: () => {},
+    persist: () => {}
   });
 
   return event;

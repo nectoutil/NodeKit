@@ -6,7 +6,7 @@
  *
  */
 
-import { describe, it, expect, vi} from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { renderHook } from '@testing-library/react';
 import { useDisabledProps } from './useDisabledProps';
 import * as useDisabledModule from '@necto-react-hooks/useDisabled';
@@ -19,18 +19,14 @@ describe('useDisabledProps', () => {
   it('should return extraProps unchanged if not disabled', () => {
     mockUseDisabled(false);
     const extraProps = { id: 'test', tabIndex: 0 };
-    const { result } = renderHook(() =>
-      useDisabledProps({ extraProps })
-    );
+    const { result } = renderHook(() => useDisabledProps({ extraProps }));
     expect(result.current).toEqual(extraProps);
   });
 
   it('should add aria-disabled if isDisabled is true', () => {
     mockUseDisabled(true);
     const extraProps = { id: 'test' };
-    const { result } = renderHook(() =>
-      useDisabledProps({ extraProps })
-    );
+    const { result } = renderHook(() => useDisabledProps({ extraProps }));
     expect(result.current['aria-disabled']).toBe(true);
     expect(result.current.id).toBe('test');
     expect('disabled' in result.current).toBe(false);
@@ -40,9 +36,7 @@ describe('useDisabledProps', () => {
     mockUseDisabled(true);
     const onClick = vi.fn();
     const extraProps = { onClick, id: 'test' };
-    const { result } = renderHook(() =>
-      useDisabledProps({ extraProps })
-    );
+    const { result } = renderHook(() => useDisabledProps({ extraProps }));
     expect('disabled' in result.current).toBe(true);
     if ('disabled' in result.current) {
       expect((result.current as any).disabled).toBe(true);
@@ -56,9 +50,7 @@ describe('useDisabledProps', () => {
     mockUseDisabled(true);
     const onChange = vi.fn();
     const extraProps = { onChange, id: 'test' };
-    const { result } = renderHook(() =>
-      useDisabledProps({ extraProps })
-    );
+    const { result } = renderHook(() => useDisabledProps({ extraProps }));
     expect('disabled' in result.current).toBe(true);
     if ('disabled' in result.current) {
       expect((result.current as any).disabled).toBe(true);
