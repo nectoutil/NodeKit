@@ -14,7 +14,7 @@
  */
 
 import { useCallback } from 'react';
-import { useSyntheticBlurEvent } from '../useSyntheticBlurEvent';
+import { useSyntheticBlurEvent } from '@necto-react/hooks';
 import { getOwnerDocument, getEventTarget, getActiveElement } from '@necto/dom';
 
 import type { FocusEvent as ReactFocusEvent } from 'react';
@@ -63,7 +63,7 @@ export function useFocus<T extends FocusableElement = FocusableElement>(
   );
 
   // --- Synthetic Focus Handler ---
-  const onSyntheticFocus = useSyntheticBlurEvent<T>(onBlur);
+  const onSyntheticFocus = useSyntheticBlurEvent<T>({ onBlur });
 
   // --- Focus Handler ---
   const onFocus = useCallback(

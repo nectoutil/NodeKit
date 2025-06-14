@@ -13,7 +13,7 @@
  * Modifications have been made to adapt the code for use in this project.
  */
 
-import { useEffectEvent } from '../useEffectEvent';
+import { useEffectEvent } from '@necto-react/hooks';
 import { createSyntheticEvent } from '@necto-react/helpers';
 import { useRef, useCallback, useLayoutEffect } from 'react';
 

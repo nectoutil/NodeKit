@@ -8,9 +8,9 @@
  *
  */
 
+import { useHover } from '@necto-react/hooks';
 import { describe, it, expect, vi } from 'vitest';
 import { renderHook, act } from '@testing-library/react';
-import { useHover } from '@necto-react-hooks/useHover';
 
 if (
   typeof window !== 'undefined' &&

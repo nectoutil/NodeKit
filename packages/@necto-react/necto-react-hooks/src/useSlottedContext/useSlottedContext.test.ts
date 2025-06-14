@@ -9,7 +9,7 @@
 import { createContext } from 'react';
 import { describe, it, expect } from 'vitest';
 import { renderHook } from '@testing-library/react';
-import { useSlottedContext } from './useSlottedContext';
+import { useSlottedContext } from '@necto-react/hooks';
 
 describe('useSlottedContext', () => {
   it('returns the direct context value when no slots are present', () => {

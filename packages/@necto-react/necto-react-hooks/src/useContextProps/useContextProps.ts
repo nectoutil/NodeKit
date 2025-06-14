@@ -18,7 +18,7 @@
 import { useMemo } from 'react';
 import { useObjectRef } from '../useObjectRef';
 import { mergeRefs, mergeProps } from '@necto/mergers';
-import { useSlottedContext } from '../useSlottedContext';
+import { useSlottedContext } from '@necto-react/hooks';
 
 import type { ForwardedRef } from 'react';
 import type {

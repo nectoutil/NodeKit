@@ -10,7 +10,7 @@
 
 import { vi, describe, it, expect } from 'vitest';
 import { renderHook, act } from '@testing-library/react';
-import { useSyntheticBlurEvent } from './useSyntheticBlurEvent';
+import { useSyntheticBlurEvent } from '@necto-react/hooks';
 
 describe('useSyntheticBlurEvent', () => {
   it('should call onBlur when a blur event occurs on a supported element', async () => {

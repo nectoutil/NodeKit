@@ -8,7 +8,7 @@
  *
  */
 
-import { useFocus } from '@necto-react-hooks/useFocus';
+import { useFocus } from '@necto-react/hooks';
 import { renderHook, act } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 

@@ -8,8 +8,8 @@
  *
  */
 
+import { usePress } from '@necto-react/hooks';
 import { describe, it, expect, vi } from 'vitest';
-import { usePress } from '@necto-react-hooks/usePress';
 import { renderHook, act } from '@testing-library/react';
 
 describe('usePress', () => {

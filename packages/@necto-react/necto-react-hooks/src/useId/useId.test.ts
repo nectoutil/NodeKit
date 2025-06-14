@@ -6,8 +6,8 @@
  *
  */
 
+import { useId } from '@necto-react/hooks';
 import { describe, it, expect } from 'vitest';
-import { useId } from '@necto-react-hooks/useId';
 import { renderHook } from '@testing-library/react';
 
 describe('useId Hook', () => {

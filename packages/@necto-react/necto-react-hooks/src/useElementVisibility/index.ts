@@ -6,9 +6,6 @@
  *
  */
 
-export * from './node';
-export * from './owner';
-export * from './containment';
-export * from './transitions';
-export * from './html-elements';
-export * from './textSelection';
+export { useElementVisibility } from './useElementVisibility';
+
+export type { UseElementVisibilityProps, UseElementVisibilityReturn } from './useElementVisibility.types';

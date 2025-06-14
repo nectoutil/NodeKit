@@ -2,8 +2,8 @@ import { useCallback, useRef } from 'react';
 import { useGlobalListeners } from './useGlobalListeners';
 import {
   useSyntheticBlurEvent,
-  createSyntheticEvent
 } from './useSyntheticBlurEvent';
+import { createSyntheticEvent } from '@necto-react/helpers';
 import {
   getActiveElement,
   getEventTarget,
@@ -51,7 +51,7 @@ export function useFocusWithin(props: FocusWithinProps): FocusWithinResult {
     [onBlurWithin, onFocusWithinChange, removeAllGlobalListeners]
   );
 
-  const onSyntheticFocus = useSyntheticBlurEvent(onBlur);
+  const onSyntheticFocus = useSyntheticBlurEvent({ onBlur });
   const onFocus = useCallback(
     (event: ReactFocusEvent) => {
       if (!event.currentTarget.contains(event.target)) return;

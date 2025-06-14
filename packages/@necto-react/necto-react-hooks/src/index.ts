@@ -6,6 +6,7 @@
  *
  */
 
+export * from './useSlottedContext';
 export * from './useContextProps';
 export * from './useDisabled';
 export * from './useEffectEvent';

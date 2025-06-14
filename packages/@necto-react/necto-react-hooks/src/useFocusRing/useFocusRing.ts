@@ -13,10 +13,10 @@
  * Modifications have been made to adapt the code for use in this project.
  */
 
-import { useFocus } from '../useFocus';
-import { useFocusWithin } from '../useFocusWithin';
+import { useFocus } from '@necto-react/hooks';
+import { useFocusWithin } from '@necto-react/hooks';
 import { useRef, useState, useCallback } from 'react';
-import { useFocusVisibleListener } from '../useFocusVisibleListener';
+import { useFocusVisibleListener } from '@necto-react/hooks';
 
 import type {
   UseFocusRingProps,
@@ -36,11 +36,11 @@ export function useFocusRing(
   const { within = false, isTextInput = false, autoFocus = false } = props;
   const currentModality: null | Modality = null;
   const state = useRef({
-    isFocused: false,
+    isFocused: autoFocus,
     isFocusVisible: autoFocus || currentModality !== 'pointer'
   });
 
-  const [isFocused, setFocused] = useState(false);
+  const [isFocused, setFocused] = useState(autoFocus);
   const [isFocusVisible, setFocusVisible] = useState(
     () => state.current.isFocused && state.current.isFocusVisible
   );

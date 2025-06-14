@@ -7,7 +7,7 @@
  */
 
 import { useMemo } from 'react';
-import { useDisabled } from '../useDisabled';
+import { useDisabled } from '@necto-react/hooks';
 
 import type { HTMLAttributes } from 'react';
 import type {

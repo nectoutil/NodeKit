@@ -9,7 +9,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { renderHook } from '@testing-library/react';
 import { useDisabledProps } from './useDisabledProps';
-import * as useDisabledModule from '@necto-react-hooks/useDisabled';
+import * as useDisabledModule from '@necto-react/hooks/useDisabled';
 
 describe('useDisabledProps', () => {
   const mockUseDisabled = (returnValue: boolean) => {

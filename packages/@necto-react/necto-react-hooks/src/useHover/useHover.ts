@@ -16,7 +16,7 @@
  */
 
 import { isTest } from 'std-env';
-import { useGlobalListeners } from '../useGlobalListeners';
+import { useGlobalListeners } from '@necto-react/hooks';
 import { getOwnerDocument, nodeContains } from '@necto/dom';
 import { useRef, useState, useCallback, useEffect, useMemo } from 'react';
 
