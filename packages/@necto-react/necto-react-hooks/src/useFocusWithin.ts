@@ -1,8 +1,6 @@
 import { useCallback, useRef } from 'react';
 import { useGlobalListeners } from './useGlobalListeners';
-import {
-  useSyntheticBlurEvent,
-} from './useSyntheticBlurEvent';
+import { useSyntheticBlurEvent } from './useSyntheticBlurEvent';
 import { createSyntheticEvent } from '@necto-react/helpers';
 import {
   getActiveElement,

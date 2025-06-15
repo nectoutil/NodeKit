@@ -17,8 +17,8 @@ import { useEffectEvent } from '@necto-react/hooks';
 import { createSyntheticEvent } from '@necto-react/helpers';
 import { useRef, useCallback, useLayoutEffect } from 'react';
 
-import type { FocusEvent as ReactFocusEvent } from 'react';
-import type { UseSyntheticBlurEventProps } from './useSyntheticBlurEvent.types';
+import type { FocusEvent } from 'react';
+import type { UseSyntheticBlurEventProps, UseSyntheticBlurEventReturn } from './useSyntheticBlurEvent.types';
 
 /**
  * React hook to handle synthetic blur events, particularly for disabled elements.
@@ -28,7 +28,7 @@ import type { UseSyntheticBlurEventProps } from './useSyntheticBlurEvent.types';
  */
 export function useSyntheticBlurEvent<T extends Element = Element>(
   props: UseSyntheticBlurEventProps<T>
-): (event: ReactFocusEvent<T>) => void {
+): UseSyntheticBlurEventReturn<T> {
   const { onBlur } = props;
   const stateRef = useRef<{
     isFocused: boolean;
@@ -50,13 +50,13 @@ export function useSyntheticBlurEvent<T extends Element = Element>(
   }, []);
 
   // Handler to dispatch the blur event using the provided callback.
-  const dispatchBlur = useEffectEvent((e: ReactFocusEvent<T>) => {
+  const dispatchBlur = useEffectEvent((e: FocusEvent<T>) => {
     onBlur?.(e);
   });
 
   // Callback to handle the blur event logic.
   return useCallback(
-    (e: ReactFocusEvent<T>) => {
+    (e: FocusEvent<T>) => {
       if (
         e.target instanceof HTMLButtonElement ||
         e.target instanceof HTMLInputElement ||
@@ -72,7 +72,7 @@ export function useSyntheticBlurEvent<T extends Element = Element>(
           if (target.disabled) {
             // Dispatch a synthetic React event for backward compatibility.
             const syntheticEvent =
-              createSyntheticEvent<ReactFocusEvent<T>>(event);
+              createSyntheticEvent<FocusEvent<T>>(event);
             dispatchBlur(syntheticEvent);
           }
 

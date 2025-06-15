@@ -13,6 +13,8 @@
  * Modifications have been made to adapt the code for use in this project.
  */
 
+// !!: This function causes errors, fix it later
+
 import { useFocus } from '@necto-react/hooks';
 import { useFocusWithin } from '@necto-react/hooks';
 import { useRef, useState, useCallback } from 'react';
@@ -60,11 +62,21 @@ export function useFocusRing(
 
   useFocusVisibleListener(
     (focusVisible) => {
-      state.current.isFocusVisible = focusVisible;
+      state.current.isFocusVisible = typeof focusVisible === 'function'
+        ? focusVisible(state.current.isFocusVisible)
+        : focusVisible;
       updateFocusVisibleState();
     },
     [],
-    { isTextInput }
+    { isTextInput },
+    {
+      fn: (focusVisible: boolean) => {
+        state.current.isFocusVisible = focusVisible;
+        updateFocusVisibleState();
+      },
+      deps: [],
+      opts: { isTextInput }
+    }
   );
 
   const { focusProps = {} } =

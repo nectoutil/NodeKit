@@ -31,17 +31,20 @@ export function useContextProps<T, E extends Element>({
   ref,
   context
 }: UseContextPropsProps<T, E>): UseContextPropsReturn<T, E> {
-  const ctx = useSlottedContext({ context, slot: props.slot }) || new Object();
-  const { ref: contextRef, ...contextProps } = ctx as {
+  const ctx = useSlottedContext({ context, slot: props.slot }) || {};
+
+  const { ref: contextRef = null, ...contextProps } = ctx as {
     ref?: unknown;
     [key: string]: unknown;
   };
+
   const mergedRef = useObjectRef(
     useMemo(
       () => mergeRefs(ref, contextRef as ForwardedRef<E>),
       [ref, contextRef]
     )
   );
+
   const mergedProps = mergeProps(contextProps, props) as unknown as T;
 
   if (

@@ -53,11 +53,8 @@ export function useSlottedContext<T>(
         `${errorMessage} Valid slot names are ${availableSlots}.`
       );
     }
+    
     return ctx.slots[slotKey];
-  }
-
-  if (ctx && typeof ctx === 'object' && 'slots' in ctx) {
-    return null;
   }
 
   return ctx as UseSlottedContextReturn<T>;

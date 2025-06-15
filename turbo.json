@@ -10,14 +10,30 @@
     "build": {
       "outputs": ["dist/**", "cache/**"]
     },
-    "build:@necto-react/hooks": {
-      "dependsOn": ["^build:@necto-react/types"]
+    "@necto/env#build": {
+      "dependsOn": ["@necto/types#build"]
     },
-    "build:@necto/id": {
-      "dependsOn": ["^build:@necto/constants"]
+    "@necto/id#build": {
+      "dependsOn": ["@necto/constants#build"]
     },
-    "build:@necto-react/helpers": {
-      "dependsOn": ["^build:@necto/dom"]
+    "@necto/dom#build": {
+      "dependsOn": ["@necto/platform#build"]
+    },
+    "@necto-react/hooks#build": {
+      "dependsOn": [
+        "@necto/dom#build",
+        "@necto/platform#build",
+        "@necto-react/helpers#build"
+      ]
+    },
+    "@necto-react/contexts#build": {
+      "dependsOn": ["@necto-react/types#build"]
+    },
+    "@necto-react/helpers#build": {
+      "dependsOn": [
+        "@necto/dom#build",
+        "@necto/platform#build"
+      ]
     }
   }
 }

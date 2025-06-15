@@ -8,4 +8,4 @@
 
 export { useSyntheticBlurEvent } from './useSyntheticBlurEvent';
 
-export type { UseSyntheticBlurEventProps } from './useSyntheticBlurEvent.types';
+export type { UseSyntheticBlurEventProps, UseSyntheticBlurEventReturn } from './useSyntheticBlurEvent.types';

@@ -13,7 +13,11 @@
  * Modifications have been made to adapt the code for use in this project.
  */
 
+// @botond-szabo Move this to the dom package.
+
 import type { FilterOptions, FilterDOMProps, FilterDOMReturn } from './types';
+
+const DOM_PROP_NAMES = new Set(['id']);
 
 /**
  * Filters a props object to include only allowed DOM props based on the provided options.
@@ -39,7 +43,7 @@ export function filterDOMProps(
   for (const propName in props) {
     if (
       Object.hasOwn(props, propName) &&
-      (new Set(['id']).has(propName) ||
+      (DOM_PROP_NAMES.has(propName) ||
         (allowLabelableProps && allowedLabelableProps.has(propName)) ||
         (allowLinkProps && allowedLinkProps.has(propName)) ||
         extraAllowedProps?.has(propName) ||

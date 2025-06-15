@@ -14,7 +14,7 @@ vi.mock('@necto-react/hooks', async (importOriginal) => {
   const actual = await importOriginal();
   return {
     ...(typeof actual === 'object' && actual !== null ? actual : {}),
-    useFocus: vi.fn(),
+    useFocus: vi.fn()
   };
 });
 const { useFocus } = require('@necto-react/hooks');
@@ -44,7 +44,7 @@ describe('useFocusRing', () => {
 
   it('should update isFocused and isFocusVisible on focus change', () => {
     let onFocusChange: (focused: boolean) => void = () => {};
-    (useFocus).mockImplementation(
+    useFocus.mockImplementation(
       ({
         onFocusChange: handler
       }: {
@@ -71,7 +71,7 @@ describe('useFocusRing', () => {
   it('should update isFocusVisible when useFocusVisibleListener is triggered', () => {
     const { useFocusVisibleListener } = require('../useFocusVisibleListener');
     let focusVisibleListener: (focusVisible: boolean) => void = () => {};
-    (useFocusVisibleListener).mockImplementation(
+    useFocusVisibleListener.mockImplementation(
       (listener: (focusVisible: boolean) => void) => {
         focusVisibleListener = listener;
       }
@@ -86,7 +86,7 @@ describe('useFocusRing', () => {
 
     const { useFocus } = require('../useFocus');
     let onFocusChange: (focused: boolean) => void = () => {};
-    (useFocus).mockImplementation(
+    useFocus.mockImplementation(
       ({
         onFocusChange: handler
       }: {

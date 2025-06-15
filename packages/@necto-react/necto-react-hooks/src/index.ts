@@ -6,6 +6,9 @@
  *
  */
 
+export * from './useMounted';
+export * from './useSupported';
+export * from './useFocusVisible';
 export * from './useSlottedContext';
 export * from './useContextProps';
 export * from './useDisabled';

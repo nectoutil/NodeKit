@@ -6,6 +6,6 @@
  *
  */
 
-export { filterDOMProps } from './filterDOMProps';
+export { useFocusVisible } from './useFocusVisible';
 
-export type { FilterOptions, FilterDOMProps, FilterDOMReturn } from './types';
+export type { UseFocusVisibleProps, UseFocusVisibleReturn } from './useFocusVisible.types';

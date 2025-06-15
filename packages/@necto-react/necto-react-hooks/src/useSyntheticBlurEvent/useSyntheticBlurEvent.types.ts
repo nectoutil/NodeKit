@@ -18,3 +18,8 @@ export interface UseSyntheticBlurEventProps<T extends Element = Element> {
    */
   onBlur: (event: FocusEvent<T>) => void;
 }
+
+/**
+ * Return type for the useSyntheticBlurEvent hook.
+ */
+export type UseSyntheticBlurEventReturn<T> = (event: FocusEvent<T>) => void;

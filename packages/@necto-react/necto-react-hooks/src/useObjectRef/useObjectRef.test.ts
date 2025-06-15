@@ -6,6 +6,3 @@
  *
  */
 
-export { filterDOMProps } from './filterDOMProps';
-
-export type { FilterOptions, FilterDOMProps, FilterDOMReturn } from './types';

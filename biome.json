@@ -36,5 +36,10 @@
       "jsxQuoteStyle": "double",
       "arrowParentheses": "always"
     }
+  },
+  "json": {
+    "formatter": {
+      "trailingCommas": "none"
+    }
   }
 }

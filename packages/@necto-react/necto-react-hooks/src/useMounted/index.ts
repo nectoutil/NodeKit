@@ -6,6 +6,6 @@
  *
  */
 
-export { filterDOMProps } from './filterDOMProps';
+export { useMounted } from './useMounted';
 
-export type { FilterOptions, FilterDOMProps, FilterDOMReturn } from './types';
+export type { UseMountedProps, UseMountedReturn } from './useMounted.types';

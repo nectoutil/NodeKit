@@ -7,7 +7,7 @@ export default defineConfig({
     environment: 'jsdom',
     exclude: ['node_modules', 'dist', '.turbo']
   },
-   resolve: {
+  resolve: {
     alias: [
       {
         find: /^@necto-react\/hooks\/(.*)$/,

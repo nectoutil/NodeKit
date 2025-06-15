@@ -15,13 +15,15 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 // Mock IntersectionObserver
 const mockObserve = vi.fn();
 const mockDisconnect = vi.fn();
-let intersectionObserverCallback: ((entries: IntersectionObserverEntry[]) => void) | null = null;
+let intersectionObserverCallback:
+  | ((entries: IntersectionObserverEntry[]) => void)
+  | null = null;
 
 const mockIntersectionObserver = vi.fn().mockImplementation((callback) => {
   intersectionObserverCallback = callback;
   return {
     observe: mockObserve,
-    disconnect: mockDisconnect,
+    disconnect: mockDisconnect
   };
 });
 
@@ -66,22 +68,24 @@ describe('useElementVisibility', () => {
     // Trigger intersection
     act(() => {
       if (intersectionObserverCallback) {
-        intersectionObserverCallback([{
-          isIntersecting: true,
-          intersectionRatio: 1,
-          intersectionRect: new DOMRectReadOnly(),
-          boundingClientRect: new DOMRectReadOnly(),
-          rootBounds: new DOMRectReadOnly(),
-          time: Date.now(),
-          target: document.createElement('div'),
-        }]);
+        intersectionObserverCallback([
+          {
+            isIntersecting: true,
+            intersectionRatio: 1,
+            intersectionRect: new DOMRectReadOnly(),
+            boundingClientRect: new DOMRectReadOnly(),
+            rootBounds: new DOMRectReadOnly(),
+            time: Date.now(),
+            target: document.createElement('div')
+          }
+        ]);
       }
     });
 
     expect(result.current[1]).toBe(true);
   });
 
-   it('should call onChange callback when visibility changes', () => {
+  it('should call onChange callback when visibility changes', () => {
     const onChange = vi.fn();
     const { result } = renderHook(() => useElementVisibility({ onChange }));
 
@@ -94,15 +98,17 @@ describe('useElementVisibility', () => {
     // Trigger visibility change
     act(() => {
       if (intersectionObserverCallback) {
-        intersectionObserverCallback([{
-          isIntersecting: true,
-          intersectionRatio: 1,
-          intersectionRect: new DOMRectReadOnly(),
-          boundingClientRect: new DOMRectReadOnly(),
-          rootBounds: new DOMRectReadOnly(),
-          time: Date.now(),
-          target: document.createElement('div'),
-        }]);
+        intersectionObserverCallback([
+          {
+            isIntersecting: true,
+            intersectionRatio: 1,
+            intersectionRect: new DOMRectReadOnly(),
+            boundingClientRect: new DOMRectReadOnly(),
+            rootBounds: new DOMRectReadOnly(),
+            time: Date.now(),
+            target: document.createElement('div')
+          }
+        ]);
       }
     });
 
@@ -121,15 +127,17 @@ describe('useElementVisibility', () => {
     // Make visible
     act(() => {
       if (intersectionObserverCallback) {
-        intersectionObserverCallback([{
-          isIntersecting: true,
-          intersectionRatio: 1,
-          intersectionRect: new DOMRectReadOnly(),
-          boundingClientRect: new DOMRectReadOnly(),
-          rootBounds: new DOMRectReadOnly(),
-          time: Date.now(),
-          target: document.createElement('div'),
-        }]);
+        intersectionObserverCallback([
+          {
+            isIntersecting: true,
+            intersectionRatio: 1,
+            intersectionRect: new DOMRectReadOnly(),
+            boundingClientRect: new DOMRectReadOnly(),
+            rootBounds: new DOMRectReadOnly(),
+            time: Date.now(),
+            target: document.createElement('div')
+          }
+        ]);
       }
     });
 
@@ -138,15 +146,17 @@ describe('useElementVisibility', () => {
     // Make not visible
     act(() => {
       if (intersectionObserverCallback) {
-        intersectionObserverCallback([{
-          isIntersecting: false,
-          intersectionRatio: 0,
-          intersectionRect: new DOMRectReadOnly(),
-          boundingClientRect: new DOMRectReadOnly(),
-          rootBounds: new DOMRectReadOnly(),
-          time: Date.now(),
-          target: document.createElement('div'),
-        }]);
+        intersectionObserverCallback([
+          {
+            isIntersecting: false,
+            intersectionRatio: 0,
+            intersectionRect: new DOMRectReadOnly(),
+            boundingClientRect: new DOMRectReadOnly(),
+            rootBounds: new DOMRectReadOnly(),
+            time: Date.now(),
+            target: document.createElement('div')
+          }
+        ]);
       }
     });
 

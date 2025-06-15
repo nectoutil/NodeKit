@@ -6,9 +6,9 @@
  *
  */
 
-import * as dom from './dom.json';
-import * as numeric from './numeric.json';
-import * as chars from './characters.json';
-import * as alphabet from './alphabet.json';
+import * as DOM from './dom.json';
+import * as NUMERIC from './numeric.json';
+import * as CHARS from './characters.json';
+import * as ALPHABET from './alphabet.json';
 
-export { chars, alphabet, numeric, dom };
+export { CHARS, ALPHABET, NUMERIC, DOM };

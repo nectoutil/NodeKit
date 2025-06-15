@@ -6,8 +6,8 @@
  *
  */
 
-import { isNode } from "./node";
-import { getOwnerDocument, getOwnerWindow } from "./owner";
+import { isNode } from './node';
+import { getOwnerDocument, getOwnerWindow } from './owner';
 
 export function getContainmentRect(
   containment: Element | null | undefined,
@@ -19,7 +19,7 @@ export function getContainmentRect(
       top: r.top,
       left: r.left,
       bottom: r.bottom,
-      right: r.right,
+      right: r.right
     };
   } else {
     // Use fallbackElement if provided, otherwise use global document/window
@@ -29,7 +29,7 @@ export function getContainmentRect(
       top: 0,
       left: 0,
       bottom: win.innerHeight || doc.documentElement.clientHeight,
-      right: win.innerWidth || doc.documentElement.clientWidth,
+      right: win.innerWidth || doc.documentElement.clientWidth
     };
   }
 }

@@ -5,7 +5,3 @@
  * LICENSE file in the root directory of this source tree.
  *
  */
-
-export { filterDOMProps } from './filterDOMProps';
-
-export type { FilterOptions, FilterDOMProps, FilterDOMReturn } from './types';

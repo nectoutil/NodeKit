@@ -6,18 +6,17 @@
  *
  */
 
-import type { RefObject } from 'react';
 
 /**
  * Indicates whether partial visibility is allowed, or specifies the edge(s) to check for partial visibility.
  */
-export type PartialVisibility = boolean | "top" | "right" | "bottom" | "left";
+export type PartialVisibility = boolean | 'top' | 'right' | 'bottom' | 'left';
 
 /**
  * Props for the useElementVisibility hook.
  */
 export interface UseElementVisibilityProps {
-   /** Whether partial visibility is allowed, or which edge to check. */
+  /** Whether partial visibility is allowed, or which edge to check. */
   partialVisibility?: PartialVisibility;
 
   /** The threshold(s) at which to trigger the observer callback. */
