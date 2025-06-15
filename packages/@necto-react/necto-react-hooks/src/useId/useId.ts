@@ -21,8 +21,8 @@ import type { UseIdProps } from './useId.types';
  * @param {UseIdProps} [props] - Optional props object. You can provide a custom prefix and/or a defaultId.
  * @returns {UseIdReturns} The generated or provided unique ID.
  */
-export function useId(props?: UseIdProps): string {
-  const { prefix = 'necto', defaultId } = props || {};
+export function useId(props: UseIdProps = {}): string {
+  const { prefix = 'necto', defaultId } = props;
 
   // Initialize state only once with a function to avoid unnecessary calculations
   const [_, setValue] = useState<string | undefined>(() => defaultId);
