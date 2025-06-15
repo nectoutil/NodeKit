@@ -6,12 +6,12 @@
  *
  */
 
-import { useState, useRef, useCallback, useEffect, useMemo } from 'react';
 import {
   getOwnerWindow,
   disableTextSelection,
   restoreTextSelection
 } from '@necto/dom';
+import { useState, useRef, useCallback, useEffect, useMemo } from 'react';
 
 import type { PointerType, PressEvent } from '@necto/types';
 import type { UsePressProps, UsePressReturn } from './usePress.types';
