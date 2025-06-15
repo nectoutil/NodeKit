@@ -30,18 +30,11 @@ export function useFocusVisible(props: UseFocusVisibleProps = {}): UseFocusVisib
     autoFocus || getInteractionModality() !== 'pointer'
   );
 
-  useFocusVisibleListener(
-    (isFocusVisible: boolean | ((prevState: boolean) => boolean)) => {
-      setFocusVisible(isFocusVisible);
-    },
-    [isTextInput],
-    { isTextInput: isTextInput },
-    {
-      fn: (isFocusVisible: boolean) => setFocusVisible(isFocusVisible),
-      deps: [isTextInput],
-      opts: { isTextInput: isTextInput }
-    }
-  );
+  useFocusVisibleListener({
+    fn: (isFocusVisible: boolean) => setFocusVisible(isFocusVisible),
+    deps: [isTextInput],
+    opts: { isTextInput }
+  });
 
   return { isFocusVisible: isFocusVisibleState };
 }

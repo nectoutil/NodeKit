@@ -13,8 +13,6 @@
  * Modifications have been made to adapt the code for use in this project.
  */
 
-// !!: This function causes errors, fix it later
-
 import { useFocus } from '@necto-react/hooks';
 import { useFocusWithin } from '@necto-react/hooks';
 import { useRef, useState, useCallback } from 'react';
@@ -26,6 +24,9 @@ import type {
   Modality
 } from './useFocusRing.types';
 
+// Current modality indications.
+const currentModality: null | Modality = null;
+
 /**
  * React hook that manages focus state and focus ring visibility for an element.
  *
@@ -36,7 +37,6 @@ export function useFocusRing(
   props: UseFocusRingProps = {}
 ): UseFocusRingReturn {
   const { within = false, isTextInput = false, autoFocus = false } = props;
-  const currentModality: null | Modality = null;
   const state = useRef({
     isFocused: autoFocus,
     isFocusVisible: autoFocus || currentModality !== 'pointer'
@@ -60,24 +60,14 @@ export function useFocusRing(
     [updateFocusVisibleState]
   );
 
-  useFocusVisibleListener(
-    (focusVisible) => {
-      state.current.isFocusVisible = typeof focusVisible === 'function'
-        ? focusVisible(state.current.isFocusVisible)
-        : focusVisible;
+  useFocusVisibleListener({
+    fn: (focusVisible: boolean) => {
+      state.current.isFocusVisible = focusVisible;
       updateFocusVisibleState();
     },
-    [],
-    { isTextInput },
-    {
-      fn: (focusVisible: boolean) => {
-        state.current.isFocusVisible = focusVisible;
-        updateFocusVisibleState();
-      },
-      deps: [],
-      opts: { isTextInput }
-    }
-  );
+    deps: [],
+    opts: { isTextInput }
+  });
 
   const { focusProps = {} } =
     useFocus({
