@@ -9,11 +9,11 @@
 import { useMemo } from 'react';
 import { useDisabled } from '@necto-react/hooks';
 
-import type { HTMLAttributes } from 'react';
 import type {
   UseDisabledPropsProps,
   UseDisabledPropsReturn
 } from './useDisabledProps.types';
+import type { HTMLAttributes } from 'react';
 
 /**
  * Returns HTML props with appropriate disabled attributes based on the disabled state.
