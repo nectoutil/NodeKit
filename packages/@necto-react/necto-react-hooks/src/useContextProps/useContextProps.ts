@@ -20,11 +20,11 @@ import { useObjectRef } from '../useObjectRef';
 import { mergeRefs, mergeProps } from '@necto/mergers';
 import { useSlottedContext } from '@necto-react/hooks';
 
-import type { ForwardedRef } from 'react';
 import type {
   UseContextPropsProps,
   UseContextPropsReturn
 } from './useContextProps.types';
+import type { ForwardedRef } from 'react';
 
 export function useContextProps<T, E extends Element>({
   props,
