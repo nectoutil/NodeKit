@@ -22,7 +22,12 @@ import { isKeyboardFocusEvent } from '@necto-react/helpers';
 import { getOwnerDocument, getOwnerWindow } from '@necto/dom';
 import { globalListeners, changeHandlers, focusState } from './focusContext';
 
-import type { UseFocusVisibleListenerProps, Modality, HandlerEvent, Handler } from './useFocusVisibleListener.types';
+import type {
+  UseFocusVisibleListenerProps,
+  Modality,
+  HandlerEvent,
+  Handler
+} from './useFocusVisibleListener.types';
 
 function triggerChangeHandlers(modality: Modality, e: HandlerEvent) {
   changeHandlers.forEach((handler) => handler(modality, e));
@@ -149,7 +154,9 @@ export function getInteractionModality(): Modality | null {
  * @param {UseFocusVisibleListenerProps} props - The props for the focus visible listener.
  * @returns {void}
  */
-export function useFocusVisibleListener(props: UseFocusVisibleListenerProps): void {
+export function useFocusVisibleListener(
+  props: UseFocusVisibleListenerProps
+): void {
   const { fn, deps, opts } = props;
 
   if (typeof window === 'undefined' || typeof document === 'undefined') {

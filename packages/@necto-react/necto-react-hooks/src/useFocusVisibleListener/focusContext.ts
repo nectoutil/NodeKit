@@ -29,16 +29,28 @@ let currentModality: Modality | null = null;
  */
 export const focusState = {
   /** Whether there was a user event before focus. */
-  get hasEventBeforeFocus() { return hasEventBeforeFocus; },
-  set hasEventBeforeFocus(value: boolean) { hasEventBeforeFocus = value; },
+  get hasEventBeforeFocus() {
+    return hasEventBeforeFocus;
+  },
+  set hasEventBeforeFocus(value: boolean) {
+    hasEventBeforeFocus = value;
+  },
 
   /** Whether the window has been blurred recently. */
-  get hasBlurredWindowRecently() { return hasBlurredWindowRecently; },
-  set hasBlurredWindowRecently(value: boolean) { hasBlurredWindowRecently = value; },
+  get hasBlurredWindowRecently() {
+    return hasBlurredWindowRecently;
+  },
+  set hasBlurredWindowRecently(value: boolean) {
+    hasBlurredWindowRecently = value;
+  },
 
   /** The current interaction modality (keyboard, pointer, or virtual). */
-  get currentModality() { return currentModality; },
-  set currentModality(value: Modality | null) { currentModality = value; },
+  get currentModality() {
+    return currentModality;
+  },
+  set currentModality(value: Modality | null) {
+    currentModality = value;
+  }
 };
 
 /**

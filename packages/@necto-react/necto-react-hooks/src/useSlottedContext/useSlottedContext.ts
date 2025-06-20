@@ -53,7 +53,7 @@ export function useSlottedContext<T>(
         `${errorMessage} Valid slot names are ${availableSlots}.`
       );
     }
-    
+
     return ctx.slots[slotKey];
   }
 

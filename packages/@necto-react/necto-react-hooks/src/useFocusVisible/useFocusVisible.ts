@@ -14,9 +14,15 @@
  */
 
 import { useState } from 'react';
-import { getInteractionModality, useFocusVisibleListener } from '@necto-react/hooks';
+import {
+  getInteractionModality,
+  useFocusVisibleListener
+} from '@necto-react/hooks';
 
-import type { UseFocusVisibleProps, UseFocusVisibleReturn } from './useFocusVisible.types';
+import type {
+  UseFocusVisibleProps,
+  UseFocusVisibleReturn
+} from './useFocusVisible.types';
 
 /**
  * React hook that provides focus visibility tracking.
@@ -24,7 +30,9 @@ import type { UseFocusVisibleProps, UseFocusVisibleReturn } from './useFocusVisi
  * @param {UseFocusVisibleProps} [props] - Options for focus visibility behavior.
  * @returns {UseFocusVisibleReturn} An object containing the focus visibility state.
  */
-export function useFocusVisible(props: UseFocusVisibleProps = {}): UseFocusVisibleReturn {
+export function useFocusVisible(
+  props: UseFocusVisibleProps = {}
+): UseFocusVisibleReturn {
   const { isTextInput, autoFocus } = props;
   const [isFocusVisibleState, setFocusVisible] = useState(
     autoFocus || getInteractionModality() !== 'pointer'

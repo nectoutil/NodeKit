@@ -21,7 +21,7 @@ export interface UseObjectRefProps<T> {
   ref?:
     | ((instance: T | null) => (() => void) | undefined)
     | RefObject<T | null>
-    | null
+    | null;
 }
 
 /**

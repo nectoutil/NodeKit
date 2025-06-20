@@ -9,7 +9,10 @@
 import { useRef } from 'react';
 
 import type { RefObject } from 'react';
-import type { UseObjectRefProps, UseObjectRefReturn } from './useObjectRef.types';
+import type {
+  UseObjectRefProps,
+  UseObjectRefReturn
+} from './useObjectRef.types';
 
 // export function useObjectRef(props: UseObjectRefProps<T>): UseObjectRefReturn<T> {
 //   const objRef: RefObject<T | null> = useRef<T>(null)

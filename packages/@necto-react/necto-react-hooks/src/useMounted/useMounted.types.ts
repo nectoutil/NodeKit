@@ -6,7 +6,7 @@
  *
  */
 
-import type { RefObject } from "react";
+import type { RefObject } from 'react';
 
 /**
  * Specifies how the mounted state should be accessed.
@@ -28,7 +28,8 @@ export interface UseMountedProps {
  * - 'boolean': Returns a boolean value directly
  * - 'function': Returns a function that returns the current mounted state
  */
-export type UseMountedReturn<T extends MountedAccessType> =
-  T extends 'ref' ? RefObject<boolean> :
-  T extends 'boolean' ? boolean :
-  () => boolean;
+export type UseMountedReturn<T extends MountedAccessType> = T extends 'ref'
+  ? RefObject<boolean>
+  : T extends 'boolean'
+    ? boolean
+    : () => boolean;

@@ -6,7 +6,6 @@
  *
  */
 
-
 /**
  * Indicates whether partial visibility is allowed, or specifies the edge(s) to check for partial visibility.
  */

@@ -8,7 +8,11 @@
 
 import { useRef, useState, useCallback, useEffect } from 'react';
 
-import type { UseMountedProps, UseMountedReturn, MountedAccessType } from "./useMounted.types";
+import type {
+  UseMountedProps,
+  UseMountedReturn,
+  MountedAccessType
+} from './useMounted.types';
 
 /**
  * React hook that tracks whether a component is mounted.
@@ -33,7 +37,7 @@ export function useMounted<T extends MountedAccessType = 'function'>(
     return () => {
       mountedRef.current = false;
       setMountedState(false);
-    }
+    };
   }, []);
 
   if (type === 'ref') return mountedRef as UseMountedReturn<T>;

@@ -18,7 +18,10 @@ import { createSyntheticEvent } from '@necto-react/helpers';
 import { useRef, useCallback, useLayoutEffect } from 'react';
 
 import type { FocusEvent } from 'react';
-import type { UseSyntheticBlurEventProps, UseSyntheticBlurEventReturn } from './useSyntheticBlurEvent.types';
+import type {
+  UseSyntheticBlurEventProps,
+  UseSyntheticBlurEventReturn
+} from './useSyntheticBlurEvent.types';
 
 /**
  * React hook to handle synthetic blur events, particularly for disabled elements.
@@ -71,8 +74,7 @@ export function useSyntheticBlurEvent<T extends Element = Element>(
 
           if (target.disabled) {
             // Dispatch a synthetic React event for backward compatibility.
-            const syntheticEvent =
-              createSyntheticEvent<FocusEvent<T>>(event);
+            const syntheticEvent = createSyntheticEvent<FocusEvent<T>>(event);
             dispatchBlur(syntheticEvent);
           }
 

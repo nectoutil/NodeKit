@@ -6,8 +6,8 @@
  *
  */
 
-import type { DOMAttributes } from "@necto-react/types";
-import type { FocusEvent as ReactFocusEvent } from "react";
+import type { DOMAttributes } from '@necto-react/types';
+import type { FocusEvent as ReactFocusEvent } from 'react';
 
 /**
  * Props for the useFocusWithin hook.
