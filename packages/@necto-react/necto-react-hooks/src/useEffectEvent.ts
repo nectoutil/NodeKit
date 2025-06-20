@@ -1,4 +1,4 @@
-// biome-ignore-all lint/suspicious/noExplicitAny: Explicity any okay for this function context.
+// biome-ignore-all lint/suspicious/noExplicitAny: Explicit any okay for this function context.
 
 /**
  * Copyright (c) Corinvo, LLC. and affiliates.
