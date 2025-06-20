@@ -38,6 +38,9 @@ importers:
       '@necto-react/types':
         specifier: workspace:*
         version: link:../necto-react-types
+      '@necto/types':
+        specifier: workspace:*
+        version: link:../../@necto/necto-types
     devDependencies:
       '@types/react':
         specifier: ^19.1.2
@@ -63,6 +66,9 @@ importers:
       '@necto/platform':
         specifier: workspace:*
         version: link:../../@necto/necto-platform
+      std-env:
+        specifier: ^3.9.0
+        version: 3.9.0
     devDependencies:
       '@types/node':
         specifier: ^22.14.1

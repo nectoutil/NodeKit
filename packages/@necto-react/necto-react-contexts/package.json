@@ -15,6 +15,7 @@
   "main": "./dist/index.js",
   "module": "./dist/index.es.js",
   "dependencies": {
+    "@necto/types": "workspace:*",
     "@necto-react/types": "workspace:*"
   },
   "devDependencies": {

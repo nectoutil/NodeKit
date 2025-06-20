@@ -10,6 +10,7 @@ export * from './useMounted';
 export * from './useSupported';
 export * from './useFocusVisible';
 export * from './useSlottedContext';
+export * from './useKeyboard';
 export * from './useContextProps';
 export * from './useDisabled';
 export * from './useEffectEvent';

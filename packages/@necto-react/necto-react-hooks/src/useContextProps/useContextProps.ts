@@ -26,6 +26,14 @@ import type {
 } from './useContextProps.types';
 import type { ForwardedRef } from 'react';
 
+/**
+ * React hook that merges props and refs from both component and context, including styles.
+ *
+ * @template T The props type.
+ * @template E The element type.
+ * @param {UseContextPropsProps<T, E>} params - Component props, ref, and context.
+ * @returns {UseContextPropsReturn<T, E>} A tuple of merged props and merged ref.
+ */
 export function useContextProps<T, E extends Element>({
   props,
   ref,

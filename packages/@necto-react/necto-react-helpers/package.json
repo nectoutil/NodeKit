@@ -17,20 +17,21 @@
   "author": "Corinvo OSS Team",
   "license": "MIT",
   "devDependencies": {
-    "tsup": "^8.4.0",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
     "@types/node": "^22.14.1",
     "@types/react": "^19.1.2",
-    "@types/react-dom": "^19.1.2"
+    "@types/react-dom": "^19.1.2",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "tsup": "^8.4.0"
   },
   "peerDependencies": {
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
   "dependencies": {
+    "@necto-react/types": "workspace:*",
     "@necto/dom": "workspace:*",
     "@necto/platform": "workspace:*",
-    "@necto-react/types": "workspace:*"
+    "std-env": "^3.9.0"
   }
 }

@@ -20,7 +20,7 @@
  * @returns A single object with merged properties.
  */
 export function mergeProps(
-  ...listOfObjects: Array<Record<string, any>>
+  ...listOfObjects: Record<string, any>[]
 ): Record<string, any> {
   if (listOfObjects.length === 0) return {};
   if (listOfObjects.length === 1) {

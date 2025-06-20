@@ -8,6 +8,8 @@
 
 export * from './node';
 export * from './owner';
+export * from './focus';
+export * from './scroll';
 export * from './containment';
 export * from './transitions';
 export * from './html-elements';

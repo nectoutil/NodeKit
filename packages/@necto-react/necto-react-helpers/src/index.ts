@@ -10,5 +10,6 @@
 
 export * from './filterDOMProps';
 export * from './isVirtualClick';
+export * from './createEventHandler';
 export * from './createSyntheticEvent';
 export * from './isKeyboardFocusEvent';

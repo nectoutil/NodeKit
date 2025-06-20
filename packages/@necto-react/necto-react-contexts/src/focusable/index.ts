@@ -6,9 +6,4 @@
  *
  */
 
-export { useFocusable } from './useFocusable';
-
-export type {
-  UseFocusableProps,
-  UseFocusableReturn
-} from './useFocusable.types';
+export { FocusableContext } from './FocusableContext';

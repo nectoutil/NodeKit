@@ -6,7 +6,25 @@
  *
  */
 
-import type { FocusEvent as ReactFocusEvent } from 'react';
+import type { FocusEvent as ReactFocusEvent, SyntheticEvent } from 'react';
+
+/**
+ * Extended SyntheticEvent with custom propagation control methods.
+ *
+ * @template T The type of the original SyntheticEvent.
+ */
+export type BaseEvent<T extends SyntheticEvent> = T & {
+  /**
+   * Use continuePropagation instead.
+   * @deprecated
+   */
+  stopPropagation(): void;
+
+  /**
+   * Continues propagation for the event.
+   */
+  continuePropagation(): void;
+};
 
 /**
  * Event handlers for hover interactions.
@@ -25,7 +43,7 @@ export interface HoverEvent {
 /**
  * Event handlers for focus interactions.
  */
-export interface FocusEvent<Target = Element> {
+export interface FocusEvents<Target = Element> {
   /** Called when the element receives focus. */
   onFocus?: (e: ReactFocusEvent<Target>) => void;
 

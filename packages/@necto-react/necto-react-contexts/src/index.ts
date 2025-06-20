@@ -7,3 +7,4 @@
  */
 
 export * from './disabled';
+export * from './focusable';
