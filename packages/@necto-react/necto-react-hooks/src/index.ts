@@ -8,6 +8,7 @@
 
 export * from './useMounted';
 export * from './useSupported';
+export * from './useSyncContextRef';
 export * from './useFocusVisible';
 export * from './useSlottedContext';
 export * from './useKeyboard';

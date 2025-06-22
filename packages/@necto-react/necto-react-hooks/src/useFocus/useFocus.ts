@@ -17,9 +17,10 @@ import { useCallback } from 'react';
 import { useSyntheticBlurEvent } from '@necto-react/hooks';
 import { getOwnerDocument, getEventTarget, getActiveElement } from '@necto/dom';
 
+import type { FocusableElement } from '@necto/types';
+import type { DOMAttributes } from '@necto-react/types';
 import type { FocusEvent as ReactFocusEvent } from 'react';
 import type { UseFocusProps, UseFocusReturn } from './useFocus.types';
-import type { FocusableElement, DOMAttributes } from '@necto-react/types';
 
 /**
  * React hook that manages focus and blur event handling for a focusable element.

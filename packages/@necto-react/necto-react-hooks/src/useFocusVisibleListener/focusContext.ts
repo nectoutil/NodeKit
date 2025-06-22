@@ -20,16 +20,16 @@ export const globalListeners = new Map<Window, { focus: () => void }>();
 export const changeHandlers = new Set<Handler>();
 
 // Shared state for focus tracking
-let hasEventBeforeFocus = false;
-let hasBlurredWindowRecently = false;
+let hasEventBeforeFocus: boolean = false;
 let currentModality: Modality | null = null;
+let hasBlurredWindowRecently: boolean = false;
 
 /**
  * Encapsulated state for focus tracking with controlled access.
  */
 export const focusState = {
   /** Whether there was a user event before focus. */
-  get hasEventBeforeFocus() {
+  get hasEventBeforeFocus(): boolean {
     return hasEventBeforeFocus;
   },
   set hasEventBeforeFocus(value: boolean) {
@@ -37,7 +37,7 @@ export const focusState = {
   },
 
   /** Whether the window has been blurred recently. */
-  get hasBlurredWindowRecently() {
+  get hasBlurredWindowRecently(): boolean {
     return hasBlurredWindowRecently;
   },
   set hasBlurredWindowRecently(value: boolean) {
@@ -45,7 +45,7 @@ export const focusState = {
   },
 
   /** The current interaction modality (keyboard, pointer, or virtual). */
-  get currentModality() {
+  get currentModality(): Modality | null {
     return currentModality;
   },
   set currentModality(value: Modality | null) {
