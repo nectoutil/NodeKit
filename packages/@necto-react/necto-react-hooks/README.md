@@ -13,9 +13,6 @@
   <a href="https://www.npmjs.com/package/@necto-react/hooks">
     <img alt="NPM version" src="https://img.shields.io/npm/v/@necto-react/hooks.svg?style=for-the-badge">
   </a>
-  <a aria-label="License" href="https://jsr.io/@necto-react/hooks">
-    <img src="https://jsr.io/badges/@necto-react/hooks?style=for-the-badge">
-  </a>
   <a aria-label="License" href="https://github.com/nectoutil/NodeKit/blob/main/LICENSE">
     <img src="https://img.shields.io/badge/License-MIT-97CA25.svg?style=for-the-badge">
   </a>
