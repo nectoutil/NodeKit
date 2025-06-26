@@ -82,7 +82,7 @@ export function useFocusable(
     autoFocusRef.current = false;
   }, [domRef]);
 
-  // Always set a tabIndex so that Safari allows focusing native buttons and inputs.
+  // Always set a tabIndex so that Safari allows focusing on native buttons and inputs.
   // Implemented as per React Aria feature mirror.
   let tabIndex: number | undefined = excludeFromTabOrder ? -1 : 0;
   if (isDisabled) {

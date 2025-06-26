@@ -17,7 +17,10 @@
       "dependsOn": ["@necto/constants#build"]
     },
     "@necto/dom#build": {
-      "dependsOn": ["@necto/platform#build"]
+      "dependsOn": [
+        "@necto/types#build",
+        "@necto/platform#build"
+      ]
     },
     "@necto-react/hooks#build": {
       "dependsOn": [

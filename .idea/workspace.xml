@@ -5,10 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3a11d6bb-b944-4dd9-9836-7f1e9c3bc108" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/packages/@necto-react/necto-react-hooks/src/useFocus/useFocus.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/@necto-react/necto-react-hooks/src/useFocus/useFocus.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/@necto-react/necto-react-hooks/src/useFocus/useFocus.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/@necto-react/necto-react-hooks/src/useFocus/useFocus.types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/@necto-react/necto-react-hooks/src/useFocusVisibleListener/focusContext.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/@necto-react/necto-react-hooks/src/useFocusVisibleListener/focusContext.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/@necto-react/necto-react-hooks/src/useFocusable/useFocusable.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/@necto-react/necto-react-hooks/src/useFocusable/useFocusable.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/turbo.json" beforeDir="false" afterPath="$PROJECT_DIR$/turbo.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,13 +41,14 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;necto-cleanup&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;/Users/botiszabo/Developer/nectoutil/NodeKit&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;pnpm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
     &quot;ts.external.directory.path&quot;: &quot;/Applications/WebStorm.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -71,6 +72,8 @@
       <workItem from="1750554254347" duration="2351000" />
       <workItem from="1750558300072" duration="487000" />
       <workItem from="1750560181816" duration="656000" />
+      <workItem from="1750633780505" duration="972000" />
+      <workItem from="1750775571748" duration="794000" />
     </task>
     <servers />
   </component>
