@@ -30,10 +30,10 @@ import type {
 } from './useFocusVisibleListener.types';
 
 function triggerChangeHandlers(modality: Modality, e: HandlerEvent) {
-  changeHandlers.forEach((handler) => handler(modality, e));
+  changeHandlers.forEach((handler: Handler) => handler(modality, e));
 }
 
-function isValidKey(e: KeyboardEvent) {
+function isValidKey(e: KeyboardEvent): boolean {
   return !(
     e.metaKey ||
     (isMacOS && e.altKey) ||

@@ -6,6 +6,3 @@
  *
  */
 
-export { useFocusWithin } from './useFocusWithin';
-
-export type { UseFocusWithinProps, FocusWithinReturn } from './useFocusWithin.types';

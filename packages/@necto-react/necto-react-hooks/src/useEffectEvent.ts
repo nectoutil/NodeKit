@@ -10,6 +10,8 @@
 
 import { useCallback, useRef, useLayoutEffect, useEffect } from 'react';
 
+import type { RefObject } from 'react';
+
 /**
  * Returns a stable event callback that always invokes the latest version of the provided function.
  *
@@ -17,7 +19,7 @@ import { useCallback, useRef, useLayoutEffect, useEffect } from 'react';
  * @returns {T} A memoized callback that always calls the latest version of `fn`.
  */
 export function useEffectEvent<T extends (...args: any[]) => any>(fn: T): T {
-  const fnRef = useRef(fn);
+  const fnRef: RefObject<any> = useRef(fn);
 
   (typeof window !== 'undefined' ? useLayoutEffect : useEffect)(() => {
     fnRef.current = fn;

@@ -6,6 +6,5 @@
  *
  */
 
-export { useFocusWithin } from './useFocusWithin';
+export function useGlobalListeners() {}
 
-export type { UseFocusWithinProps, FocusWithinReturn } from './useFocusWithin.types';
