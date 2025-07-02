@@ -33,7 +33,7 @@ export function createEventHandler<T extends SyntheticEvent>(
 
   let stopPropagation: boolean = true;
   return (e: T) => {
-    let event: BaseEvent<T> = {
+    const event: BaseEvent<T> = {
       ...e,
       preventDefault(): void {
         e.preventDefault();

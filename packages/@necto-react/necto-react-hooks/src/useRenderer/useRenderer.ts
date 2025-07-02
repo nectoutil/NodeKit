@@ -9,7 +9,7 @@
 import { useMemo } from 'react';
 
 import type { ReactNode, CSSProperties } from 'react';
-import { UseRendererProps, UseRendererReturn } from './useRenderer.types';
+import type { UseRendererProps, UseRendererReturn } from './useRenderer.types';
 
 export function useRenderer<T>(props: UseRendererProps<T>): UseRendererReturn {
   const {
@@ -46,7 +46,7 @@ export function useRenderer<T>(props: UseRendererProps<T>): UseRendererReturn {
       className: computedClassName,
       style: computedStyle,
       children: computedChildren
-    }
+    };
   }, [
     className,
     style,

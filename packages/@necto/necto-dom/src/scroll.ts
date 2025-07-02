@@ -29,7 +29,7 @@ export function supportsPreventScroll(): boolean {
   if (supportsPreventScrollCached == null) {
     supportsPreventScrollCached = false;
     try {
-      let focusElement = document.createElement('div');
+      const focusElement = document.createElement('div');
       focusElement.focus({
         get preventScroll(): boolean {
           supportsPreventScrollCached = true;

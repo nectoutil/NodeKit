@@ -16,21 +16,27 @@
 import { useCallback, useRef } from 'react';
 import { createSyntheticEvent } from '@necto-react/helpers';
 import { useGlobalListeners, useSyntheticBlurEvent } from '@necto-react/hooks';
-import { getOwnerDocument, getActiveElement, getEventTarget, nodeContains } from '@necto/dom';
+import {
+  getOwnerDocument,
+  getActiveElement,
+  getEventTarget,
+  nodeContains
+} from '@necto/dom';
 
 import type { RefObject, FocusEvent } from 'react';
 import type { DOMAttributes } from '@necto-react/types';
 import type { UseSyntheticBlurEventReturn } from '@necto-react/hooks';
-import type { UseFocusWithinProps, FocusWithinReturn } from './useFocusWithin.types';
+import type {
+  UseFocusWithinProps,
+  FocusWithinReturn
+} from './useFocusWithin.types';
 
 export function useFocusWithin(props: UseFocusWithinProps): FocusWithinReturn {
-  const {
-    isDisabled,
-    onFocusWithin,
-    onBlurWithin,
-    onFocusWithinChange
-  } = props;
-  const state: RefObject<{ isFocusWithin: boolean }> = useRef({ isFocusWithin: false });
+  const { isDisabled, onFocusWithin, onBlurWithin, onFocusWithinChange } =
+    props;
+  const state: RefObject<{ isFocusWithin: boolean }> = useRef({
+    isFocusWithin: false
+  });
   const { addGlobalListener, removeAllGlobalListeners } = useGlobalListeners();
 
   const onBlur: (event: FocusEvent<Element, Element>) => void = useCallback(
@@ -53,7 +59,8 @@ export function useFocusWithin(props: UseFocusWithinProps): FocusWithinReturn {
     [onBlurWithin, onFocusWithinChange, removeAllGlobalListeners]
   );
 
-  const onSyntheticFocus: UseSyntheticBlurEventReturn<Element> = useSyntheticBlurEvent({ onBlur });
+  const onSyntheticFocus: UseSyntheticBlurEventReturn<Element> =
+    useSyntheticBlurEvent({ onBlur });
   const onFocus: (event: FocusEvent<Element, Element>) => void = useCallback(
     (event: FocusEvent) => {
       if (!event.currentTarget.contains(event.target)) return;
@@ -81,7 +88,10 @@ export function useFocusWithin(props: UseFocusWithinProps): FocusWithinReturn {
               !nodeContains(currentTarget, e.target as Element)
             ) {
               // This might cause issues, fix if it does and revert to: const nativeEvent = new ownerDocument.defaultView!.FocusEvent(
-              if (ownerDocument.defaultView && typeof ownerDocument.defaultView.FocusEvent === 'function') {
+              if (
+                ownerDocument.defaultView &&
+                typeof ownerDocument.defaultView.FocusEvent === 'function'
+              ) {
                 const nativeEvent = new ownerDocument.defaultView.FocusEvent(
                   'blur',
                   { relatedTarget: e.target }
@@ -92,7 +102,8 @@ export function useFocusWithin(props: UseFocusWithinProps): FocusWithinReturn {
                 Object.defineProperty(nativeEvent, 'currentTarget', {
                   value: currentTarget
                 });
-                const event: FocusEvent = createSyntheticEvent<FocusEvent>(nativeEvent);
+                const event: FocusEvent =
+                  createSyntheticEvent<FocusEvent>(nativeEvent);
                 onBlur(event);
               }
             }

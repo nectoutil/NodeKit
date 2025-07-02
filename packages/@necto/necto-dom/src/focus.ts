@@ -28,11 +28,11 @@ export function focusWithoutScrolling(element: FocusableElement): void {
   if (supportsPreventScroll()) {
     element.focus({ preventScroll: true });
   } else {
-    let scrollableElements: ScrollableElement[] =
+    const scrollableElements: ScrollableElement[] =
       getScrollableElements(element);
     element.focus();
 
-    for (let { element, scrollTop, scrollLeft } of scrollableElements) {
+    for (const { element, scrollTop, scrollLeft } of scrollableElements) {
       element.scrollTop = scrollTop;
       element.scrollLeft = scrollLeft;
     }
@@ -50,8 +50,8 @@ export function getScrollableElements(
   element: FocusableElement
 ): ScrollableElement[] {
   let parent: ParentNode | null = element.parentNode;
-  let scrollableElements: ScrollableElement[] = Array.from({ length: 0 });
-  let rootScrollingElement: Element =
+  const scrollableElements: ScrollableElement[] = Array.from({ length: 0 });
+  const rootScrollingElement: Element =
     document.scrollingElement || document.documentElement;
 
   while (parent instanceof HTMLElement && parent !== rootScrollingElement) {

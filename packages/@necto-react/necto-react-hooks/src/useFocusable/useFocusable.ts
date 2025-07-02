@@ -50,14 +50,14 @@ export function useFocusable(
 ): UseFocusableReturn {
   const { autoFocus, isDisabled, excludeFromTabOrder } = props;
 
-  let { focusProps } = useFocus(props);
-  let { keyboardProps } = useKeyboard(props);
-  let context = useContext(FocusableContext) || {};
-  let autoFocusRef: RefObject<any> = useRef(autoFocus);
+  const { focusProps } = useFocus(props);
+  const { keyboardProps } = useKeyboard(props);
+  const context = useContext(FocusableContext) || {};
+  const autoFocusRef: RefObject<any> = useRef(autoFocus);
 
   // Synchronize the local ref with the context ref so both always point to the same DOM element.
   useSyncContextRef({ context: context, ref: domRef });
-  let { ref: _, ...domProps } = context;
+  const { ref: _, ...domProps } = context;
 
   const ownerDocument: Document = getOwnerDocument(domRef.current);
   const activeElement: Element | null = getActiveElement(ownerDocument);
@@ -65,7 +65,7 @@ export function useFocusable(
   useEffect(() => {
     if (autoFocusRef.current && domRef.current) {
       if (getInteractionModality() === 'virtual') {
-        let lastFocusedElement: Element | null = activeElement;
+        const lastFocusedElement: Element | null = activeElement;
         runAfterTransition(() => {
           if (
             getActiveElement(ownerDocument) === lastFocusedElement &&

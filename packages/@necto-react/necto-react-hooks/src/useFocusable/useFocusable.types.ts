@@ -6,7 +6,7 @@
  *
  */
 
-import { FocusableDOMProps, FocusEvents } from '@necto-react/types';
+import type { FocusableDOMProps, FocusEvents } from '@necto-react/types';
 
 export interface UseFocusableProps extends FocusableDOMProps, FocusEvents {
   isDisabled?: boolean;
@@ -14,4 +14,4 @@ export interface UseFocusableProps extends FocusableDOMProps, FocusEvents {
   autoFocus?: boolean;
 }
 
-export interface UseFocusableReturn {}
+export type UseFocusableReturn = {}
