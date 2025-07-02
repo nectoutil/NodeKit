@@ -1,11 +1,16 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@necto-react/hooks/*": ["./src/*"],
+      "@necto-react/hooks": ["./src/index.ts"]
+    },
     "target": "ESNext",
     "module": "ESNext",
     "jsx": "react-jsx",
     "declaration": true,
     "outDir": "./dist",
-    "rootDir": "./src",
+    "rootDir": ".",
     "strict": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
@@ -14,11 +19,6 @@
     "noEmit": false,
     "skipLibCheck": true
   },
-  "include": [
-    "src"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+  "include": ["src", "__tests__"],
+  "exclude": ["node_modules", "dist"]
 }

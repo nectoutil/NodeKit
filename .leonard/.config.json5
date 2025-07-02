@@ -1,0 +1,8 @@
+[
+  {
+    // Reason: The use of Adobe's React Spectrum in modified utility functions.
+    "name": "spectrum",
+    "license": "Apache License, Version 2.0",
+    "source": "https://github.com/adobe/react-spectrum"
+  }
+]

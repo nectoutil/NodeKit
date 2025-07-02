@@ -1,0 +1,30 @@
+{
+  "name": "@necto-react/contexts",
+  "version": "1.0.0",
+  "description": "",
+  "author": "The Corinvo OSS Team",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsup ./src/index.ts --minify --format esm,cjs,iife --dts"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "types": "dist/index.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.es.js",
+  "dependencies": {
+    "@necto/types": "workspace:*",
+    "@necto-react/types": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "react": "^19.1.0",
+    "tsup": "^8.4.0"
+  },
+  "peerDependencies": {
+    "react": "^19.1.0"
+  }
+}

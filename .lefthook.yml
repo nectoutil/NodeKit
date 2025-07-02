@@ -1,0 +1,16 @@
+colors: true
+skip_lfs: true
+
+pre-commit:
+  commands:
+    lint:
+      run: pnpm lint
+      stage_fixed: true
+    format:
+      run: pnpm format
+      stage_fixed: true
+
+commit-msg:
+  commands:
+    "lint commit message":
+      run: pnpm exec commitlint --edit {1}

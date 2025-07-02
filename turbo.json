@@ -1,11 +1,42 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "tasks": {
+    "dev": {
+      "cache": false
+    },
+    "test": {
+      "dependsOn": ["build"]
+    },
     "build": {
       "outputs": ["dist/**", "cache/**"]
     },
-    "dev": {
-      "cache": false
+    "@necto/env#build": {
+      "dependsOn": ["@necto/types#build"]
+    },
+    "@necto/id#build": {
+      "dependsOn": ["@necto/constants#build"]
+    },
+    "@necto/dom#build": {
+      "dependsOn": [
+        "@necto/types#build",
+        "@necto/platform#build"
+      ]
+    },
+    "@necto-react/hooks#build": {
+      "dependsOn": [
+        "@necto/dom#build",
+        "@necto/platform#build",
+        "@necto-react/helpers#build"
+      ]
+    },
+    "@necto-react/contexts#build": {
+      "dependsOn": ["@necto-react/types#build"]
+    },
+    "@necto-react/helpers#build": {
+      "dependsOn": [
+        "@necto/dom#build",
+        "@necto/platform#build"
+      ]
     }
   }
 }

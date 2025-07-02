@@ -1,0 +1,13 @@
+{
+  "name": "@necto-vue/composables",
+  "version": "1.0.0",
+  "description": "",
+  "author": "The Corinvo OSS Team",
+  "license": "MIT",
+  "devDependencies": {
+    "vue": "^3.5.16"
+  },
+  "peerDependencies": {
+    "vue": "^3.5.16"
+  }
+}

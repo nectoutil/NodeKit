@@ -1,0 +1,26 @@
+{
+  "name": "@necto/dom",
+  "version": "1.1.0",
+  "description": "Necto's library for providing helpers and tools to interact with the DOM.",
+  "scripts": {
+    "build": "tsup --minify terser"
+  },
+  "author": "Corinvo OSS Team",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.14.1",
+    "tsup": "^8.4.0"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "types": "./dist/index.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "dependencies": {
+    "@necto/types": "workspace:*",
+    "@necto/platform": "workspace:*",
+    "html-tags": "^4.0.0"
+  }
+}

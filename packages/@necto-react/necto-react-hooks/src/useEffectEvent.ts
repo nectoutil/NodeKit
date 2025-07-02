@@ -1,3 +1,5 @@
+// biome-ignore-all lint/suspicious/noExplicitAny: Explicit any okay for this function context.
+
 /**
  * Copyright (c) Corinvo, LLC. and affiliates.
  *
@@ -6,20 +8,27 @@
  *
  */
 
-'use strict';
+import { useCallback, useRef, useLayoutEffect, useEffect } from 'react';
 
-import { useCallback, useRef, useLayoutEffect, useEffect } from "react";
+import type { RefObject } from 'react';
 
-const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
-
+/**
+ * Returns a stable event callback that always invokes the latest version of the provided function.
+ *
+ * @param {T} fn - The event handler function to stabilize.
+ * @returns {T} A memoized callback that always calls the latest version of `fn`.
+ */
 export function useEffectEvent<T extends (...args: any[]) => any>(fn: T): T {
-  const fnRef = useRef(fn);
+  const fnRef: RefObject<any> = useRef(fn);
 
-  useIsomorphicLayoutEffect(() => {
+  (typeof window !== 'undefined' ? useLayoutEffect : useEffect)(() => {
     fnRef.current = fn;
   }, [fn]);
 
-  return useCallback(((...args: Parameters<T>): ReturnType<T> => {
-    return fnRef.current(...args);
-  }) as T, []);
+  return useCallback(
+    ((...args: Parameters<T>): ReturnType<T> => {
+      return fnRef.current(...args);
+    }) as T,
+    []
+  );
 }
