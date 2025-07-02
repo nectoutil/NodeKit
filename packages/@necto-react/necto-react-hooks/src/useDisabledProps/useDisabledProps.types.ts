@@ -23,4 +23,4 @@ export interface UseDisabledPropsProps {
 /**
  * Return type for the useDisabledProps hook.
  */
-export type UseDisabledPropsReturn = HTMLAttributes<HTMLElement>;
+export type UseDisabledPropsPropsReturn = HTMLAttributes<HTMLElement>;

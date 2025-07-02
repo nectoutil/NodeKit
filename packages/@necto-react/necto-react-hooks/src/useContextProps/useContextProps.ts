@@ -15,16 +15,15 @@
  * Modifications have been made to adapt the code for use in this project.
  */
 
-import { useMemo } from 'react';
-import { useObjectRef } from '../useObjectRef';
-import { mergeRefs, mergeProps } from '@necto/mergers';
+import { useRef, useCallback } from 'react';
+import { mergeProps } from '@necto/mergers';
 import { useSlottedContext } from '@necto-react/hooks';
 
 import type {
   UseContextPropsProps,
   UseContextPropsReturn
 } from './useContextProps.types';
-import type { ForwardedRef } from 'react';
+import type { RefObject } from 'react';
 
 /**
  * React hook that merges props and refs from both component and context, including styles.
@@ -46,11 +45,25 @@ export function useContextProps<T, E extends Element>({
     [key: string]: unknown;
   };
 
-  const mergedRef = useObjectRef(
-    useMemo(
-      () => mergeRefs(ref, contextRef as ForwardedRef<E>),
-      [ref, contextRef]
-    )
+  const localRef: RefObject<E | null> = useRef<E | null>(null);
+
+  const mergedRef = useCallback(
+    (value: E | null) => {
+      localRef.current = value;
+
+      if (typeof ref === 'function') {
+        ref(value);
+      } else if (ref) {
+        ref.current = value;
+      }
+
+      if (typeof contextRef === 'function') {
+        (contextRef as (value: E | null) => void)(value);
+      } else if (contextRef && typeof contextRef === 'object') {
+        (contextRef as RefObject<E | null>).current = value;
+      }
+    },
+    [ref, contextRef]
   );
 
   const mergedProps = mergeProps(contextProps, props) as unknown as T;

@@ -11,7 +11,7 @@ import { useDisabled } from '@necto-react/hooks';
 
 import type {
   UseDisabledPropsProps,
-  UseDisabledPropsReturn
+  UseDisabledPropsPropsReturn
 } from './useDisabledProps.types';
 import type { HTMLAttributes } from 'react';
 
@@ -23,7 +23,7 @@ import type { HTMLAttributes } from 'react';
  */
 export function useDisabledProps(
   props: UseDisabledPropsProps = {}
-): UseDisabledPropsReturn {
+): UseDisabledPropsPropsReturn {
   const { type = 'general', extraProps = {} } = props;
   const isDisabled = useDisabled({ type, defaultFallback: false });
 

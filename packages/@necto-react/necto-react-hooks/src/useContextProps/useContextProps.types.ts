@@ -6,7 +6,7 @@
  *
  */
 
-import type { RefObject, ForwardedRef, Context } from 'react';
+import type { ForwardedRef, Context } from 'react';
 
 /**
  * Props for the useContextProps hook.
@@ -63,5 +63,5 @@ export interface UseContextPropsProps<T, E extends Element> {
  */
 export type UseContextPropsReturn<T, E extends Element> = [
   T,
-  RefObject<E | null>
+  (value: E | null) => void
 ];

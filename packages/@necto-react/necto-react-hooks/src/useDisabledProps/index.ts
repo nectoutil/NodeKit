@@ -10,5 +10,5 @@ export { useDisabledProps } from './useDisabledProps';
 
 export type {
   UseDisabledPropsProps,
-  UseDisabledPropsReturn
+  UseDisabledPropsPropsReturn
 } from './useDisabledProps.types';
