@@ -1,5 +1,23 @@
 # @necto-react/hooks
 
+## 2.10.0
+
+### Minor Changes
+
+- 3bd0ef2: Update backlog
+
+### Patch Changes
+
+- Updated dependencies [3bd0ef2]
+  - @necto-react/contexts@1.3.0
+  - @necto-react/helpers@2.4.0
+  - @necto-react/types@2.3.0
+  - @necto/dom@1.4.0
+  - @necto/id@1.6.0
+  - @necto/mergers@1.4.0
+  - @necto/platform@1.4.0
+  - @necto/types@1.3.0
+
 ## 2.9.0
 
 ### Minor Changes
