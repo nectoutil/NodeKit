@@ -1,6 +1,6 @@
 {
   "name": "@necto/constants",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Necto's library defining common constant values for programs.",
   "scripts": {
     "build": "tsup --dts",

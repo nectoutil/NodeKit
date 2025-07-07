@@ -1,5 +1,11 @@
 # @necto-react/types
 
+## 2.3.0
+
+### Minor Changes
+
+- 3bd0ef2: Update backlog
+
 ## 2.2.0
 
 ### Minor Changes

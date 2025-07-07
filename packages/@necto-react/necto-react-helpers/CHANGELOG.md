@@ -1,5 +1,18 @@
 # @necto-react/helpers
 
+## 2.4.0
+
+### Minor Changes
+
+- 3bd0ef2: Update backlog
+
+### Patch Changes
+
+- Updated dependencies [3bd0ef2]
+  - @necto-react/types@2.3.0
+  - @necto/dom@1.4.0
+  - @necto/platform@1.4.0
+
 ## 2.3.0
 
 ### Minor Changes
