@@ -1,6 +1,6 @@
 {
   "name": "@necto/env",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Necto's library for managing environment variables and configuration for Node applications.",
   "author": "The Corinvo OSS Team",
   "license": "MIT",

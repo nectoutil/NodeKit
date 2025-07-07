@@ -1,6 +1,6 @@
-# @necto/dom
+# @necto-react/contexts
 
-## 1.2.0
+## 1.1.0
 
 ### Minor Changes
 
@@ -9,11 +9,5 @@
 ### Patch Changes
 
 - Updated dependencies [343fcae]
-  - @necto/platform@1.2.0
+  - @necto-react/types@2.1.0
   - @necto/types@1.1.0
-
-## 1.1.0
-
-### Minor Changes
-
-- Added new packages
