@@ -1,6 +1,6 @@
 {
   "name": "@necto/id",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "type": "module",
   "description": "Necto's library for generating algorithmic ID's based on specified parameters.",
   "main": "dist/index.js",
