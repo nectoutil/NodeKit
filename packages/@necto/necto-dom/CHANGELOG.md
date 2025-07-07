@@ -1,5 +1,17 @@
 # @necto/dom
 
+## 1.3.0
+
+### Minor Changes
+
+- 3f3a40e: Update backlog
+
+### Patch Changes
+
+- Updated dependencies [3f3a40e]
+  - @necto/platform@1.3.0
+  - @necto/types@1.2.0
+
 ## 1.2.0
 
 ### Minor Changes
