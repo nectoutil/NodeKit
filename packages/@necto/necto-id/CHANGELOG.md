@@ -1,5 +1,16 @@
 # @necto/id
 
+## 1.6.0
+
+### Minor Changes
+
+- 3bd0ef2: Update backlog
+
+### Patch Changes
+
+- Updated dependencies [3bd0ef2]
+  - @necto/constants@1.4.0
+
 ## 1.5.0
 
 ### Minor Changes
