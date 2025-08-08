@@ -1,12 +1,22 @@
 {
-  "ANCHOR_ELEMENT_PROPS": [
-    "href",
-    "hrefLang",
-    "target",
-    "rel",
-    "download",
-    "ping",
-    "referrerPolicy"
+  "PRIMITIVE_TAGS": [
+    "a",
+    "button",
+    "div",
+    "form",
+    "h2",
+    "h3",
+    "img",
+    "input",
+    "label",
+    "li",
+    "nav",
+    "ol",
+    "p",
+    "select",
+    "span",
+    "svg",
+    "ul"
   ],
   "HTML_TAGS": [
     "a",

@@ -14,4 +14,6 @@ export interface UseFocusableProps extends FocusableDOMProps, FocusEvents {
   autoFocus?: boolean;
 }
 
-export type UseFocusableReturn = {};
+export type UseFocusableReturn = Readonly<{
+  focusableProps: Record<string, any>;
+}>;

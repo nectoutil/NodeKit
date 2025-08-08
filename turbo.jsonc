@@ -10,6 +10,8 @@
     "build": {
       "outputs": ["dist/**", "cache/**"]
     },
+
+    // @necto workspace specified build dependencies.
     "@necto/env#build": {
       "dependsOn": ["@necto/types#build"]
     },
@@ -22,6 +24,8 @@
         "@necto/platform#build"
       ]
     },
+
+    // @necto-react workspace specified build dependencies.
     "@necto-react/hooks#build": {
       "dependsOn": [
         "@necto/dom#build",

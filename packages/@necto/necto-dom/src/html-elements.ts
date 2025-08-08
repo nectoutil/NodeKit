@@ -1,4 +1,4 @@
-import htmlTags from 'html-tags';
+import { DOM } from '@necto/constants';
 
 import type { HTMLElementsMap } from '@necto/types';
 
@@ -15,7 +15,7 @@ const capitalizeFirstLetter = (str: string): string =>
  * @returns A record where keys are capitalized tag names and values are original tag names.
  */
 const createHTMLElementsMap = (): HTMLElementsMap =>
-  htmlTags.reduce((acc, tag) => {
+  DOM.HTML_TAGS.reduce((acc, tag) => {
     acc[capitalizeFirstLetter(tag)] = tag as keyof HTMLElementTagNameMap;
     return acc;
   }, {} as HTMLElementsMap);

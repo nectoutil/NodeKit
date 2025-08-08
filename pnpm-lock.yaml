@@ -243,6 +243,9 @@ importers:
 
   packages/@necto/necto-dom:
     dependencies:
+      '@necto/constants':
+        specifier: workspace:*
+        version: link:../necto-constants
       '@necto/platform':
         specifier: workspace:*
         version: link:../necto-platform
