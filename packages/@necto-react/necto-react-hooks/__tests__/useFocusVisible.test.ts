@@ -14,7 +14,7 @@ vi.mock('@necto-react/hooks', () => ({
   getInteractionModality: vi.fn(() => 'keyboard')
 }));
 
-import { useFocusVisible } from './useFocusVisible';
+import { useFocusVisible } from '@necto-react/hooks';
 
 describe('useFocusVisible', () => {
   beforeEach(() => {
