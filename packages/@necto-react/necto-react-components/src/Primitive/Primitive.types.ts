@@ -9,20 +9,17 @@
 import type { DOM } from '@necto/constants';
 
 import type {
-  ComponentPropsWithRef,
   ElementType,
+  ComponentPropsWithRef,
   ForwardRefExoticComponent
 } from 'react';
+
+export type PrimitiveProps<E extends ElementType> = ComponentPropsWithRef<E> & {
+  asChild?: boolean;
+};
 
 export type Primitives = {
   [E in (typeof DOM.HTML_TAGS)[number] as E extends ElementType
     ? E
-    : never]: ForwardRefExoticComponent<
-    ComponentPropsWithRef<E & ElementType> & { asChild?: boolean }
-  >;
+    : never]: ForwardRefExoticComponent<PrimitiveProps<E & ElementType>>;
 };
-
-export type PrimitivePropsWithRef<E extends ElementType> =
-  ComponentPropsWithRef<E> & {
-    asChild?: boolean;
-  };

@@ -6,3 +6,4 @@
  *
  */
 
+export { Primitive } from "./Primitive";
