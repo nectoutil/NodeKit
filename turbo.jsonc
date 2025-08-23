@@ -41,6 +41,12 @@
         "@necto/dom#build",
         "@necto/platform#build"
       ]
+    },
+    "@necto-react/components#build": {
+      "dependsOn": [
+        "@necto/dom#build",
+        "@necto/constants#build"
+      ]
     }
   }
 }

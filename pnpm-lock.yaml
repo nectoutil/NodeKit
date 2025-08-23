@@ -38,6 +38,9 @@ importers:
       '@necto/constants':
         specifier: workspace:*
         version: link:../../@necto/necto-constants
+      '@necto/dom':
+        specifier: workspace:*
+        version: link:../../@necto/necto-dom
       react:
         specifier: ^19.1.0
         version: 19.1.0
