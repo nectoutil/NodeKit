@@ -32,6 +32,7 @@ export type PrimitiveProps<E extends ElementType> = ComponentPropsWithRef<E> & {
  * props for its element type, plus Primitive-specific props.
  */
 export type Primitives = {
-  [E in (typeof DOM.HTML_TAGS)[number] as E extends ElementType ? E : never]:
-    ForwardRefExoticComponent<PrimitiveProps<E & ElementType>>;
+  [E in (typeof DOM.HTML_TAGS)[number] as E extends ElementType
+    ? E
+    : never]: ForwardRefExoticComponent<PrimitiveProps<E & ElementType>>;
 };

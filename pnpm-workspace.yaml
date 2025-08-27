@@ -1,5 +1,3 @@
 packages:
   - packages/*
   - packages/**/*
-overrides:
-  tsup: ^8.5.0

@@ -13,8 +13,8 @@ import { DOM } from '@necto/constants';
 import { HTMLElements } from '@necto/dom';
 import { forwardRef, isValidElement, cloneElement, Children } from 'react';
 
-import type { ElementType, Ref, ReactElement } from 'react';
 import type { PrimitiveProps, Primitives } from './Primitive.types';
+import type { ElementType, Ref, ReactElement, } from 'react';
 
 const DEFAULT_PRIMITIVE_TAG: keyof HTMLElementTagNameMap = HTMLElements.Div;
 
@@ -28,7 +28,7 @@ const DEFAULT_PRIMITIVE_TAG: keyof HTMLElementTagNameMap = HTMLElements.Div;
  * @param {Ref<any>} ref - Forwarded ref for the rendered element or cloned child.
  * @returns {ReactElement | null} The rendered element, or null when cloning fails.
  */
-const PrimitiveFn = <E extends ElementType = (typeof HTMLElements)["Div"]>(
+const PrimitiveFn = <E extends ElementType = (typeof HTMLElements)['Div']>(
   { as, asChild, children, ...props }: PrimitiveProps<E>,
   ref: Ref<any>
 ): ReactElement | null => {
@@ -59,14 +59,28 @@ const PrimitiveFn = <E extends ElementType = (typeof HTMLElements)["Div"]>(
  * @returns {ReactElement | null} The rendered element or null.
  */
 export const Primitive = Object.assign(
-  forwardRef(PrimitiveFn) as <E extends ElementType = (typeof HTMLElements)["Div"]>(
+  forwardRef(PrimitiveFn) as <
+    E extends ElementType = (typeof HTMLElements)['Div']
+  >(
     props: PrimitiveProps<E> & { ref?: Ref<any> }
   ) => ReactElement | null,
-  DOM.HTML_TAGS.reduce((acc, tag) => {
-    acc[tag as keyof Primitives] = forwardRef<any, any>((props, ref) =>
-      PrimitiveFn({ ...(props as any), as: tag } as PrimitiveProps<any>, ref)
-    ) as Primitives[keyof Primitives];
-    return acc;
-  }, {} as Primitives)
-);
+  DOM.HTML_TAGS.reduce(
+    (acc, tag) => {
+      const lower = tag;
+      const upper = tag[0].toUpperCase() + tag.slice(1);
 
+      const Comp = forwardRef<any, any>((props, ref) =>
+        PrimitiveFn({ ...(props as any), as: tag } as PrimitiveProps<any>, ref)
+      );
+
+      acc[lower] = Comp;
+      acc[upper] = Comp;
+
+      return acc;
+    },
+    {} as Record<string, any>
+  )
+) as (<E extends ElementType = (typeof HTMLElements)['Div']>(
+  props: PrimitiveProps<E> & { ref?: Ref<any> }
+) => ReactElement | null) &
+  Primitives & { [k: string]: any };

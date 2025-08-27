@@ -6,4 +6,4 @@
  *
  */
 
-export { Primitive } from "./Primitive";
+export { Primitive } from './Primitive';
