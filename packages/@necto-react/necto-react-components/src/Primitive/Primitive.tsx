@@ -14,7 +14,7 @@ import { HTMLElements } from '@necto/dom';
 import { forwardRef, isValidElement, cloneElement, Children } from 'react';
 
 import type { PrimitiveProps, Primitives } from './Primitive.types';
-import type { ElementType, Ref, ReactElement, } from 'react';
+import type { ElementType, Ref, ReactElement } from 'react';
 
 const DEFAULT_PRIMITIVE_TAG: keyof HTMLElementTagNameMap = HTMLElements.Div;
 
