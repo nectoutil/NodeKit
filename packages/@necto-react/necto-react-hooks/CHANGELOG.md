@@ -1,5 +1,11 @@
 # @necto-react/hooks
 
+## 2.12.0
+
+### Minor Changes
+
+- f49ec63: Added new hook
+
 ## 2.11.0
 
 ### Minor Changes
