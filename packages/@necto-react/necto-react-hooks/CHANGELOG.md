@@ -1,5 +1,11 @@
 # @necto-react/hooks
 
+## 2.11.0
+
+### Minor Changes
+
+- 9d936c5: Fixed some errosr
+
 ## 2.10.0
 
 ### Minor Changes
