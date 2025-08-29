@@ -27,7 +27,6 @@ const mockIntersectionObserver = vi.fn().mockImplementation((callback) => {
   };
 });
 
-// @ts-ignore
 window.IntersectionObserver = mockIntersectionObserver;
 
 describe('useElementVisibility', () => {
