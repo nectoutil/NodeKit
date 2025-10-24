@@ -6,5 +6,5 @@
  *
  */
 
-export * from './Primitive';
-export * from './Conditionals';
+export * from './If';
+export * from './Else';

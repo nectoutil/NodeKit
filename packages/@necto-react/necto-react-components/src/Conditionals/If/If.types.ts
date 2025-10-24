@@ -6,5 +6,10 @@
  *
  */
 
-export * from './Primitive';
-export * from './Conditionals';
+import type { ReactNode } from 'react';
+
+export interface IfProps {
+  condition: boolean | (() => boolean);
+  keepAlive?: boolean;
+  children: ReactNode | Array<ReactNode>;
+}

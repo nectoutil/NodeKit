@@ -13,8 +13,8 @@ import { DOM } from '@necto/constants';
 import { HTMLElements } from '@necto/dom';
 import { forwardRef, isValidElement, cloneElement, Children } from 'react';
 
+import type { ElementType, Ref, ReactElement, FC } from 'react';
 import type { PrimitiveProps, Primitives } from './Primitive.types';
-import type { ElementType, Ref, ReactElement } from 'react';
 
 const DEFAULT_PRIMITIVE_TAG: keyof HTMLElementTagNameMap = HTMLElements.Div;
 
@@ -35,7 +35,7 @@ const PrimitiveFn = <E extends ElementType = (typeof HTMLElements)['Div']>(
   const Tag = (as ?? DEFAULT_PRIMITIVE_TAG) as ElementType;
 
   if (asChild) {
-    const child = Children.only(children);
+    const child: Element = Children.only(children);
     if (!isValidElement(child)) return null;
 
     return cloneElement(child as ReactElement<any>, {
@@ -58,16 +58,16 @@ const PrimitiveFn = <E extends ElementType = (typeof HTMLElements)['Div']>(
  * @param {Ref<any>} ref - Forwarded ref for the rendered element or cloned child.
  * @returns {ReactElement | null} The rendered element or null.
  */
-export const Primitive = Object.assign(
-  forwardRef(PrimitiveFn) as <
-    E extends ElementType = (typeof HTMLElements)['Div']
-  >(
-    props: PrimitiveProps<E> & { ref?: Ref<any> }
-  ) => ReactElement | null,
+export const Primitive: (<E extends ElementType = (typeof HTMLElements)['Div']>(
+  props: PrimitiveProps<E> & { ref?: Ref<any> }
+) => ReactElement | null) &
+  FC<PrimitiveProps<ElementType>> &
+  Primitives & { [k: string]: any } = Object.assign(
+  forwardRef(PrimitiveFn),
   DOM.HTML_TAGS.reduce(
     (acc, tag) => {
-      const lower = tag;
-      const upper = tag[0].toUpperCase() + tag.slice(1);
+      const lower: string = tag;
+      const upper: string = tag[0].toUpperCase() + tag.slice(1);
 
       const Comp = forwardRef<any, any>((props, ref) =>
         PrimitiveFn({ ...(props as any), as: tag } as PrimitiveProps<any>, ref)
