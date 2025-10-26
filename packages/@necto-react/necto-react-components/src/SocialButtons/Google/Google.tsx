@@ -1,5 +1,3 @@
-// biome-ignore-all lint/security/noDangerouslySetInnerHtml: eval to dom with svg data is fine.
-
 /**
  * Copyright (c) Corinvo, LLC. and affiliates.
  *
@@ -9,82 +7,57 @@
  */
 
 import { forwardRef } from 'react';
-import { If } from '../../Conditionals/If';
-import GoogleLogo from '@iconify/icons-logos/google';
-import { Primitive } from '../../Primitive/Primitive';
+import styled from 'styled-components';
+import { Button } from '../Button/Button';
+import { FcGoogle } from 'react-icons/fc';
+import styles from './Google.module.scss';
 
-import type { ReactElement } from 'react';
+import type { FC, ReactElement, ForwardedRef } from 'react';
 import type { GoogleButtonProps } from './Google.types';
-import type { ElementType, CSSProperties } from 'react';
+import type { IStyledComponent } from 'styled-components';
 
-export const GoogleButton = forwardRef<
+const GOOGLE_BUTTON_NAME = 'GoogleButton';
+
+const StyledGoogleButton: IStyledComponent<'web', any> = styled(Button).attrs<{
+  $disabled?: boolean;
+}>((props) => ({
+  className:
+    `${styles.GoogleButton} ${props.$disabled ? styles.disabled : ''}`.trim()
+}))<{ $disabled?: boolean }>``;
+
+export const GoogleButton: FC<GoogleButtonProps> = forwardRef<
   HTMLButtonElement,
-  GoogleButtonProps<ElementType>
+  GoogleButtonProps
 >(
   (
     {
-      as = 'button',
-      asChild = false,
+      as,
+      asChild,
       children = 'Continue with Google',
       iconPosition = 'left',
       showIcon = true,
-      style,
+      iconSize = 20,
+      disabled,
+      className,
       ...props
-    },
-    ref
-  ): ReactElement => {
-    const defaultStyles: CSSProperties = {
-      display: 'inline-flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      gap: '8px',
-      padding: '10px 16px',
-      backgroundColor: '#fff',
-      color: '#3c4043',
-      border: '1px solid #dadce0',
-      borderRadius: '4px',
-      fontSize: '14px',
-      fontWeight: 500,
-      fontFamily: 'system-ui, -apple-system, sans-serif',
-      cursor: 'pointer',
-      transition: 'background-color 0.2s, box-shadow 0.2s',
-      ...style
-    };
-
-    return (
-      <Primitive
-        as={as}
-        ref={ref}
-        asChild={asChild}
-        style={defaultStyles}
-        {...props}
-      >
-        <If condition={showIcon && iconPosition === 'left'}>
-          <svg
-            width={18}
-            height={18}
-            viewBox={`0 0 ${GoogleLogo.width} ${GoogleLogo.height}`}
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
-            style={{ flexShrink: 0 }}
-            dangerouslySetInnerHTML={{ __html: GoogleLogo.body }}
-          />
-        </If>
-
-        {children}
-
-        <If condition={showIcon && iconPosition === 'right'}>
-          <svg
-            width={18}
-            height={18}
-            viewBox={`0 0 ${GoogleLogo.width} ${GoogleLogo.height}`}
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
-            style={{ flexShrink: 0 }}
-            dangerouslySetInnerHTML={{ __html: GoogleLogo.body }}
-          />
-        </If>
-      </Primitive>
-    );
-  }
+    }: Omit<GoogleButtonProps, 'ref'>,
+    ref: ForwardedRef<HTMLButtonElement>
+  ): ReactElement => (
+    <StyledGoogleButton
+      as={as}
+      ref={ref}
+      asChild={asChild}
+      showIcon={showIcon}
+      disabled={disabled}
+      $disabled={disabled}
+      className={className}
+      iconPosition={iconPosition}
+      icon={<FcGoogle size={iconSize} />}
+      {...props}
+    >
+      {children}
+    </StyledGoogleButton>
+  )
 );
+
+GoogleButton.displayName = GOOGLE_BUTTON_NAME;

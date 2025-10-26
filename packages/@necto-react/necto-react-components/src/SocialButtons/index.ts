@@ -1,2 +1,9 @@
-export { GoogleButton } from './Google';
-export type { GoogleButtonProps } from './Google';
+export * from './Apple';
+export * from './Atlassian';
+export * from './Bitbucket';
+export * from './Discord';
+export * from './Dropbox';
+export * from './Facebook';
+export * from './GitHub';
+export * from './GitLab';
+export * from './Google';

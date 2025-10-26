@@ -5,12 +5,15 @@
   "description": "Necto's standard library for providing utility components for React applications.",
   "scripts": {
     "test": "vitest",
+    "test:unit": "vitest run",
+    "test:visual": "playwright test",
+    "test:visual:update": "playwright test --update-snapshots",
+    "test:all": "pnpm test:unit && pnpm test:visual",
     "build": "tsup ./src/index.ts --minify --format esm,cjs,iife --dts",
     "dev": "tsup ./src/index.ts --watch --minify --format esm,cjs,iife --dts"
   },
   "files": [
-    "dist",
-    "README.md"
+    "dist"
   ],
   "types": "dist/index.d.ts",
   "main": "./dist/index.js",
@@ -18,22 +21,29 @@
   "author": "Corinvo OSS Team",
   "license": "MIT",
   "devDependencies": {
+    "@playwright/experimental-ct-react": "^1.49.1",
+    "@playwright/test": "^1.49.1",
     "@testing-library/react": "^16.3.0",
     "@types/node": "^22.14.1",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
-    "jsdom": "^26.1.0",
-    "npm-run-all": "^4.1.5",
-    "shared": "workspace:*",
-    "tsup": "^8.4.0"
+    "@vitejs/plugin-react": "^4.3.4",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "sass": "^1.83.4",
+    "sass-embedded": "^1.93.2",
+    "tsup": "^8.4.0",
+    "vitest": "^3.0.9"
   },
   "peerDependencies": {
     "react": "^19.1.0"
   },
   "dependencies": {
-    "@iconify/icons-logos": "^1.2.36",
     "@necto/constants": "workspace:*",
     "@necto/dom": "workspace:*",
-    "react-if": "^4.1.5"
+    "clsx": "^2.1.1",
+    "react-icons": "^5.5.0",
+    "react-if": "^4.1.5",
+    "styled-components": "^6.1.19"
   }
 }

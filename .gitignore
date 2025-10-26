@@ -142,3 +142,26 @@ temp
 .pnp.*
 
 .DS_Store
+
+# Storybook
+storybook-static/
+
+# Playwright
+test-results/
+playwright-report/
+**/*playwright-report/
+playwright/
+playwright/.cache/
+.playwright-cache/
+**/.playwright-cache/
+
+# Component-specific patterns
+packages/@necto-react/necto-react-components/dist/
+packages/@necto-react/necto-react-components/.cache/
+packages/@necto-react/necto-react-components/test-results/
+packages/@necto-react/necto-react-components/playwright-report/
+packages/@necto-react/necto-react-components/playwright/.cache/
+packages/@necto-react/necto-react-components/storybook-static/
+
+# Visual test snapshots - COMMIT THESE to git for regression testing!
+# packages/@necto-react/necto-react-components/__snapshots__/ is intentionally NOT in .gitignore
