@@ -13,7 +13,7 @@ import { Button } from '../Button/Button';
 import { FaDropbox } from 'react-icons/fa';
 import styles from './Dropbox.module.scss';
 
-import type { FC, ReactElement, ForwardedRef } from 'react';
+import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { DropboxButtonProps } from './Dropbox.types';
 import type { IStyledComponent } from 'styled-components';
 
@@ -26,7 +26,7 @@ const StyledDropboxButton: IStyledComponent<'web', any> = styled(Button).attrs<{
     `${styles.DropboxButton} ${props.$disabled ? styles.disabled : ''}`.trim()
 }))<{ $disabled?: boolean }>``;
 
-export const DropboxButton: FC<DropboxButtonProps> = forwardRef<
+export const DropboxButton: ForwardRefExoticComponent<Omit<DropboxButtonProps, "ref"> & RefAttributes<HTMLButtonElement>> = forwardRef<
   HTMLButtonElement,
   DropboxButtonProps
 >(
@@ -41,7 +41,7 @@ export const DropboxButton: FC<DropboxButtonProps> = forwardRef<
       disabled,
       className,
       ...props
-    }: Omit<DropboxButtonProps, 'ref'>,
+    }: DropboxButtonProps,
     ref: ForwardedRef<HTMLButtonElement>
   ): ReactElement => (
     <StyledDropboxButton

@@ -12,7 +12,7 @@ import { Button } from '../Button/Button';
 import { FaTiktok } from 'react-icons/fa';
 import styles from './TikTok.module.scss';
 
-import type { FC, ReactElement, ForwardedRef } from 'react';
+import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { TikTokButtonProps } from './TikTok.types';
 import type { IStyledComponent } from 'styled-components';
 
@@ -25,7 +25,7 @@ const StyledTikTokButton: IStyledComponent<'web', any> = styled(Button).attrs<{
     `${styles.TikTokButton} ${props.$disabled ? styles.disabled : ''}`.trim()
 }))<{ $disabled?: boolean }>``;
 
-export const TikTokButton: FC<TikTokButtonProps> = forwardRef<
+export const TikTokButton: ForwardRefExoticComponent<Omit<TikTokButtonProps, "ref"> & RefAttributes<HTMLButtonElement>> = forwardRef<
   HTMLButtonElement,
   TikTokButtonProps
 >(
@@ -40,7 +40,7 @@ export const TikTokButton: FC<TikTokButtonProps> = forwardRef<
       disabled,
       className,
       ...props
-    }: Omit<TikTokButtonProps, 'ref'>,
+    }: TikTokButtonProps,
     ref: ForwardedRef<HTMLButtonElement>
   ): ReactElement => (
     <StyledTikTokButton

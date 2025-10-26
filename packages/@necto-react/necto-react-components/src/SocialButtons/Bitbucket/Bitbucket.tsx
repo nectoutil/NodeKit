@@ -14,7 +14,7 @@ import styles from './Bitbucket.module.scss';
 import { BitbucketIcon } from './Bitbucket.icon';
 
 import type { IStyledComponent } from 'styled-components';
-import type { FC, ReactElement, ForwardedRef } from 'react';
+import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { BitbucketButtonProps } from './Bitbucket.types';
 
 const BITBUCKET_BUTTON_NAME: string = 'BitbucketButton' as const;
@@ -26,7 +26,7 @@ const StyledBitbucketButton: IStyledComponent<'web', any> = styled(
     `${styles.BitbucketButton} ${props.$disabled ? styles.disabled : ''}`.trim()
 }))<{ $disabled?: boolean }>``;
 
-export const BitbucketButton: FC<BitbucketButtonProps> = forwardRef<
+export const BitbucketButton: ForwardRefExoticComponent<Omit<BitbucketButtonProps, "ref"> & RefAttributes<HTMLButtonElement>> = forwardRef<
   HTMLButtonElement,
   BitbucketButtonProps
 >(
@@ -41,7 +41,7 @@ export const BitbucketButton: FC<BitbucketButtonProps> = forwardRef<
       disabled,
       className,
       ...props
-    }: Omit<BitbucketButtonProps, 'ref'>,
+    }: BitbucketButtonProps,
     ref: ForwardedRef<HTMLButtonElement>
   ): ReactElement => (
     <StyledBitbucketButton

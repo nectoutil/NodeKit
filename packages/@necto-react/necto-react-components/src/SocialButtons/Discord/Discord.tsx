@@ -13,7 +13,7 @@ import { Button } from '../Button/Button';
 import { FaDiscord } from 'react-icons/fa';
 import styles from './Discord.module.scss';
 
-import type { FC, ReactElement, ForwardedRef } from 'react';
+import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { DiscordButtonProps } from './Discord.types';
 import type { IStyledComponent } from 'styled-components';
 
@@ -26,7 +26,7 @@ const StyledDiscordButton: IStyledComponent<'web', any> = styled(Button).attrs<{
     `${styles.DiscordButton} ${props.$disabled ? styles.disabled : ''}`.trim()
 }))<{ $disabled?: boolean }>``;
 
-export const DiscordButton: FC<DiscordButtonProps> = forwardRef<
+export const DiscordButton: ForwardRefExoticComponent<Omit<DiscordButtonProps, "ref"> & RefAttributes<HTMLButtonElement>> = forwardRef<
   HTMLButtonElement,
   DiscordButtonProps
 >(
@@ -41,7 +41,7 @@ export const DiscordButton: FC<DiscordButtonProps> = forwardRef<
       disabled,
       className,
       ...props
-    }: Omit<DiscordButtonProps, 'ref'>,
+    }: DiscordButtonProps,
     ref: ForwardedRef<HTMLButtonElement>
   ): ReactElement => (
     <StyledDiscordButton

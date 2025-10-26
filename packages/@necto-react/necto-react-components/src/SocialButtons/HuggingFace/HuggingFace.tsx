@@ -12,7 +12,7 @@ import { Button } from '../Button/Button';
 import { SiHuggingface } from 'react-icons/si';
 import styles from './HuggingFace.module.scss';
 
-import type { FC, ReactElement, ForwardedRef } from 'react';
+import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { HuggingFaceButtonProps } from './HuggingFace.types';
 import type { IStyledComponent } from 'styled-components';
 
@@ -25,7 +25,7 @@ const StyledHuggingFaceButton: IStyledComponent<'web', any> = styled(
     `${styles.HuggingFaceButton} ${props.$disabled ? styles.disabled : ''}`.trim()
 }))<{ $disabled?: boolean }>``;
 
-export const HuggingFaceButton: FC<HuggingFaceButtonProps> = forwardRef<
+export const HuggingFaceButton: ForwardRefExoticComponent<Omit<HuggingFaceButtonProps, "ref"> & RefAttributes<HTMLButtonElement>> = forwardRef<
   HTMLButtonElement,
   HuggingFaceButtonProps
 >(
@@ -40,7 +40,7 @@ export const HuggingFaceButton: FC<HuggingFaceButtonProps> = forwardRef<
       disabled,
       className,
       ...props
-    }: Omit<HuggingFaceButtonProps, 'ref'>,
+    }: HuggingFaceButtonProps,
     ref: ForwardedRef<HTMLButtonElement>
   ): ReactElement => (
     <StyledHuggingFaceButton

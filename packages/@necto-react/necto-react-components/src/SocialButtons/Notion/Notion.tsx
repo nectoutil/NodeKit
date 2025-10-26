@@ -12,7 +12,7 @@ import { Button } from '../Button/Button';
 import { SiNotion } from 'react-icons/si';
 import styles from './Notion.module.scss';
 
-import type { FC, ReactElement, ForwardedRef } from 'react';
+import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { NotionButtonProps } from './Notion.types';
 import type { IStyledComponent } from 'styled-components';
 
@@ -25,7 +25,7 @@ const StyledNotionButton: IStyledComponent<'web', any> = styled(Button).attrs<{
     `${styles.NotionButton} ${props.$disabled ? styles.disabled : ''}`.trim()
 }))<{ $disabled?: boolean }>``;
 
-export const NotionButton: FC<NotionButtonProps> = forwardRef<
+export const NotionButton: ForwardRefExoticComponent<Omit<NotionButtonProps, "ref"> & RefAttributes<HTMLButtonElement>> = forwardRef<
   HTMLButtonElement,
   NotionButtonProps
 >(
@@ -40,7 +40,7 @@ export const NotionButton: FC<NotionButtonProps> = forwardRef<
       disabled,
       className,
       ...props
-    }: Omit<NotionButtonProps, 'ref'>,
+    }: NotionButtonProps,
     ref: ForwardedRef<HTMLButtonElement>
   ): ReactElement => (
     <StyledNotionButton

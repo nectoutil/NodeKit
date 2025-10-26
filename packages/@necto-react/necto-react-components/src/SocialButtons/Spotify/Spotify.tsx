@@ -12,7 +12,7 @@ import { Button } from '../Button/Button';
 import { FaSpotify } from 'react-icons/fa';
 import styles from './Spotify.module.scss';
 
-import type { FC, ReactElement, ForwardedRef } from 'react';
+import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { SpotifyButtonProps } from './Spotify.types';
 import type { IStyledComponent } from 'styled-components';
 
@@ -25,7 +25,7 @@ const StyledSpotifyButton: IStyledComponent<'web', any> = styled(Button).attrs<{
     `${styles.SpotifyButton} ${props.$disabled ? styles.disabled : ''}`.trim()
 }))<{ $disabled?: boolean }>``;
 
-export const SpotifyButton: FC<SpotifyButtonProps> = forwardRef<
+export const SpotifyButton: ForwardRefExoticComponent<Omit<SpotifyButtonProps, "ref"> & RefAttributes<HTMLButtonElement>> = forwardRef<
   HTMLButtonElement,
   SpotifyButtonProps
 >(
@@ -40,7 +40,7 @@ export const SpotifyButton: FC<SpotifyButtonProps> = forwardRef<
       disabled,
       className,
       ...props
-    }: Omit<SpotifyButtonProps, 'ref'>,
+    }: SpotifyButtonProps,
     ref: ForwardedRef<HTMLButtonElement>
   ): ReactElement => (
     <StyledSpotifyButton

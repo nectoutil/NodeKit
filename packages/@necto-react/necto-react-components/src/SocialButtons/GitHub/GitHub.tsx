@@ -13,7 +13,7 @@ import { Button } from '../Button/Button';
 import { FaGithub } from 'react-icons/fa';
 import styles from './GitHub.module.scss';
 
-import type { FC, ReactElement, ForwardedRef } from 'react';
+import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { GitHubButtonProps } from './GitHub.types';
 import type { IStyledComponent } from 'styled-components';
 
@@ -26,7 +26,7 @@ const StyledGitHubButton: IStyledComponent<'web', any> = styled(Button).attrs<{
     `${styles.GitHubButton} ${props.$disabled ? styles.disabled : ''}`.trim()
 }))<{ $disabled?: boolean }>``;
 
-export const GitHubButton: FC<GitHubButtonProps> = forwardRef<
+export const GitHubButton: ForwardRefExoticComponent<Omit<GitHubButtonProps, "ref"> & RefAttributes<HTMLButtonElement>> = forwardRef<
   HTMLButtonElement,
   GitHubButtonProps
 >(
@@ -41,7 +41,7 @@ export const GitHubButton: FC<GitHubButtonProps> = forwardRef<
       disabled,
       className,
       ...props
-    }: Omit<GitHubButtonProps, 'ref'>,
+    }: GitHubButtonProps,
     ref: ForwardedRef<HTMLButtonElement>
   ): ReactElement => (
     <StyledGitHubButton
