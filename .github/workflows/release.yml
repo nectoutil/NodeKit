@@ -56,6 +56,7 @@ jobs:
           GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
 
       - name: Add automerge label to release PR
+        if: steps.create_release_pr.outputs.pull_request_number != ''
         uses: actions-ecosystem/action-add-labels@v1
         with:
           labels: automerge
