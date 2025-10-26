@@ -6,6 +6,8 @@
  *
  */
 
+/** @jsxImportSource @emotion/react */
+import cn from 'clsx';
 import { forwardRef } from 'react';
 import styled from '@emotion/styled';
 import { Button } from '../Button/Button';
@@ -16,6 +18,12 @@ import type { MetaMaskButtonProps } from './MetaMask.types';
 
 const METAMASK_BUTTON_NAME = 'MetaMaskButton';
 
+const METAMASK_BG_COLOR: string = '#f6851b';
+const METAMASK_BG_HOVER_COLOR: string = '#e2761a';
+const METAMASK_BG_ACTIVE_COLOR: string = '#cd6a17';
+const METAMASK_TEXT_COLOR: string = '#ffffff';
+const METAMASK_FOCUS_SHADOW_COLOR: string = 'rgba(246, 133, 27, 0.3)';
+
 const StyledMetaMaskButton = styled(Button)<{
   $disabled?: boolean;
 }>`
@@ -25,8 +33,9 @@ const StyledMetaMaskButton = styled(Button)<{
   gap: 10px;
   padding: 0 12px 0 12px;
   min-height: 40px;
-  background-color: #f6851b;
-  color: #ffffff;
+  width: 100%;
+  background-color: var(--necto-metamask-bg, ${METAMASK_BG_COLOR});
+  color: var(--necto-metamask-text, ${METAMASK_TEXT_COLOR});
   border: none;
   border-radius: 8px;
   font-size: 14px;
@@ -39,16 +48,16 @@ const StyledMetaMaskButton = styled(Button)<{
   transition: background-color 0.2s, box-shadow 0.2s, border-color 0.2s, color 0.2s;
 
   &:hover {
-    background-color: #e2761a;
+    background-color: var(--necto-metamask-bg-hover, ${METAMASK_BG_HOVER_COLOR});
   }
 
   &:active {
-    background-color: #cd6a17;
+    background-color: var(--necto-metamask-bg-active, ${METAMASK_BG_ACTIVE_COLOR});
   }
 
   &:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(246, 133, 27, 0.3);
+    box-shadow: 0 0 0 3px var(--necto-metamask-focus-shadow, ${METAMASK_FOCUS_SHADOW_COLOR});
   }
 
   ${props => props.$disabled && `
@@ -58,7 +67,7 @@ const StyledMetaMaskButton = styled(Button)<{
 
     &:hover,
     &:active {
-      background-color: #f6851b;
+      background-color: var(--necto-metamask-bg, ${METAMASK_BG_COLOR});
     }
   `}
 `;
@@ -88,7 +97,7 @@ export const MetaMaskButton: ForwardRefExoticComponent<Omit<MetaMaskButtonProps,
       showIcon={showIcon}
       disabled={disabled}
       $disabled={disabled}
-      className={className}
+      className={cn(`_necto:${METAMASK_BUTTON_NAME}`, className)}
       iconPosition={iconPosition}
       icon={<SiMetamask size={iconSize} />}
       {...props}

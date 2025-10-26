@@ -7,6 +7,7 @@
  */
 
 import type { DOM } from '@necto/constants';
+import type { Interpolation, Theme } from '@emotion/react';
 
 import type {
   ElementType,
@@ -23,6 +24,9 @@ export type PrimitiveProps<E extends ElementType> = ComponentPropsWithRef<E> & {
 
   /** The element type to render as (e.g., 'div', 'button', custom component). */
   as?: E;
+
+  /** Emotion css prop for custom styles */
+  css?: Interpolation<Theme>;
 };
 
 /**

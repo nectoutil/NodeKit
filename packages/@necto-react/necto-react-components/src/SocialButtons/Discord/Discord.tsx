@@ -6,6 +6,7 @@
  *
  */
 
+/** @jsxImportSource @emotion/react */
 import cn from 'clsx';
 import { forwardRef } from 'react';
 import styled from '@emotion/styled';
@@ -17,6 +18,12 @@ import type { DiscordButtonProps } from './Discord.types';
 
 const DISCORD_BUTTON_NAME: string = 'DiscordButton' as const;
 
+const DISCORD_BG_COLOR: string = '#5865f2';
+const DISCORD_BG_HOVER_COLOR: string = '#4752d9';
+const DISCORD_BG_ACTIVE_COLOR: string = '#3c45c0';
+const DISCORD_TEXT_COLOR: string = '#ffffff';
+const DISCORD_FOCUS_SHADOW_COLOR: string = 'rgba(88, 101, 242, 0.3)';
+
 const StyledDiscordButton = styled(Button)<{
   $disabled?: boolean;
 }>`
@@ -26,8 +33,9 @@ const StyledDiscordButton = styled(Button)<{
   gap: 10px;
   padding: 0 18px;
   min-height: 40px;
-  background-color: #5865f2;
-  color: #ffffff;
+  width: 100%;
+  background-color: var(--necto-discord-bg, ${DISCORD_BG_COLOR});
+  color: var(--necto-discord-text, ${DISCORD_TEXT_COLOR});
   border: none;
   border-radius: 8px;
   font-size: 14px;
@@ -40,16 +48,16 @@ const StyledDiscordButton = styled(Button)<{
   transition: background-color 0.2s, box-shadow 0.2s, border-color 0.2s, color 0.2s;
 
   &:hover {
-    background-color: #4752d9;
+    background-color: var(--necto-discord-bg-hover, ${DISCORD_BG_HOVER_COLOR});
   }
 
   &:active {
-    background-color: #3c45c0;
+    background-color: var(--necto-discord-bg-active, ${DISCORD_BG_ACTIVE_COLOR});
   }
 
   &:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(88, 101, 242, 0.3);
+    box-shadow: 0 0 0 3px var(--necto-discord-focus-shadow, ${DISCORD_FOCUS_SHADOW_COLOR});
   }
 
   ${props => props.$disabled && `
@@ -59,7 +67,7 @@ const StyledDiscordButton = styled(Button)<{
 
     &:hover,
     &:active {
-      background-color: #5865f2;
+      background-color: var(--necto-discord-bg, ${DISCORD_BG_COLOR});
     }
   `}
 `;
@@ -91,7 +99,7 @@ export const DiscordButton: ForwardRefExoticComponent<Omit<DiscordButtonProps, "
       $disabled={disabled}
       iconPosition={iconPosition}
       icon={<FaDiscord size={iconSize} />}
-      className={cn(className, `_necto:${DISCORD_BUTTON_NAME}`)}
+      className={cn(`_necto:${DISCORD_BUTTON_NAME}`, className)}
       {...props}
     >
       {children}

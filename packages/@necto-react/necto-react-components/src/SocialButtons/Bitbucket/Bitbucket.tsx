@@ -6,6 +6,7 @@
  *
  */
 
+/** @jsxImportSource @emotion/react */
 import cn from 'clsx';
 import { forwardRef } from 'react';
 import styled from '@emotion/styled';
@@ -17,6 +18,12 @@ import type { BitbucketButtonProps } from './Bitbucket.types';
 
 const BITBUCKET_BUTTON_NAME: string = 'BitbucketButton' as const;
 
+const BITBUCKET_BG_COLOR: string = '#0052cc';
+const BITBUCKET_BG_HOVER_COLOR: string = '#0747a6';
+const BITBUCKET_BG_ACTIVE_COLOR: string = '#003d99';
+const BITBUCKET_TEXT_COLOR: string = '#ffffff';
+const BITBUCKET_FOCUS_SHADOW_COLOR: string = 'rgba(0, 82, 204, 0.3)';
+
 const StyledBitbucketButton = styled(Button)<{
   $disabled?: boolean;
 }>`
@@ -26,8 +33,9 @@ const StyledBitbucketButton = styled(Button)<{
   gap: 10px;
   padding: 0 18px;
   min-height: 40px;
-  background-color: #0052cc;
-  color: #ffffff;
+  width: 100%;
+  background-color: var(--necto-bitbucket-bg, ${BITBUCKET_BG_COLOR});
+  color: var(--necto-bitbucket-text, ${BITBUCKET_TEXT_COLOR});
   border: none;
   border-radius: 8px;
   font-size: 14px;
@@ -40,16 +48,16 @@ const StyledBitbucketButton = styled(Button)<{
   transition: background-color 0.2s, box-shadow 0.2s;
 
   &:hover {
-    background-color: #0747a6;
+    background-color: var(--necto-bitbucket-bg-hover, ${BITBUCKET_BG_HOVER_COLOR});
   }
 
   &:active {
-    background-color: #003d99;
+    background-color: var(--necto-bitbucket-bg-active, ${BITBUCKET_BG_ACTIVE_COLOR});
   }
 
   &:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(0, 82, 204, 0.3);
+    box-shadow: 0 0 0 3px var(--necto-bitbucket-focus-shadow, ${BITBUCKET_FOCUS_SHADOW_COLOR});
   }
 
   ${props => props.$disabled && `
@@ -59,7 +67,7 @@ const StyledBitbucketButton = styled(Button)<{
 
     &:hover,
     &:active {
-      background-color: #0052cc;
+      background-color: var(--necto-bitbucket-bg, ${BITBUCKET_BG_COLOR});
     }
   `}
 `;
@@ -91,7 +99,7 @@ export const BitbucketButton: ForwardRefExoticComponent<Omit<BitbucketButtonProp
       $disabled={disabled}
       iconPosition={iconPosition}
       icon={<BitbucketIcon size={iconSize} />}
-      className={cn(className, `_necto:${BITBUCKET_BUTTON_NAME}`)}
+      className={cn(`_necto:${BITBUCKET_BUTTON_NAME}`, className)}
       {...props}
     >
       {children}

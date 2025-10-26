@@ -6,6 +6,7 @@
  *
  */
 
+/** @jsxImportSource @emotion/react */
 import cn from 'clsx';
 import { forwardRef } from 'react';
 import styled from '@emotion/styled';
@@ -17,6 +18,12 @@ import type { GitLabButtonProps } from './GitLab.types';
 
 const GITLAB_BUTTON_NAME: string = 'GitLabButton' as const;
 
+const GITLAB_BG_COLOR: string = '#fc6d26';
+const GITLAB_BG_HOVER_COLOR: string = '#e24329';
+const GITLAB_BG_ACTIVE_COLOR: string = '#c73b1c';
+const GITLAB_TEXT_COLOR: string = '#ffffff';
+const GITLAB_FOCUS_SHADOW_COLOR: string = 'rgba(252, 109, 38, 0.3)';
+
 const StyledGitLabButton = styled(Button)<{
   $disabled?: boolean;
 }>`
@@ -26,8 +33,9 @@ const StyledGitLabButton = styled(Button)<{
   gap: 10px;
   padding: 0 18px;
   min-height: 40px;
-  background-color: #fc6d26;
-  color: #ffffff;
+  width: 100%;
+  background-color: var(--necto-gitlab-bg, ${GITLAB_BG_COLOR});
+  color: var(--necto-gitlab-text, ${GITLAB_TEXT_COLOR});
   border: none;
   border-radius: 8px;
   font-size: 14px;
@@ -40,16 +48,16 @@ const StyledGitLabButton = styled(Button)<{
   transition: background-color 0.2s, box-shadow 0.2s;
 
   &:hover {
-    background-color: #e24329;
+    background-color: var(--necto-gitlab-bg-hover, ${GITLAB_BG_HOVER_COLOR});
   }
 
   &:active {
-    background-color: #c73b1c;
+    background-color: var(--necto-gitlab-bg-active, ${GITLAB_BG_ACTIVE_COLOR});
   }
 
   &:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(252, 109, 38, 0.3);
+    box-shadow: 0 0 0 3px var(--necto-gitlab-focus-shadow, ${GITLAB_FOCUS_SHADOW_COLOR});
   }
 
   ${props => props.$disabled && `
@@ -59,7 +67,7 @@ const StyledGitLabButton = styled(Button)<{
 
     &:hover,
     &:active {
-      background-color: #fc6d26;
+      background-color: var(--necto-gitlab-bg, ${GITLAB_BG_COLOR});
     }
   `}
 `;
@@ -91,7 +99,7 @@ export const GitLabButton: ForwardRefExoticComponent<Omit<GitLabButtonProps, "re
       $disabled={disabled}
       iconPosition={iconPosition}
       icon={<FaGitlab size={iconSize} />}
-      className={cn(className, `_necto:${GITLAB_BUTTON_NAME}`)}
+      className={cn(`_necto:${GITLAB_BUTTON_NAME}`, className)}
       {...props}
     >
       {children}

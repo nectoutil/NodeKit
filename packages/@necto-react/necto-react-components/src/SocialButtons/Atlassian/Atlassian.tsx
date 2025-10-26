@@ -6,6 +6,7 @@
  *
  */
 
+/** @jsxImportSource @emotion/react */
 import cn from 'clsx';
 import { forwardRef } from 'react';
 import styled from '@emotion/styled';
@@ -17,6 +18,12 @@ import type { AtlassianButtonProps } from './Atlassian.types';
 
 const ATLASSIAN_BUTTON_NAME: string = 'AtlassianButton' as const;
 
+const ATLASSIAN_BG_COLOR: string = '#0052cc';
+const ATLASSIAN_BG_HOVER_COLOR: string = '#0747a6';
+const ATLASSIAN_BG_ACTIVE_COLOR: string = '#003d99';
+const ATLASSIAN_TEXT_COLOR: string = '#ffffff';
+const ATLASSIAN_FOCUS_SHADOW_COLOR: string = 'rgba(0, 82, 204, 0.3)';
+
 const StyledAtlassianButton = styled(Button)<{
   $disabled?: boolean;
 }>`
@@ -26,8 +33,9 @@ const StyledAtlassianButton = styled(Button)<{
   gap: 10px;
   padding: 0 18px;
   min-height: 40px;
-  background-color: #0052cc;
-  color: #ffffff;
+  width: 100%;
+  background-color: var(--necto-atlassian-bg, ${ATLASSIAN_BG_COLOR});
+  color: var(--necto-atlassian-text, ${ATLASSIAN_TEXT_COLOR});
   border: none;
   border-radius: 8px;
   font-size: 14px;
@@ -40,16 +48,16 @@ const StyledAtlassianButton = styled(Button)<{
   transition: background-color 0.2s, box-shadow 0.2s;
 
   &:hover {
-    background-color: #0747a6;
+    background-color: var(--necto-atlassian-bg-hover, ${ATLASSIAN_BG_HOVER_COLOR});
   }
 
   &:active {
-    background-color: #003d99;
+    background-color: var(--necto-atlassian-bg-active, ${ATLASSIAN_BG_ACTIVE_COLOR});
   }
 
   &:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(0, 82, 204, 0.3);
+    box-shadow: 0 0 0 3px var(--necto-atlassian-focus-shadow, ${ATLASSIAN_FOCUS_SHADOW_COLOR});
   }
 
   ${props => props.$disabled && `
@@ -59,7 +67,7 @@ const StyledAtlassianButton = styled(Button)<{
 
     &:hover,
     &:active {
-      background-color: #0052cc;
+      background-color: var(--necto-atlassian-bg, ${ATLASSIAN_BG_COLOR});
     }
   `}
 `;
@@ -91,7 +99,7 @@ export const AtlassianButton: ForwardRefExoticComponent<Omit<AtlassianButtonProp
       $disabled={disabled}
       iconPosition={iconPosition}
       icon={<FaAtlassian size={iconSize} />}
-      className={cn(className, `_necto:${ATLASSIAN_BUTTON_NAME}`)}
+      className={cn(`_necto:${ATLASSIAN_BUTTON_NAME}`, className)}
       {...props}
     >
       {children}

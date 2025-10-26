@@ -6,6 +6,8 @@
  *
  */
 
+/** @jsxImportSource @emotion/react */
+import cn from 'clsx';
 import { forwardRef } from 'react';
 import styled from '@emotion/styled';
 import { Button } from '../Button/Button';
@@ -16,6 +18,12 @@ import type { TikTokButtonProps } from './TikTok.types';
 
 const TIKTOK_BUTTON_NAME = 'TikTokButton';
 
+const TIKTOK_BG_COLOR: string = '#000000';
+const TIKTOK_BG_HOVER_COLOR: string = '#1a1a1a';
+const TIKTOK_BG_ACTIVE_COLOR: string = '#333333';
+const TIKTOK_TEXT_COLOR: string = '#ffffff';
+const TIKTOK_FOCUS_SHADOW_COLOR: string = 'rgba(0, 0, 0, 0.3)';
+
 const StyledTikTokButton = styled(Button)<{
   $disabled?: boolean;
 }>`
@@ -25,8 +33,9 @@ const StyledTikTokButton = styled(Button)<{
   gap: 10px;
   padding: 0 12px 0 12px;
   min-height: 40px;
-  background-color: #000000;
-  color: #ffffff;
+  width: 100%;
+  background-color: var(--necto-tiktok-bg, ${TIKTOK_BG_COLOR});
+  color: var(--necto-tiktok-text, ${TIKTOK_TEXT_COLOR});
   border: none;
   border-radius: 8px;
   font-size: 14px;
@@ -39,16 +48,16 @@ const StyledTikTokButton = styled(Button)<{
   transition: background-color 0.2s, box-shadow 0.2s, border-color 0.2s, color 0.2s;
 
   &:hover {
-    background-color: #1a1a1a;
+    background-color: var(--necto-tiktok-bg-hover, ${TIKTOK_BG_HOVER_COLOR});
   }
 
   &:active {
-    background-color: #333333;
+    background-color: var(--necto-tiktok-bg-active, ${TIKTOK_BG_ACTIVE_COLOR});
   }
 
   &:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 0 3px var(--necto-tiktok-focus-shadow, ${TIKTOK_FOCUS_SHADOW_COLOR});
   }
 
   ${props => props.$disabled && `
@@ -58,7 +67,7 @@ const StyledTikTokButton = styled(Button)<{
 
     &:hover,
     &:active {
-      background-color: #000000;
+      background-color: var(--necto-tiktok-bg, ${TIKTOK_BG_COLOR});
     }
   `}
 `;
@@ -88,7 +97,7 @@ export const TikTokButton: ForwardRefExoticComponent<Omit<TikTokButtonProps, "re
       showIcon={showIcon}
       disabled={disabled}
       $disabled={disabled}
-      className={className}
+      className={cn(`_necto:${TIKTOK_BUTTON_NAME}`, className)}
       iconPosition={iconPosition}
       icon={<FaTiktok size={iconSize} />}
       {...props}

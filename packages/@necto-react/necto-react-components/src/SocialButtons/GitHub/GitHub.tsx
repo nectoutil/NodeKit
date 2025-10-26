@@ -6,6 +6,7 @@
  *
  */
 
+/** @jsxImportSource @emotion/react */
 import cn from 'clsx';
 import { forwardRef } from 'react';
 import styled from '@emotion/styled';
@@ -17,6 +18,13 @@ import type { GitHubButtonProps } from './GitHub.types';
 
 const GITHUB_BUTTON_NAME: string = 'GitHubButton' as const;
 
+const GITHUB_BG_COLOR: string = '#24292f';
+const GITHUB_BG_HOVER_COLOR: string = '#2c3237';
+const GITHUB_BG_ACTIVE_COLOR: string = '#373e47';
+const GITHUB_TEXT_COLOR: string = '#ffffff';
+const GITHUB_BORDER_COLOR: string = '#24292f';
+const GITHUB_FOCUS_SHADOW_COLOR: string = 'rgba(36, 41, 47, 0.3)';
+
 const StyledGitHubButton = styled(Button)<{
   $disabled?: boolean;
 }>`
@@ -26,9 +34,10 @@ const StyledGitHubButton = styled(Button)<{
   gap: 10px;
   padding: 0 18px;
   min-height: 40px;
-  background-color: #24292f;
-  color: #ffffff;
-  border: 1px solid #24292f;
+  width: 100%;
+  background-color: var(--necto-github-bg, ${GITHUB_BG_COLOR});
+  color: var(--necto-github-text, ${GITHUB_TEXT_COLOR});
+  border: 1px solid var(--necto-github-border, ${GITHUB_BORDER_COLOR});
   border-radius: 8px;
   font-size: 14px;
   font-weight: 500;
@@ -40,16 +49,16 @@ const StyledGitHubButton = styled(Button)<{
   transition: background-color 0.2s, box-shadow 0.2s, border-color 0.2s, color 0.2s;
 
   &:hover {
-    background-color: #2c3237;
+    background-color: var(--necto-github-bg-hover, ${GITHUB_BG_HOVER_COLOR});
   }
 
   &:active {
-    background-color: #373e47;
+    background-color: var(--necto-github-bg-active, ${GITHUB_BG_ACTIVE_COLOR});
   }
 
   &:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(36, 41, 47, 0.3);
+    box-shadow: 0 0 0 3px var(--necto-github-focus-shadow, ${GITHUB_FOCUS_SHADOW_COLOR});
   }
 
   ${props => props.$disabled && `
@@ -59,7 +68,7 @@ const StyledGitHubButton = styled(Button)<{
 
     &:hover,
     &:active {
-      background-color: #24292f;
+      background-color: var(--necto-github-bg, ${GITHUB_BG_COLOR});
     }
   `}
 `;
@@ -91,7 +100,7 @@ export const GitHubButton: ForwardRefExoticComponent<Omit<GitHubButtonProps, "re
       $disabled={disabled}
       iconPosition={iconPosition}
       icon={<FaGithub size={iconSize} />}
-      className={cn(className, `_necto:${GITHUB_BUTTON_NAME}`)}
+      className={cn(`_necto:${GITHUB_BUTTON_NAME}`, className)}
       {...props}
     >
       {children}

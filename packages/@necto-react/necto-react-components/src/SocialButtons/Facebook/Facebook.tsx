@@ -6,6 +6,7 @@
  *
  */
 
+/** @jsxImportSource @emotion/react */
 import cn from 'clsx';
 import { forwardRef } from 'react';
 import styled from '@emotion/styled';
@@ -17,6 +18,13 @@ import type { FacebookButtonProps } from './Facebook.types';
 
 const FACEBOOK_BUTTON_NAME: string = 'FacebookButton' as const;
 
+const FACEBOOK_BG_COLOR: string = '#1877f2';
+const FACEBOOK_BG_HOVER_COLOR: string = '#166fe5';
+const FACEBOOK_BG_ACTIVE_COLOR: string = '#1467d6';
+const FACEBOOK_TEXT_COLOR: string = '#ffffff';
+const FACEBOOK_BORDER_COLOR: string = '#1877f2';
+const FACEBOOK_FOCUS_SHADOW_COLOR: string = 'rgba(24, 119, 242, 0.3)';
+
 const StyledFacebookButton = styled(Button)<{
   $disabled?: boolean;
 }>`
@@ -26,9 +34,10 @@ const StyledFacebookButton = styled(Button)<{
   gap: 10px;
   padding: 0 18px;
   min-height: 40px;
-  background-color: #1877f2;
-  color: #ffffff;
-  border: 1px solid #1877f2;
+  width: 100%;
+  background-color: var(--necto-facebook-bg, ${FACEBOOK_BG_COLOR});
+  color: var(--necto-facebook-text, ${FACEBOOK_TEXT_COLOR});
+  border: 1px solid var(--necto-facebook-border, ${FACEBOOK_BORDER_COLOR});
   border-radius: 8px;
   font-size: 14px;
   font-weight: 500;
@@ -40,16 +49,16 @@ const StyledFacebookButton = styled(Button)<{
   transition: background-color 0.2s, box-shadow 0.2s, border-color 0.2s, color 0.2s;
 
   &:hover {
-    background-color: #166fe5;
+    background-color: var(--necto-facebook-bg-hover, ${FACEBOOK_BG_HOVER_COLOR});
   }
 
   &:active {
-    background-color: #1467d6;
+    background-color: var(--necto-facebook-bg-active, ${FACEBOOK_BG_ACTIVE_COLOR});
   }
 
   &:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(24, 119, 242, 0.3);
+    box-shadow: 0 0 0 3px var(--necto-facebook-focus-shadow, ${FACEBOOK_FOCUS_SHADOW_COLOR});
   }
 
   ${props => props.$disabled && `
@@ -59,7 +68,7 @@ const StyledFacebookButton = styled(Button)<{
 
     &:hover,
     &:active {
-      background-color: #1877f2;
+      background-color: var(--necto-facebook-bg, ${FACEBOOK_BG_COLOR});
     }
   `}
 `;
@@ -91,7 +100,7 @@ export const FacebookButton: ForwardRefExoticComponent<Omit<FacebookButtonProps,
       $disabled={disabled}
       iconPosition={iconPosition}
       icon={<FaFacebook size={iconSize} />}
-      className={cn(className, `_necto:${FACEBOOK_BUTTON_NAME}`)}
+      className={cn(`_necto:${FACEBOOK_BUTTON_NAME}`, className)}
       {...props}
     >
       {children}

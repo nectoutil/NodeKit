@@ -6,6 +6,8 @@
  *
  */
 
+/** @jsxImportSource @emotion/react */
+import cn from 'clsx';
 import { forwardRef } from 'react';
 import styled from '@emotion/styled';
 import { Button } from '../Button/Button';
@@ -16,6 +18,12 @@ import type { XButtonProps } from './X.types';
 
 const X_BUTTON_NAME = 'XButton';
 
+const X_BG_COLOR: string = '#000000';
+const X_BG_HOVER_COLOR: string = '#1a1a1a';
+const X_BG_ACTIVE_COLOR: string = '#333333';
+const X_TEXT_COLOR: string = '#ffffff';
+const X_FOCUS_SHADOW_COLOR: string = 'rgba(0, 0, 0, 0.3)';
+
 const StyledXButton = styled(Button)<{
   $disabled?: boolean;
 }>`
@@ -25,8 +33,9 @@ const StyledXButton = styled(Button)<{
   gap: 10px;
   padding: 0 12px 0 12px;
   min-height: 40px;
-  background-color: #000000;
-  color: #ffffff;
+  width: 100%;
+  background-color: var(--necto-x-bg, ${X_BG_COLOR});
+  color: var(--necto-x-text, ${X_TEXT_COLOR});
   border: none;
   border-radius: 8px;
   font-size: 14px;
@@ -39,16 +48,16 @@ const StyledXButton = styled(Button)<{
   transition: background-color 0.2s, box-shadow 0.2s, border-color 0.2s, color 0.2s;
 
   &:hover {
-    background-color: #1a1a1a;
+    background-color: var(--necto-x-bg-hover, ${X_BG_HOVER_COLOR});
   }
 
   &:active {
-    background-color: #333333;
+    background-color: var(--necto-x-bg-active, ${X_BG_ACTIVE_COLOR});
   }
 
   &:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 0 3px var(--necto-x-focus-shadow, ${X_FOCUS_SHADOW_COLOR});
   }
 
   ${props => props.$disabled && `
@@ -58,7 +67,7 @@ const StyledXButton = styled(Button)<{
 
     &:hover,
     &:active {
-      background-color: #000000;
+      background-color: var(--necto-x-bg, ${X_BG_COLOR});
     }
   `}
 `;
@@ -88,7 +97,7 @@ export const XButton: ForwardRefExoticComponent<Omit<XButtonProps, "ref"> & RefA
       showIcon={showIcon}
       disabled={disabled}
       $disabled={disabled}
-      className={className}
+      className={cn(`_necto:${X_BUTTON_NAME}`, className)}
       iconPosition={iconPosition}
       icon={<FaXTwitter size={iconSize} />}
       {...props}

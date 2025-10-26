@@ -6,6 +6,8 @@
  *
  */
 
+/** @jsxImportSource @emotion/react */
+import cn from 'clsx';
 import { forwardRef } from 'react';
 import styled from '@emotion/styled';
 import { Button } from '../Button/Button';
@@ -16,6 +18,13 @@ import type { GoogleButtonProps } from './Google.types';
 
 const GOOGLE_BUTTON_NAME = 'GoogleButton';
 
+const GOOGLE_BG_COLOR: string = '#ffffff';
+const GOOGLE_BG_HOVER_COLOR: string = '#f8f9fa';
+const GOOGLE_BG_ACTIVE_COLOR: string = '#eceff1';
+const GOOGLE_TEXT_COLOR: string = '#1f1f1f';
+const GOOGLE_BORDER_COLOR: string = '#747775';
+const GOOGLE_FOCUS_SHADOW_COLOR: string = 'rgba(66, 133, 244, 0.3)';
+
 const StyledGoogleButton = styled(Button)<{
   $disabled?: boolean;
 }>`
@@ -25,9 +34,10 @@ const StyledGoogleButton = styled(Button)<{
   gap: 10px;
   padding: 0 12px 0 12px;
   min-height: 40px;
-  background-color: #ffffff;
-  color: #1f1f1f;
-  border: 1px solid #747775;
+  width: 100%;
+  background-color: var(--necto-google-bg, ${GOOGLE_BG_COLOR});
+  color: var(--necto-google-text, ${GOOGLE_TEXT_COLOR});
+  border: 1px solid var(--necto-google-border, ${GOOGLE_BORDER_COLOR});
   border-radius: 8px;
   font-size: 14px;
   font-weight: 500;
@@ -39,16 +49,16 @@ const StyledGoogleButton = styled(Button)<{
   transition: background-color 0.2s, box-shadow 0.2s, border-color 0.2s, color 0.2s;
 
   &:hover {
-    background-color: #f8f9fa;
+    background-color: var(--necto-google-bg-hover, ${GOOGLE_BG_HOVER_COLOR});
   }
 
   &:active {
-    background-color: #eceff1;
+    background-color: var(--necto-google-bg-active, ${GOOGLE_BG_ACTIVE_COLOR});
   }
 
   &:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.3);
+    box-shadow: 0 0 0 3px var(--necto-google-focus-shadow, ${GOOGLE_FOCUS_SHADOW_COLOR});
   }
 
   ${props => props.$disabled && `
@@ -58,7 +68,7 @@ const StyledGoogleButton = styled(Button)<{
 
     &:hover,
     &:active {
-      background-color: #ffffff;
+      background-color: var(--necto-google-bg, ${GOOGLE_BG_COLOR});
     }
   `}
 `;
@@ -88,7 +98,7 @@ export const GoogleButton: ForwardRefExoticComponent<Omit<GoogleButtonProps, "re
       showIcon={showIcon}
       disabled={disabled}
       $disabled={disabled}
-      className={className}
+      className={cn(`_necto:${GOOGLE_BUTTON_NAME}`, className)}
       iconPosition={iconPosition}
       icon={<FcGoogle size={iconSize} />}
       {...props}
