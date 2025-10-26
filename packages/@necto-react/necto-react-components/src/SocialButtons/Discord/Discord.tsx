@@ -87,7 +87,6 @@ export const DiscordButton: ForwardRefExoticComponent<Omit<DiscordButtonProps, "
       ref={ref}
       asChild={asChild}
       showIcon={showIcon}
-      iconSize={iconSize}
       disabled={disabled}
       $disabled={disabled}
       iconPosition={iconPosition}

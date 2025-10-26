@@ -88,7 +88,6 @@ export const AppleButton: ForwardRefExoticComponent<Omit<AppleButtonProps, "ref"
       asChild={asChild}
       icon={<FaApple size={iconSize} />}
       showIcon={showIcon}
-      iconSize={iconSize}
       disabled={disabled}
       $disabled={disabled}
       iconPosition={iconPosition}

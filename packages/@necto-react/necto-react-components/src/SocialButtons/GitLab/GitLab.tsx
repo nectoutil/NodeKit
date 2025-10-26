@@ -87,7 +87,6 @@ export const GitLabButton: ForwardRefExoticComponent<Omit<GitLabButtonProps, "re
       ref={ref}
       asChild={asChild}
       showIcon={showIcon}
-      iconSize={iconSize}
       disabled={disabled}
       $disabled={disabled}
       iconPosition={iconPosition}
