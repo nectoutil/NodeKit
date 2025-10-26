@@ -1,5 +1,11 @@
 # @necto-react/components
 
+## 1.2.8
+
+### Patch Changes
+
+- de3cc23: Fixed external errors
+
 ## 1.2.7
 
 ### Patch Changes
