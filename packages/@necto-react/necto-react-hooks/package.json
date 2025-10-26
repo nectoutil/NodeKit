@@ -1,6 +1,6 @@
 {
   "name": "@necto-react/hooks",
-  "version": "2.12.2",
+  "version": "2.12.3",
   "type": "module",
   "description": "Necto's standard library for providing utility hooks for React applications.",
   "scripts": {

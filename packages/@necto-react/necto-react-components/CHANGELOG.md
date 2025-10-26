@@ -1,5 +1,13 @@
 # @necto-react/components
 
+## 1.2.7
+
+### Patch Changes
+
+- 232695d: Attempted to resolve commonjs errors
+- Updated dependencies [232695d]
+  - @necto/dom@1.4.3
+
 ## 1.2.6
 
 ### Patch Changes
