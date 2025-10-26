@@ -47,7 +47,7 @@ jobs:
         id: create_release_pr
         uses: changesets/action@v1
         with:
-          title: 'Release Packages'
+          title: 'Automated Package Release'
           createGithubReleases: true
           commit: 'Package Versioning'
           publish: pnpm exec changeset publish
