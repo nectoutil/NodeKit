@@ -58,5 +58,5 @@ jobs:
         uses: actions-ecosystem/action-add-labels@v1
         with:
           labels: automerge
-          issue_number: ${{ steps.create_release_pr.outputs.pull_request_number }}
+          number: ${{ steps.create_release_pr.outputs.pull_request_number }}
           github_token: ${{ steps.generate_token.outputs.token }}
