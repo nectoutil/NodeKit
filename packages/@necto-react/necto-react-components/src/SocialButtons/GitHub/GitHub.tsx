@@ -11,7 +11,6 @@ import { forwardRef } from 'react';
 import styled from 'styled-components';
 import { Button } from '../Button/Button';
 import { FaGithub } from 'react-icons/fa';
-import styles from './GitHub.module.scss';
 
 import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { GitHubButtonProps } from './GitHub.types';
@@ -19,12 +18,52 @@ import type { IStyledComponent } from 'styled-components';
 
 const GITHUB_BUTTON_NAME: string = 'GitHubButton' as const;
 
-const StyledGitHubButton: IStyledComponent<'web', any> = styled(Button).attrs<{
+const StyledGitHubButton: IStyledComponent<'web', any> = styled(Button)<{
   $disabled?: boolean;
-}>((props) => ({
-  className:
-    `${styles.GitHubButton} ${props.$disabled ? styles.disabled : ''}`.trim()
-}))<{ $disabled?: boolean }>``;
+}>`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 18px;
+  min-height: 40px;
+  background-color: #24292f;
+  color: #ffffff;
+  border: 1px solid #24292f;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: system-ui, -apple-system, sans-serif;
+  line-height: 20px;
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
+  transition: background-color 0.2s, box-shadow 0.2s, border-color 0.2s, color 0.2s;
+
+  &:hover {
+    background-color: #2c3237;
+  }
+
+  &:active {
+    background-color: #373e47;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(36, 41, 47, 0.3);
+  }
+
+  ${props => props.$disabled && `
+    opacity: 0.7;
+    cursor: not-allowed;
+    pointer-events: none;
+
+    &:hover,
+    &:active {
+      background-color: #24292f;
+    }
+  `}
+`;
 
 export const GitHubButton: ForwardRefExoticComponent<Omit<GitHubButtonProps, "ref"> & RefAttributes<HTMLButtonElement>> = forwardRef<
   HTMLButtonElement,

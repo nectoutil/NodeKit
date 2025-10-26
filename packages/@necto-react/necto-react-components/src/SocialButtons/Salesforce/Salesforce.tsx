@@ -10,7 +10,6 @@ import { forwardRef } from 'react';
 import styled from 'styled-components';
 import { Button } from '../Button/Button';
 import { FaSalesforce } from 'react-icons/fa';
-import styles from './Salesforce.module.scss';
 
 import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { SalesforceButtonProps } from './Salesforce.types';
@@ -18,12 +17,52 @@ import type { IStyledComponent } from 'styled-components';
 
 const SALESFORCE_BUTTON_NAME = 'SalesforceButton';
 
-const StyledSalesforceButton: IStyledComponent<'web', any> = styled(
-  Button
-).attrs<{ $disabled?: boolean }>((props) => ({
-  className:
-    `${styles.SalesforceButton} ${props.$disabled ? styles.disabled : ''}`.trim()
-}))<{ $disabled?: boolean }>``;
+const StyledSalesforceButton: IStyledComponent<'web', any> = styled(Button)<{
+  $disabled?: boolean;
+}>`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 12px;
+  min-height: 40px;
+  background-color: #00a1e0;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: system-ui, -apple-system, sans-serif;
+  line-height: 20px;
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
+  transition: background-color 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    background-color: #0074a8;
+  }
+
+  &:active {
+    background-color: #005c85;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 161, 224, 0.3);
+  }
+
+  ${props => props.$disabled && `
+    opacity: 0.7;
+    cursor: not-allowed;
+    pointer-events: none;
+
+    &:hover,
+    &:active {
+      background-color: #00a1e0;
+    }
+  `}
+`;
 
 export const SalesforceButton: ForwardRefExoticComponent<Omit<SalesforceButtonProps, "ref"> & RefAttributes<HTMLButtonElement>> = forwardRef<
   HTMLButtonElement,

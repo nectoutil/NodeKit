@@ -24,12 +24,9 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
-    "./package.json": "./package.json",
-    "./style.css": "./dist/index.css"
+    "./package.json": "./package.json"
   },
-  "sideEffects": [
-    "*.css"
-  ],
+  "sideEffects": false,
   "author": "Corinvo OSS Team",
   "license": "MIT",
   "devDependencies": {

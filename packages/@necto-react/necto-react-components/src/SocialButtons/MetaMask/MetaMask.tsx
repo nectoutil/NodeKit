@@ -10,7 +10,6 @@ import { forwardRef } from 'react';
 import styled from 'styled-components';
 import { Button } from '../Button/Button';
 import { SiMetamask } from 'react-icons/si';
-import styles from './MetaMask.module.scss';
 
 import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { MetaMaskButtonProps } from './MetaMask.types';
@@ -18,12 +17,52 @@ import type { IStyledComponent } from 'styled-components';
 
 const METAMASK_BUTTON_NAME = 'MetaMaskButton';
 
-const StyledMetaMaskButton: IStyledComponent<'web', any> = styled(
-  Button
-).attrs<{ $disabled?: boolean }>((props) => ({
-  className:
-    `${styles.MetaMaskButton} ${props.$disabled ? styles.disabled : ''}`.trim()
-}))<{ $disabled?: boolean }>``;
+const StyledMetaMaskButton: IStyledComponent<'web', any> = styled(Button)<{
+  $disabled?: boolean;
+}>`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 12px 0 12px;
+  min-height: 40px;
+  background-color: #f6851b;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'Roboto', system-ui, -apple-system, sans-serif;
+  line-height: 20px;
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
+  transition: background-color 0.2s, box-shadow 0.2s, border-color 0.2s, color 0.2s;
+
+  &:hover {
+    background-color: #e2761a;
+  }
+
+  &:active {
+    background-color: #cd6a17;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(246, 133, 27, 0.3);
+  }
+
+  ${props => props.$disabled && `
+    opacity: 0.7;
+    cursor: not-allowed;
+    pointer-events: none;
+
+    &:hover,
+    &:active {
+      background-color: #f6851b;
+    }
+  `}
+`;
 
 export const MetaMaskButton: ForwardRefExoticComponent<Omit<MetaMaskButtonProps, "ref"> & RefAttributes<HTMLButtonElement>> = forwardRef<
   HTMLButtonElement,

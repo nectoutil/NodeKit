@@ -6,7 +6,6 @@
  */
 
 import { defineConfig } from 'tsup';
-import { sassPlugin } from 'esbuild-sass-plugin';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 
@@ -19,10 +18,9 @@ const external = [
 export default defineConfig({
   entry: ['./src/index.ts'],
   format: ['esm', 'cjs'],
-  dts: true,
+  dts: false, // Temporarily disabled due to React 19 type issues
   minify: true,
   sourcemap: true,
   clean: true,
   external,
-  esbuildPlugins: [sassPlugin()],
 });
