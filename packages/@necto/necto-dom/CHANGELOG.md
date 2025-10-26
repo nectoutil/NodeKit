@@ -1,5 +1,13 @@
 # @necto/dom
 
+## 1.4.1
+
+### Patch Changes
+
+- faedceb: Added minor fixes
+- Updated dependencies [faedceb]
+  - @necto/constants@1.4.1
+
 ## 1.4.0
 
 ### Minor Changes
