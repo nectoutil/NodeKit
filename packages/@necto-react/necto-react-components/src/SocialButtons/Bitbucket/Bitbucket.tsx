@@ -87,7 +87,6 @@ export const BitbucketButton: ForwardRefExoticComponent<Omit<BitbucketButtonProp
       ref={ref}
       asChild={asChild}
       showIcon={showIcon}
-      iconSize={iconSize}
       disabled={disabled}
       $disabled={disabled}
       iconPosition={iconPosition}

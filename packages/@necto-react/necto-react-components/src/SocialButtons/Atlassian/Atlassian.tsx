@@ -87,7 +87,6 @@ export const AtlassianButton: ForwardRefExoticComponent<Omit<AtlassianButtonProp
       ref={ref}
       asChild={asChild}
       showIcon={showIcon}
-      iconSize={iconSize}
       disabled={disabled}
       $disabled={disabled}
       iconPosition={iconPosition}

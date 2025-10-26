@@ -87,7 +87,6 @@ export const FacebookButton: ForwardRefExoticComponent<Omit<FacebookButtonProps,
       ref={ref}
       asChild={asChild}
       showIcon={showIcon}
-      iconSize={iconSize}
       disabled={disabled}
       $disabled={disabled}
       iconPosition={iconPosition}

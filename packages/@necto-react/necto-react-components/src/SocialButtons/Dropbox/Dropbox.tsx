@@ -88,7 +88,6 @@ export const DropboxButton: ForwardRefExoticComponent<Omit<DropboxButtonProps, "
       asChild={asChild}
       icon={<FaDropbox size={iconSize} />}
       showIcon={showIcon}
-      iconSize={iconSize}
       disabled={disabled}
       $disabled={disabled}
       iconPosition={iconPosition}
