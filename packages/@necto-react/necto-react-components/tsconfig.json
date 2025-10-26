@@ -17,8 +17,9 @@
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "noEmit": false,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "typeRoots": ["./node_modules/@types", "./types"]
   },
-  "include": ["src", "__tests__"],
+  "include": ["src", "__tests__", "types"],
   "exclude": ["node_modules", "dist"]
 }
