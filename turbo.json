@@ -11,5 +11,5 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**", "cache/**"]
     }
-  },
+  }
 }
