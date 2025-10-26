@@ -1,5 +1,11 @@
 # @necto/dom
 
+## 1.4.3
+
+### Patch Changes
+
+- 232695d: Attempted to resolve commonjs errors
+
 ## 1.4.2
 
 ### Patch Changes
