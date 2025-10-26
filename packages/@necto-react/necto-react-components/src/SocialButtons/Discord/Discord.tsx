@@ -8,17 +8,16 @@
 
 import cn from 'clsx';
 import { forwardRef } from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { Button } from '../Button/Button';
 import { FaDiscord } from 'react-icons/fa';
 
 import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { DiscordButtonProps } from './Discord.types';
-import type { IStyledComponent } from 'styled-components';
 
 const DISCORD_BUTTON_NAME: string = 'DiscordButton' as const;
 
-const StyledDiscordButton: IStyledComponent<'web', any> = styled(Button)<{
+const StyledDiscordButton = styled(Button)<{
   $disabled?: boolean;
 }>`
   display: inline-flex;

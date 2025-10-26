@@ -8,17 +8,16 @@
 
 import cn from 'clsx';
 import { forwardRef } from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { Button } from '../Button/Button';
 import { FaAtlassian } from 'react-icons/fa';
 
 import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { AtlassianButtonProps } from './Atlassian.types';
-import type { IStyledComponent } from 'styled-components';
 
 const ATLASSIAN_BUTTON_NAME: string = 'AtlassianButton' as const;
 
-const StyledAtlassianButton: IStyledComponent<'web', any> = styled(Button)<{
+const StyledAtlassianButton = styled(Button)<{
   $disabled?: boolean;
 }>`
   display: inline-flex;

@@ -8,17 +8,16 @@
 
 import cn from 'clsx';
 import { forwardRef } from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { Button } from '../Button/Button';
 import { FaFacebook } from 'react-icons/fa6';
 
 import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { FacebookButtonProps } from './Facebook.types';
-import type { IStyledComponent } from 'styled-components';
 
 const FACEBOOK_BUTTON_NAME: string = 'FacebookButton' as const;
 
-const StyledFacebookButton: IStyledComponent<'web', any> = styled(Button)<{
+const StyledFacebookButton = styled(Button)<{
   $disabled?: boolean;
 }>`
   display: inline-flex;

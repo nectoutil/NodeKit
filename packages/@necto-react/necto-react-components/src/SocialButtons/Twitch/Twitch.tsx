@@ -7,17 +7,16 @@
  */
 
 import { forwardRef } from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { Button } from '../Button/Button';
 import { FaTwitch } from 'react-icons/fa';
 
 import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { TwitchButtonProps } from './Twitch.types';
-import type { IStyledComponent } from 'styled-components';
 
 const TWITCH_BUTTON_NAME = 'TwitchButton';
 
-const StyledTwitchButton: IStyledComponent<'web', any> = styled(Button)<{
+const StyledTwitchButton = styled(Button)<{
   $disabled?: boolean;
 }>`
   display: inline-flex;

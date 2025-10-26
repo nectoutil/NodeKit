@@ -8,17 +8,16 @@
 
 import cn from 'clsx';
 import { forwardRef } from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { FaApple } from 'react-icons/fa';
 import { Button } from '../Button/Button';
 
-import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { AppleButtonProps } from './Apple.types';
-import type { IStyledComponent } from 'styled-components';
+import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 
 const APPLE_BUTTON_NAME: string = 'AppleButton' as const;
 
-const StyledAppleButton: IStyledComponent<'web', any> = styled(Button)<{
+const StyledAppleButton = styled(Button)<{
   $disabled?: boolean;
 }>`
   display: inline-flex;

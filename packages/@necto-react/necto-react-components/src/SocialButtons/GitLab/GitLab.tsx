@@ -8,17 +8,16 @@
 
 import cn from 'clsx';
 import { forwardRef } from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { Button } from '../Button/Button';
 import { FaGitlab } from 'react-icons/fa6';
 
 import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { GitLabButtonProps } from './GitLab.types';
-import type { IStyledComponent } from 'styled-components';
 
 const GITLAB_BUTTON_NAME: string = 'GitLabButton' as const;
 
-const StyledGitLabButton: IStyledComponent<'web', any> = styled(Button)<{
+const StyledGitLabButton = styled(Button)<{
   $disabled?: boolean;
 }>`
   display: inline-flex;

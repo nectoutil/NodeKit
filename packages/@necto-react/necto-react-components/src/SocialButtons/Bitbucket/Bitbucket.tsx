@@ -8,17 +8,16 @@
 
 import cn from 'clsx';
 import { forwardRef } from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { Button } from '../Button/Button';
 import { BitbucketIcon } from './Bitbucket.icon';
 
-import type { IStyledComponent } from 'styled-components';
 import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { BitbucketButtonProps } from './Bitbucket.types';
 
 const BITBUCKET_BUTTON_NAME: string = 'BitbucketButton' as const;
 
-const StyledBitbucketButton: IStyledComponent<'web', any> = styled(Button)<{
+const StyledBitbucketButton = styled(Button)<{
   $disabled?: boolean;
 }>`
   display: inline-flex;

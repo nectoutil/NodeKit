@@ -7,17 +7,16 @@
  */
 
 import { forwardRef } from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { Button } from '../Button/Button';
 import { FaLinkedin } from 'react-icons/fa';
 
 import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { LinkedInButtonProps } from './LinkedIn.types';
-import type { IStyledComponent } from 'styled-components';
 
 const LINKEDIN_BUTTON_NAME = 'LinkedInButton';
 
-const StyledLinkedInButton: IStyledComponent<'web', any> = styled(Button)<{
+const StyledLinkedInButton = styled(Button)<{
   $disabled?: boolean;
 }>`
   display: inline-flex;

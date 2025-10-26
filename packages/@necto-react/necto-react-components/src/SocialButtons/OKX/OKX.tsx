@@ -7,17 +7,16 @@
  */
 
 import { forwardRef } from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { Button } from '../Button/Button';
 import { SiOkx } from 'react-icons/si';
 
 import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { OKXButtonProps } from './OKX.types';
-import type { IStyledComponent } from 'styled-components';
 
 const OKX_BUTTON_NAME = 'OKXButton';
 
-const StyledOKXButton: IStyledComponent<'web', any> = styled(Button)<{
+const StyledOKXButton = styled(Button)<{
   $disabled?: boolean;
 }>`
   display: inline-flex;

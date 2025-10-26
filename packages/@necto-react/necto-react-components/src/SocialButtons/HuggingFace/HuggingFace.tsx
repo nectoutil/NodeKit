@@ -7,17 +7,16 @@
  */
 
 import { forwardRef } from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { Button } from '../Button/Button';
 import { SiHuggingface } from 'react-icons/si';
 
 import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { HuggingFaceButtonProps } from './HuggingFace.types';
-import type { IStyledComponent } from 'styled-components';
 
 const HUGGINGFACE_BUTTON_NAME = 'HuggingFaceButton';
 
-const StyledHuggingFaceButton: IStyledComponent<'web', any> = styled(Button)<{
+const StyledHuggingFaceButton = styled(Button)<{
   $disabled?: boolean;
 }>`
   display: inline-flex;

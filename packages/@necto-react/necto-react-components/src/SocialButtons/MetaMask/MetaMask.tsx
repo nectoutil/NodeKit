@@ -7,17 +7,16 @@
  */
 
 import { forwardRef } from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { Button } from '../Button/Button';
 import { SiMetamask } from 'react-icons/si';
 
 import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { MetaMaskButtonProps } from './MetaMask.types';
-import type { IStyledComponent } from 'styled-components';
 
 const METAMASK_BUTTON_NAME = 'MetaMaskButton';
 
-const StyledMetaMaskButton: IStyledComponent<'web', any> = styled(Button)<{
+const StyledMetaMaskButton = styled(Button)<{
   $disabled?: boolean;
 }>`
   display: inline-flex;

@@ -7,17 +7,16 @@
  */
 
 import { forwardRef } from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { Button } from '../Button/Button';
 import { FaXTwitter } from 'react-icons/fa6';
 
 import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { XButtonProps } from './X.types';
-import type { IStyledComponent } from 'styled-components';
 
 const X_BUTTON_NAME = 'XButton';
 
-const StyledXButton: IStyledComponent<'web', any> = styled(Button)<{
+const StyledXButton = styled(Button)<{
   $disabled?: boolean;
 }>`
   display: inline-flex;

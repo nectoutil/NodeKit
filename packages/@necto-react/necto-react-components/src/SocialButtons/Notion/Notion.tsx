@@ -7,17 +7,16 @@
  */
 
 import { forwardRef } from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { Button } from '../Button/Button';
 import { SiNotion } from 'react-icons/si';
 
 import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { NotionButtonProps } from './Notion.types';
-import type { IStyledComponent } from 'styled-components';
 
 const NOTION_BUTTON_NAME = 'NotionButton';
 
-const StyledNotionButton: IStyledComponent<'web', any> = styled(Button)<{
+const StyledNotionButton = styled(Button)<{
   $disabled?: boolean;
 }>`
   display: inline-flex;

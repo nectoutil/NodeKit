@@ -7,17 +7,16 @@
  */
 
 import { forwardRef } from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { Button } from '../Button/Button';
 import { FaSlack } from 'react-icons/fa';
 
 import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { SlackButtonProps } from './Slack.types';
-import type { IStyledComponent } from 'styled-components';
 
 const SLACK_BUTTON_NAME = 'SlackButton';
 
-const StyledSlackButton: IStyledComponent<'web', any> = styled(Button)<{
+const StyledSlackButton = styled(Button)<{
   $disabled?: boolean;
 }>`
   display: inline-flex;

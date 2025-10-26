@@ -7,17 +7,16 @@
  */
 
 import { forwardRef } from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { Button } from '../Button/Button';
 import { FcGoogle } from 'react-icons/fc';
 
 import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { GoogleButtonProps } from './Google.types';
-import type { IStyledComponent } from 'styled-components';
 
 const GOOGLE_BUTTON_NAME = 'GoogleButton';
 
-const StyledGoogleButton: IStyledComponent<'web', any> = styled(Button)<{
+const StyledGoogleButton = styled(Button)<{
   $disabled?: boolean;
 }>`
   display: inline-flex;

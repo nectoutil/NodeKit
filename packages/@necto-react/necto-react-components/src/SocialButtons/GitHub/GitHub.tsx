@@ -8,17 +8,16 @@
 
 import cn from 'clsx';
 import { forwardRef } from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { Button } from '../Button/Button';
 import { FaGithub } from 'react-icons/fa';
 
 import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { GitHubButtonProps } from './GitHub.types';
-import type { IStyledComponent } from 'styled-components';
 
 const GITHUB_BUTTON_NAME: string = 'GitHubButton' as const;
 
-const StyledGitHubButton: IStyledComponent<'web', any> = styled(Button)<{
+const StyledGitHubButton = styled(Button)<{
   $disabled?: boolean;
 }>`
   display: inline-flex;
