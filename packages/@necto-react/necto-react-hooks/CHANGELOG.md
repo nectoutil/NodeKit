@@ -1,5 +1,14 @@
 # @necto-react/hooks
 
+## 2.12.2
+
+### Patch Changes
+
+- Updated dependencies [f39c992]
+  - @necto/dom@1.4.2
+  - @necto/id@1.6.2
+  - @necto-react/helpers@2.4.2
+
 ## 2.12.1
 
 ### Patch Changes

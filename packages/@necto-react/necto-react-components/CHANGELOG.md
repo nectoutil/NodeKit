@@ -1,5 +1,13 @@
 # @necto-react/components
 
+## 1.2.6
+
+### Patch Changes
+
+- Updated dependencies [f39c992]
+  - @necto/constants@1.4.2
+  - @necto/dom@1.4.2
+
 ## 1.2.5
 
 ### Patch Changes
