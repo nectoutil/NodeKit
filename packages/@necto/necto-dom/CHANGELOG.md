@@ -1,5 +1,13 @@
 # @necto/dom
 
+## 1.4.2
+
+### Patch Changes
+
+- f39c992: Added minor fixes
+- Updated dependencies [f39c992]
+  - @necto/constants@1.4.2
+
 ## 1.4.1
 
 ### Patch Changes

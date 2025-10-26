@@ -1,5 +1,12 @@
 # @necto/id
 
+## 1.6.2
+
+### Patch Changes
+
+- Updated dependencies [f39c992]
+  - @necto/constants@1.4.2
+
 ## 1.6.1
 
 ### Patch Changes
