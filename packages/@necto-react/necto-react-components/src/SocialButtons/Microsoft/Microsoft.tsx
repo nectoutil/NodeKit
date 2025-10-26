@@ -7,17 +7,16 @@
  */
 
 import { forwardRef } from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { Button } from '../Button/Button';
 import { MicrosoftIcon } from './Microsoft.icon';
 
 import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { MicrosoftButtonProps } from './Microsoft.types';
-import type { IStyledComponent } from 'styled-components';
 
 const MICROSOFT_BUTTON_NAME = 'MicrosoftButton';
 
-const StyledMicrosoftButton: IStyledComponent<'web', any> = styled(Button)<{
+const StyledMicrosoftButton = styled(Button)<{
   $disabled?: boolean;
 }>`
   display: inline-flex;

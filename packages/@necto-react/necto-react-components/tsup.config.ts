@@ -18,7 +18,7 @@ const external = [
 export default defineConfig({
   entry: ['./src/index.ts'],
   format: ['esm', 'cjs'],
-  dts: false, // Temporarily disabled due to React 19 type issues
+  dts: true,
   minify: true,
   sourcemap: true,
   clean: true,

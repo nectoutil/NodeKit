@@ -7,17 +7,16 @@
  */
 
 import { forwardRef } from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { Button } from '../Button/Button';
 import { FaSpotify } from 'react-icons/fa';
 
 import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { SpotifyButtonProps } from './Spotify.types';
-import type { IStyledComponent } from 'styled-components';
 
 const SPOTIFY_BUTTON_NAME = 'SpotifyButton';
 
-const StyledSpotifyButton: IStyledComponent<'web', any> = styled(Button)<{
+const StyledSpotifyButton = styled(Button)<{
   $disabled?: boolean;
 }>`
   display: inline-flex;

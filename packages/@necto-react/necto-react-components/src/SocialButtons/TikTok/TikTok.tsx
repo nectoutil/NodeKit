@@ -7,17 +7,16 @@
  */
 
 import { forwardRef } from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { Button } from '../Button/Button';
 import { FaTiktok } from 'react-icons/fa';
 
 import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { TikTokButtonProps } from './TikTok.types';
-import type { IStyledComponent } from 'styled-components';
 
 const TIKTOK_BUTTON_NAME = 'TikTokButton';
 
-const StyledTikTokButton: IStyledComponent<'web', any> = styled(Button)<{
+const StyledTikTokButton = styled(Button)<{
   $disabled?: boolean;
 }>`
   display: inline-flex;

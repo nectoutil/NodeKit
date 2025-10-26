@@ -8,17 +8,16 @@
 
 import cn from 'clsx';
 import { forwardRef } from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { Button } from '../Button/Button';
 import { FaDropbox } from 'react-icons/fa';
 
 import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { DropboxButtonProps } from './Dropbox.types';
-import type { IStyledComponent } from 'styled-components';
 
 const DROPBOX_BUTTON_NAME: string = 'DropboxButton' as const;
 
-const StyledDropboxButton: IStyledComponent<'web', any> = styled(Button)<{
+const StyledDropboxButton = styled(Button)<{
   $disabled?: boolean;
 }>`
   display: inline-flex;
