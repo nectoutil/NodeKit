@@ -1,6 +1,7 @@
 {
   "name": "@necto/constants",
   "version": "1.4.0",
+  "type": "module",
   "description": "Necto's library defining common constant values for programs.",
   "scripts": {
     "build": "tsup --dts",
@@ -15,9 +16,17 @@
     "dist",
     "README.md"
   ],
-  "types": "./dist/index.d.ts",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
   "author": "Corinvo OSS Team",
   "license": "MIT",
   "devDependencies": {

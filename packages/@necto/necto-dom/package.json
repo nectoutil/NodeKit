@@ -1,6 +1,7 @@
 {
   "name": "@necto/dom",
   "version": "1.4.0",
+  "type": "module",
   "description": "Necto's library for providing helpers and tools to interact with the DOM.",
   "scripts": {
     "build": "tsup --minify terser"
@@ -15,9 +16,17 @@
     "dist",
     "README.md"
   ],
-  "types": "./dist/index.d.ts",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
   "dependencies": {
     "@necto/constants": "workspace:*",
     "@necto/types": "workspace:*",
