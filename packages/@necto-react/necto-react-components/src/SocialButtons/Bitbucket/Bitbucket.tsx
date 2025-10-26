@@ -13,9 +13,9 @@ import { Button } from '../Button/Button';
 import styles from './Bitbucket.module.scss';
 import { BitbucketIcon } from './Bitbucket.icon';
 
+import type { IStyledComponent } from 'styled-components';
 import type { FC, ReactElement, ForwardedRef } from 'react';
 import type { BitbucketButtonProps } from './Bitbucket.types';
-import type { IStyledComponent } from 'styled-components';
 
 const BITBUCKET_BUTTON_NAME: string = 'BitbucketButton' as const;
 
