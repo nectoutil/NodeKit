@@ -15,9 +15,21 @@
   "files": [
     "dist"
   ],
-  "types": "dist/index.d.ts",
-  "main": "./dist/index.js",
-  "module": "./dist/index.es.js",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./package.json": "./package.json",
+    "./style.css": "./dist/index.css"
+  },
+  "sideEffects": [
+    "*.css"
+  ],
   "author": "Corinvo OSS Team",
   "license": "MIT",
   "devDependencies": {
