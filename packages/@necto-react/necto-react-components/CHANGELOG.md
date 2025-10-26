@@ -1,5 +1,11 @@
 # @necto-react/components
 
+## 1.2.10
+
+### Patch Changes
+
+- 6820f8a: Added new fixes
+
 ## 1.2.9
 
 ### Patch Changes
