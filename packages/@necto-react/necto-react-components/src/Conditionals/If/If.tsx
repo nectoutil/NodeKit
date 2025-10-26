@@ -10,9 +10,9 @@ import { Else } from '../Else';
 import { Fragment, Children } from 'react';
 
 import type { IfProps } from './If.types';
-import type { FC, ReactElement } from 'react';
+import type { ReactElement } from 'react';
 
-export const If: FC<IfProps> = (props: IfProps): ReactElement | null => {
+export const If = (props: IfProps): ReactElement | null => {
   const { condition, keepAlive, children } = props;
 
   if (!children) {

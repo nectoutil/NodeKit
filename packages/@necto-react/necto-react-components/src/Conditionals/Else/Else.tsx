@@ -9,9 +9,9 @@
 import { Fragment } from 'react';
 
 import type { ElseProps } from './Else.types';
-import type { FC, ReactElement } from 'react';
+import type { ReactElement } from 'react';
 
-export const Else: FC<ElseProps> = (props: ElseProps): ReactElement => {
+export const Else = (props: ElseProps): ReactElement => {
   const { children } = props;
 
   return (
