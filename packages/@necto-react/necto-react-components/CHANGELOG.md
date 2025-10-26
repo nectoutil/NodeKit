@@ -1,5 +1,11 @@
 # @necto-react/components
 
+## 1.2.2
+
+### Patch Changes
+
+- d855b4a: Fix social button component type annotations to resolve "cannot be used as a JSX component" errors. All button components now use explicit ForwardRefExoticComponent types instead of FC, ensuring proper TypeScript compatibility when consuming the package.
+
 ## 1.2.1
 
 ### Patch Changes
