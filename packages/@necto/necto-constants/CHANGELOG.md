@@ -1,5 +1,11 @@
 # @necto/constants
 
+## 1.4.1
+
+### Patch Changes
+
+- faedceb: Added minor fixes
+
 ## 1.4.0
 
 ### Minor Changes
