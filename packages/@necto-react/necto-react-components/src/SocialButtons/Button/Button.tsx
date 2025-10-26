@@ -6,6 +6,8 @@
  *
  */
 
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import { HTMLElements } from '@necto/dom';
 import { If } from '../../Conditionals/If';
 import { forwardRef, Fragment } from 'react';
@@ -58,8 +60,12 @@ export const Button: FC<ButtonProps> = forwardRef(function SocialButton<
 
   const iconNode: ReactNode = icon ? (
     <span
-      className="_necto:brand-icon"
-      style={{ flexShrink: 0, lineHeight: 0, display: 'inline-flex' }}
+      className="_necto:BrandIcon"
+      css={css`
+        flex-shrink: 0;
+        line-height: 0;
+        display: inline-flex;
+      `}
     >
       {icon}
     </span>

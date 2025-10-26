@@ -6,6 +6,7 @@
  *
  */
 
+/** @jsxImportSource @emotion/react */
 import cn from 'clsx';
 import { forwardRef } from 'react';
 import styled from '@emotion/styled';
@@ -17,6 +18,12 @@ import type { DropboxButtonProps } from './Dropbox.types';
 
 const DROPBOX_BUTTON_NAME: string = 'DropboxButton' as const;
 
+const DROPBOX_BG_COLOR: string = '#0061ff';
+const DROPBOX_BG_HOVER_COLOR: string = '#0056e0';
+const DROPBOX_BG_ACTIVE_COLOR: string = '#004bc5';
+const DROPBOX_TEXT_COLOR: string = '#ffffff';
+const DROPBOX_FOCUS_SHADOW_COLOR: string = 'rgba(0, 97, 255, 0.3)';
+
 const StyledDropboxButton = styled(Button)<{
   $disabled?: boolean;
 }>`
@@ -26,8 +33,9 @@ const StyledDropboxButton = styled(Button)<{
   gap: 10px;
   padding: 0 18px;
   min-height: 40px;
-  background-color: #0061ff;
-  color: #ffffff;
+  width: 100%;
+  background-color: var(--necto-dropbox-bg, ${DROPBOX_BG_COLOR});
+  color: var(--necto-dropbox-text, ${DROPBOX_TEXT_COLOR});
   border: none;
   border-radius: 8px;
   font-size: 14px;
@@ -40,16 +48,16 @@ const StyledDropboxButton = styled(Button)<{
   transition: background-color 0.2s, box-shadow 0.2s, border-color 0.2s, color 0.2s;
 
   &:hover {
-    background-color: #0056e0;
+    background-color: var(--necto-dropbox-bg-hover, ${DROPBOX_BG_HOVER_COLOR});
   }
 
   &:active {
-    background-color: #004bc5;
+    background-color: var(--necto-dropbox-bg-active, ${DROPBOX_BG_ACTIVE_COLOR});
   }
 
   &:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(0, 97, 255, 0.3);
+    box-shadow: 0 0 0 3px var(--necto-dropbox-focus-shadow, ${DROPBOX_FOCUS_SHADOW_COLOR});
   }
 
   ${props => props.$disabled && `
@@ -59,7 +67,7 @@ const StyledDropboxButton = styled(Button)<{
 
     &:hover,
     &:active {
-      background-color: #0061ff;
+      background-color: var(--necto-dropbox-bg, ${DROPBOX_BG_COLOR});
     }
   `}
 `;
@@ -91,7 +99,7 @@ export const DropboxButton: ForwardRefExoticComponent<Omit<DropboxButtonProps, "
       disabled={disabled}
       $disabled={disabled}
       iconPosition={iconPosition}
-      className={cn(className, `_necto:${DROPBOX_BUTTON_NAME}`)}
+      className={cn(`_necto:${DROPBOX_BUTTON_NAME}`, className)}
       {...props}
     >
       {children}

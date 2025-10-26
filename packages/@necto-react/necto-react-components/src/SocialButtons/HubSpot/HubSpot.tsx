@@ -6,6 +6,8 @@
  *
  */
 
+/** @jsxImportSource @emotion/react */
+import cn from 'clsx';
 import { forwardRef } from 'react';
 import styled from '@emotion/styled';
 import { Button } from '../Button/Button';
@@ -16,6 +18,12 @@ import type { HubSpotButtonProps } from './HubSpot.types';
 
 const HUBSPOT_BUTTON_NAME = 'HubSpotButton';
 
+const HUBSPOT_BG_COLOR: string = '#ff7a59';
+const HUBSPOT_BG_HOVER_COLOR: string = '#ff6a47';
+const HUBSPOT_BG_ACTIVE_COLOR: string = '#e55d3f';
+const HUBSPOT_TEXT_COLOR: string = '#ffffff';
+const HUBSPOT_FOCUS_SHADOW_COLOR: string = 'rgba(255, 122, 89, 0.3)';
+
 const StyledHubSpotButton = styled(Button)<{
   $disabled?: boolean;
 }>`
@@ -25,8 +33,9 @@ const StyledHubSpotButton = styled(Button)<{
   gap: 10px;
   padding: 0 12px 0 12px;
   min-height: 40px;
-  background-color: #ff7a59;
-  color: #ffffff;
+  width: 100%;
+  background-color: var(--necto-hubspot-bg, ${HUBSPOT_BG_COLOR});
+  color: var(--necto-hubspot-text, ${HUBSPOT_TEXT_COLOR});
   border: none;
   border-radius: 8px;
   font-size: 14px;
@@ -39,16 +48,16 @@ const StyledHubSpotButton = styled(Button)<{
   transition: background-color 0.2s, box-shadow 0.2s, border-color 0.2s, color 0.2s;
 
   &:hover {
-    background-color: #ff6a47;
+    background-color: var(--necto-hubspot-bg-hover, ${HUBSPOT_BG_HOVER_COLOR});
   }
 
   &:active {
-    background-color: #e55d3f;
+    background-color: var(--necto-hubspot-bg-active, ${HUBSPOT_BG_ACTIVE_COLOR});
   }
 
   &:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(255, 122, 89, 0.3);
+    box-shadow: 0 0 0 3px var(--necto-hubspot-focus-shadow, ${HUBSPOT_FOCUS_SHADOW_COLOR});
   }
 
   ${props => props.$disabled && `
@@ -58,7 +67,7 @@ const StyledHubSpotButton = styled(Button)<{
 
     &:hover,
     &:active {
-      background-color: #ff7a59;
+      background-color: var(--necto-hubspot-bg, ${HUBSPOT_BG_COLOR});
     }
   `}
 `;
@@ -88,7 +97,7 @@ export const HubSpotButton: ForwardRefExoticComponent<Omit<HubSpotButtonProps, "
       showIcon={showIcon}
       disabled={disabled}
       $disabled={disabled}
-      className={className}
+      className={cn(`_necto:${HUBSPOT_BUTTON_NAME}`, className)}
       iconPosition={iconPosition}
       icon={<SiHubspot size={iconSize} />}
       {...props}

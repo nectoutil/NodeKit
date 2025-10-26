@@ -9,6 +9,7 @@
  *
  */
 
+/** @jsxImportSource @emotion/react */
 import { DOM } from '@necto/constants';
 import { HTMLElements } from '@necto/dom';
 import { forwardRef, isValidElement, cloneElement, Children } from 'react';

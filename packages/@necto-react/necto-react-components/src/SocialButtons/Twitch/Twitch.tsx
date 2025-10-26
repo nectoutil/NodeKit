@@ -6,6 +6,8 @@
  *
  */
 
+/** @jsxImportSource @emotion/react */
+import cn from 'clsx';
 import { forwardRef } from 'react';
 import styled from '@emotion/styled';
 import { Button } from '../Button/Button';
@@ -16,6 +18,12 @@ import type { TwitchButtonProps } from './Twitch.types';
 
 const TWITCH_BUTTON_NAME = 'TwitchButton';
 
+const TWITCH_BG_COLOR: string = '#9146ff';
+const TWITCH_BG_HOVER_COLOR: string = '#823ee6';
+const TWITCH_BG_ACTIVE_COLOR: string = '#7337cc';
+const TWITCH_TEXT_COLOR: string = '#ffffff';
+const TWITCH_FOCUS_SHADOW_COLOR: string = 'rgba(145, 70, 255, 0.3)';
+
 const StyledTwitchButton = styled(Button)<{
   $disabled?: boolean;
 }>`
@@ -25,8 +33,9 @@ const StyledTwitchButton = styled(Button)<{
   gap: 10px;
   padding: 0 12px 0 12px;
   min-height: 40px;
-  background-color: #9146ff;
-  color: #ffffff;
+  width: 100%;
+  background-color: var(--necto-twitch-bg, ${TWITCH_BG_COLOR});
+  color: var(--necto-twitch-text, ${TWITCH_TEXT_COLOR});
   border: none;
   border-radius: 8px;
   font-size: 14px;
@@ -39,16 +48,16 @@ const StyledTwitchButton = styled(Button)<{
   transition: background-color 0.2s, box-shadow 0.2s, border-color 0.2s, color 0.2s;
 
   &:hover {
-    background-color: #823ee6;
+    background-color: var(--necto-twitch-bg-hover, ${TWITCH_BG_HOVER_COLOR});
   }
 
   &:active {
-    background-color: #7337cc;
+    background-color: var(--necto-twitch-bg-active, ${TWITCH_BG_ACTIVE_COLOR});
   }
 
   &:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(145, 70, 255, 0.3);
+    box-shadow: 0 0 0 3px var(--necto-twitch-focus-shadow, ${TWITCH_FOCUS_SHADOW_COLOR});
   }
 
   ${props => props.$disabled && `
@@ -58,7 +67,7 @@ const StyledTwitchButton = styled(Button)<{
 
     &:hover,
     &:active {
-      background-color: #9146ff;
+      background-color: var(--necto-twitch-bg, ${TWITCH_BG_COLOR});
     }
   `}
 `;
@@ -88,7 +97,7 @@ export const TwitchButton: ForwardRefExoticComponent<Omit<TwitchButtonProps, "re
       showIcon={showIcon}
       disabled={disabled}
       $disabled={disabled}
-      className={className}
+      className={cn(`_necto:${TWITCH_BUTTON_NAME}`, className)}
       iconPosition={iconPosition}
       icon={<FaTwitch size={iconSize} />}
       {...props}

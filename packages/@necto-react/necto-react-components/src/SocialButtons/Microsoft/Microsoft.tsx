@@ -6,6 +6,8 @@
  *
  */
 
+/** @jsxImportSource @emotion/react */
+import cn from 'clsx';
 import { forwardRef } from 'react';
 import styled from '@emotion/styled';
 import { Button } from '../Button/Button';
@@ -16,6 +18,13 @@ import type { MicrosoftButtonProps } from './Microsoft.types';
 
 const MICROSOFT_BUTTON_NAME = 'MicrosoftButton';
 
+const MICROSOFT_BG_COLOR: string = '#2f2f2f';
+const MICROSOFT_BG_HOVER_COLOR: string = '#3d3d3d';
+const MICROSOFT_BG_ACTIVE_COLOR: string = '#4a4a4a';
+const MICROSOFT_TEXT_COLOR: string = '#ffffff';
+const MICROSOFT_BORDER_COLOR: string = '#8c8c8c';
+const MICROSOFT_FOCUS_SHADOW_COLOR: string = 'rgba(47, 47, 47, 0.3)';
+
 const StyledMicrosoftButton = styled(Button)<{
   $disabled?: boolean;
 }>`
@@ -25,9 +34,10 @@ const StyledMicrosoftButton = styled(Button)<{
   gap: 10px;
   padding: 0 18px;
   min-height: 41px;
-  background-color: #2f2f2f;
-  color: #ffffff;
-  border: 1px solid #8c8c8c;
+  width: 100%;
+  background-color: var(--necto-microsoft-bg, ${MICROSOFT_BG_COLOR});
+  color: var(--necto-microsoft-text, ${MICROSOFT_TEXT_COLOR});
+  border: 1px solid var(--necto-microsoft-border, ${MICROSOFT_BORDER_COLOR});
   border-radius: 8px;
   font-size: 15px;
   font-weight: 600;
@@ -39,16 +49,16 @@ const StyledMicrosoftButton = styled(Button)<{
   transition: background-color 0.2s, box-shadow 0.2s, border-color 0.2s, color 0.2s;
 
   &:hover {
-    background-color: #3d3d3d;
+    background-color: var(--necto-microsoft-bg-hover, ${MICROSOFT_BG_HOVER_COLOR});
   }
 
   &:active {
-    background-color: #4a4a4a;
+    background-color: var(--necto-microsoft-bg-active, ${MICROSOFT_BG_ACTIVE_COLOR});
   }
 
   &:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(47, 47, 47, 0.3);
+    box-shadow: 0 0 0 3px var(--necto-microsoft-focus-shadow, ${MICROSOFT_FOCUS_SHADOW_COLOR});
   }
 
   ${props => props.$disabled && `
@@ -58,7 +68,7 @@ const StyledMicrosoftButton = styled(Button)<{
 
     &:hover,
     &:active {
-      background-color: #2f2f2f;
+      background-color: var(--necto-microsoft-bg, ${MICROSOFT_BG_COLOR});
     }
   `}
 `;
@@ -88,7 +98,7 @@ export const MicrosoftButton: ForwardRefExoticComponent<Omit<MicrosoftButtonProp
       showIcon={showIcon}
       disabled={disabled}
       $disabled={disabled}
-      className={className}
+      className={cn(`_necto:${MICROSOFT_BUTTON_NAME}`, className)}
       iconPosition={iconPosition}
       icon={<MicrosoftIcon size={iconSize} />}
       {...props}

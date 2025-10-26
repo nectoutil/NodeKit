@@ -6,6 +6,8 @@
  *
  */
 
+/** @jsxImportSource @emotion/react */
+import cn from 'clsx';
 import { forwardRef } from 'react';
 import styled from '@emotion/styled';
 import { Button } from '../Button/Button';
@@ -16,6 +18,12 @@ import type { SalesforceButtonProps } from './Salesforce.types';
 
 const SALESFORCE_BUTTON_NAME = 'SalesforceButton';
 
+const SALESFORCE_BG_COLOR: string = '#00a1e0';
+const SALESFORCE_BG_HOVER_COLOR: string = '#0074a8';
+const SALESFORCE_BG_ACTIVE_COLOR: string = '#005c85';
+const SALESFORCE_TEXT_COLOR: string = '#ffffff';
+const SALESFORCE_FOCUS_SHADOW_COLOR: string = 'rgba(0, 161, 224, 0.3)';
+
 const StyledSalesforceButton = styled(Button)<{
   $disabled?: boolean;
 }>`
@@ -25,8 +33,9 @@ const StyledSalesforceButton = styled(Button)<{
   gap: 10px;
   padding: 0 12px;
   min-height: 40px;
-  background-color: #00a1e0;
-  color: #ffffff;
+  width: 100%;
+  background-color: var(--necto-salesforce-bg, ${SALESFORCE_BG_COLOR});
+  color: var(--necto-salesforce-text, ${SALESFORCE_TEXT_COLOR});
   border: none;
   border-radius: 8px;
   font-size: 14px;
@@ -39,16 +48,16 @@ const StyledSalesforceButton = styled(Button)<{
   transition: background-color 0.2s, box-shadow 0.2s;
 
   &:hover {
-    background-color: #0074a8;
+    background-color: var(--necto-salesforce-bg-hover, ${SALESFORCE_BG_HOVER_COLOR});
   }
 
   &:active {
-    background-color: #005c85;
+    background-color: var(--necto-salesforce-bg-active, ${SALESFORCE_BG_ACTIVE_COLOR});
   }
 
   &:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(0, 161, 224, 0.3);
+    box-shadow: 0 0 0 3px var(--necto-salesforce-focus-shadow, ${SALESFORCE_FOCUS_SHADOW_COLOR});
   }
 
   ${props => props.$disabled && `
@@ -58,7 +67,7 @@ const StyledSalesforceButton = styled(Button)<{
 
     &:hover,
     &:active {
-      background-color: #00a1e0;
+      background-color: var(--necto-salesforce-bg, ${SALESFORCE_BG_COLOR});
     }
   `}
 `;
@@ -88,7 +97,7 @@ export const SalesforceButton: ForwardRefExoticComponent<Omit<SalesforceButtonPr
       showIcon={showIcon}
       disabled={disabled}
       $disabled={disabled}
-      className={className}
+      className={cn(`_necto:${SALESFORCE_BUTTON_NAME}`, className)}
       iconPosition={iconPosition}
       icon={<FaSalesforce size={iconSize} />}
       {...props}
