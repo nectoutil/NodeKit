@@ -5,6 +5,10 @@ export default defineConfig([
     entry: ['src/index.ts'],
     format: ['cjs', 'esm'],
     dts: true,
-    sourcemap: false
+    sourcemap: false,
+    splitting: false,
+    clean: true,
+    cjsInterop: true,
+    platform: 'neutral'
   }
 ]);
