@@ -9,6 +9,11 @@ export default defineConfig([
     splitting: false,
     clean: true,
     cjsInterop: true,
-    platform: 'neutral'
+    platform: 'neutral',
+    outExtension({ format }) {
+      return {
+        js: format === 'cjs' ? '.cjs' : '.mjs'
+      };
+    }
   }
 ]);
