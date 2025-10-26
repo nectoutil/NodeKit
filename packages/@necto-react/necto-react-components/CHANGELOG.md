@@ -1,5 +1,11 @@
 # @necto-react/components
 
+## 1.2.3
+
+### Patch Changes
+
+- ec4f3e0: Remove FC type from If and Else conditional components to prevent TypeScript conflicts with ForwardRefExoticComponent types used in social buttons.
+
 ## 1.2.2
 
 ### Patch Changes
