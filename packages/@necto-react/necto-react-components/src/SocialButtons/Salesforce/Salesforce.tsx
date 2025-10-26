@@ -12,7 +12,7 @@ import { Button } from '../Button/Button';
 import { FaSalesforce } from 'react-icons/fa';
 import styles from './Salesforce.module.scss';
 
-import type { FC, ReactElement, ForwardedRef } from 'react';
+import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { SalesforceButtonProps } from './Salesforce.types';
 import type { IStyledComponent } from 'styled-components';
 
@@ -25,7 +25,7 @@ const StyledSalesforceButton: IStyledComponent<'web', any> = styled(
     `${styles.SalesforceButton} ${props.$disabled ? styles.disabled : ''}`.trim()
 }))<{ $disabled?: boolean }>``;
 
-export const SalesforceButton: FC<SalesforceButtonProps> = forwardRef<
+export const SalesforceButton: ForwardRefExoticComponent<Omit<SalesforceButtonProps, "ref"> & RefAttributes<HTMLButtonElement>> = forwardRef<
   HTMLButtonElement,
   SalesforceButtonProps
 >(
@@ -40,7 +40,7 @@ export const SalesforceButton: FC<SalesforceButtonProps> = forwardRef<
       disabled,
       className,
       ...props
-    }: Omit<SalesforceButtonProps, 'ref'>,
+    }: SalesforceButtonProps,
     ref: ForwardedRef<HTMLButtonElement>
   ): ReactElement => (
     <StyledSalesforceButton

@@ -13,7 +13,7 @@ import { Button } from '../Button/Button';
 import { FaAtlassian } from 'react-icons/fa';
 import styles from './Atlassian.module.scss';
 
-import type { FC, ReactElement, ForwardedRef } from 'react';
+import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { AtlassianButtonProps } from './Atlassian.types';
 import type { IStyledComponent } from 'styled-components';
 
@@ -26,7 +26,7 @@ const StyledAtlassianButton: IStyledComponent<'web', any> = styled(
     `${styles.AtlassianButton} ${props.$disabled ? styles.disabled : ''}`.trim()
 }))<{ $disabled?: boolean }>``;
 
-export const AtlassianButton: FC<AtlassianButtonProps> = forwardRef<
+export const AtlassianButton: ForwardRefExoticComponent<Omit<AtlassianButtonProps, "ref"> & RefAttributes<HTMLButtonElement>> = forwardRef<
   HTMLButtonElement,
   AtlassianButtonProps
 >(
@@ -41,7 +41,7 @@ export const AtlassianButton: FC<AtlassianButtonProps> = forwardRef<
       disabled,
       className,
       ...props
-    }: Omit<AtlassianButtonProps, 'ref'>,
+    }: AtlassianButtonProps,
     ref: ForwardedRef<HTMLButtonElement>
   ): ReactElement => (
     <StyledAtlassianButton

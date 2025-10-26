@@ -12,7 +12,7 @@ import { Button } from '../Button/Button';
 import { FaTwitch } from 'react-icons/fa';
 import styles from './Twitch.module.scss';
 
-import type { FC, ReactElement, ForwardedRef } from 'react';
+import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { TwitchButtonProps } from './Twitch.types';
 import type { IStyledComponent } from 'styled-components';
 
@@ -25,7 +25,7 @@ const StyledTwitchButton: IStyledComponent<'web', any> = styled(Button).attrs<{
     `${styles.TwitchButton} ${props.$disabled ? styles.disabled : ''}`.trim()
 }))<{ $disabled?: boolean }>``;
 
-export const TwitchButton: FC<TwitchButtonProps> = forwardRef<
+export const TwitchButton: ForwardRefExoticComponent<Omit<TwitchButtonProps, "ref"> & RefAttributes<HTMLButtonElement>> = forwardRef<
   HTMLButtonElement,
   TwitchButtonProps
 >(
@@ -40,7 +40,7 @@ export const TwitchButton: FC<TwitchButtonProps> = forwardRef<
       disabled,
       className,
       ...props
-    }: Omit<TwitchButtonProps, 'ref'>,
+    }: TwitchButtonProps,
     ref: ForwardedRef<HTMLButtonElement>
   ): ReactElement => (
     <StyledTwitchButton

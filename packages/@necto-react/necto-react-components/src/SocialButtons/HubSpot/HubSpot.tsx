@@ -12,7 +12,7 @@ import { Button } from '../Button/Button';
 import { SiHubspot } from 'react-icons/si';
 import styles from './HubSpot.module.scss';
 
-import type { FC, ReactElement, ForwardedRef } from 'react';
+import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { HubSpotButtonProps } from './HubSpot.types';
 import type { IStyledComponent } from 'styled-components';
 
@@ -25,7 +25,7 @@ const StyledHubSpotButton: IStyledComponent<'web', any> = styled(Button).attrs<{
     `${styles.HubSpotButton} ${props.$disabled ? styles.disabled : ''}`.trim()
 }))<{ $disabled?: boolean }>``;
 
-export const HubSpotButton: FC<HubSpotButtonProps> = forwardRef<
+export const HubSpotButton: ForwardRefExoticComponent<Omit<HubSpotButtonProps, "ref"> & RefAttributes<HTMLButtonElement>> = forwardRef<
   HTMLButtonElement,
   HubSpotButtonProps
 >(
@@ -40,7 +40,7 @@ export const HubSpotButton: FC<HubSpotButtonProps> = forwardRef<
       disabled,
       className,
       ...props
-    }: Omit<HubSpotButtonProps, 'ref'>,
+    }: HubSpotButtonProps,
     ref: ForwardedRef<HTMLButtonElement>
   ): ReactElement => (
     <StyledHubSpotButton

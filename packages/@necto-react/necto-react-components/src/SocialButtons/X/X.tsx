@@ -12,7 +12,7 @@ import { Button } from '../Button/Button';
 import { FaXTwitter } from 'react-icons/fa6';
 import styles from './X.module.scss';
 
-import type { FC, ReactElement, ForwardedRef } from 'react';
+import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { XButtonProps } from './X.types';
 import type { IStyledComponent } from 'styled-components';
 
@@ -25,7 +25,7 @@ const StyledXButton: IStyledComponent<'web', any> = styled(Button).attrs<{
     `${styles.XButton} ${props.$disabled ? styles.disabled : ''}`.trim()
 }))<{ $disabled?: boolean }>``;
 
-export const XButton: FC<XButtonProps> = forwardRef<
+export const XButton: ForwardRefExoticComponent<Omit<XButtonProps, "ref"> & RefAttributes<HTMLButtonElement>> = forwardRef<
   HTMLButtonElement,
   XButtonProps
 >(
@@ -40,7 +40,7 @@ export const XButton: FC<XButtonProps> = forwardRef<
       disabled,
       className,
       ...props
-    }: Omit<XButtonProps, 'ref'>,
+    }: XButtonProps,
     ref: ForwardedRef<HTMLButtonElement>
   ): ReactElement => (
     <StyledXButton

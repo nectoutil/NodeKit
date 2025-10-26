@@ -12,7 +12,7 @@ import { Button } from '../Button/Button';
 import { SiOkx } from 'react-icons/si';
 import styles from './OKX.module.scss';
 
-import type { FC, ReactElement, ForwardedRef } from 'react';
+import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { OKXButtonProps } from './OKX.types';
 import type { IStyledComponent } from 'styled-components';
 
@@ -25,7 +25,7 @@ const StyledOKXButton: IStyledComponent<'web', any> = styled(Button).attrs<{
     `${styles.OKXButton} ${props.$disabled ? styles.disabled : ''}`.trim()
 }))<{ $disabled?: boolean }>``;
 
-export const OKXButton: FC<OKXButtonProps> = forwardRef<
+export const OKXButton: ForwardRefExoticComponent<Omit<OKXButtonProps, "ref"> & RefAttributes<HTMLButtonElement>> = forwardRef<
   HTMLButtonElement,
   OKXButtonProps
 >(
@@ -40,7 +40,7 @@ export const OKXButton: FC<OKXButtonProps> = forwardRef<
       disabled,
       className,
       ...props
-    }: Omit<OKXButtonProps, 'ref'>,
+    }: OKXButtonProps,
     ref: ForwardedRef<HTMLButtonElement>
   ): ReactElement => (
     <StyledOKXButton

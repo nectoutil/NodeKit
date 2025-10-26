@@ -12,7 +12,7 @@ import { Button } from '../Button/Button';
 import { FcGoogle } from 'react-icons/fc';
 import styles from './Google.module.scss';
 
-import type { FC, ReactElement, ForwardedRef } from 'react';
+import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { GoogleButtonProps } from './Google.types';
 import type { IStyledComponent } from 'styled-components';
 
@@ -25,7 +25,7 @@ const StyledGoogleButton: IStyledComponent<'web', any> = styled(Button).attrs<{
     `${styles.GoogleButton} ${props.$disabled ? styles.disabled : ''}`.trim()
 }))<{ $disabled?: boolean }>``;
 
-export const GoogleButton: FC<GoogleButtonProps> = forwardRef<
+export const GoogleButton: ForwardRefExoticComponent<Omit<GoogleButtonProps, "ref"> & RefAttributes<HTMLButtonElement>> = forwardRef<
   HTMLButtonElement,
   GoogleButtonProps
 >(
@@ -40,7 +40,7 @@ export const GoogleButton: FC<GoogleButtonProps> = forwardRef<
       disabled,
       className,
       ...props
-    }: Omit<GoogleButtonProps, 'ref'>,
+    }: GoogleButtonProps,
     ref: ForwardedRef<HTMLButtonElement>
   ): ReactElement => (
     <StyledGoogleButton

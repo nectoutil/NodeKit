@@ -12,7 +12,7 @@ import { Button } from '../Button/Button';
 import { SiMetamask } from 'react-icons/si';
 import styles from './MetaMask.module.scss';
 
-import type { FC, ReactElement, ForwardedRef } from 'react';
+import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { MetaMaskButtonProps } from './MetaMask.types';
 import type { IStyledComponent } from 'styled-components';
 
@@ -25,7 +25,7 @@ const StyledMetaMaskButton: IStyledComponent<'web', any> = styled(
     `${styles.MetaMaskButton} ${props.$disabled ? styles.disabled : ''}`.trim()
 }))<{ $disabled?: boolean }>``;
 
-export const MetaMaskButton: FC<MetaMaskButtonProps> = forwardRef<
+export const MetaMaskButton: ForwardRefExoticComponent<Omit<MetaMaskButtonProps, "ref"> & RefAttributes<HTMLButtonElement>> = forwardRef<
   HTMLButtonElement,
   MetaMaskButtonProps
 >(
@@ -40,7 +40,7 @@ export const MetaMaskButton: FC<MetaMaskButtonProps> = forwardRef<
       disabled,
       className,
       ...props
-    }: Omit<MetaMaskButtonProps, 'ref'>,
+    }: MetaMaskButtonProps,
     ref: ForwardedRef<HTMLButtonElement>
   ): ReactElement => (
     <StyledMetaMaskButton

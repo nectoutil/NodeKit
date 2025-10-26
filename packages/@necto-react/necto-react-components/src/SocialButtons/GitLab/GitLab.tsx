@@ -13,7 +13,7 @@ import { Button } from '../Button/Button';
 import styles from './GitLab.module.scss';
 import { FaGitlab } from 'react-icons/fa6';
 
-import type { FC, ReactElement, ForwardedRef } from 'react';
+import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { GitLabButtonProps } from './GitLab.types';
 import type { IStyledComponent } from 'styled-components';
 
@@ -26,7 +26,7 @@ const StyledGitLabButton: IStyledComponent<'web', any> = styled(Button).attrs<{
     `${styles.GitLabButton} ${props.$disabled ? styles.disabled : ''}`.trim()
 }))<{ $disabled?: boolean }>``;
 
-export const GitLabButton: FC<GitLabButtonProps> = forwardRef<
+export const GitLabButton: ForwardRefExoticComponent<Omit<GitLabButtonProps, "ref"> & RefAttributes<HTMLButtonElement>> = forwardRef<
   HTMLButtonElement,
   GitLabButtonProps
 >(
@@ -41,7 +41,7 @@ export const GitLabButton: FC<GitLabButtonProps> = forwardRef<
       disabled,
       className,
       ...props
-    }: Omit<GitLabButtonProps, 'ref'>,
+    }: GitLabButtonProps,
     ref: ForwardedRef<HTMLButtonElement>
   ): ReactElement => (
     <StyledGitLabButton

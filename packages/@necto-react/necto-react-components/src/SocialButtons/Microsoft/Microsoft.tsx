@@ -12,7 +12,7 @@ import { Button } from '../Button/Button';
 import styles from './Microsoft.module.scss';
 import { MicrosoftIcon } from './Microsoft.icon';
 
-import type { FC, ReactElement, ForwardedRef } from 'react';
+import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { MicrosoftButtonProps } from './Microsoft.types';
 import type { IStyledComponent } from 'styled-components';
 
@@ -25,7 +25,7 @@ const StyledMicrosoftButton: IStyledComponent<'web', any> = styled(
     `${styles.MicrosoftButton} ${props.$disabled ? styles.disabled : ''}`.trim()
 }))<{ $disabled?: boolean }>``;
 
-export const MicrosoftButton: FC<MicrosoftButtonProps> = forwardRef<
+export const MicrosoftButton: ForwardRefExoticComponent<Omit<MicrosoftButtonProps, "ref"> & RefAttributes<HTMLButtonElement>> = forwardRef<
   HTMLButtonElement,
   MicrosoftButtonProps
 >(
@@ -40,7 +40,7 @@ export const MicrosoftButton: FC<MicrosoftButtonProps> = forwardRef<
       disabled,
       className,
       ...props
-    }: Omit<MicrosoftButtonProps, 'ref'>,
+    }: MicrosoftButtonProps,
     ref: ForwardedRef<HTMLButtonElement>
   ): ReactElement => (
     <StyledMicrosoftButton

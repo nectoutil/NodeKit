@@ -13,7 +13,7 @@ import { Button } from '../Button/Button';
 import { FaFacebook } from 'react-icons/fa6';
 import styles from './Facebook.module.scss';
 
-import type { FC, ReactElement, ForwardedRef } from 'react';
+import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { FacebookButtonProps } from './Facebook.types';
 import type { IStyledComponent } from 'styled-components';
 
@@ -26,7 +26,7 @@ const StyledFacebookButton: IStyledComponent<'web', any> = styled(
     `${styles.FacebookButton} ${props.$disabled ? styles.disabled : ''}`.trim()
 }))<{ $disabled?: boolean }>``;
 
-export const FacebookButton: FC<FacebookButtonProps> = forwardRef<
+export const FacebookButton: ForwardRefExoticComponent<Omit<FacebookButtonProps, "ref"> & RefAttributes<HTMLButtonElement>> = forwardRef<
   HTMLButtonElement,
   FacebookButtonProps
 >(
@@ -41,7 +41,7 @@ export const FacebookButton: FC<FacebookButtonProps> = forwardRef<
       disabled,
       className,
       ...props
-    }: Omit<FacebookButtonProps, 'ref'>,
+    }: FacebookButtonProps,
     ref: ForwardedRef<HTMLButtonElement>
   ): ReactElement => (
     <StyledFacebookButton

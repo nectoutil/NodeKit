@@ -13,7 +13,7 @@ import { FaApple } from 'react-icons/fa';
 import { Button } from '../Button/Button';
 import styles from './Apple.module.scss';
 
-import type { FC, ReactElement, ForwardedRef } from 'react';
+import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { AppleButtonProps } from './Apple.types';
 import type { IStyledComponent } from 'styled-components';
 
@@ -26,7 +26,7 @@ const StyledAppleButton: IStyledComponent<'web', any> = styled(Button).attrs<{
     `${styles.AppleButton} ${props.$disabled ? styles.disabled : ''}`.trim()
 }))<{ $disabled?: boolean }>``;
 
-export const AppleButton: FC<AppleButtonProps> = forwardRef<
+export const AppleButton: ForwardRefExoticComponent<Omit<AppleButtonProps, "ref"> & RefAttributes<HTMLButtonElement>> = forwardRef<
   HTMLButtonElement,
   AppleButtonProps
 >(
@@ -41,7 +41,7 @@ export const AppleButton: FC<AppleButtonProps> = forwardRef<
       disabled,
       className,
       ...props
-    }: Omit<AppleButtonProps, 'ref'>,
+    }: AppleButtonProps,
     ref: ForwardedRef<HTMLButtonElement>
   ): ReactElement => (
     <StyledAppleButton

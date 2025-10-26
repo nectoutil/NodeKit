@@ -12,7 +12,7 @@ import { Button } from '../Button/Button';
 import { FaSlack } from 'react-icons/fa';
 import styles from './Slack.module.scss';
 
-import type { FC, ReactElement, ForwardedRef } from 'react';
+import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { SlackButtonProps } from './Slack.types';
 import type { IStyledComponent } from 'styled-components';
 
@@ -25,7 +25,7 @@ const StyledSlackButton: IStyledComponent<'web', any> = styled(Button).attrs<{
     `${styles.SlackButton} ${props.$disabled ? styles.disabled : ''}`.trim()
 }))<{ $disabled?: boolean }>``;
 
-export const SlackButton: FC<SlackButtonProps> = forwardRef<
+export const SlackButton: ForwardRefExoticComponent<Omit<SlackButtonProps, "ref"> & RefAttributes<HTMLButtonElement>> = forwardRef<
   HTMLButtonElement,
   SlackButtonProps
 >(
@@ -40,7 +40,7 @@ export const SlackButton: FC<SlackButtonProps> = forwardRef<
       disabled,
       className,
       ...props
-    }: Omit<SlackButtonProps, 'ref'>,
+    }: SlackButtonProps,
     ref: ForwardedRef<HTMLButtonElement>
   ): ReactElement => (
     <StyledSlackButton
