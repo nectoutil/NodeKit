@@ -8,3 +8,4 @@
 
 export * from './Primitive';
 export * from './Conditionals';
+export * from './SocialButtons';

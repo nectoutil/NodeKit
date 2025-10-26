@@ -142,3 +142,11 @@ temp
 .pnp.*
 
 .DS_Store
+
+# Storybook
+storybook-static/
+
+# Playwright
+test-results/
+playwright-report/
+playwright/.cache/

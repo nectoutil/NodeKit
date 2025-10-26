@@ -1,0 +1,57 @@
+/**
+ * Copyright (c) Corinvo, LLC. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+$x-bg: #000000;
+$x-color: #ffffff;
+$x-hover-bg: #1a1a1a;
+$x-active-bg: #333333;
+$x-focus-shadow: rgba(0, 0, 0, 0.3);
+
+.XButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 12px 0 12px;
+  min-height: 40px;
+  background-color: $x-bg;
+  color: $x-color;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'Roboto', system-ui, -apple-system, sans-serif;
+  line-height: 20px;
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
+  transition: background-color 0.2s, box-shadow 0.2s, border-color 0.2s, color 0.2s;
+
+  &:hover {
+    background-color: $x-hover-bg;
+  }
+
+  &:active {
+    background-color: $x-active-bg;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px $x-focus-shadow;
+  }
+
+  &.disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    pointer-events: none;
+
+    &:hover,
+    &:active {
+      background-color: $x-bg;
+    }
+  }
+}
