@@ -11,7 +11,6 @@ import { forwardRef } from 'react';
 import styled from 'styled-components';
 import { FaApple } from 'react-icons/fa';
 import { Button } from '../Button/Button';
-import styles from './Apple.module.scss';
 
 import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { AppleButtonProps } from './Apple.types';
@@ -19,12 +18,52 @@ import type { IStyledComponent } from 'styled-components';
 
 const APPLE_BUTTON_NAME: string = 'AppleButton' as const;
 
-const StyledAppleButton: IStyledComponent<'web', any> = styled(Button).attrs<{
+const StyledAppleButton: IStyledComponent<'web', any> = styled(Button)<{
   $disabled?: boolean;
-}>((props) => ({
-  className:
-    `${styles.AppleButton} ${props.$disabled ? styles.disabled : ''}`.trim()
-}))<{ $disabled?: boolean }>``;
+}>`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 18px;
+  min-height: 40px;
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: 'Roboto', system-ui, -apple-system, sans-serif;
+  line-height: 20px;
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
+  transition: background-color 0.2s, box-shadow 0.2s, border-color 0.2s, color 0.2s;
+
+  &:hover {
+    background-color: #1a1a1a;
+  }
+
+  &:active {
+    background-color: #333333;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.3);
+  }
+
+  ${props => props.$disabled && `
+    opacity: 0.7;
+    cursor: not-allowed;
+    pointer-events: none;
+
+    &:hover,
+    &:active {
+      background-color: #000000;
+    }
+  `}
+`;
 
 export const AppleButton: ForwardRefExoticComponent<Omit<AppleButtonProps, "ref"> & RefAttributes<HTMLButtonElement>> = forwardRef<
   HTMLButtonElement,

@@ -10,7 +10,6 @@ import { forwardRef } from 'react';
 import styled from 'styled-components';
 import { Button } from '../Button/Button';
 import { FaSlack } from 'react-icons/fa';
-import styles from './Slack.module.scss';
 
 import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { SlackButtonProps } from './Slack.types';
@@ -18,12 +17,52 @@ import type { IStyledComponent } from 'styled-components';
 
 const SLACK_BUTTON_NAME = 'SlackButton';
 
-const StyledSlackButton: IStyledComponent<'web', any> = styled(Button).attrs<{
+const StyledSlackButton: IStyledComponent<'web', any> = styled(Button)<{
   $disabled?: boolean;
-}>((props) => ({
-  className:
-    `${styles.SlackButton} ${props.$disabled ? styles.disabled : ''}`.trim()
-}))<{ $disabled?: boolean }>``;
+}>`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 12px 0 12px;
+  min-height: 40px;
+  background-color: #4a154b;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'Roboto', system-ui, -apple-system, sans-serif;
+  line-height: 20px;
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
+  transition: background-color 0.2s, box-shadow 0.2s, border-color 0.2s, color 0.2s;
+
+  &:hover {
+    background-color: #3f1240;
+  }
+
+  &:active {
+    background-color: #350f36;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(74, 21, 75, 0.3);
+  }
+
+  ${props => props.$disabled && `
+    opacity: 0.7;
+    cursor: not-allowed;
+    pointer-events: none;
+
+    &:hover,
+    &:active {
+      background-color: #4a154b;
+    }
+  `}
+`;
 
 export const SlackButton: ForwardRefExoticComponent<Omit<SlackButtonProps, "ref"> & RefAttributes<HTMLButtonElement>> = forwardRef<
   HTMLButtonElement,

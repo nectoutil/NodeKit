@@ -9,7 +9,6 @@
 import { forwardRef } from 'react';
 import styled from 'styled-components';
 import { Button } from '../Button/Button';
-import styles from './Microsoft.module.scss';
 import { MicrosoftIcon } from './Microsoft.icon';
 
 import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
@@ -18,12 +17,52 @@ import type { IStyledComponent } from 'styled-components';
 
 const MICROSOFT_BUTTON_NAME = 'MicrosoftButton';
 
-const StyledMicrosoftButton: IStyledComponent<'web', any> = styled(
-  Button
-).attrs<{ $disabled?: boolean }>((props) => ({
-  className:
-    `${styles.MicrosoftButton} ${props.$disabled ? styles.disabled : ''}`.trim()
-}))<{ $disabled?: boolean }>``;
+const StyledMicrosoftButton: IStyledComponent<'web', any> = styled(Button)<{
+  $disabled?: boolean;
+}>`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 18px;
+  min-height: 41px;
+  background-color: #2f2f2f;
+  color: #ffffff;
+  border: 1px solid #8c8c8c;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  line-height: 20px;
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
+  transition: background-color 0.2s, box-shadow 0.2s, border-color 0.2s, color 0.2s;
+
+  &:hover {
+    background-color: #3d3d3d;
+  }
+
+  &:active {
+    background-color: #4a4a4a;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(47, 47, 47, 0.3);
+  }
+
+  ${props => props.$disabled && `
+    opacity: 0.7;
+    cursor: not-allowed;
+    pointer-events: none;
+
+    &:hover,
+    &:active {
+      background-color: #2f2f2f;
+    }
+  `}
+`;
 
 export const MicrosoftButton: ForwardRefExoticComponent<Omit<MicrosoftButtonProps, "ref"> & RefAttributes<HTMLButtonElement>> = forwardRef<
   HTMLButtonElement,
