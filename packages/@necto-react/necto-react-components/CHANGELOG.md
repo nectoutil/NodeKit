@@ -1,5 +1,11 @@
 # @necto-react/components
 
+## 1.2.11
+
+### Patch Changes
+
+- a269f81: Fixed errors nad migrated to React Emotions instead of Styled Components for login buttons
+
 ## 1.2.10
 
 ### Patch Changes
