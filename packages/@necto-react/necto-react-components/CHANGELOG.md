@@ -1,5 +1,11 @@
 # @necto-react/components
 
+## 1.2.12
+
+### Patch Changes
+
+- 66afd61: Minor css fixes
+
 ## 1.2.11
 
 ### Patch Changes
