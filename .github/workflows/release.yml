@@ -44,6 +44,7 @@ jobs:
         run: pnpm build
 
       - name: Create Release Pull Request
+        id: create_release_pr
         uses: changesets/action@v1
         with:
           title: 'Release Packages'
