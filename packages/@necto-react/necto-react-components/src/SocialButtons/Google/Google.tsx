@@ -33,7 +33,7 @@ const StyledGoogleButton = styled(Button)<{
   justify-content: center;
   gap: 10px;
   padding: 0 12px 0 12px;
-  min-height: 40px;
+  height: 40px;
   width: 100%;
   background-color: var(--necto-google-bg, ${GOOGLE_BG_COLOR});
   color: var(--necto-google-text, ${GOOGLE_TEXT_COLOR});
