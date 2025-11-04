@@ -6,14 +6,18 @@
  *
  */
 
-/** @jsxImportSource @emotion/react */
 import cn from 'clsx';
 import { forwardRef } from 'react';
 import styled from '@emotion/styled';
 import { Button } from '../Button/Button';
 import { BitbucketIcon } from './Bitbucket.icon';
 
-import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
+import type {
+  ReactElement,
+  ForwardedRef,
+  ForwardRefExoticComponent,
+  RefAttributes
+} from 'react';
 import type { BitbucketButtonProps } from './Bitbucket.types';
 
 const BITBUCKET_BUTTON_NAME: string = 'BitbucketButton' as const;
@@ -27,25 +31,12 @@ const BITBUCKET_FOCUS_SHADOW_COLOR: string = 'rgba(0, 82, 204, 0.3)';
 const StyledBitbucketButton = styled(Button)<{
   $disabled?: boolean;
 }>`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
   padding: 0 18px;
-  min-height: 40px;
-  width: 100%;
   background-color: var(--necto-bitbucket-bg, ${BITBUCKET_BG_COLOR});
   color: var(--necto-bitbucket-text, ${BITBUCKET_TEXT_COLOR});
   border: none;
-  border-radius: 8px;
-  font-size: 14px;
   font-weight: 500;
   font-family: system-ui, -apple-system, sans-serif;
-  line-height: 20px;
-  cursor: pointer;
-  user-select: none;
-  text-decoration: none;
-  transition: background-color 0.2s, box-shadow 0.2s;
 
   &:hover {
     background-color: var(--necto-bitbucket-bg-hover, ${BITBUCKET_BG_HOVER_COLOR});
@@ -56,15 +47,12 @@ const StyledBitbucketButton = styled(Button)<{
   }
 
   &:focus-visible {
-    outline: none;
     box-shadow: 0 0 0 3px var(--necto-bitbucket-focus-shadow, ${BITBUCKET_FOCUS_SHADOW_COLOR});
   }
 
-  ${props => props.$disabled && `
-    opacity: 0.7;
-    cursor: not-allowed;
-    pointer-events: none;
-
+  ${(props) =>
+    props.$disabled &&
+    `
     &:hover,
     &:active {
       background-color: var(--necto-bitbucket-bg, ${BITBUCKET_BG_COLOR});
@@ -72,10 +60,9 @@ const StyledBitbucketButton = styled(Button)<{
   `}
 `;
 
-export const BitbucketButton: ForwardRefExoticComponent<Omit<BitbucketButtonProps, "ref"> & RefAttributes<HTMLButtonElement>> = forwardRef<
-  HTMLButtonElement,
-  BitbucketButtonProps
->(
+export const BitbucketButton: ForwardRefExoticComponent<
+  Omit<BitbucketButtonProps, 'ref'> & RefAttributes<HTMLButtonElement>
+> = forwardRef<HTMLButtonElement, BitbucketButtonProps>(
   (
     {
       as,

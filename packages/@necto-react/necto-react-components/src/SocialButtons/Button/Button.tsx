@@ -6,21 +6,21 @@
  *
  */
 
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { HTMLElements } from '@necto/dom';
 import { If } from '../../Conditionals/If';
 import { forwardRef, Fragment } from 'react';
 import { Primitive } from '../../Primitive/Primitive';
 
-import type { FC, ReactElement } from 'react';
-import type { ButtonProps } from './Button.types';
 import type {
   ElementType,
   KeyboardEvent,
   ForwardedRef,
   ReactNode
 } from 'react';
+import type { FC, ReactElement } from 'react';
+import type { ButtonProps } from './Button.types';
+import type { SerializedStyles } from '@emotion/react';
 
 const DEFAULT_BUTTON_TAG: keyof HTMLElementTagNameMap = HTMLElements.Button;
 
@@ -71,14 +71,47 @@ export const Button: FC<ButtonProps> = forwardRef(function SocialButton<
     </span>
   ) : null;
 
+  const baseStyles: SerializedStyles = css`
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 40px;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 20px;
+    cursor: pointer;
+    user-select: none;
+    text-decoration: none;
+    transition: background-color 0.2s, box-shadow 0.2s, border-color 0.2s, color 0.2s;
+
+    &:focus-visible {
+      outline: none;
+    }
+
+    ${
+      disabled &&
+      `
+      opacity: 0.7;
+      cursor: not-allowed;
+      pointer-events: none;
+    `
+    }
+  `;
+
   return (
     <Primitive
       as={as}
       ref={ref as any}
       asChild={asChild}
       className={className}
+      css={baseStyles}
       {...a11yProps}
-      {...props}
+      {...(() => {
+        const { css, ...rest } = props;
+        return rest;
+      })()}
     >
       <Fragment>
         <If condition={!!iconNode && showIcon && iconPosition === 'left'}>

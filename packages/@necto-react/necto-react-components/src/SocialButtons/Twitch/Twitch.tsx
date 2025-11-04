@@ -6,14 +6,18 @@
  *
  */
 
-/** @jsxImportSource @emotion/react */
 import cn from 'clsx';
 import { forwardRef } from 'react';
 import styled from '@emotion/styled';
 import { Button } from '../Button/Button';
 import { FaTwitch } from 'react-icons/fa';
 
-import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
+import type {
+  ReactElement,
+  ForwardedRef,
+  ForwardRefExoticComponent,
+  RefAttributes
+} from 'react';
 import type { TwitchButtonProps } from './Twitch.types';
 
 const TWITCH_BUTTON_NAME = 'TwitchButton';
@@ -27,25 +31,12 @@ const TWITCH_FOCUS_SHADOW_COLOR: string = 'rgba(145, 70, 255, 0.3)';
 const StyledTwitchButton = styled(Button)<{
   $disabled?: boolean;
 }>`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
   padding: 0 12px 0 12px;
-  min-height: 40px;
-  width: 100%;
   background-color: var(--necto-twitch-bg, ${TWITCH_BG_COLOR});
   color: var(--necto-twitch-text, ${TWITCH_TEXT_COLOR});
   border: none;
-  border-radius: 8px;
-  font-size: 14px;
   font-weight: 500;
   font-family: 'Roboto', system-ui, -apple-system, sans-serif;
-  line-height: 20px;
-  cursor: pointer;
-  user-select: none;
-  text-decoration: none;
-  transition: background-color 0.2s, box-shadow 0.2s, border-color 0.2s, color 0.2s;
 
   &:hover {
     background-color: var(--necto-twitch-bg-hover, ${TWITCH_BG_HOVER_COLOR});
@@ -56,15 +47,12 @@ const StyledTwitchButton = styled(Button)<{
   }
 
   &:focus-visible {
-    outline: none;
     box-shadow: 0 0 0 3px var(--necto-twitch-focus-shadow, ${TWITCH_FOCUS_SHADOW_COLOR});
   }
 
-  ${props => props.$disabled && `
-    opacity: 0.7;
-    cursor: not-allowed;
-    pointer-events: none;
-
+  ${(props) =>
+    props.$disabled &&
+    `
     &:hover,
     &:active {
       background-color: var(--necto-twitch-bg, ${TWITCH_BG_COLOR});
@@ -72,10 +60,9 @@ const StyledTwitchButton = styled(Button)<{
   `}
 `;
 
-export const TwitchButton: ForwardRefExoticComponent<Omit<TwitchButtonProps, "ref"> & RefAttributes<HTMLButtonElement>> = forwardRef<
-  HTMLButtonElement,
-  TwitchButtonProps
->(
+export const TwitchButton: ForwardRefExoticComponent<
+  Omit<TwitchButtonProps, 'ref'> & RefAttributes<HTMLButtonElement>
+> = forwardRef<HTMLButtonElement, TwitchButtonProps>(
   (
     {
       as,
