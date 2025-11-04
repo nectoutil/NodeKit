@@ -1,5 +1,13 @@
 # @necto-react/components
 
+## 1.2.13
+
+### Patch Changes
+
+- 73fdf60: Fixed GitLab button color and added minor fixes to dom package
+- Updated dependencies [73fdf60]
+  - @necto/dom@1.4.4
+
 ## 1.2.12
 
 ### Patch Changes
