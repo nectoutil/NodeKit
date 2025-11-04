@@ -7,5 +7,6 @@ export type GitLabButtonProps<T extends ElementType = 'button'> =
     iconPosition?: 'left' | 'right';
     showIcon?: boolean;
     iconSize?: number;
+    iconColor?: string | null;
     disabled?: boolean;
   };

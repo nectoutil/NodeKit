@@ -148,6 +148,7 @@ storybook-static/
 
 # Playwright
 test-results/
+__snapshots__
 playwright-report/
 **/*playwright-report/
 playwright/
@@ -162,6 +163,3 @@ packages/@necto-react/necto-react-components/test-results/
 packages/@necto-react/necto-react-components/playwright-report/
 packages/@necto-react/necto-react-components/playwright/.cache/
 packages/@necto-react/necto-react-components/storybook-static/
-
-# Visual test snapshots - COMMIT THESE to git for regression testing!
-# packages/@necto-react/necto-react-components/__snapshots__/ is intentionally NOT in .gitignore

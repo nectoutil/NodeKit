@@ -6,14 +6,18 @@
  *
  */
 
-/** @jsxImportSource @emotion/react */
 import cn from 'clsx';
 import { forwardRef } from 'react';
 import styled from '@emotion/styled';
 import { Button } from '../Button/Button';
 import { FaSalesforce } from 'react-icons/fa';
 
-import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
+import type {
+  ReactElement,
+  ForwardedRef,
+  ForwardRefExoticComponent,
+  RefAttributes
+} from 'react';
 import type { SalesforceButtonProps } from './Salesforce.types';
 
 const SALESFORCE_BUTTON_NAME = 'SalesforceButton';
@@ -27,25 +31,12 @@ const SALESFORCE_FOCUS_SHADOW_COLOR: string = 'rgba(0, 161, 224, 0.3)';
 const StyledSalesforceButton = styled(Button)<{
   $disabled?: boolean;
 }>`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
   padding: 0 12px;
-  min-height: 40px;
-  width: 100%;
   background-color: var(--necto-salesforce-bg, ${SALESFORCE_BG_COLOR});
   color: var(--necto-salesforce-text, ${SALESFORCE_TEXT_COLOR});
   border: none;
-  border-radius: 8px;
-  font-size: 14px;
   font-weight: 500;
   font-family: system-ui, -apple-system, sans-serif;
-  line-height: 20px;
-  cursor: pointer;
-  user-select: none;
-  text-decoration: none;
-  transition: background-color 0.2s, box-shadow 0.2s;
 
   &:hover {
     background-color: var(--necto-salesforce-bg-hover, ${SALESFORCE_BG_HOVER_COLOR});
@@ -56,15 +47,12 @@ const StyledSalesforceButton = styled(Button)<{
   }
 
   &:focus-visible {
-    outline: none;
     box-shadow: 0 0 0 3px var(--necto-salesforce-focus-shadow, ${SALESFORCE_FOCUS_SHADOW_COLOR});
   }
 
-  ${props => props.$disabled && `
-    opacity: 0.7;
-    cursor: not-allowed;
-    pointer-events: none;
-
+  ${(props) =>
+    props.$disabled &&
+    `
     &:hover,
     &:active {
       background-color: var(--necto-salesforce-bg, ${SALESFORCE_BG_COLOR});
@@ -72,10 +60,9 @@ const StyledSalesforceButton = styled(Button)<{
   `}
 `;
 
-export const SalesforceButton: ForwardRefExoticComponent<Omit<SalesforceButtonProps, "ref"> & RefAttributes<HTMLButtonElement>> = forwardRef<
-  HTMLButtonElement,
-  SalesforceButtonProps
->(
+export const SalesforceButton: ForwardRefExoticComponent<
+  Omit<SalesforceButtonProps, 'ref'> & RefAttributes<HTMLButtonElement>
+> = forwardRef<HTMLButtonElement, SalesforceButtonProps>(
   (
     {
       as,

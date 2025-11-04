@@ -5,6 +5,7 @@
       "@necto-react/components/*": ["./src/*"],
       "@necto-react/components": ["./src/index.ts"]
     },
+    "jsxImportSource": "@emotion/react",
     "target": "ESNext",
     "module": "ESNext",
     "jsx": "react-jsx",

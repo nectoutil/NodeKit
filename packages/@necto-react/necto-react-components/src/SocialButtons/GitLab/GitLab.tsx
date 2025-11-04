@@ -6,14 +6,18 @@
  *
  */
 
-/** @jsxImportSource @emotion/react */
 import cn from 'clsx';
 import { forwardRef } from 'react';
 import styled from '@emotion/styled';
 import { Button } from '../Button/Button';
-import { FaGitlab } from 'react-icons/fa6';
+import { GitLabIcon } from './GitLab.icon';
 
-import type { ReactElement, ForwardedRef, ForwardRefExoticComponent, RefAttributes } from 'react';
+import type {
+  ReactElement,
+  ForwardedRef,
+  ForwardRefExoticComponent,
+  RefAttributes
+} from 'react';
 import type { GitLabButtonProps } from './GitLab.types';
 
 const GITLAB_BUTTON_NAME: string = 'GitLabButton' as const;
@@ -27,25 +31,12 @@ const GITLAB_FOCUS_SHADOW_COLOR: string = 'rgba(252, 109, 38, 0.3)';
 const StyledGitLabButton = styled(Button)<{
   $disabled?: boolean;
 }>`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
   padding: 0 18px;
-  min-height: 40px;
-  width: 100%;
   background-color: var(--necto-gitlab-bg, ${GITLAB_BG_COLOR});
   color: var(--necto-gitlab-text, ${GITLAB_TEXT_COLOR});
   border: none;
-  border-radius: 8px;
-  font-size: 14px;
   font-weight: 500;
   font-family: system-ui, -apple-system, sans-serif;
-  line-height: 20px;
-  cursor: pointer;
-  user-select: none;
-  text-decoration: none;
-  transition: background-color 0.2s, box-shadow 0.2s;
 
   &:hover {
     background-color: var(--necto-gitlab-bg-hover, ${GITLAB_BG_HOVER_COLOR});
@@ -56,15 +47,12 @@ const StyledGitLabButton = styled(Button)<{
   }
 
   &:focus-visible {
-    outline: none;
     box-shadow: 0 0 0 3px var(--necto-gitlab-focus-shadow, ${GITLAB_FOCUS_SHADOW_COLOR});
   }
 
-  ${props => props.$disabled && `
-    opacity: 0.7;
-    cursor: not-allowed;
-    pointer-events: none;
-
+  ${(props) =>
+    props.$disabled &&
+    `
     &:hover,
     &:active {
       background-color: var(--necto-gitlab-bg, ${GITLAB_BG_COLOR});
@@ -72,14 +60,14 @@ const StyledGitLabButton = styled(Button)<{
   `}
 `;
 
-export const GitLabButton: ForwardRefExoticComponent<Omit<GitLabButtonProps, "ref"> & RefAttributes<HTMLButtonElement>> = forwardRef<
-  HTMLButtonElement,
-  GitLabButtonProps
->(
+export const GitLabButton: ForwardRefExoticComponent<
+  Omit<GitLabButtonProps, 'ref'> & RefAttributes<HTMLButtonElement>
+> = forwardRef<HTMLButtonElement, GitLabButtonProps>(
   (
     {
       as,
       asChild,
+      iconColor = '#fff',
       children = 'Continue with GitLab',
       iconPosition = 'left',
       showIcon = true,
@@ -98,7 +86,7 @@ export const GitLabButton: ForwardRefExoticComponent<Omit<GitLabButtonProps, "re
       disabled={disabled}
       $disabled={disabled}
       iconPosition={iconPosition}
-      icon={<FaGitlab size={iconSize} />}
+      icon={<GitLabIcon size={iconSize} color={iconColor} />}
       className={cn(`_necto:${GITLAB_BUTTON_NAME}`, className)}
       {...props}
     >

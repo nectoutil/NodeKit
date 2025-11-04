@@ -31,6 +31,10 @@ const meta = {
       options: ['left', 'right'],
       description: 'Position of the GitLab icon'
     },
+    iconColor: {
+      control: ['text', null],
+      description: 'Color of button icon'
+    },
     as: {
       control: 'text',
       description: 'HTML element or React component to render as'
@@ -63,6 +67,13 @@ export const IconOnRight: Story = {
 
 export const CustomText: Story = {
   args: {
+    children: 'Sign in with GitLab'
+  }
+};
+
+export const CustomIconColor: Story = {
+  args: {
+    iconColor: null,
     children: 'Sign in with GitLab'
   }
 };
