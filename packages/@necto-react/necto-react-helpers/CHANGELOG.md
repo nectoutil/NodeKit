@@ -1,5 +1,12 @@
 # @necto-react/helpers
 
+## 2.4.4
+
+### Patch Changes
+
+- Updated dependencies [73fdf60]
+  - @necto/dom@1.4.4
+
 ## 2.4.3
 
 ### Patch Changes

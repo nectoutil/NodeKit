@@ -1,5 +1,11 @@
 # @necto/dom
 
+## 1.4.4
+
+### Patch Changes
+
+- 73fdf60: Fixed GitLab button color and added minor fixes to dom package
+
 ## 1.4.3
 
 ### Patch Changes
