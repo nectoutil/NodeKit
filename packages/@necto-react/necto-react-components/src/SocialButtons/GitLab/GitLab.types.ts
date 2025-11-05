@@ -1,12 +1,6 @@
-import type { ElementType, ReactNode } from 'react';
-import type { PrimitiveProps } from '../../Primitive/Primitive.types';
+import type { ElementType } from 'react';
+import type { ButtonProps } from '../Button/Button.types';
 
-export type GitLabButtonProps<T extends ElementType = 'button'> =
-  PrimitiveProps<T> & {
-    children?: ReactNode;
-    iconPosition?: 'left' | 'right';
-    showIcon?: boolean;
-    iconSize?: number;
-    iconColor?: string | null;
-    disabled?: boolean;
-  };
+export type GitLabButtonProps<T extends ElementType = 'button'> = ButtonProps<T> & {
+  iconColor?: string | null;
+};

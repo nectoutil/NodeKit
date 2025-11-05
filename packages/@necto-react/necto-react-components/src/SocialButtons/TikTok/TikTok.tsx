@@ -10,6 +10,7 @@ import cn from 'clsx';
 import { forwardRef } from 'react';
 import styled from '@emotion/styled';
 import { Button } from '../Button/Button';
+import { TikTokIcon } from './TikTok.icon';
 import { FaTiktok } from 'react-icons/fa';
 
 import type {
@@ -67,6 +68,7 @@ export const TikTokButton: ForwardRefExoticComponent<
     {
       as,
       asChild,
+      iconColor = null,
       children = 'Continue with TikTok',
       iconPosition = 'left',
       showIcon = true,
@@ -86,7 +88,11 @@ export const TikTokButton: ForwardRefExoticComponent<
       $disabled={disabled}
       className={cn(`_necto:${TIKTOK_BUTTON_NAME}`, className)}
       iconPosition={iconPosition}
-      icon={<FaTiktok size={iconSize} />}
+      icon={
+        iconColor
+          ? <FaTiktok size={iconSize} color={iconColor} />
+          : <TikTokIcon size={iconSize} />
+      }
       {...props}
     >
       {children}

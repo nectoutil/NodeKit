@@ -6,13 +6,13 @@
  *
  */
 
-import { TikTokButton } from './TikTok';
+import { SnapchatButton } from './Snapchat';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
-  title: 'Social Buttons/TikTok Button',
-  component: TikTokButton,
+  title: 'Social Buttons/Snapchat Button',
+  component: SnapchatButton,
   parameters: {
     layout: 'centered'
   },
@@ -24,16 +24,16 @@ const meta = {
     },
     showIcon: {
       control: 'boolean',
-      description: 'Show or hide the TikTok icon'
+      description: 'Show or hide the Snapchat icon'
     },
     iconPosition: {
       control: 'radio',
       options: ['left', 'right'],
-      description: 'Position of the TikTok icon'
+      description: 'Position of the Snapchat icon'
     },
     iconColor: {
-      control: 'text',
-      description: 'Custom color for the icon (uses simple FaTiktok icon instead of multicolor)'
+      control: ['text', null],
+      description: 'Color of button icon'
     },
     as: {
       control: 'text',
@@ -44,7 +44,7 @@ const meta = {
       description: 'Merge props into child element'
     }
   }
-} satisfies Meta<typeof TikTokButton>;
+} satisfies Meta<typeof SnapchatButton>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -67,7 +67,14 @@ export const IconOnRight: Story = {
 
 export const CustomText: Story = {
   args: {
-    children: 'Sign in with TikTok'
+    children: 'Sign in with Snapchat'
+  }
+};
+
+export const CustomIconColor: Story = {
+  args: {
+    iconColor: 'black',
+    children: 'Sign in with Snapchat'
   }
 };
 
@@ -84,12 +91,6 @@ export const CustomStyles: Story = {
 export const AsLink: Story = {
   args: {
     as: 'a',
-    href: '/auth/tiktok'
-  }
-};
-
-export const WhiteIcon: Story = {
-  args: {
-    iconColor: '#ffffff'
+    href: '/auth/Snapchat'
   }
 };
