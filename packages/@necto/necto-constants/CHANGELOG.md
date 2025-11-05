@@ -1,5 +1,11 @@
 # @necto/constants
 
+## 1.4.3
+
+### Patch Changes
+
+- e5ea15f: Fixed minor errors
+
 ## 1.4.2
 
 ### Patch Changes

@@ -1,5 +1,14 @@
 # @necto-react/components
 
+## 1.2.14
+
+### Patch Changes
+
+- e5ea15f: Fixed minor errors
+- Updated dependencies [e5ea15f]
+  - @necto/constants@1.4.3
+  - @necto/dom@1.4.5
+
 ## 1.2.13
 
 ### Patch Changes
