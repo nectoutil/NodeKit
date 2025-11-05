@@ -1,11 +1,4 @@
-import type { ElementType, ReactNode } from 'react';
-import type { PrimitiveProps } from '../../Primitive/Primitive.types';
+import type { ElementType } from 'react';
+import type { ButtonProps } from '../Button/Button.types';
 
-export type TwitchButtonProps<T extends ElementType = 'button'> =
-  PrimitiveProps<T> & {
-    children?: ReactNode;
-    iconPosition?: 'left' | 'right';
-    showIcon?: boolean;
-    iconSize?: number;
-    disabled?: boolean;
-  };
+export type TwitchButtonProps<T extends ElementType = 'button'> = ButtonProps<T>;

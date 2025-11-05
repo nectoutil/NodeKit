@@ -10,7 +10,7 @@ import cn from 'clsx';
 import { forwardRef } from 'react';
 import styled from '@emotion/styled';
 import { Button } from '../Button/Button';
-import { SiMetamask } from 'react-icons/si';
+import { MetaMaskIcon } from './MetaMask.icon';
 
 import type {
   ReactElement,
@@ -86,7 +86,7 @@ export const MetaMaskButton: ForwardRefExoticComponent<
       $disabled={disabled}
       className={cn(`_necto:${METAMASK_BUTTON_NAME}`, className)}
       iconPosition={iconPosition}
-      icon={<SiMetamask size={iconSize} />}
+      icon={<MetaMaskIcon size={iconSize} />}
       {...props}
     >
       {children}

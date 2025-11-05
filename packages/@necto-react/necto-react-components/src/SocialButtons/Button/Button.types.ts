@@ -16,6 +16,7 @@ export type ButtonProps<T extends ElementType = 'button'> =
     icon?: ReactNode;
     showIcon?: boolean;
     iconPosition?: 'left' | 'right';
+    iconSize?: number;
     disabled?: boolean;
     css?: Interpolation<Theme>;
   };
