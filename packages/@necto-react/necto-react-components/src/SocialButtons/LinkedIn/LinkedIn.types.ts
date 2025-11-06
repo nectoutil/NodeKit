@@ -1,4 +1,5 @@
 import type { ElementType } from 'react';
 import type { ButtonProps } from '../Button/Button.types';
 
-export type LinkedInButtonProps<T extends ElementType = 'button'> = ButtonProps<T>;
+export type LinkedInButtonProps<T extends ElementType = 'button'> =
+  ButtonProps<T>;
