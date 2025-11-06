@@ -1,5 +1,11 @@
 # @necto-react/components
 
+## 1.2.15
+
+### Patch Changes
+
+- 8c5019d: Fixed Vite issues with imports and exports
+
 ## 1.2.14
 
 ### Patch Changes
