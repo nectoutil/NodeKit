@@ -1,5 +1,11 @@
 # @necto-react/hooks
 
+## 2.12.6
+
+### Patch Changes
+
+- 8c5019d: Fixed Vite issues with imports and exports
+
 ## 2.12.5
 
 ### Patch Changes
