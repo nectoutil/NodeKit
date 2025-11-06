@@ -33,7 +33,8 @@ const meta = {
     },
     iconColor: {
       control: 'text',
-      description: 'Custom color for the icon (uses simple FaTiktok icon instead of multicolor)'
+      description:
+        'Custom color for the icon (uses simple FaTiktok icon instead of multicolor)'
     },
     as: {
       control: 'text',

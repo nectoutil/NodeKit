@@ -89,9 +89,11 @@ export const TikTokButton: ForwardRefExoticComponent<
       className={cn(`_necto:${TIKTOK_BUTTON_NAME}`, className)}
       iconPosition={iconPosition}
       icon={
-        iconColor
-          ? <FaTiktok size={iconSize} color={iconColor} />
-          : <TikTokIcon size={iconSize} />
+        iconColor ? (
+          <FaTiktok size={iconSize} color={iconColor} />
+        ) : (
+          <TikTokIcon size={iconSize} />
+        )
       }
       {...props}
     >
