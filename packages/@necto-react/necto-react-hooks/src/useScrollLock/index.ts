@@ -6,6 +6,9 @@
  *
  */
 
-export * from './Primitive';
-export * from './conditionals';
-export * from './social-buttons';
+export { useScrollLock } from './useScrollLock';
+
+export type {
+  UseScrollLockProps,
+  UseScrollLockReturn
+} from './useScrollLock.types';

@@ -4,6 +4,16 @@
   "description": "",
   "author": "The Corinvo OSS Team",
   "license": "MIT",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
   "scripts": {
     "build": "tsup ./src/index.ts --minify --format esm,cjs,iife --dts"
   },
@@ -11,9 +21,6 @@
     "dist",
     "README.md"
   ],
-  "types": "dist/index.d.ts",
-  "main": "./dist/index.js",
-  "module": "./dist/index.es.js",
   "dependencies": {
     "@necto/types": "workspace:*",
     "@necto-react/types": "workspace:*"

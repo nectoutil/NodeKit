@@ -1,6 +1,6 @@
 {
-  "name": "shared",
   "private": true,
+  "name": "shared",
   "version": "1.3.0",
   "description": "Shared private packages for Necto standard libraries.",
   "license": "MIT",

@@ -65,7 +65,7 @@ export const Primitive: (<E extends ElementType = (typeof HTMLElements)['Div']>(
   Primitives & { [k: string]: any } = Object.assign(
   forwardRef(PrimitiveFn),
   DOM.HTML_TAGS.reduce(
-    (acc, tag) => {
+    (acc: Record<string, any>, tag: string): Record<string, any> => {
       const lower: string = tag;
       const upper: string = tag[0].toUpperCase() + tag.slice(1);
 

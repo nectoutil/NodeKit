@@ -6,14 +6,13 @@
  *
  */
 
-import type { DOM } from '@necto/constants';
-import type { Interpolation, Theme } from '@emotion/react';
-
 import type {
   ElementType,
   ComponentPropsWithRef,
   ForwardRefExoticComponent
 } from 'react';
+import type { DOM } from '@necto/constants';
+import type { Interpolation, Theme } from '@emotion/react';
 
 /**
  * Props for the polymorphic Primitive component.

@@ -31,3 +31,4 @@ export * from './useSyncContextRef';
 export * from './useSyntheticBlurEvent';
 export * from './useEffectEvent';
 export * from './useSupported';
+export * from './useScrollLock';
