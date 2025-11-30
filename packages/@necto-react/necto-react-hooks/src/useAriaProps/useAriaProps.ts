@@ -1,3 +1,5 @@
+// biome-ignore-all lint/suspicious/noExplicitAny: Any for aria props is fine.
+
 /**
  * Copyright (c) Corinvo, LLC. and affiliates.
  *
@@ -8,11 +10,13 @@
 
 import { useMemo } from 'react';
 
-import type { AriaAttributes } from 'react';
+import { AriaProps } from '@necto/dom';
+
 import type {
   UseAriaPropsProps,
   UseAriaPropsReturn
 } from './useAriaProps.types';
+import type { AriaAttributes } from 'react';
 
 /**
  * Returns ARIA attributes based on the provided state flags.
@@ -43,57 +47,60 @@ export function useAriaProps(
   } = props;
 
   return useMemo((): AriaAttributes => {
-    const ariaProps: Record<string, any> = {};
+    const ariaAttributes: Record<string, any> = {};
 
     const booleanMapping: Array<{
       value: boolean | undefined;
       attr: string;
     }> = [
-      { value: isInvalid, attr: 'aria-invalid' },
-      { value: isDisabled, attr: 'aria-disabled' },
-      { value: isReadOnly, attr: 'aria-readonly' },
-      { value: isRequired, attr: 'aria-required' },
-      { value: isBusy, attr: 'aria-busy' },
-      { value: isExpanded, attr: 'aria-expanded' },
-      { value: isSelected, attr: 'aria-selected' },
-      { value: isHidden, attr: 'aria-hidden' }
+      { value: isInvalid, attr: AriaProps.Invalid },
+      { value: isDisabled, attr: AriaProps.Disabled },
+      { value: isReadOnly, attr: AriaProps.Readonly },
+      { value: isRequired, attr: AriaProps.Required },
+      { value: isBusy, attr: AriaProps.Busy },
+      { value: isExpanded, attr: AriaProps.Expanded },
+      { value: isSelected, attr: AriaProps.Selected },
+      { value: isHidden, attr: AriaProps.Hidden }
     ];
 
     for (const { value, attr } of booleanMapping) {
       if (value !== undefined) {
-        ariaProps[attr] = value || undefined;
+        ariaAttributes[attr] = value || undefined;
       }
     }
 
     if (isPressed !== undefined) {
-      ariaProps['aria-pressed'] = isPressed === false ? undefined : isPressed;
+      ariaAttributes[AriaProps.Pressed] =
+        isPressed === false ? undefined : isPressed;
     }
 
     if (isChecked !== undefined) {
-      ariaProps['aria-checked'] = isChecked === false ? undefined : isChecked;
+      ariaAttributes[AriaProps.Checked] =
+        isChecked === false ? undefined : isChecked;
     }
 
     if (hasPopup !== undefined) {
-      ariaProps['aria-haspopup'] = hasPopup === false ? undefined : hasPopup;
+      ariaAttributes[AriaProps.Haspopup] =
+        hasPopup === false ? undefined : hasPopup;
     }
 
     if (valueCurrent !== undefined) {
-      ariaProps['aria-valuenow'] = valueCurrent;
+      ariaAttributes[AriaProps.Valuenow] = valueCurrent;
     }
 
     if (valueMin !== undefined) {
-      ariaProps['aria-valuemin'] = valueMin;
+      ariaAttributes[AriaProps.Valuemin] = valueMin;
     }
 
     if (valueMax !== undefined) {
-      ariaProps['aria-valuemax'] = valueMax;
+      ariaAttributes[AriaProps.Valuemax] = valueMax;
     }
 
     if (valueText !== undefined) {
-      ariaProps['aria-valuetext'] = valueText;
+      ariaAttributes[AriaProps.Valuetext] = valueText;
     }
 
-    return ariaProps;
+    return ariaAttributes;
   }, [
     isInvalid,
     isDisabled,

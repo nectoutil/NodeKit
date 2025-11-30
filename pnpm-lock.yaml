@@ -248,6 +248,49 @@ importers:
         specifier: ^8.4.0
         version: 8.5.0(jiti@2.6.1)(postcss@8.5.6)(typescript@5.9.3)
 
+  packages/@necto-react/necto-react-popper:
+    dependencies:
+      '@necto-react/hooks':
+        specifier: workspace:*
+        version: link:../necto-react-hooks
+      '@necto-react/types':
+        specifier: workspace:*
+        version: link:../necto-react-types
+      '@necto/dom':
+        specifier: workspace:*
+        version: link:../../@necto/necto-dom
+      '@necto/popper':
+        specifier: workspace:*
+        version: link:../../@necto/necto-popper
+      '@necto/types':
+        specifier: workspace:*
+        version: link:../../@necto/necto-types
+      defu:
+        specifier: ^6.1.4
+        version: 6.1.4
+      react:
+        specifier: ^19.1.0
+        version: 19.2.0
+    devDependencies:
+      '@testing-library/react':
+        specifier: ^16.3.0
+        version: 16.3.0(@testing-library/dom@10.4.0)(@types/react-dom@19.1.2(@types/react@19.1.2))(@types/react@19.1.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      '@types/node':
+        specifier: ^22.14.1
+        version: 22.19.0
+      '@types/react':
+        specifier: 19.1.2
+        version: 19.1.2
+      '@types/react-dom':
+        specifier: 19.1.2
+        version: 19.1.2(@types/react@19.1.2)
+      jsdom:
+        specifier: ^26.1.0
+        version: 26.1.0
+      tsup:
+        specifier: ^8.4.0
+        version: 8.5.0(jiti@2.6.1)(postcss@8.5.6)(typescript@5.9.3)
+
   packages/@necto-react/necto-react-types:
     dependencies:
       react:
@@ -410,6 +453,25 @@ importers:
 
   packages/@necto/necto-platform:
     devDependencies:
+      tsup:
+        specifier: ^8.4.0
+        version: 8.5.0(jiti@2.6.1)(postcss@8.5.6)(typescript@5.9.3)
+
+  packages/@necto/necto-popper:
+    dependencies:
+      '@necto/constants':
+        specifier: workspace:*
+        version: link:../necto-constants
+      '@necto/dom':
+        specifier: workspace:*
+        version: link:../necto-dom
+      '@necto/types':
+        specifier: workspace:*
+        version: link:../necto-types
+    devDependencies:
+      '@types/node':
+        specifier: ^22.14.1
+        version: 22.19.0
       tsup:
         specifier: ^8.4.0
         version: 8.5.0(jiti@2.6.1)(postcss@8.5.6)(typescript@5.9.3)
@@ -3082,6 +3144,9 @@ packages:
   define-properties@1.2.1:
     resolution: {integrity: sha512-8QmQKqEASLd5nx0U1B1okLElbUuuttJ/AnYmRXbbbGDWh6uS208EjD4Xqq/I9wK7u0v6O08XhTWnt5XtEbR6Dg==}
     engines: {node: '>= 0.4'}
+
+  defu@6.1.4:
+    resolution: {integrity: sha512-mEQCMmwJu317oSz8CwdIOdwf3xMif1ttiM8LTufzc3g6kR+9Pe236twL8j3IYT1F7GfRgGcW6MWxzZjLIkuHIg==}
 
   dequal@2.0.3:
     resolution: {integrity: sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA==}
@@ -8596,6 +8661,8 @@ snapshots:
       define-data-property: 1.1.4
       has-property-descriptors: 1.0.2
       object-keys: 1.1.1
+
+  defu@6.1.4: {}
 
   dequal@2.0.3: {}
 

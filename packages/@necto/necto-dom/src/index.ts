@@ -14,3 +14,4 @@ export * from './containment';
 export * from './transitions';
 export * from './html-elements';
 export * from './textSelection';
+export * from './aria-props';
