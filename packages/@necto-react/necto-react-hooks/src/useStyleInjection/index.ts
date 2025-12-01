@@ -1,14 +1,2 @@
-/**
- * Copyright (c) Corinvo, LLC. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
-export { useAriaProps } from './useStyleInjection';
-
-export type {
-  UseAriaPropsProps,
-  UseAriaPropsReturn
-} from './useStyleInjection.types';
+export { useStyleInjection } from './useStyleInjection';
+export type { UseStyleInjectionProps } from './useStyleInjection.types';

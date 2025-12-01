@@ -51,6 +51,7 @@
     "@necto/id": "workspace:*",
     "@necto/mergers": "workspace:*",
     "@necto/platform": "workspace:*",
+    "@necto/strings": "workspace:*",
     "react-aria": "^3.39.0",
     "std-env": "^3.9.0"
   }

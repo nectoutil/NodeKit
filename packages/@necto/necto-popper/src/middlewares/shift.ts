@@ -4,7 +4,7 @@
 
 import { detectOverflow } from '../utils/detectOverflow';
 import type { Middleware, BoundaryOptions } from '../types';
-import { createMiddleware, clamp } from '../types';
+import { createMiddleware } from '../types';
 
 export interface ShiftOptions extends BoundaryOptions {
   /**

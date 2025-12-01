@@ -210,6 +210,9 @@ importers:
       '@necto/platform':
         specifier: workspace:*
         version: link:../../@necto/necto-platform
+      '@necto/strings':
+        specifier: workspace:*
+        version: link:../../@necto/necto-strings
       '@necto/types':
         specifier: workspace:*
         version: link:../../@necto/necto-types
