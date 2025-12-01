@@ -9,9 +9,6 @@
   <a href="https://www.npmjs.com/package/@necto/assert">
     <img alt="NPM version" src="https://img.shields.io/npm/v/@necto/assert.svg?style=for-the-badge">
   </a>
-  <a aria-label="License" href="https://jsr.io/@necto/assert">
-    <img src="https://jsr.io/badges/@necto/assert?style=for-the-badge">
-  </a>
   <a aria-label="License" href="https://github.com/corinvo/necto/blob/main/LICENSE">
     <img src="https://img.shields.io/badge/License-MIT-97CA25.svg?style=for-the-badge">
   </a>
