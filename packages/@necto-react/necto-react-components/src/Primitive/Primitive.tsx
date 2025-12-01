@@ -19,7 +19,6 @@ import type { PrimitiveProps, Primitives } from './Primitive.types';
 const DEFAULT_PRIMITIVE_TAG: keyof HTMLElementTagNameMap = HTMLElements.Div;
 
 /**
- /**
  * @internal
  * Internal render function for the Primitive component. Handles polymorphic rendering, child cloning, and ref forwarding.
  * Not for public use; use the exported Primitive component instead.
