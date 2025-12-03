@@ -11,7 +11,7 @@
 
 import { DOM } from '@necto/constants';
 import { HTMLElements } from '@necto/dom';
-import { forwardRef, isValidElement, cloneElement, Children } from 'react';
+import { Children, forwardRef, isValidElement, cloneElement } from 'react';
 
 import type { ElementType, Ref, ReactElement, FC } from 'react';
 import type { PrimitiveProps, Primitives } from './Primitive.types';
