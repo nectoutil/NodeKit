@@ -8,15 +8,18 @@
 
 import { useCallback, useMemo, useRef } from 'react';
 
-import type { UseListNavigationProps, UseListNavigationReturn } from './types';
+import type {
+  UseListNavigationOptions,
+  UseListNavigationReturn
+} from './types';
 
 /**
  * Provides keyboard navigation for list-based floating elements.
- * @param props - Configuration options.
+ * @param options - Configuration options.
  * @returns Props to spread on reference, floating, and item elements.
  */
 export function useListNavigation(
-  props: UseListNavigationProps
+  options: UseListNavigationOptions
 ): UseListNavigationReturn {
   const {
     open,
@@ -30,7 +33,7 @@ export function useListNavigation(
     orientation = 'vertical',
     focusItemOnHover = true,
     openOnArrowKeyDown = true
-  } = props;
+  } = options;
 
   const indexRef = useRef(activeIndex);
   indexRef.current = activeIndex;

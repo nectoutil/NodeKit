@@ -9,6 +9,6 @@
 export { useFocusable } from './useFocusable';
 
 export type {
-  UseFocusableProps,
+  UseFocusableOptions,
   UseFocusableReturn
 } from './useFocusable.types';

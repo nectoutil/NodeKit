@@ -8,7 +8,7 @@
 
 import type { ElementProps } from '../types';
 
-export interface UseDismissProps {
+export interface UseDismissOptions {
   /**
    * Whether the floating element is open.
    */

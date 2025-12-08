@@ -17,7 +17,7 @@ export type FloatingRole =
   | 'grid'
   | 'alertdialog';
 
-export interface UseRoleProps {
+export interface UseRoleOptions {
   /**
    * Whether the floating element is open.
    */

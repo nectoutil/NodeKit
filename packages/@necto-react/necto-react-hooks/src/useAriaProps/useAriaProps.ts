@@ -13,7 +13,7 @@ import { useMemo } from 'react';
 import { AriaProps } from '@necto/dom';
 
 import type {
-  UseAriaPropsProps,
+  UseAriaPropsOptions,
   UseAriaPropsReturn
 } from './useAriaProps.types';
 import type { AriaAttributes } from 'react';
@@ -22,11 +22,11 @@ import type { AriaAttributes } from 'react';
  * Returns ARIA attributes based on the provided state flags.
  * Automatically filters out undefined values to avoid adding empty ARIA attributes.
  *
- * @param {UseAriaPropsProps} props - State flags to convert to ARIA attributes.
+ * @param {UseAriaPropsOptions} options - State flags to convert to ARIA attributes.
  * @returns {UseAriaPropsReturn} The ARIA attributes object with only defined values.
  */
 export function useAriaProps(
-  props: UseAriaPropsProps = {}
+  options: UseAriaPropsOptions = {}
 ): UseAriaPropsReturn {
   const {
     isInvalid,
@@ -44,7 +44,7 @@ export function useAriaProps(
     valueMin,
     valueMax,
     valueText
-  } = props;
+  } = options;
 
   return useMemo((): AriaAttributes => {
     const ariaAttributes: Record<string, any> = {};

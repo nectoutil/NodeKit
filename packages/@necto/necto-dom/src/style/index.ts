@@ -11,7 +11,6 @@ import { getOwnerDocument } from '../owner';
 import type {
   CreateStyleElementOptions,
   InjectStyleOptions,
-  StyleEntry,
   StyleMap
 } from './types';
 

@@ -9,6 +9,6 @@
 export { useElementVisibility } from './useElementVisibility';
 
 export type {
-  UseElementVisibilityProps,
+  UseElementVisibilityOptions,
   UseElementVisibilityReturn
 } from './useElementVisibility.types';

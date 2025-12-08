@@ -9,14 +9,14 @@
 import { useRef, useCallback, useEffect, useMemo } from 'react';
 import { getOwnerDocument, nodeContains } from '@necto/dom';
 
-import type { UseDismissProps, UseDismissReturn } from './types';
+import type { UseDismissOptions, UseDismissReturn } from './types';
 
 /**
  * Provides dismiss interaction (outside click, escape key) for floating elements.
- * @param props - Configuration options.
+ * @param options - Configuration options.
  * @returns Props to spread on reference and floating elements.
  */
-export function useDismiss(props: UseDismissProps): UseDismissReturn {
+export function useDismiss(options: UseDismissOptions): UseDismissReturn {
   const {
     open,
     onOpenChange,
@@ -26,7 +26,7 @@ export function useDismiss(props: UseDismissProps): UseDismissReturn {
     referencePress = false,
     ancestorScroll = false,
     bubbles = false
-  } = props;
+  } = options;
 
   const referenceRef = useRef<Element | null>(null);
   const floatingRef = useRef<HTMLElement | null>(null);

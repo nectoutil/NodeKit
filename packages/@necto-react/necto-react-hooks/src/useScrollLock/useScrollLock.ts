@@ -11,20 +11,20 @@ import { useRef, useState, useEffect } from 'react';
 
 import type { RefObject } from 'react';
 import type {
-  UseScrollLockProps,
+  UseScrollLockOptions,
   UseScrollLockReturn
 } from './useScrollLock.types';
 
 /**
  * React hook that locks scrolling on a target element or the entire page.
  *
- * @param {UseScrollLockProps} [props] - Options to configure scroll lock behavior.
+ * @param {UseScrollLockOptions} [options] - Options to configure scroll lock behavior.
  * @returns {UseScrollLockReturn} An object with isLocked state and lock/unlock functions.
  */
 export function useScrollLock(
-  props: UseScrollLockProps = {}
+  options: UseScrollLockOptions = {}
 ): UseScrollLockReturn {
-  const { autoLock = false, target: targetProp, widthReflow = true } = props;
+  const { autoLock = false, target: targetProp, widthReflow = true } = options;
 
   const [isLocked, setIsLocked] = useState(false);
   const target: RefObject<HTMLElement | null> = useRef<HTMLElement | null>(

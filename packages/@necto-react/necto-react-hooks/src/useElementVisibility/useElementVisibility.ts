@@ -10,7 +10,7 @@ import { useEffectEvent } from '@necto-react/hooks';
 import { useRef, useState, useCallback, useEffect } from 'react';
 
 import type {
-  UseElementVisibilityProps,
+  UseElementVisibilityOptions,
   UseElementVisibilityReturn,
   IntersectionDetails
 } from './useElementVisibility.types';
@@ -19,11 +19,11 @@ import type {
  * React hook that observes the visibility of a DOM element using the Intersection Observer API.
  *
  * @template T The type of the element being observed.
- * @param {UseElementVisibilityProps} [props] - Options to control visibility observation and callbacks.
+ * @param {UseElementVisibilityOptions} [options] - Options to control visibility observation and callbacks.
  * @returns {UseElementVisibilityReturn<T>} A tuple containing the ref to the element, the visibility state, and intersection details.
  */
 export function useElementVisibility<T extends Element = Element>(
-  props: UseElementVisibilityProps = {}
+  options: UseElementVisibilityOptions = {}
 ): UseElementVisibilityReturn<T> {
   const {
     partialVisibility = false,
@@ -33,7 +33,7 @@ export function useElementVisibility<T extends Element = Element>(
     active = true,
     once = false,
     onChange
-  } = props;
+  } = options;
 
   const [element, setElement] = useState<T | null>(null);
   const [isVisible, setIsVisible] = useState<boolean>(false);

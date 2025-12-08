@@ -9,7 +9,7 @@
 export { usePopper } from './usePopper';
 
 export type {
-  UsePopperProps,
+  UsePopperOptions,
   UsePopperReturn,
   ComputePositionOptions,
   ComputePositionResult,

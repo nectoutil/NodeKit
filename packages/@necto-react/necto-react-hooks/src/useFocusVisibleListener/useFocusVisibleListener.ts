@@ -23,7 +23,7 @@ import { getOwnerDocument, getOwnerWindow } from '@necto/dom';
 import { globalListeners, changeHandlers, focusState } from './focusContext';
 
 import type {
-  UseFocusVisibleListenerProps,
+  UseFocusVisibleListenerOptions,
   Modality,
   HandlerEvent,
   Handler
@@ -151,13 +151,13 @@ export function getInteractionModality(): Modality | null {
 /**
  * React hook that listens for focus visibility changes based on interaction modality.
  *
- * @param {UseFocusVisibleListenerProps} props - The props for the focus visible listener.
+ * @param {UseFocusVisibleListenerOptions} options - The options for the focus visible listener.
  * @returns {void}
  */
 export function useFocusVisibleListener(
-  props: UseFocusVisibleListenerProps
+  options: UseFocusVisibleListenerOptions
 ): void {
-  const { fn, deps, opts } = props;
+  const { fn, deps, opts } = options;
 
   if (typeof window === 'undefined' || typeof document === 'undefined') {
     return;

@@ -8,15 +8,15 @@
 
 import { useRef, useCallback, useMemo, useEffect } from 'react';
 
-import type { UseFloatingHoverProps, UseFloatingHoverReturn } from './types';
+import type { UseFloatingHoverOptions, UseFloatingHoverReturn } from './types';
 
 /**
  * Provides hover interaction with delay support for floating elements.
- * @param props - Configuration options.
+ * @param options - Configuration options.
  * @returns Props to spread on reference and floating elements.
  */
 export function useFloatingHover(
-  props: UseFloatingHoverProps
+  options: UseFloatingHoverOptions
 ): UseFloatingHoverReturn {
   const {
     open,
@@ -26,7 +26,7 @@ export function useFloatingHover(
     handleClose = true,
     mouseOnly = false,
     restMs = 0
-  } = props;
+  } = options;
 
   const openDelay = typeof delay === 'number' ? delay : (delay.open ?? 0);
   const closeDelay = typeof delay === 'number' ? delay : (delay.close ?? 0);

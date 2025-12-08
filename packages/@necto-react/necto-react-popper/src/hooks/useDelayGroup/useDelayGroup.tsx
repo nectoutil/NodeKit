@@ -17,7 +17,7 @@ import React, {
 
 import type {
   DelayGroupContext,
-  UseDelayGroupProps,
+  UseDelayGroupOptions,
   UseDelayGroupReturn,
   DelayGroupProviderProps
 } from './types';
@@ -87,11 +87,13 @@ export function DelayGroupProvider(
 
 /**
  * Provides delay group functionality for a floating element.
- * @param props - Configuration options.
+ * @param options - Configuration options.
  * @returns Delay value and group control functions.
  */
-export function useDelayGroup(props: UseDelayGroupProps): UseDelayGroupReturn {
-  const { id } = props;
+export function useDelayGroup(
+  options: UseDelayGroupOptions
+): UseDelayGroupReturn {
+  const { id } = options;
 
   const context = useContext(DelayGroupCtx);
 

@@ -8,4 +8,4 @@
 
 export { useId } from './useId';
 
-export type { UseIdProps } from './useId.types';
+export type { UseIdOptions } from './useId.types';

@@ -8,8 +8,6 @@
 
 import { DOM } from '@necto/constants';
 
-import type { AriaAttribute } from './types';
-
 /**
  * Converts an aria attribute name to a capitalized key.
  * @param attr - The aria attribute (e.g., 'aria-pressed').

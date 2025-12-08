@@ -6,7 +6,7 @@
  *
  */
 
-import type { HTMLProps, MutableRefObject } from 'react';
+import type { MutableRefObject } from 'react';
 
 export type ElementProps = Record<string, unknown>;
 

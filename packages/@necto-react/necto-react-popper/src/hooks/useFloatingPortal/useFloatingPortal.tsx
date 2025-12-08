@@ -10,7 +10,7 @@ import React, { useState, useEffect, useId, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 
 import type {
-  UseFloatingPortalProps,
+  UseFloatingPortalOptions,
   UseFloatingPortalReturn,
   FloatingPortalProps
 } from './types';
@@ -36,13 +36,13 @@ function getPortalRoot(): HTMLElement {
 
 /**
  * Provides portal functionality for floating elements.
- * @param props - Configuration options.
+ * @param options - Configuration options.
  * @returns Portal node and ID.
  */
 export function useFloatingPortal(
-  props: UseFloatingPortalProps = {}
+  options: UseFloatingPortalOptions = {}
 ): UseFloatingPortalReturn {
-  const { id, enabled = true, root } = props;
+  const { id, enabled = true, root } = options;
 
   const uniqueId = useId();
   const portalId = id ?? `necto-portal-${uniqueId}`;

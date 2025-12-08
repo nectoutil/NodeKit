@@ -8,4 +8,4 @@
 
 export { useTypeahead } from './useTypeahead';
 
-export type { UseTypeaheadProps, UseTypeaheadReturn } from './types';
+export type { UseTypeaheadOptions, UseTypeaheadReturn } from './types';

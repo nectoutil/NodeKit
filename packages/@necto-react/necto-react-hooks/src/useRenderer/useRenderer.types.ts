@@ -10,9 +10,9 @@ import type { RenderProps } from '@necto-react/types';
 import type { ReactNode, CSSProperties } from 'react';
 
 /**
- * Props for the useRendererHook
+ * Options for the useRenderer hook.
  */
-export interface UseRendererProps<T> extends RenderProps<T> {
+export interface UseRendererOptions<T> extends RenderProps<T> {
   // Optional ID for the component.
   id?: string;
 

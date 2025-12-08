@@ -9,4 +9,4 @@
 export { getInteractionModality } from './focusContext';
 export { useFocusVisibleListener } from './useFocusVisibleListener';
 
-export type { UseFocusVisibleListenerProps } from './useFocusVisibleListener.types';
+export type { UseFocusVisibleListenerOptions } from './useFocusVisibleListener.types';

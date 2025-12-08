@@ -8,7 +8,7 @@
 
 import type { ElementProps } from '../types';
 
-export interface UseFloatingFocusProps {
+export interface UseFloatingFocusOptions {
   /**
    * Whether the floating element is open.
    */

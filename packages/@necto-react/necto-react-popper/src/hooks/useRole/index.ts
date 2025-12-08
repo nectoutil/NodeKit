@@ -8,4 +8,4 @@
 
 export { useRole } from './useRole';
 
-export type { UseRoleProps, UseRoleReturn, FloatingRole } from './types';
+export type { UseRoleOptions, UseRoleReturn, FloatingRole } from './types';

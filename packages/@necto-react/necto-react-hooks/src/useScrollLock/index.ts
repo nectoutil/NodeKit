@@ -9,6 +9,6 @@
 export { useScrollLock } from './useScrollLock';
 
 export type {
-  UseScrollLockProps,
+  UseScrollLockOptions,
   UseScrollLockReturn
 } from './useScrollLock.types';

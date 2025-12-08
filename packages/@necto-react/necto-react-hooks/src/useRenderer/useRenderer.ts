@@ -9,9 +9,20 @@
 import { useMemo } from 'react';
 
 import type { ReactNode, CSSProperties } from 'react';
-import type { UseRendererProps, UseRendererReturn } from './useRenderer.types';
+import type {
+  UseRendererOptions,
+  UseRendererReturn
+} from './useRenderer.types';
 
-export function useRenderer<T>(props: UseRendererProps<T>): UseRendererReturn {
+/**
+ * React hook that handles rendering logic for components with render props.
+ *
+ * @param {UseRendererOptions} options - Options for the hook.
+ * @returns {UseRendererReturn} The resolved rendering properties.
+ */
+export function useRenderer<T>(
+  options: UseRendererOptions<T>
+): UseRendererReturn {
   const {
     className,
     style,
@@ -21,7 +32,7 @@ export function useRenderer<T>(props: UseRendererProps<T>): UseRendererReturn {
     defaultChildren,
     defaultStyle,
     values
-  } = props;
+  } = options;
 
   return useMemo(() => {
     // Compute classnames

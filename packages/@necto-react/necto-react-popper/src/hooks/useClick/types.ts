@@ -8,7 +8,7 @@
 
 import type { ElementProps } from '../types';
 
-export interface UseClickProps {
+export interface UseClickOptions {
   /**
    * Whether the floating element is open.
    */

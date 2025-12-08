@@ -8,7 +8,7 @@
 
 import { useCallback, useMemo, useRef, useEffect } from 'react';
 
-import type { UseTypeaheadProps, UseTypeaheadReturn } from './types';
+import type { UseTypeaheadOptions, UseTypeaheadReturn } from './types';
 
 function defaultFindMatch(
   list: Array<HTMLElement | null>,
@@ -31,10 +31,10 @@ function defaultFindMatch(
 
 /**
  * Provides typeahead search for list-based floating elements.
- * @param props - Configuration options.
+ * @param options - Configuration options.
  * @returns Props to spread on reference and floating elements.
  */
-export function useTypeahead(props: UseTypeaheadProps): UseTypeaheadReturn {
+export function useTypeahead(options: UseTypeaheadOptions): UseTypeaheadReturn {
   const {
     open,
     listRef,
@@ -44,7 +44,7 @@ export function useTypeahead(props: UseTypeaheadProps): UseTypeaheadReturn {
     findMatch = defaultFindMatch,
     resetMs = 750,
     onTypingChange
-  } = props;
+  } = options;
 
   const searchRef = useRef('');
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);

@@ -10,9 +10,9 @@ import type { HTMLAttributes } from 'react';
 import type { DisabledFlags } from '@necto-react/types';
 
 /**
- * Props for the useDisabledProps hook.
+ * Options for the useDisabledProps hook.
  */
-export interface UseDisabledPropsProps {
+export interface UseDisabledPropsOptions {
   /** The key of the disabled flag to check. Defaults to 'general'. */
   type?: keyof DisabledFlags;
 
@@ -23,4 +23,4 @@ export interface UseDisabledPropsProps {
 /**
  * Return type for the useDisabledProps hook.
  */
-export type UseDisabledPropsPropsReturn = HTMLAttributes<HTMLElement>;
+export type UseDisabledPropsReturn = HTMLAttributes<HTMLElement>;

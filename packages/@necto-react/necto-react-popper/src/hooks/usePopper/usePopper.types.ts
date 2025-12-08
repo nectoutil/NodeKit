@@ -9,9 +9,9 @@ import type {
 } from '@necto/popper';
 
 /**
- * Props for usePopper hook
+ * Options for usePopper hook
  */
-export interface UsePopperProps extends ComputePositionOptions {
+export interface UsePopperOptions extends ComputePositionOptions {
   /**
    * External reference element (instead of using refs)
    */

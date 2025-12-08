@@ -12,9 +12,9 @@ export {
 } from './useTransitionStatus';
 
 export type {
-  UseTransitionStatusProps,
+  UseTransitionStatusOptions,
   UseTransitionStatusReturn,
-  UseTransitionStylesProps,
+  UseTransitionStylesOptions,
   UseTransitionStylesReturn,
   TransitionStatus
 } from './types';

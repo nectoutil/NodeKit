@@ -20,7 +20,7 @@ import { mergeProps } from '@necto/mergers';
 import { useSlottedContext } from '@necto-react/hooks';
 
 import type {
-  UseContextPropsProps,
+  UseContextPropsOptions,
   UseContextPropsReturn
 } from './useContextProps.types';
 import type { RefObject } from 'react';
@@ -30,14 +30,14 @@ import type { RefObject } from 'react';
  *
  * @template T The props type.
  * @template E The element type.
- * @param {UseContextPropsProps<T, E>} params - Component props, ref, and context.
+ * @param {UseContextPropsOptions<T, E>} options - Component props, ref, and context.
  * @returns {UseContextPropsReturn<T, E>} A tuple of merged props and merged ref.
  */
 export function useContextProps<T, E extends Element>({
   props,
   ref,
   context
-}: UseContextPropsProps<T, E>): UseContextPropsReturn<T, E> {
+}: UseContextPropsOptions<T, E>): UseContextPropsReturn<T, E> {
   const ctx = useSlottedContext({ context, slot: props.slot }) || {};
 
   const { ref: contextRef = null, ...contextProps } = ctx as {

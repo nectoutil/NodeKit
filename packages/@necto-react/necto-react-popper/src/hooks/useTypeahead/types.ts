@@ -9,7 +9,7 @@
 import type { MutableRefObject } from 'react';
 import type { ElementProps } from '../types';
 
-export interface UseTypeaheadProps {
+export interface UseTypeaheadOptions {
   /**
    * Whether the floating element is open.
    */

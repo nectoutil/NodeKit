@@ -8,4 +8,4 @@
 
 export { useDismiss } from './useDismiss';
 
-export type { UseDismissProps, UseDismissReturn } from './types';
+export type { UseDismissOptions, UseDismissReturn } from './types';

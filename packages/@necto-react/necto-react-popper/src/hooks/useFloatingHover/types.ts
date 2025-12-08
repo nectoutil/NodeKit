@@ -8,7 +8,7 @@
 
 import type { ElementProps } from '../types';
 
-export interface UseFloatingHoverProps {
+export interface UseFloatingHoverOptions {
   /**
    * Whether the floating element is open.
    */

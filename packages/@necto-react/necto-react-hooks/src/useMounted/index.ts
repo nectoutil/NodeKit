@@ -8,4 +8,4 @@
 
 export { useMounted } from './useMounted';
 
-export type { UseMountedProps, UseMountedReturn } from './useMounted.types';
+export type { UseMountedOptions, UseMountedReturn } from './useMounted.types';

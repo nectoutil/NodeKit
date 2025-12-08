@@ -37,6 +37,7 @@
     "vue": "^3.5.0"
   },
   "dependencies": {
+    "@necto-vue/composables": "workspace:*",
     "@necto/constants": "workspace:*",
     "@necto/dom": "workspace:*",
     "@necto/image": "workspace:*"

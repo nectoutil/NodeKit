@@ -8,4 +8,4 @@
 
 export { useClientPoint } from './useClientPoint';
 
-export type { UseClientPointProps, UseClientPointReturn } from './types';
+export type { UseClientPointOptions, UseClientPointReturn } from './types';

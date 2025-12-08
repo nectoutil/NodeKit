@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "@necto/constants": "workspace:*",
+    "@necto/file": "workspace:*",
     "@necto/types": "workspace:*",
     "@necto/platform": "workspace:*",
     "html-tags": "^4.0.0"

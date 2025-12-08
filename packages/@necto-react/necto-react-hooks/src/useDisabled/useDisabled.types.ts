@@ -8,9 +8,9 @@
 import type { DisabledFlags } from '@necto-react/types';
 
 /**
- * Props for the useDisabled hook.
+ * Options for the useDisabled hook.
  */
-export interface UseDisabledProps {
+export interface UseDisabledOptions {
   /** The key of the disabled flag to check. Defaults to 'general'. */
   type?: keyof DisabledFlags;
 
@@ -21,4 +21,4 @@ export interface UseDisabledProps {
 /**
  * Return type for the useDisabled hook.
  */
-export type UseDisabledPropsReturn = boolean;
+export type UseDisabledReturn = boolean;

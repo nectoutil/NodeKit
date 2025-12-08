@@ -8,4 +8,7 @@
 
 export { useRenderer } from './useRenderer';
 
-export type { UseRendererProps, UseRendererReturn } from './useRenderer.types';
+export type {
+  UseRendererOptions,
+  UseRendererReturn
+} from './useRenderer.types';

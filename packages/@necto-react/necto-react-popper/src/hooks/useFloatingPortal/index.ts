@@ -7,7 +7,7 @@
  */
 
 import type {
-  UseFloatingPortalProps,
+  UseFloatingPortalOptions,
   UseFloatingPortalReturn,
   FloatingPortalProps
 } from './types';
@@ -15,7 +15,7 @@ import type {
 export { useFloatingPortal, FloatingPortal } from './useFloatingPortal';
 
 export type {
-  UseFloatingPortalProps,
+  UseFloatingPortalOptions,
   UseFloatingPortalReturn,
   FloatingPortalProps
 };

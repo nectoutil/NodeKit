@@ -8,4 +8,7 @@
 
 export { useListNavigation } from './useListNavigation';
 
-export type { UseListNavigationProps, UseListNavigationReturn } from './types';
+export type {
+  UseListNavigationOptions,
+  UseListNavigationReturn
+} from './types';

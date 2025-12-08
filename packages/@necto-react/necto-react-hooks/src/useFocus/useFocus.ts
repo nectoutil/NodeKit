@@ -20,24 +20,24 @@ import { getOwnerDocument, getEventTarget, getActiveElement } from '@necto/dom';
 import type { FocusableElement } from '@necto/types';
 import type { DOMAttributes } from '@necto-react/types';
 import type { FocusEvent as ReactFocusEvent } from 'react';
-import type { UseFocusProps, UseFocusReturn } from './useFocus.types';
+import type { UseFocusOptions, UseFocusReturn } from './useFocus.types';
 
 /**
  * React hook that manages focus and blur event handling for a focusable element.
  *
  * @template T The type of the focusable element.
- * @param {UseFocusProps<T>} [props] - Options and event handlers for focus management.
+ * @param {UseFocusOptions<T>} [options] - Options and event handlers for focus management.
  * @returns {UseFocusReturn<T>} An object containing props to spread on the target element for focus management.
  */
 export function useFocus<T extends FocusableElement = FocusableElement>(
-  props: UseFocusProps<T> = {}
+  options: UseFocusOptions<T> = {}
 ): UseFocusReturn<T> {
   const {
     isDisabled,
     onFocus: onFocusProp,
     onBlur: onBlurProp,
     onFocusChange
-  } = props;
+  } = options;
 
   // Unified handler for focus change
   const handleFocusChange = useCallback(

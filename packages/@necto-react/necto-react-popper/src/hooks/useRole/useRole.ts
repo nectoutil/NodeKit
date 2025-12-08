@@ -8,15 +8,15 @@
 
 import { useId, useMemo } from 'react';
 
-import type { UseRoleProps, UseRoleReturn } from './types';
+import type { UseRoleOptions, UseRoleReturn } from './types';
 
 /**
  * Provides ARIA role props for floating elements.
- * @param props - Configuration options.
+ * @param options - Configuration options.
  * @returns Props to spread on reference and floating elements.
  */
-export function useRole(props: UseRoleProps): UseRoleReturn {
-  const { open, enabled = true, role = 'dialog' } = props;
+export function useRole(options: UseRoleOptions): UseRoleReturn {
+  const { open, enabled = true, role = 'dialog' } = options;
 
   const floatingId = useId();
 

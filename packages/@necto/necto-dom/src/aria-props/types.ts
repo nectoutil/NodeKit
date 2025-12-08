@@ -6,7 +6,7 @@
  *
  */
 
-import { DOM } from '@necto/constants';
+import type { DOM } from '@necto/constants';
 
 /**
  * Type representing valid ARIA attribute values (e.g., 'aria-pressed', 'aria-disabled').

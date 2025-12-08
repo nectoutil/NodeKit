@@ -9,6 +9,6 @@
 export { useAriaProps } from './useAriaProps';
 
 export type {
-  UseAriaPropsProps,
+  UseAriaPropsOptions,
   UseAriaPropsReturn
 } from './useAriaProps.types';

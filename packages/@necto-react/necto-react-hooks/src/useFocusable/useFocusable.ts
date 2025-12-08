@@ -30,7 +30,7 @@ import { useEffect, useRef, useContext } from 'react';
 import { FocusableContext } from '@necto-react/contexts';
 
 import type {
-  UseFocusableProps,
+  UseFocusableOptions,
   UseFocusableReturn
 } from './useFocusable.types';
 import type { RefObject } from 'react';
@@ -40,18 +40,18 @@ import type { FocusableElement } from '@necto/types';
  * React hook that provides focus management and keyboard accessibility for a focusable element.
  * Handles autofocus, disabled state, tab order, and merges focus and keyboard props.
  *
- * @param {UseFocusableProps} props - Props controlling focus behavior and accessibility.
+ * @param {UseFocusableOptions} options - Options controlling focus behavior and accessibility.
  * @param {RefObject<FocusableElement | null>} domRef - Ref to the DOM element to manage focus for.
  * @returns {UseFocusableReturn} Object containing merged props for focusable behavior.
  */
 export function useFocusable(
-  props: UseFocusableProps,
+  options: UseFocusableOptions,
   domRef: RefObject<FocusableElement | null>
 ): UseFocusableReturn {
-  const { autoFocus, isDisabled, excludeFromTabOrder } = props;
+  const { autoFocus, isDisabled, excludeFromTabOrder } = options;
 
-  const { focusProps } = useFocus(props);
-  const { keyboardProps } = useKeyboard(props);
+  const { focusProps } = useFocus(options);
+  const { keyboardProps } = useKeyboard(options);
   const context = useContext(FocusableContext) || {};
   const autoFocusRef: RefObject<any> = useRef(autoFocus);
 

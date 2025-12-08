@@ -8,4 +8,4 @@
 
 export { useFocus } from './useFocus';
 
-export type { UseFocusProps, UseFocusReturn } from './useFocus.types';
+export type { UseFocusOptions, UseFocusReturn } from './useFocus.types';

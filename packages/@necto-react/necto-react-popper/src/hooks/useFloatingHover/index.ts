@@ -8,4 +8,4 @@
 
 export { useFloatingHover } from './useFloatingHover';
 
-export type { UseFloatingHoverProps, UseFloatingHoverReturn } from './types';
+export type { UseFloatingHoverOptions, UseFloatingHoverReturn } from './types';

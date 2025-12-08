@@ -6,7 +6,7 @@
  *
  */
 
-export interface UseFloatingPortalProps {
+export interface UseFloatingPortalOptions {
   /**
    * Custom portal ID to use.
    */

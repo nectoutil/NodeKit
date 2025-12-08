@@ -9,9 +9,9 @@
 import { useState, useEffect, useLayoutEffect } from 'react';
 
 import type {
-  UseTransitionStatusProps,
+  UseTransitionStatusOptions,
   UseTransitionStatusReturn,
-  UseTransitionStylesProps,
+  UseTransitionStylesOptions,
   UseTransitionStylesReturn,
   TransitionStatus
 } from './types';
@@ -21,13 +21,13 @@ const useIsomorphicLayoutEffect =
 
 /**
  * Provides transition status for animating floating elements.
- * @param props - Configuration options.
+ * @param options - Configuration options.
  * @returns Mounted state and current transition status.
  */
 export function useTransitionStatus(
-  props: UseTransitionStatusProps
+  options: UseTransitionStatusOptions
 ): UseTransitionStatusReturn {
-  const { open, duration = 250 } = props;
+  const { open, duration = 250 } = options;
 
   const closeDuration =
     typeof duration === 'number' ? duration : (duration.close ?? 250);
@@ -65,11 +65,11 @@ export function useTransitionStatus(
 
 /**
  * Provides transition styles for animating floating elements.
- * @param props - Configuration options including style definitions.
+ * @param options - Configuration options including style definitions.
  * @returns Mounted state, status, and computed styles.
  */
 export function useTransitionStyles(
-  props: UseTransitionStylesProps
+  options: UseTransitionStylesOptions
 ): UseTransitionStylesReturn {
   const {
     open,
@@ -78,7 +78,7 @@ export function useTransitionStyles(
     openStyles = { opacity: 1 },
     closeStyles,
     common = {}
-  } = props;
+  } = options;
 
   const openDuration =
     typeof duration === 'number' ? duration : (duration.open ?? 250);

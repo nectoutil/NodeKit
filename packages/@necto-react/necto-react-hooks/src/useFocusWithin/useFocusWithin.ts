@@ -27,13 +27,15 @@ import type { RefObject, FocusEvent } from 'react';
 import type { DOMAttributes } from '@necto-react/types';
 import type { UseSyntheticBlurEventReturn } from '@necto-react/hooks';
 import type {
-  UseFocusWithinProps,
+  UseFocusWithinOptions,
   FocusWithinReturn
 } from './useFocusWithin.types';
 
-export function useFocusWithin(props: UseFocusWithinProps): FocusWithinReturn {
+export function useFocusWithin(
+  options: UseFocusWithinOptions
+): FocusWithinReturn {
   const { isDisabled, onFocusWithin, onBlurWithin, onFocusWithinChange } =
-    props;
+    options;
   const state: RefObject<{ isFocusWithin: boolean }> = useRef({
     isFocusWithin: false
   });

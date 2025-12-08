@@ -19,20 +19,20 @@ import { useRef, useCallback, useLayoutEffect } from 'react';
 
 import type { FocusEvent } from 'react';
 import type {
-  UseSyntheticBlurEventProps,
+  UseSyntheticBlurEventOptions,
   UseSyntheticBlurEventReturn
 } from './useSyntheticBlurEvent.types';
 
 /**
  * React hook to handle synthetic blur events, particularly for disabled elements.
  *
- * @param onBlur - Callback to handle the blur event.
+ * @param {UseSyntheticBlurEventOptions} options - Options for the hook.
  * @returns A callback to attach to the element's blur event.
  */
 export function useSyntheticBlurEvent<T extends Element = Element>(
-  props: UseSyntheticBlurEventProps<T>
+  options: UseSyntheticBlurEventOptions<T>
 ): UseSyntheticBlurEventReturn<T> {
-  const { onBlur } = props;
+  const { onBlur } = options;
   const stateRef = useRef<{
     isFocused: boolean;
     observer: MutationObserver | null;

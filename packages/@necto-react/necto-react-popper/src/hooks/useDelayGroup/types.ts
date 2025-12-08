@@ -33,7 +33,7 @@ export interface DelayGroupContext {
   timeoutMs: number;
 }
 
-export interface UseDelayGroupProps {
+export interface UseDelayGroupOptions {
   /**
    * Unique ID for this floating element in the group.
    */

@@ -1,0 +1,37 @@
+{
+  "name": "@necto/file",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "File type detection utilities for Necto",
+  "scripts": {
+    "build": "tsup --minify terser",
+    "dev": "tsup --watch"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "sideEffects": false,
+  "author": "Corinvo OSS Team",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.14.1",
+    "@types/sax": "^1.2.7",
+    "terser": "^5.39.0",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "sax": "^1.4.1"
+  }
+}

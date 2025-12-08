@@ -10,9 +10,9 @@ import type { FocusEvents, DOMAttributes } from '@necto-react/types';
 import type { FocusableElement } from '@necto/types';
 
 /**
- * Props for the useFocus hook.
+ * Options for the useFocus hook.
  */
-export interface UseFocusProps<T = FocusableElement> extends FocusEvents<T> {
+export interface UseFocusOptions<T = FocusableElement> extends FocusEvents<T> {
   /** Whether focus events are disabled. */
   isDisabled?: boolean;
 }

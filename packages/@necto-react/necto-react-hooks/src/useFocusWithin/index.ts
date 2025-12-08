@@ -9,6 +9,6 @@
 export { useFocusWithin } from './useFocusWithin';
 
 export type {
-  UseFocusWithinProps,
+  UseFocusWithinOptions,
   FocusWithinReturn
 } from './useFocusWithin.types';

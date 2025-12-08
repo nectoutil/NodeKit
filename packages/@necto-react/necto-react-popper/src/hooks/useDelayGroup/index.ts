@@ -8,7 +8,7 @@
 
 import type {
   DelayGroupContext,
-  UseDelayGroupProps,
+  UseDelayGroupOptions,
   UseDelayGroupReturn,
   DelayGroupProviderProps
 } from './types';
@@ -17,7 +17,7 @@ export { DelayGroupProvider, useDelayGroup } from './useDelayGroup';
 
 export type {
   DelayGroupContext,
-  UseDelayGroupProps,
+  UseDelayGroupOptions,
   UseDelayGroupReturn,
   DelayGroupProviderProps
 };

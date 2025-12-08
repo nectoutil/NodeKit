@@ -8,14 +8,14 @@
 
 import { useRef, useCallback, useMemo } from 'react';
 
-import type { UseClickProps, UseClickReturn } from './types';
+import type { UseClickOptions, UseClickReturn } from './types';
 
 /**
  * Provides click interaction for floating elements.
- * @param props - Configuration options.
+ * @param options - Configuration options.
  * @returns Props to spread on reference and floating elements.
  */
-export function useClick(props: UseClickProps): UseClickReturn {
+export function useClick(options: UseClickOptions): UseClickReturn {
   const {
     open,
     onOpenChange,
@@ -24,7 +24,7 @@ export function useClick(props: UseClickProps): UseClickReturn {
     event = 'click',
     ignoreMouse = true,
     keyboardHandlers = true
-  } = props;
+  } = options;
 
   const pointerTypeRef = useRef<string>('');
   const didKeyDownRef = useRef(false);

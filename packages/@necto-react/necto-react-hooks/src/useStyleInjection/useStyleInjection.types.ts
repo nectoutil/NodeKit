@@ -6,7 +6,10 @@
  *
  */
 
-export interface UseStyleInjectionProps {
+/**
+ * Options for the useStyleInjection hook.
+ */
+export interface UseStyleInjectionOptions {
   id?: string;
   css: string | string[];
   window?: Window | null;

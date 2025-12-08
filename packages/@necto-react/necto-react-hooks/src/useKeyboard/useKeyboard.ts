@@ -7,27 +7,30 @@
  */
 
 import { createEventHandler } from '@necto-react/helpers';
-import type { UseKeyboardProps, UseKeyboardReturn } from './useKeyboard.types';
+import type {
+  UseKeyboardOptions,
+  UseKeyboardReturn
+} from './useKeyboard.types';
 
 /**
  * React hook that provides keyboard event handlers based on the disabled state.
  *
- * @param {UseKeyboardProps} props - Props controlling keyboard interaction.
+ * @param {UseKeyboardOptions} options - Options controlling keyboard interaction.
  * @returns {UseKeyboardReturn} Object containing keyboard event handler props.
  */
-export function useKeyboard(props: UseKeyboardProps): UseKeyboardReturn {
+export function useKeyboard(options: UseKeyboardOptions): UseKeyboardReturn {
   return {
-    keyboardProps: props.isDisabled
+    keyboardProps: options.isDisabled
       ? {}
       : {
-          onKeyDown: props.onKeyDown
+          onKeyDown: options.onKeyDown
             ? createEventHandler((e) =>
-                props.onKeyDown?.(e.nativeEvent as KeyboardEvent)
+                options.onKeyDown?.(e.nativeEvent as KeyboardEvent)
               )
             : undefined,
-          onKeyUp: props.onKeyUp
+          onKeyUp: options.onKeyUp
             ? createEventHandler((e) =>
-                props.onKeyUp?.(e.nativeEvent as KeyboardEvent)
+                options.onKeyUp?.(e.nativeEvent as KeyboardEvent)
               )
             : undefined
         }

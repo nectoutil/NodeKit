@@ -10,7 +10,7 @@ import type { CSSProperties } from 'react';
 
 export type TransitionStatus = 'unmounted' | 'initial' | 'open' | 'close';
 
-export interface UseTransitionStatusProps {
+export interface UseTransitionStatusOptions {
   /**
    * Whether the floating element is open.
    */
@@ -35,7 +35,7 @@ export interface UseTransitionStatusReturn {
   status: TransitionStatus;
 }
 
-export interface UseTransitionStylesProps extends UseTransitionStatusProps {
+export interface UseTransitionStylesOptions extends UseTransitionStatusOptions {
   /**
    * Initial styles when opening.
    */

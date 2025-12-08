@@ -8,17 +8,17 @@
 
 import { useCallback, useMemo, useRef, useEffect } from 'react';
 
-import type { UseClientPointProps, UseClientPointReturn } from './types';
+import type { UseClientPointOptions, UseClientPointReturn } from './types';
 
 /**
  * Provides cursor-position-based positioning for floating elements.
- * @param props - Configuration options.
+ * @param options - Configuration options.
  * @returns Props to spread on reference and floating elements.
  */
 export function useClientPoint(
-  props: UseClientPointProps
+  options: UseClientPointOptions
 ): UseClientPointReturn {
-  const { open, enabled = true, axis = 'both', setReference } = props;
+  const { open, enabled = true, axis = 'both', setReference } = options;
 
   const clientPointRef = useRef({ x: 0, y: 0 });
   const initialReferenceRect = useRef<DOMRect | null>(null);

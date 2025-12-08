@@ -8,7 +8,7 @@
 
 import type { ElementProps } from '../types';
 
-export interface UseClientPointProps {
+export interface UseClientPointOptions {
   /**
    * Whether the floating element is open.
    */

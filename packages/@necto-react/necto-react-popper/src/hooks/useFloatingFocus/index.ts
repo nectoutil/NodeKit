@@ -8,4 +8,4 @@
 
 export { useFloatingFocus } from './useFloatingFocus';
 
-export type { UseFloatingFocusProps, UseFloatingFocusReturn } from './types';
+export type { UseFloatingFocusOptions, UseFloatingFocusReturn } from './types';

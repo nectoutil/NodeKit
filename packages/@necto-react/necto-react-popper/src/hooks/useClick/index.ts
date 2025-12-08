@@ -8,4 +8,4 @@
 
 export { useClick } from './useClick';
 
-export type { UseClickProps, UseClickReturn } from './types';
+export type { UseClickOptions, UseClickReturn } from './types';

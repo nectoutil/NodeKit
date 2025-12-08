@@ -24,6 +24,9 @@ export interface ImageProps
   /** Alt text for accessibility (required) */
   alt: string;
 
+  /** Image size (sets both width and height) */
+  size?: string | number;
+
   /** Image width */
   width?: string | number;
 

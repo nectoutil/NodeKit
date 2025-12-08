@@ -14,9 +14,9 @@ import type { RefObject } from 'react';
 export type MountedAccessType = 'function' | 'ref' | 'boolean';
 
 /**
- * Props for the useMounted hook.
+ * Options for the useMounted hook.
  */
-export interface UseMountedProps {
+export interface UseMountedOptions {
   /** The type of access to the mounted state. */
   type?: MountedAccessType;
 }
