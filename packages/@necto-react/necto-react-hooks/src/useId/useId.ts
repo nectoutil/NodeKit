@@ -13,16 +13,16 @@ import { isTest } from 'std-env';
 import { registry, defaultContext, idsUpdaterMap } from './hookContext';
 import React, { useRef, useState, useEffect, useId as useReactId } from 'react';
 
-import type { UseIdProps } from './useId.types';
+import type { UseIdOptions } from './useId.types';
 
 /**
  * Generates a unique, stable ID for React components, optionally with a custom prefix.
  *
- * @param {UseIdProps} [props] - Optional props object. You can provide a custom prefix and/or a defaultId.
- * @returns {UseIdReturns} The generated or provided unique ID.
+ * @param {UseIdOptions} [options] - Optional options object. You can provide a custom prefix and/or a defaultId.
+ * @returns {string} The generated or provided unique ID.
  */
-export function useId(props: UseIdProps = {}): string {
-  const { prefix = 'necto', defaultId } = props;
+export function useId(options: UseIdOptions = {}): string {
+  const { prefix = 'necto', defaultId } = options;
 
   // Initialize state only once with a function to avoid unnecessary calculations
   const [_, setValue] = useState<string | undefined>(() => defaultId);

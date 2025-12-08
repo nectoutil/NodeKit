@@ -10,9 +10,9 @@ import type { DOMAttributes } from '@necto-react/types';
 import type { FocusEvent as ReactFocusEvent } from 'react';
 
 /**
- * Props for the useFocusWithin hook.
+ * Options for the useFocusWithin hook.
  */
-export interface UseFocusWithinProps {
+export interface UseFocusWithinOptions {
   /** Whether the focus events should be disabled. */
   isDisabled?: boolean;
 

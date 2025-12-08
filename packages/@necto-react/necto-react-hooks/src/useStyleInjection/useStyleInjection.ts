@@ -9,15 +9,20 @@
 import { injectStyle } from '@necto/dom';
 import { useIsomorphicInsertionEffect } from '@necto-react/hooks';
 
-import type { UseStyleInjectionProps } from './useStyleInjection.types';
+import type { UseStyleInjectionOptions } from './useStyleInjection.types';
 
+/**
+ * React hook that injects CSS styles into the document.
+ *
+ * @param {UseStyleInjectionOptions} options - Options for the hook.
+ */
 export function useStyleInjection({
   id,
   css,
-  window: targetWindow = typeof window !== 'undefined' ? window : null,
   insertionPoint,
-  enabled = true
-}: UseStyleInjectionProps): void {
+  enabled = true,
+  window: targetWindow = typeof window !== 'undefined' ? window : null
+}: UseStyleInjectionOptions): void {
   const cssString: string = Array.isArray(css) ? css.join('\n') : css;
 
   useIsomorphicInsertionEffect(() => {

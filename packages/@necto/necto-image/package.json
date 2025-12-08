@@ -1,0 +1,33 @@
+{
+  "name": "@necto/image",
+  "version": "1.0.0",
+  "description": "Framework-agnostic image transformation utilities for CDN providers",
+  "scripts": {
+    "build": "tsup --minify terser"
+  },
+  "author": "Corinvo OSS Team",
+  "license": "MIT",
+  "dependencies": {
+    "@necto/dom": "workspace:*",
+    "@necto/url": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.1",
+    "tsup": "^8.4.0"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  }
+}

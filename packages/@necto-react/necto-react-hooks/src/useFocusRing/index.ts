@@ -9,6 +9,6 @@
 export { useFocusRing } from './useFocusRing';
 
 export type {
-  UseFocusRingProps,
+  UseFocusRingOptions,
   UseFocusRingReturn
 } from './useFocusRing.types';

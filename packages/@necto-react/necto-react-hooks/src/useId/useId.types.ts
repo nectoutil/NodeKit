@@ -7,9 +7,9 @@
  */
 
 /**
- * Props for the useId hook.
+ * Options for the useId hook.
  */
-export interface UseIdProps {
+export interface UseIdOptions {
   /** Optional custom prefix for the generated ID. */
   prefix?: string;
 

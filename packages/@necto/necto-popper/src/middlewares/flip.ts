@@ -1,10 +1,12 @@
 /**
- * Flip middleware - flips placement when there's not enough space
- * Example of a more complex middleware
+ * Copyright (c) Corinvo, LLC. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
  */
 
 import { detectOverflow, hasOverflow } from '../utils/detectOverflow';
-import type { Middleware, Placement, BoundaryOptions } from '../types';
 import {
   createMiddleware,
   getSide,
@@ -12,42 +14,35 @@ import {
   getOppositeSide
 } from '../types';
 
+import type { Middleware, Placement, BoundaryOptions } from '../types';
+
 export interface FlipOptions extends BoundaryOptions {
   /**
-   * Fallback placements to try if the main placement doesn't fit
-   * If not provided, will just flip to the opposite side
+   * Fallback placements to try if the main placement doesn't fit.
    */
   fallbackPlacements?: Placement[];
 }
 
 /**
  * Creates a flip middleware that changes placement when overflowing.
- *
- * Uses @necto/dom's getContainmentRect under the hood!
- *
- * @example
- * computePosition(ref, floating, {
- *   middleware: [flip()] // Auto-flips if no space
- * });
+ * @param options - Configuration options for flip behavior.
+ * @returns A middleware that flips placement when there's insufficient space.
  */
 export function flip(options: FlipOptions = {}): Middleware {
   return createMiddleware('flip', (state) => {
     const { placement, rects } = state;
     const floatingRect = rects.floating;
 
-    // Check if current placement causes overflow using our utility
     const overflow = detectOverflow(floatingRect, options);
     const isOverflowing = hasOverflow(floatingRect, options);
 
     if (!isOverflowing) {
-      return {}; // No changes needed
+      return {};
     }
 
-    // Determine which side has the most overflow
     const side = getSide(placement);
     const alignment = getAlignment(placement);
 
-    // Check if we should flip to the opposite side
     let shouldFlip = false;
 
     switch (side) {
@@ -69,7 +64,6 @@ export function flip(options: FlipOptions = {}): Middleware {
       return {};
     }
 
-    // Flip to opposite side
     const oppositeSide = getOppositeSide(side);
     const oppositePlacement: Placement = alignment
       ? `${oppositeSide}-${alignment}`
@@ -77,7 +71,7 @@ export function flip(options: FlipOptions = {}): Middleware {
 
     return {
       placement: oppositePlacement,
-      reset: true, // Tell computePosition to recalculate coords
+      reset: true,
       data: { flipped: true, originalPlacement: placement }
     };
   });

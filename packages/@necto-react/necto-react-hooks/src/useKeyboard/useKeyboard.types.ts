@@ -9,9 +9,9 @@
 import type { KeyboardEvents, DOMAttributes } from '@necto-react/types';
 
 /**
- * Props for the useKeyboard hook.
+ * Options for the useKeyboard hook.
  */
-export interface UseKeyboardProps extends KeyboardEvents {
+export interface UseKeyboardOptions extends KeyboardEvents {
   /**
    * Whether the keyboard interaction is disabled.
    * Defaults to false.

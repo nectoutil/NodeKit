@@ -36,9 +36,9 @@ export type HandlerEvent =
 export type Handler = (modality: Modality, e: HandlerEvent) => void;
 
 /**
- * Props for the useFocusVisibleListener hook.
+ * Options for the useFocusVisibleListener hook.
  */
-export interface UseFocusVisibleListenerProps {
+export interface UseFocusVisibleListenerOptions {
   /** Function called when focus visibility changes. */
   fn: (isFocusVisible: boolean) => void;
 

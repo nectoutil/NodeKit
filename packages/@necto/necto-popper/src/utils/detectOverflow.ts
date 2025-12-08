@@ -1,34 +1,28 @@
 /**
- * Utilities for detecting overflow and viewport boundaries
+ * Copyright (c) Corinvo, LLC. and affiliates.
  *
- * Uses @necto/dom utilities - perfect example of package reuse!
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
  */
 
 import { getContainmentRect } from '@necto/dom';
-import type { Rect, OverflowData, BoundaryOptions } from '../types';
 import { resolvePadding, hasAnyOverflow } from '../types';
+
+import type { Rect, OverflowData, BoundaryOptions } from '../types';
 
 /**
  * Detects how much a rect overflows its boundary.
- *
- * Uses your existing @necto/dom getContainmentRect!
- *
- * @example
- * const overflow = detectOverflow(tooltipRect, { boundary: container })
- * if (overflow.top > 0) {
- *   // Tooltip is overflowing the top by `overflow.top` pixels
- * }
+ * @param rect - The rectangle to check for overflow.
+ * @param options - Boundary and padding options.
+ * @returns Overflow amounts for each side (positive values indicate overflow).
  */
 export function detectOverflow(
   rect: Rect,
   options: BoundaryOptions = {}
 ): OverflowData {
   const { boundary, padding: paddingOption = 0 } = options;
-
-  // Resolve padding using our utility
   const padding = resolvePadding(paddingOption);
-
-  // ✅ Using your existing @necto/dom utility!
   const boundaryRect = getContainmentRect(boundary);
 
   return {
@@ -40,7 +34,10 @@ export function detectOverflow(
 }
 
 /**
- * Check if a rect is overflowing on any side
+ * Checks if a rect is overflowing on any side.
+ * @param rect - The rectangle to check.
+ * @param options - Boundary and padding options.
+ * @returns True if the rect overflows on any side.
  */
 export function hasOverflow(
   rect: Rect,

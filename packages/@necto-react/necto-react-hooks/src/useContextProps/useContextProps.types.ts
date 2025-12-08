@@ -9,9 +9,9 @@
 import type { ForwardedRef, Context } from 'react';
 
 /**
- * Props for the useContextProps hook.
+ * Options for the useContextProps hook.
  */
-export interface UseContextPropsProps<T, E extends Element> {
+export interface UseContextPropsOptions<T, E extends Element> {
   /**
    * Component props, must include optional slot property and optional ref.
    */

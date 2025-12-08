@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom';
 import { defu } from 'defu';
 import { useLatestRef } from '@necto-react/hooks';
 import { computePosition } from '@necto/popper';
-import type { UsePopperProps, UsePopperReturn } from './usePopper.types';
+import type { UsePopperOptions, UsePopperReturn } from './usePopper.types';
 import type { ComputePositionResult } from '@necto/popper';
 
 function deepEqual(a: any, b: any): boolean {
@@ -37,7 +37,7 @@ function roundByDPR(element: Element, value: number): number {
   return Math.round(value * dpr) / dpr;
 }
 
-export function usePopper(props: UsePopperProps = {}): UsePopperReturn {
+export function usePopper(options: UsePopperOptions = {}): UsePopperReturn {
   const {
     placement,
     strategy,
@@ -47,7 +47,7 @@ export function usePopper(props: UsePopperProps = {}): UsePopperReturn {
     transform,
     whileElementsMounted,
     open
-  } = defu(props, {
+  } = defu(options, {
     placement: 'bottom' as const,
     strategy: 'absolute' as const,
     middleware: [],

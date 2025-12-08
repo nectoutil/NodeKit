@@ -7,9 +7,9 @@
  */
 
 /**
- * Props for the useScrollLock hook.
+ * Options for the useScrollLock hook.
  */
-export interface UseScrollLockProps {
+export interface UseScrollLockOptions {
   /** Whether to automatically lock scroll on mount. */
   autoLock?: boolean;
 

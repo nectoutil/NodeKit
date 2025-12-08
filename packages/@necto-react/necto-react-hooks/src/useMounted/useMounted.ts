@@ -9,7 +9,7 @@
 import { useRef, useState, useCallback, useEffect } from 'react';
 
 import type {
-  UseMountedProps,
+  UseMountedOptions,
   UseMountedReturn,
   MountedAccessType
 } from './useMounted.types';
@@ -18,13 +18,15 @@ import type {
  * React hook that tracks whether a component is mounted.
  *
  * @template T The type of access to the mounted state (function, ref, or boolean).
- * @param {UseMountedProps & { type: T }} [props] - Options to configure the hook behavior.
+ * @param {UseMountedOptions & { type: T }} [options] - Options to configure the hook behavior.
  * @returns {UseMountedReturn<T>} The mounted state in the requested format.
  */
 export function useMounted<T extends MountedAccessType = 'function'>(
-  props: UseMountedProps & { type: T } = {} as UseMountedProps & { type: T }
+  options: UseMountedOptions & { type: T } = {} as UseMountedOptions & {
+    type: T;
+  }
 ): UseMountedReturn<T> {
-  const { type = 'function' } = props;
+  const { type = 'function' } = options;
 
   const mountedRef = useRef<boolean>(false);
   const [mountedState, setMountedState] = useState(false);

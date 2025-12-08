@@ -9,6 +9,6 @@
 export { useContextProps } from './useContextProps';
 
 export type {
-  UseContextPropsProps,
+  UseContextPropsOptions,
   UseContextPropsReturn
 } from './useContextProps.types';

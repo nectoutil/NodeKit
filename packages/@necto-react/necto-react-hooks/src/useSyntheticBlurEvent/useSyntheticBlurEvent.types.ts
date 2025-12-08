@@ -9,9 +9,9 @@
 import type { FocusEvent } from 'react';
 
 /**
- * Props for the useSyntheticBlurEvent hook.
+ * Options for the useSyntheticBlurEvent hook.
  */
-export interface UseSyntheticBlurEventProps<T extends Element = Element> {
+export interface UseSyntheticBlurEventOptions<T extends Element = Element> {
   /**
    * Handler called when the blur event is triggered on the target element.
    * Receives a React FocusEvent for the target element.

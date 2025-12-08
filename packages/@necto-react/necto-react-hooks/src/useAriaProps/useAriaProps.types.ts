@@ -9,9 +9,9 @@
 import type { AriaAttributes } from 'react';
 
 /**
- * Props for the useAriaProps hook.
+ * Options for the useAriaProps hook.
  */
-export interface UseAriaPropsProps {
+export interface UseAriaPropsOptions {
   /** Whether the element is invalid. */
   isInvalid?: boolean;
 

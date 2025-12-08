@@ -9,6 +9,6 @@
 export { useSyntheticBlurEvent } from './useSyntheticBlurEvent';
 
 export type {
-  UseSyntheticBlurEventProps,
+  UseSyntheticBlurEventOptions,
   UseSyntheticBlurEventReturn
 } from './useSyntheticBlurEvent.types';

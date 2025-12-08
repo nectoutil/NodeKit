@@ -10,8 +10,8 @@ import { useMemo } from 'react';
 import { useDisabled } from '@necto-react/hooks';
 
 import type {
-  UseDisabledPropsProps,
-  UseDisabledPropsPropsReturn
+  UseDisabledPropsOptions,
+  UseDisabledPropsReturn
 } from './useDisabledProps.types';
 import type { HTMLAttributes } from 'react';
 
@@ -22,9 +22,9 @@ import type { HTMLAttributes } from 'react';
  * @returns {HTMLAttributes<HTMLElement>} The merged props including disabled and aria-disabled if applicable.
  */
 export function useDisabledProps(
-  props: UseDisabledPropsProps = {}
-): UseDisabledPropsPropsReturn {
-  const { type = 'general', extraProps = {} } = props;
+  options: UseDisabledPropsOptions = {}
+): UseDisabledPropsReturn {
+  const { type = 'general', extraProps = {} } = options;
   const isDisabled = useDisabled({ type, defaultFallback: false });
 
   return useMemo(() => {

@@ -7,9 +7,9 @@
  */
 
 /**
- * Props for the useFocusVisible hook.
+ * Options for the useFocusVisible hook.
  */
-export interface UseFocusVisibleProps {
+export interface UseFocusVisibleOptions {
   /** Whether the target element is a text input. */
   isTextInput?: boolean;
 

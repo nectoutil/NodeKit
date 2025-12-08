@@ -19,7 +19,7 @@ import { useRef, useState, useCallback } from 'react';
 import { useFocusVisibleListener } from '@necto-react/hooks';
 
 import type {
-  UseFocusRingProps,
+  UseFocusRingOptions,
   UseFocusRingReturn,
   Modality
 } from './useFocusRing.types';
@@ -30,13 +30,13 @@ const currentModality: null | Modality = null;
 /**
  * React hook that manages focus state and focus ring visibility for an element.
  *
- * @param {UseFocusRingProps} [props] - Options to control focus ring behavior.
+ * @param {UseFocusRingOptions} [options] - Options to control focus ring behavior.
  * @returns {UseFocusRingReturn} An object containing focus state, focus visibility, and props to spread on the target element.
  */
 export function useFocusRing(
-  props: UseFocusRingProps = {}
+  options: UseFocusRingOptions = {}
 ): UseFocusRingReturn {
-  const { within = false, isTextInput = false, autoFocus = false } = props;
+  const { within = false, isTextInput = false, autoFocus = false } = options;
   const state = useRef({
     isFocused: autoFocus,
     isFocusVisible: autoFocus || currentModality !== 'pointer'

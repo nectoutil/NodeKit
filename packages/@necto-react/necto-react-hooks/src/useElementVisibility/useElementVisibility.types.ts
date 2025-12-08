@@ -12,9 +12,9 @@
 export type PartialVisibility = boolean | 'top' | 'right' | 'bottom' | 'left';
 
 /**
- * Props for the useElementVisibility hook.
+ * Options for the useElementVisibility hook.
  */
-export interface UseElementVisibilityProps {
+export interface UseElementVisibilityOptions {
   /** Whether partial visibility is allowed, or which edge to check. */
   partialVisibility?: PartialVisibility;
 

@@ -1,2 +1,2 @@
 export { useStyleInjection } from './useStyleInjection';
-export type { UseStyleInjectionProps } from './useStyleInjection.types';
+export type { UseStyleInjectionOptions } from './useStyleInjection.types';

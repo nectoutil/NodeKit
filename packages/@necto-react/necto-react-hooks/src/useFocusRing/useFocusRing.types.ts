@@ -9,9 +9,9 @@
 import type { DOMAttributes } from '@necto-react/types';
 
 /**
- * Props for the useFocusRing hook.
+ * Options for the useFocusRing hook.
  */
-export interface UseFocusRingProps {
+export interface UseFocusRingOptions {
   /** Whether to track focus visibility within a subtree instead of just the element. */
   within?: boolean;
 
