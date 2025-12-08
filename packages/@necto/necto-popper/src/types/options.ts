@@ -1,67 +1,42 @@
 /**
- * Configuration options for computePosition
+ * Copyright (c) Corinvo, LLC. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
  */
 
 import type { Placement, Strategy } from './placement';
 import type { Middleware } from './middleware';
 
-/**
- * Options for computing position
- */
 export interface ComputePositionOptions {
   /**
-   * Where to place the floating element relative to the reference
+   * Where to place the floating element relative to the reference.
    * @default 'bottom'
    */
   placement?: Placement;
 
   /**
-   * The CSS position property to use
+   * The CSS position property to use.
    * @default 'absolute'
    */
   strategy?: Strategy;
 
   /**
-   * Array of middleware to apply
-   * Middleware functions are applied in order
+   * Array of middleware to apply in order.
    * @default []
    */
   middleware?: Middleware[];
 }
 
-/**
- * The result of computing position
- */
 export interface ComputePositionResult {
-  /**
-   * The x coordinate for the floating element
-   */
   x: number;
-
-  /**
-   * The y coordinate for the floating element
-   */
   y: number;
-
-  /**
-   * The final placement (may differ from initial if flipped)
-   */
   placement: Placement;
-
-  /**
-   * The strategy used
-   */
   strategy: Strategy;
-
-  /**
-   * Additional data from middleware
-   */
   middlewareData?: Record<string, unknown>;
 }
 
-/**
- * Default values for options
- */
 export const DEFAULT_OPTIONS: Required<
   Omit<ComputePositionOptions, 'middleware'>
 > = {

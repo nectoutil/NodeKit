@@ -14,9 +14,9 @@ import type { UseStyleInjectionProps } from './useStyleInjection.types';
 export function useStyleInjection({
   id,
   css,
-  window: targetWindow = typeof window !== 'undefined' ? window : null,
   insertionPoint,
-  enabled = true
+  enabled = true,
+  window: targetWindow = typeof window !== 'undefined' ? window : null
 }: UseStyleInjectionProps): void {
   const cssString: string = Array.isArray(css) ? css.join('\n') : css;
 

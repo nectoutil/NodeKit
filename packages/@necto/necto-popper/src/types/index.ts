@@ -1,17 +1,12 @@
 /**
- * Central export for all types
- * Organized and consolidated for clarity
+ * Copyright (c) Corinvo, LLC. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
  */
 
-// ============================================================================
-// PLACEMENT - Placement-related types and utilities
-// ============================================================================
-export type {
-  Side,
-  Alignment,
-  Placement,
-  Strategy
-} from './placement';
+export type { Side, Alignment, Placement, Strategy } from './placement';
 
 export {
   isSide,
@@ -24,9 +19,6 @@ export {
   getOppositeAlignment
 } from './placement';
 
-// ============================================================================
-// GEOMETRY - Geometric types, boundaries, padding, overflow
-// ============================================================================
 export type {
   Coordinates,
   Dimensions,
@@ -36,18 +28,11 @@ export type {
   Padding,
   OverflowData,
   RootBoundary,
-  BoundaryOptions // Moved from boundary.ts
+  BoundaryOptions
 } from './geometry';
 
-export {
-  resolvePadding,
-  hasAnyOverflow,
-  clamp
-} from './geometry';
+export { resolvePadding, hasAnyOverflow, clamp } from './geometry';
 
-// ============================================================================
-// MIDDLEWARE - Middleware system types
-// ============================================================================
 export type {
   MiddlewareState,
   MiddlewareResult,
@@ -59,12 +44,6 @@ export type {
 
 export { createMiddleware } from './middleware';
 
-// ============================================================================
-// OPTIONS - Main API options and results
-// ============================================================================
-export type {
-  ComputePositionOptions,
-  ComputePositionResult
-} from './options';
+export type { ComputePositionOptions, ComputePositionResult } from './options';
 
 export { DEFAULT_OPTIONS } from './options';

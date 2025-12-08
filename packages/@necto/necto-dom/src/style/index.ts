@@ -1,16 +1,19 @@
-import { getOwnerDocument } from './owner';
+/**
+ * Copyright (c) Corinvo, LLC. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
 
-export interface CreateStyleElementOptions {
-  id?: string;
-  insertionPoint?: HTMLElement | null;
-}
+import { getOwnerDocument } from '../owner';
 
-export interface StyleEntry {
-  element: HTMLStyleElement | null;
-  count: number;
-}
-
-export type StyleMap = Map<string, StyleEntry>;
+import type {
+  CreateStyleElementOptions,
+  InjectStyleOptions,
+  StyleEntry,
+  StyleMap
+} from './types';
 
 const STYLE_ATTRIBUTE = 'necto-style-id';
 const DEFAULT_ID = 'necto-style';
@@ -49,7 +52,7 @@ export function createStyleElement(
 
 export function injectStyle(
   css: string,
-  options: CreateStyleElementOptions & { window?: Window | null } = {}
+  options: InjectStyleOptions = {}
 ): () => void {
   const {
     id = DEFAULT_ID,
@@ -90,3 +93,10 @@ export function injectStyle(
 export function removeStyleElement(element: HTMLStyleElement): void {
   element.remove();
 }
+
+export type {
+  CreateStyleElementOptions,
+  InjectStyleOptions,
+  StyleEntry,
+  StyleMap
+} from './types';

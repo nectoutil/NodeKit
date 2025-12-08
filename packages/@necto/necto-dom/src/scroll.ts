@@ -13,23 +13,14 @@
  * Modifications have been made to adapt the code for use in this project.
  */
 
-/**
- * Caches the result of the supportsPreventScroll feature detection.
- *
- * null indicates that the feature has not been checked yet.
- */
 let supportsPreventScrollCached: boolean | null = null;
 
-/**
- * Detects if the browser supports the preventScroll option in the focus() method.
- *
- * @returns {boolean} True if preventScroll is supported, otherwise false.
- */
+/** Detects if the browser supports the preventScroll option in focus() */
 export function supportsPreventScroll(): boolean {
   if (supportsPreventScrollCached == null) {
     supportsPreventScrollCached = false;
     try {
-      const focusElement = document.createElement('div');
+      const focusElement: HTMLDivElement = document.createElement('div');
       focusElement.focus({
         get preventScroll(): boolean {
           supportsPreventScrollCached = true;
@@ -37,7 +28,7 @@ export function supportsPreventScroll(): boolean {
         }
       });
     } catch {
-      // Throw Formatted Errors Later
+      // Ignore
     }
   }
 

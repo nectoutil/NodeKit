@@ -8,6 +8,8 @@
 
 import { DOM } from '@necto/constants';
 
+import type { AriaAttribute } from './types';
+
 /**
  * Converts an aria attribute name to a capitalized key.
  * @param attr - The aria attribute (e.g., 'aria-pressed').
@@ -45,12 +47,7 @@ const createAriaPropsMap = (): Record<string, string> =>
  * };
  * ```
  */
-export const AriaProps = createAriaPropsMap();
-
-/**
- * Type representing valid ARIA attribute values (e.g., 'aria-pressed', 'aria-disabled').
- */
-export type AriaAttribute = (typeof DOM.ARIA_ATTRIBUTES)[number];
+export const AriaProps: Record<string, string> = createAriaPropsMap();
 
 /**
  * Array of all ARIA attribute values.
@@ -94,3 +91,5 @@ export const isAriaAttribute = (prop: string): boolean =>
  */
 export const hasAriaPrefix = (prop: string): boolean =>
   prop.startsWith('aria-');
+
+export type { AriaAttribute } from './types';

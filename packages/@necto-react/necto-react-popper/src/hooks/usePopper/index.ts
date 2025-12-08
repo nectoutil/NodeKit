@@ -1,6 +1,19 @@
 /**
- * usePopper hook exports
+ * Copyright (c) Corinvo, LLC. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
  */
 
 export { usePopper } from './usePopper';
-export type * from './usePopper.types';
+
+export type {
+  UsePopperProps,
+  UsePopperReturn,
+  ComputePositionOptions,
+  ComputePositionResult,
+  Placement,
+  Strategy,
+  Middleware
+} from './usePopper.types';

@@ -1,33 +1,30 @@
 /**
- * Offset middleware - adds distance between reference and floating element
- * Example of a simple middleware function
+ * Copyright (c) Corinvo, LLC. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
  */
 
-import type { Middleware } from '../types';
 import { createMiddleware, getSide } from '../types';
+
+import type { Middleware } from '../types';
 
 export interface OffsetOptions {
   /**
-   * The offset distance
+   * The offset distance in pixels.
    */
   value: number;
 }
 
 /**
- * Creates an offset middleware.
- * This is a "middleware factory" - a function that returns a middleware function.
- *
- * Pattern: Configuration → Middleware Function → Result
- *
- * @example
- * computePosition(ref, floating, {
- *   middleware: [offset({ value: 10 })] // Adds 10px gap
- * });
+ * Creates an offset middleware that adds distance between reference and floating elements.
+ * @param options - The offset value or options object.
+ * @returns A middleware that applies the specified offset.
  */
 export function offset(options: OffsetOptions | number): Middleware {
   const value = typeof options === 'number' ? options : options.value;
 
-  // Return the actual middleware using createMiddleware helper
   return createMiddleware('offset', (state) => {
     const { x, y, placement } = state;
     const side = getSide(placement);
@@ -35,7 +32,6 @@ export function offset(options: OffsetOptions | number): Middleware {
     let newX = x;
     let newY = y;
 
-    // Apply offset based on side
     switch (side) {
       case 'top':
         newY -= value;

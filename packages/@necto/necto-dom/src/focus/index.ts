@@ -13,7 +13,7 @@
  * Modifications have been made to adapt the code for use in this project.
  */
 
-import { supportsPreventScroll } from './scroll';
+import { supportsPreventScroll } from '../scroll';
 
 import type { ScrollableElement } from './types';
 import type { FocusableElement } from '@necto/types';
@@ -79,3 +79,5 @@ export function getScrollableElements(
 
   return scrollableElements;
 }
+
+export type { ScrollableElement } from './types';

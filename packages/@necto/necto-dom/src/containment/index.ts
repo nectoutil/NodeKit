@@ -6,13 +6,15 @@
  *
  */
 
-import { isNode } from './node';
-import { getOwnerDocument, getOwnerWindow } from './owner';
+import { isNode } from '../node';
+import { getOwnerDocument, getOwnerWindow } from '../owner';
+
+import type { ContainmentRect } from './types';
 
 export function getContainmentRect(
   containment: Element | null | undefined,
   fallbackElement?: Element | null
-): { top: number; left: number; bottom: number; right: number } {
+): ContainmentRect {
   if (containment && isNode(containment)) {
     const r = (containment as Element).getBoundingClientRect();
     return {
@@ -33,3 +35,5 @@ export function getContainmentRect(
     };
   }
 }
+
+export type { ContainmentRect } from './types';

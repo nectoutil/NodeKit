@@ -14,13 +14,13 @@
  */
 
 import { isIOS } from '@necto/platform';
-import { getOwnerDocument } from './owner';
-import { runAfterTransition } from './transitions';
+import { getOwnerDocument } from '../owner';
+import { runAfterTransition } from '../transitions';
 
 import type { TextSelectionStates } from './types';
 
+let savedUserSelect: string = '';
 let state: TextSelectionStates = 'default';
-let savedUserSelect = '';
 const modifiedElementMap = new WeakMap<Element, string>();
 
 /**
@@ -111,3 +111,5 @@ export function restoreTextSelection(target?: Element): void {
     }
   }
 }
+
+export type { TextSelectionStates } from './types';

@@ -1,0 +1,44 @@
+{
+  "name": "@necto-vue/components",
+  "version": "0.0.1",
+  "type": "module",
+  "description": "Necto's standard library for providing utility components for Vue applications.",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite build --watch"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "sideEffects": false,
+  "author": "Corinvo OSS Team",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.14.1",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@vitejs/plugin-vue-jsx": "^5.1.2",
+    "typescript": "^5.9.3",
+    "vite": "^6.0.0",
+    "vite-plugin-dts": "^4.3.0",
+    "vue": "^3.5.13"
+  },
+  "peerDependencies": {
+    "vue": "^3.5.0"
+  },
+  "dependencies": {
+    "@necto/constants": "workspace:*",
+    "@necto/dom": "workspace:*",
+    "@necto/image": "workspace:*"
+  }
+}

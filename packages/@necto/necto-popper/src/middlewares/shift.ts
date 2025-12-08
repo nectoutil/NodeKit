@@ -1,33 +1,33 @@
 /**
- * Shift middleware - shifts the floating element to stay in view
+ * Copyright (c) Corinvo, LLC. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
  */
 
 import { detectOverflow } from '../utils/detectOverflow';
-import type { Middleware, BoundaryOptions } from '../types';
 import { createMiddleware } from '../types';
+
+import type { Middleware, BoundaryOptions } from '../types';
 
 export interface ShiftOptions extends BoundaryOptions {
   /**
-   * Maximum distance to shift (prevents shifting too far)
+   * Maximum distance to shift in pixels.
    */
   maxShift?: number;
 
   /**
-   * Which axes to shift on
+   * Which axes to shift on.
    * @default 'both'
    */
   axis?: 'x' | 'y' | 'both';
 }
 
 /**
- * Creates a shift middleware that keeps element within viewport.
- *
- * Uses @necto/dom's getContainmentRect for boundary detection!
- *
- * @example
- * computePosition(ref, floating, {
- *   middleware: [shift({ padding: 8 })]
- * });
+ * Creates a shift middleware that keeps the floating element within the viewport.
+ * @param options - Configuration options for shift behavior.
+ * @returns A middleware that shifts position to prevent overflow.
  */
 export function shift(options: ShiftOptions = {}): Middleware {
   return createMiddleware('shift', (state) => {
@@ -35,7 +35,6 @@ export function shift(options: ShiftOptions = {}): Middleware {
     const { maxShift, axis = 'both' } = options;
     const floatingRect = rects.floating;
 
-    // Detect overflow using our utility (which uses @necto/dom!)
     const overflow = detectOverflow(
       { ...floatingRect, x, y },
       { boundary: options.boundary, padding: options.padding }
@@ -44,7 +43,6 @@ export function shift(options: ShiftOptions = {}): Middleware {
     let newX = x;
     let newY = y;
 
-    // Shift horizontally if needed and allowed
     if (axis === 'x' || axis === 'both') {
       if (overflow.left > 0) {
         const shiftAmount = Math.min(overflow.left, maxShift ?? overflow.left);
@@ -58,7 +56,6 @@ export function shift(options: ShiftOptions = {}): Middleware {
       }
     }
 
-    // Shift vertically if needed and allowed
     if (axis === 'y' || axis === 'both') {
       if (overflow.top > 0) {
         const shiftAmount = Math.min(overflow.top, maxShift ?? overflow.top);
@@ -72,7 +69,6 @@ export function shift(options: ShiftOptions = {}): Middleware {
       }
     }
 
-    // Only return new coordinates if they changed
     if (newX !== x || newY !== y) {
       return {
         x: newX,

@@ -1,45 +1,41 @@
 /**
- * Placement and positioning types
- * Using advanced TypeScript for type safety
+ * Copyright (c) Corinvo, LLC. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
  */
 
-/**
- * The four primary sides where an element can be placed
- */
 export type Side = 'top' | 'right' | 'bottom' | 'left';
 
-/**
- * Alignment within a side
- */
 export type Alignment = 'start' | 'end';
 
-/**
- * All possible placements using template literal types
- * Generates: 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', etc.
- */
 export type Placement = Side | `${Side}-${Alignment}`;
 
-/**
- * Positioning strategy for the floating element
- */
 export type Strategy = 'absolute' | 'fixed';
 
 /**
- * Type guard to check if a string is a valid Side
+ * Checks if a string is a valid Side.
+ * @param value - The string to check.
+ * @returns True if the value is a valid Side.
  */
 export function isSide(value: string): value is Side {
   return ['top', 'right', 'bottom', 'left'].includes(value);
 }
 
 /**
- * Type guard to check if a string is a valid Alignment
+ * Checks if a string is a valid Alignment.
+ * @param value - The string to check.
+ * @returns True if the value is a valid Alignment.
  */
 export function isAlignment(value: string): value is Alignment {
   return ['start', 'end'].includes(value);
 }
 
 /**
- * Type guard to check if a string is a valid Placement
+ * Checks if a string is a valid Placement.
+ * @param value - The string to check.
+ * @returns True if the value is a valid Placement.
  */
 export function isPlacement(value: string): value is Placement {
   const parts = value.split('-');
@@ -53,20 +49,18 @@ export function isPlacement(value: string): value is Placement {
 }
 
 /**
- * Extract the side from a placement
- * @example
- * getSide('top-start') // 'top'
- * getSide('bottom') // 'bottom'
+ * Extracts the side from a placement.
+ * @param placement - The placement to extract from.
+ * @returns The side component of the placement.
  */
 export function getSide(placement: Placement): Side {
   return placement.split('-')[0] as Side;
 }
 
 /**
- * Extract the alignment from a placement (if any)
- * @example
- * getAlignment('top-start') // 'start'
- * getAlignment('bottom') // undefined
+ * Extracts the alignment from a placement.
+ * @param placement - The placement to extract from.
+ * @returns The alignment component, or undefined if none.
  */
 export function getAlignment(placement: Placement): Alignment | undefined {
   const parts = placement.split('-');
@@ -74,14 +68,18 @@ export function getAlignment(placement: Placement): Alignment | undefined {
 }
 
 /**
- * Get the axis for a given side
+ * Gets the axis for a given side.
+ * @param side - The side to get the axis for.
+ * @returns 'x' for left/right, 'y' for top/bottom.
  */
 export function getAxis(side: Side): 'x' | 'y' {
   return side === 'top' || side === 'bottom' ? 'y' : 'x';
 }
 
 /**
- * Get the opposite side
+ * Gets the opposite side.
+ * @param side - The side to get the opposite of.
+ * @returns The opposite side.
  */
 export function getOppositeSide(side: Side): Side {
   const opposites: Record<Side, Side> = {
@@ -94,7 +92,9 @@ export function getOppositeSide(side: Side): Side {
 }
 
 /**
- * Get the opposite alignment
+ * Gets the opposite alignment.
+ * @param alignment - The alignment to get the opposite of.
+ * @returns The opposite alignment.
  */
 export function getOppositeAlignment(alignment: Alignment): Alignment {
   return alignment === 'start' ? 'end' : 'start';

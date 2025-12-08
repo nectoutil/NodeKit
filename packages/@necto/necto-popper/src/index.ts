@@ -1,27 +1,17 @@
 /**
- * @necto/popper
+ * Copyright (c) Corinvo, LLC. and affiliates.
  *
- * Core positioning engine for popovers, tooltips, dropdowns, and floating elements.
- * Framework-agnostic positioning utilities.
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
  *
- * Built on top of @necto/dom for robust DOM manipulation.
  */
 
-// ============================================================================
-// TYPES - Comprehensive type system for positioning
-// ============================================================================
 export type * from './types';
-export * from './types'; // Export utilities and constants
+export * from './types';
 
-// ============================================================================
-// CORE - Main positioning engine
-// ============================================================================
 export { computePosition } from './core/computePosition';
 export { getElementRects } from './core/getElementRects';
 
-// ============================================================================
-// MIDDLEWARE - Composable position modifiers
-// ============================================================================
 export { offset } from './middlewares/offset';
 export type { OffsetOptions } from './middlewares/offset';
 
@@ -31,15 +21,23 @@ export type { FlipOptions } from './middlewares/flip';
 export { shift } from './middlewares/shift';
 export type { ShiftOptions } from './middlewares/shift';
 
-// ============================================================================
-// UTILITIES - Helper functions
-// ============================================================================
+export { arrow } from './middlewares/arrow';
+export type { ArrowOptions } from './middlewares/arrow';
+
+export { size } from './middlewares/size';
+export type { SizeOptions } from './middlewares/size';
+
+export { autoPlacement } from './middlewares/autoPlacement';
+export type { AutoPlacementOptions } from './middlewares/autoPlacement';
+
+export { hide } from './middlewares/hide';
+export type { HideOptions } from './middlewares/hide';
+
 export { computeCoords } from './utils/getPlacementCoords';
 export { detectOverflow, hasOverflow } from './utils/detectOverflow';
+export { autoUpdate } from './utils/autoUpdate';
+export type { AutoUpdateOptions } from './utils/autoUpdate';
 
-// ============================================================================
-// RE-EXPORTS - Commonly used @necto/dom utilities for convenience
-// ============================================================================
 export {
   getContainmentRect,
   isNode,

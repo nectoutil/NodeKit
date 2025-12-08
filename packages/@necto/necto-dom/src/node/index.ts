@@ -6,7 +6,7 @@
  *
  */
 
-import { isShadowRoot } from './shadow-dom';
+import { isShadowRoot } from '../shadow-dom';
 
 export function isNode(value: unknown): value is Node {
   return (

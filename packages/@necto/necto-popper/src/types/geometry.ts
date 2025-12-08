@@ -1,56 +1,33 @@
 /**
- * Geometry and boundary types for positioning calculations
- * Consolidated for simplicity - boundaries are geometric concepts
+ * Copyright (c) Corinvo, LLC. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
  */
 
-// ============================================================================
-// BASIC GEOMETRY
-// ============================================================================
-
-/**
- * 2D coordinates
- */
 export interface Coordinates {
   x: number;
   y: number;
 }
 
-/**
- * Element dimensions
- */
 export interface Dimensions {
   width: number;
   height: number;
 }
 
-/**
- * A rectangle with position and dimensions
- */
 export interface Rect extends Coordinates, Dimensions {}
 
-/**
- * Bounding rectangles for reference and floating elements
- */
 export interface ElementRects {
   readonly reference: Rect;
   readonly floating: Rect;
 }
 
-/**
- * The actual HTML elements being positioned
- */
 export interface Elements {
   readonly reference: Element;
   readonly floating: HTMLElement;
 }
 
-// ============================================================================
-// PADDING & OVERFLOW
-// ============================================================================
-
-/**
- * Padding configuration - can be a number or per-side object
- */
 export type Padding =
   | number
   | Partial<{
@@ -61,7 +38,9 @@ export type Padding =
     }>;
 
 /**
- * Resolve padding to all four sides
+ * Resolves padding to all four sides.
+ * @param padding - The padding value or object.
+ * @returns Resolved padding for all sides.
  */
 export function resolvePadding(padding: Padding = 0): Required<{
   top: number;
@@ -86,9 +65,6 @@ export function resolvePadding(padding: Padding = 0): Required<{
   };
 }
 
-/**
- * Overflow amounts on each side
- */
 export interface OverflowData {
   readonly top: number;
   readonly right: number;
@@ -97,7 +73,9 @@ export interface OverflowData {
 }
 
 /**
- * Check if there's any overflow
+ * Checks if there's any overflow on any side.
+ * @param overflow - The overflow data to check.
+ * @returns True if any side has overflow.
  */
 export function hasAnyOverflow(overflow: OverflowData): boolean {
   return (
@@ -108,46 +86,33 @@ export function hasAnyOverflow(overflow: OverflowData): boolean {
   );
 }
 
-// ============================================================================
-// BOUNDARY (merged from boundary.ts)
-// ============================================================================
-
-/**
- * Root boundary - can be viewport, document, or a specific element
- */
 export type RootBoundary = 'viewport' | 'document' | Element;
 
-/**
- * Boundary options for overflow detection
- * Used by flip(), shift(), and other middleware
- */
 export interface BoundaryOptions {
   /**
-   * The boundary element to check overflow against
-   * If undefined, uses the viewport
+   * The boundary element to check overflow against.
    */
   boundary?: Element;
 
   /**
-   * Padding around the boundary
-   * Can be a single number or per-side values
+   * Padding around the boundary.
    * @default 0
    */
   padding?: Padding;
 
   /**
-   * The root boundary to use
+   * The root boundary to use.
    * @default 'viewport'
    */
   rootBoundary?: RootBoundary;
 }
 
-// ============================================================================
-// UTILITIES
-// ============================================================================
-
 /**
- * Clamp a value between min and max
+ * Clamps a value between min and max.
+ * @param value - The value to clamp.
+ * @param min - The minimum value.
+ * @param max - The maximum value.
+ * @returns The clamped value.
  */
 export function clamp(value: number, min: number, max: number): number {
   return Math.max(min, Math.min(max, value));

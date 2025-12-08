@@ -1,15 +1,20 @@
 /**
- * Get element bounding rectangles
+ * Copyright (c) Corinvo, LLC. and affiliates.
  *
- * Uses @necto/dom utilities - reusing existing code!
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
  */
 
 import { isNode } from '@necto/dom';
+
 import type { ElementRects, Rect } from '../types';
 
 /**
  * Gets the bounding rectangles for reference and floating elements.
- * Pure function - just reads DOM and returns data.
+ * @param reference - The reference element.
+ * @param floating - The floating element.
+ * @returns The bounding rectangles for both elements.
  */
 export function getElementRects(
   reference: Element,
@@ -22,12 +27,11 @@ export function getElementRects(
 }
 
 /**
- * Converts a DOMRect to our Rect type
- *
- * Uses @necto/dom's isNode for validation
+ * Converts a DOMRect to a Rect type.
+ * @param element - The element to get the bounding rect from.
+ * @returns The element's bounding rectangle.
  */
 function getRectFromElement(element: Element): Rect {
-  // Validate element using @necto/dom utility
   if (!isNode(element)) {
     throw new Error('Invalid element provided to getRectFromElement');
   }
