@@ -6,9 +6,10 @@
  *
  */
 
-export type * from './dom';
-export type * from './props';
-export type * from './flags';
-export type * from './events';
-export type * from './components';
-export type * from './selection';
+export { useLongPress } from './useLongPress';
+
+export type {
+  LongPressEvent,
+  UseLongPressOptions,
+  UseLongPressReturn
+} from './useLongPress.types';

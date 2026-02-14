@@ -36,3 +36,5 @@ export * from './useAriaProps';
 export * from './useStyleInjection';
 export * from './useLatestRef';
 export * from './useIsomorphicInsertionEffect';
+export * from './useLongPress';
+export * from './useSelectable';

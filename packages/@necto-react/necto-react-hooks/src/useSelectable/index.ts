@@ -6,9 +6,9 @@
  *
  */
 
-export type * from './dom';
-export type * from './props';
-export type * from './flags';
-export type * from './events';
-export type * from './components';
-export type * from './selection';
+export { useSelectable } from './useSelectable';
+
+export type {
+  UseSelectableReturn,
+  UseSelectableOptions
+} from './useSelectable.types';
