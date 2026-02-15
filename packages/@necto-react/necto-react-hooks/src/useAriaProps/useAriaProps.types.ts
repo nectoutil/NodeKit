@@ -56,6 +56,21 @@ export interface UseAriaPropsOptions {
 
   /** The current value as text (for range widgets). */
   valueText?: string;
+
+  /** A label for the element. */
+  label?: string;
+
+  /** ID of the element that labels this element. */
+  labelledBy?: string;
+
+  /** ID of the element that describes this element. */
+  describedBy?: string;
+
+  /** ID of the element that this element controls. */
+  controls?: string;
+
+  /** ID of the element that owns this element. */
+  owns?: string;
 }
 
 /**

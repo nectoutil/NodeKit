@@ -13,3 +13,4 @@
 export * from './isMac';
 export * from './isAndroid';
 export * from './isIOS';
+export * from './isCtrlKeyPressed';

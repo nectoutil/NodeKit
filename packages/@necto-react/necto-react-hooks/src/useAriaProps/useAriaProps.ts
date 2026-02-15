@@ -9,7 +9,6 @@
  */
 
 import { useMemo } from 'react';
-
 import { AriaProps } from '@necto/dom';
 
 import type {
@@ -43,7 +42,12 @@ export function useAriaProps(
     valueCurrent,
     valueMin,
     valueMax,
-    valueText
+    valueText,
+    label,
+    labelledBy,
+    describedBy,
+    controls,
+    owns
   } = options;
 
   return useMemo((): AriaAttributes => {
@@ -100,6 +104,26 @@ export function useAriaProps(
       ariaAttributes[AriaProps.Valuetext] = valueText;
     }
 
+    if (label !== undefined) {
+      ariaAttributes[AriaProps.Label] = label;
+    }
+
+    if (labelledBy !== undefined) {
+      ariaAttributes[AriaProps.Labelledby] = labelledBy;
+    }
+
+    if (describedBy !== undefined) {
+      ariaAttributes[AriaProps.Describedby] = describedBy;
+    }
+
+    if (controls !== undefined) {
+      ariaAttributes[AriaProps.Controls] = controls;
+    }
+
+    if (owns !== undefined) {
+      ariaAttributes[AriaProps.Owns] = owns;
+    }
+
     return ariaAttributes;
   }, [
     isInvalid,
@@ -116,6 +140,11 @@ export function useAriaProps(
     valueCurrent,
     valueMin,
     valueMax,
-    valueText
+    valueText,
+    label,
+    labelledBy,
+    describedBy,
+    controls,
+    owns
   ]);
 }

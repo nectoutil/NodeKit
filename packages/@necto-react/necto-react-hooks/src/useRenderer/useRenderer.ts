@@ -24,30 +24,28 @@ export function useRenderer<T>(
   options: UseRendererOptions<T>
 ): UseRendererReturn {
   const {
-    className,
     style,
+    values,
     children,
-    // Default class name
-    defaultClassName = 'necto',
-    defaultChildren,
+    className,
     defaultStyle,
-    values
+    defaultChildren,
+    defaultClassName = 'necto'
   } = options;
 
   return useMemo(() => {
-    // Compute classnames
     const computedClassName: string =
       typeof className === 'function'
         ? className({ ...values, defaultClassName })
-        : `${defaultClassName} ${className}`;
+        : className
+          ? `${defaultClassName} ${className}`
+          : defaultClassName;
 
-    // Compute style
     const computedStyle: CSSProperties | undefined =
       typeof style === 'function'
         ? style({ ...values, defaultStyle: defaultStyle || {} })
         : { ...defaultStyle, ...style };
 
-    // Compute children
     const computedChildren: ReactNode =
       typeof children === 'function'
         ? children({ ...values, defaultChildren })
