@@ -16,7 +16,6 @@
 import {
   useFocus,
   useKeyboard,
-  useSyncContextRef,
   getInteractionModality
 } from '@necto-react/hooks';
 import {
@@ -26,8 +25,7 @@ import {
   focusWithoutScrolling
 } from '@necto/dom';
 import { mergeProps } from '@necto/mergers';
-import { useEffect, useRef, useContext } from 'react';
-import { FocusableContext } from '@necto-react/contexts';
+import { useEffect, useRef } from 'react';
 
 import type {
   UseFocusableOptions,
@@ -52,12 +50,7 @@ export function useFocusable(
 
   const { focusProps } = useFocus(options);
   const { keyboardProps } = useKeyboard(options);
-  const context = useContext(FocusableContext) || {};
   const autoFocusRef: RefObject<any> = useRef(autoFocus);
-
-  // Synchronize the local ref with the context ref so both always point to the same DOM element.
-  useSyncContextRef({ context: context, ref: domRef });
-  const { ref: _, ...domProps } = context;
 
   const ownerDocument: Document = getOwnerDocument(domRef.current);
   const activeElement: Element | null = getActiveElement(ownerDocument);
@@ -90,12 +83,6 @@ export function useFocusable(
   }
 
   return {
-    focusableProps: mergeProps(
-      {
-        ...mergeProps(focusProps ?? {}, keyboardProps),
-        tabIndex
-      },
-      isDisabled ? {} : domProps
-    )
+    focusableProps: mergeProps(focusProps ?? {}, keyboardProps, { tabIndex })
   };
 }

@@ -13,6 +13,7 @@ import { isTest } from 'std-env';
 import { registry, defaultContext, idsUpdaterMap } from './hookContext';
 import React, { useRef, useState, useEffect, useId as useReactId } from 'react';
 
+import type { RefObject } from 'react';
 import type { UseIdOptions } from './useId.types';
 
 /**
@@ -26,10 +27,10 @@ export function useId(options: UseIdOptions = {}): string {
 
   // Initialize state only once with a function to avoid unnecessary calculations
   const [_, setValue] = useState<string | undefined>(() => defaultId);
-  const nextIdRef = useRef<string | null>(null);
-  const cleanupRef = useRef<object>({});
+  const nextIdRef: RefObject<string | null> = useRef<string | null>(null);
+  const cleanupRef: RefObject<object> = useRef<object>({});
 
-  const id = (() => {
+  const id: string = (() => {
     if (defaultId) return defaultId;
     const reactId =
       typeof React['useId'] === 'function'

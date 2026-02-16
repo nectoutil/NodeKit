@@ -25,7 +25,7 @@ export const idsUpdaterMap = new Map<string, { current: string | null }[]>();
 /**
  * FinalizationRegistry for cleaning up unused IDs from idsUpdaterMap.
  */
-export const registry =
+export const registry: FinalizationRegistry<string> | null =
   typeof FinalizationRegistry !== 'undefined'
     ? new FinalizationRegistry<string>((id) => {
         idsUpdaterMap.delete(id);

@@ -9,8 +9,6 @@
  */
 
 export * from './useContextProps';
-export * from './useDisabled';
-export * from './useDisabledProps';
 export * from './useElementVisibility';
 export * from './useFocus';
 export * from './useFocusable';
@@ -21,13 +19,11 @@ export * from './useFocusWithin';
 export * from './useGlobalListeners';
 export * from './useHover';
 export * from './useId';
-// export * from './useIntersectionObserver';
 export * from './useKeyboard';
 export * from './useMounted';
 export * from './usePress';
 export * from './useRenderer';
 export * from './useSlottedContext';
-export * from './useSyncContextRef';
 export * from './useSyntheticBlurEvent';
 export * from './useEffectEvent';
 export * from './useSupported';
