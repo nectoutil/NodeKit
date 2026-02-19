@@ -61,6 +61,7 @@ const BoxFn = <T extends ElementType = 'div'>(
     outlineWidth,
     opacity,
     zIndex,
+    className,
     ...others
   } = props;
 
@@ -83,7 +84,8 @@ const BoxFn = <T extends ElementType = 'div'>(
       {...others}
       className={cn(
         styles.Box,
-        `_necto:${BOX_NAME}`
+        `_necto:${BOX_NAME}`,
+        className
       )}
       style={{
         '--necto-box-background': background,
