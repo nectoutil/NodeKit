@@ -6,9 +6,9 @@
  *
  */
 
-import type { Key, RefObject } from 'react';
+import type { RefObject } from 'react';
 import type { DOMAttributes } from '@necto-react/types';
-import type { KeyboardDelegate } from '@necto/types';
+import type { Key, KeyboardDelegate } from '@necto/types';
 
 // Re-export for convenience
 export type { KeyboardDelegate } from '@necto/types';

@@ -6,8 +6,8 @@
  *
  */
 
-export * from './layouts';
-export * from './Primitive';
-export * from './ShadowBevel';
-export * from './conditionals';
-export * from './social-buttons';
+import { HTMLElements } from '@necto/dom';
+
+export const DEFAULT_PRIMITIVE_TAG: keyof HTMLElementTagNameMap = HTMLElements.Div;
+
+export const PRIMITIVE_NAME: string = 'Primitive' as const;

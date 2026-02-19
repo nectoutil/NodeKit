@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm --filter @necto-react/hooks build:*)",
+      "Bash(gh api:*)",
+      "Bash(python3:*)",
+      "Bash(gh search code:*)",
+      "WebSearch",
+      "Bash(gh issue view:*)",
+      "Bash(ls:*)",
+      "Bash(node -e:*)",
+      "Bash(pnpm add:*)"
+    ]
+  }
+}

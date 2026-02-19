@@ -13,10 +13,10 @@ import { DOM } from '@necto/constants';
 import { HTMLElements } from '@necto/dom';
 import { Children, forwardRef, isValidElement, cloneElement } from 'react';
 
-import type { ElementType, Ref, ReactElement, FC } from 'react';
-import type { PrimitiveProps, Primitives } from './Primitive.types';
+import { DEFAULT_PRIMITIVE_TAG, PRIMITIVE_NAME } from './constants';
 
-const DEFAULT_PRIMITIVE_TAG: keyof HTMLElementTagNameMap = HTMLElements.Div;
+import type { PrimitiveProps, Primitives } from './Primitive.types';
+import type { ElementType, Ref, ReactElement, FC, ForwardRefExoticComponent } from 'react';
 
 /**
  * @internal
@@ -68,7 +68,7 @@ export const Primitive: (<E extends ElementType = (typeof HTMLElements)['Div']>(
       const lower: string = tag;
       const upper: string = tag[0].toUpperCase() + tag.slice(1);
 
-      const Comp = forwardRef<any, any>((props, ref) =>
+      const Comp: ForwardRefExoticComponent<Omit<any, "ref"> & React.RefAttributes<any>> = forwardRef<any, any>((props, ref) =>
         PrimitiveFn({ ...(props as any), as: tag } as PrimitiveProps<any>, ref)
       );
 
@@ -81,5 +81,6 @@ export const Primitive: (<E extends ElementType = (typeof HTMLElements)['Div']>(
   )
 ) as (<E extends ElementType = (typeof HTMLElements)['Div']>(
   props: PrimitiveProps<E> & { ref?: Ref<any> }
-) => ReactElement | null) &
-  Primitives & { [k: string]: any };
+) => ReactElement | null) & Primitives & { [k: string]: any };
+
+Primitive.displayName = PRIMITIVE_NAME;

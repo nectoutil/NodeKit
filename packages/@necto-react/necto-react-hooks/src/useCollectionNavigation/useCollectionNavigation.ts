@@ -14,7 +14,8 @@ import { useCallback, useEffect, useRef } from 'react';
 import { isCtrlKeyPressed, isMac } from '@necto/platform';
 import { focusWithoutScrolling, scrollIntoView } from '@necto/dom';
 
-import type { KeyboardEvent, FocusEvent, Key } from 'react';
+import type { KeyboardEvent, FocusEvent } from 'react';
+import type { Key } from '@necto/types';
 import type {
   UseCollectionNavigationOptions,
   UseCollectionNavigationReturn,
@@ -80,7 +81,7 @@ export function useCollectionNavigation(
 
   const effectiveScrollRef = scrollRef ?? ref;
   const scrollPos = useRef<{ top: number; left: number }>({ top: 0, left: 0 });
-  const lastFocusedKey = useRef<Key | null>(manager.focusedKey);
+  const lastFocusedKey = useRef(manager.focusedKey);
   const autoFocusRef = useRef<boolean | FocusStrategy>(autoFocus);
   const typeAheadBuffer = useRef<string>('');
   const typeAheadTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);

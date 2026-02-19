@@ -1,0 +1,33 @@
+/**
+ * Copyright (c) Corinvo, LLC. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
+.ShadowBevel {
+  overflow: clip;
+  z-index: 0;
+  position: relative;
+  box-shadow: var(--necto-shadow-bevel-box-shadow);
+  border-radius: var(--necto-shadow-bevel-border-radius);
+
+  &::before {
+    content: var(--necto-shadow-bevel-content, '');
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    z-index: var(--necto-shadow-bevel-z-index, 0);
+    pointer-events: none;
+    mix-blend-mode: luminosity;
+    border-radius: inherit;
+    box-shadow:
+      1px 0 0 0 rgba(0, 0, 0, 0.13) inset,
+      -1px 0 0 0 rgba(0, 0, 0, 0.13) inset,
+      0 -1px 0 0 rgba(0, 0, 0, 0.17) inset,
+      0 1px 0 0 rgba(204, 204, 204, 0.5) inset;
+  }
+}

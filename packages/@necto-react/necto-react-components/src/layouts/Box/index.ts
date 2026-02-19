@@ -6,8 +6,6 @@
  *
  */
 
-export * from './layouts';
-export * from './Primitive';
-export * from './ShadowBevel';
-export * from './conditionals';
-export * from './social-buttons';
+export { Box } from './Box';
+
+export type { BoxProps } from './Box.types';
