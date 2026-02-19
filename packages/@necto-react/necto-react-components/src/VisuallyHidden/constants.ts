@@ -6,9 +6,4 @@
  *
  */
 
-export * from './layouts';
-export * from './Primitive';
-export * from './ShadowBevel';
-export * from './conditionals';
-export * from './VisuallyHidden';
-export * from './social-buttons';
+export const VISUALLY_HIDDEN_NAME: string = 'VisuallyHidden' as const;

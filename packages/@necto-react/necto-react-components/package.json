@@ -62,6 +62,7 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
+    "@necto-react/hooks": "workspace:*",
     "@necto/constants": "workspace:*",
     "@necto/dom": "workspace:*",
     "clsx": "^2.1.1",

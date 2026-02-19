@@ -28,6 +28,8 @@ const ShadowBevelFn = <T extends ElementType = 'div'>(
     borderRadius,
     zIndex = 0,
     bevel = true,
+    className,
+    style,
     ...others
   } = props;
 
@@ -37,14 +39,16 @@ const ShadowBevelFn = <T extends ElementType = 'div'>(
       ref={ref}
       {...others}
       className={cn(
+        className,
         styles.ShadowBevel,
         `_necto:${SHADOW_BEVEL_NAME}`
       )}
       style={{
+        ...style,
         '--necto-shadow-bevel-z-index': zIndex,
         '--necto-shadow-bevel-content': bevel ? '""' : 'none',
-        '--necto-shadow-bevel-box-shadow': bevel ? (typeof boxShadow === 'number' ? `var(--necto-shadow-${boxShadow})` : boxShadow) : 'none',
-        '--necto-shadow-bevel-border-radius': bevel ? (typeof borderRadius === 'number' ? `${borderRadius}px` : borderRadius) : '0'
+        '--necto-shadow-bevel-box-shadow': typeof boxShadow === 'number' ? `var(--necto-shadow-${boxShadow})` : (boxShadow ?? 'none'),
+        '--necto-shadow-bevel-border-radius': typeof borderRadius === 'number' ? `${borderRadius}px` : (borderRadius ?? '0')
       }}
     >
       {children}
