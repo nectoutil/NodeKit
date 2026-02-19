@@ -7,40 +7,16 @@
  */
 
 .Box {
-  --necto-box-background: initial;
-  --necto-box-border-color: initial;
-  --necto-box-border-style: initial;
   --necto-box-border-width: 0;
   --necto-box-border-block-start-width: var(--necto-box-border-width);
   --necto-box-border-block-end-width: var(--necto-box-border-width);
   --necto-box-border-inline-start-width: var(--necto-box-border-width);
   --necto-box-border-inline-end-width: var(--necto-box-border-width);
-  --necto-box-border-radius: initial;
-  --necto-box-border-end-start-radius: var(--necto-box-border-radius);
-  --necto-box-border-end-end-radius: var(--necto-box-border-radius);
-  --necto-box-border-start-start-radius: var(--necto-box-border-radius);
-  --necto-box-border-start-end-radius: var(--necto-box-border-radius);
-  --necto-box-color: initial;
-  --necto-box-min-height: initial;
-  --necto-box-min-width: initial;
-  --necto-box-max-width: initial;
-  --necto-box-width: initial;
-  --necto-box-overflow-x: initial;
-  --necto-box-overflow-y: initial;
-  --necto-box-padding-block-start: initial;
-  --necto-box-padding-block-end: initial;
-  --necto-box-padding-inline-start: initial;
-  --necto-box-padding-inline-end: initial;
-  --necto-box-shadow: initial;
-  --necto-box-outline-color: initial;
-  --necto-box-outline-style: initial;
-  --necto-box-outline-width: initial;
-  --necto-box-opacity: initial;
-  --necto-box-z-index: initial;
+  --necto-box-border-end-start-radius: var(--necto-box-border-radius, 0);
+  --necto-box-border-end-end-radius: var(--necto-box-border-radius, 0);
+  --necto-box-border-start-start-radius: var(--necto-box-border-radius, 0);
+  --necto-box-border-start-end-radius: var(--necto-box-border-radius, 0);
 
-  background-color: var(--necto-box-background);
-  border-color: var(--necto-box-border-color);
-  border-style: var(--necto-box-border-style);
   border-block-start-width: var(--necto-box-border-block-start-width);
   border-block-end-width: var(--necto-box-border-block-end-width);
   border-inline-start-width: var(--necto-box-border-inline-start-width);
@@ -49,8 +25,6 @@
   border-end-end-radius: var(--necto-box-border-end-end-radius);
   border-start-start-radius: var(--necto-box-border-start-start-radius);
   border-start-end-radius: var(--necto-box-border-start-end-radius);
-  box-shadow: var(--necto-box-shadow);
-  color: var(--necto-box-color);
   min-height: var(--necto-box-min-height);
   min-width: var(--necto-box-min-width);
   max-width: var(--necto-box-max-width);
@@ -61,9 +35,6 @@
   padding-block-end: var(--necto-box-padding-block-end);
   padding-inline-start: var(--necto-box-padding-inline-start);
   padding-inline-end: var(--necto-box-padding-inline-end);
-  outline-color: var(--necto-box-outline-color);
-  outline-style: var(--necto-box-outline-style);
-  outline-width: var(--necto-box-outline-width);
   opacity: var(--necto-box-opacity);
   z-index: var(--necto-box-z-index);
 }
