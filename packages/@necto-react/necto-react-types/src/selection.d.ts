@@ -6,85 +6,55 @@
  *
  */
 
-import type { Key } from 'react';
-
-/**
- * The selection mode for a collection.
- * - 'none': No selection allowed.
- * - 'single': Only one item can be selected at a time.
- * - 'multiple': Multiple items can be selected.
- */
+/** Selection mode for a collection. */
 export type SelectionMode = 'none' | 'single' | 'multiple';
 
-/**
- * The selection behavior for a collection.
- * - 'toggle': Clicking an item toggles its selection without affecting others.
- * - 'replace': Clicking an item replaces the current selection with that item.
- */
-export type SelectionBehavior = 'toggle' | 'replace';
+/** Focus strategy when auto-focusing. */
+export type FocusStrategy = 'first' | 'last';
 
 /**
  * Interface for managing selection state in a collection.
- * Provides methods to read and update selection, focus, and item states.
  */
 export interface SelectionManager {
-  /** The current selection mode ('none', 'single', or 'multiple'). */
-  readonly selectionMode: SelectionMode;
-
-  /** The current selection behavior ('toggle' or 'replace'). */
-  readonly selectionBehavior: SelectionBehavior;
-
-  /** Whether no items are currently selected. */
-  readonly isEmpty: boolean;
-
-  /** Whether the collection currently has focus. */
+  /** The currently focused key. */
+  readonly focusedKey: (string | number) | null;
+  /** Set the focused key. */
+  setFocusedKey(
+    key: (string | number) | null,
+    childFocus?: FocusStrategy
+  ): void;
+  /** Whether the collection is focused. */
   readonly isFocused: boolean;
-
-  /** The key of the currently focused item, or null if none. */
-  readonly focusedKey: Key | null;
-
-  /** The set of currently selected item keys. */
-  readonly selectedKeys: Set<Key>;
-
-  /** Whether empty selection is disallowed (at least one item must be selected). */
-  readonly disallowEmptySelection: boolean;
-
-  /** Sets whether the collection is focused. */
-  setFocused: (isFocused: boolean) => void;
-
-  /** Sets the currently focused item key. */
-  setFocusedKey: (key: Key | null) => void;
-
-  /** Sets the selected item keys. */
-  setSelectedKeys: (keys: Set<Key> | Key[]) => void;
-
-  /** Sets the selection behavior. */
-  setSelectionBehavior: (behavior: SelectionBehavior) => void;
-
-  /** Returns whether the given key is currently selected. */
-  isSelected: (key: Key) => boolean;
-
-  /** Returns whether the given key is disabled. */
-  isDisabled: (key: Key) => boolean;
-
-  /** Returns whether the given key represents a link item. */
-  isLink: (key: Key) => boolean;
-
-  /** Returns whether the given key can be selected. */
-  canSelectItem: (key: Key) => boolean;
-
-  /** Toggles selection state of the given key. */
-  toggleSelection: (key: Key) => void;
-
-  /** Replaces the current selection with just the given key. */
-  replaceSelection: (key: Key) => void;
-
-  /** Extends the selection to include the given key (for shift-click). */
-  extendSelection: (key: Key) => void;
-
-  /** Gets item props for link navigation (href, routerOptions). */
-  getItemProps: (key: Key) => { href?: string; routerOptions?: unknown } | null;
-
-  /** The underlying collection data (optional). */
-  readonly collection?: { id?: string };
+  /** Set whether the collection is focused. */
+  setFocused(isFocused: boolean): void;
+  /** The set of selected keys. */
+  readonly selectedKeys: Set<string | number>;
+  /** The selection mode. */
+  readonly selectionMode: SelectionMode;
+  /** Replace selection with a single key. */
+  replaceSelection(key: string | number): void;
+  /** Extend selection to include a key. */
+  extendSelection(key: string | number): void;
+  /** Toggle selection of a key. */
+  toggleSelection(key: string | number): void;
+  /** Select all items. */
+  selectAll(): void;
+  /** Clear all selection. */
+  clearSelection(): void;
+  /** Check if a key is selected. */
+  isSelected(key: string | number): boolean;
+  /** Check if a key is disabled. */
+  isDisabled?(key: string | number): boolean;
+  /** Check if a key is a link. */
+  isLink?(key: string | number): boolean;
+  /** Get props for an item. */
+  getItemProps?(
+    key: string | number
+  ): { href?: string; routerOptions?: unknown } | undefined;
+  /** Whether the user can select an item. */
+  canSelectItem?(key: string | number): boolean;
+  /** The first selected key. */
+  readonly firstSelectedKey?: (string | number) | null;
+  /** The last selected key. */
+  readonly lastSelectedKey?: (string | number) | null;
 }

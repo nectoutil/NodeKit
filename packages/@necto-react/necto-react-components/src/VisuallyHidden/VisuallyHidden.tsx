@@ -12,28 +12,24 @@ import { forwardRef, useMemo, useState } from 'react';
 import { Primitive } from '../Primitive';
 import { VISUALLY_HIDDEN_NAME } from './constants';
 
+import type { Ref, ReactElement, CSSProperties } from 'react';
 import type { VisuallyHiddenProps } from './VisuallyHidden.types';
-import type { ElementType, Ref, ReactElement, CSSProperties } from 'react';
 
-const VisuallyHiddenFn = <T extends ElementType = 'div'>(
-  props: VisuallyHiddenProps<T>,
+const VisuallyHiddenFn = (
+  props: VisuallyHiddenProps,
   ref: Ref<any>
 ): ReactElement => {
-  const {
-    as,
-    children,
-    isFocusable,
-    style,
-    ...others
-  } = props;
+  const { as, style, children, isFocusable, ...others } = props;
 
   const [isFocused, setFocused] = useState(false);
   const { focusWithinProps } = useFocusWithin({
     isDisabled: !isFocusable,
-    onFocusWithinChange: setFocused,
+    onFocusWithinChange: setFocused
   });
 
-  const combinedStyle: CSSProperties | undefined = useMemo<CSSProperties | undefined>(() => {
+  const combinedStyle: CSSProperties | undefined = useMemo<
+    CSSProperties | undefined
+  >(() => {
     if (isFocused) {
       return style;
     }
@@ -48,12 +44,10 @@ const VisuallyHiddenFn = <T extends ElementType = 'div'>(
       padding: 0,
       position: 'absolute',
       width: '1px',
-      whiteSpace: 'nowrap',
+      whiteSpace: 'nowrap'
     };
 
-    return style
-      ? { ...hidden, ...style }
-      : hidden;
+    return style ? { ...hidden, ...style } : hidden;
   }, [isFocused, style]);
 
   return (
@@ -69,13 +63,13 @@ const VisuallyHiddenFn = <T extends ElementType = 'div'>(
   );
 };
 
-export const VisuallyHidden: (<T extends ElementType = 'div'>(
-  props: VisuallyHiddenProps<T> & { ref?: Ref<any> }
+export const VisuallyHidden: ((
+  props: VisuallyHiddenProps & { ref?: Ref<any> }
 ) => ReactElement) & { Root: any } & { [k: string]: any } = Object.assign(
   forwardRef(VisuallyHiddenFn),
   { Root: forwardRef(VisuallyHiddenFn) }
-) as (<T extends ElementType = 'div'>(
-  props: VisuallyHiddenProps<T> & { ref?: Ref<any> }
-) => ReactElement) & { Root: any } & { [k: string]: any };
+) as ((props: VisuallyHiddenProps & { ref?: Ref<any> }) => ReactElement) & {
+  Root: any;
+} & { [k: string]: any };
 
 VisuallyHidden.displayName = VISUALLY_HIDDEN_NAME;

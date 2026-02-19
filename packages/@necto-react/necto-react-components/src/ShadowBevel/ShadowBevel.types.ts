@@ -9,7 +9,7 @@
 import type { ElementType } from 'react';
 import type { PrimitiveProps } from '../Primitive';
 
-export type ShadowBevelProps<T extends ElementType> = PrimitiveProps<T> & {
+export type ShadowBevelProps = PrimitiveProps<ElementType> & {
   bevel?: boolean;
   boxShadow?: number | string;
   borderRadius?: number | string;

@@ -14,10 +14,10 @@ import styles from './ShadowBevel.module.scss';
 import { SHADOW_BEVEL_NAME } from './constants';
 
 import type { ShadowBevelProps } from './ShadowBevel.types';
-import type { ElementType, Ref, ReactElement } from 'react';
+import type { Ref, ReactElement } from 'react';
 
-const ShadowBevelFn = <T extends ElementType = 'div'>(
- props: ShadowBevelProps<T>,
+const ShadowBevelFn = (
+  props: ShadowBevelProps,
   ref: Ref<any>
 ): ReactElement => {
   const {
@@ -47,8 +47,14 @@ const ShadowBevelFn = <T extends ElementType = 'div'>(
         ...style,
         '--necto-shadow-bevel-z-index': zIndex,
         '--necto-shadow-bevel-content': bevel ? '""' : 'none',
-        '--necto-shadow-bevel-box-shadow': typeof boxShadow === 'number' ? `var(--necto-shadow-${boxShadow})` : (boxShadow ?? 'none'),
-        '--necto-shadow-bevel-border-radius': typeof borderRadius === 'number' ? `${borderRadius}px` : (borderRadius ?? '0')
+        '--necto-shadow-bevel-box-shadow':
+          typeof boxShadow === 'number'
+            ? `var(--necto-shadow-${boxShadow})`
+            : (boxShadow ?? 'none'),
+        '--necto-shadow-bevel-border-radius':
+          typeof borderRadius === 'number'
+            ? `${borderRadius}px`
+            : (borderRadius ?? '0')
       }}
     >
       {children}
@@ -56,13 +62,13 @@ const ShadowBevelFn = <T extends ElementType = 'div'>(
   );
 };
 
-export const ShadowBevel: (<T extends ElementType = 'div'>(
-  props: ShadowBevelProps<T> & { ref?: Ref<any> }
-) => ReactElement) & { Root: any } = Object.assign(
+export const ShadowBevel: ((
+  props: ShadowBevelProps & { ref?: Ref<any> }
+) => ReactElement) & { Root: any } & { [k: string]: any } = Object.assign(
   forwardRef(ShadowBevelFn),
-  {
-    Root: forwardRef(ShadowBevelFn)
-  }
-) as (<T extends ElementType = 'div'>(
-  props: ShadowBevelProps<T> & { ref?: Ref<any> }
-) => ReactElement) & { Root: any };
+  { Root: forwardRef(ShadowBevelFn) }
+) as ((props: ShadowBevelProps & { ref?: Ref<any> }) => ReactElement) & {
+  Root: any;
+} & { [k: string]: any };
+
+ShadowBevel.displayName = SHADOW_BEVEL_NAME;

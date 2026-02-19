@@ -14,13 +14,13 @@ import { useCallback, useEffect, useRef } from 'react';
 import { isCtrlKeyPressed, isMac } from '@necto/platform';
 import { focusWithoutScrolling, scrollIntoView } from '@necto/dom';
 
-import type { KeyboardEvent, FocusEvent } from 'react';
-import type { Key } from '@necto/types';
 import type {
-  UseCollectionNavigationOptions,
+  FocusStrategy,
   UseCollectionNavigationReturn,
-  FocusStrategy
+  UseCollectionNavigationOptions
 } from './useCollectionNavigation.types';
+import type { Key } from '@necto/types';
+import type { KeyboardEvent, FocusEvent } from 'react';
 
 /**
  * Checks if a modifier key for non-contiguous selection is pressed.

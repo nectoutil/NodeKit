@@ -9,7 +9,17 @@
       "Bash(gh issue view:*)",
       "Bash(ls:*)",
       "Bash(node -e:*)",
-      "Bash(pnpm add:*)"
+      "Bash(pnpm add:*)",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(xargs cat:*)",
+      "Bash(git log:*)",
+      "Bash(for hook in useAriaProps useCollectionNavigation useContextProps useCssInjection useEffectEvent useElementVisibility useFocus useFocusRing useFocusVisible useFocusVisibleListener useFocusWithin useFocusable useGlobalListeners useHover useId useIsomorphicInsertionEffect useKeyboard useLatestRef useLongPress useMounted usePress useRenderer useScrollLock useSelectable useSlottedContext useStyleInjection useSupported useSyntheticBlurEvent)",
+      "Bash(do echo \"=== $hook ===\" grep -r \"import.*$hook\" packages/@necto-react/necto-react-hooks/src --include=\"*.ts\" --include=\"*.tsx\")",
+      "Bash(test:*)",
+      "Bash(pnpm build:*)",
+      "Bash(for hook in useContextProps useElementVisibility useFocus useFocusable useFocusRing useFocusVisible useFocusVisibleListener useFocusWithin useGlobalListeners useHover useId useKeyboard useMounted usePress useRenderer useSlottedContext useSyntheticBlurEvent useEffectEvent useSupported useScrollLock useAriaProps useStyleInjection useLatestRef useIsomorphicInsertionEffect useLongPress useSelectable useCollectionNavigation useFormState)",
+      "Bash(do echo '=== $hook ===' grep -h \"from ''''\\\\.\\\\./\\\\|from \\\\.\\\\./\\\\|from ''''@necto-react/hooks\" /Users/botondszabo/Developer/nectoutil/NodeKit/packages/@necto-react/necto-react-hooks/src/$hook/$hook.ts /Users/botondszabo/Developer/nectoutil/NodeKit/packages/@necto-react/necto-react-hooks/src/$hook.ts)"
     ]
   }
 }
