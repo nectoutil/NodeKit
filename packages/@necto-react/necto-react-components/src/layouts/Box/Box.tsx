@@ -67,7 +67,12 @@ const BoxFn = <T extends ElementType = 'div'>(
 
   const borderStyleValue = borderStyle
     ? borderStyle
-    : borderColor || borderWidth || borderBlockStartWidth || borderBlockEndWidth || borderInlineStartWidth || borderInlineEndWidth
+    : borderColor ||
+        borderWidth ||
+        borderBlockStartWidth ||
+        borderBlockEndWidth ||
+        borderInlineStartWidth ||
+        borderInlineEndWidth
       ? 'solid'
       : undefined;
 
@@ -82,11 +87,7 @@ const BoxFn = <T extends ElementType = 'div'>(
       as={as}
       ref={ref}
       {...others}
-      className={cn(
-        styles.Box,
-        `_necto:${BOX_NAME}`,
-        className
-      )}
+      className={cn(styles.Box, `_necto:${BOX_NAME}`, className)}
       style={{
         ...(background && { backgroundColor: background }),
         ...(borderColor && { borderColor }),
@@ -97,27 +98,51 @@ const BoxFn = <T extends ElementType = 'div'>(
         ...(outlineStyleValue && { outlineStyle: outlineStyleValue }),
         ...(outlineWidth && { outlineWidth }),
         ...(borderWidth && { '--necto-box-border-width': borderWidth }),
-        ...(borderBlockStartWidth && { '--necto-box-border-block-start-width': borderBlockStartWidth }),
-        ...(borderBlockEndWidth && { '--necto-box-border-block-end-width': borderBlockEndWidth }),
-        ...(borderInlineStartWidth && { '--necto-box-border-inline-start-width': borderInlineStartWidth }),
-        ...(borderInlineEndWidth && { '--necto-box-border-inline-end-width': borderInlineEndWidth }),
+        ...(borderBlockStartWidth && {
+          '--necto-box-border-block-start-width': borderBlockStartWidth
+        }),
+        ...(borderBlockEndWidth && {
+          '--necto-box-border-block-end-width': borderBlockEndWidth
+        }),
+        ...(borderInlineStartWidth && {
+          '--necto-box-border-inline-start-width': borderInlineStartWidth
+        }),
+        ...(borderInlineEndWidth && {
+          '--necto-box-border-inline-end-width': borderInlineEndWidth
+        }),
         ...(borderRadius && { '--necto-box-border-radius': borderRadius }),
-        ...(borderEndStartRadius && { '--necto-box-border-end-start-radius': borderEndStartRadius }),
-        ...(borderEndEndRadius && { '--necto-box-border-end-end-radius': borderEndEndRadius }),
-        ...(borderStartStartRadius && { '--necto-box-border-start-start-radius': borderStartStartRadius }),
-        ...(borderStartEndRadius && { '--necto-box-border-start-end-radius': borderStartEndRadius }),
+        ...(borderEndStartRadius && {
+          '--necto-box-border-end-start-radius': borderEndStartRadius
+        }),
+        ...(borderEndEndRadius && {
+          '--necto-box-border-end-end-radius': borderEndEndRadius
+        }),
+        ...(borderStartStartRadius && {
+          '--necto-box-border-start-start-radius': borderStartStartRadius
+        }),
+        ...(borderStartEndRadius && {
+          '--necto-box-border-start-end-radius': borderStartEndRadius
+        }),
         '--necto-box-min-height': minHeight,
         '--necto-box-min-width': minWidth,
         '--necto-box-max-width': maxWidth,
         '--necto-box-width': width,
         '--necto-box-overflow-x': overflowX,
         '--necto-box-overflow-y': overflowY,
-        '--necto-box-padding-block-start': px(paddingBlockStart ?? paddingBlock ?? padding),
-        '--necto-box-padding-block-end': px(paddingBlockEnd ?? paddingBlock ?? padding),
-        '--necto-box-padding-inline-start': px(paddingInlineStart ?? paddingInline ?? padding),
-        '--necto-box-padding-inline-end': px(paddingInlineEnd ?? paddingInline ?? padding),
+        '--necto-box-padding-block-start': px(
+          paddingBlockStart ?? paddingBlock ?? padding
+        ),
+        '--necto-box-padding-block-end': px(
+          paddingBlockEnd ?? paddingBlock ?? padding
+        ),
+        '--necto-box-padding-inline-start': px(
+          paddingInlineStart ?? paddingInline ?? padding
+        ),
+        '--necto-box-padding-inline-end': px(
+          paddingInlineEnd ?? paddingInline ?? padding
+        ),
         '--necto-box-opacity': opacity,
-        '--necto-box-z-index': zIndex,
+        '--necto-box-z-index': zIndex
       }}
     >
       {children}
@@ -127,9 +152,8 @@ const BoxFn = <T extends ElementType = 'div'>(
 
 export const Box: (<T extends ElementType = 'div'>(
   props: BoxProps<T> & { ref?: Ref<any> }
-) => ReactElement) & { Root: any } = Object.assign(
-  forwardRef(BoxFn),
-  { Root: forwardRef(BoxFn) }
-) as (<T extends ElementType = 'div'>(
+) => ReactElement) & { Root: any } = Object.assign(forwardRef(BoxFn), {
+  Root: forwardRef(BoxFn)
+}) as (<T extends ElementType = 'div'>(
   props: BoxProps<T> & { ref?: Ref<any> }
 ) => ReactElement) & { Root: any };

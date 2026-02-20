@@ -26,8 +26,8 @@ function nectoScssModulesPlugin(): Plugin {
           postcssModules({
             getJSON(_: string, json: Record<string, string>) {
               classMap = json;
-            },
-          }),
+            }
+          })
         ]).process(compiled.css, { from: args.path });
 
         return {
@@ -40,10 +40,10 @@ function nectoScssModulesPlugin(): Plugin {
 })();
 export default ${JSON.stringify(classMap)};
 `,
-          loader: 'js',
+          loader: 'js'
         };
       });
-    },
+    }
   };
 }
 
@@ -55,11 +55,11 @@ export default defineConfig({
     sassPlugin({
       filter: /\.scss$/,
       type: 'style',
-      cache: false,
-    }),
+      cache: false
+    })
   ],
   dts: true,
   clean: true,
   minify: true,
-  sourcemap: true,
+  sourcemap: true
 });
