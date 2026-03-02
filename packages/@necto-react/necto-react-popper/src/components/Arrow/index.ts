@@ -6,6 +6,6 @@
  *
  */
 
-export { useRole } from './useRole';
-
-export type { UseRoleOptions, UseRoleReturn, PopperRole } from './types';
+export { Arrow } from './Arrow';
+export type { ArrowContextValue } from './Arrow';
+export type { ArrowProps, ArrowRenderProps } from './Arrow.types';

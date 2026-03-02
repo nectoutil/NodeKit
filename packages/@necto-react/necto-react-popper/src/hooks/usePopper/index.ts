@@ -8,12 +8,4 @@
 
 export { usePopper } from './usePopper';
 
-export type {
-  UsePopperOptions,
-  UsePopperReturn,
-  ComputePositionOptions,
-  ComputePositionResult,
-  Placement,
-  Strategy,
-  Middleware
-} from './usePopper.types';
+export type { UsePopperOptions, UsePopperReturn } from './usePopper.types';

@@ -46,9 +46,9 @@ export async function computePosition(
     const result: MiddlewareResult = await mw.fn({
       x,
       y,
-      placement: currentPlacement,
-      strategy,
       rects,
+      strategy,
+      placement: currentPlacement,
       elements: { reference, floating }
     });
 
@@ -70,8 +70,8 @@ export async function computePosition(
   return {
     x,
     y,
-    placement: currentPlacement,
     strategy,
-    middlewareData
+    middlewareData,
+    placement: currentPlacement
   };
 }

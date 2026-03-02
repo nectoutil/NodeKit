@@ -6,6 +6,6 @@
  *
  */
 
-export { useRole } from './useRole';
+export { usePopperFocus } from './usePopperFocus';
 
-export type { UseRoleOptions, UseRoleReturn, PopperRole } from './types';
+export type { UsePopperFocusOptions, UsePopperFocusReturn } from './types';

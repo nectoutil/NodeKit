@@ -6,6 +6,9 @@
  *
  */
 
-export { useRole } from './useRole';
+export { useAnimation } from './useAnimation';
 
-export type { UseRoleOptions, UseRoleReturn, PopperRole } from './types';
+export type {
+  UseAnimationOptions,
+  UseAnimationReturn
+} from './useAnimation.types';

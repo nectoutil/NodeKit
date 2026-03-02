@@ -8,16 +8,16 @@
 
 import { useRef, useCallback, useMemo, useEffect } from 'react';
 
-import type { UseFloatingHoverOptions, UseFloatingHoverReturn } from './types';
+import type { UsePopperHoverOptions, UsePopperHoverReturn } from './types';
 
 /**
- * Provides hover interaction with delay support for floating elements.
+ * Provides hover interaction with delay support for popper elements.
  * @param options - Configuration options.
  * @returns Props to spread on reference and floating elements.
  */
-export function useFloatingHover(
-  options: UseFloatingHoverOptions
-): UseFloatingHoverReturn {
+export function usePopperHover(
+  options: UsePopperHoverOptions
+): UsePopperHoverReturn {
   const {
     open,
     onOpenChange,

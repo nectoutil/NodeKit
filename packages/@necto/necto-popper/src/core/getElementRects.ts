@@ -36,7 +36,7 @@ function getRectFromElement(element: Element): Rect {
     throw new Error('Invalid element provided to getRectFromElement');
   }
 
-  const domRect = element.getBoundingClientRect();
+  const domRect: DOMRect = element.getBoundingClientRect();
 
   return {
     x: domRect.x,

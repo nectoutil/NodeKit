@@ -6,6 +6,8 @@
  *
  */
 
-export { useFloatingHover } from './useFloatingHover';
-
-export type { UseFloatingHoverOptions, UseFloatingHoverReturn } from './types';
+export { useOverlayPosition } from './useOverlayPosition';
+export type {
+  UseOverlayPositionOptions,
+  UseOverlayPositionReturn
+} from './useOverlayPosition.types';

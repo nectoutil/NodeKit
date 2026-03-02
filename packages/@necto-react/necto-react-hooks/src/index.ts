@@ -33,5 +33,6 @@ export * from './useStyleInjection';
 export * from './useLatestRef';
 export * from './useIsomorphicInsertionEffect';
 export * from './useLongPress';
+export * from './useAnimation';
 export * from './useCollectionNavigation';
 export * from './useFormState';

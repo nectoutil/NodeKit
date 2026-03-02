@@ -7,15 +7,15 @@
  */
 
 import type {
-  UseFloatingPortalOptions,
-  UseFloatingPortalReturn,
-  FloatingPortalProps
+  UsePopperPortalOptions,
+  UsePopperPortalReturn,
+  PopperPortalProps
 } from './types';
 
-export { useFloatingPortal, FloatingPortal } from './useFloatingPortal';
+export { usePopperPortal, PopperPortal } from './usePopperPortal';
 
 export type {
-  UseFloatingPortalOptions,
-  UseFloatingPortalReturn,
-  FloatingPortalProps
+  UsePopperPortalOptions,
+  UsePopperPortalReturn,
+  PopperPortalProps
 };

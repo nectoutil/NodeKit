@@ -8,8 +8,8 @@
 
 export * from './usePopper';
 export * from './useClick';
-export * from './useFloatingHover';
-export * from './useFloatingFocus';
+export * from './usePopperHover';
+export * from './usePopperFocus';
 export * from './useDismiss';
 export * from './useRole';
 export * from './useInteractions';
@@ -19,6 +19,7 @@ export * from './useTransitionStatus';
 export * from './useClientPoint';
 export * from './useDelayGroup';
 export * from './useMergeRefs';
-export * from './useFloatingPortal';
+export * from './usePopperPortal';
+export * from './useOverlayPosition';
 
-export type { ElementProps, FloatingContext, InteractionProps } from './types';
+export type { ElementProps, PopperContext, InteractionProps } from './types';

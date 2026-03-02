@@ -6,6 +6,6 @@
  *
  */
 
-export { useRole } from './useRole';
+export { usePopperHover } from './usePopperHover';
 
-export type { UseRoleOptions, UseRoleReturn, PopperRole } from './types';
+export type { UsePopperHoverOptions, UsePopperHoverReturn } from './types';

@@ -6,6 +6,5 @@
  *
  */
 
-export { useFloatingFocus } from './useFloatingFocus';
-
-export type { UseFloatingFocusOptions, UseFloatingFocusReturn } from './types';
+export { Overlay } from './Overlay';
+export type { OverlayProps } from './Overlay.types';

@@ -8,7 +8,7 @@
 
 import type { ElementProps } from '../types';
 
-export type FloatingRole =
+export type PopperRole =
   | 'tooltip'
   | 'dialog'
   | 'menu'
@@ -33,7 +33,7 @@ export interface UseRoleOptions {
    * The ARIA role of the floating element.
    * @default 'dialog'
    */
-  role?: FloatingRole;
+  role?: PopperRole;
 }
 
 export interface UseRoleReturn {

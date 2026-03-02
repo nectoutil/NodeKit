@@ -10,7 +10,7 @@ import type { MutableRefObject } from 'react';
 
 export type ElementProps = Record<string, unknown>;
 
-export interface FloatingContext {
+export interface PopperContext {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   refs: {

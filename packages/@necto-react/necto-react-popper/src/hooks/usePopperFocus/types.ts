@@ -8,9 +8,9 @@
 
 import type { ElementProps } from '../types';
 
-export interface UseFloatingFocusOptions {
+export interface UsePopperFocusOptions {
   /**
-   * Whether the floating element is open.
+   * Whether the popper element is open.
    */
   open: boolean;
 
@@ -32,7 +32,7 @@ export interface UseFloatingFocusOptions {
   visibleOnly?: boolean;
 }
 
-export interface UseFloatingFocusReturn {
+export interface UsePopperFocusReturn {
   reference: ElementProps;
   floating: ElementProps;
 }

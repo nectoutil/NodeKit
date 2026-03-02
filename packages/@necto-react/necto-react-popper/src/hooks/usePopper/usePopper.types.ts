@@ -1,6 +1,9 @@
 /**
- * Types for usePopper hook
- * Following Floating UI patterns
+ * Copyright (c) Corinvo, LLC. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
  */
 
 import type {
@@ -84,12 +87,3 @@ export interface UsePopperReturn extends ComputePositionResult {
    */
   floatingStyles: React.CSSProperties;
 }
-
-// Re-export vanilla types for convenience
-export type {
-  ComputePositionOptions,
-  ComputePositionResult,
-  Placement,
-  Strategy,
-  Middleware
-} from '@necto/popper';

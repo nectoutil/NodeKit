@@ -47,3 +47,5 @@ export { createMiddleware } from './middleware';
 export type { ComputePositionOptions, ComputePositionResult } from './options';
 
 export { DEFAULT_OPTIONS } from './options';
+
+export type { PositionProps } from './position';

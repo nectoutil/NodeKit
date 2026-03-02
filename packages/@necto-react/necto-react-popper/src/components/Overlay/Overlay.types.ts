@@ -6,6 +6,8 @@
  *
  */
 
-export { useRole } from './useRole';
+import type { HTMLAttributes } from 'react';
 
-export type { UseRoleOptions, UseRoleReturn, PopperRole } from './types';
+export interface OverlayProps extends HTMLAttributes<HTMLDivElement> {
+  lockScroll?: boolean;
+}

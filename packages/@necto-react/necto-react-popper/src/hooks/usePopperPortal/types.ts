@@ -6,7 +6,7 @@
  *
  */
 
-export interface UseFloatingPortalOptions {
+export interface UsePopperPortalOptions {
   /**
    * Custom portal ID to use.
    */
@@ -30,7 +30,7 @@ export interface UseFloatingPortalOptions {
   preserveTabOrder?: boolean;
 }
 
-export interface UseFloatingPortalReturn {
+export interface UsePopperPortalReturn {
   /**
    * The portal container element.
    */
@@ -42,7 +42,7 @@ export interface UseFloatingPortalReturn {
   portalId: string;
 }
 
-export interface FloatingPortalProps {
+export interface PopperPortalProps {
   /**
    * Custom portal ID.
    */

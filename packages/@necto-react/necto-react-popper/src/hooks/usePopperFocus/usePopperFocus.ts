@@ -8,16 +8,16 @@
 
 import { useRef, useCallback, useMemo } from 'react';
 
-import type { UseFloatingFocusOptions, UseFloatingFocusReturn } from './types';
+import type { UsePopperFocusOptions, UsePopperFocusReturn } from './types';
 
 /**
- * Provides focus interaction for floating elements.
+ * Provides focus interaction for popper elements.
  * @param options - Configuration options.
  * @returns Props to spread on reference and floating elements.
  */
-export function useFloatingFocus(
-  options: UseFloatingFocusOptions
-): UseFloatingFocusReturn {
+export function usePopperFocus(
+  options: UsePopperFocusOptions
+): UsePopperFocusReturn {
   const { open, onOpenChange, enabled = true, visibleOnly = true } = options;
 
   const blockFocusRef = useRef(false);

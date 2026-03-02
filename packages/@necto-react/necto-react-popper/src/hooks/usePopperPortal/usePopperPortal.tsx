@@ -10,12 +10,12 @@ import React, { useState, useEffect, useId, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 
 import type {
-  UseFloatingPortalOptions,
-  UseFloatingPortalReturn,
-  FloatingPortalProps
+  UsePopperPortalOptions,
+  UsePopperPortalReturn,
+  PopperPortalProps
 } from './types';
 
-const PORTAL_ROOT_ID = 'necto-floating-portal-root';
+const PORTAL_ROOT_ID = 'necto-popper-portal-root';
 
 /**
  * Gets or creates the default portal root element.
@@ -35,13 +35,13 @@ function getPortalRoot(): HTMLElement {
 }
 
 /**
- * Provides portal functionality for floating elements.
+ * Provides portal functionality for popper elements.
  * @param options - Configuration options.
  * @returns Portal node and ID.
  */
-export function useFloatingPortal(
-  options: UseFloatingPortalOptions = {}
-): UseFloatingPortalReturn {
+export function usePopperPortal(
+  options: UsePopperPortalOptions = {}
+): UsePopperPortalReturn {
   const { id, enabled = true, root } = options;
 
   const uniqueId = useId();
@@ -58,7 +58,7 @@ export function useFloatingPortal(
     const parentRoot = root ?? getPortalRoot();
     const node = document.createElement('div');
     node.id = portalId;
-    node.setAttribute('data-necto-floating-portal', '');
+    node.setAttribute('data-necto-popper-portal', '');
     parentRoot.appendChild(node);
     setPortalNode(node);
 
@@ -80,12 +80,12 @@ export function useFloatingPortal(
  * @param props - Configuration options.
  * @returns Portal component or null.
  */
-export function FloatingPortal(
-  props: FloatingPortalProps
+export function PopperPortal(
+  props: PopperPortalProps
 ): React.ReactPortal | null {
   const { id, root, preserveTabOrder = true, children } = props;
 
-  const { portalNode } = useFloatingPortal({ id, root, preserveTabOrder });
+  const { portalNode } = usePopperPortal({ id, root, preserveTabOrder });
 
   const content = useMemo(() => {
     if (!preserveTabOrder) {

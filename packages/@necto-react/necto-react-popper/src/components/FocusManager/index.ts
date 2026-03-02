@@ -6,6 +6,5 @@
  *
  */
 
-export { useRole } from './useRole';
-
-export type { UseRoleOptions, UseRoleReturn, PopperRole } from './types';
+export { FocusManager } from './FocusManager';
+export type { FocusManagerProps } from './FocusManager.types';

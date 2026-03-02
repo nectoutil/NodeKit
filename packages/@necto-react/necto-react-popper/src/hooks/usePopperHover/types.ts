@@ -8,9 +8,9 @@
 
 import type { ElementProps } from '../types';
 
-export interface UseFloatingHoverOptions {
+export interface UsePopperHoverOptions {
   /**
-   * Whether the floating element is open.
+   * Whether the popper element is open.
    */
   open: boolean;
 
@@ -32,7 +32,7 @@ export interface UseFloatingHoverOptions {
   delay?: number | { open?: number; close?: number };
 
   /**
-   * Whether hovering the floating element keeps it open.
+   * Whether hovering the popper element keeps it open.
    * @default true
    */
   handleClose?: boolean;
@@ -50,7 +50,7 @@ export interface UseFloatingHoverOptions {
   restMs?: number;
 }
 
-export interface UseFloatingHoverReturn {
+export interface UsePopperHoverReturn {
   reference: ElementProps;
   floating: ElementProps;
 }
