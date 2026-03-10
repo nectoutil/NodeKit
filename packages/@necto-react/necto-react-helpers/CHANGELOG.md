@@ -1,5 +1,17 @@
 # @necto-react/helpers
 
+## 2.5.0
+
+### Minor Changes
+
+- d6ea5b7: Added new changes
+
+### Patch Changes
+
+- Updated dependencies [d6ea5b7]
+  - @necto-react/types@2.4.0
+  - @necto/dom@1.5.0
+
 ## 2.4.5
 
 ### Patch Changes
