@@ -1,5 +1,11 @@
 # @necto-react/types
 
+## 2.4.0
+
+### Minor Changes
+
+- d6ea5b7: Added new changes
+
 ## 2.3.0
 
 ### Minor Changes

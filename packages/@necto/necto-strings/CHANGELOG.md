@@ -1,5 +1,11 @@
 # @necto/strings
 
+## 1.6.0
+
+### Minor Changes
+
+- d6ea5b7: Added new changes
+
 ## 1.5.0
 
 ### Minor Changes
