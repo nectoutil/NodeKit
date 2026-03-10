@@ -37,7 +37,7 @@ export async function computePosition(
     middleware = []
   } = options;
 
-  const rects: ElementRects = getElementRects(reference, floating);
+  const rects: ElementRects = getElementRects(reference, floating, strategy);
   let { x, y } = computeCoords(placement, rects);
   let currentPlacement: Placement = placement;
   const middlewareData: Record<string, unknown> = {};

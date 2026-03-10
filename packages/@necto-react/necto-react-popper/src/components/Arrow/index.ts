@@ -6,6 +6,6 @@
  *
  */
 
-export { Arrow } from './Arrow';
+export { PopperArrow, Arrow } from './Arrow';
 export type { ArrowContextValue } from './Arrow';
 export type { ArrowProps, ArrowRenderProps } from './Arrow.types';

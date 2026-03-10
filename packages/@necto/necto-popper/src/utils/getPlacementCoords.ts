@@ -49,7 +49,10 @@ export function computeCoords(
   if (alignment) {
     const axis = getAxis(side);
 
-    if (axis === 'x') {
+    // Alignment adjusts the CROSS axis, not the main axis.
+    // For top/bottom (axis='y'), alignment adjusts x.
+    // For left/right (axis='x'), alignment adjusts y.
+    if (axis === 'y') {
       if (alignment === 'start') {
         x = reference.x;
       } else if (alignment === 'end') {
