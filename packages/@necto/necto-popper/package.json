@@ -1,6 +1,6 @@
 {
   "name": "@necto/popper",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Necto's library for providing positioning and popover utilities.",
   "scripts": {
     "build": "tsup --minify terser"

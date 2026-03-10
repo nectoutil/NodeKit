@@ -1,5 +1,12 @@
 # @necto-react/hooks
 
+## 2.12.7
+
+### Patch Changes
+
+- Updated dependencies [97a590e]
+  - @necto/strings@1.5.0
+
 ## 2.12.6
 
 ### Patch Changes
