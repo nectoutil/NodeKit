@@ -14,7 +14,9 @@ export interface ArrowContextValue extends ArrowProps {
   placement: Side | null;
 }
 
-export function Arrow(props: ArrowContextValue) {
+export { PopperArrow as Arrow };
+
+export function PopperArrow(props: ArrowContextValue) {
   const {
     ref,
     placement,

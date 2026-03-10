@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "turbo run dev",
     "storybook": "concurrently \"pnpm storybook:react\" \"pnpm storybook:vue\"",
-    "storybook:react": "storybook dev -p 6006",
-    "storybook:vue": "storybook dev -p 6007 -c .storybook-vue",
+    "storybook:react": "pnpm --filter @necto/react storybook",
+    "storybook:vue": "storybook dev -p 6007 -c .storybook-vue --no-open",
     "build-storybook": "concurrently \"pnpm build-storybook:react\" \"pnpm build-storybook:vue\"",
     "build-storybook:react": "storybook build",
     "build-storybook:vue": "storybook build -c .storybook-vue",
