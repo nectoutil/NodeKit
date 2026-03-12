@@ -1,5 +1,11 @@
 # @necto-react/types
 
+## 2.4.1
+
+### Patch Changes
+
+- Add type: module and exports field for proper ESM resolution in Vite
+
 ## 2.4.0
 
 ### Minor Changes

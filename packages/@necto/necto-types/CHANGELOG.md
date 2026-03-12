@@ -1,5 +1,11 @@
 # @necto/types
 
+## 1.3.1
+
+### Patch Changes
+
+- Add ESM module support with type: module, exports, and dual format output
+
 ## 1.3.0
 
 ### Minor Changes

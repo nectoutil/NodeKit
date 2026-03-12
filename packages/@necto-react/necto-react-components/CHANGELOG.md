@@ -1,5 +1,93 @@
 # @necto-react/components
 
+## 1.4.8
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto-react/hooks@2.14.8
+
+## 1.4.7
+
+### Patch Changes
+
+- @necto-react/hooks@2.14.7
+- @necto/dom@1.6.6
+
+## 1.4.6
+
+### Patch Changes
+
+- @necto-react/hooks@2.14.6
+- @necto/dom@1.6.5
+
+## 1.4.5
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto/constants@1.4.4
+  - @necto/dom@1.6.4
+  - @necto-react/hooks@2.14.5
+
+## 1.4.4
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto/dom@1.6.3
+  - @necto-react/hooks@2.14.4
+
+## 1.4.3
+
+### Patch Changes
+
+- Lazy-initialize HTML tag maps to fix circular chunk initialization in bundlers
+- Updated dependencies
+  - @necto/dom@1.6.2
+  - @necto-react/hooks@2.14.3
+
+## 1.4.2
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto-react/hooks@2.14.2
+
+## 1.4.1
+
+### Patch Changes
+
+- @necto-react/hooks@2.14.1
+- @necto/dom@1.6.1
+
+## 1.4.0
+
+### Minor Changes
+
+- Fix workspace dependency resolution in published package
+
+## 1.3.3
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto-react/hooks@2.14.0
+
+## 1.3.2
+
+### Patch Changes
+
+- @necto-react/hooks@2.13.2
+
+## 1.3.1
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto/dom@1.6.0
+  - @necto-react/hooks@2.13.1
+
 ## 1.3.0
 
 ### Minor Changes

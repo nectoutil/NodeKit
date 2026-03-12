@@ -1,5 +1,111 @@
 # @necto/react
 
+## 1.1.14
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto-react/hooks@2.14.8
+  - @necto-react/components@1.4.8
+  - @necto-react/popper@0.3.6
+
+## 1.1.13
+
+### Patch Changes
+
+- @necto-react/hooks@2.14.7
+- @necto-react/popper@0.3.5
+- @necto-react/components@1.4.7
+
+## 1.1.12
+
+### Patch Changes
+
+- @necto-react/hooks@2.14.6
+- @necto-react/popper@0.3.4
+- @necto-react/components@1.4.6
+
+## 1.1.11
+
+### Patch Changes
+
+- @necto-react/components@1.4.5
+- @necto-react/hooks@2.14.5
+- @necto-react/popper@0.3.3
+
+## 1.1.10
+
+### Patch Changes
+
+- @necto-react/components@1.4.4
+- @necto-react/hooks@2.14.4
+- @necto-react/popper@0.3.2
+
+## 1.1.9
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto-react/components@1.4.3
+  - @necto-react/hooks@2.14.3
+  - @necto-react/popper@0.3.1
+
+## 1.1.8
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto-react/popper@0.3.0
+
+## 1.1.7
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto-react/hooks@2.14.2
+  - @necto-react/components@1.4.2
+  - @necto-react/popper@0.2.5
+
+## 1.1.6
+
+### Patch Changes
+
+- @necto-react/hooks@2.14.1
+- @necto-react/components@1.4.1
+- @necto-react/popper@0.2.4
+
+## 1.1.5
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto-react/components@1.4.0
+
+## 1.1.4
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto-react/hooks@2.14.0
+  - @necto-react/components@1.3.3
+  - @necto-react/popper@0.2.3
+
+## 1.1.3
+
+### Patch Changes
+
+- @necto-react/hooks@2.13.2
+- @necto-react/components@1.3.2
+- @necto-react/popper@0.2.2
+
+## 1.1.2
+
+### Patch Changes
+
+- @necto-react/components@1.3.1
+- @necto-react/hooks@2.13.1
+- @necto-react/popper@0.2.1
+
 ## 1.1.1
 
 ### Patch Changes

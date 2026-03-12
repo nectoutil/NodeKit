@@ -1,6 +1,6 @@
 {
   "name": "@necto/platform",
-  "version": "1.4.0",
+  "version": "1.5.1",
   "description": "Necto's library for detecting platforms, devices, other device related information.",
   "scripts": {
     "build": "tsup --minify"
@@ -9,9 +9,17 @@
     "dist",
     "README.md"
   ],
-  "types": "dist/index.d.ts",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
   "author": "Corinvo OSS Team",
   "license": "MIT",
   "devDependencies": {

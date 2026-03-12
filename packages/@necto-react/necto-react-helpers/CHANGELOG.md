@@ -1,5 +1,62 @@
 # @necto-react/helpers
 
+## 2.6.6
+
+### Patch Changes
+
+- @necto/dom@1.6.6
+
+## 2.6.5
+
+### Patch Changes
+
+- Add type: module and exports field for proper ESM resolution in Vite
+- Updated dependencies
+  - @necto-react/types@2.4.1
+  - @necto/platform@1.5.1
+  - @necto/dom@1.6.5
+
+## 2.6.4
+
+### Patch Changes
+
+- @necto/dom@1.6.4
+
+## 2.6.3
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto/dom@1.6.3
+
+## 2.6.2
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto/dom@1.6.2
+
+## 2.6.1
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto/platform@1.5.0
+  - @necto/dom@1.6.1
+
+## 2.6.0
+
+### Minor Changes
+
+- Fix workspace dependency resolution in published package
+
+## 2.5.1
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto/dom@1.6.0
+
 ## 2.5.0
 
 ### Minor Changes

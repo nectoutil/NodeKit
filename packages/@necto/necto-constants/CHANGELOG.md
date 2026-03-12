@@ -1,5 +1,11 @@
 # @necto/constants
 
+## 1.4.4
+
+### Patch Changes
+
+- Add exports field and type: module for proper ESM resolution
+
 ## 1.4.3
 
 ### Patch Changes

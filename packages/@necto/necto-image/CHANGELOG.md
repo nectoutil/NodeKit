@@ -1,5 +1,50 @@
 # @necto/image
 
+## 1.0.8
+
+### Patch Changes
+
+- @necto/dom@1.6.6
+
+## 1.0.7
+
+### Patch Changes
+
+- @necto/dom@1.6.5
+
+## 1.0.6
+
+### Patch Changes
+
+- @necto/dom@1.6.4
+
+## 1.0.5
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto/dom@1.6.3
+
+## 1.0.4
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto/dom@1.6.2
+
+## 1.0.3
+
+### Patch Changes
+
+- @necto/dom@1.6.1
+
+## 1.0.2
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto/dom@1.6.0
+
 ## 1.0.1
 
 ### Patch Changes

@@ -23,7 +23,8 @@
   "pnpm": {
     "overrides": {
       "@types/react": "19.1.2",
-      "@types/react-dom": "19.1.2"
+      "@types/react-dom": "19.1.2",
+      "csstype": "3.2.3"
     }
   },
   "devDependencies": {
@@ -41,6 +42,7 @@
     "@vitejs/plugin-vue": "^5.2.1",
     "commitlint": "^19.8.1",
     "concurrently": "^9.2.1",
+    "csstype": "3.2.3",
     "lefthook": "^1.11.13",
     "markdownlint": "^0.38.0",
     "react": "^19.1.0",

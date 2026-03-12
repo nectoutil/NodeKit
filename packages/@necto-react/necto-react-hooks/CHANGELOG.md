@@ -1,5 +1,93 @@
 # @necto-react/hooks
 
+## 2.14.8
+
+### Patch Changes
+
+- Fix react-dom being bundled into ESM output by adding proper externals to tsup config
+
+## 2.14.7
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto/types@1.3.1
+  - @necto/dom@1.6.6
+  - @necto-react/helpers@2.6.6
+
+## 2.14.6
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto-react/types@2.4.1
+  - @necto/mergers@1.5.1
+  - @necto/strings@1.6.1
+  - @necto/platform@1.5.1
+  - @necto-react/helpers@2.6.5
+  - @necto/id@1.6.5
+  - @necto/dom@1.6.5
+
+## 2.14.5
+
+### Patch Changes
+
+- @necto/dom@1.6.4
+- @necto/id@1.6.4
+- @necto-react/helpers@2.6.4
+
+## 2.14.4
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto/dom@1.6.3
+  - @necto-react/helpers@2.6.3
+
+## 2.14.3
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto/dom@1.6.2
+  - @necto-react/helpers@2.6.2
+
+## 2.14.2
+
+### Patch Changes
+
+- Update @necto/platform dependency
+
+## 2.14.1
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto/platform@1.5.0
+  - @necto-react/helpers@2.6.1
+  - @necto/dom@1.6.1
+
+## 2.14.0
+
+### Minor Changes
+
+- Fix workspace dependency resolution in published package
+
+## 2.13.2
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto-react/helpers@2.6.0
+
+## 2.13.1
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto/dom@1.6.0
+  - @necto-react/helpers@2.5.1
+
 ## 2.13.0
 
 ### Minor Changes

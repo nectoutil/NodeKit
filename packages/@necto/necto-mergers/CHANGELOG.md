@@ -1,5 +1,11 @@
 # @necto/props-merge
 
+## 1.5.1
+
+### Patch Changes
+
+- Add type: module and exports field for proper ESM resolution in Vite
+
 ## 1.5.0
 
 ### Minor Changes

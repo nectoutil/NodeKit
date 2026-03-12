@@ -1,5 +1,51 @@
 # @necto/dom
 
+## 1.6.6
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto/types@1.3.1
+
+## 1.6.5
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto/platform@1.5.1
+
+## 1.6.4
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto/constants@1.4.4
+
+## 1.6.3
+
+### Patch Changes
+
+- Lazy-initialize ARIA props map to fix circular chunk initialization
+
+## 1.6.2
+
+### Patch Changes
+
+- Lazy-initialize HTML tag maps to fix circular chunk initialization in bundlers
+
+## 1.6.1
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto/platform@1.5.0
+
+## 1.6.0
+
+### Minor Changes
+
+- Fix workspace dependency resolution in published package
+
 ## 1.5.0
 
 ### Minor Changes

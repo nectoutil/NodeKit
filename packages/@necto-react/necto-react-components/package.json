@@ -1,6 +1,6 @@
 {
   "name": "@necto-react/components",
-  "version": "1.3.0",
+  "version": "1.4.8",
   "type": "module",
   "description": "Necto's standard library for providing utility components for React applications.",
   "scripts": {

@@ -63,12 +63,12 @@ const PrimitiveFn = <E extends ElementType = (typeof HTMLElements)['Div']>(
  * @param {Ref<any>} ref - Forwarded ref for the rendered element or cloned child.
  * @returns {ReactElement | null} The rendered element or null.
  */
-export const Primitive: (<E extends ElementType = (typeof HTMLElements)['Div']>(
-  props: PrimitiveProps<E> & { ref?: Ref<any> }
-) => ReactElement | null) &
-  FC<PrimitiveProps<ElementType>> &
-  Primitives & { [k: string]: any } = Object.assign(
-  forwardRef(PrimitiveFn),
+/**
+ * Build the tag→component map lazily so that the module-level
+ * `DOM.HTML_TAGS` import from `@necto/constants` is guaranteed to be
+ * initialised, even when bundlers split these packages into separate chunks.
+ */
+const buildTagComponents = (): Record<string, any> =>
   DOM.HTML_TAGS.reduce(
     (acc: Record<string, any>, tag: string): Record<string, any> => {
       const lower: string = tag;
@@ -86,10 +86,22 @@ export const Primitive: (<E extends ElementType = (typeof HTMLElements)['Div']>(
       return acc;
     },
     {} as Record<string, any>
-  )
-) as (<E extends ElementType = (typeof HTMLElements)['Div']>(
+  );
+
+let _tagComponents: Record<string, any> | undefined;
+
+const basePrimitive = forwardRef(PrimitiveFn);
+
+export const Primitive: (<E extends ElementType = (typeof HTMLElements)['Div']>(
   props: PrimitiveProps<E> & { ref?: Ref<any> }
 ) => ReactElement | null) &
-  Primitives & { [k: string]: any };
+  FC<PrimitiveProps<ElementType>> &
+  Primitives & { [k: string]: any } = new Proxy(basePrimitive, {
+  get(target, prop, receiver) {
+    if (!_tagComponents) _tagComponents = buildTagComponents();
+    if (typeof prop === 'string' && prop in _tagComponents) return _tagComponents[prop];
+    return Reflect.get(target, prop, receiver);
+  },
+}) as any;
 
 Primitive.displayName = PRIMITIVE_NAME;

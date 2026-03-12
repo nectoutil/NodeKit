@@ -31,6 +31,18 @@ const createAriaPropsMap = (): Record<string, string> =>
     {} as Record<string, string>
   );
 
+let _ariaPropsMap: Record<string, string> | undefined;
+let _allAriaProps: readonly string[] | undefined;
+let _ariaPropsSet: Set<string> | undefined;
+
+const ensureInit = () => {
+  if (!_ariaPropsMap) {
+    _ariaPropsMap = createAriaPropsMap();
+    _allAriaProps = DOM.ARIA_ATTRIBUTES;
+    _ariaPropsSet = new Set(_allAriaProps);
+  }
+};
+
 /**
  * All valid ARIA attribute names as constants.
  * Use: AriaProps.Pressed → 'aria-pressed'
@@ -45,7 +57,20 @@ const createAriaPropsMap = (): Record<string, string> =>
  * };
  * ```
  */
-export const AriaProps: Record<string, string> = createAriaPropsMap();
+export const AriaProps: Record<string, string> = new Proxy({} as Record<string, string>, {
+  get(_target, prop, receiver) {
+    ensureInit();
+    return Reflect.get(_ariaPropsMap!, prop, receiver);
+  },
+  ownKeys() {
+    ensureInit();
+    return Reflect.ownKeys(_ariaPropsMap!);
+  },
+  getOwnPropertyDescriptor(_target, prop) {
+    ensureInit();
+    return Object.getOwnPropertyDescriptor(_ariaPropsMap!, prop);
+  },
+});
 
 /**
  * Array of all ARIA attribute values.
@@ -58,12 +83,22 @@ export const AriaProps: Record<string, string> = createAriaPropsMap();
  * });
  * ```
  */
-export const ALL_ARIA_PROPS: readonly string[] = DOM.ARIA_ATTRIBUTES;
+export const ALL_ARIA_PROPS: readonly string[] = new Proxy([] as readonly string[], {
+  get(_target, prop, receiver) {
+    ensureInit();
+    return Reflect.get(_allAriaProps!, prop, receiver);
+  },
+});
 
 /**
  * Set of all ARIA attribute values for O(1) lookup.
  */
-export const ARIA_PROPS_SET: Set<string> = new Set(ALL_ARIA_PROPS);
+export const ARIA_PROPS_SET: Set<string> = new Proxy(new Set<string>(), {
+  get(_target, prop, receiver) {
+    ensureInit();
+    return Reflect.get(_ariaPropsSet!, prop, receiver);
+  },
+});
 
 /**
  * Checks if a string is a valid ARIA attribute.
@@ -78,8 +113,10 @@ export const ARIA_PROPS_SET: Set<string> = new Set(ALL_ARIA_PROPS);
  * isAriaAttribute('onClick');      // false
  * ```
  */
-export const isAriaAttribute = (prop: string): boolean =>
-  ARIA_PROPS_SET.has(prop);
+export const isAriaAttribute = (prop: string): boolean => {
+  ensureInit();
+  return _ariaPropsSet!.has(prop);
+};
 
 /**
  * Checks if a string starts with 'aria-' prefix.
