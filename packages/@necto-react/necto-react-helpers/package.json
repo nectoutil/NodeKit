@@ -1,6 +1,6 @@
 {
   "name": "@necto-react/helpers",
-  "version": "2.6.6",
+  "version": "2.6.10",
   "description": "Necto's library for providing global helpers React applications",
   "type": "module",
   "scripts": {

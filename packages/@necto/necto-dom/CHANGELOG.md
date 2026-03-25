@@ -1,5 +1,30 @@
 # @necto/dom
 
+## 1.6.10
+
+### Patch Changes
+
+- Return undefined instead of throwing in SSR environments for getOwnerDocument/getOwnerWindow
+
+## 1.6.9
+
+### Patch Changes
+
+- Guard all bare document references with typeof checks for SSR safety
+
+## 1.6.8
+
+### Patch Changes
+
+- Fix workspace dependency resolution - republish with proper workspace:\* replacement
+- Republish with proper workspace:\* replacement via pnpm pack
+
+## 1.6.7
+
+### Patch Changes
+
+- Make getActiveElement SSR-safe by guarding against missing document
+
 ## 1.6.6
 
 ### Patch Changes

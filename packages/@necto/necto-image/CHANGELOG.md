@@ -1,5 +1,35 @@
 # @necto/image
 
+## 1.0.12
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto/dom@1.6.10
+
+## 1.0.11
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto/dom@1.6.9
+
+## 1.0.10
+
+### Patch Changes
+
+- Fix workspace dependency resolution - republish with proper workspace:\* replacement
+- Updated dependencies
+- Updated dependencies
+  - @necto/dom@1.6.8
+
+## 1.0.9
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto/dom@1.6.7
+
 ## 1.0.8
 
 ### Patch Changes

@@ -52,8 +52,10 @@ export function useFocusable(
   const { keyboardProps } = useKeyboard(options);
   const autoFocusRef: RefObject<any> = useRef(autoFocus);
 
-  const ownerDocument: Document = getOwnerDocument(domRef.current);
-  const activeElement: Element | null = getActiveElement(ownerDocument);
+  const ownerDocument = getOwnerDocument(domRef.current);
+  const activeElement: Element | null = ownerDocument
+    ? getActiveElement(ownerDocument)
+    : null;
 
   useEffect(() => {
     if (autoFocusRef.current && domRef.current) {
@@ -61,6 +63,7 @@ export function useFocusable(
         const lastFocusedElement: Element | null = activeElement;
         runAfterTransition(() => {
           if (
+            ownerDocument &&
             getActiveElement(ownerDocument) === lastFocusedElement &&
             domRef.current?.isConnected
           ) {

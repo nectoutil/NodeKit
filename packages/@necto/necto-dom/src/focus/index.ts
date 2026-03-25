@@ -51,8 +51,10 @@ export function getScrollableElements(
 ): ScrollableElement[] {
   let parent: ParentNode | null = element.parentNode;
   const scrollableElements: ScrollableElement[] = Array.from({ length: 0 });
-  const rootScrollingElement: Element =
-    document.scrollingElement || document.documentElement;
+  const rootScrollingElement: Element | null =
+    typeof document !== 'undefined'
+      ? document.scrollingElement || document.documentElement
+      : null;
 
   while (parent instanceof HTMLElement && parent !== rootScrollingElement) {
     if (

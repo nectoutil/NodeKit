@@ -20,6 +20,7 @@ export function supportsPreventScroll(): boolean {
   if (supportsPreventScrollCached == null) {
     supportsPreventScrollCached = false;
     try {
+      if (typeof document === 'undefined') return false;
       const focusElement: HTMLDivElement = document.createElement('div');
       focusElement.focus({
         get preventScroll(): boolean {

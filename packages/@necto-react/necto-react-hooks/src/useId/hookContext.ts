@@ -12,7 +12,7 @@
  * @property {number} current - Counter for generating unique IDs.
  */
 export const defaultContext = {
-  prefix: String(Math.round(Math.random() * 1e10)),
+  prefix: '',
   current: 0
 };
 

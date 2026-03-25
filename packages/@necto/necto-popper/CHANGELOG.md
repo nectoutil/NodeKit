@@ -1,5 +1,35 @@
 # @necto/popper
 
+## 0.3.9
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto/dom@1.6.10
+
+## 0.3.8
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto/dom@1.6.9
+
+## 0.3.7
+
+### Patch Changes
+
+- Fix workspace dependency resolution - republish with proper workspace:\* replacement
+- Updated dependencies
+- Updated dependencies
+  - @necto/dom@1.6.8
+
+## 0.3.6
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto/dom@1.6.7
+
 ## 0.3.5
 
 ### Patch Changes

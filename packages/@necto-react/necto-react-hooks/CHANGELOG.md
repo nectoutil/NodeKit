@@ -1,5 +1,46 @@
 # @necto-react/hooks
 
+## 2.14.13
+
+### Patch Changes
+
+- Fix useId hydration mismatch by removing random prefix that differed between server and client
+
+## 2.14.12
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto/dom@1.6.10
+  - @necto-react/helpers@2.6.10
+
+## 2.14.11
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto/dom@1.6.9
+  - @necto-react/helpers@2.6.9
+
+## 2.14.10
+
+### Patch Changes
+
+- Fix workspace dependency resolution - republish with proper workspace:\* replacement
+- Republish with proper workspace:\* replacement via pnpm pack
+- Updated dependencies
+- Updated dependencies
+  - @necto/dom@1.6.8
+  - @necto-react/helpers@2.6.8
+
+## 2.14.9
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto/dom@1.6.7
+  - @necto-react/helpers@2.6.7
+
 ## 2.14.8
 
 ### Patch Changes

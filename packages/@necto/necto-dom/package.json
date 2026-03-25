@@ -1,6 +1,6 @@
 {
   "name": "@necto/dom",
-  "version": "1.6.6",
+  "version": "1.6.10",
   "description": "Necto's library for providing helpers and tools to interact with the DOM.",
   "scripts": {
     "build": "tsup --minify terser"

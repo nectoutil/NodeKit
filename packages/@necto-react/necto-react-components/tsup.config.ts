@@ -32,13 +32,22 @@ function nectoScssModulesPlugin(): Plugin {
 
         return {
           contents: `
-(function() {
+var _injected = false;
+function _inject() {
+  if (_injected || typeof document === 'undefined') return;
+  _injected = true;
   var s = document.createElement('style');
   s.setAttribute('${STYLE_ATTR}', '');
   s.textContent = ${JSON.stringify(result.css)};
   document.head.appendChild(s);
-})();
-export default ${JSON.stringify(classMap)};
+}
+var _classes = ${JSON.stringify(classMap)};
+export default new Proxy(_classes, {
+  get: function(target, prop) {
+    _inject();
+    return target[prop];
+  }
+});
 `,
           loader: 'js'
         };

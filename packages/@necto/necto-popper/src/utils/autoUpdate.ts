@@ -57,7 +57,8 @@ function getScrollAncestors(element: Element): Array<Element | Window> {
     current = current.parentElement;
   }
 
-  ancestors.push(getOwnerWindow(element));
+  const win = getOwnerWindow(element);
+  if (win) ancestors.push(win);
   return ancestors;
 }
 
@@ -99,8 +100,10 @@ export function autoUpdate(
 
   if (ancestorResize) {
     const win = getOwnerWindow(reference);
-    win.addEventListener('resize', update);
-    cleanupFns.push(() => win.removeEventListener('resize', update));
+    if (win) {
+      win.addEventListener('resize', update);
+      cleanupFns.push(() => win.removeEventListener('resize', update));
+    }
   }
 
   let resizeObserver: ResizeObserver | null = null;

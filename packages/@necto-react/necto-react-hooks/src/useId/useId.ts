@@ -9,7 +9,6 @@
  *
  */
 
-import { isTest } from 'std-env';
 import { registry, defaultContext, idsUpdaterMap } from './hookContext';
 import React, { useRef, useState, useEffect, useId as useReactId } from 'react';
 
@@ -36,10 +35,7 @@ export function useId(options: UseIdOptions = {}): string {
       typeof React['useId'] === 'function'
         ? useReactId()
         : String(++defaultContext.current);
-    const computedPrefix = isTest
-      ? prefix
-      : `${prefix}${defaultContext.prefix}`;
-    return `${computedPrefix}-${reactId}`;
+    return `${prefix}-${reactId}`;
   })();
 
   useEffect(() => {

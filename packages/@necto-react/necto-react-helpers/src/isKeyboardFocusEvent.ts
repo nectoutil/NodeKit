@@ -48,6 +48,7 @@ export function isKeyboardFocusEvent(
 
   const ownerDoc = getOwnerDocument(e.target as Element);
   const ownerWin = getOwnerWindow(e.target as Element);
+  if (!ownerDoc || !ownerWin) return false;
 
   // Use window-specific constructors for cross-frame support
   const IHTMLInputElement =

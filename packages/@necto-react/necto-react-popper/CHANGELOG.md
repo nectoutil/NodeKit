@@ -1,5 +1,50 @@
 # @necto-react/popper
 
+## 0.3.11
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto-react/hooks@2.14.13
+
+## 0.3.10
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto/dom@1.6.10
+  - @necto-react/hooks@2.14.12
+  - @necto/popper@0.3.9
+
+## 0.3.9
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto/dom@1.6.9
+  - @necto-react/hooks@2.14.11
+  - @necto/popper@0.3.8
+
+## 0.3.8
+
+### Patch Changes
+
+- Fix workspace dependency resolution - republish with proper workspace:\* replacement
+- Updated dependencies
+- Updated dependencies
+  - @necto/dom@1.6.8
+  - @necto/popper@0.3.7
+  - @necto-react/hooks@2.14.10
+
+## 0.3.7
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto/dom@1.6.7
+  - @necto-react/hooks@2.14.9
+  - @necto/popper@0.3.6
+
 ## 0.3.6
 
 ### Patch Changes

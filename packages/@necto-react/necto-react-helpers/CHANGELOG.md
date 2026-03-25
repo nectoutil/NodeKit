@@ -1,5 +1,36 @@
 # @necto-react/helpers
 
+## 2.6.10
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto/dom@1.6.10
+
+## 2.6.9
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto/dom@1.6.9
+
+## 2.6.8
+
+### Patch Changes
+
+- Fix workspace dependency resolution - republish with proper workspace:\* replacement
+- Republish with proper workspace:\* replacement via pnpm pack
+- Updated dependencies
+- Updated dependencies
+  - @necto/dom@1.6.8
+
+## 2.6.7
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto/dom@1.6.7
+
 ## 2.6.6
 
 ### Patch Changes

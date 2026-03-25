@@ -1,5 +1,64 @@
 # @necto-react/components
 
+## 1.4.16
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto-react/hooks@2.14.13
+
+## 1.4.15
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto/dom@1.6.10
+  - @necto-react/hooks@2.14.12
+
+## 1.4.14
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto/dom@1.6.9
+  - @necto-react/hooks@2.14.11
+
+## 1.4.13
+
+### Patch Changes
+
+- Fix workspace dependency resolution - republish with proper workspace:\* replacement
+- Updated dependencies
+- Updated dependencies
+  - @necto/dom@1.6.8
+  - @necto-react/hooks@2.14.10
+
+## 1.4.12
+
+### Patch Changes
+
+- Republish with proper workspace:\* replacement via pnpm pack
+
+## 1.4.11
+
+### Patch Changes
+
+- Updated dependencies
+  - @necto/dom@1.6.7
+  - @necto-react/hooks@2.14.9
+
+## 1.4.10
+
+### Patch Changes
+
+- Fix workspace:\* leaking into published package
+
+## 1.4.9
+
+### Patch Changes
+
+- Fix SSR safety: defer SCSS module style injection behind a Proxy so styles only inject when a component renders in the browser, not on module import
+
 ## 1.4.8
 
 ### Patch Changes

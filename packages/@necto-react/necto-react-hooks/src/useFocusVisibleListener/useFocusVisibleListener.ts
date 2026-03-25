@@ -88,6 +88,8 @@ function setupGlobalFocusEvents(element?: HTMLElement | null) {
   if (
     typeof window === 'undefined' ||
     typeof document === 'undefined' ||
+    !windowObject ||
+    !documentObject ||
     globalListeners.has(windowObject)
   ) {
     return;
@@ -115,7 +117,7 @@ function tearDownGlobalFocusEvents(element?: HTMLElement | null) {
   const windowObject = getOwnerWindow(element);
   const documentObject = getOwnerDocument(element);
 
-  if (!globalListeners.has(windowObject)) return;
+  if (!windowObject || !documentObject || !globalListeners.has(windowObject)) return;
 
   const { focus } = globalListeners.get(windowObject)!;
   windowObject.HTMLElement.prototype.focus = focus;
@@ -132,6 +134,10 @@ export function addWindowFocusTracking(
   element?: HTMLElement | null
 ): () => void {
   const documentObject = getOwnerDocument(element);
+
+  if (!documentObject) {
+    return () => {};
+  }
 
   if (documentObject.readyState !== 'loading') {
     setupGlobalFocusEvents(element);

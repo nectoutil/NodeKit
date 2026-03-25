@@ -456,8 +456,9 @@ export function usePress(props: UsePressProps = {}): UsePressReturn {
 
   useEffect(() => {
     const element = domRef?.current;
-    if (element && element instanceof getOwnerWindow(element).Element) {
-      const style = getOwnerWindow(element).getComputedStyle(element);
+    const ownerWin = element ? getOwnerWindow(element) : undefined;
+    if (element && ownerWin && element instanceof ownerWin.Element) {
+      const style = ownerWin.getComputedStyle(element);
       if (style.touchAction === 'auto') {
         (element as HTMLElement).style.touchAction = 'pan-x pan-y pinch-zoom';
       }

@@ -33,7 +33,12 @@ export function createStyleElement(
   options: CreateStyleElementOptions = {}
 ): HTMLStyleElement {
   const { id = DEFAULT_ID, insertionPoint } = options;
-  const doc = insertionPoint ? getOwnerDocument(insertionPoint) : document;
+  const doc = insertionPoint
+    ? getOwnerDocument(insertionPoint)
+    : typeof document !== 'undefined'
+      ? document
+      : undefined;
+  if (!doc) return null as unknown as HTMLStyleElement;
 
   const style = doc.createElement('style');
   style.setAttribute('type', 'text/css');

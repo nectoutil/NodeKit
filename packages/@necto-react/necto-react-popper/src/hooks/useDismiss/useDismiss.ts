@@ -86,6 +86,7 @@ export function useDismiss(options: UseDismissOptions): UseDismissReturn {
     if (!enabled || !open) return;
 
     const doc = getOwnerDocument(floatingRef.current);
+    if (!doc) return;
 
     if (escapeKey) {
       doc.addEventListener('keydown', closeOnEscapeKey);

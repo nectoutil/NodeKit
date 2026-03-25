@@ -67,7 +67,8 @@ export function useFocusWithin(
     (event: FocusEvent) => {
       if (!event.currentTarget.contains(event.target)) return;
 
-      const ownerDocument: Document = getOwnerDocument(event.target);
+      const ownerDocument = getOwnerDocument(event.target);
+      if (!ownerDocument) return;
       const activeElement: Element | null = getActiveElement(ownerDocument);
 
       if (
