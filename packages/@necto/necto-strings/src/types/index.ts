@@ -5,6 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { slugify } from './slugify';
-
-export type { SlugifyOptions, CharMap, LocaleMap } from './types';
+export type { SlugifyOptions, CharMap, LocaleMap } from './slugify';

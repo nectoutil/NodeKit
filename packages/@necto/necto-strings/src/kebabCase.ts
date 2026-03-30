@@ -6,16 +6,25 @@
  *
  */
 
-export function kebabCase(str: string, keepLeadingDash = false) {
-  const result = str.replace(/\p{Lu}/gu, (match) => `-${match.toLowerCase()}`);
+export function kebabCase(str: string, keepLeadingDash = false): string {
+  const result: string = str.replace(
+    /\p{Lu}/gu,
+    (match: string): string => `-${match.toLowerCase()}`
+  );
 
-  if (keepLeadingDash) return result;
+  if (keepLeadingDash) {
+    return result;
+  }
 
-  if (result.startsWith('-')) return result.slice(1);
+  if (result.startsWith('-')) {
+    return result.slice(1);
+  }
 
   return result;
 }
 
-kebabCase.reverse = (str: string) => {
-  return str.replace(/-\p{Ll}/gu, (match) => match.slice(1).toUpperCase());
+kebabCase.reverse = (str: string): string => {
+  return str.replace(/-\p{Ll}/gu, (match: string): string =>
+    match.slice(1).toUpperCase()
+  );
 };

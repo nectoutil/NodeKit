@@ -1,9 +1,10 @@
 {
   "name": "@necto/strings",
-  "version": "1.6.1",
+  "version": "1.7.0",
   "description": "Necto's library providing string manipulation methods.",
   "scripts": {
-    "build": "tsup --minify"
+    "build": "tsup --minify",
+    "test": "vitest"
   },
   "files": [
     "dist",
@@ -22,6 +23,9 @@
   },
   "author": "Corinvo OSS Team",
   "license": "MIT",
+  "dependencies": {
+    "@necto/constants": "workspace:*"
+  },
   "devDependencies": {
     "tsup": "^8.4.0"
   }

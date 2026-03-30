@@ -23,7 +23,7 @@ export function randomBytes(size: number): Uint8Array {
     return new Uint8Array(buf.buffer, buf.byteOffset, buf.byteLength);
   }
 
-  const bytes = new Uint8Array(size);
+  const bytes: Uint8Array<ArrayBuffer> = new Uint8Array(size);
 
   if (size > 0) {
     const MAX_BYTES = 65536;
@@ -34,6 +34,7 @@ export function randomBytes(size: number): Uint8Array {
           offset,
           Math.min(offset + MAX_BYTES, size)
         );
+
         crypto.getRandomValues(slice);
       }
     } else {

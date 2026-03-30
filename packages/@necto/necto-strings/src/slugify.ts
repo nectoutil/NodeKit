@@ -7,7 +7,7 @@
 
 import { CHAR_MAP, LOCALE_MAP } from '@necto/constants';
 
-import type { CharMap, LocaleMap, SlugifyOptions } from './types';
+import type { CharMap, LocaleMap, SlugifyOptions } from './types/slugify';
 
 const charMap = CHAR_MAP as CharMap;
 const localeMap = LOCALE_MAP as LocaleMap;
