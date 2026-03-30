@@ -1,6 +1,6 @@
 {
   "name": "@necto/id",
-  "version": "1.6.5",
+  "version": "1.6.6",
   "type": "module",
   "description": "Necto's library for generating algorithmic ID's based on specified parameters.",
   "main": "./dist/index.cjs",
@@ -35,7 +35,8 @@
     "tsup": "^8.4.0"
   },
   "dependencies": {
-    "randombytes": "^2.1.0",
+    "@necto/assert": "workspace:*",
+    "@necto/crypto": "workspace:*",
     "@necto/constants": "workspace:*"
   }
 }

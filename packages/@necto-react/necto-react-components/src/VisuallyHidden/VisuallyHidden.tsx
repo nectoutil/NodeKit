@@ -17,7 +17,7 @@ import type { VisuallyHiddenProps } from './VisuallyHidden.types';
 
 const VisuallyHiddenFn = (
   props: VisuallyHiddenProps,
-  ref: Ref<any>
+  ref: Ref<HTMLElement>
 ): ReactElement => {
   const { as, style, children, isFocusable, ...others } = props;
 
@@ -64,12 +64,14 @@ const VisuallyHiddenFn = (
 };
 
 export const VisuallyHidden: ((
-  props: VisuallyHiddenProps & { ref?: Ref<any> }
-) => ReactElement) & { Root: any } & { [k: string]: any } = Object.assign(
+  props: VisuallyHiddenProps & { ref?: Ref<HTMLElement> }
+) => ReactElement) & { Root: typeof VisuallyHidden } = Object.assign(
   forwardRef(VisuallyHiddenFn),
   { Root: forwardRef(VisuallyHiddenFn) }
-) as ((props: VisuallyHiddenProps & { ref?: Ref<any> }) => ReactElement) & {
-  Root: any;
-} & { [k: string]: any };
+) as ((
+  props: VisuallyHiddenProps & { ref?: Ref<HTMLElement> }
+) => ReactElement) & {
+  Root: typeof VisuallyHidden;
+};
 
 VisuallyHidden.displayName = VISUALLY_HIDDEN_NAME;

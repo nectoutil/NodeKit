@@ -38,9 +38,7 @@ export function PopperArrow(props: ArrowContextValue) {
   }
 
   const renderedChildren =
-    typeof children === 'function'
-      ? children({ placement })
-      : children;
+    typeof children === 'function' ? children({ placement }) : children;
 
   return (
     <div

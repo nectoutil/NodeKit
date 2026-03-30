@@ -1,5 +1,7 @@
 // biome-ignore-all lint/suspicious/noExplicitAny: Explicit any okay here.
 // biome-ignore-all lint/style/noNonNullAssertion: Null assertions okay here.
+// biome-ignore-all lint/correctness/useExhaustiveDependencies: Intentional dependency management.
+// biome-ignore-all lint/correctness/useHookAtTopLevel: Conditional hook usage is intentional.
 
 /**
  * Portions of this file are based on code from the React Aria Spectrum library by Adobe,
@@ -117,7 +119,8 @@ function tearDownGlobalFocusEvents(element?: HTMLElement | null) {
   const windowObject = getOwnerWindow(element);
   const documentObject = getOwnerDocument(element);
 
-  if (!windowObject || !documentObject || !globalListeners.has(windowObject)) return;
+  if (!windowObject || !documentObject || !globalListeners.has(windowObject))
+    return;
 
   const { focus } = globalListeners.get(windowObject)!;
   windowObject.HTMLElement.prototype.focus = focus;

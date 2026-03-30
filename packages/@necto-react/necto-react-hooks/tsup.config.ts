@@ -12,6 +12,6 @@ export default defineConfig({
     /^react-aria/,
     /^@react-aria/,
     /^@react-stately/,
-    /^@internationalized/,
-  ],
+    /^@internationalized/
+  ]
 });

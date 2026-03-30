@@ -1,6 +1,6 @@
 {
   "name": "@necto-react/hooks",
-  "version": "2.14.13",
+  "version": "2.14.16",
   "type": "module",
   "description": "Necto's standard library for providing utility hooks for React applications.",
   "scripts": {
@@ -40,7 +40,8 @@
     "tsup": "^8.4.0"
   },
   "peerDependencies": {
-    "react": "^19.1.0"
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   },
   "dependencies": {
     "@necto-react/helpers": "workspace:*",

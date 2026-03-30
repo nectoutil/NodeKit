@@ -1,3 +1,4 @@
+// biome-ignore-all lint/suspicious/noExplicitAny: Event type requires any.
 /**
  * Portions of this file are based on code from the React Aria Spectrum library by Adobe,
  * licensed under the Apache License, Version 2.0.

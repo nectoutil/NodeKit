@@ -1,3 +1,4 @@
+// biome-ignore-all lint/a11y/useButtonType: Story component.
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState, useMemo } from 'react';
 import { usePopper } from '../src/hooks/usePopper';
@@ -21,10 +22,18 @@ const meta: Meta<PopperDemoArgs> = {
     placement: {
       control: 'select',
       options: [
-        'top', 'top-start', 'top-end',
-        'bottom', 'bottom-start', 'bottom-end',
-        'left', 'left-start', 'left-end',
-        'right', 'right-start', 'right-end'
+        'top',
+        'top-start',
+        'top-end',
+        'bottom',
+        'bottom-start',
+        'bottom-end',
+        'left',
+        'left-start',
+        'left-end',
+        'right',
+        'right-start',
+        'right-end'
       ]
     },
     offsetDistance: {
@@ -45,7 +54,11 @@ export default meta;
 
 const ARROW_SIZE = 8;
 
-const PopperDemo = ({ placement, offsetDistance, showArrow }: PopperDemoArgs) => {
+const PopperDemo = ({
+  placement,
+  offsetDistance,
+  showArrow
+}: PopperDemoArgs) => {
   const [isOpen, setIsOpen] = useState(false);
   // Use state instead of ref so middleware re-runs when arrow element mounts
   const [arrowEl, setArrowEl] = useState<HTMLDivElement | null>(null);
@@ -60,7 +73,12 @@ const PopperDemo = ({ placement, offsetDistance, showArrow }: PopperDemoArgs) =>
     [offsetDistance, showArrow, arrowEl]
   );
 
-  const { refs, floatingStyles, middlewareData, placement: finalPlacement } = usePopper({
+  const {
+    refs,
+    floatingStyles,
+    middlewareData,
+    placement: finalPlacement
+  } = usePopper({
     placement,
     open: isOpen,
     middleware,
@@ -69,10 +87,17 @@ const PopperDemo = ({ placement, offsetDistance, showArrow }: PopperDemoArgs) =>
 
   const side = getSide(finalPlacement);
   const isVertical = side === 'top' || side === 'bottom';
-  const arrowData = middlewareData.arrow as { x?: number; y?: number } | undefined;
+  const arrowData = middlewareData.arrow as
+    | { x?: number; y?: number }
+    | undefined;
 
   // Position arrow half-in, half-out on the correct edge
-  const oppositeSide = { top: 'bottom', bottom: 'top', left: 'right', right: 'left' } as const;
+  const oppositeSide = {
+    top: 'bottom',
+    bottom: 'top',
+    left: 'right',
+    right: 'left'
+  } as const;
   const arrowStyle: React.CSSProperties = {
     position: 'absolute',
     width: ARROW_SIZE,
@@ -80,9 +105,7 @@ const PopperDemo = ({ placement, offsetDistance, showArrow }: PopperDemoArgs) =>
     backgroundColor: '#1a1a1a',
     transform: 'rotate(45deg)',
     [oppositeSide[side]]: -ARROW_SIZE / 2,
-    ...(isVertical
-      ? { left: arrowData?.x ?? 0 }
-      : { top: arrowData?.y ?? 0 })
+    ...(isVertical ? { left: arrowData?.x ?? 0 } : { top: arrowData?.y ?? 0 })
   };
 
   return (
@@ -120,13 +143,7 @@ const PopperDemo = ({ placement, offsetDistance, showArrow }: PopperDemoArgs) =>
             }}
           >
             Popper content ({finalPlacement})
-
-            {showArrow && (
-              <div
-                ref={setArrowEl}
-                style={arrowStyle}
-              />
-            )}
+            {showArrow && <div ref={setArrowEl} style={arrowStyle} />}
           </div>
         </PopperPortal>
       )}

@@ -1,0 +1,33 @@
+{
+  "name": "@necto/slugify",
+  "version": "0.1.1",
+  "description": "Necto's slugify engine for generating URL-safe slugs from strings.",
+  "scripts": {
+    "build": "tsup --minify terser",
+    "test": "vitest"
+  },
+  "author": "Corinvo OSS Team",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.14.1",
+    "tsup": "^8.4.0"
+  },
+  "dependencies": {
+    "@necto/constants": "workspace:*"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  }
+}

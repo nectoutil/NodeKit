@@ -1,3 +1,4 @@
+// biome-ignore-all lint/suspicious/noExplicitAny: React internal type compatibility.
 /**
  * Copyright (c) Corinvo, LLC. and affiliates.
  *
@@ -9,4 +10,4 @@
 import React, { useLayoutEffect } from 'react';
 
 export const useIsomorphicInsertionEffect: typeof useLayoutEffect =
-  (React as any)['useInsertionEffect'] ?? useLayoutEffect;
+  (React as any).useInsertionEffect ?? useLayoutEffect;

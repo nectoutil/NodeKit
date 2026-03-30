@@ -37,7 +37,11 @@
       "Bash(cd /Users/botondszabo/Developer/nectoutil/NodeKit/packages/@necto-react/necto-react-popper && npm publish --access public --otp=209355 2>&1)",
       "Bash(cd /Users/botondszabo/Developer/nectoutil/NodeKit/packages/@necto-react/necto-react-types && npm publish --access public --otp=209355 2>&1)",
       "Bash(cd /Users/botondszabo/Developer/nectoutil/NodeKit/packages/@necto-vue/necto-vue-composables && npm publish --access public --otp=209355 2>&1)",
-      "Bash(pnpm test:unit --filter @necto-react/hooks 2>&1)"
+      "Bash(pnpm test:unit --filter @necto-react/hooks 2>&1)",
+      "Bash(xxd)",
+      "Bash(npx vitest:*)",
+      "Bash(pnpm install:*)",
+      "Bash(npm publish:*)"
     ]
   }
 }

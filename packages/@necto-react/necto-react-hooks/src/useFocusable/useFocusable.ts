@@ -1,3 +1,4 @@
+// biome-ignore-all lint/suspicious/noExplicitAny: Focusable hook requires any.
 /**
  * Portions of this file are based on code from the React Aria Spectrum library by Adobe,
  * licensed under the Apache License, Version 2.0.
@@ -76,7 +77,7 @@ export function useFocusable(
     }
 
     autoFocusRef.current = false;
-  }, [domRef]);
+  }, [domRef, activeElement, ownerDocument]);
 
   // Always set a tabIndex so that Safari allows focusing on native buttons and inputs.
   // Implemented as per React Aria feature mirror.

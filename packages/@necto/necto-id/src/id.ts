@@ -6,8 +6,9 @@
  *
  */
 
-import randomBytes from 'randombytes';
+import { assert } from '@necto/assert';
 import { ALPHABET } from '@necto/constants';
+import { randomBytes } from '@necto/crypto';
 
 /**
  * Generates a random ID of the specified length using the provided character set.
@@ -22,14 +23,10 @@ export function id(
     ...ALPHABET.CAPITALIZED
   ])
 ): string {
-  if (length <= 0) {
-    throw new Error('Length must be a positive integer.');
-  }
+  assert(length > 0, 'Length must be a positive integer.');
 
-  const charsetLength = charset.length;
-  const randomValues = randomBytes(length);
-
-  return Array.from(randomValues)
-    .map((value) => charset[value % charsetLength])
+  const randomValues: Uint8Array = randomBytes(length);
+  return Array.from(randomValues as Iterable<number>)
+    .map((value: number): string => charset[value % charset.length])
     .join('');
 }

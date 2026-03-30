@@ -17,7 +17,7 @@ import type { ElementRects, Rect, Strategy } from '../types';
  * @returns The offset parent element or the documentElement.
  */
 function getOffsetParent(element: HTMLElement): Element {
-  let offsetParent = element.offsetParent;
+  const offsetParent = element.offsetParent;
 
   // If offsetParent is body with position:static, use documentElement
   if (
@@ -65,7 +65,9 @@ function getRectRelativeToOffsetParent(
   strategy: Strategy
 ): Rect {
   if (!isNode(element)) {
-    throw new Error('Invalid element provided to getRectRelativeToOffsetParent');
+    throw new Error(
+      'Invalid element provided to getRectRelativeToOffsetParent'
+    );
   }
 
   const elementRect = element.getBoundingClientRect();
@@ -97,12 +99,8 @@ function getRectRelativeToOffsetParent(
     // Subtract the offset parent's position to get relative coordinates
     if (isOffsetParentAnElement) {
       const offsetParentRect = offsetParent.getBoundingClientRect();
-      offsetX =
-        offsetParentRect.x +
-        (offsetParent as HTMLElement).clientLeft;
-      offsetY =
-        offsetParentRect.y +
-        (offsetParent as HTMLElement).clientTop;
+      offsetX = offsetParentRect.x + (offsetParent as HTMLElement).clientLeft;
+      offsetY = offsetParentRect.y + (offsetParent as HTMLElement).clientTop;
     }
   }
 
@@ -131,11 +129,7 @@ export function getElementRects(
   const offsetParent = getOffsetParent(floating);
 
   return {
-    reference: getRectRelativeToOffsetParent(
-      reference,
-      offsetParent,
-      strategy
-    ),
+    reference: getRectRelativeToOffsetParent(reference, offsetParent, strategy),
     floating: {
       x: 0,
       y: 0,

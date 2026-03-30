@@ -1,3 +1,4 @@
+// biome-ignore-all lint/suspicious/noExplicitAny: Focusable types require any.
 /**
  * Copyright (c) Corinvo, LLC. and affiliates.
  *

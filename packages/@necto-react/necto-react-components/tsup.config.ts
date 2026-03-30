@@ -67,6 +67,20 @@ export default defineConfig({
       cache: false
     })
   ],
+  external: [
+    'react',
+    'react-dom',
+    'react/jsx-runtime',
+    /^@necto\//,
+    /^@necto-react\//
+  ],
+  noExternal: [
+    '@emotion/react',
+    '@emotion/styled',
+    'clsx',
+    'react-icons',
+    'react-if'
+  ],
   dts: true,
   clean: true,
   minify: true,

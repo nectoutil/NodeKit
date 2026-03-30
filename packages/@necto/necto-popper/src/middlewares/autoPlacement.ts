@@ -51,8 +51,8 @@ export function autoPlacement(options: AutoPlacementOptions = {}): Middleware {
 
   return createMiddleware('autoPlacement', (state) => {
     const { rects, placement } = state;
-    const currentSide = getSide(placement);
-    const currentAlignment = getAlignment(placement);
+    const _currentSide = getSide(placement);
+    const _currentAlignment = getAlignment(placement);
 
     const placements: Placement[] =
       allowedPlacements ??

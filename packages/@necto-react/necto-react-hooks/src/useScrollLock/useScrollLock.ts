@@ -94,7 +94,7 @@ export function useScrollLock(
     return (): void => {
       unlock();
     };
-  }, [autoLock, targetProp, widthReflow, lock, unlock]);
+  }, [autoLock, targetProp, lock, unlock]);
 
   return { isLocked, lock, unlock };
 }

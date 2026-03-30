@@ -20,7 +20,6 @@ export function supportsPreventScroll(): boolean {
   if (supportsPreventScrollCached == null) {
     supportsPreventScrollCached = false;
     try {
-      if (typeof document === 'undefined') return false;
       const focusElement: HTMLDivElement = document.createElement('div');
       focusElement.focus({
         get preventScroll(): boolean {
@@ -98,34 +97,5 @@ export function scrollIntoView(
     }
 
     scrollContainer.scrollLeft = scrollLeft;
-  }
-}
-
-/**
- * Scrolls an element into the viewport if it's not already visible.
- *
- * @param element - The element to scroll into viewport.
- * @param options - Optional options for scrolling behavior.
- */
-export function scrollIntoViewport(
-  element: HTMLElement,
-  options?: { containingElement?: HTMLElement | null }
-): void {
-  const { containingElement } = options ?? {};
-
-  // Use native scrollIntoView with smooth behavior
-  element.scrollIntoView({
-    behavior: 'auto',
-    block: 'nearest',
-    inline: 'nearest'
-  });
-
-  // If there's a containing element, ensure it's also visible
-  if (containingElement) {
-    containingElement.scrollIntoView({
-      behavior: 'auto',
-      block: 'nearest',
-      inline: 'nearest'
-    });
   }
 }

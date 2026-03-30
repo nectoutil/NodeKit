@@ -106,7 +106,9 @@ export function useHover(props: UseHoverProps = {}): UseHoverReturn {
       state.pointerType = pointerType;
       state.target = event.currentTarget;
 
-      const hoverDoc = getOwnerDocument(event.target instanceof Element ? event.target : null);
+      const hoverDoc = getOwnerDocument(
+        event.target instanceof Element ? event.target : null
+      );
       if (!hoverDoc) return;
 
       addGlobalListener(

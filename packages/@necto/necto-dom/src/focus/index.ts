@@ -46,15 +46,11 @@ export function focusWithoutScrolling(element: FocusableElement): void {
  * @param {FocusableElement} element - The element whose scrollable ancestors are to be found.
  * @returns {ScrollableElement[]} An array of scrollable elements with their scroll positions.
  */
-export function getScrollableElements(
-  element: FocusableElement
-): ScrollableElement[] {
+function getScrollableElements(element: FocusableElement): ScrollableElement[] {
   let parent: ParentNode | null = element.parentNode;
   const scrollableElements: ScrollableElement[] = Array.from({ length: 0 });
-  const rootScrollingElement: Element | null =
-    typeof document !== 'undefined'
-      ? document.scrollingElement || document.documentElement
-      : null;
+  const rootScrollingElement: Element =
+    document.scrollingElement || document.documentElement;
 
   while (parent instanceof HTMLElement && parent !== rootScrollingElement) {
     if (
@@ -81,5 +77,3 @@ export function getScrollableElements(
 
   return scrollableElements;
 }
-
-export type { ScrollableElement } from './types';

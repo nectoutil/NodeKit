@@ -37,16 +37,16 @@ export function getImageStyle({
 
   // Only apply layout styles if layout is explicitly set or dimensions are provided
   if (layout === 'fixed') {
-    if (width !== undefined) style.width = toPx(width)!;
-    if (height !== undefined) style.height = toPx(height)!;
+    if (width !== undefined) style.width = toPx(width) ?? '';
+    if (height !== undefined) style.height = toPx(height) ?? '';
   } else if (layout === 'constrained') {
     style.width = '100%';
-    if (width !== undefined) style['max-width'] = toPx(width)!;
-    if (height !== undefined) style['max-height'] = toPx(height)!;
+    if (width !== undefined) style['max-width'] = toPx(width) ?? '';
+    if (height !== undefined) style['max-height'] = toPx(height) ?? '';
     if (aspectRatio) style['aspect-ratio'] = String(aspectRatio);
   } else if (layout === 'fullWidth') {
     style.width = '100%';
-    if (height !== undefined) style.height = toPx(height)!;
+    if (height !== undefined) style.height = toPx(height) ?? '';
     if (aspectRatio) style['aspect-ratio'] = String(aspectRatio);
   }
 

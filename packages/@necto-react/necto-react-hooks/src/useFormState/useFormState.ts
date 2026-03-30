@@ -1,3 +1,4 @@
+// biome-ignore-all lint/correctness/useHookAtTopLevel: Conditional hook usage is intentional.
 /**
  * Portions of this file are based on code from the React Aria Spectrum library by Adobe,
  * licensed under the Apache License, Version 2.0.
@@ -67,8 +68,7 @@ export const FormValidationContext: Context<ValidationErrors> =
  * Private prop key used by parent form components (e.g. a future `useForm`)
  * to pass pre-computed validation state to child fields, avoiding redundant computation.
  */
-export const privateValidationStateProp: string =
-  '__formValidationState' + Date.now();
+export const privateValidationStateProp: string = `__formValidationState${Date.now()}`;
 
 /**
  * Manages form field validation state, combining custom validation,
@@ -125,7 +125,7 @@ function useFormStateImpl<T>(
   }
 
   // If the isInvalid prop is controlled, produce a realtime validation result.
-  let controlledError: ValidationResult | null =
+  const controlledError: ValidationResult | null =
     isInvalid !== undefined
       ? {
           isInvalid,

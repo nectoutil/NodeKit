@@ -1,3 +1,5 @@
+// biome-ignore-all lint/correctness/noUnusedVariables: Polymorphic props destructuring.
+// biome-ignore-all lint/suspicious/noExplicitAny: Polymorphic component requires any for dynamic element types.
 /**
  * Copyright (c) Corinvo, LLC. and affiliates.
  *

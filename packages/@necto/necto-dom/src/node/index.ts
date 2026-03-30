@@ -39,7 +39,7 @@ export function nodeContains(
       current.tagName === 'SLOT' &&
       (current as HTMLSlotElement).assignedSlot
     ) {
-      current = (current as HTMLSlotElement).assignedSlot!.parentNode;
+      current = (current as HTMLSlotElement).assignedSlot?.parentNode;
     } else if (isShadowRoot(current)) {
       current = (current as ShadowRoot).host;
     } else {
@@ -51,12 +51,9 @@ export function nodeContains(
 }
 
 export const getActiveElement = (
-  doc?: Document | ShadowRoot,
+  doc: Document = document,
   supportShadowDOM = true
 ): Element | null => {
-  if (!doc) doc = typeof document !== 'undefined' ? document : undefined;
-  if (!doc) return null;
-
   if (!supportShadowDOM) {
     return doc.activeElement;
   }

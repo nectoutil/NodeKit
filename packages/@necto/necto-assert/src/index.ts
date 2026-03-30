@@ -6,3 +6,6 @@
  *
  */
 
+export * from './match';
+export * from './assert';
+export * from './errors';

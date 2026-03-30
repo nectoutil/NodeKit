@@ -1,3 +1,5 @@
+// biome-ignore-all lint/suspicious/noExplicitAny: Social button component uses dynamic typing.
+// biome-ignore-all lint/correctness/noUnusedVariables: Props destructuring.
 /**
  * Copyright (c) Corinvo, LLC. and affiliates.
  *
@@ -8,7 +10,6 @@
 
 import { css } from '@emotion/react';
 import { HTMLElements } from '@necto/dom';
-import { If } from '../../Conditionals/If';
 import { forwardRef, Fragment } from 'react';
 import { Primitive } from '../../Primitive/Primitive';
 
@@ -114,15 +115,11 @@ export const Button: FC<ButtonProps> = forwardRef(function SocialButton<
       })()}
     >
       <Fragment>
-        <If condition={!!iconNode && showIcon && iconPosition === 'left'}>
-          {iconNode}
-        </If>
+        {!!iconNode && showIcon && iconPosition === 'left' && iconNode}
 
         {children}
 
-        <If condition={!!iconNode && showIcon && iconPosition === 'right'}>
-          {iconNode}
-        </If>
+        {!!iconNode && showIcon && iconPosition === 'right' && iconNode}
       </Fragment>
     </Primitive>
   );

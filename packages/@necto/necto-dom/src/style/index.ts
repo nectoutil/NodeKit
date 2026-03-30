@@ -19,7 +19,7 @@ const DEFAULT_ID = 'necto-style';
 
 const windowStylesMap = new WeakMap<Window, StyleMap>();
 
-export function getStyleMap(targetWindow: Window): StyleMap {
+function getStyleMap(targetWindow: Window): StyleMap {
   let map = windowStylesMap.get(targetWindow);
   if (!map) {
     map = new Map();
@@ -28,17 +28,12 @@ export function getStyleMap(targetWindow: Window): StyleMap {
   return map;
 }
 
-export function createStyleElement(
+function createStyleElement(
   css: string,
   options: CreateStyleElementOptions = {}
 ): HTMLStyleElement {
   const { id = DEFAULT_ID, insertionPoint } = options;
-  const doc = insertionPoint
-    ? getOwnerDocument(insertionPoint)
-    : typeof document !== 'undefined'
-      ? document
-      : undefined;
-  if (!doc) return null as unknown as HTMLStyleElement;
+  const doc = insertionPoint ? getOwnerDocument(insertionPoint) : document;
 
   const style = doc.createElement('style');
   style.setAttribute('type', 'text/css');
@@ -93,14 +88,3 @@ export function injectStyle(
     }
   };
 }
-
-export function removeStyleElement(element: HTMLStyleElement): void {
-  element.remove();
-}
-
-export type {
-  CreateStyleElementOptions,
-  InjectStyleOptions,
-  StyleEntry,
-  StyleMap
-} from './types';

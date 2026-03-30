@@ -25,17 +25,8 @@ export function getContainmentRect(
     };
   } else {
     // Use fallbackElement if provided, otherwise use global document/window
-    const doc = fallbackElement
-      ? getOwnerDocument(fallbackElement)
-      : typeof document !== 'undefined'
-        ? document
-        : undefined;
-    const win = fallbackElement
-      ? getOwnerWindow(fallbackElement)
-      : typeof window !== 'undefined'
-        ? window
-        : undefined;
-    if (!doc || !win) return { top: 0, left: 0, bottom: 0, right: 0 };
+    const doc = fallbackElement ? getOwnerDocument(fallbackElement) : document;
+    const win = fallbackElement ? getOwnerWindow(fallbackElement) : window;
     return {
       top: 0,
       left: 0,

@@ -29,9 +29,7 @@ import type {
  * - When `isOpen` becomes `false`, the element enters an exiting phase and stays mounted until all animations complete.
  * - `isRendered` indicates whether the element should remain in the DOM (open or still exiting).
  */
-export function useAnimation(
-  options: UseAnimationOptions
-): UseAnimationReturn {
+export function useAnimation(options: UseAnimationOptions): UseAnimationReturn {
   const { ref, isOpen, isReady = true } = options;
 
   // --- Enter animation ---

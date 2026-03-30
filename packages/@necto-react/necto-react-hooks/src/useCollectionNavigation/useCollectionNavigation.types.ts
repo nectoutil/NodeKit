@@ -10,7 +10,6 @@ import type { RefObject } from 'react';
 import type {
   DOMAttributes,
   SelectionManager,
-  SelectionMode,
   FocusStrategy
 } from '@necto-react/types';
 import type { Key, KeyboardDelegate } from '@necto/types';

@@ -47,7 +47,7 @@ export interface UsePopperOptions extends ComputePositionOptions {
     reference: Element,
     floating: HTMLElement,
     update: () => void
-  ) => void | (() => void);
+  ) => undefined | (() => void);
 }
 
 /**

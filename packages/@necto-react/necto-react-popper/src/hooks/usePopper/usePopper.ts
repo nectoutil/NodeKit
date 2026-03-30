@@ -1,3 +1,4 @@
+// biome-ignore-all lint/suspicious/noExplicitAny: Popper hook requires any.
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { defu } from 'defu';
@@ -96,7 +97,7 @@ export function usePopper(options: UsePopperOptions = {}): UsePopperReturn {
   const referenceEl = externalReference || _reference;
   const floatingEl = externalFloating || _floating;
 
-  const hasWhileElementsMounted = whileElementsMounted != null;
+  const _hasWhileElementsMounted = whileElementsMounted != null;
   const whileElementsMountedRef = useLatestRef(whileElementsMounted);
   const openRef = useLatestRef(open);
 
@@ -146,13 +147,7 @@ export function usePopper(options: UsePopperOptions = {}): UsePopperReturn {
       }
       update();
     }
-  }, [
-    referenceEl,
-    floatingEl,
-    update,
-    whileElementsMountedRef,
-    hasWhileElementsMounted
-  ]);
+  }, [referenceEl, floatingEl, update, whileElementsMountedRef]);
 
   const refs = React.useMemo(
     () => ({

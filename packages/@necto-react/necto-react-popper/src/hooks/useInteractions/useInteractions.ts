@@ -1,3 +1,4 @@
+// biome-ignore-all lint/complexity/noBannedTypes: Function type is intentional for generic event handlers.
 /**
  * Copyright (c) Corinvo, LLC. and affiliates.
  *

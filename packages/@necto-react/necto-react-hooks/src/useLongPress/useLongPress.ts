@@ -1,3 +1,4 @@
+// biome-ignore-all lint/style/noNonNullAssertion: Intentional non-null assertion for event targets.
 /**
  * Portions of this file are based on code from the React Aria Spectrum library by Adobe,
  * licensed under the Apache License, Version 2.0.

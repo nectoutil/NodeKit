@@ -1,0 +1,29 @@
+{
+  "name": "@necto/crypto",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Necto's cryptographic utilities.",
+  "author": "Corinvo OSS Team",
+  "license": "MIT",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.1",
+    "tsup": "^8.4.0"
+  }
+}

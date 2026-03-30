@@ -10,6 +10,7 @@ export default defineConfig([
     clean: true,
     cjsInterop: true,
     platform: 'neutral',
+    external: ['@necto/constants', '@necto/file', '@necto/platform'],
     outExtension({ format }) {
       return {
         js: format === 'cjs' ? '.cjs' : '.mjs'

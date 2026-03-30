@@ -18,11 +18,11 @@ import type { Ref, ReactElement } from 'react';
 
 const ShadowBevelFn = (
   props: ShadowBevelProps,
-  ref: Ref<any>
+  ref: Ref<HTMLElement>
 ): ReactElement => {
   const {
     as,
-    asChild,
+    asChild: _asChild,
     children,
     boxShadow,
     borderRadius,
@@ -63,12 +63,14 @@ const ShadowBevelFn = (
 };
 
 export const ShadowBevel: ((
-  props: ShadowBevelProps & { ref?: Ref<any> }
-) => ReactElement) & { Root: any } & { [k: string]: any } = Object.assign(
+  props: ShadowBevelProps & { ref?: Ref<HTMLElement> }
+) => ReactElement) & { Root: typeof ShadowBevel } = Object.assign(
   forwardRef(ShadowBevelFn),
   { Root: forwardRef(ShadowBevelFn) }
-) as ((props: ShadowBevelProps & { ref?: Ref<any> }) => ReactElement) & {
-  Root: any;
-} & { [k: string]: any };
+) as ((
+  props: ShadowBevelProps & { ref?: Ref<HTMLElement> }
+) => ReactElement) & {
+  Root: typeof ShadowBevel;
+};
 
 ShadowBevel.displayName = SHADOW_BEVEL_NAME;

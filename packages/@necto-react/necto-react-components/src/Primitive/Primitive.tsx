@@ -1,6 +1,3 @@
-// biome-ignore-all assist/source/organizeImports: No import sorting needed.
-// biome-ignore-all lint/suspicious/noExplicitAny: No need to enforce any rule here.
-
 /**
  * Copyright (c) Corinvo, LLC. and affiliates.
  *
@@ -9,8 +6,10 @@
  *
  */
 
+// biome-ignore-all lint/suspicious/noExplicitAny: Polymorphic component requires any for dynamic element types.
+
 import { DOM } from '@necto/constants';
-import { HTMLElements } from '@necto/dom';
+import type { HTMLElements } from '@necto/dom';
 import { Children, forwardRef, isValidElement, cloneElement } from 'react';
 
 import { DEFAULT_PRIMITIVE_TAG, PRIMITIVE_NAME } from './constants';
@@ -99,9 +98,10 @@ export const Primitive: (<E extends ElementType = (typeof HTMLElements)['Div']>(
   Primitives & { [k: string]: any } = new Proxy(basePrimitive, {
   get(target, prop, receiver) {
     if (!_tagComponents) _tagComponents = buildTagComponents();
-    if (typeof prop === 'string' && prop in _tagComponents) return _tagComponents[prop];
+    if (typeof prop === 'string' && prop in _tagComponents)
+      return _tagComponents[prop];
     return Reflect.get(target, prop, receiver);
-  },
+  }
 }) as any;
 
 Primitive.displayName = PRIMITIVE_NAME;

@@ -5,23 +5,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/** Returns the ownerDocument of an element, or the global document. Returns undefined during SSR. */
-export function getOwnerDocument(el: Element | null | undefined): Document | undefined {
-  if (el?.ownerDocument) return el.ownerDocument;
-  if (typeof document !== 'undefined') return document;
-  return undefined;
+/** Returns the ownerDocument of an element, or the global document */
+export function getOwnerDocument(el: Element | null | undefined): Document {
+  return el?.ownerDocument ?? document;
 }
 
-/** Returns the window object that owns an element. Returns undefined during SSR. */
+/** Returns the window object that owns an element */
 export function getOwnerWindow(
   el: (Window & typeof global) | Element | null | undefined
-): (Window & typeof global) | undefined {
+): Window & typeof global {
   if (el && 'window' in el && el.window === el) {
     return el;
   }
 
-  const doc: Document | undefined = getOwnerDocument(el as Element | null | undefined);
-  if (doc?.defaultView) return doc.defaultView;
-  if (typeof window !== 'undefined') return window;
-  return undefined;
+  return (
+    getOwnerDocument(el as Element | null | undefined).defaultView || window
+  );
 }

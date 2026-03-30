@@ -28,26 +28,6 @@ const createHTMLElementsMap = (): HTMLElementsMap =>
     return acc;
   }, {} as HTMLElementsMap);
 
-let _htmlElements: HTMLElementsMap | undefined;
-
-/**
- * Lazily-initialized mapping of capitalized HTML tag names to their original tag names.
- * Deferred to avoid module initialization order issues when bundlers split
- * `@necto/constants` and `@necto/dom` into separate chunks.
- */
-const HTMLElements: HTMLElementsMap = new Proxy({} as HTMLElementsMap, {
-  get(_target, prop, receiver) {
-    if (!_htmlElements) _htmlElements = createHTMLElementsMap();
-    return Reflect.get(_htmlElements, prop, receiver);
-  },
-  ownKeys() {
-    if (!_htmlElements) _htmlElements = createHTMLElementsMap();
-    return Reflect.ownKeys(_htmlElements);
-  },
-  getOwnPropertyDescriptor(_target, prop) {
-    if (!_htmlElements) _htmlElements = createHTMLElementsMap();
-    return Object.getOwnPropertyDescriptor(_htmlElements, prop);
-  },
-});
+const HTMLElements = createHTMLElementsMap();
 
 export { HTMLElements };

@@ -1,6 +1,6 @@
 {
   "name": "@necto/dom",
-  "version": "1.6.10",
+  "version": "1.7.2",
   "description": "Necto's library for providing helpers and tools to interact with the DOM.",
   "scripts": {
     "build": "tsup --minify terser"
@@ -28,7 +28,6 @@
   },
   "dependencies": {
     "@necto/constants": "workspace:*",
-    "@necto/file": "workspace:*",
     "@necto/types": "workspace:*",
     "@necto/platform": "workspace:*",
     "html-tags": "^4.0.0"
