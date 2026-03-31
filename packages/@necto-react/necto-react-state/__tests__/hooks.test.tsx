@@ -260,3 +260,68 @@ describe('derived read-write state with hooks', () => {
     expect(result.current[0]).toBe(0);
   });
 });
+
+describe('useState signal-style API', () => {
+  it('should expose .value for reading', () => {
+    const count = state(42);
+    const store = createStore();
+
+    const { result } = renderHook(() => useState(count), {
+      wrapper: createWrapper(store),
+    });
+
+    expect(result.current.value).toBe(42);
+  });
+
+  it('should expose .set() for direct value setting', () => {
+    const count = state(0);
+    const store = createStore();
+
+    const { result } = renderHook(() => useState(count), {
+      wrapper: createWrapper(store),
+    });
+
+    act(() => {
+      result.current.set(123);
+    });
+
+    expect(result.current.value).toBe(123);
+  });
+
+  it('should expose .update() for function updates', () => {
+    const count = state(10);
+    const store = createStore();
+
+    const { result } = renderHook(() => useState(count), {
+      wrapper: createWrapper(store),
+    });
+
+    act(() => {
+      result.current.update((c) => c + 5);
+    });
+
+    expect(result.current.value).toBe(15);
+  });
+
+  it('should work with both destructure and signal style', () => {
+    const count = state(0);
+    const store = createStore();
+
+    const { result } = renderHook(() => useState(count), {
+      wrapper: createWrapper(store),
+    });
+
+    act(() => {
+      result.current.set(10);
+    });
+
+    expect(result.current[0]).toBe(10);
+    expect(result.current.value).toBe(10);
+
+    act(() => {
+      result.current[1](20);
+    });
+
+    expect(result.current.value).toBe(20);
+  });
+});

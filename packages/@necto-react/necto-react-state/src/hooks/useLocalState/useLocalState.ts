@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { useRef, useMemo } from 'react';
+import { useRef } from 'react';
 import { state } from '@necto/state';
 
 import { useState } from '../useState';
@@ -44,24 +44,9 @@ export function useLocalState<Value>(
     stateRef.current = state(resolved);
   }
 
-  const [value, setter] = useState(stateRef.current, options);
+  const result = useState(stateRef.current, options) as LocalStateResult<Value>;
 
-  const result = useMemo(() => {
-    const tuple = [value, setter] as unknown as LocalStateResult<Value>;
-
-    Object.defineProperty(tuple, 'value', {
-      get: () => tuple[0],
-      enumerable: true,
-      configurable: true
-    });
-
-    tuple.set = (v: Value) => setter(v);
-    tuple.update = (fn: (prev: Value) => Value) =>
-      setter(fn as SetStateAction<Value>);
-    tuple.reset = () => setter(initialRef.current as SetStateAction<Value>);
-
-    return tuple;
-  }, [value, setter]);
+  result.reset = () => result[1](initialRef.current as SetStateAction<Value>);
 
   return result;
 }

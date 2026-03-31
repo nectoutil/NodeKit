@@ -5,18 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { SetStateAction, Store } from '@necto/state';
+import type { Store } from '@necto/state';
+import type { StateResult } from '../useState';
 
 export type UseLocalStateOptions = {
   store?: Store;
 };
 
-export type LocalStateResult<Value> = [
-  Value,
-  (value: SetStateAction<Value>) => void
-] & {
-  value: Value;
-  set: (value: Value) => void;
-  update: (fn: (prev: Value) => Value) => void;
+export type LocalStateResult<Value> = StateResult<Value> & {
   reset: () => void;
 };

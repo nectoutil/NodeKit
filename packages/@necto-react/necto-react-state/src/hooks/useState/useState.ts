@@ -5,56 +5,51 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { useMemo } from 'react';
+
 import type {
   State,
   WritableState,
   PrimitiveState,
-  SetStateAction,
-  ExtractStateValue,
-  ExtractStateArgs,
-  ExtractStateResult
+  SetStateAction
 } from '@necto/state';
 
 import { useStateValue } from '../useStateValue';
 import { useSetState } from '../useSetState';
 
-import type { UseStateOptions } from './useState.types';
+import type { UseStateOptions, StateResult } from './useState.types';
 
-type SetState<Args extends unknown[], Result> = (...args: Args) => Result;
-
-/** useState(writableState) — returns [value, setter] */
-export function useState<Value, Args extends unknown[], Result>(
-  s: WritableState<Value, Args, Result>,
-  options?: UseStateOptions
-): [Awaited<Value>, SetState<Args, Result>];
-
-/** useState(primitiveState) — returns [value, setter] for a primitive state */
+/** useState(writableState) — returns [value, setter] with signal-style API */
 export function useState<Value>(
   s: PrimitiveState<Value>,
   options?: UseStateOptions
-): [Awaited<Value>, SetState<[SetStateAction<Value>], void>];
+): StateResult<Value>;
 
-/** useState(readOnlyState) — returns [value, never] for a read-only state */
 export function useState<Value>(
-  s: State<Value>,
-  options?: UseStateOptions
-): [Awaited<Value>, never];
-
-/** useState(state) — generic overload */
-export function useState<S extends WritableState<unknown, never[], unknown>>(
-  s: S,
-  options?: UseStateOptions
-): [
-  Awaited<ExtractStateValue<S>>,
-  SetState<ExtractStateArgs<S>, ExtractStateResult<S>>
-];
-
-export function useState<Value, Args extends unknown[], Result>(
-  s: State<Value> | WritableState<Value, Args, Result>,
+  s: PrimitiveState<Value> | State<Value>,
   options?: UseStateOptions
 ) {
-  return [
-    useStateValue(s, options),
-    useSetState(s as WritableState<Value, Args, Result>, options)
-  ];
+  const value = useStateValue(s, options);
+  const setter = useSetState(
+    s as WritableState<Value, [SetStateAction<Value>], void>,
+    options
+  );
+
+  const result = useMemo(() => {
+    const tuple = [value, setter] as unknown as StateResult<Value>;
+
+    Object.defineProperty(tuple, 'value', {
+      get: () => tuple[0],
+      enumerable: true,
+      configurable: true
+    });
+
+    tuple.set = (v: Value) => setter(v);
+    tuple.update = (fn: (prev: Value) => Value) =>
+      setter(fn as SetStateAction<Value>);
+
+    return tuple;
+  }, [value, setter]);
+
+  return result;
 }

@@ -6,4 +6,4 @@
  */
 
 export { useState } from './useState';
-export type { UseStateOptions } from './useState.types';
+export type { UseStateOptions, StateResult } from './useState.types';
