@@ -256,18 +256,18 @@ describe('useLocalState signal-style API', () => {
   });
 
   it('should work with object values', () => {
-    const { result } = renderHook(() => useLocalState({ name: 'John', age: 30 }));
+    const { result } = renderHook(() => useLocalState({ name: 'John', age: 30, height: "6ft, 3in" }));
 
     act(() => {
-      result.current.set({ name: 'Jane', age: 25 });
+      result.current.set({ name: 'Jane', age: 25, height: "5ft, 3in" });
     });
 
-    expect(result.current.value).toEqual({ name: 'Jane', age: 25 });
+    expect(result.current.value).toEqual({ name: 'Jane', age: 25, height: "5ft, 3in" });
 
     act(() => {
       result.current.reset();
     });
 
-    expect(result.current.value).toEqual({ name: 'John', age: 30 });
+    expect(result.current.value).toEqual({ name: 'John', age: 30, height: "6ft, 3in" });
   });
 });

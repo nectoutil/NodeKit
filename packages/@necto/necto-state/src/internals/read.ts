@@ -98,8 +98,10 @@ export function readStateRecord<Value>(
           throw new Error('no state init');
         }
       }
+
       return unwrapValue(aState);
     }
+
     const aState = ctx.methods.readStateRecord(a);
     try {
       return unwrapValue(aState);

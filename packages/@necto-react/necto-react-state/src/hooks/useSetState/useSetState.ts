@@ -17,8 +17,6 @@ import { useStore } from '../../components/Provider';
 
 import type { UseSetStateOptions } from './useSetState.types';
 
-type SetState<Args extends unknown[], Result> = (...args: Args) => Result;
-
 /** useSetState(state) — returns a stable setter function */
 export function useSetState<Value, Args extends unknown[], Result>(
   s: WritableState<Value, Args, Result>,
