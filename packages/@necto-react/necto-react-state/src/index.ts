@@ -14,4 +14,7 @@ export { Provider, useStore } from './components/Provider';
 export type { UseStateOptions } from './hooks/useState';
 export type { UseStateValueOptions } from './hooks/useStateValue';
 export type { UseSetStateOptions } from './hooks/useSetState';
-export type { UseLocalStateOptions } from './hooks/useLocalState';
+export type {
+  UseLocalStateOptions,
+  LocalStateResult
+} from './hooks/useLocalState';

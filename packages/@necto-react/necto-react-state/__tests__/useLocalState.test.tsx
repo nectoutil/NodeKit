@@ -157,3 +157,117 @@ describe('useLocalState', () => {
     expect(result.current[0]).toBe(false);
   });
 });
+
+describe('useLocalState signal-style API', () => {
+  it('should expose .value for reading', () => {
+    const { result } = renderHook(() => useLocalState(42));
+
+    expect(result.current.value).toBe(42);
+  });
+
+  it('should expose .set() for direct value setting', () => {
+    const { result } = renderHook(() => useLocalState(0));
+
+    act(() => {
+      result.current.set(123);
+    });
+
+    expect(result.current.value).toBe(123);
+  });
+
+  it('should expose .update() for function updates', () => {
+    const { result } = renderHook(() => useLocalState(10));
+
+    act(() => {
+      result.current.update((c) => c + 1);
+    });
+
+    expect(result.current.value).toBe(11);
+  });
+
+  it('should expose .reset() to return to initial value', () => {
+    const { result } = renderHook(() => useLocalState(5));
+
+    act(() => {
+      result.current.set(99);
+    });
+
+    expect(result.current.value).toBe(99);
+
+    act(() => {
+      result.current.reset();
+    });
+
+    expect(result.current.value).toBe(5);
+  });
+
+  it('should reset to lazy initializer value', () => {
+    const { result } = renderHook(() => useLocalState(() => 42));
+
+    act(() => {
+      result.current.set(0);
+    });
+
+    expect(result.current.value).toBe(0);
+
+    act(() => {
+      result.current.reset();
+    });
+
+    expect(result.current.value).toBe(42);
+  });
+
+  it('should work with both destructure and signal style in the same hook', () => {
+    const { result } = renderHook(() => useLocalState(0));
+
+    act(() => {
+      result.current.set(10);
+    });
+
+    expect(result.current[0]).toBe(10);
+    expect(result.current.value).toBe(10);
+
+    act(() => {
+      result.current[1](20);
+    });
+
+    expect(result.current.value).toBe(20);
+    expect(result.current[0]).toBe(20);
+  });
+
+  it('should chain multiple signal operations', () => {
+    const { result } = renderHook(() => useLocalState(0));
+
+    act(() => {
+      result.current.set(5);
+    });
+
+    act(() => {
+      result.current.update((v) => v * 3);
+    });
+
+    expect(result.current.value).toBe(15);
+
+    act(() => {
+      result.current.reset();
+    });
+
+    expect(result.current.value).toBe(0);
+  });
+
+  it('should work with object values', () => {
+    const { result } = renderHook(() => useLocalState({ name: 'John', age: 30 }));
+
+    act(() => {
+      result.current.set({ name: 'Jane', age: 25 });
+    });
+
+    expect(result.current.value).toEqual({ name: 'Jane', age: 25 });
+
+    act(() => {
+      result.current.reset();
+    });
+
+    expect(result.current.value).toEqual({ name: 'John', age: 30 });
+  });
+});

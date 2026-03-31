@@ -5,30 +5,34 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { useRef } from 'react';
+import { useRef, useMemo } from 'react';
 import { state } from '@necto/state';
 
 import { useState } from '../useState';
 
 import type { SetStateAction, PrimitiveState } from '@necto/state';
-import type { UseLocalStateOptions } from './useLocalState.types';
+import type {
+  UseLocalStateOptions,
+  LocalStateResult
+} from './useLocalState.types';
 
-/** useLocalState(initialValue) — component-scoped state, drop-in replacement for React's useState */
+/** useLocalState(initialValue) — component-scoped state, drop-in for React's useState with signal-style API */
 export function useLocalState<Value>(
   initialValue: Value,
   options?: UseLocalStateOptions
-): [Value, (value: SetStateAction<Value>) => void];
+): LocalStateResult<Value>;
 
 /** useLocalState(initializer) — component-scoped state with lazy initializer */
 export function useLocalState<Value>(
   initializer: () => Value,
   options?: UseLocalStateOptions
-): [Value, (value: SetStateAction<Value>) => void];
+): LocalStateResult<Value>;
 
 export function useLocalState<Value>(
   initialValue: Value | (() => Value),
   options?: UseLocalStateOptions
 ) {
+  const initialRef = useRef<Value>(null);
   const stateRef = useRef<PrimitiveState<Value>>(null);
 
   if (stateRef.current === null) {
@@ -36,8 +40,28 @@ export function useLocalState<Value>(
       typeof initialValue === 'function'
         ? (initialValue as () => Value)()
         : initialValue;
+    initialRef.current = resolved;
     stateRef.current = state(resolved);
   }
 
-  return useState(stateRef.current, options);
+  const [value, setter] = useState(stateRef.current, options);
+
+  const result = useMemo(() => {
+    const tuple = [value, setter] as unknown as LocalStateResult<Value>;
+
+    Object.defineProperty(tuple, 'value', {
+      get: () => tuple[0],
+      enumerable: true,
+      configurable: true
+    });
+
+    tuple.set = (v: Value) => setter(v);
+    tuple.update = (fn: (prev: Value) => Value) =>
+      setter(fn as SetStateAction<Value>);
+    tuple.reset = () => setter(initialRef.current as SetStateAction<Value>);
+
+    return tuple;
+  }, [value, setter]);
+
+  return result;
 }
