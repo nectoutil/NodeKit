@@ -5,18 +5,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { state } from './state';
-export { createStore, getDefaultStore } from './store';
-
 export type {
   State,
-  Store,
-  Getter,
-  Setter,
   WritableState,
   PrimitiveState,
   SetStateAction,
+  Getter,
+  Setter,
+  Read,
+  Write,
+  WithInitialValue,
   ExtractStateValue,
   ExtractStateArgs,
   ExtractStateResult
-} from './types';
+} from './state';
+
+export type { Store, EpochNumber, StateRecord, Mounted } from './store';

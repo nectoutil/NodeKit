@@ -1,0 +1,29 @@
+{
+  "name": "@necto/state",
+  "version": "0.0.1",
+  "description": "Necto's atomic state management library.",
+  "scripts": {
+    "build": "tsup --minify",
+    "test": "vitest"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "author": "Corinvo OSS Team",
+  "license": "MIT",
+  "devDependencies": {
+    "tsup": "^8.4.0"
+  }
+}
