@@ -1,5 +1,17 @@
 # @necto-react/popper
 
+## 0.5.0
+
+### Minor Changes
+
+- b53176e: Added leftover changes
+
+### Patch Changes
+
+- Updated dependencies [b53176e]
+  - @necto-react/state@0.2.0
+  - @necto/popper@0.5.0
+
 ## 0.4.0
 
 ### Minor Changes
