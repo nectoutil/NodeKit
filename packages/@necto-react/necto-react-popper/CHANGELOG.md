@@ -1,5 +1,17 @@
 # @necto-react/popper
 
+## 0.4.0
+
+### Minor Changes
+
+- d003ea7: Updated minor api erros and added some small features
+
+### Patch Changes
+
+- Updated dependencies [d003ea7]
+  - @necto-react/state@0.1.0
+  - @necto/popper@0.4.0
+
 ## 0.3.11
 
 ### Patch Changes
