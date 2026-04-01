@@ -1,5 +1,11 @@
 # @necto/popper
 
+## 0.5.0
+
+### Minor Changes
+
+- b53176e: Added leftover changes
+
 ## 0.4.0
 
 ### Minor Changes
