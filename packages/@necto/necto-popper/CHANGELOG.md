@@ -1,5 +1,11 @@
 # @necto/popper
 
+## 0.4.0
+
+### Minor Changes
+
+- d003ea7: Updated minor api erros and added some small features
+
 ## 0.3.9
 
 ### Patch Changes
