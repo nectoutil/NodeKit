@@ -62,15 +62,16 @@ const ShadowBevelFn = (
   );
 };
 
-export const ShadowBevel: ((
-  props: ShadowBevelProps & { ref?: Ref<HTMLElement> }
-) => ReactElement) & { Root: typeof ShadowBevel } = Object.assign(
-  forwardRef(ShadowBevelFn),
-  { Root: forwardRef(ShadowBevelFn) }
-) as ((
+type ShadowBevelComponent = ((
   props: ShadowBevelProps & { ref?: Ref<HTMLElement> }
 ) => ReactElement) & {
-  Root: typeof ShadowBevel;
+  displayName?: string;
+  Root: ShadowBevelComponent;
 };
+
+export const ShadowBevel: ShadowBevelComponent = Object.assign(
+  forwardRef(ShadowBevelFn),
+  { Root: forwardRef(ShadowBevelFn) }
+) as unknown as ShadowBevelComponent;
 
 ShadowBevel.displayName = SHADOW_BEVEL_NAME;

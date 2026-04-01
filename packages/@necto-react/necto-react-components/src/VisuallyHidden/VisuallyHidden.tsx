@@ -63,15 +63,16 @@ const VisuallyHiddenFn = (
   );
 };
 
-export const VisuallyHidden: ((
-  props: VisuallyHiddenProps & { ref?: Ref<HTMLElement> }
-) => ReactElement) & { Root: typeof VisuallyHidden } = Object.assign(
-  forwardRef(VisuallyHiddenFn),
-  { Root: forwardRef(VisuallyHiddenFn) }
-) as ((
+type VisuallyHiddenComponent = ((
   props: VisuallyHiddenProps & { ref?: Ref<HTMLElement> }
 ) => ReactElement) & {
-  Root: typeof VisuallyHidden;
+  displayName?: string;
+  Root: VisuallyHiddenComponent;
 };
+
+export const VisuallyHidden: VisuallyHiddenComponent = Object.assign(
+  forwardRef(VisuallyHiddenFn),
+  { Root: forwardRef(VisuallyHiddenFn) }
+) as unknown as VisuallyHiddenComponent;
 
 VisuallyHidden.displayName = VISUALLY_HIDDEN_NAME;

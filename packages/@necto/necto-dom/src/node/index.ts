@@ -39,7 +39,7 @@ export function nodeContains(
       current.tagName === 'SLOT' &&
       (current as HTMLSlotElement).assignedSlot
     ) {
-      current = (current as HTMLSlotElement).assignedSlot?.parentNode;
+      current = (current as HTMLSlotElement).assignedSlot?.parentNode ?? null;
     } else if (isShadowRoot(current)) {
       current = (current as ShadowRoot).host;
     } else {

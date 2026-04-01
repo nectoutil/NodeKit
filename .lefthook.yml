@@ -2,13 +2,23 @@ colors: true
 skip_lfs: true
 
 pre-commit:
+  piped: true
+  scripts:
+    "check-lockfile":
+      runner: bash
+      priority: 1
   commands:
-    lint:
-      run: pnpm lint
-      stage_fixed: true
     format:
       run: pnpm format
       stage_fixed: true
+      priority: 2
+    lint:
+      run: pnpm lint
+      stage_fixed: true
+      priority: 3
+    build:
+      run: pnpm build
+      priority: 4
 
 commit-msg:
   commands:

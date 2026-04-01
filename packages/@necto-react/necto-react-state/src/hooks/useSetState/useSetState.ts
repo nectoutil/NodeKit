@@ -15,7 +15,7 @@ import type {
 
 import { useStore } from '../../components/Provider';
 
-import type { UseSetStateOptions } from './useSetState.types';
+import type { SetState, UseSetStateOptions } from './useSetState.types';
 
 /** useSetState(state) — returns a stable setter function */
 export function useSetState<Value, Args extends unknown[], Result>(
