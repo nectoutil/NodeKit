@@ -6,8 +6,8 @@
  *
  */
 
-import type { CSSProperties } from 'react';
 import type { Side } from '@necto/popper';
+import type { CSSProperties } from 'react';
 import type { ArrowProps } from './Arrow.types';
 
 export interface ArrowContextValue extends ArrowProps {

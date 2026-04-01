@@ -1,50 +1,32 @@
 import type { StorybookConfig } from '@storybook/react-vite';
 import path from 'node:path';
+import fs from 'node:fs';
 
 const packagesRoot = path.resolve(__dirname, '../../..');
 
-// Map workspace package names to their source entry points so Vite
-// doesn't resolve to CJS dist/ bundles.
-const workspaceAliases: Record<string, string> = {
-  // @necto-react packages
-  '@necto-react/hooks': path.join(
-    packagesRoot,
-    '@necto-react/necto-react-hooks/src/index.ts'
-  ),
-  '@necto-react/helpers': path.join(
-    packagesRoot,
-    '@necto-react/necto-react-helpers/src/index.ts'
-  ),
-  '@necto-react/popper': path.join(
-    packagesRoot,
-    '@necto-react/necto-react-popper/src/index.ts'
-  ),
-  '@necto-react/types': path.join(
-    packagesRoot,
-    '@necto-react/necto-react-types/src/index.ts'
-  ),
-  '@necto-react/components': path.join(
-    packagesRoot,
-    '@necto-react/necto-react-components/src/index.ts'
-  ),
-  // @necto packages
-  '@necto/dom': path.join(packagesRoot, '@necto/necto-dom/src/index.ts'),
-  '@necto/popper': path.join(packagesRoot, '@necto/necto-popper/src/index.ts'),
-  '@necto/types': path.join(packagesRoot, '@necto/necto-types/src/index.ts'),
-  '@necto/mergers': path.join(
-    packagesRoot,
-    '@necto/necto-mergers/src/index.ts'
-  ),
-  '@necto/platform': path.join(
-    packagesRoot,
-    '@necto/necto-platform/src/index.ts'
-  ),
-  '@necto/strings': path.join(
-    packagesRoot,
-    '@necto/necto-strings/src/index.ts'
-  ),
-  '@necto/id': path.join(packagesRoot, '@necto/necto-id/src/index.ts')
-};
+// Dynamically map all workspace package names to their source entry points
+// so Vite resolves to TS source instead of CJS dist/ bundles.
+function getWorkspaceAliases(): Record<string, string> {
+  const aliases: Record<string, string> = {};
+
+  for (const scope of ['@necto', '@necto-react']) {
+    const scopeDir = path.join(packagesRoot, scope);
+    if (!fs.existsSync(scopeDir)) continue;
+
+    for (const pkg of fs.readdirSync(scopeDir)) {
+      const srcIndex = path.join(scopeDir, pkg, 'src', 'index.ts');
+      if (!fs.existsSync(srcIndex)) continue;
+
+      const pkgJsonPath = path.join(scopeDir, pkg, 'package.json');
+      if (!fs.existsSync(pkgJsonPath)) continue;
+
+      const pkgJson = JSON.parse(fs.readFileSync(pkgJsonPath, 'utf-8'));
+      aliases[pkgJson.name] = srcIndex;
+    }
+  }
+
+  return aliases;
+}
 
 const config: StorybookConfig = {
   stories: [
@@ -66,7 +48,7 @@ const config: StorybookConfig = {
     config.resolve = config.resolve ?? {};
     config.resolve.alias = {
       ...((config.resolve.alias as Record<string, string>) ?? {}),
-      ...workspaceAliases
+      ...getWorkspaceAliases()
     };
     return config;
   }

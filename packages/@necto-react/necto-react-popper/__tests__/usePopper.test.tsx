@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { renderHook, waitFor } from '@testing-library/react';
+import { renderHook, waitFor, act } from '@testing-library/react';
 import { usePopper } from '../src/hooks/usePopper';
 import type { Middleware } from '@necto/popper';
 
@@ -10,9 +10,9 @@ vi.mock('@necto/popper', () => ({
       y: 200,
       placement: 'bottom',
       strategy: 'absolute',
-      middlewareData: {},
+      middlewareData: {}
     })
-  ),
+  )
 }));
 
 describe('usePopper', () => {
@@ -33,12 +33,9 @@ describe('usePopper', () => {
     expect(result.current.floatingStyles).toBeDefined();
   });
 
-  it('should merge custom props with defaults using defu', () => {
+  it('should merge custom props with defaults', () => {
     const { result } = renderHook(() =>
-      usePopper({
-        placement: 'top',
-        strategy: 'fixed',
-      })
+      usePopper({ placement: 'top', strategy: 'fixed' })
     );
 
     expect(result.current.placement).toBe('top');
@@ -52,90 +49,61 @@ describe('usePopper', () => {
     expect(typeof result.current.refs.setFloating).toBe('function');
   });
 
-  it('should provide reference and floating refs', () => {
+  it('should provide reference and floating refs initialized to null', () => {
     const { result } = renderHook(() => usePopper());
 
-    expect(result.current.refs.reference).toBeDefined();
     expect(result.current.refs.reference.current).toBeNull();
-    expect(result.current.refs.floating).toBeDefined();
     expect(result.current.refs.floating.current).toBeNull();
   });
 
-  it('should return transform-based styles by default', () => {
+  it('should return transform-based floatingStyles by default', () => {
     const { result } = renderHook(() => usePopper());
 
-    expect(result.current.floatingStyles).toEqual({
-      position: 'absolute',
-      left: 0,
-      top: 0,
-    });
+    expect(result.current.floatingStyles.position).toBe('absolute');
+    expect(result.current.floatingStyles.left).toBe(0);
+    expect(result.current.floatingStyles.top).toBe(0);
   });
 
-  it('should return position-based styles when transform is false', () => {
-    const { result } = renderHook(() => usePopper({ transform: false }));
+  it('should include visibility hidden when not positioned', () => {
+    const floatingElement = document.createElement('div');
+    const { result } = renderHook(() => usePopper({ floating: floatingElement }));
 
-    expect(result.current.floatingStyles).toEqual({
-      position: 'absolute',
-      left: 0,
-      top: 0,
-    });
-  });
-
-  it('should accept middleware array', () => {
-    const offsetMiddleware: Middleware = {
-      name: 'offset',
-      fn: vi.fn(),
-    };
-
-    const { result } = renderHook(() =>
-      usePopper({
-        middleware: [offsetMiddleware],
-      })
-    );
-
-    expect(result.current).toBeDefined();
-  });
-
-  it('should handle open prop', () => {
-    const { result, rerender } = renderHook(
-      ({ open }) => usePopper({ open }),
-      { initialProps: { open: true } }
-    );
-
-    expect(result.current.isPositioned).toBe(false);
-
-    rerender({ open: false });
-    expect(result.current.isPositioned).toBe(false);
-  });
-
-  it('should provide update function', () => {
-    const { result } = renderHook(() => usePopper());
-
-    expect(typeof result.current.update).toBe('function');
+    expect(result.current.floatingStyles.visibility).toBe('hidden');
   });
 
   it('should accept external reference element', () => {
     const refElement = document.createElement('div');
-
-    const { result } = renderHook(() =>
-      usePopper({
-        reference: refElement,
-      })
-    );
+    const { result } = renderHook(() => usePopper({ reference: refElement }));
 
     expect(result.current.elements.reference).toBe(refElement);
   });
 
   it('should accept external floating element', () => {
     const floatingElement = document.createElement('div');
-
-    const { result } = renderHook(() =>
-      usePopper({
-        floating: floatingElement,
-      })
-    );
+    const { result } = renderHook(() => usePopper({ floating: floatingElement }));
 
     expect(result.current.elements.floating).toBe(floatingElement);
+  });
+
+  it('should call computePosition when both elements are provided', async () => {
+    const { computePosition } = await import('@necto/popper');
+    const refElement = document.createElement('div');
+    const floatingElement = document.createElement('div');
+
+    renderHook(() =>
+      usePopper({ reference: refElement, floating: floatingElement })
+    );
+
+    await waitFor(() => {
+      expect(computePosition).toHaveBeenCalledWith(
+        refElement,
+        floatingElement,
+        expect.objectContaining({
+          placement: 'bottom',
+          strategy: 'absolute'
+        })
+      );
+    });
   });
 
   it('should call whileElementsMounted when both elements are present', async () => {
@@ -148,7 +116,7 @@ describe('usePopper', () => {
       usePopper({
         reference: refElement,
         floating: floatingElement,
-        whileElementsMounted,
+        whileElementsMounted
       })
     );
 
@@ -161,46 +129,72 @@ describe('usePopper', () => {
     });
   });
 
-  it('should memoize refs object', () => {
+  it('should memoize refs object across rerenders', () => {
     const { result, rerender } = renderHook(() => usePopper());
 
     const firstRefs = result.current.refs;
     rerender();
-    const secondRefs = result.current.refs;
 
-    expect(firstRefs).toBe(secondRefs);
+    expect(firstRefs).toBe(result.current.refs);
   });
 
-  it('should memoize elements object', () => {
+  it('should memoize elements object when elements unchanged', () => {
     const refElement = document.createElement('div');
     const floatingElement = document.createElement('div');
 
     const { result, rerender } = renderHook(() =>
-      usePopper({
-        reference: refElement,
-        floating: floatingElement,
-      })
+      usePopper({ reference: refElement, floating: floatingElement })
     );
 
     const firstElements = result.current.elements;
     rerender();
-    const secondElements = result.current.elements;
 
-    expect(firstElements).toBe(secondElements);
+    expect(firstElements).toBe(result.current.elements);
   });
 
   it('should update elements when external elements change', () => {
-    const refElement1 = document.createElement('div');
-    const refElement2 = document.createElement('div');
+    const ref1 = document.createElement('div');
+    const ref2 = document.createElement('div');
 
     const { result, rerender } = renderHook(
       ({ reference }) => usePopper({ reference }),
-      { initialProps: { reference: refElement1 } }
+      { initialProps: { reference: ref1 } }
     );
 
-    expect(result.current.elements.reference).toBe(refElement1);
+    expect(result.current.elements.reference).toBe(ref1);
 
-    rerender({ reference: refElement2 });
-    expect(result.current.elements.reference).toBe(refElement2);
+    rerender({ reference: ref2 });
+    expect(result.current.elements.reference).toBe(ref2);
+  });
+
+  it('should accept middleware array', () => {
+    const mw: Middleware = { name: 'test', fn: vi.fn() };
+    const { result } = renderHook(() => usePopper({ middleware: [mw] }));
+
+    expect(result.current).toBeDefined();
+  });
+
+  it('should handle open=false by setting isPositioned to false', () => {
+    const { result, rerender } = renderHook(
+      ({ open }) => usePopper({ open }),
+      { initialProps: { open: true } }
+    );
+
+    rerender({ open: false });
+    expect(result.current.isPositioned).toBe(false);
+  });
+
+  it('should provide an update function', () => {
+    const { result } = renderHook(() => usePopper());
+    expect(typeof result.current.update).toBe('function');
+  });
+
+  it('should return left/top styles when transform is false', () => {
+    const { result } = renderHook(() => usePopper({ transform: false }));
+
+    expect(result.current.floatingStyles.position).toBe('absolute');
+    expect(result.current.floatingStyles.left).toBe(0);
+    expect(result.current.floatingStyles.top).toBe(0);
+    expect(result.current.floatingStyles.transform).toBeUndefined();
   });
 });

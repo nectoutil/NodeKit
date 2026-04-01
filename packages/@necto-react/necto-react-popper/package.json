@@ -42,6 +42,7 @@
   },
   "dependencies": {
     "@necto-react/hooks": "workspace:*",
+    "@necto-react/state": "workspace:*",
     "@necto-react/types": "workspace:*",
     "@necto/dom": "workspace:*",
     "@necto/popper": "workspace:*",

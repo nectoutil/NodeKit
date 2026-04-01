@@ -112,7 +112,8 @@ const PopperDemo = ({
     <div style={{ padding: '100px' }}>
       <button
         ref={refs.setReference}
-        onClick={() => setIsOpen(!isOpen)}
+        onMouseEnter={() => setIsOpen(true)}
+        onMouseLeave={() => setIsOpen(false)}
         style={{
           padding: '12px 24px',
           backgroundColor: '#0066cc',
@@ -124,7 +125,7 @@ const PopperDemo = ({
           fontWeight: 500
         }}
       >
-        {isOpen ? 'Close' : 'Open'} Popper
+        Hover me
       </button>
 
       {isOpen && (

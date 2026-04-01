@@ -1,11 +1,23 @@
 // biome-ignore-all lint/suspicious/noExplicitAny: Popper hook requires any.
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+
+/**
+ * Copyright (c) Corinvo, LLC. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
 import { defu } from 'defu';
-import { useLatestRef } from '@necto-react/hooks';
+import { flushSync } from 'react-dom';
 import { computePosition } from '@necto/popper';
-import type { UsePopperOptions, UsePopperReturn } from './usePopper.types';
+import { useLatestRef } from '@necto-react/hooks';
+import { useLocalState } from '@necto-react/state';
+import { useMemo, useCallback, useRef, useLayoutEffect } from 'react';
+
+import type { CSSProperties } from 'react';
 import type { ComputePositionResult } from '@necto/popper';
+import type { UsePopperOptions, UsePopperReturn } from './usePopper.types';
 
 function deepEqual(a: any, b: any): boolean {
   if (a === b) return true;
@@ -55,13 +67,13 @@ export function usePopper(options: UsePopperOptions = {}): UsePopperReturn {
     transform: true
   });
 
-  const [latestMiddleware, setLatestMiddleware] = React.useState(middleware);
+  const [latestMiddleware, setLatestMiddleware] = useLocalState(middleware);
 
   if (!deepEqual(latestMiddleware, middleware)) {
     setLatestMiddleware(middleware);
   }
 
-  const [data, setData] = React.useState<
+  const [data, setData] = useLocalState<
     ComputePositionResult & { isPositioned: boolean }
   >({
     x: 0,
@@ -72,27 +84,33 @@ export function usePopper(options: UsePopperOptions = {}): UsePopperReturn {
     isPositioned: false
   });
 
-  const [_reference, _setReference] = React.useState<Element | null>(null);
-  const [_floating, _setFloating] = React.useState<HTMLElement | null>(null);
+  const [_reference, _setReference] = useLocalState<Element | null>(null);
+  const [_floating, _setFloating] = useLocalState<HTMLElement | null>(null);
 
-  const referenceRef = React.useRef<Element | null>(null);
-  const floatingRef = React.useRef<HTMLElement | null>(null);
-  const dataRef = React.useRef(data);
-  const isMountedRef = React.useRef(false);
+  const referenceRef = useRef<Element | null>(null);
+  const floatingRef = useRef<HTMLElement | null>(null);
+  const dataRef = useRef(data);
+  const isMountedRef = useRef(false);
 
-  const setReference = React.useCallback((node: Element | null) => {
-    if (node !== referenceRef.current) {
-      referenceRef.current = node;
-      _setReference(node);
-    }
-  }, []);
+  const setReference = useCallback(
+    (node: Element | null) => {
+      if (node !== referenceRef.current) {
+        referenceRef.current = node;
+        _setReference(node);
+      }
+    },
+    [_setReference]
+  );
 
-  const setFloating = React.useCallback((node: HTMLElement | null) => {
-    if (node !== floatingRef.current) {
-      floatingRef.current = node;
-      _setFloating(node);
-    }
-  }, []);
+  const setFloating = useCallback(
+    (node: HTMLElement | null) => {
+      if (node !== floatingRef.current) {
+        floatingRef.current = node;
+        _setFloating(node);
+      }
+    },
+    [_setFloating]
+  );
 
   const referenceEl = externalReference || _reference;
   const floatingEl = externalFloating || _floating;
@@ -101,7 +119,7 @@ export function usePopper(options: UsePopperOptions = {}): UsePopperReturn {
   const whileElementsMountedRef = useLatestRef(whileElementsMounted);
   const openRef = useLatestRef(open);
 
-  const update = React.useCallback(() => {
+  const update = useCallback(() => {
     if (!referenceRef.current || !floatingRef.current) return;
 
     computePosition(referenceRef.current, floatingRef.current, {
@@ -116,28 +134,28 @@ export function usePopper(options: UsePopperOptions = {}): UsePopperReturn {
 
       if (isMountedRef.current && !deepEqual(dataRef.current, fullData)) {
         dataRef.current = fullData;
-        ReactDOM.flushSync(() => {
+        flushSync(() => {
           setData(fullData);
         });
       }
     });
-  }, [latestMiddleware, placement, strategy, openRef]);
+  }, [latestMiddleware, placement, strategy, openRef, setData]);
 
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     if (open === false && dataRef.current.isPositioned) {
       dataRef.current.isPositioned = false;
       setData((data) => ({ ...data, isPositioned: false }));
     }
-  }, [open]);
+  }, [open, setData]);
 
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     isMountedRef.current = true;
     return () => {
       isMountedRef.current = false;
     };
   }, []);
 
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     if (referenceEl) referenceRef.current = referenceEl;
     if (floatingEl) floatingRef.current = floatingEl;
 
@@ -149,7 +167,7 @@ export function usePopper(options: UsePopperOptions = {}): UsePopperReturn {
     }
   }, [referenceEl, floatingEl, update, whileElementsMountedRef]);
 
-  const refs = React.useMemo(
+  const refs = useMemo(
     () => ({
       reference: referenceRef,
       floating: floatingRef,
@@ -159,13 +177,13 @@ export function usePopper(options: UsePopperOptions = {}): UsePopperReturn {
     [setReference, setFloating]
   );
 
-  const elements = React.useMemo(
+  const elements = useMemo(
     () => ({ reference: referenceEl, floating: floatingEl }),
     [referenceEl, floatingEl]
   );
 
-  const floatingStyles = React.useMemo(() => {
-    const initialStyles: React.CSSProperties = {
+  const floatingStyles = useMemo(() => {
+    const initialStyles: CSSProperties = {
       position: strategy,
       left: 0,
       top: 0
@@ -180,18 +198,27 @@ export function usePopper(options: UsePopperOptions = {}): UsePopperReturn {
       return {
         ...initialStyles,
         transform: `translate(${x}px, ${y}px)`,
-        ...(getDPR(elements.floating) >= 1.5 && { willChange: 'transform' })
+        ...(getDPR(elements.floating) >= 1.5 && { willChange: 'transform' }),
+        ...(!data.isPositioned && { visibility: 'hidden' as const })
       };
     }
 
     return {
       position: strategy,
       left: x,
-      top: y
+      top: y,
+      ...(!data.isPositioned && { visibility: 'hidden' as const })
     };
-  }, [strategy, transform, elements.floating, data.x, data.y]);
+  }, [
+    strategy,
+    transform,
+    elements.floating,
+    data.x,
+    data.y,
+    data.isPositioned
+  ]);
 
-  return React.useMemo(
+  return useMemo(
     () => ({
       ...data,
       update,
