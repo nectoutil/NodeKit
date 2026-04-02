@@ -405,7 +405,7 @@ importers:
         specifier: ^7.26.0
         version: 7.28.5(@babel/core@7.28.5)
       '@rollup/plugin-babel':
-        specifier: ^6.0.4
+        specifier: ^6.1.0
         version: 6.1.0(@babel/core@7.28.5)(@types/babel__core@7.20.5)(rollup@4.53.2)
       '@rollup/plugin-json':
         specifier: ^6.1.0
