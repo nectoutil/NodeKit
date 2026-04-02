@@ -1,5 +1,12 @@
 # @necto-react/state
 
+## 0.2.1
+
+### Patch Changes
+
+- Updated dependencies [675ff23]
+  - @necto/state@0.0.2
+
 ## 0.2.0
 
 ### Minor Changes

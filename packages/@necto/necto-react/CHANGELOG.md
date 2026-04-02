@@ -1,5 +1,11 @@
 # @necto/react
 
+## 1.1.25
+
+### Patch Changes
+
+- @necto-react/popper@0.5.1
+
 ## 1.1.24
 
 ### Patch Changes

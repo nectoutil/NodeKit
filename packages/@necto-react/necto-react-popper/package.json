@@ -1,6 +1,6 @@
 {
   "name": "@necto-react/popper",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "type": "module",
   "description": "Necto's React library for positioning, popovers, tooltips, and floating elements.",
   "scripts": {
