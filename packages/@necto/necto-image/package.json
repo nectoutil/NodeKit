@@ -7,6 +7,11 @@
   },
   "author": "Corinvo OSS Team",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nectoutil/NodeKit",
+    "directory": "packages/@necto/necto-image"
+  },
   "dependencies": {
     "@necto/dom": "workspace:*",
     "@necto/url": "workspace:*"
