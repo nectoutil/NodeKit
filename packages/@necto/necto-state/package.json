@@ -21,6 +21,10 @@
       "require": "./dist/index.cjs"
     }
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nectoutil/NodeKit.git"
+  },
   "author": "Corinvo OSS Team",
   "license": "MIT",
   "devDependencies": {
