@@ -1,5 +1,11 @@
 # @necto-react/popper
 
+## 0.6.0
+
+### Minor Changes
+
+- f4f3a19: Fixed some style errors
+
 ## 0.5.2
 
 ### Patch Changes
