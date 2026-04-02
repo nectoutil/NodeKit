@@ -24,14 +24,21 @@ export function getContainmentRect(
       right: r.right
     };
   } else {
-    // Use fallbackElement if provided, otherwise use global document/window
-    const doc = fallbackElement ? getOwnerDocument(fallbackElement) : document;
-    const win = fallbackElement ? getOwnerWindow(fallbackElement) : window;
+    const doc = fallbackElement
+      ? getOwnerDocument(fallbackElement)
+      : typeof document !== 'undefined'
+        ? document
+        : null;
+    const win = fallbackElement
+      ? getOwnerWindow(fallbackElement)
+      : typeof window !== 'undefined'
+        ? window
+        : null;
     return {
       top: 0,
       left: 0,
-      bottom: win.innerHeight || doc.documentElement.clientHeight,
-      right: win.innerWidth || doc.documentElement.clientWidth
+      bottom: win?.innerHeight || doc?.documentElement?.clientHeight || 0,
+      right: win?.innerWidth || doc?.documentElement?.clientWidth || 0
     };
   }
 }

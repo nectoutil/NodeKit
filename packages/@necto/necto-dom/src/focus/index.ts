@@ -21,15 +21,41 @@ import type { FocusableElement } from '@necto/types';
 /**
  * Focuses the given element without causing the page to scroll.
  * Uses the native preventScroll option if supported, otherwise manually restores scroll positions.
- *
- * @param {FocusableElement} element - The element to focus.
  */
 export function focusWithoutScrolling(element: FocusableElement): void {
   if (supportsPreventScroll()) {
     element.focus({ preventScroll: true });
   } else {
-    const scrollableElements: ScrollableElement[] =
-      getScrollableElements(element);
+    let parent: ParentNode | null = element.parentNode;
+    const scrollableElements: ScrollableElement[] = [];
+    const rootScrollingElement: Element | null =
+      typeof document !== 'undefined'
+        ? document.scrollingElement || document.documentElement
+        : null;
+
+    while (parent instanceof HTMLElement && parent !== rootScrollingElement) {
+      if (
+        parent.offsetHeight < parent.scrollHeight ||
+        parent.offsetWidth < parent.scrollWidth
+      ) {
+        scrollableElements.push({
+          element: parent,
+          scrollTop: parent.scrollTop,
+          scrollLeft: parent.scrollLeft
+        });
+      }
+
+      parent = parent.parentNode;
+    }
+
+    if (rootScrollingElement instanceof HTMLElement) {
+      scrollableElements.push({
+        element: rootScrollingElement,
+        scrollTop: rootScrollingElement.scrollTop,
+        scrollLeft: rootScrollingElement.scrollLeft
+      });
+    }
+
     element.focus();
 
     for (const { element, scrollTop, scrollLeft } of scrollableElements) {
@@ -37,43 +63,4 @@ export function focusWithoutScrolling(element: FocusableElement): void {
       element.scrollLeft = scrollLeft;
     }
   }
-}
-
-/**
- * Returns a list of all scrollable ancestor elements for a given element,
- * including the root scrolling element.
- *
- * @param {FocusableElement} element - The element whose scrollable ancestors are to be found.
- * @returns {ScrollableElement[]} An array of scrollable elements with their scroll positions.
- */
-function getScrollableElements(element: FocusableElement): ScrollableElement[] {
-  let parent: ParentNode | null = element.parentNode;
-  const scrollableElements: ScrollableElement[] = Array.from({ length: 0 });
-  const rootScrollingElement: Element =
-    document.scrollingElement || document.documentElement;
-
-  while (parent instanceof HTMLElement && parent !== rootScrollingElement) {
-    if (
-      parent.offsetHeight < parent.scrollHeight ||
-      parent.offsetWidth < parent.scrollWidth
-    ) {
-      scrollableElements.push({
-        element: parent,
-        scrollTop: parent.scrollTop,
-        scrollLeft: parent.scrollLeft
-      });
-    }
-
-    parent = parent.parentNode;
-  }
-
-  if (rootScrollingElement instanceof HTMLElement) {
-    scrollableElements.push({
-      element: rootScrollingElement,
-      scrollTop: rootScrollingElement.scrollTop,
-      scrollLeft: rootScrollingElement.scrollLeft
-    });
-  }
-
-  return scrollableElements;
 }

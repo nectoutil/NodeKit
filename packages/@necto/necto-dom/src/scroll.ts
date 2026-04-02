@@ -19,16 +19,19 @@ let supportsPreventScrollCached: boolean | null = null;
 export function supportsPreventScroll(): boolean {
   if (supportsPreventScrollCached == null) {
     supportsPreventScrollCached = false;
-    try {
-      const focusElement: HTMLDivElement = document.createElement('div');
-      focusElement.focus({
-        get preventScroll(): boolean {
-          supportsPreventScrollCached = true;
-          return true;
-        }
-      });
-    } catch {
-      // Ignore
+
+    if (typeof document !== 'undefined') {
+      try {
+        const focusElement: HTMLDivElement = document.createElement('div');
+        focusElement.focus({
+          get preventScroll(): boolean {
+            supportsPreventScrollCached = true;
+            return true;
+          }
+        });
+      } catch {
+        // Ignore
+      }
     }
   }
 
