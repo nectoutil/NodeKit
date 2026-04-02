@@ -1,5 +1,12 @@
 # @necto/image
 
+## 1.0.15
+
+### Patch Changes
+
+- Updated dependencies [595c9b6]
+  - @necto/dom@1.9.0
+
 ## 1.0.14
 
 ### Patch Changes
