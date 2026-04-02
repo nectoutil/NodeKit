@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) Corinvo, LLC. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 // biome-ignore-all lint/correctness/noUnusedVariables: Polymorphic props destructuring.
 // biome-ignore-all lint/suspicious/noExplicitAny: Polymorphic component requires any for dynamic element types.
 /**

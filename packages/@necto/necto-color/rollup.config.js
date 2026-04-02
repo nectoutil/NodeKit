@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) Corinvo, LLC. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import copy from 'rollup-plugin-copy';
 import json from '@rollup/plugin-json';
 import babel from '@rollup/plugin-babel';
