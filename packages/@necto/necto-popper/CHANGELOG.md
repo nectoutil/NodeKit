@@ -1,5 +1,24 @@
 # @necto/popper
 
+## 0.5.1
+
+### Patch Changes
+
+- 40c54dc: Fix SSR compatibility: guard all `document` and `window` references with `typeof` checks to prevent `ReferenceError: document is not defined` during server-side rendering.
+
+  - `getOwnerDocument` returns `null` instead of crashing when `document` is undefined
+  - `getOwnerWindow` returns `null` instead of crashing when `window` is undefined
+  - `getActiveElement` returns `null` in SSR environments
+  - `supportsPreventScroll` returns `false` in SSR without accessing `document`
+  - `focusWithoutScrolling` guards `document.scrollingElement` access
+  - `getContainmentRect` returns zero rect in SSR
+  - `createStyleElement` returns early in SSR
+  - Merged `focusWithoutScrolling` and `getScrollableElements` into a single function
+  - Changed barrel exports to use `export *` for all modules
+
+- Updated dependencies [40c54dc]
+  - @necto/dom@1.7.3
+
 ## 0.5.0
 
 ### Minor Changes
