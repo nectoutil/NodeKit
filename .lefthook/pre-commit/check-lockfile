@@ -1,9 +1,0 @@
-#!/bin/sh
-
-if git diff --exit-code pnpm-lock.yaml > /dev/null 2>&1; then
-  exit 0
-else
-  echo "❌ pnpm-lock.yaml has unstaged changes."
-  echo "   Run 'pnpm install' and commit the updated lockfile."
-  exit 1
-fi

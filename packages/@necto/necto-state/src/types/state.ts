@@ -1,3 +1,5 @@
+// biome-ignore-all lint/suspicious/noConfusingVoidType: void is intentional in callback return types.
+
 /**
  * Copyright (c) Corinvo, LLC. and affiliates.
  *

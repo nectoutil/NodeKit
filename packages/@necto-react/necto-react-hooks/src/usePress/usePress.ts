@@ -12,6 +12,7 @@ import {
   restoreTextSelection
 } from '@necto/dom';
 import { useState, useRef, useCallback, useEffect, useMemo } from 'react';
+import { useStyleInjection } from '../useStyleInjection';
 
 import type { PointerType, PressEvent } from '@necto/types';
 import type { UsePressProps, UsePressReturn } from './usePress.types';
@@ -52,6 +53,7 @@ export function usePress(props: UsePressProps = {}): UsePressReturn {
     isDisabled,
     preventFocusOnPress,
     allowTextSelectionOnPress,
+    styleInjection = 'global',
     ref: domRef,
 
     // Callbacks
@@ -62,6 +64,16 @@ export function usePress(props: UsePressProps = {}): UsePressReturn {
     onPressUp,
     onClick
   } = props;
+
+  useStyleInjection({
+    id: 'necto-pressable',
+    css: `@layer {
+      [data-necto-pressable] {
+        touch-action: pan-x pan-y pinch-zoom;
+      }
+    }`,
+    enabled: styleInjection === 'global'
+  });
 
   const [isPressed, setPressed] = useState(false);
   const ignoreEmulatedMouseEvents = useRef(false);
@@ -437,7 +449,8 @@ export function usePress(props: UsePressProps = {}): UsePressReturn {
       onTouchEnd,
       onKeyDown,
       onKeyUp,
-      onClick: onClickHandler
+      onClick: onClickHandler,
+      ...(styleInjection === 'global' && { 'data-necto-pressable': '' })
     }),
     [
       onMouseDown,
@@ -448,11 +461,16 @@ export function usePress(props: UsePressProps = {}): UsePressReturn {
       onTouchEnd,
       onKeyDown,
       onKeyUp,
-      onClickHandler
+      onClickHandler,
+      styleInjection
     ]
   );
 
   useEffect(() => {
+    if (styleInjection === 'global') {
+      return;
+    }
+
     const element = domRef?.current;
     const ownerWin = element ? getOwnerWindow(element) : undefined;
     if (element && ownerWin && element instanceof ownerWin.Element) {
@@ -461,7 +479,7 @@ export function usePress(props: UsePressProps = {}): UsePressReturn {
         (element as HTMLElement).style.touchAction = 'pan-x pan-y pinch-zoom';
       }
     }
-  }, [domRef]);
+  }, [domRef, styleInjection]);
 
   return { pressProps, isPressed };
 }

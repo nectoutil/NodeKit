@@ -1,4 +1,3 @@
-// biome-ignore-all lint/complexity/noBannedTypes: Function type is intentional for generic event handlers.
 /**
  * Copyright (c) Corinvo, LLC. and affiliates.
  *
@@ -8,9 +7,14 @@
  */
 
 import { useMemo } from 'react';
+import { mergeProps, mergeRefs } from '@necto/mergers';
 
+import type { Ref } from 'react';
 import type { ElementProps } from '../types';
-import type { InteractionReturn, UseInteractionsReturn } from './types';
+import type {
+  InteractionReturn,
+  UseInteractionsReturn
+} from './useInteractions.types';
 
 /**
  * Merges multiple interaction hooks into unified prop getters.
@@ -24,45 +28,23 @@ export function useInteractions(
     Boolean
   ) as InteractionReturn[];
 
-  const mergeProps = useMemo(() => {
+  const buildProps = useMemo(() => {
     return (
       key: 'reference' | 'floating' | 'item',
       userProps?: ElementProps
     ): ElementProps => {
-      const merged: ElementProps = { ...userProps };
+      const allProps = filteredInteractions
+        .map((interaction) => interaction[key])
+        .filter(Boolean) as ElementProps[];
 
-      for (const interaction of filteredInteractions) {
-        const props = interaction[key];
-        if (!props) continue;
+      const refs = [userProps?.ref, ...allProps.map((p) => p.ref)].filter(
+        Boolean
+      ) as Ref<unknown>[];
 
-        for (const [propKey, propValue] of Object.entries(props)) {
-          if (propKey === 'ref') {
-            const existingRef = merged.ref;
-            if (existingRef) {
-              merged.ref = (node: Element | null) => {
-                if (typeof existingRef === 'function') existingRef(node);
-                if (typeof propValue === 'function') propValue(node);
-              };
-            } else {
-              merged.ref = propValue;
-            }
-          } else if (
-            propKey.startsWith('on') &&
-            typeof propValue === 'function'
-          ) {
-            const existingHandler = merged[propKey];
-            if (typeof existingHandler === 'function') {
-              merged[propKey] = (...args: unknown[]) => {
-                (propValue as Function)(...args);
-                (existingHandler as Function)(...args);
-              };
-            } else {
-              merged[propKey] = propValue;
-            }
-          } else {
-            merged[propKey] = propValue;
-          }
-        }
+      const merged = mergeProps(userProps ?? {}, ...allProps);
+
+      if (refs.length > 0) {
+        merged.ref = mergeRefs(...refs);
       }
 
       return merged;
@@ -70,16 +52,19 @@ export function useInteractions(
   }, [filteredInteractions]);
 
   const getReferenceProps = useMemo(() => {
-    return (userProps?: ElementProps) => mergeProps('reference', userProps);
-  }, [mergeProps]);
+    return (userProps?: ElementProps): ElementProps =>
+      buildProps('reference', userProps);
+  }, [buildProps]);
 
   const getFloatingProps = useMemo(() => {
-    return (userProps?: ElementProps) => mergeProps('floating', userProps);
-  }, [mergeProps]);
+    return (userProps?: ElementProps): ElementProps =>
+      buildProps('floating', userProps);
+  }, [buildProps]);
 
   const getItemProps = useMemo(() => {
-    return (userProps?: ElementProps) => mergeProps('item', userProps);
-  }, [mergeProps]);
+    return (userProps?: ElementProps): ElementProps =>
+      buildProps('item', userProps);
+  }, [buildProps]);
 
   return {
     getReferenceProps,

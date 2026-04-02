@@ -41,26 +41,3 @@ export interface UsePopperPortalReturn {
    */
   portalId: string;
 }
-
-export interface PopperPortalProps {
-  /**
-   * Custom portal ID.
-   */
-  id?: string;
-
-  /**
-   * Custom root element.
-   */
-  root?: HTMLElement | null;
-
-  /**
-   * Whether to preserve tab order.
-   * @default true
-   */
-  preserveTabOrder?: boolean;
-
-  /**
-   * Children to render in the portal.
-   */
-  children: React.ReactNode;
-}

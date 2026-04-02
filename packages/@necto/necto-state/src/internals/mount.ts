@@ -1,3 +1,6 @@
+// biome-ignore-all lint/suspicious/noExplicitAny: Explicit any is required for generic state handling.
+// biome-ignore-all lint/style/noNonNullAssertion: Non-null assertions are intentional in state internals.
+
 /**
  * Copyright (c) Corinvo, LLC. and affiliates.
  *

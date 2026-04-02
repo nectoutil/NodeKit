@@ -6,9 +6,5 @@
  *
  */
 
-export { useInteractions } from './useInteractions';
-
-export type {
-  InteractionReturn,
-  UseInteractionsReturn
-} from './useInteractions.types';
+export * from './useTransitionStyles';
+export type * from './useTransitionStyles.types';

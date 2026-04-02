@@ -274,6 +274,9 @@ importers:
 
   packages/@necto-react/necto-react-popper:
     dependencies:
+      '@necto-react/components':
+        specifier: workspace:*
+        version: link:../necto-react-components
       '@necto-react/hooks':
         specifier: workspace:*
         version: link:../necto-react-hooks
@@ -286,6 +289,9 @@ importers:
       '@necto/dom':
         specifier: workspace:*
         version: link:../../@necto/necto-dom
+      '@necto/mergers':
+        specifier: workspace:*
+        version: link:../../@necto/necto-mergers
       '@necto/popper':
         specifier: workspace:*
         version: link:../../@necto/necto-popper
@@ -603,31 +609,18 @@ importers:
       '@necto-react/components':
         specifier: workspace:*
         version: link:../../@necto-react/necto-react-components
+      '@necto-react/helpers':
+        specifier: workspace:*
+        version: link:../../@necto-react/necto-react-helpers
       '@necto-react/hooks':
         specifier: workspace:*
         version: link:../../@necto-react/necto-react-hooks
       '@necto-react/popper':
         specifier: workspace:*
         version: link:../../@necto-react/necto-react-popper
-    devDependencies:
-      '@storybook/addon-essentials':
-        specifier: ^8.6.14
-        version: 8.6.14(@types/react@19.1.2)(storybook@8.6.14(prettier@2.8.8))
-      '@storybook/addon-interactions':
-        specifier: ^8.6.14
-        version: 8.6.14(storybook@8.6.14(prettier@2.8.8))
-      '@storybook/addon-links':
-        specifier: ^8.6.14
-        version: 8.6.14(react@19.2.0)(storybook@8.6.14(prettier@2.8.8))
-      '@storybook/react':
-        specifier: ^8.6.14
-        version: 8.6.14(@storybook/test@8.6.14(storybook@8.6.14(prettier@2.8.8)))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(storybook@8.6.14(prettier@2.8.8))(typescript@5.9.3)
-      '@storybook/react-vite':
-        specifier: ^8.6.14
-        version: 8.6.14(@storybook/test@8.6.14(storybook@8.6.14(prettier@2.8.8)))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(rollup@4.53.2)(storybook@8.6.14(prettier@2.8.8))(typescript@5.9.3)(vite@7.2.2(@types/node@22.19.0)(jiti@2.6.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.1))
-      storybook:
-        specifier: ^8.6.14
-        version: 8.6.14(prettier@2.8.8)
+      '@necto-react/state':
+        specifier: workspace:*
+        version: link:../../@necto-react/necto-react-state
 
   packages/@necto/necto-state:
     devDependencies:

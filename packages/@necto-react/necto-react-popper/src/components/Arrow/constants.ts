@@ -6,9 +6,4 @@
  *
  */
 
-export { useInteractions } from './useInteractions';
-
-export type {
-  InteractionReturn,
-  UseInteractionsReturn
-} from './useInteractions.types';
+export const ARROW_NAME: string = 'Arrow' as const;

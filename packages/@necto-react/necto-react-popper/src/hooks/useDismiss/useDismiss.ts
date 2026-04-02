@@ -6,10 +6,11 @@
  *
  */
 
-import { useRef, useCallback, useEffect, useMemo } from 'react';
 import { getOwnerDocument, nodeContains } from '@necto/dom';
+import { useRef, useCallback, useEffect, useMemo } from 'react';
 
-import type { UseDismissOptions, UseDismissReturn } from './types';
+import type { RefObject } from 'react';
+import type { UseDismissOptions, UseDismissReturn } from './useDismiss.types';
 
 /**
  * Provides dismiss interaction (outside click, escape key) for floating elements.
@@ -19,41 +20,51 @@ import type { UseDismissOptions, UseDismissReturn } from './types';
 export function useDismiss(options: UseDismissOptions): UseDismissReturn {
   const {
     open,
-    onOpenChange,
     enabled = true,
+    bubbles = false,
     escapeKey = true,
     outsidePress = true,
     referencePress = false,
     ancestorScroll = false,
-    bubbles = false
+
+    // Callbacks
+    onOpenChange
   } = options;
 
-  const referenceRef = useRef<Element | null>(null);
-  const floatingRef = useRef<HTMLElement | null>(null);
-  const insideTreeRef = useRef(false);
+  const insideTreeRef: RefObject<boolean> = useRef(false);
+  const referenceRef: RefObject<Element | null> = useRef<Element | null>(null);
+  const floatingRef: RefObject<HTMLElement | null> = useRef<HTMLElement | null>(
+    null
+  );
 
-  const escapeKeyBubbles =
+  const escapeKeyBubbles: boolean =
     typeof bubbles === 'boolean' ? bubbles : (bubbles.escapeKey ?? false);
-  const outsidePressBubbles =
+  const outsidePressBubbles: boolean =
     typeof bubbles === 'boolean' ? bubbles : (bubbles.outsidePress ?? false);
 
-  const closeOnEscapeKey = useCallback(
-    (event: KeyboardEvent) => {
-      if (!open || !escapeKey) return;
+  const closeOnEscapeKey: (event: KeyboardEvent) => void = useCallback(
+    (event: KeyboardEvent): void => {
+      if (!open || !escapeKey) {
+        return;
+      }
 
       if (event.key === 'Escape') {
         if (!escapeKeyBubbles) {
           event.stopPropagation();
         }
+
         onOpenChange(false);
       }
     },
     [open, escapeKey, escapeKeyBubbles, onOpenChange]
   );
 
-  const closeOnOutsidePress = useCallback(
-    (event: MouseEvent) => {
-      if (!open) return;
+  const closeOnOutsidePress: (event: MouseEvent) => void = useCallback(
+    (event: MouseEvent): void => {
+      if (!open) {
+        return;
+      }
+
       if (insideTreeRef.current) {
         insideTreeRef.current = false;
         return;
@@ -62,7 +73,9 @@ export function useDismiss(options: UseDismissOptions): UseDismissReturn {
       const target = event.target as Element;
 
       if (referenceRef.current && nodeContains(referenceRef.current, target)) {
-        if (!referencePress) return;
+        if (!referencePress) {
+          return;
+        }
       }
 
       if (floatingRef.current && nodeContains(floatingRef.current, target)) {
@@ -85,24 +98,26 @@ export function useDismiss(options: UseDismissOptions): UseDismissReturn {
   useEffect(() => {
     if (!enabled || !open) return;
 
-    const doc = getOwnerDocument(floatingRef.current);
-    if (!doc) return;
+    const _document: Document = getOwnerDocument(floatingRef.current);
+    if (!_document) {
+      return;
+    }
 
     if (escapeKey) {
-      doc.addEventListener('keydown', closeOnEscapeKey);
+      _document.addEventListener('keydown', closeOnEscapeKey);
     }
 
     if (outsidePress) {
-      doc.addEventListener('mousedown', closeOnOutsidePress);
+      _document.addEventListener('mousedown', closeOnOutsidePress);
     }
 
-    return () => {
-      doc.removeEventListener('keydown', closeOnEscapeKey);
-      doc.removeEventListener('mousedown', closeOnOutsidePress);
+    return (): void => {
+      _document.removeEventListener('keydown', closeOnEscapeKey);
+      _document.removeEventListener('mousedown', closeOnOutsidePress);
     };
   }, [
-    enabled,
     open,
+    enabled,
     escapeKey,
     outsidePress,
     closeOnEscapeKey,
@@ -110,45 +125,53 @@ export function useDismiss(options: UseDismissOptions): UseDismissReturn {
   ]);
 
   useEffect(() => {
-    if (!enabled || !open || !ancestorScroll) return;
+    if (!enabled || !open || !ancestorScroll) {
+      return;
+    }
 
     const scrollHandler = () => {
       onOpenChange(false);
     };
 
-    const reference = referenceRef.current;
-    if (!reference) return;
+    const reference: Element | null = referenceRef.current;
+    if (!reference) {
+      return;
+    }
 
-    let current: Element | null = reference.parentElement;
     const cleanup: (() => void)[] = [];
+    let current: Element | null = reference.parentElement;
 
     while (current) {
       current.addEventListener('scroll', scrollHandler);
-      const el = current;
-      cleanup.push(() => el.removeEventListener('scroll', scrollHandler));
+      const element: Element = current;
+      cleanup.push(() => element.removeEventListener('scroll', scrollHandler));
       current = current.parentElement;
     }
 
     window.addEventListener('scroll', scrollHandler);
     cleanup.push(() => window.removeEventListener('scroll', scrollHandler));
 
-    return () => {
+    return (): void => {
       cleanup.forEach((fn) => fn());
     };
   }, [enabled, open, ancestorScroll, onOpenChange]);
 
   const reference = useMemo(() => {
-    if (!enabled) return {};
+    if (!enabled) {
+      return {};
+    }
 
     return {
-      ref: (node: Element | null) => {
+      ref: (node: Element | null): void => {
         referenceRef.current = node;
       }
     };
   }, [enabled]);
 
   const floating = useMemo(() => {
-    if (!enabled) return {};
+    if (!enabled) {
+      return {};
+    }
 
     return {
       ref: (node: HTMLElement | null) => {

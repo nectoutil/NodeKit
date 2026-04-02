@@ -7,10 +7,10 @@
  */
 
 import type {
-  CSSProperties,
-  HTMLAttributes,
   ReactNode,
-  RefObject
+  RefObject,
+  CSSProperties,
+  HTMLAttributes
 } from 'react';
 import type { Side } from '@necto/popper';
 
@@ -27,4 +27,5 @@ export interface ArrowProps
   children?: ReactNode | ((renderProps: ArrowRenderProps) => ReactNode);
   style?: CSSProperties;
   className?: string;
+  placement: Side | null;
 }

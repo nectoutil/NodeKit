@@ -7,7 +7,12 @@
  */
 
 export interface CreateStyleElementOptions {
+  /** Internal necto tracking ID. Used as the `necto-style-id` attribute. */
   id?: string;
+
+  /** User-facing HTML `id` attribute on the `<style>` element. */
+  elementId?: string;
+
   insertionPoint?: HTMLElement | null;
 }
 

@@ -12,3 +12,4 @@ export * from './useRole';
 export * from './useDismiss';
 export * from './useInteractions';
 export * from './useTransitionStatus';
+export * from './useTransitionStyles';

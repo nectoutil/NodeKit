@@ -1,3 +1,5 @@
+// biome-ignore-all lint/style/noNonNullAssertion: Non-null assertions are intentional in state internals.
+
 /**
  * Copyright (c) Corinvo, LLC. and affiliates.
  *

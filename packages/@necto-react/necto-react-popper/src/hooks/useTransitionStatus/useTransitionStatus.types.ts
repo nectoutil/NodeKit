@@ -6,8 +6,6 @@
  *
  */
 
-import type { CSSProperties } from 'react';
-
 export type TransitionStatus = 'unmounted' | 'initial' | 'open' | 'close';
 
 export interface UseTransitionStatusOptions {
@@ -33,33 +31,4 @@ export interface UseTransitionStatusReturn {
    * The current transition status.
    */
   status: TransitionStatus;
-}
-
-export interface UseTransitionStylesOptions extends UseTransitionStatusOptions {
-  /**
-   * Initial styles when opening.
-   */
-  initial?: CSSProperties;
-
-  /**
-   * Styles when open.
-   */
-  openStyles?: CSSProperties;
-
-  /**
-   * Styles when closing.
-   */
-  closeStyles?: CSSProperties;
-
-  /**
-   * Common styles applied to all states.
-   */
-  common?: CSSProperties;
-}
-
-export interface UseTransitionStylesReturn extends UseTransitionStatusReturn {
-  /**
-   * Styles to apply based on current status.
-   */
-  styles: CSSProperties;
 }
