@@ -46,10 +46,7 @@ const ArrowFn = (props: ArrowProps, ref: Ref<HTMLDivElement>): ReactElement => {
     'start' | 'end' | undefined
   ];
 
-  // SVG default points down. Rotation transforms flip it per placement.
-  // translateY/X pushes the arrow outside the tooltip content edge.
   let svgTransform: string | undefined;
-
   switch (side) {
     case 'top':
     case 'bottom': {
