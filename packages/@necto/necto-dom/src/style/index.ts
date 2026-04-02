@@ -15,9 +15,12 @@ import type {
 } from './types';
 
 const STYLE_ATTRIBUTE = 'necto-style-id';
-const DEFAULT_ID = 'necto-style';
 
 const windowStylesMap = new WeakMap<Window, StyleMap>();
+
+function generateInternalId(): string {
+  return `ncto-<:${Math.random().toString(36).slice(2, 9)}:>`;
+}
 
 function getStyleMap(targetWindow: Window): StyleMap {
   let map = windowStylesMap.get(targetWindow);
@@ -32,7 +35,7 @@ function createStyleElement(
   css: string,
   options: CreateStyleElementOptions = {}
 ): HTMLStyleElement {
-  const { id = DEFAULT_ID, elementId, insertionPoint } = options;
+  const { id, internalId, insertionPoint } = options;
   const doc = insertionPoint
     ? getOwnerDocument(insertionPoint)
     : typeof document !== 'undefined'
@@ -42,10 +45,10 @@ function createStyleElement(
 
   const style = doc.createElement('style');
   style.setAttribute('type', 'text/css');
-  style.setAttribute(STYLE_ATTRIBUTE, id);
+  style.setAttribute(STYLE_ATTRIBUTE, internalId ?? generateInternalId());
 
-  if (elementId) {
-    style.id = elementId;
+  if (id) {
+    style.id = id;
   }
 
   style.textContent = css;
@@ -64,8 +67,7 @@ export function injectStyle(
   options: InjectStyleOptions = {}
 ): () => void {
   const {
-    id = DEFAULT_ID,
-    elementId,
+    id,
     window: targetWindow = typeof window !== 'undefined' ? window : null,
     insertionPoint
   } = options;
@@ -73,12 +75,13 @@ export function injectStyle(
   if (!targetWindow || !css) return () => {};
 
   const styleMap = getStyleMap(targetWindow);
-  const key = `${id}:${css}`;
+  const key = `${id ?? 'necto'}:${css}`;
   let entry = styleMap.get(key);
 
   if (!entry) {
+    const internalId = generateInternalId();
     entry = {
-      element: createStyleElement(css, { id, elementId, insertionPoint }),
+      element: createStyleElement(css, { id, internalId, insertionPoint }),
       count: 1
     };
     styleMap.set(key, entry);

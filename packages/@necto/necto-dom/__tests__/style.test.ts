@@ -26,39 +26,31 @@ describe('injectStyle', () => {
     cleanup();
   });
 
-  it('should set necto-style-id attribute with the provided id', () => {
-    const cleanup = injectStyle('.test {}', { id: 'my-component' });
-
-    const style = document.querySelector('style[necto-style-id="my-component"]');
-    expect(style).not.toBeNull();
-
-    cleanup();
-  });
-
-  it('should set default necto-style-id when no id is provided', () => {
+  it('should auto-generate a necto-style-id with ncto- prefix', () => {
     const cleanup = injectStyle('.test {}');
 
-    const style = document.querySelector('style[necto-style-id="necto-style"]');
+    const style = document.querySelector('style[necto-style-id]');
     expect(style).not.toBeNull();
+    expect(style?.getAttribute('necto-style-id')).toMatch(/^ncto-<:[a-z0-9]+:>$/);
 
     cleanup();
   });
 
-  it('should set the HTML id attribute when elementId is provided', () => {
-    const cleanup = injectStyle('.test {}', { id: 'internal', elementId: 'user-facing-id' });
+  it('should set the HTML id attribute when id is provided', () => {
+    const cleanup = injectStyle('.test {}', { id: 'my-component' });
 
-    const style = document.querySelector('style#user-facing-id');
+    const style = document.querySelector('style#my-component');
     expect(style).not.toBeNull();
-    expect(style?.getAttribute('necto-style-id')).toBe('internal');
-    expect(style?.id).toBe('user-facing-id');
+    expect(style?.id).toBe('my-component');
+    expect(style?.getAttribute('necto-style-id')).toMatch(/^ncto-<:/);
 
     cleanup();
   });
 
-  it('should not set HTML id when elementId is not provided', () => {
-    const cleanup = injectStyle('.test {}', { id: 'internal' });
+  it('should not set HTML id when id is not provided', () => {
+    const cleanup = injectStyle('.test {}');
 
-    const style = document.querySelector('style[necto-style-id="internal"]');
+    const style = document.querySelector('style[necto-style-id]');
     expect(style).not.toBeNull();
     expect(style?.id).toBe('');
 
@@ -69,34 +61,32 @@ describe('injectStyle', () => {
     const cleanup1 = injectStyle('.test {}', { id: 'shared' });
     const cleanup2 = injectStyle('.test {}', { id: 'shared' });
 
-    const styles = document.querySelectorAll('style[necto-style-id="shared"]');
+    const styles = document.querySelectorAll('style#shared');
     expect(styles.length).toBe(1);
 
     cleanup1();
-    // Style should still exist after first cleanup (refcount = 1)
-    expect(document.querySelector('style[necto-style-id="shared"]')).not.toBeNull();
+    expect(document.querySelector('style#shared')).not.toBeNull();
 
     cleanup2();
-    // Style should be removed after second cleanup (refcount = 0)
-    expect(document.querySelector('style[necto-style-id="shared"]')).toBeNull();
+    expect(document.querySelector('style#shared')).toBeNull();
   });
 
   it('should remove the style element when all references are cleaned up', () => {
     const cleanup = injectStyle('.test { color: blue; }', { id: 'removable' });
 
-    expect(document.querySelector('style[necto-style-id="removable"]')).not.toBeNull();
+    expect(document.querySelector('style#removable')).not.toBeNull();
 
     cleanup();
 
-    expect(document.querySelector('style[necto-style-id="removable"]')).toBeNull();
+    expect(document.querySelector('style#removable')).toBeNull();
   });
 
   it('should return a no-op cleanup when css is empty', () => {
-    const cleanup = injectStyle('', { id: 'empty' });
+    const cleanup = injectStyle('');
 
-    expect(document.querySelector('style[necto-style-id="empty"]')).toBeNull();
+    expect(document.querySelector('style[necto-style-id]')).toBeNull();
 
-    cleanup(); // should not throw
+    cleanup();
   });
 
   it('should set type attribute to text/css', () => {
@@ -108,18 +98,30 @@ describe('injectStyle', () => {
     cleanup();
   });
 
-  it('should have both necto-style-id and id attributes when both are provided', () => {
-    const cleanup = injectStyle('.btn { padding: 8px; }', {
-      id: 'necto-pressable',
-      elementId: 'pressable-styles'
-    });
+  it('should have both necto-style-id and id attributes', () => {
+    const cleanup = injectStyle('.btn { padding: 8px; }', { id: 'necto-pressable' });
 
-    const style = document.querySelector('style#pressable-styles');
+    const style = document.querySelector('style#necto-pressable');
     expect(style).not.toBeNull();
-    expect(style?.getAttribute('necto-style-id')).toBe('necto-pressable');
-    expect(style?.id).toBe('pressable-styles');
+    expect(style?.getAttribute('necto-style-id')).toMatch(/^ncto-<:/);
+    expect(style?.id).toBe('necto-pressable');
     expect(style?.textContent).toBe('.btn { padding: 8px; }');
 
     cleanup();
+  });
+
+  it('should generate unique internal ids for different css strings', () => {
+    const cleanup1 = injectStyle('.a {}');
+    const cleanup2 = injectStyle('.b {}');
+
+    const styles = document.querySelectorAll('style[necto-style-id]');
+    expect(styles.length).toBe(2);
+
+    const id1 = styles[0]?.getAttribute('necto-style-id');
+    const id2 = styles[1]?.getAttribute('necto-style-id');
+    expect(id1).not.toBe(id2);
+
+    cleanup1();
+    cleanup2();
   });
 });

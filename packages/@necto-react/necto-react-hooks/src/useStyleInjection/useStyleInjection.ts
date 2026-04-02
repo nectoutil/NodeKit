@@ -18,7 +18,6 @@ import type { UseStyleInjectionOptions } from './useStyleInjection.types';
  */
 export function useStyleInjection({
   id,
-  elementId,
   css,
   insertionPoint,
   enabled = true,
@@ -31,9 +30,8 @@ export function useStyleInjection({
 
     return injectStyle(cssString, {
       id,
-      elementId,
       window: targetWindow,
       insertionPoint
     });
-  }, [id, elementId, cssString, targetWindow, insertionPoint, enabled]);
+  }, [id, cssString, targetWindow, insertionPoint, enabled]);
 }
