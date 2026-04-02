@@ -12,18 +12,33 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      pull-requests: write
 
     steps:
+      - name: Generate GitHub App token
+        id: generate_token
+        uses: tibdex/github-app-token@v2
+        with:
+          app_id: ${{ secrets.NECTO_BOT_ID }}
+          private_key: ${{ secrets.NECTO_BOT_KEY }}
+
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          token: ${{ steps.generate_token.outputs.token }}
 
       - name: Fix License Header
         uses: apache/skywalking-eyes/header@main
         with:
           mode: fix
 
-      - name: Apply Changes
-        uses: stefanzweifel/git-auto-commit-action@v5
+      - name: Create PR with license headers
+        uses: peter-evans/create-pull-request@v7
         with:
-          commit_message: 'chore: add license headers'
-          commit_author: 'License Bot <license_bot@github.com>'
+          token: ${{ steps.generate_token.outputs.token }}
+          commit-message: 'chore: add license headers'
+          title: 'chore: add license headers'
+          body: 'Automated PR to add missing license headers to source files.'
+          branch: chore/license-headers
+          delete-branch: true
+          labels: automerge
