@@ -14,7 +14,7 @@ import type {
   StyleMap
 } from './types';
 
-const STYLE_ATTRIBUTE = 'necto-style-id';
+const STYLE_ATTRIBUTE = 'data-style-id';
 
 const windowStylesMap = new WeakMap<Window, StyleMap>();
 

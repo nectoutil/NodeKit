@@ -67,11 +67,13 @@ export function usePress(props: UsePressProps = {}): UsePressReturn {
 
   useStyleInjection({
     id: 'necto-pressable',
-    css: `@layer {
-      [data-necto-pressable] {
-        touch-action: pan-x pan-y pinch-zoom;
-      }
-    }`,
+    css: [
+      '@layer {',
+      '  [data-necto-pressable] {',
+      '    touch-action: pan-x pan-y pinch-zoom;',
+      '  }',
+      '}'
+    ].join('\n'),
     enabled: styleInjection === 'global'
   });
 

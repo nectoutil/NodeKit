@@ -19,19 +19,19 @@ describe('injectStyle', () => {
   it('should inject a style element into the head', () => {
     const cleanup = injectStyle('.test { color: red; }');
 
-    const style = document.querySelector('style[necto-style-id]');
+    const style = document.querySelector('style[data-style-id]');
     expect(style).not.toBeNull();
     expect(style?.textContent).toBe('.test { color: red; }');
 
     cleanup();
   });
 
-  it('should auto-generate a necto-style-id with ncto- prefix', () => {
+  it('should auto-generate a data-style-id with necto- prefix', () => {
     const cleanup = injectStyle('.test {}');
 
-    const style = document.querySelector('style[necto-style-id]');
+    const style = document.querySelector('style[data-style-id]');
     expect(style).not.toBeNull();
-    expect(style?.getAttribute('necto-style-id')).toMatch(/^ncto-<:[a-z0-9]+:>$/);
+    expect(style?.getAttribute('data-style-id')).toMatch(/^necto-<:[a-z0-9]+:>$/);
 
     cleanup();
   });
@@ -42,7 +42,7 @@ describe('injectStyle', () => {
     const style = document.querySelector('style#my-component');
     expect(style).not.toBeNull();
     expect(style?.id).toBe('my-component');
-    expect(style?.getAttribute('necto-style-id')).toMatch(/^ncto-<:/);
+    expect(style?.getAttribute('data-style-id')).toMatch(/^necto-<:/);
 
     cleanup();
   });
@@ -50,7 +50,7 @@ describe('injectStyle', () => {
   it('should not set HTML id when id is not provided', () => {
     const cleanup = injectStyle('.test {}');
 
-    const style = document.querySelector('style[necto-style-id]');
+    const style = document.querySelector('style[data-style-id]');
     expect(style).not.toBeNull();
     expect(style?.id).toBe('');
 
@@ -84,7 +84,7 @@ describe('injectStyle', () => {
   it('should return a no-op cleanup when css is empty', () => {
     const cleanup = injectStyle('');
 
-    expect(document.querySelector('style[necto-style-id]')).toBeNull();
+    expect(document.querySelector('style[data-style-id]')).toBeNull();
 
     cleanup();
   });
@@ -92,18 +92,18 @@ describe('injectStyle', () => {
   it('should set type attribute to text/css', () => {
     const cleanup = injectStyle('.test {}');
 
-    const style = document.querySelector('style[necto-style-id]');
+    const style = document.querySelector('style[data-style-id]');
     expect(style?.getAttribute('type')).toBe('text/css');
 
     cleanup();
   });
 
-  it('should have both necto-style-id and id attributes', () => {
+  it('should have both data-style-id and id attributes', () => {
     const cleanup = injectStyle('.btn { padding: 8px; }', { id: 'necto-pressable' });
 
     const style = document.querySelector('style#necto-pressable');
     expect(style).not.toBeNull();
-    expect(style?.getAttribute('necto-style-id')).toMatch(/^ncto-<:/);
+    expect(style?.getAttribute('data-style-id')).toMatch(/^necto-<:/);
     expect(style?.id).toBe('necto-pressable');
     expect(style?.textContent).toBe('.btn { padding: 8px; }');
 
@@ -114,11 +114,11 @@ describe('injectStyle', () => {
     const cleanup1 = injectStyle('.a {}');
     const cleanup2 = injectStyle('.b {}');
 
-    const styles = document.querySelectorAll('style[necto-style-id]');
+    const styles = document.querySelectorAll('style[data-style-id]');
     expect(styles.length).toBe(2);
 
-    const id1 = styles[0]?.getAttribute('necto-style-id');
-    const id2 = styles[1]?.getAttribute('necto-style-id');
+    const id1 = styles[0]?.getAttribute('data-style-id');
+    const id2 = styles[1]?.getAttribute('data-style-id');
     expect(id1).not.toBe(id2);
 
     cleanup1();
