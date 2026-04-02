@@ -18,7 +18,7 @@ pre-commit:
       priority: 3
     markdownlint:
       glob: "**/*.md"
-      run: pnpm exec markdownlint {staged_files}
+      run: pnpm exec markdownlint --ignore .changeset {staged_files}
       priority: 4
     yamllint:
       glob: "**/*.{yml,yaml}"

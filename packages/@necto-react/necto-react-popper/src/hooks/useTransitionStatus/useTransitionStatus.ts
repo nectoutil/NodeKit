@@ -88,8 +88,20 @@ export function useTransitionStyles(
   const { isMounted, status } = useTransitionStatus({ open, duration });
 
   const styles = (() => {
+    const transitionProperties = [
+      ...new Set([
+        ...Object.keys(initial),
+        ...Object.keys(openStyles),
+        ...Object.keys(closeStyles ?? {})
+      ])
+    ]
+      .filter(
+        (key) => key !== 'transitionProperty' && key !== 'transitionDuration'
+      )
+      .join(', ');
+
     const baseTransition = {
-      transitionProperty: 'opacity, transform',
+      transitionProperty: transitionProperties || 'opacity',
       transitionDuration: `${status === 'close' ? closeDuration : openDuration}ms`
     };
 
