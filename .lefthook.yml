@@ -16,9 +16,17 @@ pre-commit:
       run: pnpm lint
       stage_fixed: true
       priority: 3
+    markdownlint:
+      glob: "**/*.md"
+      run: pnpm exec markdownlint {staged_files}
+      priority: 4
+    yamllint:
+      glob: "**/*.{yml,yaml}"
+      run: pnpm exec yamllint {staged_files}
+      priority: 5
     build:
       run: pnpm turbo build --filter="...[HEAD]"
-      priority: 4
+      priority: 6
 
 commit-msg:
   commands:
