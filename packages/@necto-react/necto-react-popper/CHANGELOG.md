@@ -1,5 +1,22 @@
 # @necto-react/popper
 
+## 0.9.0
+
+### Minor Changes
+
+- f9ea3f5: feat: PopperArrow renders default SVG triangle with placement-based rotation
+
+  - **@necto-react/popper**: `PopperArrow` now renders a default SVG triangle that rotates based on placement (top/bottom/left/right). Accepts `width` and `height` props. Custom `children` override the default SVG. Inlined all arrow rendering logic into the component.
+  - **@necto/dom**: Cleaned up `injectStyle` — merged helper functions inline, added JSDoc, renamed constants to uppercase convention.
+
+### Patch Changes
+
+- Updated dependencies [f9ea3f5]
+  - @necto/dom@1.9.2
+  - @necto-react/components@1.4.25
+  - @necto-react/hooks@2.16.2
+  - @necto/popper@0.5.5
+
 ## 0.8.1
 
 ### Patch Changes
