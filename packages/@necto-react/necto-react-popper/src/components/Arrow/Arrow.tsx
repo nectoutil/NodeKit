@@ -13,11 +13,20 @@ import { ARROW_NAME } from './constants';
 
 import type { ArrowProps } from './Arrow.types';
 import type { Ref, ReactElement, CSSProperties } from 'react';
+import type { Side } from '@necto/popper';
+
+const ROTATION_TRANSFORMS: Record<Side, string> = {
+  top: 'translateY(100%)',
+  right: 'translateY(50%) rotate(90deg) translateX(-50%)',
+  bottom: 'rotate(180deg)',
+  left: 'translateY(50%) rotate(-90deg) translateX(50%)'
+};
 
 /**
  * @internal
- * Internal render function for the Arrow component. Handles positioning
- * and centering of the arrow element based on the parent popper's placement.
+ * Internal render function for the Arrow component. Handles positioning,
+ * centering, and rotation of the arrow element based on the parent popper's placement.
+ * Renders a default SVG triangle when no children are provided.
  *
  * @param {ArrowProps} props - The props for the Arrow component.
  * @param {Ref<HTMLDivElement>} ref - Forwarded ref for the arrow element.
@@ -30,6 +39,8 @@ const ArrowFn = (props: ArrowProps, ref: Ref<HTMLDivElement>): ReactElement => {
     className,
     ref: propRef,
     style: userStyle,
+    width = 10,
+    height = 5,
     ...rest
   } = props;
 
@@ -49,7 +60,6 @@ const ArrowFn = (props: ArrowProps, ref: Ref<HTMLDivElement>): ReactElement => {
     arrowStyles[placement] = '100%';
   }
 
-  // Merge user's transform with positioning transform so both apply
   if (userStyle?.transform) {
     arrowStyles.transform =
       `${arrowStyles.transform ?? ''} ${userStyle.transform}`.trim();
@@ -63,7 +73,34 @@ const ArrowFn = (props: ArrowProps, ref: Ref<HTMLDivElement>): ReactElement => {
       style={{ ...arrowStyles, ...userStyle, transform: arrowStyles.transform }}
       {...rest}
     >
-      {typeof children === 'function' ? children({ placement }) : children}
+      {children != null ? (
+        typeof children === 'function' ? (
+          children({ placement })
+        ) : (
+          children
+        )
+      ) : (
+        <span
+          style={{
+            display: 'inline-block',
+            transform:
+              placement != null ? ROTATION_TRANSFORMS[placement] : undefined,
+            fontSize: 0,
+            lineHeight: 0
+          }}
+        >
+          <svg
+            width={width}
+            height={height}
+            aria-hidden="true"
+            viewBox="0 0 30 10"
+            preserveAspectRatio="none"
+            style={{ display: 'block' }}
+          >
+            <polygon points="0,0 30,0 15,10" fill="currentColor" />
+          </svg>
+        </span>
+      )}
     </Primitive.Div>
   );
 };
@@ -71,7 +108,8 @@ const ArrowFn = (props: ArrowProps, ref: Ref<HTMLDivElement>): ReactElement => {
 /**
  * The public PopperArrow component for Necto.
  * Renders a positioned arrow element that centers itself based on the
- * parent popper's resolved placement.
+ * parent popper's resolved placement. Includes a default SVG triangle
+ * that rotates based on placement. Custom content via children is supported.
  *
  * @param {ArrowProps} props - The props for the PopperArrow component.
  * @param {Ref<HTMLDivElement>} ref - Forwarded ref for the arrow element.

@@ -6,16 +6,6 @@
  *
  */
 
-export interface CreateStyleElementOptions {
-  /** User-facing HTML `id` attribute on the `<style>` element. */
-  id?: string;
-
-  /** Internal tracking ID. Auto-generated if not provided. */
-  internalId?: string;
-
-  insertionPoint?: HTMLElement | null;
-}
-
 export interface StyleEntry {
   element: HTMLStyleElement | null;
   count: number;
