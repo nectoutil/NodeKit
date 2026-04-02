@@ -1,6 +1,6 @@
 {
   "name": "@necto/popper",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Necto's library for providing positioning and popover utilities.",
   "scripts": {
     "test": "vitest",
