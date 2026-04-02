@@ -19,7 +19,7 @@ const STYLE_ATTRIBUTE = 'necto-style-id';
 const windowStylesMap = new WeakMap<Window, StyleMap>();
 
 function generateInternalId(): string {
-  return `ncto-<:${Math.random().toString(36).slice(2, 9)}:>`;
+  return `necto-<:${Math.random().toString(36).slice(2, 9)}:>`;
 }
 
 function getStyleMap(targetWindow: Window): StyleMap {
