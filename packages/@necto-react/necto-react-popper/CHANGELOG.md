@@ -1,5 +1,16 @@
 # @necto-react/popper
 
+## 0.9.1
+
+### Patch Changes
+
+- aeb0d05: fix: arrow positioning for all placement variants
+
+  - Extract side from compound placements (e.g., `top-start` → `top`)
+  - Handle alignment (`start`/`end`) for arrow offset positioning
+  - Fix SVG transform to correctly push arrow outside tooltip for all sides
+  - Use switch statement for cleaner placement handling
+
 ## 0.9.0
 
 ### Minor Changes
