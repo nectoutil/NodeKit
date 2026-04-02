@@ -1,5 +1,11 @@
 # @necto-react/popper
 
+## 0.5.1
+
+### Patch Changes
+
+- @necto-react/state@0.2.1
+
 ## 0.5.0
 
 ### Minor Changes
