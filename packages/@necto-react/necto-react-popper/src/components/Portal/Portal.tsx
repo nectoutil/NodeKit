@@ -9,8 +9,10 @@
 import { createPortal } from 'react-dom';
 import { usePopperPortal } from '../../hooks/usePopperPortal';
 
+import { PORTAL_NAME } from './constants';
+
 import type { ReactPortal } from 'react';
-import type { PopperPortalProps } from './Portal.types';
+import type { PortalProps } from './Portal.types';
 
 /**
  * Renders children into a portal at the end of the document body.
@@ -19,7 +21,7 @@ import type { PopperPortalProps } from './Portal.types';
  * @param props - Configuration options.
  * @returns Portal component or null.
  */
-export function PopperPortal(props: PopperPortalProps): ReactPortal | null {
+export function Portal(props: PortalProps): ReactPortal | null {
   const { id, root, preserveTabOrder = true, children } = props;
 
   const { portalNode } = usePopperPortal({ id, root, preserveTabOrder });
@@ -31,4 +33,4 @@ export function PopperPortal(props: PopperPortalProps): ReactPortal | null {
   return createPortal(children, portalNode);
 }
 
-PopperPortal.displayName = 'PopperPortal';
+Portal.displayName = PORTAL_NAME;

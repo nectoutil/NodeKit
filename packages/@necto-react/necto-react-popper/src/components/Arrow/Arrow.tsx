@@ -13,14 +13,6 @@ import { ARROW_NAME } from './constants';
 
 import type { ArrowProps } from './Arrow.types';
 import type { Ref, ReactElement, CSSProperties } from 'react';
-import type { Side } from '@necto/popper';
-
-const ROTATION_TRANSFORMS: Record<Side, string> = {
-  top: 'translateY(100%)',
-  right: 'translateY(50%) rotate(90deg) translateX(-50%)',
-  bottom: 'rotate(180deg)',
-  left: 'translateY(50%) rotate(-90deg) translateX(50%)'
-};
 
 /**
  * @internal
@@ -37,10 +29,10 @@ const ArrowFn = (props: ArrowProps, ref: Ref<HTMLDivElement>): ReactElement => {
     children,
     placement,
     className,
-    ref: propRef,
-    style: userStyle,
     width = 10,
     height = 5,
+    ref: propRef,
+    style: userStyle,
     ...rest
   } = props;
 
@@ -48,16 +40,70 @@ const ArrowFn = (props: ArrowProps, ref: Ref<HTMLDivElement>): ReactElement => {
     position: 'absolute'
   };
 
-  if (placement === 'top' || placement === 'bottom') {
-    arrowStyles.left = '50%';
-    arrowStyles.transform = 'translateX(-50%)';
-  } else if (placement === 'left' || placement === 'right') {
-    arrowStyles.top = '50%';
-    arrowStyles.transform = 'translateY(-50%)';
-  }
+  // Extract the side from compound placements (e.g., 'top-start' → 'top')
+  const [side, alignment] = (placement?.split('-') ?? []) as [
+    'top' | 'bottom' | 'left' | 'right' | undefined,
+    'start' | 'end' | undefined
+  ];
 
-  if (placement != null) {
-    arrowStyles[placement] = '100%';
+  // SVG default points down. Rotation transforms flip it per placement.
+  // translateY/X pushes the arrow outside the tooltip content edge.
+  let svgTransform: string | undefined;
+
+  switch (side) {
+    case 'top':
+    case 'bottom': {
+      // Horizontal centering or alignment
+      switch (alignment) {
+        case 'start':
+          arrowStyles.left = width;
+          break;
+        case 'end':
+          arrowStyles.right = width;
+          break;
+        default:
+          arrowStyles.left = '50%';
+          arrowStyles.transform = 'translateX(-50%)';
+          break;
+      }
+
+      if (side === 'top') {
+        arrowStyles.bottom = 0;
+        svgTransform = 'translateY(100%)';
+      } else {
+        arrowStyles.top = 0;
+        svgTransform = 'translateY(-100%) rotate(180deg)';
+      }
+
+      break;
+    }
+
+    case 'left':
+    case 'right': {
+      // Vertical centering or alignment
+      switch (alignment) {
+        case 'start':
+          arrowStyles.top = height;
+          break;
+        case 'end':
+          arrowStyles.bottom = height;
+          break;
+        default:
+          arrowStyles.top = '50%';
+          arrowStyles.transform = 'translateY(-50%)';
+          break;
+      }
+
+      if (side === 'left') {
+        arrowStyles.right = 0;
+        svgTransform = 'translateX(100%) rotate(90deg)';
+      } else {
+        arrowStyles.left = 0;
+        svgTransform = 'translateX(-100%) rotate(-90deg)';
+      }
+
+      break;
+    }
   }
 
   if (userStyle?.transform) {
@@ -83,8 +129,7 @@ const ArrowFn = (props: ArrowProps, ref: Ref<HTMLDivElement>): ReactElement => {
         <span
           style={{
             display: 'inline-block',
-            transform:
-              placement != null ? ROTATION_TRANSFORMS[placement] : undefined,
+            transform: svgTransform,
             fontSize: 0,
             lineHeight: 0
           }}

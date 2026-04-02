@@ -6,6 +6,9 @@
  *
  */
 
-export { PopperPortal } from './Portal';
+export { Portal, Portal as PopperPortal } from './Portal';
 
-export type { PopperPortalProps } from './Portal.types';
+export type {
+  PortalProps,
+  PortalProps as PopperPortalProps
+} from './Portal.types';

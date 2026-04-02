@@ -8,7 +8,7 @@
 
 import type { ReactNode } from 'react';
 
-export interface PopperPortalProps {
+export interface PortalProps {
   /**
    * Custom portal ID.
    */
