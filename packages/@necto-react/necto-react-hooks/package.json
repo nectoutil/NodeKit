@@ -29,6 +29,11 @@
   },
   "author": "Corinvo OSS Team",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nectoutil/NodeKit",
+    "directory": "packages/@necto-react/necto-react-hooks"
+  },
   "devDependencies": {
     "@testing-library/react": "^16.3.0",
     "@types/node": "^22.14.1",
