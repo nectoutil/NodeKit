@@ -1,8 +1,5 @@
 #!/bin/sh
 
-# Ensure pnpm-lock.yaml is up to date with package.json changes.
-# If this fails, run 'pnpm install' and stage the updated lockfile.
-
 if git diff --exit-code pnpm-lock.yaml > /dev/null 2>&1; then
   exit 0
 else
