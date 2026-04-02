@@ -17,7 +17,7 @@ pre-commit:
       stage_fixed: true
       priority: 3
     build:
-      run: pnpm build
+      run: pnpm turbo build --filter="...[HEAD]"
       priority: 4
 
 commit-msg:
