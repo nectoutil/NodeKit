@@ -34,6 +34,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
+          node-version: '24'
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install PNPM
@@ -55,6 +56,7 @@ jobs:
           publish: pnpm exec changeset publish --provenance --access public
         env:
           GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
+          NPM_TOKEN: ''
 
       - name: Add automerge label to release PR
         if: steps.create_release_pr.outputs.pullRequestNumber
