@@ -1,0 +1,40 @@
+header:
+  license:
+    spdx-id: MIT
+    copyright-owner: Corinvo, LLC. and affiliates
+    content: |
+      Copyright (c) Corinvo, LLC. and affiliates.
+
+      This source code is licensed under the MIT license found in the
+      LICENSE file in the root directory of this source tree.
+
+  paths:
+    - '**/*.ts'
+    - '**/*.tsx'
+    - '**/*.js'
+    - '**/*.jsx'
+    - '**/*.css'
+    - '**/*.scss'
+
+  paths-ignore:
+    - 'node_modules'
+    - '**/node_modules/**'
+    - '**/dist/**'
+    - '**/.dist/**'
+    - '**/.turbo/**'
+    - '**/testdata/**'
+    - 'licenses'
+    - '**/*.md'
+    - '**/*.json'
+    - '**/*.yaml'
+    - '**/*.yml'
+    - '**/*.toml'
+    - '**/*.gitkeep'
+    - '**/*.cts'
+    - '.npmrc'
+    - '.node-version'
+    - 'LICENSE'
+    - 'NOTICE'
+
+  comment: on-failure
+  license-location-threshold: 80
