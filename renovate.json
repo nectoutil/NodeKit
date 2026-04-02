@@ -1,0 +1,44 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "dependencyDashboard": false,
+  "labels": ["dependencies"],
+  "rangeStrategy": "bump",
+  "packageRules": [
+    {
+      "description": "Group React and React types together so they always stay in sync",
+      "groupName": "react",
+      "matchPackageNames": [
+        "react",
+        "react-dom",
+        "@types/react",
+        "@types/react-dom"
+      ],
+      "matchUpdateTypes": ["major", "minor", "patch"],
+      "enabled": true
+    },
+    {
+      "description": "Pin React major version — only allow minor and patch updates to avoid breaking libraries",
+      "matchPackageNames": [
+        "react",
+        "react-dom",
+        "@types/react",
+        "@types/react-dom"
+      ],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
+    },
+    {
+      "description": "Group all necto workspace packages",
+      "groupName": "necto packages",
+      "matchPackagePatterns": ["^@necto/", "^@necto-react/"],
+      "enabled": false
+    },
+    {
+      "description": "Auto-merge patch updates for dev dependencies",
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["patch"],
+      "automerge": true
+    }
+  ]
+}

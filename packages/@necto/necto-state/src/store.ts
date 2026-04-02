@@ -1,3 +1,5 @@
+// biome-ignore-all lint/suspicious/noExplicitAny: Explicit any is required for generic state handling.
+
 /**
  * Copyright (c) Corinvo, LLC. and affiliates.
  *

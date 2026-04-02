@@ -6,15 +6,10 @@
  *
  */
 
-export {
-  useTransitionStatus,
-  useTransitionStyles
-} from './useTransitionStatus';
+export { useTransitionStatus } from './useTransitionStatus';
 
 export type {
-  UseTransitionStatusOptions,
+  TransitionStatus,
   UseTransitionStatusReturn,
-  UseTransitionStylesOptions,
-  UseTransitionStylesReturn,
-  TransitionStatus
-} from './types';
+  UseTransitionStatusOptions
+} from './useTransitionStatus.types';

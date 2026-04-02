@@ -6,9 +6,10 @@
  *
  */
 
-import { useId, useMemo } from 'react';
+import { useMemo } from 'react';
+import { useId } from '@necto-react/hooks';
 
-import type { UseRoleOptions, UseRoleReturn } from './types';
+import type { UseRoleOptions, UseRoleReturn } from './useRole.types';
 
 /**
  * Provides ARIA role props for floating elements.
@@ -18,14 +19,14 @@ import type { UseRoleOptions, UseRoleReturn } from './types';
 export function useRole(options: UseRoleOptions): UseRoleReturn {
   const { open, enabled = true, role = 'dialog' } = options;
 
-  const floatingId = useId();
+  const nectoId: string = useId({ prefix: 'necto-popper' });
 
   const reference = useMemo(() => {
     if (!enabled) return {};
 
     if (role === 'tooltip') {
       return {
-        'aria-describedby': open ? floatingId : undefined
+        'aria-describedby': open ? nectoId : undefined
       };
     }
 
@@ -38,15 +39,15 @@ export function useRole(options: UseRoleOptions): UseRoleReturn {
         role === 'grid'
           ? role
           : 'dialog',
-      'aria-controls': open ? floatingId : undefined
+      'aria-controls': open ? nectoId : undefined
     };
-  }, [enabled, open, role, floatingId]);
+  }, [enabled, open, role, nectoId]);
 
   const floating = useMemo(() => {
     if (!enabled) return {};
 
     const baseProps: Record<string, unknown> = {
-      id: floatingId,
+      id: nectoId,
       role
     };
 
@@ -62,7 +63,7 @@ export function useRole(options: UseRoleOptions): UseRoleReturn {
     }
 
     return baseProps;
-  }, [enabled, floatingId, role]);
+  }, [enabled, nectoId, role]);
 
   return {
     reference,

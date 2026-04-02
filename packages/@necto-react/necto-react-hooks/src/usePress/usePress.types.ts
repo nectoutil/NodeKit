@@ -25,6 +25,14 @@ export interface UsePressProps {
   /** Ref to the target DOM element. */
   ref?: RefObject<HTMLElement>;
 
+  /**
+   * How press styles (touch-action, user-select) are applied.
+   * - 'inline': sets styles directly on the element (default)
+   * - 'global': injects a shared <style> tag and uses data attributes
+   * @default 'global'
+   */
+  styleInjection?: 'inline' | 'global';
+
   /** Handler called when a press interaction is successfully completed. */
   onPress?: (e: PressEvent) => void;
 
@@ -59,6 +67,7 @@ export interface UsePressReturn {
     onKeyDown?: (e: KeyboardEvent) => void;
     onKeyUp?: (e: KeyboardEvent) => void;
     onClick?: (e: MouseEvent) => void;
+    'data-necto-pressable'?: string;
   };
 
   /** Whether the element is currently pressed. */

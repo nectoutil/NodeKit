@@ -32,7 +32,7 @@ function createStyleElement(
   css: string,
   options: CreateStyleElementOptions = {}
 ): HTMLStyleElement {
-  const { id = DEFAULT_ID, insertionPoint } = options;
+  const { id = DEFAULT_ID, elementId, insertionPoint } = options;
   const doc = insertionPoint
     ? getOwnerDocument(insertionPoint)
     : typeof document !== 'undefined'
@@ -43,6 +43,11 @@ function createStyleElement(
   const style = doc.createElement('style');
   style.setAttribute('type', 'text/css');
   style.setAttribute(STYLE_ATTRIBUTE, id);
+
+  if (elementId) {
+    style.id = elementId;
+  }
+
   style.textContent = css;
 
   if (insertionPoint) {
@@ -60,6 +65,7 @@ export function injectStyle(
 ): () => void {
   const {
     id = DEFAULT_ID,
+    elementId,
     window: targetWindow = typeof window !== 'undefined' ? window : null,
     insertionPoint
   } = options;
@@ -72,7 +78,7 @@ export function injectStyle(
 
   if (!entry) {
     entry = {
-      element: createStyleElement(css, { id, insertionPoint }),
+      element: createStyleElement(css, { id, elementId, insertionPoint }),
       count: 1
     };
     styleMap.set(key, entry);

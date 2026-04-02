@@ -11,44 +11,25 @@
 import { defu } from 'defu';
 import { flushSync } from 'react-dom';
 import { computePosition } from '@necto/popper';
-import { useLatestRef } from '@necto-react/hooks';
 import { useLocalState } from '@necto-react/state';
-import { useMemo, useCallback, useRef, useLayoutEffect } from 'react';
+import { useLatestRef, useMounted } from '@necto-react/hooks';
+import {
+  useMemo,
+  useCallback,
+  useRef,
+  useLayoutEffect,
+  type RefObject
+} from 'react';
+
+import {
+  deepEqual,
+  getDevicePixelRatio,
+  roundByDevicePixelRatio
+} from './utils';
 
 import type { CSSProperties } from 'react';
 import type { ComputePositionResult } from '@necto/popper';
 import type { UsePopperOptions, UsePopperReturn } from './usePopper.types';
-
-function deepEqual(a: any, b: any): boolean {
-  if (a === b) return true;
-  if (
-    typeof a !== 'object' ||
-    typeof b !== 'object' ||
-    a == null ||
-    b == null
-  ) {
-    return a === b;
-  }
-  const keysA = Object.keys(a);
-  const keysB = Object.keys(b);
-  if (keysA.length !== keysB.length) return false;
-  for (const key of keysA) {
-    if (!keysB.includes(key) || !deepEqual(a[key], b[key])) {
-      return false;
-    }
-  }
-  return true;
-}
-
-function getDPR(element: Element): number {
-  const win = element.ownerDocument.defaultView || window;
-  return win.devicePixelRatio || 1;
-}
-
-function roundByDPR(element: Element, value: number): number {
-  const dpr = getDPR(element);
-  return Math.round(value * dpr) / dpr;
-}
 
 export function usePopper(options: UsePopperOptions = {}): UsePopperReturn {
   const {
@@ -87,10 +68,12 @@ export function usePopper(options: UsePopperOptions = {}): UsePopperReturn {
   const [_reference, _setReference] = useLocalState<Element | null>(null);
   const [_floating, _setFloating] = useLocalState<HTMLElement | null>(null);
 
-  const referenceRef = useRef<Element | null>(null);
-  const floatingRef = useRef<HTMLElement | null>(null);
   const dataRef = useRef(data);
-  const isMountedRef = useRef(false);
+  const isMountedRef: RefObject<boolean> = useMounted({ type: 'ref' });
+  const referenceRef: RefObject<Element | null> = useRef<Element | null>(null);
+  const floatingRef: RefObject<HTMLElement | null> = useRef<HTMLElement | null>(
+    null
+  );
 
   const setReference = useCallback(
     (node: Element | null) => {
@@ -115,10 +98,10 @@ export function usePopper(options: UsePopperOptions = {}): UsePopperReturn {
   const referenceEl = externalReference || _reference;
   const floatingEl = externalFloating || _floating;
 
-  const _hasWhileElementsMounted = whileElementsMounted != null;
   const whileElementsMountedRef = useLatestRef(whileElementsMounted);
   const openRef = useLatestRef(open);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: isMountedRef is a stable ref from useMounted, not a reactive dependency.
   const update = useCallback(() => {
     if (!referenceRef.current || !floatingRef.current) return;
 
@@ -147,13 +130,6 @@ export function usePopper(options: UsePopperOptions = {}): UsePopperReturn {
       setData((data) => ({ ...data, isPositioned: false }));
     }
   }, [open, setData]);
-
-  useLayoutEffect(() => {
-    isMountedRef.current = true;
-    return () => {
-      isMountedRef.current = false;
-    };
-  }, []);
 
   useLayoutEffect(() => {
     if (referenceEl) referenceRef.current = referenceEl;
@@ -191,14 +167,16 @@ export function usePopper(options: UsePopperOptions = {}): UsePopperReturn {
 
     if (!elements.floating) return initialStyles;
 
-    const x = roundByDPR(elements.floating, data.x);
-    const y = roundByDPR(elements.floating, data.y);
+    const x = roundByDevicePixelRatio(elements.floating, data.x);
+    const y = roundByDevicePixelRatio(elements.floating, data.y);
 
     if (transform) {
       return {
         ...initialStyles,
         transform: `translate(${x}px, ${y}px)`,
-        ...(getDPR(elements.floating) >= 1.5 && { willChange: 'transform' }),
+        ...(getDevicePixelRatio(elements.floating) >= 1.5 && {
+          willChange: 'transform'
+        }),
         ...(!data.isPositioned && { visibility: 'hidden' as const })
       };
     }

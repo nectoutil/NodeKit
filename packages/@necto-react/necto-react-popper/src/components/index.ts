@@ -7,3 +7,4 @@
  */
 
 export * from './Arrow';
+export * from './Portal';

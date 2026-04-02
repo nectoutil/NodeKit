@@ -6,9 +6,6 @@
  *
  */
 
-export { useInteractions } from './useInteractions';
+export { PopperPortal } from './Portal';
 
-export type {
-  InteractionReturn,
-  UseInteractionsReturn
-} from './useInteractions.types';
+export type { PopperPortalProps } from './Portal.types';

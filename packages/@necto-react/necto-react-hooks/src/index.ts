@@ -30,6 +30,7 @@ export * from './useAriaProps';
 export * from './useStyleInjection';
 export * from './useLatestRef';
 export * from './useIsomorphicInsertionEffect';
+export * from './useIsomorphicLayoutEffect';
 export * from './useLongPress';
 export * from './useAnimation';
 export * from './useCollectionNavigation';

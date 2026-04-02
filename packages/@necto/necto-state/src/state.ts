@@ -1,3 +1,5 @@
+// biome-ignore-all lint/style/useTemplate: String concatenation is intentional here.
+
 /**
  * Copyright (c) Corinvo, LLC. and affiliates.
  *

@@ -6,16 +6,9 @@
  *
  */
 
-import type {
-  UsePopperPortalOptions,
-  UsePopperPortalReturn,
-  PopperPortalProps
-} from './types';
-
-export { usePopperPortal, PopperPortal } from './usePopperPortal';
+export { usePopperPortal } from './usePopperPortal';
 
 export type {
   UsePopperPortalOptions,
-  UsePopperPortalReturn,
-  PopperPortalProps
-};
+  UsePopperPortalReturn
+} from './usePopperPortal.types';

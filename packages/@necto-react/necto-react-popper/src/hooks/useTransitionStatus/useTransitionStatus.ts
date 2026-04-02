@@ -6,18 +6,14 @@
  *
  */
 
-import { useState, useEffect, useLayoutEffect } from 'react';
+import { useLocalState } from '@necto-react/state';
+import { useIsomorphicLayoutEffect } from '@necto-react/hooks';
 
 import type {
-  UseTransitionStatusOptions,
+  TransitionStatus,
   UseTransitionStatusReturn,
-  UseTransitionStylesOptions,
-  UseTransitionStylesReturn,
-  TransitionStatus
-} from './types';
-
-const useIsomorphicLayoutEffect =
-  typeof window !== 'undefined' ? useLayoutEffect : useEffect;
+  UseTransitionStatusOptions
+} from './useTransitionStatus.types';
 
 /**
  * Provides transition status for animating floating elements.
@@ -29,11 +25,11 @@ export function useTransitionStatus(
 ): UseTransitionStatusReturn {
   const { open, duration = 250 } = options;
 
-  const closeDuration =
+  const closeDuration: number =
     typeof duration === 'number' ? duration : (duration.close ?? 250);
 
-  const [status, setStatus] = useState<TransitionStatus>('unmounted');
-  const [isMounted, setIsMounted] = useState(false);
+  const [status, setStatus] = useLocalState<TransitionStatus>('unmounted');
+  const [isMounted, setIsMounted] = useLocalState(false);
 
   useIsomorphicLayoutEffect(() => {
     if (open) {
@@ -53,73 +49,12 @@ export function useTransitionStatus(
         setIsMounted(false);
       }, closeDuration);
 
-      return () => clearTimeout(timeout);
+      return (): void => clearTimeout(timeout);
     }
   }, [open, closeDuration, isMounted]);
 
   return {
     isMounted,
     status
-  };
-}
-
-/**
- * Provides transition styles for animating floating elements.
- * @param options - Configuration options including style definitions.
- * @returns Mounted state, status, and computed styles.
- */
-export function useTransitionStyles(
-  options: UseTransitionStylesOptions
-): UseTransitionStylesReturn {
-  const {
-    open,
-    duration = 250,
-    initial = { opacity: 0 },
-    openStyles = { opacity: 1 },
-    closeStyles,
-    common = {}
-  } = options;
-
-  const openDuration =
-    typeof duration === 'number' ? duration : (duration.open ?? 250);
-  const closeDuration =
-    typeof duration === 'number' ? duration : (duration.close ?? 250);
-
-  const { isMounted, status } = useTransitionStatus({ open, duration });
-
-  const styles = (() => {
-    const transitionProperties = [
-      ...new Set([
-        ...Object.keys(initial),
-        ...Object.keys(openStyles),
-        ...Object.keys(closeStyles ?? {})
-      ])
-    ]
-      .filter(
-        (key) => key !== 'transitionProperty' && key !== 'transitionDuration'
-      )
-      .join(', ');
-
-    const baseTransition = {
-      transitionProperty: transitionProperties || 'opacity',
-      transitionDuration: `${status === 'close' ? closeDuration : openDuration}ms`
-    };
-
-    switch (status) {
-      case 'initial':
-        return { ...common, ...baseTransition, ...initial };
-      case 'open':
-        return { ...common, ...baseTransition, ...openStyles };
-      case 'close':
-        return { ...common, ...baseTransition, ...(closeStyles ?? initial) };
-      default:
-        return common;
-    }
-  })();
-
-  return {
-    isMounted,
-    status,
-    styles
   };
 }

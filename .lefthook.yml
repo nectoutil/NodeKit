@@ -3,11 +3,11 @@ skip_lfs: true
 
 pre-commit:
   piped: true
-  scripts:
-    "check-lockfile":
-      runner: bash
-      priority: 1
   commands:
+    lockfile-check:
+      glob: "**/package.json"
+      run: pnpm install --frozen-lockfile --ignore-scripts
+      priority: 1
     format:
       run: pnpm format
       stage_fixed: true

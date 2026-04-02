@@ -45,10 +45,12 @@
     "react": "^19.1.0"
   },
   "dependencies": {
+    "@necto-react/components": "workspace:*",
     "@necto-react/hooks": "workspace:*",
     "@necto-react/state": "workspace:*",
     "@necto-react/types": "workspace:*",
     "@necto/dom": "workspace:*",
+    "@necto/mergers": "workspace:*",
     "@necto/popper": "workspace:*",
     "@necto/types": "workspace:*",
     "defu": "^6.1.4"

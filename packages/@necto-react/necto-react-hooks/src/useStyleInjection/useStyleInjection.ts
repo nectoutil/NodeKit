@@ -18,6 +18,7 @@ import type { UseStyleInjectionOptions } from './useStyleInjection.types';
  */
 export function useStyleInjection({
   id,
+  elementId,
   css,
   insertionPoint,
   enabled = true,
@@ -28,6 +29,11 @@ export function useStyleInjection({
   useIsomorphicInsertionEffect(() => {
     if (!enabled || !cssString) return;
 
-    return injectStyle(cssString, { id, window: targetWindow, insertionPoint });
-  }, [id, cssString, targetWindow, insertionPoint, enabled]);
+    return injectStyle(cssString, {
+      id,
+      elementId,
+      window: targetWindow,
+      insertionPoint
+    });
+  }, [id, elementId, cssString, targetWindow, insertionPoint, enabled]);
 }
