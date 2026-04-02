@@ -7,7 +7,9 @@
 
 /** Returns the ownerDocument of an element, or the global document */
 export function getOwnerDocument(el: Element | null | undefined): Document {
-  return el?.ownerDocument ?? document;
+  if (el?.ownerDocument) return el.ownerDocument;
+  if (typeof document !== 'undefined') return document;
+  return null as unknown as Document;
 }
 
 /** Returns the window object that owns an element */
@@ -18,7 +20,8 @@ export function getOwnerWindow(
     return el;
   }
 
-  return (
-    getOwnerDocument(el as Element | null | undefined).defaultView || window
-  );
+  const doc = getOwnerDocument(el as Element | null | undefined);
+  if (doc?.defaultView) return doc.defaultView;
+  if (typeof window !== 'undefined') return window;
+  return null as unknown as Window & typeof global;
 }

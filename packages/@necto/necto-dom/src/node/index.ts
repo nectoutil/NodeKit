@@ -51,9 +51,12 @@ export function nodeContains(
 }
 
 export const getActiveElement = (
-  doc: Document = document,
+  doc: Document = typeof document !== 'undefined'
+    ? document
+    : (null as unknown as Document),
   supportShadowDOM = true
 ): Element | null => {
+  if (!doc) return null;
   if (!supportShadowDOM) {
     return doc.activeElement;
   }

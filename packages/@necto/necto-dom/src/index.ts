@@ -7,12 +7,12 @@
 
 export * from './css';
 export * from './owner';
-export { scrollIntoView } from './scroll';
+export * from './scroll';
 export * from './node';
-export { focusWithoutScrolling } from './focus';
-export { injectStyle } from './style';
-export { getContainmentRect } from './containment';
+export * from './focus';
+export * from './style';
+export * from './containment';
 export * from './transitions';
 export * from './html-elements';
-export { disableTextSelection, restoreTextSelection } from './text-selection';
+export * from './text-selection';
 export * from './aria-props';
