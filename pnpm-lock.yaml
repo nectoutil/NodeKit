@@ -411,7 +411,7 @@ importers:
         specifier: ^6.1.0
         version: 6.1.0(rollup@4.53.2)
       '@rollup/plugin-node-resolve':
-        specifier: ^16.0.1
+        specifier: ^16.0.3
         version: 16.0.3(rollup@4.53.2)
       '@rollup/plugin-replace':
         specifier: ^6.0.2
