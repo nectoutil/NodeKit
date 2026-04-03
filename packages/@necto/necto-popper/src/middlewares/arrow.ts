@@ -40,20 +40,18 @@ export function arrow(options: ArrowOptions): Middleware {
     const side = getSide(placement);
     const isVertical = side === 'top' || side === 'bottom';
 
-    const arrowRect = element.getBoundingClientRect();
-    const arrowLength = isVertical ? arrowRect.width : arrowRect.height;
+    // Cross-axis length of the arrow element.
+    // For left/right, the arrow rotates 90deg so its width becomes the cross-axis length.
+    const arrowLength = element.offsetWidth;
 
     const floatingLength = isVertical
       ? rects.floating.width
       : rects.floating.height;
-    const referenceLength = isVertical
-      ? rects.reference.width
-      : rects.reference.height;
 
-    const minPadding = padding;
-    const maxPadding = floatingLength - arrowLength - padding;
+    const minPadding: number = padding;
+    const maxPadding: number = floatingLength - arrowLength - padding;
 
-    const referenceCenter = isVertical
+    const referenceCenter: number = isVertical
       ? rects.reference.x + rects.reference.width / 2
       : rects.reference.y + rects.reference.height / 2;
 
@@ -62,13 +60,10 @@ export function arrow(options: ArrowOptions): Middleware {
     const center = referenceCenter - floatingStart - arrowLength / 2;
     const arrowOffset = clamp(center, minPadding, maxPadding);
 
-    const shouldCenter = referenceLength < floatingLength;
-
     return {
       data: {
         x: isVertical ? arrowOffset : undefined,
-        y: isVertical ? undefined : arrowOffset,
-        centerOffset: shouldCenter ? center - arrowOffset : 0
+        y: isVertical ? undefined : arrowOffset
       }
     };
   });

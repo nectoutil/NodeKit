@@ -28,8 +28,16 @@ export interface ArrowProps
   style?: CSSProperties;
   className?: string;
   placement: Side | null;
-  /** Width of the default SVG arrow in pixels. Defaults to 10. */
+
+  /** Arrow x coordinate from arrow middleware. */
+  arrowX?: number;
+
+  /** Arrow y coordinate from arrow middleware. */
+  arrowY?: number;
+
+  /** Width of the default SVG arrow in pixels. @default 10 */
   width?: number;
-  /** Height of the default SVG arrow in pixels. Defaults to 5. */
+
+  /** Height of the default SVG arrow in pixels. @default 5 */
   height?: number;
 }
