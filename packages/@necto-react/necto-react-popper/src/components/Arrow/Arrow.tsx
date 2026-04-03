@@ -12,23 +12,21 @@ import { Primitive } from '@necto-react/components';
 import { ARROW_NAME } from './constants';
 
 import type { ArrowProps } from './Arrow.types';
-import type { Ref, ReactElement, CSSProperties } from 'react';
+import type { Side } from '@necto/popper';
+import type { Ref, ReactElement } from 'react';
 
 /**
  * @internal
- * Internal render function for the Arrow component. Handles positioning,
- * centering, and rotation of the arrow element based on the parent popper's placement.
- * Renders a default SVG triangle when no children are provided.
- *
- * @param {ArrowProps} props - The props for the Arrow component.
- * @param {Ref<HTMLDivElement>} ref - Forwarded ref for the arrow element.
- * @returns {ReactElement} The rendered arrow element.
+ * Internal render function for the Arrow component. Uses arrowX/arrowY from
+ * the arrow middleware for pixel-perfect positioning.
  */
 const ArrowFn = (props: ArrowProps, ref: Ref<HTMLDivElement>): ReactElement => {
   const {
     children,
     placement,
     className,
+    arrowX,
+    arrowY,
     width = 10,
     height = 5,
     ref: propRef,
@@ -36,101 +34,48 @@ const ArrowFn = (props: ArrowProps, ref: Ref<HTMLDivElement>): ReactElement => {
     ...rest
   } = props;
 
-  const arrowStyles: CSSProperties = {
-    position: 'absolute'
-  };
-
-  // Extract the side from compound placements (e.g., 'top-start' → 'top')
-  const [side, alignment] = (placement?.split('-') ?? []) as [
-    'top' | 'bottom' | 'left' | 'right' | undefined,
-    'start' | 'end' | undefined
-  ];
-
-  let svgTransform: string | undefined;
-  switch (side) {
-    case 'top':
-    case 'bottom': {
-      // Horizontal centering or alignment
-      switch (alignment) {
-        case 'start':
-          arrowStyles.left = width;
-          break;
-        case 'end':
-          arrowStyles.right = width;
-          break;
-        default:
-          arrowStyles.left = '50%';
-          arrowStyles.transform = 'translateX(-50%)';
-          break;
-      }
-
-      if (side === 'top') {
-        arrowStyles.bottom = 0;
-        svgTransform = 'translateY(100%)';
-      } else {
-        arrowStyles.top = 0;
-        svgTransform = 'translateY(-100%) rotate(180deg)';
-      }
-
-      break;
-    }
-
-    case 'left':
-    case 'right': {
-      // Vertical centering or alignment
-      switch (alignment) {
-        case 'start':
-          arrowStyles.top = height;
-          break;
-        case 'end':
-          arrowStyles.bottom = height;
-          break;
-        default:
-          arrowStyles.top = '50%';
-          arrowStyles.transform = 'translateY(-50%)';
-          break;
-      }
-
-      if (side === 'left') {
-        arrowStyles.right = 0;
-        svgTransform = 'translateX(100%) rotate(90deg)';
-      } else {
-        arrowStyles.left = 0;
-        svgTransform = 'translateX(-100%) rotate(-90deg)';
-      }
-
-      break;
-    }
-  }
-
-  if (userStyle?.transform) {
-    arrowStyles.transform =
-      `${arrowStyles.transform ?? ''} ${userStyle.transform}`.trim();
-  }
+  const side = (placement?.split('-')[0] ?? 'top') as Side;
+  const isVertical = side === 'top' || side === 'bottom';
 
   return (
-    <Primitive.Div
+    <span
       ref={propRef ?? ref}
-      className={className}
-      data-placement={placement ?? undefined}
-      style={{ ...arrowStyles, ...userStyle, transform: arrowStyles.transform }}
-      {...rest}
+      style={{
+        position: 'absolute',
+        left: arrowX != null ? arrowX : undefined,
+        top:
+          arrowY != null
+            ? arrowY + (isVertical ? 0 : (width - height) / 2)
+            : undefined,
+        [{ top: 'bottom', bottom: 'top', left: 'right', right: 'left' }[side]]:
+          0,
+        transformOrigin: {
+          top: '',
+          right: '0 0',
+          bottom: 'center 0',
+          left: '100% 0'
+        }[side],
+        transform: {
+          top: 'translateY(100%)',
+          right: 'translateY(50%) rotate(90deg) translateX(-50%)',
+          bottom: 'rotate(180deg)',
+          left: 'translateY(50%) rotate(-90deg) translateX(50%)'
+        }[side]
+      }}
     >
-      {children != null ? (
-        typeof children === 'function' ? (
-          children({ placement })
+      <Primitive.Div
+        className={className}
+        data-placement={placement ?? undefined}
+        style={{ display: 'block', ...userStyle }}
+        {...rest}
+      >
+        {children != null ? (
+          typeof children === 'function' ? (
+            children({ placement })
+          ) : (
+            children
+          )
         ) : (
-          children
-        )
-      ) : (
-        <span
-          style={{
-            display: 'inline-block',
-            transform: svgTransform,
-            fontSize: 0,
-            lineHeight: 0
-          }}
-        >
           <svg
             width={width}
             height={height}
@@ -141,21 +86,15 @@ const ArrowFn = (props: ArrowProps, ref: Ref<HTMLDivElement>): ReactElement => {
           >
             <polygon points="0,0 30,0 15,10" fill="currentColor" />
           </svg>
-        </span>
-      )}
-    </Primitive.Div>
+        )}
+      </Primitive.Div>
+    </span>
   );
 };
 
 /**
  * The public PopperArrow component for Necto.
- * Renders a positioned arrow element that centers itself based on the
- * parent popper's resolved placement. Includes a default SVG triangle
- * that rotates based on placement. Custom content via children is supported.
- *
- * @param {ArrowProps} props - The props for the PopperArrow component.
- * @param {Ref<HTMLDivElement>} ref - Forwarded ref for the arrow element.
- * @returns {ReactElement} The rendered arrow element.
+ * Renders a positioned arrow element using coordinates from the arrow middleware.
  */
 export const Arrow = forwardRef<HTMLDivElement, ArrowProps>(ArrowFn);
 
