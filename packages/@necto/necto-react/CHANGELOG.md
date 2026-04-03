@@ -1,5 +1,12 @@
 # @necto/react
 
+## 1.1.33
+
+### Patch Changes
+
+- Updated dependencies [7133d0e]
+  - @necto-react/popper@0.10.0
+
 ## 1.1.32
 
 ### Patch Changes
