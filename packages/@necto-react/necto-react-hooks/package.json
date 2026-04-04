@@ -57,7 +57,7 @@
     "@necto/platform": "workspace:*",
     "@necto/strings": "workspace:*",
     "@necto/types": "workspace:*",
-    "defu": "^6.1.4",
+    "defu": "^6.1.6",
     "react-aria": "^3.39.0",
     "std-env": "^3.9.0"
   }
