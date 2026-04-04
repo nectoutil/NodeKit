@@ -39,7 +39,7 @@
     "@storybook/test": "^8.5.0",
     "@storybook/vue3": "^8.5.0",
     "@storybook/vue3-vite": "^8.5.0",
-    "@vitejs/plugin-vue": "^5.2.1",
+    "@vitejs/plugin-vue": "^5.2.4",
     "commitlint": "^19.8.1",
     "concurrently": "^9.2.1",
     "conventional-changelog-conventionalcommits": "^9.3.1",
