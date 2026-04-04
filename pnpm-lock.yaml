@@ -389,8 +389,8 @@ importers:
   packages/@necto/necto-color:
     dependencies:
       color-convert:
-        specifier: ^3.0.1
-        version: 3.1.2
+        specifier: ^3.1.3
+        version: 3.1.3
       color-name:
         specifier: ^2.0.0
         version: 2.0.2
@@ -3354,8 +3354,8 @@ packages:
     resolution: {integrity: sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==}
     engines: {node: '>=7.0.0'}
 
-  color-convert@3.1.2:
-    resolution: {integrity: sha512-UNqkvCDXstVck3kdowtOTWROIJQwafjOfXSmddoDrXo4cewMKmusCeF22Q24zvjR8nwWib/3S/dfyzPItPEiJg==}
+  color-convert@3.1.3:
+    resolution: {integrity: sha512-fasDH2ont2GqF5HpyO4w0+BcewlhHEZOFn9c1ckZdHpJ56Qb7MHhH/IcJZbBGgvdtwdwNbLvxiBEdg336iA9Sg==}
     engines: {node: '>=14.6'}
 
   color-name@1.1.3:
@@ -9544,7 +9544,7 @@ snapshots:
     dependencies:
       color-name: 1.1.4
 
-  color-convert@3.1.2:
+  color-convert@3.1.3:
     dependencies:
       color-name: 2.0.2
 
