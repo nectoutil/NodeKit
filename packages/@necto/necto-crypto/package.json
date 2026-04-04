@@ -23,7 +23,7 @@
     "build": "tsup"
   },
   "devDependencies": {
-    "@types/node": "^22.14.1",
+    "@types/node": "^22.19.17",
     "tsup": "^8.4.0"
   }
 }

@@ -40,7 +40,7 @@
     "@playwright/experimental-ct-react": "^1.49.1",
     "@playwright/test": "^1.49.1",
     "@testing-library/react": "^16.3.2",
-    "@types/node": "^22.14.1",
+    "@types/node": "^22.19.17",
     "@vitejs/plugin-react": "^4.3.4",
     "clsx": "^2.1.1",
     "esbuild-plugin-css-module": "^0.1.0",
