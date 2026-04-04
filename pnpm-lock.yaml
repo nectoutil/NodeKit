@@ -62,7 +62,7 @@ importers:
         specifier: 3.2.3
         version: 3.2.3
       lefthook:
-        specifier: ^1.11.13
+        specifier: ^1.13.6
         version: 1.13.6
       markdownlint:
         specifier: ^0.38.0
