@@ -45,7 +45,7 @@
     "clsx": "^2.1.1",
     "esbuild-plugin-css-module": "^0.1.0",
     "esbuild-sass-plugin": "^3.3.1",
-    "postcss": "^8.5.6",
+    "postcss": "^8.5.8",
     "postcss-modules": "^6.0.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
