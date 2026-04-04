@@ -23,7 +23,7 @@
   "author": "Corinvo OSS Team",
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^22.14.1",
+    "@types/node": "^22.19.17",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "tsup": "^8.4.0"
