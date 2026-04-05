@@ -86,7 +86,7 @@ importers:
         specifier: ^2.4.4
         version: 2.6.0
       vitest:
-        specifier: ^3.0.9
+        specifier: ^3.2.4
         version: 3.2.4(@types/debug@4.1.12)(@types/node@22.19.17)(jiti@2.6.1)(jsdom@26.1.0)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.1)
       vue:
         specifier: ^3.5.13
@@ -168,7 +168,7 @@ importers:
         specifier: ^8.5.1
         version: 8.5.1(@microsoft/api-extractor@7.55.1(@types/node@22.19.17))(jiti@2.6.1)(postcss@8.5.8)(typescript@5.9.3)
       vitest:
-        specifier: ^3.0.9
+        specifier: ^3.2.4
         version: 3.2.4(@types/debug@4.1.12)(@types/node@22.19.17)(jiti@2.6.1)(jsdom@26.1.0)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.1)
 
   packages/@necto-react/necto-react-helpers:
@@ -383,7 +383,7 @@ importers:
         specifier: ^8.5.1
         version: 8.5.1(@microsoft/api-extractor@7.55.1(@types/node@22.19.17))(jiti@2.6.1)(postcss@8.5.8)(typescript@5.9.3)
       vitest:
-        specifier: ^3.0.9
+        specifier: ^3.2.4
         version: 3.2.4(@types/debug@4.1.12)(@types/node@22.19.17)(jiti@2.6.1)(jsdom@26.1.0)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.1)
 
   packages/@necto/necto-color:
@@ -12434,7 +12434,7 @@ snapshots:
       debug: 4.4.3
       es-module-lexer: 1.7.0
       pathe: 2.0.3
-      vite: 6.4.1(@types/node@22.19.17)(jiti@2.6.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.1)
+      vite: 7.2.2(@types/node@22.19.17)(jiti@2.6.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.1)
     transitivePeerDependencies:
       - '@types/node'
       - jiti

@@ -54,7 +54,7 @@
     "sass": "^1.83.4",
     "sass-embedded": "^1.93.2",
     "tsup": "^8.5.1",
-    "vitest": "^3.0.9"
+    "vitest": "^3.2.4"
   },
   "peerDependencies": {
     "@types/react": "^19.1.2",
