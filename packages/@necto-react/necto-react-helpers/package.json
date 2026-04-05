@@ -34,7 +34,7 @@
     "@types/react-dom": "^19.1.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "tsup": "^8.4.0"
+    "tsup": "^8.5.1"
   },
   "peerDependencies": {
     "react": "^19.1.0",

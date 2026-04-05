@@ -39,7 +39,7 @@
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "jsdom": "^26.1.0",
-    "tsup": "^8.4.0"
+    "tsup": "^8.5.1"
   },
   "peerDependencies": {
     "react": "^19.1.0"
