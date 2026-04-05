@@ -28,7 +28,7 @@
     "@types/node": "^22.19.17",
     "@types/sax": "^1.2.7",
     "terser": "^5.39.0",
-    "tsup": "^8.5.0",
+    "tsup": "^8.5.1",
     "typescript": "^5.9.3"
   },
   "dependencies": {

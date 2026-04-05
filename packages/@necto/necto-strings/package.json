@@ -27,6 +27,6 @@
     "@necto/constants": "workspace:*"
   },
   "devDependencies": {
-    "tsup": "^8.4.0"
+    "tsup": "^8.5.1"
   }
 }

@@ -32,7 +32,7 @@
   "devDependencies": {
     "@types/node": "^22.19.17",
     "@types/randombytes": "^2.0.3",
-    "tsup": "^8.4.0"
+    "tsup": "^8.5.1"
   },
   "dependencies": {
     "@necto/assert": "workspace:*",
