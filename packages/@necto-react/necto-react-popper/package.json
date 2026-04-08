@@ -53,6 +53,6 @@
     "@necto/mergers": "workspace:*",
     "@necto/popper": "workspace:*",
     "@necto/types": "workspace:*",
-    "defu": "^6.1.4"
+    "defu": "^6.1.7"
   }
 }
