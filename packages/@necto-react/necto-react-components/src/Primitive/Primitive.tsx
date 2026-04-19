@@ -1,3 +1,5 @@
+// biome-ignore-all lint/suspicious/noExplicitAny: Polymorphic component requires any for dynamic element types.
+
 /**
  * Copyright (c) Corinvo, LLC. and affiliates.
  *
@@ -6,22 +8,31 @@
  *
  */
 
-// biome-ignore-all lint/suspicious/noExplicitAny: Polymorphic component requires any for dynamic element types.
-
+import {
+  Children,
+  forwardRef,
+  cloneElement,
+  createElement,
+  isValidElement,
+  type ForwardedRef
+} from 'react';
 import { DOM } from '@necto/constants';
-import type { HTMLElements } from '@necto/dom';
-import { Children, forwardRef, isValidElement, cloneElement } from 'react';
+import { capitalize } from '@necto/strings';
 
 import { DEFAULT_PRIMITIVE_TAG, PRIMITIVE_NAME } from './constants';
 
-import type { PrimitiveProps, Primitives } from './Primitive.types';
 import type {
-  ElementType,
   Ref,
+  ElementType,
   ReactElement,
-  FC,
+  RefAttributes,
+  FunctionComponent,
   ForwardRefExoticComponent
 } from 'react';
+import type { HTMLElements } from '@necto/dom';
+import type { PrimitiveProps, Primitives } from './Primitive.types';
+
+let tagComponents: Record<string, any> | undefined;
 
 /**
  * @internal
@@ -33,13 +44,14 @@ import type {
  * @returns {ReactElement | null} The rendered element, or null when cloning fails.
  */
 const PrimitiveFn = <E extends ElementType = (typeof HTMLElements)['Div']>(
-  { as, asChild, children, ...props }: PrimitiveProps<E>,
+  props: PrimitiveProps<E>,
   ref: Ref<any>
 ): ReactElement | null => {
-  const Tag = (as ?? DEFAULT_PRIMITIVE_TAG) as ElementType;
+  const { as, asChild, children, ...rest } = props;
 
   if (asChild) {
     const child: Element = Children.only(children);
+
     if (!isValidElement(child)) return null;
 
     return cloneElement(child as ReactElement<any>, {
@@ -48,10 +60,10 @@ const PrimitiveFn = <E extends ElementType = (typeof HTMLElements)['Div']>(
     });
   }
 
-  return (
-    <Tag ref={ref} {...(props as any)}>
-      {children}
-    </Tag>
+  return createElement(
+    as ?? DEFAULT_PRIMITIVE_TAG,
+    { ref, ...rest } as any,
+    children
   );
 };
 
@@ -62,44 +74,38 @@ const PrimitiveFn = <E extends ElementType = (typeof HTMLElements)['Div']>(
  * @param {Ref<any>} ref - Forwarded ref for the rendered element or cloned child.
  * @returns {ReactElement | null} The rendered element or null.
  */
-/**
- * Build the tag→component map lazily so that the module-level
- * `DOM.HTML_TAGS` import from `@necto/constants` is guaranteed to be
- * initialised, even when bundlers split these packages into separate chunks.
- */
-const buildTagComponents = (): Record<string, any> =>
-  DOM.HTML_TAGS.reduce(
-    (acc: Record<string, any>, tag: string): Record<string, any> => {
-      const lower: string = tag;
-      const upper: string = tag[0].toUpperCase() + tag.slice(1);
-
-      const Comp: ForwardRefExoticComponent<
-        Omit<any, 'ref'> & React.RefAttributes<any>
-      > = forwardRef<any, any>((props, ref) =>
-        PrimitiveFn({ ...(props as any), as: tag } as PrimitiveProps<any>, ref)
-      );
-
-      acc[lower] = Comp;
-      acc[upper] = Comp;
-
-      return acc;
-    },
-    {} as Record<string, any>
-  );
-
-let _tagComponents: Record<string, any> | undefined;
-
-const basePrimitive = forwardRef(PrimitiveFn);
-
 export const Primitive: (<E extends ElementType = (typeof HTMLElements)['Div']>(
   props: PrimitiveProps<E> & { ref?: Ref<any> }
 ) => ReactElement | null) &
-  FC<PrimitiveProps<ElementType>> &
-  Primitives & { [k: string]: any } = new Proxy(basePrimitive, {
-  get(target, prop, receiver) {
-    if (!_tagComponents) _tagComponents = buildTagComponents();
-    if (typeof prop === 'string' && prop in _tagComponents)
-      return _tagComponents[prop];
+  FunctionComponent<PrimitiveProps<ElementType>> &
+  Primitives & { [k: string]: any } = new Proxy(forwardRef(PrimitiveFn), {
+  get(
+    target: ForwardRefExoticComponent<Omit<any, 'ref'> & RefAttributes<any>>,
+    prop: string | symbol,
+    receiver: any
+  ): any {
+    if (!tagComponents) {
+      tagComponents = {};
+
+      for (const tag of DOM.HTML_TAGS) {
+        const Component: ForwardRefExoticComponent<
+          Omit<any, 'ref'> & RefAttributes<any>
+        > = forwardRef<any, any>(
+          (props: Omit<any, 'ref'>, ref: ForwardedRef<any>) =>
+            PrimitiveFn(
+              { ...(props as any), as: tag } as PrimitiveProps<any>,
+              ref
+            )
+        );
+
+        tagComponents[tag] = Component;
+        tagComponents[capitalize(tag)] = Component;
+      }
+    }
+
+    if (typeof prop === 'string' && prop in tagComponents)
+      return tagComponents[prop];
+
     return Reflect.get(target, prop, receiver);
   }
 }) as any;

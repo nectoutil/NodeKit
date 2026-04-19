@@ -8,7 +8,6 @@
 
 import type { ElementType, ReactNode } from 'react';
 import type { PrimitiveProps } from '../../Primitive/Primitive.types';
-import type { Interpolation, Theme } from '@emotion/react';
 
 export type ButtonProps<T extends ElementType = 'button'> =
   PrimitiveProps<T> & {
@@ -18,5 +17,4 @@ export type ButtonProps<T extends ElementType = 'button'> =
     iconPosition?: 'left' | 'right';
     iconSize?: number;
     disabled?: boolean;
-    css?: Interpolation<Theme>;
   };

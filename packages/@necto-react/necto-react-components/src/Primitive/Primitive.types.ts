@@ -12,7 +12,6 @@ import type {
   ForwardRefExoticComponent
 } from 'react';
 import type { DOM } from '@necto/constants';
-import type { Interpolation, Theme } from '@emotion/react';
 
 /**
  * Props for the polymorphic Primitive component.
@@ -23,9 +22,6 @@ export type PrimitiveProps<E extends ElementType> = ComponentPropsWithRef<E> & {
 
   /** The element type to render as (e.g., 'div', 'button', custom component). */
   as?: E;
-
-  /** Emotion css prop for custom styles */
-  css?: Interpolation<Theme>;
 };
 
 /**

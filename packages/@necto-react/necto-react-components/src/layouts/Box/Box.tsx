@@ -16,10 +16,10 @@
  */
 
 import cn from 'clsx';
+import styled from '@emotion/styled';
 import { forwardRef } from 'react';
 
 import { Primitive } from '../../Primitive';
-import styles from './Box.module.scss';
 
 import type { BoxProps } from './Box.types';
 import type { ElementType, Ref, ReactElement } from 'react';
@@ -28,6 +28,39 @@ const BOX_NAME: string = 'Box' as const;
 
 const px = (value: number | undefined): string | undefined =>
   value != null ? `${value}px` : undefined;
+
+const StyledBox = styled(Primitive)`
+  --necto-box-border-width: 0;
+  --necto-box-border-block-start-width: var(--necto-box-border-width);
+  --necto-box-border-block-end-width: var(--necto-box-border-width);
+  --necto-box-border-inline-start-width: var(--necto-box-border-width);
+  --necto-box-border-inline-end-width: var(--necto-box-border-width);
+  --necto-box-border-end-start-radius: var(--necto-box-border-radius, 0);
+  --necto-box-border-end-end-radius: var(--necto-box-border-radius, 0);
+  --necto-box-border-start-start-radius: var(--necto-box-border-radius, 0);
+  --necto-box-border-start-end-radius: var(--necto-box-border-radius, 0);
+
+  border-block-start-width: var(--necto-box-border-block-start-width);
+  border-block-end-width: var(--necto-box-border-block-end-width);
+  border-inline-start-width: var(--necto-box-border-inline-start-width);
+  border-inline-end-width: var(--necto-box-border-inline-end-width);
+  border-end-start-radius: var(--necto-box-border-end-start-radius);
+  border-end-end-radius: var(--necto-box-border-end-end-radius);
+  border-start-start-radius: var(--necto-box-border-start-start-radius);
+  border-start-end-radius: var(--necto-box-border-start-end-radius);
+  min-height: var(--necto-box-min-height);
+  min-width: var(--necto-box-min-width);
+  max-width: var(--necto-box-max-width);
+  width: var(--necto-box-width);
+  overflow-x: var(--necto-box-overflow-x);
+  overflow-y: var(--necto-box-overflow-y);
+  padding-block-start: var(--necto-box-padding-block-start);
+  padding-block-end: var(--necto-box-padding-block-end);
+  padding-inline-start: var(--necto-box-padding-inline-start);
+  padding-inline-end: var(--necto-box-padding-inline-end);
+  opacity: var(--necto-box-opacity);
+  z-index: var(--necto-box-z-index);
+`;
 
 const BoxFn = <T extends ElementType = 'div'>(
   props: BoxProps<T>,
@@ -92,11 +125,11 @@ const BoxFn = <T extends ElementType = 'div'>(
       : undefined;
 
   return (
-    <Primitive
+    <StyledBox
       as={as}
       ref={ref}
       {...others}
-      className={cn(styles.Box, `_necto:${BOX_NAME}`, className)}
+      className={cn(`_necto:${BOX_NAME}`, className)}
       style={{
         ...(background && { backgroundColor: background }),
         ...(borderColor && { borderColor }),
@@ -155,7 +188,7 @@ const BoxFn = <T extends ElementType = 'div'>(
       }}
     >
       {children}
-    </Primitive>
+    </StyledBox>
   );
 };
 
