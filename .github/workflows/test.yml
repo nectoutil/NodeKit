@@ -58,6 +58,13 @@ jobs:
       - name: Run tests with coverage
         run: pnpm test:coverage
 
+      - name: Fix lcov paths for Codecov flags
+        run: |
+          find packages -name "lcov.info" -path "*/coverage/*" | while IFS= read -r f; do
+            pkg=$(dirname "$(dirname "$f")")/
+            sed -i "s|^SF:|SF:${pkg}|g" "$f"
+          done
+
       - name: Upload coverage to Codecov
         if: ${{ !cancelled() }}
         uses: codecov/codecov-action@v5
