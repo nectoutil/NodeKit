@@ -30,13 +30,10 @@ export interface FlipOptions extends BoundaryOptions {
  */
 export function flip(options: FlipOptions = {}): Middleware {
   return createMiddleware('flip', (state) => {
-    const { x, y, placement, rects } = state;
+    const { placement, rects } = state;
 
-    // Use actual positioned coordinates, not raw floating rect
-    const positionedRect = { ...rects.floating, x, y };
-
-    const overflow = detectOverflow(positionedRect, options);
-    const isOverflowing = hasOverflow(positionedRect, options);
+    const overflow = detectOverflow(rects.floating, options);
+    const isOverflowing = hasOverflow(rects.floating, options);
 
     if (!isOverflowing) {
       return {};
