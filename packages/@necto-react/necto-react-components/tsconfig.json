@@ -5,7 +5,6 @@
       "@necto-react/components/*": ["./src/*"],
       "@necto-react/components": ["./src/index.ts"]
     },
-    "jsxImportSource": "@emotion/react",
     "target": "ESNext",
     "module": "ESNext",
     "jsx": "react-jsx",
@@ -19,8 +18,8 @@
     "isolatedModules": true,
     "noEmit": false,
     "skipLibCheck": true,
-    "typeRoots": ["./node_modules/@types", "./types"]
+    "typeRoots": ["./node_modules/@types"]
   },
-  "include": ["src", "__tests__", "types"],
+  "include": ["src", "__tests__"],
   "exclude": ["node_modules", "dist"]
 }

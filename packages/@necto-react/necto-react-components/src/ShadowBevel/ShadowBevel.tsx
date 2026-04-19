@@ -8,41 +8,65 @@
 
 import cn from 'clsx';
 import { forwardRef } from 'react';
+import styled from '@emotion/styled';
 
 import { Primitive } from '../Primitive';
-import styles from './ShadowBevel.module.scss';
 import { SHADOW_BEVEL_NAME } from './constants';
 
-import type { ShadowBevelProps } from './ShadowBevel.types';
 import type { Ref, ReactElement } from 'react';
+import type { ShadowBevelProps } from './ShadowBevel.types';
+
+const StyledShadowBevel = styled(Primitive)`
+  --necto-shadow-bevel-content: '';
+  --necto-shadow-bevel-z-index: 0;
+  --necto-shadow-bevel-border-radius: 0;
+  --necto-shadow-bevel-box-shadow: none;
+
+  overflow: clip;
+  z-index: 0;
+  position: relative;
+  box-shadow: var(--necto-shadow-bevel-box-shadow);
+  border-radius: var(--necto-shadow-bevel-border-radius);
+
+  &::before {
+    content: var(--necto-shadow-bevel-content);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    z-index: var(--necto-shadow-bevel-z-index);
+    pointer-events: none;
+    mix-blend-mode: luminosity;
+    border-radius: inherit;
+    box-shadow:
+      1px 0 0 0 rgba(0, 0, 0, 0.13) inset,
+      -1px 0 0 0 rgba(0, 0, 0, 0.13) inset,
+      0 -1px 0 0 rgba(0, 0, 0, 0.17) inset,
+      0 1px 0 0 rgba(204, 204, 204, 0.5) inset;
+  }
+`;
 
 const ShadowBevelFn = (
   props: ShadowBevelProps,
   ref: Ref<HTMLElement>
 ): ReactElement => {
   const {
-    as,
-    asChild: _asChild,
+    style,
     children,
     boxShadow,
     borderRadius,
+    className,
     zIndex = 0,
     bevel = true,
-    className,
-    style,
     ...others
   } = props;
 
   return (
-    <Primitive
-      as={as}
+    <StyledShadowBevel
       ref={ref}
       {...others}
-      className={cn(
-        className,
-        styles.ShadowBevel,
-        `_necto:${SHADOW_BEVEL_NAME}`
-      )}
+      className={cn(className, `_necto:${SHADOW_BEVEL_NAME}`)}
       style={{
         ...style,
         '--necto-shadow-bevel-z-index': zIndex,
@@ -58,20 +82,22 @@ const ShadowBevelFn = (
       }}
     >
       {children}
-    </Primitive>
+    </StyledShadowBevel>
   );
 };
 
-type ShadowBevelComponent = ((
+export const ShadowBevel: ((
   props: ShadowBevelProps & { ref?: Ref<HTMLElement> }
 ) => ReactElement) & {
+  Root: any;
   displayName?: string;
-  Root: ShadowBevelComponent;
+} = Object.assign(forwardRef(ShadowBevelFn), {
+  Root: forwardRef(ShadowBevelFn)
+}) as unknown as ((
+  props: ShadowBevelProps & { ref?: Ref<HTMLElement> }
+) => ReactElement) & {
+  Root: any;
+  displayName?: string;
 };
-
-export const ShadowBevel: ShadowBevelComponent = Object.assign(
-  forwardRef(ShadowBevelFn),
-  { Root: forwardRef(ShadowBevelFn) }
-) as unknown as ShadowBevelComponent;
 
 ShadowBevel.displayName = SHADOW_BEVEL_NAME;

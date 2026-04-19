@@ -5,7 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { kebabCase } from './kebabCase';
 export { slugify } from './slugify';
+export { kebabCase } from './kebabCase';
+export { capitalize } from './capitalize';
 
 export type { SlugifyOptions, CharMap, LocaleMap } from './types';

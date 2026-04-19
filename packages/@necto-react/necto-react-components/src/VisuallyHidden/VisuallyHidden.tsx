@@ -54,25 +54,27 @@ const VisuallyHiddenFn = (
     <Primitive
       as={as}
       ref={ref}
+      style={combinedStyle}
       {...others}
       {...focusWithinProps}
-      style={combinedStyle}
     >
       {children}
     </Primitive>
   );
 };
 
-type VisuallyHiddenComponent = ((
+export const VisuallyHidden: ((
   props: VisuallyHiddenProps & { ref?: Ref<HTMLElement> }
 ) => ReactElement) & {
+  Root: any;
   displayName?: string;
-  Root: VisuallyHiddenComponent;
+} = Object.assign(forwardRef(VisuallyHiddenFn), {
+  Root: forwardRef(VisuallyHiddenFn)
+}) as unknown as ((
+  props: VisuallyHiddenProps & { ref?: Ref<HTMLElement> }
+) => ReactElement) & {
+  Root: any;
+  displayName?: string;
 };
-
-export const VisuallyHidden: VisuallyHiddenComponent = Object.assign(
-  forwardRef(VisuallyHiddenFn),
-  { Root: forwardRef(VisuallyHiddenFn) }
-) as unknown as VisuallyHiddenComponent;
 
 VisuallyHidden.displayName = VISUALLY_HIDDEN_NAME;

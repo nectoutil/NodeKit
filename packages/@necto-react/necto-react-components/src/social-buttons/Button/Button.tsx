@@ -15,7 +15,7 @@
  *
  */
 
-import { css } from '@emotion/react';
+import styled from '@emotion/styled';
 import { HTMLElements } from '@necto/dom';
 import { forwardRef, Fragment } from 'react';
 import { Primitive } from '../../Primitive/Primitive';
@@ -28,9 +28,42 @@ import type {
 } from 'react';
 import type { FC, ReactElement } from 'react';
 import type { ButtonProps } from './Button.types';
-import type { SerializedStyles } from '@emotion/react';
 
 const DEFAULT_BUTTON_TAG: keyof HTMLElementTagNameMap = HTMLElements.Button;
+
+const BrandIcon = styled.span`
+  flex-shrink: 0;
+  line-height: 0;
+  display: inline-flex;
+`;
+
+const StyledButton = styled(Primitive)<{ $disabled?: boolean }>`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 40px;
+  width: 100%;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 20px;
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
+  transition: background-color 0.2s, box-shadow 0.2s, border-color 0.2s, color 0.2s;
+
+  &:focus-visible {
+    outline: none;
+  }
+
+  ${(props) =>
+    props.$disabled &&
+    `
+    opacity: 0.7;
+    cursor: not-allowed;
+    pointer-events: none;
+  `}
+`;
 
 export const Button: FC<ButtonProps> = forwardRef(function SocialButton<
   T extends ElementType = typeof DEFAULT_BUTTON_TAG
@@ -67,59 +100,18 @@ export const Button: FC<ButtonProps> = forwardRef(function SocialButton<
     : { disabled };
 
   const iconNode: ReactNode = icon ? (
-    <span
-      className="_necto:BrandIcon"
-      css={css`
-        flex-shrink: 0;
-        line-height: 0;
-        display: inline-flex;
-      `}
-    >
-      {icon}
-    </span>
+    <BrandIcon className="_necto:BrandIcon">{icon}</BrandIcon>
   ) : null;
 
-  const baseStyles: SerializedStyles = css`
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    min-height: 40px;
-    width: 100%;
-    border-radius: 8px;
-    font-size: 14px;
-    line-height: 20px;
-    cursor: pointer;
-    user-select: none;
-    text-decoration: none;
-    transition: background-color 0.2s, box-shadow 0.2s, border-color 0.2s, color 0.2s;
-
-    &:focus-visible {
-      outline: none;
-    }
-
-    ${
-      disabled &&
-      `
-      opacity: 0.7;
-      cursor: not-allowed;
-      pointer-events: none;
-    `
-    }
-  `;
-
   return (
-    <Primitive
+    <StyledButton
       as={as}
       ref={ref as any}
       asChild={asChild}
       className={className}
-      css={baseStyles}
+      $disabled={disabled}
       {...a11yProps}
-      {...(() => {
-        const { css, ...rest } = props;
-        return rest;
-      })()}
+      {...props}
     >
       <Fragment>
         {!!iconNode && showIcon && iconPosition === 'left' && iconNode}
@@ -128,6 +120,6 @@ export const Button: FC<ButtonProps> = forwardRef(function SocialButton<
 
         {!!iconNode && showIcon && iconPosition === 'right' && iconNode}
       </Fragment>
-    </Primitive>
+    </StyledButton>
   );
 });

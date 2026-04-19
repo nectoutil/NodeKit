@@ -6,8 +6,8 @@
  *
  */
 
-import { HTMLElements } from '@necto/dom';
+export function capitalize(str: string): string {
+  if (str.length === 0) return str;
 
-export const PRIMITIVE_NAME: string = 'Primitive' as const;
-export const DEFAULT_PRIMITIVE_TAG: keyof HTMLElementTagNameMap =
-  HTMLElements.Div;
+  return str[0].toUpperCase() + str.slice(1);
+}
