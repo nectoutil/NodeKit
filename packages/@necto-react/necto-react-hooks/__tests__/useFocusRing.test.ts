@@ -8,21 +8,14 @@
 
 import { useFocusRing } from '@necto-react/hooks';
 import { renderHook, act } from '@testing-library/react';
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-
-vi.mock('@necto-react/hooks', async (importOriginal) => {
-  const actual = await importOriginal();
-  return {
-    ...(typeof actual === 'object' && actual !== null ? actual : {}),
-    useFocus: vi.fn()
-  };
-});
-const { useFocus } = require('@necto-react/hooks');
+import { describe, it, expect } from 'vitest';
 
 describe('useFocusRing', () => {
-  beforeEach(() => {
-    vi.clearAllMocks();
-  });
+  const focusEvt = {
+    target: document.body,
+    currentTarget: document.body,
+    nativeEvent: { target: document.body }
+  } as any;
 
   it('should return isFocused and isFocusVisible as false by default', () => {
     const { result } = renderHook(() => useFocusRing());
@@ -43,68 +36,31 @@ describe('useFocusRing', () => {
   });
 
   it('should update isFocused and isFocusVisible on focus change', () => {
-    let onFocusChange: (focused: boolean) => void = () => {};
-    useFocus.mockImplementation(
-      ({
-        onFocusChange: handler
-      }: {
-        onFocusChange: (focused: boolean) => void;
-      }) => {
-        onFocusChange = handler;
-        return { focusProps: {} };
-      }
-    );
-
     const { result } = renderHook(() => useFocusRing());
 
     act(() => {
-      onFocusChange(true);
+      result.current.focusProps?.onFocus?.(focusEvt);
     });
     expect(result.current.isFocused).toBe(true);
 
     act(() => {
-      onFocusChange(false);
+      result.current.focusProps?.onBlur?.(focusEvt);
     });
     expect(result.current.isFocused).toBe(false);
   });
 
   it('should update isFocusVisible when useFocusVisibleListener is triggered', () => {
-    const { useFocusVisibleListener } = require('../useFocusVisibleListener');
-    let focusVisibleListener: (focusVisible: boolean) => void = () => {};
-    useFocusVisibleListener.mockImplementation(
-      (listener: (focusVisible: boolean) => void) => {
-        focusVisibleListener = listener;
-      }
-    );
-
     const { result } = renderHook(() => useFocusRing());
 
-    act(() => {
-      focusVisibleListener(true);
-    });
     expect(result.current.isFocusVisible).toBe(false);
 
-    const { useFocus } = require('../useFocus');
-    let onFocusChange: (focused: boolean) => void = () => {};
-    useFocus.mockImplementation(
-      ({
-        onFocusChange: handler
-      }: {
-        onFocusChange: (focused: boolean) => void;
-      }) => {
-        onFocusChange = handler;
-        return { focusProps: {} };
-      }
-    );
-
     act(() => {
-      onFocusChange(true);
-      focusVisibleListener(true);
+      result.current.focusProps?.onFocus?.(focusEvt);
     });
     expect(result.current.isFocusVisible).toBe(true);
 
     act(() => {
-      focusVisibleListener(false);
+      result.current.focusProps?.onBlur?.(focusEvt);
     });
     expect(result.current.isFocusVisible).toBe(false);
   });

@@ -9,10 +9,14 @@
 import { renderHook } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
-vi.mock('@necto-react/hooks', () => ({
-  useFocusVisibleListener: vi.fn(),
-  getInteractionModality: vi.fn(() => 'keyboard')
-}));
+vi.mock('@necto-react/hooks', async (importOriginal) => {
+  const actual = await importOriginal();
+  return {
+    ...(typeof actual === 'object' && actual !== null ? actual : {}),
+    useFocusVisibleListener: vi.fn(),
+    getInteractionModality: vi.fn(() => 'keyboard')
+  };
+});
 
 import { useFocusVisible } from '@necto-react/hooks';
 

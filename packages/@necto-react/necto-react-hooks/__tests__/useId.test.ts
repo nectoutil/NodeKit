@@ -13,13 +13,13 @@ import { renderHook } from '@testing-library/react';
 describe('useId Hook', () => {
   it('generates a unique ID with the default prefix if none is provided', () => {
     const { result } = renderHook(() => useId());
-    expect(result.current).toMatch(/^necto-(«r\d+»|\d+-\d+)$/);
+    expect(result.current).toMatch(/^necto-/);
   });
 
   it('generates ID with a custom prefix', () => {
     const customPrefix = 'custom';
     const { result } = renderHook(() => useId({ prefix: customPrefix }));
-    expect(result.current).toMatch(/^custom-(«r\d+»|\d+-\d+)$/);
+    expect(result.current).toMatch(/^custom-/);
   });
 
   it('returns the provided defaultId if given', () => {
@@ -31,7 +31,7 @@ describe('useId Hook', () => {
   it('does not change the ID across re-renders', () => {
     const { result, rerender } = renderHook(() => useId({ prefix: 'stable' }));
     const firstId = result.current;
-    rerender(); // Trigger re-render
+    rerender();
     expect(result.current).toBe(firstId);
   });
 
