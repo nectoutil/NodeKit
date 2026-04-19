@@ -6,7 +6,7 @@
  */
 
 import { test, expect } from '@playwright/experimental-ct-react';
-import { GitHubButton } from '../../src/SocialButtons/GitHub/GitHub';
+import { GitHubButton } from '../../src/social-buttons/GitHub/GitHub';
 
 test.describe('GitHubButton Visual Tests', () => {
   test('should render GitHub button states', async ({ mount }) => {

@@ -7,7 +7,7 @@
 
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { GitLabButton } from '../../src/SocialButtons/GitLab/GitLab';
+import { GitLabButton } from '../../src/social-buttons/GitLab/GitLab';
 
 describe('GitLabButton', () => {
   it('should render with default text', () => {

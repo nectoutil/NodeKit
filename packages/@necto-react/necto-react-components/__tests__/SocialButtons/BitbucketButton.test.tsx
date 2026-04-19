@@ -7,7 +7,7 @@
 
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { BitbucketButton } from '../../src/SocialButtons/Bitbucket/Bitbucket';
+import { BitbucketButton } from '../../src/social-buttons/Bitbucket/Bitbucket';
 
 describe('BitbucketButton', () => {
   it('should render with default text', () => {

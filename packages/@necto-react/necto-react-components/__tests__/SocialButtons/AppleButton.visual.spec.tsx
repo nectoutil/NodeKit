@@ -6,7 +6,7 @@
  */
 
 import { test, expect } from '@playwright/experimental-ct-react';
-import { AppleButton } from '../../src/SocialButtons/Apple/Apple';
+import { AppleButton } from '../../src/social-buttons/Apple/Apple';
 
 test.describe('AppleButton Visual Tests', () => {
   test('should render Apple button states', async ({ mount }) => {

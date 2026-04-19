@@ -7,7 +7,7 @@
 
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { DropboxButton } from '../../src/SocialButtons/Dropbox/Dropbox';
+import { DropboxButton } from '../../src/social-buttons/Dropbox/Dropbox';
 
 describe('DropboxButton', () => {
   it('should render with default text', () => {

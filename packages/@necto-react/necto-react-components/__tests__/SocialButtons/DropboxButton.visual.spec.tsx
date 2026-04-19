@@ -6,7 +6,7 @@
  */
 
 import { test, expect } from '@playwright/experimental-ct-react';
-import { DropboxButton } from '../../src/SocialButtons/Dropbox/Dropbox';
+import { DropboxButton } from '../../src/social-buttons/Dropbox/Dropbox';
 
 test.describe('DropboxButton Visual Tests', () => {
   test('should render Dropbox button states', async ({ mount }) => {

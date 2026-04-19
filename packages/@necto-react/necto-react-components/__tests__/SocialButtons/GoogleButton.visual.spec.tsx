@@ -6,7 +6,7 @@
  */
 
 import { test, expect } from '@playwright/experimental-ct-react';
-import { GoogleButton } from '../../src/SocialButtons/Google/Google';
+import { GoogleButton } from '../../src/social-buttons/Google/Google';
 
 test.describe('GoogleButton Visual Tests', () => {
   test('should render Google button states', async ({ mount }) => {

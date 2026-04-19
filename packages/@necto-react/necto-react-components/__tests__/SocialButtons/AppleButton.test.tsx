@@ -7,7 +7,7 @@
 
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { AppleButton } from '../../src/SocialButtons/Apple/Apple';
+import { AppleButton } from '../../src/social-buttons/Apple/Apple';
 
 describe('AppleButton', () => {
   it('should render with default text', () => {

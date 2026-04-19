@@ -7,7 +7,7 @@
 
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { AtlassianButton } from '../../src/SocialButtons/Atlassian/Atlassian';
+import { AtlassianButton } from '../../src/social-buttons/Atlassian/Atlassian';
 
 describe('AtlassianButton', () => {
   it('should render with default text', () => {

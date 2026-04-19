@@ -6,7 +6,7 @@
  */
 
 import { test, expect } from '@playwright/experimental-ct-react';
-import { BitbucketButton } from '../../src/SocialButtons/Bitbucket/Bitbucket';
+import { BitbucketButton } from '../../src/social-buttons/Bitbucket/Bitbucket';
 
 test.describe('BitbucketButton Visual Tests', () => {
   test('should render Bitbucket button states', async ({ mount }) => {

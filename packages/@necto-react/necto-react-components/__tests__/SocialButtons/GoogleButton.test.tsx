@@ -7,7 +7,7 @@
 
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { GoogleButton } from '../../src/SocialButtons/Google/Google';
+import { GoogleButton } from '../../src/social-buttons/Google/Google';
 
 describe('GoogleButton', () => {
   it('should render with default text', () => {

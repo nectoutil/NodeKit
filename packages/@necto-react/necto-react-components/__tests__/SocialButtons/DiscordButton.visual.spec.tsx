@@ -6,7 +6,7 @@
  */
 
 import { test, expect } from '@playwright/experimental-ct-react';
-import { DiscordButton } from '../../src/SocialButtons/Discord/Discord';
+import { DiscordButton } from '../../src/social-buttons/Discord/Discord';
 
 test.describe('DiscordButton Visual Tests', () => {
   test('should render Discord button states', async ({ mount }) => {

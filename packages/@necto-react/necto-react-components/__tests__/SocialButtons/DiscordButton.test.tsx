@@ -7,7 +7,7 @@
 
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { DiscordButton } from '../../src/SocialButtons/Discord/Discord';
+import { DiscordButton } from '../../src/social-buttons/Discord/Discord';
 
 describe('DiscordButton', () => {
   it('should render with default text', () => {

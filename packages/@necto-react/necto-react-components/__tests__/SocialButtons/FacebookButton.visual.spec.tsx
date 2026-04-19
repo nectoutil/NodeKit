@@ -6,7 +6,7 @@
  */
 
 import { test, expect } from '@playwright/experimental-ct-react';
-import { FacebookButton } from '../../src/SocialButtons/Facebook/Facebook';
+import { FacebookButton } from '../../src/social-buttons/Facebook/Facebook';
 
 test.describe('FacebookButton Visual Tests', () => {
   test('should render Facebook button states', async ({ mount }) => {

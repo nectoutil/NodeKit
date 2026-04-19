@@ -7,7 +7,7 @@
 
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { GitHubButton } from '../../src/SocialButtons/GitHub/GitHub';
+import { GitHubButton } from '../../src/social-buttons/GitHub/GitHub';
 
 describe('GitHubButton', () => {
   it('should render with default text', () => {

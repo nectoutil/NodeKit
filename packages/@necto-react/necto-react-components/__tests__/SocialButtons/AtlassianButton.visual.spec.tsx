@@ -6,7 +6,7 @@
  */
 
 import { test, expect } from '@playwright/experimental-ct-react';
-import { AtlassianButton } from '../../src/SocialButtons/Atlassian/Atlassian';
+import { AtlassianButton } from '../../src/social-buttons/Atlassian/Atlassian';
 
 test.describe('AtlassianButton Visual Tests', () => {
   test('should render Atlassian button states', async ({ mount }) => {
