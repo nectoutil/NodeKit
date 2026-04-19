@@ -63,10 +63,10 @@ jobs:
           GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
           NPM_TOKEN: ''
 
-      - name: Add automerge label to release PR
+      - name: Enable auto-merge on release PR
         if: steps.create_release_pr.outputs.pullRequestNumber
-        uses: actions-ecosystem/action-add-labels@v1
+        uses: peter-evans/enable-pull-request-automerge@v3
         with:
-          labels: automerge
-          number: ${{ steps.create_release_pr.outputs.pullRequestNumber }}
-          github_token: ${{ steps.generate_token.outputs.token }}
+          token: ${{ steps.generate_token.outputs.token }}
+          pull-request-number: ${{ steps.create_release_pr.outputs.pullRequestNumber }}
+          merge-method: squash
