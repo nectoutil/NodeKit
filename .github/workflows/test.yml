@@ -67,8 +67,17 @@ jobs:
 
       - name: Upload coverage to Codecov
         if: ${{ !cancelled() }}
-        uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: "**/coverage/lcov.info"
-          fail_ci_if_error: true
+        run: |
+          curl -Os https://cli.codecov.io/latest/linux/codecov
+          chmod +x codecov
+          find packages -name "lcov.info" -path "*/coverage/*" | while IFS= read -r f; do
+            flag=$(basename "$(dirname "$(dirname "$f")")")
+            ./codecov upload-coverage \
+              --token "$CODECOV_TOKEN" \
+              --file "$f" \
+              --flag "$flag" \
+              --git-service github \
+              --fail-on-error
+          done
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
