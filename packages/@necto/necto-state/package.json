@@ -29,6 +29,7 @@
   "author": "Corinvo OSS Team",
   "license": "MIT",
   "devDependencies": {
-    "tsup": "^8.5.1"
+    "tsup": "^8.5.1",
+    "@vitest/coverage-istanbul": "^3.2.4"
   }
 }

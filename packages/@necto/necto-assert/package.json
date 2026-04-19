@@ -27,7 +27,8 @@
   "devDependencies": {
     "@types/node": "^22.19.17",
     "tsup": "^8.5.1",
-    "vitest": "^3.2.4"
+    "vitest": "^3.2.4",
+    "@vitest/coverage-istanbul": "^3.2.4"
   },
   "repository": {
     "type": "git",

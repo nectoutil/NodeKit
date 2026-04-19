@@ -26,9 +26,7 @@ export function Portal(props: PortalProps): ReactPortal | null {
 
   const { portalNode } = usePopperPortal({ id, root, preserveTabOrder });
 
-  if (!portalNode) {
-    return null;
-  }
+  if (!portalNode) return null;
 
   return createPortal(children, portalNode);
 }

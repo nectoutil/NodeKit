@@ -48,7 +48,8 @@
     "react-dom": "^19.1.0",
     "react-icons": "^5.5.0",
     "tsup": "^8.5.1",
-    "vitest": "^3.2.4"
+    "vitest": "^3.2.4",
+    "@vitest/coverage-istanbul": "^3.2.4"
   },
   "peerDependencies": {
     "@types/react": "^19.1.2",

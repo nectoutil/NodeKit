@@ -11,7 +11,6 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     coverage: {
-      provider: 'v8',
       reporter: ['lcov', 'text'],
       include: ['src/**/*.{ts,tsx}'],
       exclude: ['node_modules', 'dist']

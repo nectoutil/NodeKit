@@ -13,7 +13,6 @@ export default defineConfig({
     exclude: ['node_modules', 'dist'],
 
     coverage: {
-      provider: 'v8',
       reporter: ['lcov', 'text'],
       include: ['src/**/*.{ts,tsx}'],
       exclude: ['node_modules', 'dist']

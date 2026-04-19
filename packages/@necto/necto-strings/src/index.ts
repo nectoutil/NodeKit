@@ -6,7 +6,7 @@
  */
 
 export { slugify } from './slugify';
-export { kebabCase } from './kebabCase';
+export { kebabCase } from './kebab-case';
 export { capitalize } from './capitalize';
 
 export type { SlugifyOptions, CharMap, LocaleMap } from './types';

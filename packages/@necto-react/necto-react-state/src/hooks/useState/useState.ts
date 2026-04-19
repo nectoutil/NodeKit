@@ -7,16 +7,16 @@
 
 import { useMemo } from 'react';
 
+import { useSetState } from '../useSetState';
+import { useStateValue } from '../useStateValue';
+
 import type {
   State,
   WritableState,
   PrimitiveState,
   SetStateAction
 } from '@necto/state';
-
-import { useStateValue } from '../useStateValue';
-import { useSetState } from '../useSetState';
-
+import type { SetState } from '../useSetState/useSetState.types';
 import type { UseStateOptions, StateResult } from './useState.types';
 
 /** useState(writableState) — returns [value, setter] with signal-style API */
@@ -30,14 +30,13 @@ export function useState<Value>(
   options?: UseStateOptions
 ): StateResult<Value> {
   const value = useStateValue(state, options) as Awaited<Value>;
-  const setter = useSetState(
+  const setter: SetState<[SetStateAction<Value>], void> = useSetState(
     state as WritableState<Value, [SetStateAction<Value>], void>,
     options
   );
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: value is intentionally excluded — it is mutated in-place on the tuple below to preserve object identity.
   const result: StateResult<Value> = useMemo((): StateResult<Value> => {
-    const tuple = [value, setter] as unknown as StateResult<Value>;
+    const tuple = [undefined, setter] as unknown as StateResult<Value>;
 
     Object.defineProperties(tuple, {
       value: {

@@ -10,12 +10,12 @@ import { renderHook, act } from '@testing-library/react';
 import { createElement } from 'react';
 
 import { state, createStore } from '@necto/state';
-import { Provider, useStore } from '../src/components/Provider';
+import { Provider } from '../src/components/Provider';
+import { useStore } from '../src/hooks/useStore';
 import { useState } from '../src/hooks/useState';
 
 import type { ReactNode } from 'react';
 import type { Store } from '@necto/state';
-
 function createWrapper(store: Store) {
   return function Wrapper({ children }: { children: ReactNode }) {
     return createElement(Provider, { store }, children);
@@ -49,36 +49,6 @@ describe('Provider', () => {
       createElement(Provider, {}, children);
 
     const { result } = renderHook(() => useStore(), { wrapper });
-
-    expect(result.current).toBeDefined();
-  });
-});
-
-describe('useStore', () => {
-  it('should return the store from context', () => {
-    const store = createStore();
-
-    const { result } = renderHook(() => useStore(), {
-      wrapper: createWrapper(store)
-    });
-
-    expect(result.current).toBe(store);
-  });
-
-  it('should prefer explicit store option over context', () => {
-    const contextStore = createStore();
-    const explicitStore = createStore();
-
-    const { result } = renderHook(
-      () => useStore({ store: explicitStore }),
-      { wrapper: createWrapper(contextStore) }
-    );
-
-    expect(result.current).toBe(explicitStore);
-  });
-
-  it('should fall back to default store when no context or option', () => {
-    const { result } = renderHook(() => useStore());
 
     expect(result.current).toBeDefined();
   });

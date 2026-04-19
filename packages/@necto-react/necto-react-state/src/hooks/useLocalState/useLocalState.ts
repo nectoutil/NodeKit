@@ -10,19 +10,18 @@ import { state } from '@necto/state';
 
 import { useState } from '../useState';
 
-import type { SetStateAction, PrimitiveState } from '@necto/state';
 import type {
-  UseLocalStateOptions,
-  LocalStateResult
+  LocalStateResult,
+  UseLocalStateOptions
 } from './useLocalState.types';
+import type { RefObject } from 'react';
+import type { SetStateAction, PrimitiveState } from '@necto/state';
 
-/** useLocalState(initialValue) — component-scoped state, drop-in for React's useState with signal-style API */
 export function useLocalState<Value>(
   initialValue: Value,
   options?: UseLocalStateOptions
 ): LocalStateResult<Value>;
 
-/** useLocalState(initializer) — component-scoped state with lazy initializer */
 export function useLocalState<Value>(
   initializer: () => Value,
   options?: UseLocalStateOptions
@@ -31,22 +30,29 @@ export function useLocalState<Value>(
 export function useLocalState<Value>(
   initialValue: Value | (() => Value),
   options?: UseLocalStateOptions
-) {
-  const initialRef = useRef<Value>(null);
-  const stateRef = useRef<PrimitiveState<Value>>(null);
+): LocalStateResult<Value> {
+  const initialRef: RefObject<Value | null> = useRef<Value>(null);
+  const stateRef: RefObject<PrimitiveState<Value> | null> =
+    useRef<PrimitiveState<Value>>(null);
 
   if (stateRef.current === null) {
-    const resolved =
+    const resolved: Value =
       typeof initialValue === 'function'
         ? (initialValue as () => Value)()
         : initialValue;
+
     initialRef.current = resolved;
     stateRef.current = state(resolved);
   }
 
   const result = useState(stateRef.current, options) as LocalStateResult<Value>;
 
-  result.reset = () => result[1](initialRef.current as SetStateAction<Value>);
+  Object.defineProperty(result, 'reset', {
+    value: (): void => result[1](initialRef.current as SetStateAction<Value>),
+    writable: true,
+    enumerable: false,
+    configurable: true
+  });
 
   return result;
 }

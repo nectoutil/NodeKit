@@ -7,40 +7,37 @@
 
 import { useCallback } from 'react';
 
+import { useStore } from '../useStore';
+
 import type {
   WritableState,
   ExtractStateArgs,
   ExtractStateResult
 } from '@necto/state';
-
-import { useStore } from '../../components/Provider';
-
 import type { SetState, UseSetStateOptions } from './useSetState.types';
 
-/** useSetState(state) — returns a stable setter function */
 export function useSetState<Value, Args extends unknown[], Result>(
-  s: WritableState<Value, Args, Result>,
+  state: WritableState<Value, Args, Result>,
   options?: UseSetStateOptions
 ): SetState<Args, Result>;
 
 export function useSetState<S extends WritableState<unknown, never[], unknown>>(
-  s: S,
+  state: S,
   options?: UseSetStateOptions
 ): SetState<ExtractStateArgs<S>, ExtractStateResult<S>>;
 
 export function useSetState<Value, Args extends unknown[], Result>(
-  s: WritableState<Value, Args, Result>,
+  state: WritableState<Value, Args, Result>,
   options?: UseSetStateOptions
 ) {
   const store = useStore(options);
-  const setState = useCallback(
+
+  return useCallback(
     (...args: Args) => {
-      if (!('write' in s)) {
-        throw new Error('state is not writable');
-      }
-      return store.set(s, ...args);
+      if (!('write' in state)) throw new Error('state is not writable');
+
+      return store.set(state, ...args);
     },
-    [store, s]
+    [store, state]
   );
-  return setState;
 }

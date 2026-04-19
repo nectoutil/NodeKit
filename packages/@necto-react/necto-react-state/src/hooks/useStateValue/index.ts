@@ -6,4 +6,5 @@
  */
 
 export { useStateValue } from './useStateValue';
+
 export type { UseStateValueOptions } from './useStateValue.types';
