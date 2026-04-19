@@ -54,7 +54,7 @@ export const AriaProps: Record<string, string> = createAriaPropsMap();
  * @example
  * ```ts
  * filterDOMProps(props, {
- *   extraAllowedProps: new Set([...ALLOWED_EXTERNAL_PROPS, ...ALL_ARIA_PROPS])
+ *   additionalAllowedProps: new Set([...ALLOWED_EXTERNAL_PROPS, ...ALL_ARIA_PROPS])
  * });
  * ```
  */

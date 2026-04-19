@@ -40,7 +40,7 @@ export function filterDOMProps(
   const {
     allowLabelableProps = false,
     allowLinkProps = false,
-    extraAllowedProps,
+    additionalAllowedProps,
     allowedLabelableProps = new Set<string>(),
     allowedLinkProps = new Set<string>()
   } = options;
@@ -53,7 +53,7 @@ export function filterDOMProps(
       (DOM_PROP_NAMES.has(propName) ||
         (allowLabelableProps && allowedLabelableProps.has(propName)) ||
         (allowLinkProps && allowedLinkProps.has(propName)) ||
-        extraAllowedProps?.has(propName) ||
+        additionalAllowedProps?.has(propName) ||
         new RegExp(/^(data-.*)$/).test(propName))
     ) {
       allowedProps[propName] = props[propName as keyof typeof props];

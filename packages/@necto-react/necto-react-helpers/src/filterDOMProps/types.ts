@@ -18,8 +18,8 @@ export interface FilterOptions {
   /** Whether to allow link-related props (e.g., href, target). */
   allowLinkProps?: boolean;
 
-  /** Extra prop names to allow through the filter. */
-  extraAllowedProps?: Set<string>;
+  /** Additional prop names to allow through the filter. */
+  additionalAllowedProps?: Set<string>;
 
   /** Custom set of allowed labelable prop names. */
   allowedLabelableProps?: Set<string>;
