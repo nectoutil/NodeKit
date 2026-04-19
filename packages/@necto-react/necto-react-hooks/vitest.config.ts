@@ -12,7 +12,14 @@ export default defineConfig({
   test: {
     include: ['__tests__/**/*.test.{ts,js,tsx,jsx}'],
     environment: 'jsdom',
-    exclude: ['node_modules', 'dist', '.turbo']
+    exclude: ['node_modules', 'dist', '.turbo'],
+
+    coverage: {
+      provider: 'v8',
+      reporter: ['lcov', 'text'],
+      include: ['src/**/*.{ts,tsx}'],
+      exclude: ['node_modules', 'dist']
+    }
   },
   resolve: {
     alias: [

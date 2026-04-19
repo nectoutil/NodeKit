@@ -4,7 +4,8 @@
   "description": "Necto's library for providing positioning and popover utilities.",
   "scripts": {
     "test": "vitest",
-    "build": "tsup --minify terser"
+    "build": "tsup --minify terser",
+    "test:coverage": "vitest run --coverage"
   },
   "repository": {
     "type": "git",

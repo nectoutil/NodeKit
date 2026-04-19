@@ -10,6 +10,13 @@ import { defineConfig } from 'vitest/config';
 export default defineConfig({
   test: {
     include: ['__tests__/**/*.test.{ts,js}'],
-    exclude: ['node_modules', 'dist']
+    exclude: ['node_modules', 'dist'],
+
+    coverage: {
+      provider: 'v8',
+      reporter: ['lcov', 'text'],
+      include: ['src/**/*.{ts,tsx}'],
+      exclude: ['node_modules', 'dist']
+    }
   }
 });

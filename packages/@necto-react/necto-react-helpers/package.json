@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "test": "vitest",
-    "build": "tsup ./src/index.ts --minify --format esm,cjs,iife --dts"
+    "build": "tsup ./src/index.ts --minify --format esm,cjs,iife --dts",
+    "test:coverage": "vitest run --coverage"
   },
   "files": [
     "dist",

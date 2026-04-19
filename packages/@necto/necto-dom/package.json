@@ -3,7 +3,8 @@
   "version": "1.9.2",
   "description": "Necto's library for providing helpers and tools to interact with the DOM.",
   "scripts": {
-    "build": "tsup --minify terser"
+    "build": "tsup --minify terser",
+    "test:coverage": "vitest run --coverage"
   },
   "author": "Corinvo OSS Team",
   "license": "MIT",

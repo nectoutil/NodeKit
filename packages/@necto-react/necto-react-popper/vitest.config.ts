@@ -34,7 +34,14 @@ function getWorkspaceAliases() {
 
 export default defineConfig({
   test: {
-    environment: 'jsdom'
+    environment: 'jsdom',
+
+    coverage: {
+      provider: 'v8',
+      reporter: ['lcov', 'text'],
+      include: ['src/**/*.{ts,tsx}'],
+      exclude: ['node_modules', 'dist']
+    }
   },
   resolve: {
     alias: getWorkspaceAliases()

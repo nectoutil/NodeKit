@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "test": "vitest",
-    "build": "tsup --minify"
+    "build": "tsup --minify",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@necto/types": "workspace:*"

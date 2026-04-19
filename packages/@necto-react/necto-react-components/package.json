@@ -10,7 +10,8 @@
     "test:visual:update": "playwright test --update-snapshots",
     "test:all": "pnpm test:unit && pnpm test:visual",
     "build": "tsup",
-    "dev": "tsup --watch"
+    "dev": "tsup --watch",
+    "test:coverage": "vitest run --coverage"
   },
   "files": [
     "dist"

@@ -3,7 +3,8 @@
   "version": "1.5.1",
   "description": "Necto's library providing object and array merging utilities.",
   "scripts": {
-    "build": "tsup --minify"
+    "build": "tsup --minify",
+    "test:coverage": "vitest run --coverage"
   },
   "files": [
     "dist",

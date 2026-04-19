@@ -4,7 +4,8 @@
   "description": "Necto's atomic state management library.",
   "scripts": {
     "build": "tsup --minify",
-    "test": "vitest"
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "files": [
     "dist",

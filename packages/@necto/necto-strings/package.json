@@ -4,7 +4,8 @@
   "description": "Necto's library providing string manipulation methods.",
   "scripts": {
     "build": "tsup --minify",
-    "test": "vitest"
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "files": [
     "dist",

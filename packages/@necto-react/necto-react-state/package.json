@@ -4,7 +4,8 @@
   "description": "React bindings for @necto/state.",
   "scripts": {
     "build": "tsup --minify",
-    "test": "vitest"
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "files": [
     "dist",

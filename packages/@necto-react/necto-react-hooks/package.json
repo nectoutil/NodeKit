@@ -6,7 +6,8 @@
   "scripts": {
     "test": "vitest",
     "build": "tsup",
-    "dev": "tsup --watch"
+    "dev": "tsup --watch",
+    "test:coverage": "vitest run --coverage"
   },
   "files": [
     "dist",
