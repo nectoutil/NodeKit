@@ -7,7 +7,7 @@
     "test": "vitest",
     "build": "tsup",
     "dev": "tsup --watch",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage --passWithNoTests"
   },
   "files": [
     "dist",

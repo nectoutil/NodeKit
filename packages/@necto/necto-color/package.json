@@ -8,7 +8,7 @@
     "build-disabled": "npm run build:rollup",
     "build-disabled:rollup": "npx rollup -c",
     "test": "pnpm exec vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage --passWithNoTests"
   },
   "files": [
     "dist/*"

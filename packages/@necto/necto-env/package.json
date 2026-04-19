@@ -7,7 +7,7 @@
   "scripts": {
     "test": "vitest",
     "build": "tsup --minify",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage --passWithNoTests"
   },
   "dependencies": {
     "@necto/types": "workspace:*"

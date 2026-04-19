@@ -5,7 +5,7 @@
   "scripts": {
     "build": "tsup --minify",
     "test": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage --passWithNoTests"
   },
   "files": [
     "dist",

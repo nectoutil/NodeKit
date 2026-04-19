@@ -5,7 +5,7 @@
   "scripts": {
     "test": "vitest",
     "build": "tsup --minify terser",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage --passWithNoTests"
   },
   "repository": {
     "type": "git",

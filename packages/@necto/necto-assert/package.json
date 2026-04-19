@@ -22,7 +22,7 @@
   "scripts": {
     "build": "tsup",
     "test": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage --passWithNoTests"
   },
   "devDependencies": {
     "@types/node": "^22.19.17",

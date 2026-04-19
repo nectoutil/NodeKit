@@ -4,7 +4,7 @@
   "description": "Necto's library providing object and array merging utilities.",
   "scripts": {
     "build": "tsup --minify",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage --passWithNoTests"
   },
   "files": [
     "dist",

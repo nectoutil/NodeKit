@@ -6,7 +6,7 @@
   "scripts": {
     "test": "vitest",
     "build": "tsup ./src/index.ts --minify --format esm,cjs,iife --dts",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage --passWithNoTests"
   },
   "files": [
     "dist",

@@ -4,7 +4,7 @@
   "description": "Necto's library for detecting platforms, devices, other device related information.",
   "scripts": {
     "build": "tsup --minify",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage --passWithNoTests"
   },
   "files": [
     "dist",

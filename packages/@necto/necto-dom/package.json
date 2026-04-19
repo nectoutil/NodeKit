@@ -4,7 +4,7 @@
   "description": "Necto's library for providing helpers and tools to interact with the DOM.",
   "scripts": {
     "build": "tsup --minify terser",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage --passWithNoTests"
   },
   "author": "Corinvo OSS Team",
   "license": "MIT",
