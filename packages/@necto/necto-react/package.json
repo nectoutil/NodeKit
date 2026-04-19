@@ -1,11 +1,11 @@
 {
   "name": "@necto/react",
   "version": "1.1.35",
-  "description": "",
+  "description": "Necto's React package aggregating all React utilities and components.",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nectoutil/NodeKit.git"
+    "url": "https://github.com/nectoutil/NodeKit"
   },
   "dependencies": {
     "@necto-react/state": "workspace:*",
@@ -13,5 +13,6 @@
     "@necto-react/popper": "workspace:*",
     "@necto-react/helpers": "workspace:*",
     "@necto-react/components": "workspace:*"
-  }
+  },
+  "license": "MIT"
 }

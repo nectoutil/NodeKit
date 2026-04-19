@@ -1,5 +1,10 @@
 {
   "name": "@necto/idb",
   "version": "0.1.0",
-  "private": true
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nectoutil/NodeKit",
+    "directory": "packages/@necto/necto-idb"
+  }
 }

@@ -25,5 +25,10 @@
   "devDependencies": {
     "@types/node": "^22.19.17",
     "tsup": "^8.5.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nectoutil/NodeKit",
+    "directory": "packages/@necto/necto-crypto"
   }
 }
