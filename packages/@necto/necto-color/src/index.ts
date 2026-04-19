@@ -49,14 +49,16 @@ class Color {
       // Preserve the original input value
       this.value = object;
 
-      // color-string’s 'parsed.model' might be "rgb" or "hsl" (etc.),
-      // and we want to see if there's an alpha channel
+      // color-string normalizes hex strings to 'rgb'/'rgba' - detect hex format explicitly
       let detectedModel = parsed.model;
       const numChannels = parsed.value.length;
 
-      // If we see "rgb" but there are 4 channels, treat it as "rgba" internally
-      // (But remember color-convert doesn’t have an 'rgba' section.)
-      if (detectedModel === 'rgb' && numChannels === 4) {
+      if (object.startsWith('#')) {
+        // #rrggbbaa (9 chars) = hexa, #rgb (4) or #rrggbb (7) = hex
+        detectedModel = (object.length === 9 ? 'hexa' : 'hex') as any;
+      } else if (detectedModel === 'rgb' && numChannels === 4) {
+        // If we see "rgb" but there are 4 channels, treat it as "rgba" internally
+        // (color-convert doesn't have an 'rgba' section)
         detectedModel = 'rgba' as any;
       }
 
@@ -70,9 +72,12 @@ class Color {
       // Save our user-facing model, e.g. "rgba"
       this.model = model || detectedModel;
 
-      // For color-convert lookups, revert "rgba" → "rgb"
+      // For color-convert lookups, revert "rgba" → "rgb", "hex"/"hexa" → "rgb"
       // (Likewise for "hsla" → "hsl", etc.)
-      const colorConvertModel = detectedModel.replace('a', '');
+      const colorConvertModel =
+        detectedModel === 'hex' || detectedModel === 'hexa'
+          ? 'rgb'
+          : detectedModel.replace('a', '');
 
       // Now get channel count from color-convert. E.g. "rgb" → 3 channels
       const channels = (convert as any)[colorConvertModel].channels;
