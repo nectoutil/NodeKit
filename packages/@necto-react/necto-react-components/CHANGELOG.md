@@ -1,5 +1,23 @@
 # @necto-react/components
 
+## 3.0.0
+
+### Major Changes
+
+- 36723b4: **Breaking:** Remove Emotion `css` prop from `ButtonProps` and `Primitive`. The `css` prop and `@emotion/react` dependency have been removed entirely; styling now uses `@emotion/styled` exclusively.
+
+  **Breaking:** Remove `jsxImportSource: "@emotion/react"` from tsconfig — the global `css` prop on JSX elements is no longer available.
+
+  Internally, `Box` and `ShadowBevel` have been migrated from SCSS modules to `@emotion/styled`, allowing the entire SCSS/PostCSS build pipeline (`sass`, `sass-embedded`, `postcss`, `postcss-modules`, `esbuild-sass-plugin`) to be removed.
+
+  **New:** `capitalize` added to `@necto/strings` — uppercases the first character of a string, empty-string safe.
+
+### Patch Changes
+
+- Updated dependencies [36723b4]
+  - @necto/strings@1.9.0
+  - @necto-react/hooks@2.16.4
+
 ## 2.0.0
 
 ### Major Changes
