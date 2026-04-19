@@ -5,7 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { defineConfig } from 'tsup';
+import { env } from 'node:process';
+import { defineConfig } from 'tsdown';
+import { codecovRollupPlugin } from '@codecov/rollup-plugin';
 
 export default defineConfig({
   entry: ['src/index.ts'],
@@ -20,5 +22,12 @@ export default defineConfig({
     /^@react-aria/,
     /^@react-stately/,
     /^@internationalized/
+  ],
+  plugins: [
+    codecovRollupPlugin({
+      enableBundleAnalysis: !!env.CODECOV_TOKEN,
+      bundleName: '@necto-react/hooks',
+      uploadToken: env.CODECOV_TOKEN
+    })
   ]
 });

@@ -9,8 +9,8 @@
     "test:visual": "playwright test",
     "test:visual:update": "playwright test --update-snapshots",
     "test:all": "pnpm test:unit && pnpm test:visual",
-    "build": "tsup",
-    "dev": "tsup --watch",
+    "build": "tsdown",
+    "dev": "tsdown --watch",
     "test:coverage": "vitest run --coverage --passWithNoTests"
   },
   "files": [
@@ -47,7 +47,7 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-icons": "^5.5.0",
-    "tsup": "^8.5.1",
+    "tsdown": "^0.12.7",
     "vitest": "^3.2.4",
     "@vitest/coverage-istanbul": "^3.2.4"
   },

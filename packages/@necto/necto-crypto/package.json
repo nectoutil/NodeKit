@@ -20,7 +20,7 @@
     "README.md"
   ],
   "scripts": {
-    "build": "tsup",
+    "build": "tsdown",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage --passWithNoTests"
   },
@@ -44,7 +44,7 @@
     "buffer": "^6.0.3",
     "fast-check": "^4.7.0",
     "node-forge": "^1.4.0",
-    "tsup": "^8.5.1",
+    "tsdown": "^0.12.7",
     "vitest": "^3.2.4"
   },
   "repository": {

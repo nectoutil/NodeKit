@@ -3,7 +3,7 @@
   "version": "1.9.0",
   "description": "Necto's library providing string manipulation methods.",
   "scripts": {
-    "build": "tsup --minify",
+    "build": "tsdown --minify",
     "test": "vitest",
     "test:coverage": "vitest run --coverage --passWithNoTests"
   },
@@ -28,7 +28,7 @@
     "@necto/constants": "workspace:*"
   },
   "devDependencies": {
-    "tsup": "^8.5.1",
+    "tsdown": "^0.12.7",
     "@vitest/coverage-istanbul": "^3.2.4"
   },
   "repository": {

@@ -5,7 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { defineConfig } from 'tsup';
+import { env } from 'node:process';
+import { defineConfig } from 'tsdown';
+import { codecovRollupPlugin } from '@codecov/rollup-plugin';
 
 export default defineConfig({
   format: ['esm', 'cjs'],
@@ -21,5 +23,12 @@ export default defineConfig({
   dts: true,
   clean: true,
   minify: true,
-  sourcemap: true
+  sourcemap: true,
+  plugins: [
+    codecovRollupPlugin({
+      enableBundleAnalysis: !!env.CODECOV_TOKEN,
+      bundleName: '@necto-react/components',
+      uploadToken: env.CODECOV_TOKEN
+    })
+  ]
 });

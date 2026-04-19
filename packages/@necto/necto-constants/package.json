@@ -3,8 +3,8 @@
   "version": "1.4.5",
   "description": "Necto's library defining common constant values for programs.",
   "scripts": {
-    "build": "tsup --dts",
-    "build:watch": "tsup --watch"
+    "build": "tsdown --dts",
+    "build:watch": "tsdown --watch"
   },
   "keywords": [
     "necto",
@@ -29,7 +29,7 @@
   "author": "Corinvo OSS Team",
   "license": "MIT",
   "devDependencies": {
-    "tsup": "^8.5.1"
+    "tsdown": "^0.12.7"
   },
   "repository": {
     "type": "git",

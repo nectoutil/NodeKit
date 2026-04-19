@@ -5,8 +5,8 @@
   "description": "Necto's React library for positioning, popovers, tooltips, and floating elements.",
   "scripts": {
     "test": "vitest",
-    "build": "tsup",
-    "dev": "tsup ./src/index.ts --watch --minify --format esm,cjs,iife --dts",
+    "build": "tsdown",
+    "dev": "tsdown ./src/index.ts --watch --minify --format esm,cjs,iife --dts",
     "test:coverage": "vitest run --coverage --passWithNoTests"
   },
   "files": [
@@ -42,7 +42,7 @@
     "@types/react-dom": "^19.1.2",
     "@vitest/coverage-istanbul": "^3.2.4",
     "jsdom": "^26.1.0",
-    "tsup": "^8.5.1"
+    "tsdown": "^0.12.7"
   },
   "peerDependencies": {
     "react": "^19.1.0"

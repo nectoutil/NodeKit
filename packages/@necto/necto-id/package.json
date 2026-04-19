@@ -14,8 +14,8 @@
     }
   },
   "scripts": {
-    "build": "tsup --minify",
-    "build:watch": "tsup --watch",
+    "build": "tsdown --minify",
+    "build:watch": "tsdown --watch",
     "test:coverage": "vitest run --coverage --passWithNoTests"
   },
   "files": [
@@ -33,7 +33,7 @@
   "devDependencies": {
     "@types/node": "^22.19.17",
     "@types/randombytes": "^2.0.3",
-    "tsup": "^8.5.1",
+    "tsdown": "^0.12.7",
     "@vitest/coverage-istanbul": "^3.2.4"
   },
   "dependencies": {

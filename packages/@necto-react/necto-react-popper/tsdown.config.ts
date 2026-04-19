@@ -5,7 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { defineConfig } from 'tsup';
+import { env } from 'node:process';
+import { defineConfig } from 'tsdown';
+import { codecovRollupPlugin } from '@codecov/rollup-plugin';
 
 export default defineConfig({
   entry: ['./src/index.ts'],
@@ -15,5 +17,11 @@ export default defineConfig({
   minify: true,
   sourcemap: true,
   external: ['react', 'react-dom'],
-  cjsInterop: true
+  plugins: [
+    codecovRollupPlugin({
+      enableBundleAnalysis: !!env.CODECOV_TOKEN,
+      bundleName: '@necto-react/popper',
+      uploadToken: env.CODECOV_TOKEN
+    })
+  ]
 });

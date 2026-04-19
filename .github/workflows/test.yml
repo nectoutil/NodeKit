@@ -43,6 +43,17 @@ jobs:
 
       - name: Build packages
         run: pnpm build
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: Run tests
+        run: pnpm vitest run --reporter=default --reporter=junit --outputFile=test-report.junit.xml
+
+      - name: Upload test results to Codecov
+        if: ${{ !cancelled() }}
+        uses: codecov/test-results-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Run tests with coverage
         run: pnpm test:coverage

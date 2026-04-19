@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "vitest",
-    "build": "tsup ./src/index.ts --minify --format esm,cjs,iife --dts",
+    "build": "tsdown",
     "test:coverage": "vitest run --coverage --passWithNoTests"
   },
   "files": [
@@ -35,7 +35,7 @@
     "@types/react-dom": "^19.1.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "tsup": "^8.5.1",
+    "tsdown": "^0.12.7",
     "@vitest/coverage-istanbul": "^3.2.4"
   },
   "peerDependencies": {

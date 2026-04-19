@@ -3,7 +3,7 @@
   "version": "0.0.2",
   "description": "Necto's atomic state management library.",
   "scripts": {
-    "build": "tsup --minify",
+    "build": "tsdown --minify",
     "test": "vitest",
     "test:coverage": "vitest run --coverage --passWithNoTests"
   },
@@ -29,7 +29,7 @@
   "author": "Corinvo OSS Team",
   "license": "MIT",
   "devDependencies": {
-    "tsup": "^8.5.1",
+    "tsdown": "^0.12.7",
     "@vitest/coverage-istanbul": "^3.2.4"
   }
 }
