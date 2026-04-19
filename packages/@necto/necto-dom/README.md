@@ -17,6 +17,6 @@
     <img src="https://img.shields.io/badge/License-MIT-97CA25.svg?style=for-the-badge">
   </a>
   <a href="https://codecov.io/github/nectoutil/NodeKit">
-    <img src="https://img.shields.io/codecov/c/github/nectoutil/NodeKit?flag=necto-dom&style=for-the-badge&token=uURJIDdst6"/>
+    <img src="https://img.shields.io/codecov/c/github/nectoutil/NodeKit?flag=necto-dom&style=for-the-badge&token=uURJIDdst6&logo=codecov&label=codecov"/>
   </a>
 </div>

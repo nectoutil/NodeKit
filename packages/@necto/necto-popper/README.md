@@ -16,13 +16,16 @@
   <a aria-label="License" href="https://github.com/corinvo/necto/blob/main/LICENSE">
     <img src="https://img.shields.io/badge/License-MIT-97CA25.svg?style=for-the-badge">
   </a>
+  <a href="https://codecov.io/github/nectoutil/NodeKit">
+    <img src="https://img.shields.io/codecov/c/github/nectoutil/NodeKit?flag=necto-popper&style=for-the-badge&token=uURJIDdst6&logo=codecov&label=codecov"/>
+  </a>
 </div>
 
 ## 📚 Usage
 
 ### Basic Example
 
-```typescript
+```javascript
 import { computePosition, offset, flip, shift } from '@necto/popper';
 
 const button = document.querySelector('#button')!;
@@ -52,7 +55,7 @@ console.log(middlewareData.flip); // { flipped: true, originalPlacement: 'top' }
 
 ### Advanced Example with Options
 
-```typescript
+```javascript
 const { x, y, placement } = await computePosition(button, tooltip, {
   placement: 'bottom-start',
   strategy: 'fixed',
@@ -73,7 +76,7 @@ const { x, y, placement } = await computePosition(button, tooltip, {
 
 ### Type-Safe Helpers
 
-```typescript
+```javascript
 import { getSide, getAlignment, getOppositeSide, isPlacement } from '@necto/popper';
 
 // Extract placement parts
@@ -91,7 +94,7 @@ if (isPlacement(userInput)) {
 
 ## React code interop
 
-```typescript
+```javascript
 // React wrapper - just 20 lines!
 import { computePosition } from '@necto/popper';
 import type { ComputePositionOptions } from '@necto/popper';
@@ -115,6 +118,7 @@ export function usePopper(
 ```
 
 That's it! The vanilla package handles:
+
 - ✅ All positioning logic
 - ✅ All type definitions
 - ✅ All middleware
