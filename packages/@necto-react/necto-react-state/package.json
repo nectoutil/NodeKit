@@ -47,6 +47,7 @@
     "jsdom": "^26.1.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "tsup": "^8.5.1"
+    "tsup": "^8.5.1",
+    "@vitest/coverage-istanbul": "^3.2.4"
   }
 }

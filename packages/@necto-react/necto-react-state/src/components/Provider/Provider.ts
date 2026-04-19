@@ -5,23 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { createContext, createElement, useContext, useRef } from 'react';
+import { createStore } from '@necto/state';
+import { createElement, useRef } from 'react';
 
-import type { ReactElement, ReactNode } from 'react';
+import type { ReactNode, RefObject, ReactElement } from 'react';
 import type { Store } from '@necto/state';
 
-import { createStore, getDefaultStore } from '@necto/state';
-
-const StoreContext = createContext<Store | undefined>(undefined);
-
-type UseStoreOptions = {
-  store?: Store;
-};
-
-export function useStore(options?: UseStoreOptions): Store {
-  const store = useContext(StoreContext);
-  return options?.store || store || getDefaultStore();
-}
+import { StoreContext } from '../../contexts/storeContext';
 
 export function Provider({
   children,
@@ -30,13 +20,13 @@ export function Provider({
   children?: ReactNode;
   store?: Store;
 }): ReactElement {
-  const storeRef = useRef<Store>(null);
-  if (store) {
+  const storeRef: RefObject<Store | null> = useRef<Store>(null);
+
+  if (store)
     return createElement(StoreContext.Provider, { value: store }, children);
-  }
-  if (storeRef.current === null) {
-    storeRef.current = createStore();
-  }
+
+  if (storeRef.current === null) storeRef.current = createStore();
+
   return createElement(
     StoreContext.Provider,
     { value: storeRef.current },

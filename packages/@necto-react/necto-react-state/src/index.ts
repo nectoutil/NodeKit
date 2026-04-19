@@ -5,16 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { useState } from './hooks/useState';
-export { useStateValue } from './hooks/useStateValue';
-export { useSetState } from './hooks/useSetState';
-export { useLocalState } from './hooks/useLocalState';
-export { Provider, useStore } from './components/Provider';
+export * from './hooks/useState';
+export * from './hooks/useStore';
+export * from './hooks/useSetState';
+export * from './hooks/useStateValue';
+export * from './hooks/useLocalState';
 
-export type { UseStateOptions, StateResult } from './hooks/useState';
-export type { UseStateValueOptions } from './hooks/useStateValue';
-export type { UseSetStateOptions } from './hooks/useSetState';
-export type {
-  UseLocalStateOptions,
-  LocalStateResult
-} from './hooks/useLocalState';
+export * from './components/Provider';

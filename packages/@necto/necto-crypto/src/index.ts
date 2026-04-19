@@ -6,4 +6,5 @@
  *
  */
 
+export { md5 } from './md5';
 export { randomBytes } from './random-bytes';

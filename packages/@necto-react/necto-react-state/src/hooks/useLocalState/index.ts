@@ -6,7 +6,8 @@
  */
 
 export { useLocalState } from './useLocalState';
+
 export type {
-  UseLocalStateOptions,
-  LocalStateResult
+  LocalStateResult,
+  UseLocalStateOptions
 } from './useLocalState.types';

@@ -18,7 +18,6 @@ export default defineConfig({
     exclude: ['node_modules', 'dist', '.turbo'],
 
     coverage: {
-      provider: 'v8',
       reporter: ['lcov', 'text'],
       include: ['src/**/*.{ts,tsx}'],
       exclude: ['node_modules', 'dist']

@@ -12,7 +12,13 @@ import { forwardRef, useMemo, useState } from 'react';
 import { Primitive } from '../Primitive';
 import { VISUALLY_HIDDEN_NAME } from './constants';
 
-import type { Ref, ReactElement, CSSProperties } from 'react';
+import type {
+  Ref,
+  ReactElement,
+  CSSProperties,
+  ForwardRefExoticComponent,
+  RefAttributes
+} from 'react';
 import type { VisuallyHiddenProps } from './VisuallyHidden.types';
 
 const VisuallyHiddenFn = (
@@ -66,14 +72,18 @@ const VisuallyHiddenFn = (
 export const VisuallyHidden: ((
   props: VisuallyHiddenProps & { ref?: Ref<HTMLElement> }
 ) => ReactElement) & {
-  Root: any;
+  Root: ForwardRefExoticComponent<
+    VisuallyHiddenProps & RefAttributes<HTMLElement>
+  >;
   displayName?: string;
 } = Object.assign(forwardRef(VisuallyHiddenFn), {
   Root: forwardRef(VisuallyHiddenFn)
 }) as unknown as ((
   props: VisuallyHiddenProps & { ref?: Ref<HTMLElement> }
 ) => ReactElement) & {
-  Root: any;
+  Root: ForwardRefExoticComponent<
+    VisuallyHiddenProps & RefAttributes<HTMLElement>
+  >;
   displayName?: string;
 };
 

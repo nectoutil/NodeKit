@@ -11,9 +11,9 @@ import { Primitive } from '@necto-react/components';
 
 import { ARROW_NAME } from './constants';
 
-import type { ArrowProps } from './Arrow.types';
 import type { Side } from '@necto/popper';
 import type { Ref, ReactElement } from 'react';
+import type { ArrowProps } from './Arrow.types';
 
 /**
  * @internal

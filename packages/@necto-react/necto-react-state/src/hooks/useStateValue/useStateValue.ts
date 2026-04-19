@@ -7,60 +7,60 @@
 
 import { useDebugValue, useEffect, useReducer } from 'react';
 
-import type { State, ExtractStateValue, Store } from '@necto/state';
-
-import { useStore } from '../../components/Provider';
+import { useStore } from '../useStore';
 
 import type { UseStateValueOptions } from './useStateValue.types';
+import type { State, ExtractStateValue, Store } from '@necto/state';
 
-/** useStateValue(state) — subscribe and return the current value */
 export function useStateValue<Value>(
-  s: State<Value>,
+  state: State<Value>,
   options?: UseStateValueOptions
 ): Awaited<Value>;
 
 export function useStateValue<S extends State<unknown>>(
-  s: S,
+  state: S,
   options?: UseStateValueOptions
 ): Awaited<ExtractStateValue<S>>;
 
 export function useStateValue<Value>(
-  s: State<Value>,
+  state: State<Value>,
   options?: UseStateValueOptions
-) {
+): Awaited<Value> {
   const store = useStore(options);
 
   const [[valueFromReducer, storeFromReducer, stateFromReducer], rerender] =
-    useReducer<readonly [Value, Store, typeof s], undefined, []>(
+    useReducer<readonly [Value, Store, typeof state], undefined, []>(
       (prev) => {
-        const nextValue = store.get(s);
+        const nextValue = store.get(state);
         if (
           Object.is(prev[0], nextValue) &&
           prev[1] === store &&
-          prev[2] === s
+          prev[2] === state
         ) {
           return prev;
         }
-        return [nextValue, store, s];
+        return [nextValue, store, state];
       },
       undefined,
-      () => [store.get(s), store, s]
+      () => [store.get(state), store, state]
     );
 
   let value = valueFromReducer;
-  if (storeFromReducer !== store || stateFromReducer !== s) {
+  if (storeFromReducer !== store || stateFromReducer !== state) {
     rerender();
-    value = store.get(s);
+    value = store.get(state);
   }
 
   useEffect(() => {
-    const unsub = store.sub(s, () => {
+    const unsub = store.sub(state, () => {
       rerender();
     });
+
     rerender();
     return unsub;
-  }, [store, s]);
+  }, [store, state]);
 
   useDebugValue(value);
+
   return value as Awaited<Value>;
 }

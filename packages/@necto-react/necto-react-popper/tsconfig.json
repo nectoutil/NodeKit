@@ -1,10 +1,5 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
-    "paths": {
-      "@necto-react/popper/*": ["./src/*"],
-      "@necto-react/popper": ["./src/index.ts"]
-    },
     "target": "ESNext",
     "module": "ESNext",
     "jsx": "react-jsx",

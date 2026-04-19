@@ -20,11 +20,32 @@
     "README.md"
   ],
   "scripts": {
-    "build": "tsup"
+    "build": "tsup",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage --passWithNoTests"
   },
   "devDependencies": {
+    "@peculiar/webcrypto": "^1.5.0",
+    "@stablelib/aes": "^2.0.1",
+    "@stablelib/base64": "^2.0.1",
+    "@stablelib/bytes": "^2.0.1",
+    "@stablelib/chacha20poly1305": "^2.0.1",
+    "@stablelib/ed25519": "^2.1.0",
+    "@stablelib/hex": "^2.0.1",
+    "@stablelib/hmac": "^2.0.1",
+    "@stablelib/random": "^2.0.1",
+    "@stablelib/sha256": "^2.0.1",
+    "@stablelib/sha512": "^2.0.1",
+    "@stablelib/x25519": "^2.0.1",
+    "@stablelib/xchacha20poly1305": "^2.0.1",
     "@types/node": "^22.19.17",
-    "tsup": "^8.5.1"
+    "@types/node-forge": "^1.3.14",
+    "@vitest/coverage-istanbul": "^3.2.4",
+    "buffer": "^6.0.3",
+    "fast-check": "^4.7.0",
+    "node-forge": "^1.4.0",
+    "tsup": "^8.5.1",
+    "vitest": "^3.2.4"
   },
   "repository": {
     "type": "git",

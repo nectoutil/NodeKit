@@ -13,7 +13,12 @@ import styled from '@emotion/styled';
 import { Primitive } from '../Primitive';
 import { SHADOW_BEVEL_NAME } from './constants';
 
-import type { Ref, ReactElement } from 'react';
+import type {
+  Ref,
+  ReactElement,
+  ForwardRefExoticComponent,
+  RefAttributes
+} from 'react';
 import type { ShadowBevelProps } from './ShadowBevel.types';
 
 const StyledShadowBevel = styled(Primitive)`
@@ -89,14 +94,18 @@ const ShadowBevelFn = (
 export const ShadowBevel: ((
   props: ShadowBevelProps & { ref?: Ref<HTMLElement> }
 ) => ReactElement) & {
-  Root: any;
+  Root: ForwardRefExoticComponent<
+    ShadowBevelProps & RefAttributes<HTMLElement>
+  >;
   displayName?: string;
 } = Object.assign(forwardRef(ShadowBevelFn), {
   Root: forwardRef(ShadowBevelFn)
 }) as unknown as ((
   props: ShadowBevelProps & { ref?: Ref<HTMLElement> }
 ) => ReactElement) & {
-  Root: any;
+  Root: ForwardRefExoticComponent<
+    ShadowBevelProps & RefAttributes<HTMLElement>
+  >;
   displayName?: string;
 };
 

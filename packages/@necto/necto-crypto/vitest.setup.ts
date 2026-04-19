@@ -5,6 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export default [
-  'packages/**/*'
-];
+import { Crypto } from '@peculiar/webcrypto';
+
+Object.defineProperty(globalThis, 'crypto', {
+  value: new Crypto(),
+  writable: true,
+  configurable: true
+});

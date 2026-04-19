@@ -8,6 +8,33 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "lib": ["ES2017", "DOM"],
+    "paths": {
+      "@necto/assert": ["packages/@necto/necto-assert/src/index.ts"],
+      "@necto/color": ["packages/@necto/necto-color/src/index.ts"],
+      "@necto/constants": ["packages/@necto/necto-constants/src/index.ts"],
+      "@necto/crypto": ["packages/@necto/necto-crypto/src/index.ts"],
+      "@necto/dom": ["packages/@necto/necto-dom/src/index.ts"],
+      "@necto/env": ["packages/@necto/necto-env/src/index.ts"],
+      "@necto/file": ["packages/@necto/necto-file/src/index.ts"],
+      "@necto/flags": ["packages/@necto/necto-flags/src/index.ts"],
+      "@necto/id": ["packages/@necto/necto-id/src/index.ts"],
+      "@necto/image": ["packages/@necto/necto-image/src/index.ts"],
+      "@necto/math": ["packages/@necto/necto-math/src/index.ts"],
+      "@necto/mergers": ["packages/@necto/necto-mergers/src/index.ts"],
+      "@necto/platform": ["packages/@necto/necto-platform/src/index.ts"],
+      "@necto/popper": ["packages/@necto/necto-popper/src/index.ts"],
+      "@necto/react": ["packages/@necto/necto-react/src/index.ts"],
+      "@necto/state": ["packages/@necto/necto-state/src/index.ts"],
+      "@necto/strings": ["packages/@necto/necto-strings/src/index.ts"],
+      "@necto/types": ["packages/@necto/necto-types/src/index.ts"],
+      "@necto/url": ["packages/@necto/necto-url/src/index.ts"],
+      "@necto-react/components": ["packages/@necto-react/necto-react-components/src/index.ts"],
+      "@necto-react/helpers": ["packages/@necto-react/necto-react-helpers/src/index.ts"],
+      "@necto-react/hooks": ["packages/@necto-react/necto-react-hooks/src/index.ts"],
+      "@necto-react/popper": ["packages/@necto-react/necto-react-popper/src/index.ts"],
+      "@necto-react/state": ["packages/@necto-react/necto-react-state/src/index.ts"],
+      "@necto-react/types": ["packages/@necto-react/necto-react-types/src/index.ts"]
+    }
   },
-  "include": ["packages", "vitest.workspace.ts"]
+  "include": ["packages", "vitest.config.mts"]
 }
