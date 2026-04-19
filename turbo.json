@@ -10,7 +10,8 @@
     },
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**", "cache/**"]
+      "outputs": ["dist/**", "cache/**"],
+      "env": ["CODECOV_TOKEN"]
     }
   }
 }
