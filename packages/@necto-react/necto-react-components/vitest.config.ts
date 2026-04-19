@@ -18,6 +18,7 @@ export default defineConfig({
     exclude: ['node_modules', 'dist', '**/*.visual.spec.*'],
 
     coverage: {
+      provider: 'istanbul',
       reporter: ['lcov', 'text'],
       include: ['src/**/*.{ts,tsx}'],
       exclude: ['node_modules', 'dist']

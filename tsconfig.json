@@ -8,6 +8,7 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "lib": ["ES2017", "DOM"],
+    "baseUrl": ".",
     "paths": {
       "@necto/assert": ["packages/@necto/necto-assert/src/index.ts"],
       "@necto/color": ["packages/@necto/necto-color/src/index.ts"],
