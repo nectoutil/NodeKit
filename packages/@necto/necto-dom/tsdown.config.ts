@@ -15,7 +15,6 @@ export default defineConfig([
     format: ['cjs', 'esm'],
     dts: true,
     sourcemap: false,
-    splitting: false,
     clean: true,
     platform: 'neutral',
     external: ['@necto/constants', '@necto/file', '@necto/platform'],

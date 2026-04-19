@@ -1,4 +1,8 @@
 {
+  "no-inline-html": false,
+  "first-line-heading": false,
+  "no-alt-text": false,
+  "line-length": false,
   "code-block-style": {
     "style": "fenced"
   },
@@ -27,10 +31,6 @@
   },
   "hr-style": {
     "style": "---"
-  },
-  "line-length": {
-    "strict": true,
-    "code_blocks": false
   },
   "link-image-style": {
     "collapsed": false,

@@ -16,3 +16,109 @@ comment:
   layout: "reach,diff,flags,files"
   behavior: default
   require_changes: true
+
+flags:
+  necto-assert:
+    paths:
+      - packages/@necto/necto-assert/
+    carryforward: true
+  necto-color:
+    paths:
+      - packages/@necto/necto-color/
+    carryforward: true
+  necto-constants:
+    paths:
+      - packages/@necto/necto-constants/
+    carryforward: true
+  necto-crypto:
+    paths:
+      - packages/@necto/necto-crypto/
+    carryforward: true
+  necto-dom:
+    paths:
+      - packages/@necto/necto-dom/
+    carryforward: true
+  necto-env:
+    paths:
+      - packages/@necto/necto-env/
+    carryforward: true
+  necto-file:
+    paths:
+      - packages/@necto/necto-file/
+    carryforward: true
+  necto-flags:
+    paths:
+      - packages/@necto/necto-flags/
+    carryforward: true
+  necto-id:
+    paths:
+      - packages/@necto/necto-id/
+    carryforward: true
+  necto-idb:
+    paths:
+      - packages/@necto/necto-idb/
+    carryforward: true
+  necto-image:
+    paths:
+      - packages/@necto/necto-image/
+    carryforward: true
+  necto-math:
+    paths:
+      - packages/@necto/necto-math/
+    carryforward: true
+  necto-mergers:
+    paths:
+      - packages/@necto/necto-mergers/
+    carryforward: true
+  necto-platform:
+    paths:
+      - packages/@necto/necto-platform/
+    carryforward: true
+  necto-popper:
+    paths:
+      - packages/@necto/necto-popper/
+    carryforward: true
+  necto-react:
+    paths:
+      - packages/@necto/necto-react/
+    carryforward: true
+  necto-state:
+    paths:
+      - packages/@necto/necto-state/
+    carryforward: true
+  necto-strings:
+    paths:
+      - packages/@necto/necto-strings/
+    carryforward: true
+  necto-types:
+    paths:
+      - packages/@necto/necto-types/
+    carryforward: true
+  necto-url:
+    paths:
+      - packages/@necto/necto-url/
+    carryforward: true
+  necto-react-components:
+    paths:
+      - packages/@necto-react/necto-react-components/
+    carryforward: true
+  necto-react-helpers:
+    paths:
+      - packages/@necto-react/necto-react-helpers/
+    carryforward: true
+  necto-react-hooks:
+    paths:
+      - packages/@necto-react/necto-react-hooks/
+    carryforward: true
+  necto-react-popper:
+    paths:
+      - packages/@necto-react/necto-react-popper/
+    carryforward: true
+  necto-react-state:
+    paths:
+      - packages/@necto-react/necto-react-state/
+    carryforward: true
+  necto-react-types:
+    paths:
+      - packages/@necto-react/necto-react-types/
+    carryforward: true
