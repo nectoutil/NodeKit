@@ -7,7 +7,8 @@
 
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { renderHook, act } from '@testing-library/react';
-import { useTransitionStatus, useTransitionStyles } from '../src/hooks/useTransitionStatus/useTransitionStatus';
+import { useTransitionStatus } from '../src/hooks/useTransitionStatus/useTransitionStatus';
+import { useTransitionStyles } from '../src/hooks/useTransitionStyles/useTransitionStyles';
 
 describe('useTransitionStatus', () => {
   beforeEach(() => {
@@ -151,7 +152,7 @@ describe('useTransitionStyles', () => {
     expect(result.current.status).toBe('initial');
     expect(result.current.styles).toMatchObject({
       opacity: 0,
-      transitionProperty: 'opacity, transform',
+      transitionProperty: 'opacity',
       transitionDuration: '200ms'
     });
   });
