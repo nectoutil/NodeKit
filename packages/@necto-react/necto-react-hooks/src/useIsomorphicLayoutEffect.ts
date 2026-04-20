@@ -13,4 +13,6 @@ import { useEffect, useLayoutEffect } from 'react';
  * to avoid React warnings about useLayoutEffect during SSR.
  */
 export const useIsomorphicLayoutEffect: typeof useLayoutEffect =
-  typeof window !== 'undefined' ? useLayoutEffect : useEffect;
+  typeof window !== 'undefined'
+    ? useLayoutEffect
+    : /* istanbul ignore next */ useEffect;

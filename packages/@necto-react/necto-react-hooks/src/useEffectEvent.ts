@@ -28,7 +28,9 @@ import type { RefObject } from 'react';
 export function useEffectEvent<T extends (...args: any[]) => any>(fn: T): T {
   const fnRef: RefObject<any> = useRef(fn);
 
-  (typeof window !== 'undefined' ? useLayoutEffect : useEffect)(() => {
+  (typeof window !== 'undefined'
+    ? useLayoutEffect
+    : /* istanbul ignore next */ useEffect)(() => {
     fnRef.current = fn;
   }, [fn]);
 

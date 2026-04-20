@@ -6,10 +6,10 @@
  *
  */
 
-import { useLayoutEffect, useEffect } from 'react';
+import { useLayoutEffect } from 'react';
+import { describe, it, expect, vi } from 'vitest';
 import { renderHook } from '@testing-library/react';
 import { useIsomorphicLayoutEffect } from '@necto-react/hooks';
-import { describe, it, expect, vi } from 'vitest';
 
 describe('useIsomorphicLayoutEffect', () => {
   it('should be a function', () => {

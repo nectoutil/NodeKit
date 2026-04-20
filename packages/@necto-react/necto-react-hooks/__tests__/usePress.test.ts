@@ -63,7 +63,7 @@ describe('usePress', () => {
 
   it('sets data-necto-pressable attribute by default', () => {
     render(createElement(Pressable, null));
-    expect(screen.getByTestId('pressable').hasAttribute('data-necto-pressable')).toBe(true);
+    expect(screen.getByTestId('pressable')).toHaveAttribute('data-necto-pressable');
   });
 
   // ── mouse ──────────────────────────────────────────────────────────────────

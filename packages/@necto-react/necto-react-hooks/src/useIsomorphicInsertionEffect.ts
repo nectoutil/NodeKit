@@ -17,4 +17,5 @@
 import React, { useLayoutEffect } from 'react';
 
 export const useIsomorphicInsertionEffect: typeof useLayoutEffect =
-  (React as any).useInsertionEffect ?? useLayoutEffect;
+  (React as any).useInsertionEffect ??
+  /* istanbul ignore next */ useLayoutEffect;

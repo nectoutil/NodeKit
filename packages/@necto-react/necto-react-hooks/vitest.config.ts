@@ -12,6 +12,7 @@ export default defineConfig({
   test: {
     include: ['__tests__/**/*.test.{ts,js,tsx,jsx}'],
     environment: 'jsdom',
+    setupFiles: ['./vitest.setup.ts'],
     exclude: ['node_modules', 'dist', '.turbo'],
 
     coverage: {

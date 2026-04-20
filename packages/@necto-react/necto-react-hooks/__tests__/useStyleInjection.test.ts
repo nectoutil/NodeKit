@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { describe, it, expect, beforeEach } from 'vitest';
-import { renderHook, act } from '@testing-library/react';
 import { useStyleInjection } from '@necto-react/hooks';
+import { renderHook, act } from '@testing-library/react';
+import { describe, it, expect, beforeEach } from 'vitest';
 
 function getStyleById(id: string): HTMLStyleElement | null {
   return document.getElementById(id) as HTMLStyleElement | null;
