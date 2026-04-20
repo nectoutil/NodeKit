@@ -10,4 +10,3 @@ export * from './layouts';
 export * from './Primitive';
 export * from './ShadowBevel';
 export * from './VisuallyHidden';
-export * from './social-buttons';

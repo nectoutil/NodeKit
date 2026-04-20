@@ -16,8 +16,8 @@ import { SHADOW_BEVEL_NAME } from './constants';
 import type {
   Ref,
   ReactElement,
-  ForwardRefExoticComponent,
-  RefAttributes
+  RefAttributes,
+  ForwardRefExoticComponent
 } from 'react';
 import type { ShadowBevelProps } from './ShadowBevel.types';
 
@@ -79,11 +79,11 @@ const ShadowBevelFn = (
         '--necto-shadow-bevel-box-shadow':
           typeof boxShadow === 'number'
             ? `var(--necto-shadow-${boxShadow})`
-            : (boxShadow ?? 'none'),
+            : boxShadow || 'none',
         '--necto-shadow-bevel-border-radius':
           typeof borderRadius === 'number'
             ? `${borderRadius}px`
-            : (borderRadius ?? '0')
+            : borderRadius || '0'
       }}
     >
       {children}
