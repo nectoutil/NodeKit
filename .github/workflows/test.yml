@@ -18,16 +18,12 @@ jobs:
   test:
     name: Run tests and upload coverage
     runs-on: ubuntu-latest
-    if: |
-      github.actor != 'renovate[bot]' &&
-      github.actor != 'necto-github-bot[bot]' &&
-      !startsWith(github.head_ref, 'changeset-release/')
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          fetch-depth: 0
 
       - name: Install PNPM
         uses: pnpm/action-setup@v4
@@ -56,6 +52,10 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Run tests with coverage
+        if: |
+          github.actor != 'renovate[bot]' &&
+          github.actor != 'necto-github-bot[bot]' &&
+          !startsWith(github.head_ref, 'changeset-release/')
         run: pnpm test:coverage
 
       - name: Fix lcov paths for Codecov flags
