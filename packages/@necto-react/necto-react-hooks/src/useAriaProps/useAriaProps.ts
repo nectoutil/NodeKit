@@ -1,13 +1,5 @@
 // biome-ignore-all lint/suspicious/noExplicitAny: Any for aria props is fine.
 
-/**
- * Copyright (c) Corinvo, LLC. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
 import { useMemo } from 'react';
 import { AriaProps } from '@necto/dom';
 

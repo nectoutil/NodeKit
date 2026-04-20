@@ -6,38 +6,24 @@
  */
 
 // biome-ignore-all lint/correctness/useHookAtTopLevel: Conditional hook usage is intentional.
-/**
- * Portions of this file are based on code from the React Aria Spectrum library by Adobe,
- * licensed under the Apache License, Version 2.0.
- * Copyright (c) Adobe. All rights reserved.
- * See: https://github.com/adobe/react-spectrum
- *
- * Modifications copyright (c) Corinvo, LLC. and affiliates. All rights reserved.
- *
- * This file contains code licensed under:
- * - The MIT License (see LICENSE in the root directory) for Corinvo modifications.
- * - The Apache License, Version 2.0 for portions from Adobe.
- *
- * Modifications have been made to adapt the code for use in this project.
- */
 
 import {
-  createContext,
-  useContext,
-  useEffect,
-  useMemo,
   useRef,
-  useState
+  useMemo,
+  useState,
+  useEffect,
+  useContext,
+  createContext
 } from 'react';
 
-import type { Context } from 'react';
 import type {
-  UseFormStateOptions,
-  UseFormStateReturn,
   ValidationErrors,
+  ValidationResult,
+  UseFormStateReturn,
   ValidationFunction,
-  ValidationResult
+  UseFormStateOptions
 } from './useFormState.types';
+import type { Context } from 'react';
 
 /** An all-valid `ValidityState` where every constraint passes. */
 export const VALID_VALIDITY_STATE: ValidityState = {

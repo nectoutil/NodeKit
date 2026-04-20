@@ -1,11 +1,3 @@
-/**
- * Copyright (c) Corinvo, LLC. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
 import type { DOMAttributes } from '@necto-react/types';
 import type { FocusEvent as ReactFocusEvent } from 'react';
 

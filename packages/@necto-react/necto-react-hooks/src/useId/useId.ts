@@ -8,14 +8,6 @@
 // biome-ignore-all lint/complexity/useLiteralKeys: Key literals are okay here for React backwards compatibility.
 // biome-ignore-all lint/correctness/useHookAtTopLevel: Conditional hook calls OK since it is for backwards compatibility.
 
-/**
- * Copyright (c) Corinvo, LLC. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
 import { registry, defaultContext, idsUpdaterMap } from './hookContext';
 import React, { useRef, useState, useEffect, useId as useReactId } from 'react';
 

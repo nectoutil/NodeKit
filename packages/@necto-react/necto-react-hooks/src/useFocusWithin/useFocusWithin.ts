@@ -5,38 +5,23 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/**
- * Portions of this file are based on code from the React Aria Spectrum library by Adobe,
- * licensed under the Apache License, Version 2.0.
- * Copyright (c) Adobe. All rights reserved.
- * See: https://github.com/adobe/react-spectrum
- *
- * Modifications copyright (c) Corinvo, LLC. and affiliates. All rights reserved.
- *
- * This file contains code licensed under:
- * - The MIT License (see LICENSE in the root directory) for Corinvo modifications.
- * - The Apache License, Version 2.0 for portions from Adobe.
- *
- * Modifications have been made to adapt the code for use in this project.
- */
-
+import {
+  nodeContains,
+  getEventTarget,
+  getOwnerDocument,
+  getActiveElement
+} from '@necto/dom';
 import { useCallback, useRef } from 'react';
 import { createSyntheticEvent } from '@necto-react/helpers';
 import { useGlobalListeners, useSyntheticBlurEvent } from '@necto-react/hooks';
-import {
-  getOwnerDocument,
-  getActiveElement,
-  getEventTarget,
-  nodeContains
-} from '@necto/dom';
 
+import type {
+  FocusWithinReturn,
+  UseFocusWithinOptions
+} from './useFocusWithin.types';
 import type { RefObject, FocusEvent } from 'react';
 import type { DOMAttributes } from '@necto-react/types';
 import type { UseSyntheticBlurEventReturn } from '@necto-react/hooks';
-import type {
-  UseFocusWithinOptions,
-  FocusWithinReturn
-} from './useFocusWithin.types';
 
 export function useFocusWithin(
   options: UseFocusWithinOptions
@@ -97,7 +82,6 @@ export function useFocusWithin(
               state.current.isFocusWithin &&
               !nodeContains(currentTarget, e.target as Element)
             ) {
-              // This might cause issues, fix if it does and revert to: const nativeEvent = new ownerDocument.defaultView!.FocusEvent(
               if (
                 ownerDocument.defaultView &&
                 typeof ownerDocument.defaultView.FocusEvent === 'function'
@@ -106,12 +90,15 @@ export function useFocusWithin(
                   'blur',
                   { relatedTarget: e.target }
                 );
+
                 Object.defineProperty(nativeEvent, 'target', {
                   value: currentTarget
                 });
+
                 Object.defineProperty(nativeEvent, 'currentTarget', {
                   value: currentTarget
                 });
+
                 const event: FocusEvent =
                   createSyntheticEvent<FocusEvent>(nativeEvent);
                 onBlur(event);

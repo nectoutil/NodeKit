@@ -8,14 +8,6 @@
 // biome-ignore-all lint/suspicious/noExplicitAny: Explicit any okay for this type definitions.
 
 /**
- * Copyright (c) Corinvo, LLC. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
-/**
  * Represents the type of user interaction modality that triggered focus.
  *
  * - 'keyboard': Focus was triggered via keyboard input (e.g., Tab key).

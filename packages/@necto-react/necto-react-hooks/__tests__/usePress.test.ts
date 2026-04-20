@@ -295,4 +295,138 @@ describe('usePress', () => {
     await user.keyboard('{Enter}');
     expect(onPress).not.toHaveBeenCalled();
   });
+
+  // ── window mouseup handler (onMouseUpWin) ─────────────────────────────────
+
+  it('fires onPressEnd, onPressUp, and onPress via window mouseup when released over target', () => {
+    const onPressEnd = vi.fn();
+    const onPressUp = vi.fn();
+    const onPress = vi.fn();
+    const el = document.createElement('div');
+    const child = document.createElement('span');
+    el.appendChild(child);
+    document.body.appendChild(el);
+    const { result } = renderHook(() => usePress({ onPressEnd, onPressUp, onPress }));
+    // Must be one synchronous act — effect cleanup removes the window listener on re-render
+    act(() => {
+      result.current.pressProps.onMouseDown?.(mouseEvent({ currentTarget: el, target: el }));
+      child.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }));
+    });
+    expect(onPressEnd).toHaveBeenCalled();
+    expect(onPressUp).toHaveBeenCalled();
+    expect(onPress).toHaveBeenCalled();
+    document.body.removeChild(el);
+  });
+
+  it('fires onPressEnd and onPressUp but not onPress via window mouseup when outside target', () => {
+    const onPressEnd = vi.fn();
+    const onPressUp = vi.fn();
+    const onPress = vi.fn();
+    const el = document.createElement('div');
+    document.body.appendChild(el);
+    const { result } = renderHook(() => usePress({ onPressEnd, onPressUp, onPress }));
+    act(() => {
+      result.current.pressProps.onMouseDown?.(mouseEvent({ currentTarget: el, target: el }));
+      window.dispatchEvent(new MouseEvent('mouseup'));
+    });
+    expect(onPressEnd).toHaveBeenCalled();
+    expect(onPressUp).toHaveBeenCalled();
+    expect(onPress).not.toHaveBeenCalled();
+    document.body.removeChild(el);
+  });
+
+  // ── onTouchEnd component handler ──────────────────────────────────────────
+
+  it('calls onPressEnd, onPressUp, and onPress on touchend over target', () => {
+    const onPressEnd = vi.fn();
+    const onPressUp = vi.fn();
+    const onPress = vi.fn();
+    const { result } = renderHook(() => usePress({ onPressEnd, onPressUp, onPress }));
+    const el = document.createElement('div');
+    act(() => { result.current.pressProps.onTouchStart?.(touchEvent({ currentTarget: el, target: el })); });
+    act(() => { result.current.pressProps.onTouchEnd?.(touchEvent({ currentTarget: el, target: el })); });
+    expect(onPressEnd).toHaveBeenCalledWith(expect.objectContaining({ type: 'pressend', pointerType: 'touch' }));
+    expect(onPressUp).toHaveBeenCalled();
+    expect(onPress).toHaveBeenCalledWith(expect.objectContaining({ type: 'press', pointerType: 'touch' }));
+  });
+
+  it('does not call onPress on touchend when target is outside currentTarget', () => {
+    const onPress = vi.fn();
+    const { result } = renderHook(() => usePress({ onPress }));
+    const el = document.createElement('div');
+    const outside = document.createElement('span');
+    act(() => { result.current.pressProps.onTouchStart?.(touchEvent({ currentTarget: el, target: el })); });
+    act(() => { result.current.pressProps.onTouchEnd?.(touchEvent({ currentTarget: el, target: outside })); });
+    expect(onPress).not.toHaveBeenCalled();
+  });
+
+  it('ignores touchend when pressStarted is false', () => {
+    const onPressEnd = vi.fn();
+    const { result } = renderHook(() => usePress({ onPressEnd }));
+    act(() => { result.current.pressProps.onTouchEnd?.(touchEvent()); });
+    expect(onPressEnd).not.toHaveBeenCalled();
+  });
+
+  // ── window touchend handler (onTouchEndWin) ───────────────────────────────
+
+  it('fires onPressEnd and onPressUp via window touchend after touchstart', () => {
+    const onPressEnd = vi.fn();
+    const onPressUp = vi.fn();
+    const { result } = renderHook(() => usePress({ onPressEnd, onPressUp }));
+    const el = document.createElement('div');
+    act(() => {
+      result.current.pressProps.onTouchStart?.(touchEvent({ currentTarget: el, target: el }));
+      window.dispatchEvent(new TouchEvent('touchend'));
+    });
+    expect(onPressEnd).toHaveBeenCalled();
+    expect(onPressUp).toHaveBeenCalled();
+  });
+
+  // ── window touchcancel handler (onTouchCancelWin) ─────────────────────────
+
+  it('fires onPressEnd via window touchcancel after touchstart', () => {
+    const onPressEnd = vi.fn();
+    const { result } = renderHook(() => usePress({ onPressEnd }));
+    const el = document.createElement('div');
+    act(() => {
+      result.current.pressProps.onTouchStart?.(touchEvent({ currentTarget: el, target: el }));
+      window.dispatchEvent(new TouchEvent('touchcancel'));
+    });
+    expect(onPressEnd).toHaveBeenCalled();
+  });
+
+  // ── styleInjection non-global ─────────────────────────────────────────────
+
+  it('sets touchAction on element when styleInjection is not global', async () => {
+    const el = document.createElement('div');
+    document.body.appendChild(el);
+    const ref = { current: el };
+    // JSDOM returns '' for touchAction, but the hook checks for 'auto'; mock it
+    const spy = vi.spyOn(window, 'getComputedStyle').mockReturnValue({ touchAction: 'auto' } as CSSStyleDeclaration);
+    renderHook(() => usePress({ styleInjection: 'inline', ref }));
+    await act(async () => {});
+    expect(el.style.touchAction).toBe('pan-x pan-y pinch-zoom');
+    spy.mockRestore();
+    document.body.removeChild(el);
+  });
+
+  it('does not throw when styleInjection is not global and no ref provided', async () => {
+    renderHook(() => usePress({ styleInjection: 'inline' }));
+    await act(async () => {});
+  });
+
+  // ── setTimeout inside onTouchStart ────────────────────────────────────────
+
+  it('resets ignoreEmulatedMouseEvents after 100ms timeout on touchstart', () => {
+    vi.useFakeTimers();
+    const onClick = vi.fn();
+    const { result } = renderHook(() => usePress({ onClick }));
+    const el = document.createElement('div');
+    act(() => { result.current.pressProps.onTouchStart?.(touchEvent({ currentTarget: el, target: el })); });
+    // After 100ms the flag resets and click handler fires normally
+    act(() => { vi.advanceTimersByTime(100); });
+    act(() => { result.current.pressProps.onClick?.(mouseEvent()); });
+    expect(onClick).toHaveBeenCalled();
+    vi.useRealTimers();
+  });
 });
