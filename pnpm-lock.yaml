@@ -416,8 +416,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.2
       color-string:
-        specifier: ^2.0.1
-        version: 2.1.2
+        specifier: ^2.1.4
+        version: 2.1.4
     devDependencies:
       '@babel/preset-env':
         specifier: ^7.26.9
@@ -3726,8 +3726,8 @@ packages:
     resolution: {integrity: sha512-9vEt7gE16EW7Eu7pvZnR0abW9z6ufzhXxGXZEVU9IqPdlsUiMwJeJfRtq0zePUmnbHGT9zajca7mX8zgoayo4A==}
     engines: {node: '>=12.20'}
 
-  color-string@2.1.2:
-    resolution: {integrity: sha512-RxmjYxbWemV9gKu4zPgiZagUxbH3RQpEIO77XoSSX0ivgABDZ+h8Zuash/EMFLTI4N9QgFPOJ6JQpPZKFxa+dA==}
+  color-string@2.1.4:
+    resolution: {integrity: sha512-Bb6Cq8oq0IjDOe8wJmi4JeNn763Xs9cfrBcaylK1tPypWzyoy2G3l90v9k64kjphl/ZJjPIShFztenRomi8WTg==}
     engines: {node: '>=18'}
 
   colorette@1.4.0:
@@ -10101,7 +10101,7 @@ snapshots:
 
   color-name@2.0.2: {}
 
-  color-string@2.1.2:
+  color-string@2.1.4:
     dependencies:
       color-name: 2.0.2
 
