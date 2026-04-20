@@ -33,6 +33,7 @@ jobs:
           mode: fix
 
       - name: Create PR with license headers
+        id: create_pr
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ steps.generate_token.outputs.token }}
@@ -41,4 +42,11 @@ jobs:
           body: 'Automated PR to add missing license headers to source files.'
           branch: chore/license-headers
           delete-branch: true
-          labels: automerge
+
+      - name: Enable auto-merge on license header PR
+        if: steps.create_pr.outputs.pull-request-number
+        uses: peter-evans/enable-pull-request-automerge@v3
+        with:
+          token: ${{ steps.generate_token.outputs.token }}
+          pull-request-number: ${{ steps.create_pr.outputs.pull-request-number }}
+          merge-method: squash
