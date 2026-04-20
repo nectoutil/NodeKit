@@ -29,7 +29,7 @@
     }
   },
   "devDependencies": {
-    "@biomejs/biome": "2.0.0-beta.5",
+    "@biomejs/biome": "2.4.12",
     "@changesets/cli": "^2.30.0",
     "@codecov/rollup-plugin": "^2.0.1",
     "@storybook/addon-essentials": "^8.6.14",
