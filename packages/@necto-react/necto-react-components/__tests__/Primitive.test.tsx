@@ -5,54 +5,162 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { describe, it, expect } from 'vitest';
+import { createRef } from 'react';
+import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { Primitive } from '../src/Primitive/Primitive';
 
 describe('Primitive', () => {
-  it('should render as default div element', () => {
-    const { container } = render(<Primitive>Test Content</Primitive>);
-    expect(container.querySelector('div')).toBeInTheDocument();
-    expect(screen.getByText('Test Content')).toBeInTheDocument();
+  describe('default rendering', () => {
+    it('renders as a div by default', () => {
+      const { container } = render(<Primitive>content</Primitive>);
+      expect(container.firstChild?.nodeName).toBe('DIV');
+    });
+
+    it('renders children', () => {
+      render(<Primitive>Test Content</Primitive>);
+      expect(screen.getByText('Test Content')).toBeInTheDocument();
+    });
+
+    it('passes className through', () => {
+      const { container } = render(<Primitive className="foo">x</Primitive>);
+      expect(container.firstChild).toHaveClass('foo');
+    });
+
+    it('passes arbitrary props through', () => {
+      render(<Primitive data-testid="prim" aria-label="test">x</Primitive>);
+      expect(screen.getByTestId('prim')).toHaveAttribute('aria-label', 'test');
+    });
+
+    it('has the correct displayName', () => {
+      expect(Primitive.displayName).toBe('Primitive');
+    });
   });
 
-  it('should render as custom element via "as" prop', () => {
-    const { container } = render(<Primitive as="button">Click Me</Primitive>);
-    expect(container.querySelector('button')).toBeInTheDocument();
-    expect(screen.getByText('Click Me')).toBeInTheDocument();
+  describe('as prop', () => {
+    it('renders as the specified HTML tag', () => {
+      const { container } = render(<Primitive as="section">x</Primitive>);
+      expect(container.firstChild?.nodeName).toBe('SECTION');
+    });
+
+    it('renders as a button with correct attributes', () => {
+      render(<Primitive as="button" type="submit">Submit</Primitive>);
+      const el = screen.getByText('Submit');
+      expect(el.tagName).toBe('BUTTON');
+      expect(el).toHaveAttribute('type', 'submit');
+    });
+
+    it('renders as an anchor with href', () => {
+      render(<Primitive as="a" href="/test">Link</Primitive>);
+      const el = screen.getByText('Link');
+      expect(el.tagName).toBe('A');
+      expect(el).toHaveAttribute('href', '/test');
+    });
   });
 
-  it('should merge props with child element when asChild is true', () => {
-    render(
-      <Primitive asChild data-testid="merged">
-        <button>Child Button</button>
-      </Primitive>
-    );
-    const button = screen.getByTestId('merged');
-    expect(button).toBeInTheDocument();
-    expect(button.tagName).toBe('BUTTON');
-    expect(screen.getByText('Child Button')).toBeInTheDocument();
+  describe('ref forwarding', () => {
+    it('forwards ref to the default div element', () => {
+      const ref = createRef<HTMLDivElement>();
+      render(<Primitive ref={ref}>x</Primitive>);
+      expect(ref.current).toBeInstanceOf(HTMLDivElement);
+    });
+
+    it('forwards ref when using the as prop', () => {
+      const ref = createRef<HTMLButtonElement>();
+      render(<Primitive as="button" ref={ref}>x</Primitive>);
+      expect(ref.current).toBeInstanceOf(HTMLButtonElement);
+    });
   });
 
-  it('should pass through className and other props', () => {
-    const { container } = render(
-      <Primitive className="custom-class" data-testid="test">
-        Content
-      </Primitive>
-    );
-    const element = container.querySelector('.custom-class');
-    expect(element).toBeInTheDocument();
-    expect(element).toHaveAttribute('data-testid', 'test');
+  describe('asChild', () => {
+    it('renders the child element with no extra div wrapper', () => {
+      const { container } = render(
+        <Primitive asChild>
+          <span>content</span>
+        </Primitive>
+      );
+      expect(container.firstChild?.nodeName).toBe('SPAN');
+      expect(container.querySelector('div')).toBeNull();
+    });
+
+    it('merges props onto the child element', () => {
+      render(
+        <Primitive asChild data-testid="cloned">
+          <span>child</span>
+        </Primitive>
+      );
+      expect(screen.getByTestId('cloned').tagName).toBe('SPAN');
+    });
+
+    it('throws when given more than one child', () => {
+      const spy = vi.spyOn(console, 'error').mockImplementation(() => {});
+      expect(() =>
+        render(
+          <Primitive asChild>
+            <span>a</span>
+            <span>b</span>
+          </Primitive>
+        )
+      ).toThrow();
+      spy.mockRestore();
+    });
+
+    it('uses the forwarded ref when child has no ref', () => {
+      const ref = createRef<HTMLSpanElement>();
+      render(
+        <Primitive asChild ref={ref}>
+          <span>x</span>
+        </Primitive>
+      );
+      expect(ref.current).toBeInstanceOf(HTMLSpanElement);
+    });
+
+    it('preserves the child existing ref', () => {
+      const childRef = createRef<HTMLSpanElement>();
+      render(
+        <Primitive asChild>
+          <span ref={childRef}>x</span>
+        </Primitive>
+      );
+      expect(childRef.current).toBeInstanceOf(HTMLSpanElement);
+    });
   });
 
-  it('should render as anchor tag with href', () => {
-    render(
-      <Primitive as="a" href="/test">
-        Link
-      </Primitive>
-    );
-    const link = screen.getByText('Link');
-    expect(link.tagName).toBe('A');
-    expect(link).toHaveAttribute('href', '/test');
+  describe('tag components via Proxy', () => {
+    it('Primitive.div renders a div', () => {
+      render(<Primitive.div>content</Primitive.div>);
+      expect(screen.getByText('content').tagName).toBe('DIV');
+    });
+
+    it('Primitive.Div renders a div via capitalized accessor', () => {
+      render(<Primitive.Div>content</Primitive.Div>);
+      expect(screen.getByText('content').tagName).toBe('DIV');
+    });
+
+    it('Primitive.button renders a button', () => {
+      render(<Primitive.button type="button">click</Primitive.button>);
+      expect(screen.getByText('click').tagName).toBe('BUTTON');
+    });
+
+    it('Primitive.span renders a span', () => {
+      render(<Primitive.span>inline</Primitive.span>);
+      expect(screen.getByText('inline').tagName).toBe('SPAN');
+    });
+
+    it('tag component passes props through', () => {
+      render(<Primitive.div data-testid="tag-div" className="c">x</Primitive.div>);
+      const el = screen.getByTestId('tag-div');
+      expect(el).toHaveClass('c');
+    });
+
+    it('tag component forwards ref', () => {
+      const ref = createRef<HTMLDivElement>();
+      render(<Primitive.div ref={ref}>x</Primitive.div>);
+      expect(ref.current).toBeInstanceOf(HTMLDivElement);
+    });
+
+    it('returns the same component on repeated access', () => {
+      expect(Primitive.div).toBe(Primitive.div);
+    });
   });
 });

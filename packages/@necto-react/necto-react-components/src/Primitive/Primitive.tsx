@@ -1,12 +1,3 @@
-/*
- * Copyright (c) Corinvo, LLC. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-// biome-ignore-all lint/suspicious/noExplicitAny: Polymorphic component requires any for dynamic element types.
-
 /**
  * Copyright (c) Corinvo, LLC. and affiliates.
  *
@@ -15,13 +6,14 @@
  *
  */
 
+// biome-ignore-all lint/suspicious/noExplicitAny: Polymorphic component requires any for dynamic element types.
+
 import {
   Children,
   forwardRef,
   cloneElement,
   createElement,
-  isValidElement,
-  type ForwardedRef
+  isValidElement
 } from 'react';
 import { DOM } from '@necto/constants';
 import { capitalize } from '@necto/strings';
@@ -31,6 +23,7 @@ import { DEFAULT_PRIMITIVE_TAG, PRIMITIVE_NAME } from './constants';
 import type {
   Ref,
   ElementType,
+  ForwardedRef,
   ReactElement,
   RefAttributes,
   FunctionComponent,
@@ -110,8 +103,9 @@ export const Primitive: (<E extends ElementType = (typeof HTMLElements)['Div']>(
       }
     }
 
-    if (typeof prop === 'string' && prop in tagComponents)
+    if (typeof prop === 'string' && prop in tagComponents) {
       return tagComponents[prop];
+    }
 
     return Reflect.get(target, prop, receiver);
   }

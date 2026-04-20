@@ -5,3 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  *
  */
+
+import { expect } from 'vitest';
+import '@testing-library/jest-dom';
+import { matchers as emotionMatchers } from '@emotion/jest';
+
+expect.extend(emotionMatchers);
