@@ -1,5 +1,11 @@
 # @necto-react/components
 
+## 3.0.1
+
+### Patch Changes
+
+- fbc449f: Add `@emotion/jest` to the test setup for `necto-react-components`. Extends vitest's `expect` with `toHaveStyleRule` so tests can assert emotion-generated CSS rules and pseudo-element styles. Also fixes `ShadowBevel` empty-string fallback for `boxShadow` and `borderRadius` props, and adds comprehensive static-style coverage for the component.
+
 ## 3.0.0
 
 ### Major Changes
