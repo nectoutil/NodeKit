@@ -8,16 +8,19 @@ coverage:
         target: auto
         threshold: 5%
         if_not_found: success
+        carryforward: true
     patch:
       default:
         target: auto
         threshold: 5%
         if_not_found: success
+        carryforward: true
 
 comment:
   layout: "reach,diff,flags,files"
   behavior: default
-  require_changes: true
+  require_changes: false
+  show_carryforward_flags: true
 
 flags:
   necto-assert:
