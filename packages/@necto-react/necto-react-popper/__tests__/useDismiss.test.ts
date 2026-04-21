@@ -5,18 +5,24 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { renderHook, act } from '@testing-library/react';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+import userEvent from '@testing-library/user-event';
+
 import { useDismiss } from '../src/hooks/useDismiss/useDismiss';
+
+import type { UserEvent } from '@testing-library/user-event';
 
 type RefFn = (node: Element | null) => void;
 type PointerFn = () => void;
 
 describe('useDismiss', () => {
   let onOpenChange: ReturnType<typeof vi.fn>;
+  let user: UserEvent;
 
   beforeEach(() => {
     onOpenChange = vi.fn();
+    user = userEvent.setup();
   });
 
   it('should return reference and floating prop objects', () => {
@@ -28,83 +34,57 @@ describe('useDismiss', () => {
     expect(result.current.floating).toBeDefined();
   });
 
-  it('should close on Escape key', () => {
+  it('should close on Escape key', async () => {
     renderHook(() => useDismiss({ open: true, onOpenChange }));
 
-    act(() => {
-      document.dispatchEvent(
-        new KeyboardEvent('keydown', { key: 'Escape', bubbles: true })
-      );
-    });
+    await user.keyboard('{Escape}');
 
     expect(onOpenChange).toHaveBeenCalledWith(false);
   });
 
-  it('should not close on Escape when escapeKey is false', () => {
+  it('should not close on Escape when escapeKey is false', async () => {
     renderHook(() =>
       useDismiss({ open: true, onOpenChange, escapeKey: false })
     );
 
-    act(() => {
-      document.dispatchEvent(
-        new KeyboardEvent('keydown', { key: 'Escape', bubbles: true })
-      );
-    });
+    await user.keyboard('{Escape}');
 
     expect(onOpenChange).not.toHaveBeenCalled();
   });
 
-  it('should close on outside click', () => {
+  it('should close on outside click', async () => {
     renderHook(() => useDismiss({ open: true, onOpenChange }));
 
-    act(() => {
-      document.dispatchEvent(
-        new MouseEvent('mousedown', { bubbles: true })
-      );
-    });
+    await user.click(document.body);
 
     expect(onOpenChange).toHaveBeenCalledWith(false);
   });
 
-  it('should not close on outside click when outsidePress is false', () => {
+  it('should not close on outside click when outsidePress is false', async () => {
     renderHook(() =>
       useDismiss({ open: true, onOpenChange, outsidePress: false })
     );
 
-    act(() => {
-      document.dispatchEvent(
-        new MouseEvent('mousedown', { bubbles: true })
-      );
-    });
+    await user.click(document.body);
 
     expect(onOpenChange).not.toHaveBeenCalled();
   });
 
-  it('should not fire when not open', () => {
+  it('should not fire when not open', async () => {
     renderHook(() => useDismiss({ open: false, onOpenChange }));
 
-    act(() => {
-      document.dispatchEvent(
-        new KeyboardEvent('keydown', { key: 'Escape', bubbles: true })
-      );
-      document.dispatchEvent(
-        new MouseEvent('mousedown', { bubbles: true })
-      );
-    });
+    await user.keyboard('{Escape}');
+    await user.click(document.body);
 
     expect(onOpenChange).not.toHaveBeenCalled();
   });
 
-  it('should not fire when disabled', () => {
+  it('should not fire when disabled', async () => {
     renderHook(() =>
       useDismiss({ open: true, onOpenChange, enabled: false })
     );
 
-    act(() => {
-      document.dispatchEvent(
-        new KeyboardEvent('keydown', { key: 'Escape', bubbles: true })
-      );
-    });
+    await user.keyboard('{Escape}');
 
     expect(onOpenChange).not.toHaveBeenCalled();
   });
@@ -135,14 +115,10 @@ describe('useDismiss', () => {
     expect(typeof result.current.floating.onPointerDown).toBe('function');
   });
 
-  it('should not close on non-Escape keys', () => {
+  it('should not close on non-Escape keys', async () => {
     renderHook(() => useDismiss({ open: true, onOpenChange }));
 
-    act(() => {
-      document.dispatchEvent(
-        new KeyboardEvent('keydown', { key: 'Enter', bubbles: true })
-      );
-    });
+    await user.keyboard('{Enter}');
 
     expect(onOpenChange).not.toHaveBeenCalled();
   });
@@ -166,8 +142,6 @@ describe('useDismiss', () => {
   });
 
   it('should read escapeKey flag from bubbles object', () => {
-    const stopSpy = vi.spyOn(KeyboardEvent.prototype, 'stopPropagation');
-
     renderHook(() =>
       useDismiss({
         open: true,
@@ -176,38 +150,32 @@ describe('useDismiss', () => {
       })
     );
 
+    const evt = new KeyboardEvent('keydown', { key: 'Escape', bubbles: true });
+    const stopSpy = vi.spyOn(evt, 'stopPropagation');
+
     act(() => {
-      document.dispatchEvent(
-        new KeyboardEvent('keydown', { key: 'Escape', bubbles: true })
-      );
+      document.dispatchEvent(evt);
     });
 
     expect(stopSpy).not.toHaveBeenCalled();
     expect(onOpenChange).toHaveBeenCalledWith(false);
-
-    stopSpy.mockRestore();
   });
 
   it('should default escapeKey bubble to false when bubbles is empty object', () => {
-    const stopSpy = vi.spyOn(KeyboardEvent.prototype, 'stopPropagation');
-
     renderHook(() => useDismiss({ open: true, onOpenChange, bubbles: {} }));
 
+    const evt = new KeyboardEvent('keydown', { key: 'Escape', bubbles: true });
+    const stopSpy = vi.spyOn(evt, 'stopPropagation');
+
     act(() => {
-      document.dispatchEvent(
-        new KeyboardEvent('keydown', { key: 'Escape', bubbles: true })
-      );
+      document.dispatchEvent(evt);
     });
 
     expect(stopSpy).toHaveBeenCalled();
     expect(onOpenChange).toHaveBeenCalledWith(false);
-
-    stopSpy.mockRestore();
   });
 
   it('should read outsidePress flag from bubbles object', () => {
-    const stopSpy = vi.spyOn(MouseEvent.prototype, 'stopPropagation');
-
     renderHook(() =>
       useDismiss({
         open: true,
@@ -216,33 +184,33 @@ describe('useDismiss', () => {
       })
     );
 
+    const evt = new MouseEvent('mousedown', { bubbles: true });
+    const stopSpy = vi.spyOn(evt, 'stopPropagation');
+
     act(() => {
-      document.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
+      document.dispatchEvent(evt);
     });
 
     expect(stopSpy).not.toHaveBeenCalled();
     expect(onOpenChange).toHaveBeenCalledWith(false);
-
-    stopSpy.mockRestore();
   });
 
   it('should stopPropagation for outside press when bubbles is false', () => {
-    const stopSpy = vi.spyOn(MouseEvent.prototype, 'stopPropagation');
-
     renderHook(() =>
       useDismiss({ open: true, onOpenChange, bubbles: false })
     );
 
+    const evt = new MouseEvent('mousedown', { bubbles: true });
+    const stopSpy = vi.spyOn(evt, 'stopPropagation');
+
     act(() => {
-      document.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
+      document.dispatchEvent(evt);
     });
 
     expect(stopSpy).toHaveBeenCalled();
-
-    stopSpy.mockRestore();
   });
 
-  it('should not close when click target is inside the floating element', () => {
+  it('should not close when click target is inside the floating element', async () => {
     const floatingEl = document.createElement('div');
     const child = document.createElement('span');
     floatingEl.appendChild(child);
@@ -256,16 +224,14 @@ describe('useDismiss', () => {
       (result.current.floating.ref as RefFn)(floatingEl);
     });
 
-    act(() => {
-      child.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
-    });
+    await user.click(child);
 
     expect(onOpenChange).not.toHaveBeenCalled();
 
     document.body.removeChild(floatingEl);
   });
 
-  it('should not close when click is inside the reference by default', () => {
+  it('should not close when click is inside the reference by default', async () => {
     const referenceEl = document.createElement('button');
     document.body.appendChild(referenceEl);
 
@@ -277,16 +243,14 @@ describe('useDismiss', () => {
       (result.current.reference.ref as RefFn)(referenceEl);
     });
 
-    act(() => {
-      referenceEl.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
-    });
+    await user.click(referenceEl);
 
     expect(onOpenChange).not.toHaveBeenCalled();
 
     document.body.removeChild(referenceEl);
   });
 
-  it('should close when click is inside the reference and referencePress is true', () => {
+  it('should close when click is inside the reference and referencePress is true', async () => {
     const referenceEl = document.createElement('button');
     document.body.appendChild(referenceEl);
 
@@ -298,36 +262,30 @@ describe('useDismiss', () => {
       (result.current.reference.ref as RefFn)(referenceEl);
     });
 
-    act(() => {
-      referenceEl.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
-    });
+    await user.click(referenceEl);
 
     expect(onOpenChange).toHaveBeenCalledWith(false);
 
     document.body.removeChild(referenceEl);
   });
 
-  it('should not close when outsidePress predicate returns false', () => {
+  it('should not close when outsidePress predicate returns false', async () => {
     const outsidePress = vi.fn(() => false);
 
     renderHook(() => useDismiss({ open: true, onOpenChange, outsidePress }));
 
-    act(() => {
-      document.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
-    });
+    await user.click(document.body);
 
     expect(outsidePress).toHaveBeenCalled();
     expect(onOpenChange).not.toHaveBeenCalled();
   });
 
-  it('should close when outsidePress predicate returns true', () => {
+  it('should close when outsidePress predicate returns true', async () => {
     const outsidePress = vi.fn(() => true);
 
     renderHook(() => useDismiss({ open: true, onOpenChange, outsidePress }));
 
-    act(() => {
-      document.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
-    });
+    await user.click(document.body);
 
     expect(outsidePress).toHaveBeenCalled();
     expect(onOpenChange).toHaveBeenCalledWith(false);
