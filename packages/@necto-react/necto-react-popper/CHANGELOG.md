@@ -1,5 +1,11 @@
 # @necto-react/popper
 
+## 0.10.4
+
+### Patch Changes
+
+- 4106019: Fix a `TypeError: Cannot read properties of null (reading 'removeEventListener')` thrown on unmount when `useDismiss` was configured with `ancestorScroll: true`. The ancestor-traversal loop captured its `current` variable by reference in each cleanup closure, so by the time React invoked them the binding had already been reassigned to `null`. Each cleanup closure now captures its element in a per-iteration `const`, so scroll listeners are correctly removed from the exact element they were attached to.
+
 ## 0.10.3
 
 ### Patch Changes
