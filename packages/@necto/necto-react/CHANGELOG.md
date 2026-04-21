@@ -1,5 +1,33 @@
 # @necto/react
 
+## 1.2.0
+
+### Minor Changes
+
+- 70f03f1: Dissolve the `@necto-react/helpers` package and distribute its utilities to more appropriate homes.
+
+  **Moved to `@necto/dom`:**
+
+  - `filterDOMProps`
+  - `isVirtualClick`
+  - `isKeyboardFocusEvent`
+
+  **Moved to `@necto-react/hooks` (under a new `utils/` subfolder):**
+
+  - `createSyntheticEvent`
+  - `createEventHandler`
+
+  Consumers using the `@necto/react` umbrella package are unaffected — all utilities remain exported via that re-export barrel. Consumers who imported directly from `@necto-react/helpers` must update their imports to the new package homes.
+
+  Also removes the unused `terser` devDependency from `@necto/file`.
+
+### Patch Changes
+
+- Updated dependencies [70f03f1]
+  - @necto-react/hooks@2.17.0
+  - @necto-react/components@3.0.2
+  - @necto-react/popper@0.10.5
+
 ## 1.1.37
 
 ### Patch Changes
