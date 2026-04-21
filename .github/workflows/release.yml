@@ -31,7 +31,7 @@ jobs:
           private_key: ${{ secrets.NECTO_BOT_KEY }}
 
       - name: Checkout Repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           token: ${{ steps.generate_token.outputs.token }}
 
