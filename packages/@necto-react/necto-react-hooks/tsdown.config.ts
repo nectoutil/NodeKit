@@ -10,13 +10,5 @@ import { defineConfig } from 'tsdown';
 export default defineConfig({
   entry: ['src/index.ts'],
   format: ['esm', 'cjs'],
-  external: [
-    'react',
-    'react-dom',
-    'react/jsx-runtime',
-    /^react-aria/,
-    /^@react-aria/,
-    /^@react-stately/,
-    /^@internationalized/
-  ]
+  external: ['react', 'react-dom', 'react/jsx-runtime']
 });
