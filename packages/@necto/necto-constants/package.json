@@ -29,7 +29,7 @@
   "author": "Corinvo OSS Team",
   "license": "MIT",
   "devDependencies": {
-    "tsdown": "^0.12.7"
+    "tsdown": "^0.21.9"
   },
   "repository": {
     "type": "git",

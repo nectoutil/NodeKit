@@ -44,7 +44,7 @@
     "buffer": "^6.0.3",
     "fast-check": "^4.7.0",
     "node-forge": "^1.4.0",
-    "tsdown": "^0.12.7",
+    "tsdown": "^0.21.9",
     "vitest": "^3.2.4"
   },
   "repository": {

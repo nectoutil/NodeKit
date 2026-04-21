@@ -9,7 +9,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^22.19.17",
-    "tsdown": "^0.12.7"
+    "tsdown": "^0.21.9"
   },
   "files": [
     "dist",
