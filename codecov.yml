@@ -107,10 +107,6 @@ flags:
     paths:
       - packages/@necto-react/necto-react-components/
     carryforward: true
-  necto-react-helpers:
-    paths:
-      - packages/@necto-react/necto-react-helpers/
-    carryforward: true
   necto-react-hooks:
     paths:
       - packages/@necto-react/necto-react-hooks/
