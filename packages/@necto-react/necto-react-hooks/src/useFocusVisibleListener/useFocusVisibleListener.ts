@@ -27,9 +27,8 @@ import type {
 } from './useFocusVisibleListener.types';
 
 function triggerChangeHandlers(modality: Modality, e: HandlerEvent) {
-  changeHandlers.forEach((handler: Handler) => {
-    handler(modality, e);
-  });
+  // biome-ignore lint/suspicious/useIterableCallbackReturn: Implicit return is intentional and harmless here.
+  changeHandlers.forEach((handler: Handler) => handler(modality, e));
 }
 
 function isValidKey(e: KeyboardEvent): boolean {

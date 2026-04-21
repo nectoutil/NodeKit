@@ -7,8 +7,14 @@
 
 /** Returns the ownerDocument of an element, or the global document */
 export function getOwnerDocument(el: Element | null | undefined): Document {
-  if (el?.ownerDocument) return el.ownerDocument;
-  if (typeof document !== 'undefined') return document;
+  if (el?.ownerDocument) {
+    return el.ownerDocument;
+  }
+
+  if (typeof document !== 'undefined') {
+    return document;
+  }
+
   return null as unknown as Document;
 }
 
@@ -20,8 +26,16 @@ export function getOwnerWindow(
     return el;
   }
 
-  const doc = getOwnerDocument(el as Element | null | undefined);
-  if (doc?.defaultView) return doc.defaultView;
-  if (typeof window !== 'undefined') return window;
+  const ownerDocument: Document = getOwnerDocument(
+    el as Element | null | undefined
+  );
+  if (ownerDocument?.defaultView) {
+    return ownerDocument.defaultView;
+  }
+
+  if (typeof window !== 'undefined') {
+    return window;
+  }
+
   return null as unknown as Window & typeof global;
 }

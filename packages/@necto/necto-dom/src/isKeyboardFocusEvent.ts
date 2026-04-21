@@ -1,25 +1,12 @@
-/**
- * Copyright (c) Corinvo, LLC. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- * Portions of this code are based on the React Aria Spectrum library by Adobe,
- * licensed under the Apache License, Version 2.0.
- * See: https://github.com/adobe/react-spectrum
- *
- * Modifications have been made to adapt the code for use in this project.
- */
-
 import { getOwnerDocument, getOwnerWindow } from './owner';
 
-export type Modality = 'keyboard' | 'pointer' | 'virtual';
 export type HandlerEvent =
   | PointerEvent
   | MouseEvent
   | KeyboardEvent
   | FocusEvent
   | null;
+export type Modality = 'keyboard' | 'pointer' | 'virtual';
 
 const nonTextInputTypes = new Set([
   'checkbox',
@@ -42,13 +29,14 @@ const FOCUS_VISIBLE_INPUT_KEYS: Record<string, true> = {
 export function isKeyboardFocusEvent(
   isTextInput: boolean,
   modality: Modality,
-  e: HandlerEvent
+  event: HandlerEvent
 ): boolean {
-  if (!e || !('target' in e) || !e.target) return false;
+  if (!event || !('target' in event) || !event.target) return false;
 
-  const ownerDoc = getOwnerDocument(e.target as Element);
-  const ownerWin = getOwnerWindow(e.target as Element);
-  if (!ownerDoc || !ownerWin) return false;
+  const ownerDocument: Document = getOwnerDocument(event.target as Element);
+  const ownerWin = getOwnerWindow(event.target as Element);
+
+  if (!ownerDocument || !ownerWin) return false;
 
   // Use window-specific constructors for cross-frame support
   const IHTMLInputElement =
@@ -64,21 +52,21 @@ export function isKeyboardFocusEvent(
   const IKeyboardEvent =
     typeof window !== 'undefined' ? ownerWin.KeyboardEvent : KeyboardEvent;
 
-  const activeEl = ownerDoc.activeElement;
+  const activeElement: Element | null = ownerDocument.activeElement;
 
   isTextInput =
     isTextInput ||
-    (activeEl instanceof IHTMLInputElement &&
-      !nonTextInputTypes.has((activeEl as HTMLInputElement).type)) ||
-    activeEl instanceof IHTMLTextAreaElement ||
-    (activeEl instanceof IHTMLElement &&
-      (activeEl as HTMLElement).isContentEditable);
+    (activeElement instanceof IHTMLInputElement &&
+      !nonTextInputTypes.has((activeElement as HTMLInputElement).type)) ||
+    activeElement instanceof IHTMLTextAreaElement ||
+    (activeElement instanceof IHTMLElement &&
+      (activeElement as HTMLElement).isContentEditable);
 
   if (
     isTextInput &&
     modality === 'keyboard' &&
-    e instanceof IKeyboardEvent &&
-    !FOCUS_VISIBLE_INPUT_KEYS[(e as KeyboardEvent).key]
+    event instanceof IKeyboardEvent &&
+    !FOCUS_VISIBLE_INPUT_KEYS[(event as KeyboardEvent).key]
   ) {
     return false;
   }
