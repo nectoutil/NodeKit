@@ -50,7 +50,7 @@ export function useGlobalListeners(): UseGlobalListenersReturn {
       options?: boolean | EventListenerOptions
     ) => {
       const storedListener = globalListeners.current.get(listener);
-      // @ts-ignore
+      // @ts-expect-error
       const fn = storedListener?.options?.once ? storedListener.fn : listener;
 
       eventTarget.removeEventListener(type, fn as EventListener, options);

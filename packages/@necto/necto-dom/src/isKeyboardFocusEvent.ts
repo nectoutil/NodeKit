@@ -11,7 +11,7 @@
  * Modifications have been made to adapt the code for use in this project.
  */
 
-import { getOwnerDocument, getOwnerWindow } from '@necto/dom';
+import { getOwnerDocument, getOwnerWindow } from './owner';
 
 export type Modality = 'keyboard' | 'pointer' | 'virtual';
 export type HandlerEvent =

@@ -21,8 +21,9 @@
  */
 
 import { useEffectEvent } from '@necto-react/hooks';
-import { createSyntheticEvent } from '@necto-react/helpers';
 import { useRef, useCallback, useLayoutEffect } from 'react';
+
+import { createSyntheticEvent } from '../utils';
 
 import type { FocusEvent } from 'react';
 import type {

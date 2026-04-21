@@ -26,5 +26,7 @@ export function abortPromise(
   ctx: StoreContext,
   promise: PromiseLike<unknown>
 ): void {
-  ctx.abortHandlersMap.get(promise)?.forEach((fn) => fn());
+  ctx.abortHandlersMap.get(promise)?.forEach((fn) => {
+    fn();
+  });
 }

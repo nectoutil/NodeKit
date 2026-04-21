@@ -9,5 +9,4 @@
 export * from '@necto-react/state';
 export * from '@necto-react/hooks';
 export * from '@necto-react/popper';
-export * from '@necto-react/helpers';
 export * from '@necto-react/components';

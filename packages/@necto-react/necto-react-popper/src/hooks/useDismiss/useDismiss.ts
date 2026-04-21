@@ -152,7 +152,9 @@ export function useDismiss(options: UseDismissOptions): UseDismissReturn {
     cleanup.push(() => window.removeEventListener('scroll', scrollHandler));
 
     return (): void => {
-      cleanup.forEach((fn) => fn());
+      cleanup.forEach((fn) => {
+        fn();
+      });
     };
   }, [enabled, open, ancestorScroll, onOpenChange]);
 

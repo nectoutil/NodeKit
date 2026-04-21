@@ -35,9 +35,9 @@ export function flushCallbacks(ctx: StoreContext): void {
   do {
     const callbacks = new Set<() => void>();
     const add = callbacks.add.bind(callbacks);
-    ctx.changedStates.forEach((s) =>
-      ctx.mountedMap.get(s)?.listeners.forEach(add)
-    );
+    ctx.changedStates.forEach((s) => {
+      ctx.mountedMap.get(s)?.listeners.forEach(add);
+    });
     ctx.changedStates.clear();
     ctx.unmountCallbacks.forEach(add);
     ctx.unmountCallbacks.clear();

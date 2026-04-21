@@ -11,12 +11,12 @@
       "packages/**/*",
       "!**/*.yml",
       "!**/*.json",
-      "!packages/**/node_modules/**",
-      "!packages/**/dist/**",
-      "!packages/**/coverage/**",
-      "!packages/**/.turbo/**",
-      "!packages/**/__tests__/**",
-      "!packages/@necto/necto-color/**"
+      "!packages/**/node_modules",
+      "!packages/**/dist",
+      "!packages/**/coverage",
+      "!packages/**/.turbo",
+      "!packages/**/__tests__",
+      "!packages/@necto/necto-color"
     ]
   },
   "formatter": {

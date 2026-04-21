@@ -16,3 +16,6 @@ export * from './transitions';
 export * from './html-elements';
 export * from './text-selection';
 export * from './aria-props';
+export * from './filterDOMProps';
+export * from './isVirtualClick';
+export * from './isKeyboardFocusEvent';

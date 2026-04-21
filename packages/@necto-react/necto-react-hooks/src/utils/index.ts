@@ -6,4 +6,6 @@
  *
  */
 
+export { createSyntheticEvent } from './createSyntheticEvent';
 export { createEventHandler } from './createEventHandler';
+export type { EventHandler, BaseEventHandler } from './createEventHandler';

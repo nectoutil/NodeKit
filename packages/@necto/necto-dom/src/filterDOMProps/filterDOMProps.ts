@@ -20,8 +20,6 @@
  * Modifications have been made to adapt the code for use in this project.
  */
 
-// @botond-szabo Move this to the dom package.
-
 import type { FilterOptions, FilterDOMProps, FilterDOMReturn } from './types';
 
 const DOM_PROP_NAMES = new Set(['id']);

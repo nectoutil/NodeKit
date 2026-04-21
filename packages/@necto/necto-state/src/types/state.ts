@@ -77,18 +77,8 @@ export type PrimitiveState<Value> = WritableState<
 
 export type ExtractStateValue<S> = S extends State<infer Value> ? Value : never;
 
-export type ExtractStateArgs<S> = S extends WritableState<
-  unknown,
-  infer Args,
-  infer _Result
->
-  ? Args
-  : never;
+export type ExtractStateArgs<S> =
+  S extends WritableState<unknown, infer Args, infer _Result> ? Args : never;
 
-export type ExtractStateResult<S> = S extends WritableState<
-  unknown,
-  infer _Args,
-  infer Result
->
-  ? Result
-  : never;
+export type ExtractStateResult<S> =
+  S extends WritableState<unknown, infer _Args, infer Result> ? Result : never;

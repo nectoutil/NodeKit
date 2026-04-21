@@ -6,7 +6,7 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { filterDOMProps } from '@necto-react-helpers/filterDOMProps';
+import { filterDOMProps } from '../src/filterDOMProps';
 
 describe('filterDOMProps', () => {
   it('should allow id by default', () => {

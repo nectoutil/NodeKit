@@ -5,3 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  *
  */
+
+export { createEventHandler } from './createEventHandler';
+
+export type { EventHandler, BaseEventHandler } from './types';
