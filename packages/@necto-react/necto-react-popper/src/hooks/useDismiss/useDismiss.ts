@@ -142,10 +142,9 @@ export function useDismiss(options: UseDismissOptions): UseDismissReturn {
     let current: Element | null = reference.parentElement;
 
     while (current) {
-      current.addEventListener('scroll', scrollHandler);
-      cleanup.push(() =>
-        (current as Element).removeEventListener('scroll', scrollHandler)
-      );
+      const element: Element = current;
+      element.addEventListener('scroll', scrollHandler);
+      cleanup.push(() => element.removeEventListener('scroll', scrollHandler));
       current = current.parentElement;
     }
 
