@@ -30,10 +30,10 @@ export function getEnv(key: string, options?: EnvOptions): string | undefined {
 
   switch (currentRuntime) {
     case 'deno':
-      // @ts-ignore
+      // @ts-expect-error
       return Deno.env.get(key);
     case 'bun':
-      // @ts-ignore
+      // @ts-expect-error
       return Bun.env[key];
     case 'node':
       return process.env[key];
@@ -86,11 +86,11 @@ export const env = new Proxy<EnvObject>({} as EnvObject, {
       typeof Deno !== 'undefined' &&
       typeof Deno.env?.toObject === 'function'
     ) {
-      // @ts-ignore
+      // @ts-expect-error
       return Object.keys(Deno.env.toObject());
     }
     if (typeof Bun !== 'undefined' && Bun.env) {
-      // @ts-ignore
+      // @ts-expect-error
       return Object.keys(Bun.env);
     }
     if (typeof process !== 'undefined' && process.env) {

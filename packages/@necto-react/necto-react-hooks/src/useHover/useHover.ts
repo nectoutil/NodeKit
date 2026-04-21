@@ -80,6 +80,7 @@ export function useHover(props: UseHoverProps = {}): UseHoverReturn {
   }, [setGlobalIgnoreEmulatedMouseEvents]);
 
   // --- Trigger Hover Start Handler ---
+  // biome-ignore lint/correctness/useExhaustiveDependencies: triggerHoverEnd is declared below and referenced lazily at call time; listing it in deps would cause a TDZ ReferenceError.
   const triggerHoverStart = useCallback(
     (event: PointerEvent | MouseEvent, pointerType: string) => {
       if (
@@ -122,7 +123,7 @@ export function useHover(props: UseHoverProps = {}): UseHoverReturn {
       );
 
       onHoverStart?.({
-        // @ts-ignore
+        // @ts-expect-error
         type: 'hoverstart',
         target: event.currentTarget,
         pointerType
@@ -148,7 +149,7 @@ export function useHover(props: UseHoverProps = {}): UseHoverReturn {
       removeAllGlobalListeners();
 
       onHoverEnd?.({
-        // @ts-ignore
+        // @ts-expect-error
         type: 'hoverend',
         target: event.currentTarget,
         pointerType

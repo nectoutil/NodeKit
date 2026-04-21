@@ -51,7 +51,6 @@
     "react-dom": "^19.1.0"
   },
   "dependencies": {
-    "@necto-react/helpers": "workspace:*",
     "@necto-react/types": "workspace:*",
     "@necto/dom": "workspace:*",
     "@necto/id": "workspace:*",

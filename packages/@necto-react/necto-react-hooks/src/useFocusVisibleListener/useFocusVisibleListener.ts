@@ -12,8 +12,11 @@
 
 import { isMacOS } from 'std-env';
 import { useEffect } from 'react';
-import { isKeyboardFocusEvent } from '@necto-react/helpers';
-import { getOwnerDocument, getOwnerWindow } from '@necto/dom';
+import {
+  getOwnerDocument,
+  getOwnerWindow,
+  isKeyboardFocusEvent
+} from '@necto/dom';
 import { globalListeners, changeHandlers, focusState } from './focusContext';
 
 import type {
@@ -24,6 +27,7 @@ import type {
 } from './useFocusVisibleListener.types';
 
 function triggerChangeHandlers(modality: Modality, e: HandlerEvent) {
+  // biome-ignore lint/suspicious/useIterableCallbackReturn: Implicit return is intentional and harmless here.
   changeHandlers.forEach((handler: Handler) => handler(modality, e));
 }
 

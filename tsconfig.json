@@ -32,7 +32,6 @@
       "@necto/types": ["packages/@necto/necto-types/src/index.ts"],
       "@necto/url": ["packages/@necto/necto-url/src/index.ts"],
       "@necto-react/components": ["packages/@necto-react/necto-react-components/src/index.ts"],
-      "@necto-react/helpers": ["packages/@necto-react/necto-react-helpers/src/index.ts"],
       "@necto-react/hooks": ["packages/@necto-react/necto-react-hooks/src/index.ts"],
       "@necto-react/popper": ["packages/@necto-react/necto-react-popper/src/index.ts"],
       "@necto-react/state": ["packages/@necto-react/necto-react-state/src/index.ts"],

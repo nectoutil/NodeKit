@@ -12,8 +12,9 @@ import {
   getActiveElement
 } from '@necto/dom';
 import { useCallback, useRef } from 'react';
-import { createSyntheticEvent } from '@necto-react/helpers';
 import { useGlobalListeners, useSyntheticBlurEvent } from '@necto-react/hooks';
+
+import { createSyntheticEvent } from '../utils';
 
 import type {
   FocusWithinReturn,

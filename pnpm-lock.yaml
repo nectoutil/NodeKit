@@ -132,48 +132,8 @@ importers:
         specifier: ^3.2.4
         version: 3.2.4(@types/debug@4.1.12)(@types/node@22.19.17)(jiti@2.6.1)(jsdom@26.1.0)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.1)
 
-  packages/@necto-react/necto-react-helpers:
-    dependencies:
-      '@necto-react/types':
-        specifier: workspace:*
-        version: link:../necto-react-types
-      '@necto/dom':
-        specifier: workspace:*
-        version: link:../../@necto/necto-dom
-      '@necto/platform':
-        specifier: workspace:*
-        version: link:../../@necto/necto-platform
-      std-env:
-        specifier: ^3.10.0
-        version: 3.10.0
-    devDependencies:
-      '@types/node':
-        specifier: ^22.19.17
-        version: 22.19.17
-      '@types/react':
-        specifier: 19.1.2
-        version: 19.1.2
-      '@types/react-dom':
-        specifier: 19.1.2
-        version: 19.1.2(@types/react@19.1.2)
-      '@vitest/coverage-istanbul':
-        specifier: ^3.2.4
-        version: 3.2.4(vitest@3.2.4(@types/debug@4.1.12)(@types/node@22.19.17)(jiti@2.6.1)(jsdom@26.1.0)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.1))
-      react:
-        specifier: ^19.1.0
-        version: 19.2.0
-      react-dom:
-        specifier: ^19.1.0
-        version: 19.2.0(react@19.2.0)
-      tsdown:
-        specifier: ^0.12.7
-        version: 0.12.9(typescript@5.9.3)
-
   packages/@necto-react/necto-react-hooks:
     dependencies:
-      '@necto-react/helpers':
-        specifier: workspace:*
-        version: link:../necto-react-helpers
       '@necto-react/types':
         specifier: workspace:*
         version: link:../necto-react-types
@@ -518,9 +478,6 @@ importers:
       '@types/sax':
         specifier: ^1.2.7
         version: 1.2.7
-      terser:
-        specifier: ^5.39.0
-        version: 5.44.1
       tsdown:
         specifier: ^0.12.7
         version: 0.12.9(typescript@5.9.3)
@@ -636,9 +593,6 @@ importers:
       '@necto-react/components':
         specifier: workspace:*
         version: link:../../@necto-react/necto-react-components
-      '@necto-react/helpers':
-        specifier: workspace:*
-        version: link:../../@necto-react/necto-react-helpers
       '@necto-react/hooks':
         specifier: workspace:*
         version: link:../../@necto-react/necto-react-hooks
@@ -4694,6 +4648,7 @@ snapshots:
     dependencies:
       '@jridgewell/gen-mapping': 0.3.13
       '@jridgewell/trace-mapping': 0.3.31
+    optional: true
 
   '@jridgewell/sourcemap-codec@1.5.5': {}
 
@@ -5485,7 +5440,8 @@ snapshots:
   buffer-builder@0.2.0:
     optional: true
 
-  buffer-from@1.1.2: {}
+  buffer-from@1.1.2:
+    optional: true
 
   buffer@6.0.3:
     dependencies:
@@ -5566,7 +5522,8 @@ snapshots:
 
   commander@14.0.3: {}
 
-  commander@2.20.3: {}
+  commander@2.20.3:
+    optional: true
 
   commander@8.3.0: {}
 
@@ -6868,10 +6825,12 @@ snapshots:
     dependencies:
       buffer-from: 1.1.2
       source-map: 0.6.1
+    optional: true
 
   source-map@0.5.7: {}
 
-  source-map@0.6.1: {}
+  source-map@0.6.1:
+    optional: true
 
   spawndamnit@3.0.1:
     dependencies:
@@ -6956,6 +6915,7 @@ snapshots:
       acorn: 8.15.0
       commander: 2.20.3
       source-map-support: 0.5.21
+    optional: true
 
   test-exclude@7.0.2:
     dependencies:

@@ -16,10 +16,10 @@
   <a aria-label="License" href="https://github.com/nectoutil/NodeKit/blob/main/LICENSE">
     <img src="https://img.shields.io/badge/License-MIT-97CA25.svg?style=for-the-badge">
   </a>
-  
+
   <br />
-  
-  <a href="https://codecov.io/github/nectoutil/NodeKit">
+
+  <a href="https://app.codecov.io/github/nectoutil/NodeKit/tree/main/packages%2F%40necto-react%2Fnecto-react-components">
     <img src="https://img.shields.io/codecov/c/github/nectoutil/NodeKit?flag=necto-react-components&style=for-the-badge&token=uURJIDdst6&logo=codecov&label=codecov"/>
   </a>
   <img src="https://img.shields.io/badge/-ReactJs-61DAFB?logo=react&logoColor=white&style=for-the-badge">

@@ -26,5 +26,6 @@ export function abortPromise(
   ctx: StoreContext,
   promise: PromiseLike<unknown>
 ): void {
+  // biome-ignore lint/suspicious/useIterableCallbackReturn: Implicit return is intentional and harmless here.
   ctx.abortHandlersMap.get(promise)?.forEach((fn) => fn());
 }

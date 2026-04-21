@@ -49,6 +49,5 @@ export type MiddlewareFactory<TOptions = void> = TOptions extends void
   ? () => Middleware
   : (options: TOptions) => Middleware;
 
-export type MiddlewareOptions<T> = T extends MiddlewareFactory<infer O>
-  ? O
-  : never;
+export type MiddlewareOptions<T> =
+  T extends MiddlewareFactory<infer O> ? O : never;

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { createEventHandler } from '@necto-react/helpers';
+import { createEventHandler } from '../utils';
 
 import type {
   UseKeyboardOptions,
