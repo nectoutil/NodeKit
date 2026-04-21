@@ -17,5 +17,5 @@ export default defineConfig({
     /^@necto\//,
     /^@necto-react\//
   ],
-  noExternal: ['@emotion/styled', 'clsx', 'react-icons']
+  noExternal: ['@emotion/styled', 'clsx']
 });
