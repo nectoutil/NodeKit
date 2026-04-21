@@ -7,13 +7,6 @@
 
 // biome-ignore-all lint/style/noNonNullAssertion: Non-null assertions are intentional in state internals.
 
-/**
- * Copyright (c) Corinvo, LLC. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
 import {
   unwrapValue,
   isPromiseLike,
@@ -23,6 +16,7 @@ import {
   isWritableState,
   addPendingPromise
 } from './helpers';
+
 import type { StoreContext } from './context';
 import type { State, StateRecord, EpochNumber } from '../types';
 
@@ -31,36 +25,39 @@ type AnyState = State<AnyValue>;
 
 export function ensureStateRecord<Value>(
   ctx: StoreContext,
-  s: State<Value>
+  state: State<Value>
 ): StateRecord<Value> {
-  let stateRecord = ctx.stateRecordMap.get(s);
+  let stateRecord = ctx.stateRecordMap.get(state);
   if (!stateRecord) {
     stateRecord = {
       dependencies: new Map(),
       pendingPromises: new Set(),
       epoch: 0
     };
-    ctx.stateRecordMap.set(s, stateRecord);
-    s.INTERNAL_onInit?.(ctx.store);
+
+    ctx.stateRecordMap.set(state, stateRecord);
+    state.INTERNAL_onInit?.(ctx.store);
   }
+
   return stateRecord as StateRecord<Value>;
 }
 
 export function readStateRecord<Value>(
   ctx: StoreContext,
-  s: State<Value>
+  state: State<Value>
 ): StateRecord<Value> {
-  const stateRecord = ctx.methods.ensureStateRecord(s);
+  const stateRecord = ctx.methods.ensureStateRecord(state);
 
   if (isInitialized(stateRecord)) {
     if (
-      (ctx.mountedMap.has(s) &&
-        ctx.invalidatedStates.get(s) !== stateRecord.epoch) ||
+      (ctx.mountedMap.has(state) &&
+        ctx.invalidatedStates.get(state) !== stateRecord.epoch) ||
       stateRecord.validatedEpoch === ctx.storeEpoch
     ) {
       stateRecord.validatedEpoch = ctx.storeEpoch;
       return stateRecord;
     }
+
     let hasChangedDeps = false;
     for (const [a, epoch] of stateRecord.dependencies) {
       if (ctx.methods.readStateRecord(a).epoch !== epoch) {
@@ -68,13 +65,14 @@ export function readStateRecord<Value>(
         break;
       }
     }
+
     if (!hasChangedDeps) {
       stateRecord.validatedEpoch = ctx.storeEpoch;
       return stateRecord;
     }
   }
 
-  let isSync = true;
+  let isSync: boolean = true;
   const prevDeps = new Set<AnyState>(stateRecord.dependencies.keys());
   const nextDeps = new Map<AnyState, EpochNumber>();
 
@@ -87,9 +85,10 @@ export function readStateRecord<Value>(
   };
 
   const mountDepsIfAsync = () => {
-    if (ctx.mountedMap.has(s)) {
+    if (ctx.mountedMap.has(state)) {
       const shouldRecompute = !ctx.changedStates.size;
-      ctx.methods.mountDependencies(s);
+      ctx.methods.mountDependencies(state);
+
       if (shouldRecompute) {
         ctx.methods.recomputeInvalidated();
         ctx.methods.flushCallbacks();
@@ -98,7 +97,7 @@ export function readStateRecord<Value>(
   };
 
   const getter = <V>(a: State<V>) => {
-    if (a === (s as AnyState)) {
+    if (a === (state as AnyState)) {
       const aState = ctx.methods.ensureStateRecord(a);
       if (!isInitialized(aState)) {
         if (hasInitialValue(a)) {
@@ -117,12 +116,15 @@ export function readStateRecord<Value>(
     } finally {
       nextDeps.set(a, aState.epoch);
       stateRecord.dependencies.set(a, aState.epoch);
+
       if (isPromiseLike(stateRecord.value)) {
-        addPendingPromise(s, stateRecord.value, aState);
+        addPendingPromise(state, stateRecord.value, aState);
       }
-      if (ctx.mountedMap.has(s)) {
-        ctx.mountedMap.get(a)?.dependents.add(s);
+
+      if (ctx.mountedMap.has(state)) {
+        ctx.mountedMap.get(a)?.dependents.add(state);
       }
+
       if (!isSync) {
         mountDepsIfAsync();
       }
@@ -136,14 +138,15 @@ export function readStateRecord<Value>(
       if (!controller) {
         controller = new AbortController();
       }
+
       return controller.signal;
     },
     get setSelf() {
-      if (!setSelf && isWritableState(s)) {
+      if (!setSelf && isWritableState(state)) {
         setSelf = (...args) => {
           if (!isSync) {
             try {
-              return ctx.methods.writeStateRecord(s, ...args);
+              return ctx.methods.writeStateRecord(state, ...args);
             } finally {
               ctx.methods.recomputeInvalidated();
               ctx.methods.flushCallbacks();
@@ -151,20 +154,22 @@ export function readStateRecord<Value>(
           }
         };
       }
+
       return setSelf;
     }
   };
 
   const prevEpoch = stateRecord.epoch;
-  const prevInvalidated = ctx.invalidatedStates.get(s) === prevEpoch;
+  const prevInvalidated = ctx.invalidatedStates.get(state) === prevEpoch;
 
   try {
-    const valueOrPromise = s.read(getter, options as never);
-    ctx.methods.setValueOrPromise(s, valueOrPromise);
+    const valueOrPromise = state.read(getter, options as never);
+    ctx.methods.setValueOrPromise(state, valueOrPromise);
     if (isPromiseLike(valueOrPromise)) {
       ctx.methods.registerAbortHandler(valueOrPromise, () =>
         controller?.abort()
       );
+
       const settle = () => {
         pruneDeps();
         mountDepsIfAsync();
@@ -173,19 +178,23 @@ export function readStateRecord<Value>(
     } else {
       pruneDeps();
     }
+
     stateRecord.validatedEpoch = ctx.storeEpoch;
+
     return stateRecord;
   } catch (error) {
     delete stateRecord.value;
+
     stateRecord.error = error;
-    ++stateRecord.epoch;
+    stateRecord.epoch++;
     stateRecord.validatedEpoch = ctx.storeEpoch;
+
     return stateRecord;
   } finally {
     isSync = false;
     if (stateRecord.epoch !== prevEpoch && prevInvalidated) {
-      ctx.invalidatedStates.set(s, stateRecord.epoch);
-      ctx.changedStates.add(s);
+      ctx.invalidatedStates.set(state, stateRecord.epoch);
+      ctx.changedStates.add(state);
     }
   }
 }
@@ -199,19 +208,24 @@ export function recomputeInvalidated(ctx: StoreContext): void {
   while (stack.length) {
     const a = stack[stack.length - 1]!;
     const aState = ctx.methods.ensureStateRecord(a);
+
     if (visited.has(a)) {
       stack.pop();
       continue;
     }
+
     if (visiting.has(a)) {
       if (ctx.invalidatedStates.get(a) === aState.epoch) {
         topSorted.push([a, aState]);
       }
+
       visited.add(a);
       stack.pop();
       continue;
     }
+
     visiting.add(a);
+
     for (const dep of getDependents(a, aState, ctx.mountedMap)) {
       if (!visiting.has(dep)) {
         stack.push(dep);
@@ -219,20 +233,23 @@ export function recomputeInvalidated(ctx: StoreContext): void {
     }
   }
 
-  for (let i = topSorted.length - 1; i >= 0; --i) {
+  for (let i: number = topSorted.length - 1; i >= 0; --i) {
     const [a, aState] = topSorted[i]!;
     let hasChangedDeps = false;
+
     for (const dep of aState.dependencies.keys()) {
       if (dep !== a && ctx.changedStates.has(dep)) {
         hasChangedDeps = true;
         break;
       }
     }
+
     if (hasChangedDeps) {
       ctx.invalidatedStates.set(a, aState.epoch);
       ctx.methods.readStateRecord(a);
       ctx.methods.mountDependencies(a);
     }
+
     ctx.invalidatedStates.delete(a);
   }
 }

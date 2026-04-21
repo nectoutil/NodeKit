@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// biome-ignore-all lint/suspicious/useIterableCallbackReturn: Implicit return is intentional and harmless here.
+
 import type { StoreContext } from './context';
 
 export function registerAbortHandler(
@@ -13,12 +15,14 @@ export function registerAbortHandler(
   handler: () => void
 ): void {
   let handlers = ctx.abortHandlersMap.get(promise);
+
   if (!handlers) {
     handlers = new Set();
     ctx.abortHandlersMap.set(promise, handlers);
     const cleanup = () => ctx.abortHandlersMap.delete(promise);
     promise.then(cleanup, cleanup);
   }
+
   handlers.add(handler);
 }
 
@@ -26,6 +30,5 @@ export function abortPromise(
   ctx: StoreContext,
   promise: PromiseLike<unknown>
 ): void {
-  // biome-ignore lint/suspicious/useIterableCallbackReturn: Implicit return is intentional and harmless here.
   ctx.abortHandlersMap.get(promise)?.forEach((fn) => fn());
 }

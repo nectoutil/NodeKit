@@ -21,9 +21,8 @@ export function useSupported(fn: () => unknown): boolean {
 
   useEffect(() => {
     if (isMounted()) {
-      /* istanbul ignore else -- defensive guard, unreachable in browser */ setIsSupported(
-        Boolean(fn())
-      );
+      /* istanbul ignore else -- defensive guard, unreachable in browser */
+      setIsSupported(Boolean(fn()));
     }
   }, [fn, isMounted]);
 

@@ -7,14 +7,6 @@
 
 // biome-ignore-all lint/suspicious/noExplicitAny: Explicit any okay for this function context.
 
-/**
- * Copyright (c) Corinvo, LLC. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
 import { useCallback, useRef, useLayoutEffect, useEffect } from 'react';
 
 import type { RefObject } from 'react';
