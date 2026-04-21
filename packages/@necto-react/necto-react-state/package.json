@@ -37,16 +37,16 @@
     "@necto/state": "workspace:*"
   },
   "peerDependencies": {
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5"
   },
   "devDependencies": {
     "@testing-library/react": "^16.3.2",
-    "@types/react": "^19.1.2",
-    "@types/react-dom": "^19.1.2",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
     "jsdom": "^26.1.0",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
     "tsdown": "^0.12.7",
     "@vitest/coverage-istanbul": "^3.2.4"
   }
