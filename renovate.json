@@ -6,6 +6,13 @@
   "rangeStrategy": "bump",
   "platformAutomerge": true,
   "rebaseWhen": "conflicted",
+  "postUpgradeTasks": {
+    "commands": [
+      "mkdir -p .changeset && printf -- '---\\n---\\n\\nchore(deps): {{{depName}}} {{{currentVersion}}} → {{{newVersion}}}\\n' > .changeset/renovate-{{{branchName}}}.md"
+    ],
+    "fileFilters": [".changeset/**"],
+    "executionMode": "branch"
+  },
   "packageRules": [
     {
       "description": "Group React and React types together so they always stay in sync",
