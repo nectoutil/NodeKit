@@ -46,6 +46,6 @@
     "@necto-react/types": "workspace:*",
     "@necto/dom": "workspace:*",
     "@necto/platform": "workspace:*",
-    "std-env": "^3.9.0"
+    "std-env": "^3.10.0"
   }
 }

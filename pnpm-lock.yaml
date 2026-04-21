@@ -147,7 +147,7 @@ importers:
         specifier: workspace:*
         version: link:../../@necto/necto-platform
       std-env:
-        specifier: ^3.9.0
+        specifier: ^3.10.0
         version: 3.10.0
     devDependencies:
       '@types/node':
@@ -211,7 +211,7 @@ importers:
         specifier: ^19.1.0
         version: 19.2.0(react@19.2.0)
       std-env:
-        specifier: ^3.9.0
+        specifier: ^3.10.0
         version: 3.10.0
     devDependencies:
       '@testing-library/jest-dom':
