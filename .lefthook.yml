@@ -25,7 +25,7 @@ pre-commit:
       run: pnpm exec yamllint {staged_files}
       priority: 5
     build:
-      run: pnpm turbo build --filter="...[HEAD]"
+      run: pnpm build
       priority: 6
 
 commit-msg:

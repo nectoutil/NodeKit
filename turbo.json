@@ -5,12 +5,12 @@
       "cache": false
     },
     "test:coverage": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["//#build:pkgs"],
       "outputs": ["coverage/**"]
     },
-    "build": {
-      "dependsOn": ["^build"],
-      "outputs": ["dist/**", "cache/**"],
+    "//#build:pkgs": {
+      "inputs": ["packages/**/src/**", "packages/**/tsdown.config.ts", "tsdown.config.ts"],
+      "outputs": ["packages/**/dist/**"],
       "env": ["CODECOV_TOKEN"]
     }
   }

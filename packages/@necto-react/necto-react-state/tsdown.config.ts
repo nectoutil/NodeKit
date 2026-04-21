@@ -5,23 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { env } from 'node:process';
 import { defineConfig } from 'tsdown';
-import { codecovRollupPlugin } from '@codecov/rollup-plugin';
 
 export default defineConfig([
   {
     entry: ['src/index.ts'],
     format: ['cjs', 'esm'],
-    dts: true,
-    sourcemap: false,
-    external: ['react', '@necto/state'],
-    plugins: [
-      codecovRollupPlugin({
-        enableBundleAnalysis: !!env.CODECOV_TOKEN,
-        bundleName: '@necto-react/state',
-        uploadToken: env.CODECOV_TOKEN
-      })
-    ]
+    external: ['react', '@necto/state']
   }
 ]);
