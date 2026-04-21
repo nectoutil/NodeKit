@@ -19,7 +19,7 @@
 
   <br />
   
-  <a href="https://codecov.io/github/nectoutil/NodeKit">
+  <a href="https://app.codecov.io/github/nectoutil/NodeKit/tree/main/packages%2F%40necto-react%2Fnecto-react-hooks">
     <img src="https://img.shields.io/codecov/c/github/nectoutil/NodeKit?flag=necto-react-hooks&style=for-the-badge&token=uURJIDdst6&logo=codecov&label=codecov"/>
   </a>
   <img src="https://img.shields.io/badge/-ReactJs-61DAFB?logo=react&logoColor=white&style=for-the-badge">
