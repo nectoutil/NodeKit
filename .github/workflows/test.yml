@@ -19,8 +19,15 @@ env:
   LEFTHOOK: 0
 
 jobs:
+  build:
+    name: Build
+    uses: ./.github/workflows/build.yml
+    secrets:
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
   test:
     name: Run tests and upload coverage
+    needs: build
     runs-on: ubuntu-latest
 
     steps:
@@ -41,10 +48,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build packages
-        run: pnpm build
-        env:
-          CODECOV_TOKEN: ${{ github.event_name != 'merge_group' && secrets.CODECOV_TOKEN || '' }}
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ needs.build.outputs.artifact-name }}
+          path: packages
 
       - name: Run tests
         run: pnpm vitest run --reporter=default --reporter=junit --outputFile=test-report.junit.xml
