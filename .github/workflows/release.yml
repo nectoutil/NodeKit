@@ -63,10 +63,12 @@ jobs:
           title: 'Automated Package Release'
           createGithubReleases: true
           commit: 'Package Versioning'
-          publish: pnpm exec changeset publish --provenance --access public
+          publish: pnpm exec changeset publish
         env:
           GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
           NPM_TOKEN: ''
+          NPM_CONFIG_PROVENANCE: true
+          NPM_CONFIG_ACCESS: public
 
       - name: Enable auto-merge on release PR
         if: steps.create_release_pr.outputs.pullRequestNumber

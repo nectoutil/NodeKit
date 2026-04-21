@@ -44,13 +44,13 @@ jobs:
       - name: Build packages
         run: pnpm build
         env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+          CODECOV_TOKEN: ${{ github.event_name != 'merge_group' && secrets.CODECOV_TOKEN || '' }}
 
       - name: Run tests
         run: pnpm vitest run --reporter=default --reporter=junit --outputFile=test-report.junit.xml
 
       - name: Upload test results to Codecov
-        if: ${{ !cancelled() }}
+        if: ${{ !cancelled() && github.event_name != 'merge_group' }}
         uses: codecov/test-results-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
@@ -66,7 +66,7 @@ jobs:
           done
 
       - name: Upload coverage to Codecov
-        if: ${{ !cancelled() }}
+        if: ${{ !cancelled() && github.event_name != 'merge_group' }}
         run: |
           curl -Os https://cli.codecov.io/latest/linux/codecov
           chmod +x codecov
