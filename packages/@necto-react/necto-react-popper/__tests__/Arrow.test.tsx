@@ -58,4 +58,23 @@ describe('Arrow', () => {
     const span = container.querySelector('span');
     expect(span?.style.top).toBe('20px');
   });
+
+  it('should default to top side when placement is undefined', () => {
+    const { container } = render(<Arrow />);
+    const span = container.querySelector('span');
+    expect(span?.style.bottom).toBe('0px');
+  });
+
+  it('should omit data-placement when placement is undefined', () => {
+    const { container } = render(<Arrow />);
+    expect(container.querySelector('[data-placement]')).toBeNull();
+  });
+
+  it('should offset arrowY by (width - height) / 2 for horizontal placements', () => {
+    const { container } = render(
+      <Arrow placement="left" arrowY={10} width={10} height={5} />
+    );
+    const span = container.querySelector('span');
+    expect(span?.style.top).toBe('12.5px');
+  });
 });

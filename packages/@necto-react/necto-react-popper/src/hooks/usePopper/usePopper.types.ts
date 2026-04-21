@@ -7,8 +7,8 @@
  */
 
 import type {
-  ComputePositionOptions,
-  ComputePositionResult
+  ComputePositionResult,
+  ComputePositionOptions
 } from '@necto/popper';
 
 /**

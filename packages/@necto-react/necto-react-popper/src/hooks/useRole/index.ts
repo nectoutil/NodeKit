@@ -9,7 +9,7 @@
 export { useRole } from './useRole';
 
 export type {
-  UseRoleOptions,
+  PopperRole,
   UseRoleReturn,
-  PopperRole
+  UseRoleOptions
 } from './useRole.types';

@@ -9,12 +9,12 @@
 import { useMemo } from 'react';
 import { mergeProps, mergeRefs } from '@necto/mergers';
 
-import type { Ref } from 'react';
-import type { ElementProps } from '../types';
 import type {
   InteractionReturn,
   UseInteractionsReturn
 } from './useInteractions.types';
+import type { Ref } from 'react';
+import type { ElementProps } from '../types';
 
 /**
  * Merges multiple interaction hooks into unified prop getters.

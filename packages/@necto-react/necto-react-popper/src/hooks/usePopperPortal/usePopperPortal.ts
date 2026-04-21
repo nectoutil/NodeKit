@@ -8,13 +8,12 @@
 
 import { useState, useEffect, useId } from 'react';
 
-import type {
-  UsePopperPortalOptions,
-  UsePopperPortalReturn
-} from './usePopperPortal.types';
+import { PORTAL_ROOT_ID } from './constants';
 
-// Name of portal element where all poppers are placed
-const PORTAL_ROOT_ID: string = 'necto-popper-portal-root' as const;
+import type {
+  UsePopperPortalReturn,
+  UsePopperPortalOptions
+} from './usePopperPortal.types';
 
 /**
  * Provides portal functionality for popper elements.

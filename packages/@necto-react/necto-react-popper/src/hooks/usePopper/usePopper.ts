@@ -8,18 +8,12 @@
  *
  */
 
+import { useRef, useMemo, useCallback, useLayoutEffect } from 'react';
 import { defu } from 'defu';
 import { flushSync } from 'react-dom';
 import { computePosition } from '@necto/popper';
 import { useLocalState } from '@necto-react/state';
 import { useLatestRef, useMounted } from '@necto-react/hooks';
-import {
-  useMemo,
-  useCallback,
-  useRef,
-  useLayoutEffect,
-  type RefObject
-} from 'react';
 
 import {
   deepEqual,
@@ -27,7 +21,7 @@ import {
   roundByDevicePixelRatio
 } from './utils';
 
-import type { CSSProperties } from 'react';
+import type { CSSProperties, RefObject } from 'react';
 import type { ComputePositionResult } from '@necto/popper';
 import type { UsePopperOptions, UsePopperReturn } from './usePopper.types';
 

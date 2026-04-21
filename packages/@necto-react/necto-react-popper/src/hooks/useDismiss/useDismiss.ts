@@ -98,22 +98,22 @@ export function useDismiss(options: UseDismissOptions): UseDismissReturn {
   useEffect(() => {
     if (!enabled || !open) return;
 
-    const _document: Document = getOwnerDocument(floatingRef.current);
-    if (!_document) {
+    const ownerDocument: Document = getOwnerDocument(floatingRef.current);
+    if (!ownerDocument) {
       return;
     }
 
     if (escapeKey) {
-      _document.addEventListener('keydown', closeOnEscapeKey);
+      ownerDocument.addEventListener('keydown', closeOnEscapeKey);
     }
 
     if (outsidePress) {
-      _document.addEventListener('mousedown', closeOnOutsidePress);
+      ownerDocument.addEventListener('mousedown', closeOnOutsidePress);
     }
 
     return (): void => {
-      _document.removeEventListener('keydown', closeOnEscapeKey);
-      _document.removeEventListener('mousedown', closeOnOutsidePress);
+      ownerDocument.removeEventListener('keydown', closeOnEscapeKey);
+      ownerDocument.removeEventListener('mousedown', closeOnOutsidePress);
     };
   }, [
     open,
@@ -143,8 +143,9 @@ export function useDismiss(options: UseDismissOptions): UseDismissReturn {
 
     while (current) {
       current.addEventListener('scroll', scrollHandler);
-      const element: Element = current;
-      cleanup.push(() => element.removeEventListener('scroll', scrollHandler));
+      cleanup.push(() =>
+        (current as Element).removeEventListener('scroll', scrollHandler)
+      );
       current = current.parentElement;
     }
 

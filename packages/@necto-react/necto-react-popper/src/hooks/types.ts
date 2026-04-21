@@ -6,7 +6,7 @@
  *
  */
 
-import type { MutableRefObject } from 'react';
+import type { RefObject } from 'react';
 
 export type ElementProps = Record<string, unknown>;
 
@@ -14,14 +14,14 @@ export interface PopperContext {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   refs: {
-    reference: MutableRefObject<Element | null>;
-    floating: MutableRefObject<HTMLElement | null>;
+    reference: RefObject<Element | null>;
+    floating: RefObject<HTMLElement | null>;
   };
   elements: {
     reference: Element | null;
     floating: HTMLElement | null;
   };
-  dataRef: MutableRefObject<Record<string, unknown>>;
+  dataRef: RefObject<Record<string, unknown>>;
 }
 
 export interface InteractionProps {

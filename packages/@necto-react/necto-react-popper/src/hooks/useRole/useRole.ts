@@ -20,7 +20,6 @@ export function useRole(options: UseRoleOptions): UseRoleReturn {
   const { open, enabled = true, role = 'dialog' } = options;
 
   const nectoId: string = useId({ prefix: 'necto-popper' });
-
   const reference = useMemo(() => {
     if (!enabled) return {};
 

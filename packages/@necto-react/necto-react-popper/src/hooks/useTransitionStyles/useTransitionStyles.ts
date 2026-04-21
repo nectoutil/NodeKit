@@ -8,11 +8,11 @@
 
 import { useTransitionStatus } from '../useTransitionStatus';
 
-import type { CSSProperties } from 'react';
 import type {
   UseTransitionStylesOptions,
   UseTransitionStylesReturn
 } from './useTransitionStyles.types';
+import type { CSSProperties } from 'react';
 
 /**
  * Provides transition styles for animating floating elements.
@@ -27,12 +27,15 @@ export function useTransitionStyles(
     closeStyles,
     common = {},
     duration = 250,
-    initial = { opacity: 0 },
-    openStyles = { opacity: 1 }
+    initial = {
+      opacity: 0
+    },
+    openStyles = {
+      opacity: 1
+    }
   } = options;
 
   const { isMounted, status } = useTransitionStatus({ open, duration });
-
   const styles: CSSProperties = ((): CSSProperties => {
     const transitionProperties: string = [
       ...new Set([
@@ -48,18 +51,38 @@ export function useTransitionStyles(
 
     const baseTransition = {
       transitionProperty: transitionProperties || 'opacity',
-      transitionDuration: `${status === 'close' ? (typeof duration === 'number' ? duration : (duration.close ?? 250)) : typeof duration === 'number' ? duration : (duration.open ?? 250)}ms`
+      transitionDuration: `${
+        status === 'close'
+          ? typeof duration === 'number'
+            ? duration
+            : (duration.close ?? 250)
+          : typeof duration === 'number'
+            ? duration
+            : (duration.open ?? 250)
+      }ms`
     };
 
     switch (status) {
       case 'initial': {
-        return { ...common, ...baseTransition, ...initial };
+        return {
+          ...common,
+          ...baseTransition,
+          ...initial
+        };
       }
       case 'open': {
-        return { ...common, ...baseTransition, ...openStyles };
+        return {
+          ...common,
+          ...baseTransition,
+          ...openStyles
+        };
       }
       case 'close': {
-        return { ...common, ...baseTransition, ...(closeStyles ?? initial) };
+        return {
+          ...common,
+          ...baseTransition,
+          ...(closeStyles ?? initial)
+        };
       }
       default:
         return common;

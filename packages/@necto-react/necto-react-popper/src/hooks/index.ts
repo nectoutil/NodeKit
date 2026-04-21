@@ -6,10 +6,10 @@
  *
  */
 
-export * from './usePopper';
-export * from './usePopperPortal';
 export * from './useRole';
+export * from './usePopper';
 export * from './useDismiss';
+export * from './usePopperPortal';
 export * from './useInteractions';
 export * from './useTransitionStatus';
 export * from './useTransitionStyles';
