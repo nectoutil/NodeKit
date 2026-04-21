@@ -23,10 +23,11 @@ import {
   setValueOrPromise,
   invalidateDependents
 } from './internals/write';
-import type { Store } from './types';
 import { unwrapValue } from './internals/helpers';
 import { createStoreContext } from './internals/context';
 import { registerAbortHandler, abortPromise } from './internals/abort';
+
+import type { Store } from './types';
 
 export function createStore(): Store {
   const ctx = createStoreContext();

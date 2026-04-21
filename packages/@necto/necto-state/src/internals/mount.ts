@@ -40,6 +40,8 @@ export function flushCallbacks(ctx: StoreContext): void {
     // biome-ignore lint/suspicious/useIterableCallbackReturn: Implicit void return is intentional and harmless here.
     [ctx.unmountCallbacks, ctx.mountCallbacks].forEach((c) => c.clear());
 
+    callbacks.forEach(call);
+
     if (ctx.changedStates.size) {
       ctx.methods.recomputeInvalidated();
     }
