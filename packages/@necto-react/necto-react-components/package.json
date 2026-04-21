@@ -46,15 +46,15 @@
     "@vitejs/plugin-react": "^4.7.0",
     "@vitest/coverage-istanbul": "^3.2.4",
     "clsx": "^2.1.1",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
     "tsdown": "^0.12.7",
     "vitest": "^3.2.4"
   },
   "peerDependencies": {
-    "@types/react": "^19.1.2",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "@types/react": "^19.2.14",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5"
   },
   "peerDependenciesMeta": {
     "@types/react": {
