@@ -7,11 +7,11 @@
 
 import type {
   State,
-  WritableState,
   Store,
-  StateRecord,
   Mounted,
-  EpochNumber
+  EpochNumber,
+  StateRecord,
+  WritableState
 } from '../types';
 
 type AnyValue = unknown;

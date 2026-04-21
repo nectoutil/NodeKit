@@ -7,13 +7,6 @@
 
 // biome-ignore-all lint/style/useTemplate: String concatenation is intentional here.
 
-/**
- * Copyright (c) Corinvo, LLC. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
 import type {
   Getter,
   PrimitiveState,
@@ -56,7 +49,7 @@ export function state<Value, Args extends unknown[], Result>(
   read?: Value | Read<Value, (...args: Args) => unknown>,
   write?: Write<Args, Result>
 ) {
-  const key: string = `state${keyCount++}`;
+  const key: string = `necto-state${keyCount++}`;
 
   const config = {
     toString() {
