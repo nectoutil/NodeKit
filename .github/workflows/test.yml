@@ -55,10 +55,6 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Run tests with coverage
-        if: |
-          github.actor != 'renovate[bot]' &&
-          github.actor != 'necto-github-bot[bot]' &&
-          !startsWith(github.head_ref, 'changeset-release/')
         run: pnpm test:coverage
 
       - name: Fix lcov paths for Codecov flags
