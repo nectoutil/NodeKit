@@ -4,6 +4,7 @@
   "dependencyDashboard": false,
   "labels": ["dependencies"],
   "rangeStrategy": "bump",
+  "platformAutomerge": true,
   "packageRules": [
     {
       "description": "Group React and React types together so they always stay in sync",
