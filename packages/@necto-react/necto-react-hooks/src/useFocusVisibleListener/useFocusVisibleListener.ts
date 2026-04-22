@@ -94,10 +94,21 @@ function setupGlobalFocusEvents(element?: HTMLElement | null) {
   }
 
   const originalFocus = windowObject.HTMLElement.prototype.focus;
-  windowObject.HTMLElement.prototype.focus = function (...args) {
-    focusState.hasEventBeforeFocus = true;
-    originalFocus.apply(this, args);
-  };
+
+  // HTMLElement.prototype.focus is non-writable in strict mode on WebKit (JSC).
+  try {
+    Object.defineProperty(windowObject.HTMLElement.prototype, 'focus', {
+      value: function (...args: unknown[]) {
+        focusState.hasEventBeforeFocus = true;
+        originalFocus.apply(this, args as Parameters<typeof originalFocus>);
+      },
+      writable: true,
+      configurable: true
+    });
+  } catch {
+    // If an environment ever locks focus as non-configurable, fall through
+    // without patching.
+  }
 
   documentObject.addEventListener('keydown', handleKeyboardEvent, true);
   documentObject.addEventListener('click', handlePointerEvent, true);
@@ -119,7 +130,17 @@ function tearDownGlobalFocusEvents(element?: HTMLElement | null) {
     return;
 
   const { focus } = globalListeners.get(windowObject)!;
-  windowObject.HTMLElement.prototype.focus = focus;
+
+  // Restore native focus via defineProperty for WebKit strict-mode compatibility.
+  try {
+    Object.defineProperty(windowObject.HTMLElement.prototype, 'focus', {
+      value: focus,
+      writable: true,
+      configurable: true
+    });
+  } catch {
+    // If restoration fails, leave the monkey-patch in place.
+  }
 
   documentObject.removeEventListener('keydown', handleKeyboardEvent, true);
   documentObject.removeEventListener('click', handlePointerEvent, true);
