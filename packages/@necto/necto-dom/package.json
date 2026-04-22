@@ -37,6 +37,6 @@
     "@necto/constants": "workspace:*",
     "@necto/types": "workspace:*",
     "@necto/platform": "workspace:*",
-    "html-tags": "^4.0.0"
+    "html-tags": "^5.1.0"
   }
 }
