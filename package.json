@@ -44,5 +44,5 @@
     "vitest": "^3.2.4",
     "yaml-lint": "^1.7.0"
   },
-  "packageManager": "pnpm@10.33.2"
+  "packageManager": "pnpm@10.33.1"
 }
