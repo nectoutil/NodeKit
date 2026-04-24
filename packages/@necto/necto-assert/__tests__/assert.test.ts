@@ -20,6 +20,36 @@ describe('AssertionError', () => {
     const cause = new Error('root');
     expect(new AssertionError('wrap', { cause }).cause).toBe(cause);
   });
+
+  it('should prefix the error name with "necto." to identify the source library', () => {
+    const err = new AssertionError('fail');
+    expect(err.name.startsWith('necto.')).toBe(true);
+  });
+
+  it('should include "necto.AssertionError" in the error name', () => {
+    const err = new AssertionError('fail');
+    expect(err.name).toContain('necto.AssertionError');
+  });
+
+  it('should include "necto.AssertionError" in toString() output', () => {
+    const err = new AssertionError('fail');
+    expect(err.toString()).toContain('necto.AssertionError');
+  });
+
+  it('should preserve the necto prefix when thrown from assert()', () => {
+    try {
+      assert(false, 'boom');
+      expect.unreachable('assert should have thrown');
+    } catch (err) {
+      expect(err).toBeInstanceOf(AssertionError);
+      expect((err as AssertionError).name).toContain('necto.AssertionError');
+    }
+  });
+
+  it('should preserve the necto prefix across empty and non-empty messages', () => {
+    expect(new AssertionError('').name).toContain('necto.AssertionError');
+    expect(new AssertionError('some message').name).toContain('necto.AssertionError');
+  });
 });
 
 describe('assert', () => {

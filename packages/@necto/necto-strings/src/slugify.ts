@@ -12,9 +12,9 @@ import type { CharMap, LocaleMap, SlugifyOptions } from './types/slugify';
 const charMap = CHAR_MAP as CharMap;
 const localeMap = LOCALE_MAP as LocaleMap;
 
-const SEPARATOR_REGEX: RegExp = /[\s\-_~]+/g;
-const ESCAPE_REGEX: RegExp = /[.*+?^${}()|[\]\\]/g;
-const COMBINING_MARKS_REGEX: RegExp = /[\u0300-\u036f]/g;
+const SEPARATOR_REGEX: RegExp = new RegExp(/[\s\-_~]+/g);
+const ESCAPE_REGEX: RegExp = new RegExp(/[.*+?^${}()|[\]\\]/g);
+const COMBINING_MARKS_REGEX: RegExp = new RegExp(/[\u0300-\u036f]/g);
 
 export function slugify(input: string, options: SlugifyOptions = {}): string {
   const {
