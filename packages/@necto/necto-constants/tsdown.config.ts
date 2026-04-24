@@ -10,6 +10,16 @@ import { defineConfig } from 'tsdown';
 export default defineConfig([
   {
     entry: ['src/index.ts'],
-    format: ['cjs', 'esm']
+    format: ['cjs', 'esm'],
+    noExternal: [
+      'html-tags',
+      'svg-tag-names',
+      'aria-attributes',
+      'css-color-names',
+      'http-status-codes',
+      'html-void-elements',
+      'svg-element-attributes',
+      'html-element-attributes'
+    ]
   }
 ]);
