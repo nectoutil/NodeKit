@@ -53,7 +53,7 @@
     "react-dom": "catalog:",
     "tsdown": "^0.12.7",
     "vitest": "^3.2.4",
-    "vitest-axe": "^1.0.0-pre.3"
+    "vitest-axe": "^1.0.0-pre.5"
   },
   "peerDependencies": {
     "@types/react": "catalog:",

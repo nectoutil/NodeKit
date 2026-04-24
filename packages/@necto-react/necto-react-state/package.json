@@ -51,7 +51,7 @@
     "react": "catalog:",
     "react-dom": "catalog:",
     "tsdown": "^0.12.7",
-    "vitest-axe": "^1.0.0-pre.3",
+    "vitest-axe": "^1.0.0-pre.5",
     "@vitest/coverage-istanbul": "^3.2.4"
   }
 }
