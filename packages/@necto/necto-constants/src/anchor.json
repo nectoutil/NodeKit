@@ -1,0 +1,11 @@
+{
+  "PROPS": [
+    "rel",
+    "href",
+    "ping",
+    "target",
+    "download",
+    "hrefLang",
+    "referrerPolicy"
+  ]
+}

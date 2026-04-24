@@ -25,12 +25,16 @@ describe('AriaProps', () => {
 });
 
 describe('ALL_ARIA_PROPS', () => {
-  it('is a non-empty array of aria- strings', () => {
+  it('is a non-empty array of valid ARIA identifiers', () => {
     expect(Array.isArray(ALL_ARIA_PROPS)).toBe(true);
     expect(ALL_ARIA_PROPS.length).toBeGreaterThan(0);
     for (const attr of ALL_ARIA_PROPS) {
-      expect(attr.startsWith('aria-')).toBe(true);
+      expect(attr === 'role' || attr.startsWith('aria-')).toBe(true);
     }
+  });
+
+  it('includes role as per the WAI-ARIA spec', () => {
+    expect(ALL_ARIA_PROPS).toContain('role');
   });
 });
 

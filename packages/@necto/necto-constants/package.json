@@ -29,6 +29,14 @@
   "author": "Corinvo OSS Team",
   "license": "MIT",
   "devDependencies": {
+    "html-tags": "^5.1.0",
+    "svg-tag-names": "^3.0.1",
+    "css-color-names": "^1.0.1",
+    "aria-attributes": "^2.0.1",
+    "http-status-codes": "^2.3.0",
+    "html-void-elements": "^3.0.0",
+    "html-element-attributes": "^3.5.0",
+    "svg-element-attributes": "^2.1.0",
     "tsdown": "^0.12.7"
   },
   "repository": {
