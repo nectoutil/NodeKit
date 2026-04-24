@@ -1,5 +1,13 @@
 # @necto-react/hooks
 
+## 2.17.2
+
+### Patch Changes
+
+- @necto/dom@1.10.1
+- @necto/id@1.6.7
+- @necto/strings@1.9.1
+
 ## 2.17.1
 
 ### Patch Changes

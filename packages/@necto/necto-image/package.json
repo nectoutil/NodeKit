@@ -1,6 +1,6 @@
 {
   "name": "@necto/image",
-  "version": "1.0.18",
+  "version": "1.0.19",
   "description": "Framework-agnostic image transformation utilities for CDN providers",
   "scripts": {
     "build": "tsdown --minify"

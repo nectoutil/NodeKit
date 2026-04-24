@@ -1,5 +1,12 @@
 # @necto/strings
 
+## 1.9.1
+
+### Patch Changes
+
+- Updated dependencies [023e73e]
+  - @necto/constants@2.0.0
+
 ## 1.9.0
 
 ### Minor Changes
