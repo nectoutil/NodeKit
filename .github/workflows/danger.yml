@@ -33,13 +33,13 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v6
         with:
-          node-version: '24'
           cache: pnpm
+          node-version-file: '.nvmrc'
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
 
-      - name: Run Danger
-        run: pnpm danger ci
+      - name: Danger JS
+        uses: danger/danger-js@9.1.6
         env:
           DANGER_GITHUB_API_TOKEN: ${{ secrets.NECTO_BOT_TOKEN }}
