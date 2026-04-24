@@ -37,17 +37,21 @@
     "@necto/state": "workspace:*"
   },
   "peerDependencies": {
-    "react": "^19.2.5",
-    "react-dom": "^19.2.5"
+    "react": "catalog:",
+    "react-dom": "catalog:"
   },
   "devDependencies": {
+    "@testing-library/dom": "^10.4.1",
     "@testing-library/react": "^16.3.2",
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@vitejs/plugin-react": "^4.7.0",
+    "axe-core": "^4.10.3",
     "jsdom": "^26.1.0",
-    "react": "^19.2.5",
-    "react-dom": "^19.2.5",
+    "react": "catalog:",
+    "react-dom": "catalog:",
     "tsdown": "^0.12.7",
+    "vitest-axe": "^1.0.0-pre.3",
     "@vitest/coverage-istanbul": "^3.2.4"
   }
 }

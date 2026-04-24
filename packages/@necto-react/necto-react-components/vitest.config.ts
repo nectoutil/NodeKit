@@ -13,10 +13,25 @@ export default defineConfig({
   plugins: [react()],
   test: {
     globals: true,
-    environment: 'jsdom',
     setupFiles: ['./vitest.setup.ts'],
     exclude: ['node_modules', 'dist', '**/*.visual.spec.*'],
-
+    browser: {
+      enabled: true,
+      headless: true,
+      provider: 'playwright',
+      screenshotFailures: false,
+      instances: [
+        {
+          browser: 'chromium'
+        },
+        {
+          browser: 'firefox'
+        },
+        {
+          browser: 'webkit'
+        }
+      ]
+    },
     coverage: {
       provider: 'istanbul',
       reporter: ['lcov', 'text'],

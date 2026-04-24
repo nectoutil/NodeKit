@@ -376,7 +376,7 @@ describe('usePress', () => {
     const el = document.createElement('div');
     act(() => {
       result.current.pressProps.onTouchStart?.(touchEvent({ currentTarget: el, target: el }));
-      window.dispatchEvent(new TouchEvent('touchend'));
+      window.dispatchEvent(new UIEvent('touchend'));
     });
     expect(onPressEnd).toHaveBeenCalled();
     expect(onPressUp).toHaveBeenCalled();
@@ -390,7 +390,7 @@ describe('usePress', () => {
     const el = document.createElement('div');
     act(() => {
       result.current.pressProps.onTouchStart?.(touchEvent({ currentTarget: el, target: el }));
-      window.dispatchEvent(new TouchEvent('touchcancel'));
+      window.dispatchEvent(new UIEvent('touchcancel'));
     });
     expect(onPressEnd).toHaveBeenCalled();
   });

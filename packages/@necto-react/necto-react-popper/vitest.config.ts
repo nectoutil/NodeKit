@@ -5,15 +5,31 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vitest/config';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
-  plugins: [tsconfigPaths({ root: '../../..' })],
+  plugins: [react(), tsconfigPaths()],
   test: {
-    environment: 'jsdom',
     setupFiles: ['./vitest.setup.ts'],
-
+    browser: {
+      enabled: true,
+      headless: true,
+      provider: 'playwright',
+      screenshotFailures: false,
+      instances: [
+        {
+          browser: 'chromium'
+        },
+        {
+          browser: 'firefox'
+        },
+        {
+          browser: 'webkit'
+        }
+      ]
+    },
     coverage: {
       provider: 'istanbul',
       reporter: ['lcov', 'text'],

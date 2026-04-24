@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { ViteUserConfig } from 'vitest/config';
+import { defineConfig } from 'vitest/config';
 
-export default  {
+export default defineConfig({
   test: {
     coverage: {
       provider: 'istanbul',
@@ -15,4 +15,4 @@ export default  {
     },
     projects: ['packages/**/vitest.config.*'],
   },
-} satisfies ViteUserConfig;
+});

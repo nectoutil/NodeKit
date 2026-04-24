@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import '@testing-library/jest-dom/vitest';
 import { afterEach } from 'vitest';
+import '@testing-library/jest-dom/vitest';
 import { cleanup } from '@testing-library/react';
 
 afterEach(() => {

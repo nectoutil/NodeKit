@@ -1,3 +1,21 @@
 packages:
   - packages/*
   - packages/**/*
+
+catalog:
+  react: ^19.2.5
+  react-dom: ^19.2.5
+  '@types/react': ^19.2.14
+  '@types/react-dom': ^19.2.3
+
+shellEmulator: true
+autoInstallPeers: true
+verifyDepsBeforeRun: install
+preferWorkspacePackages: true
+
+onlyBuiltDependencies:
+  - esbuild
+  - lefthook
+  - playwright
+  - unrs-resolver
+  - '@biomejs/biome'

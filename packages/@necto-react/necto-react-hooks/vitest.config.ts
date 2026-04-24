@@ -5,33 +5,37 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import path from 'node:path';
 import { defineConfig } from 'vitest/config';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
+  plugins: [tsconfigPaths()],
   test: {
-    include: ['__tests__/**/*.test.{ts,js,tsx,jsx}'],
-    environment: 'jsdom',
     setupFiles: ['./vitest.setup.ts'],
     exclude: ['node_modules', 'dist', '.turbo'],
-
+    include: ['__tests__/**/*.test.{ts,js,tsx,jsx}'],
+    browser: {
+      enabled: true,
+      headless: true,
+      provider: 'playwright',
+      screenshotFailures: false,
+      instances: [
+        {
+          browser: 'chromium'
+        },
+        {
+          browser: 'firefox'
+        },
+        {
+          browser: 'webkit'
+        }
+      ]
+    },
     coverage: {
       provider: 'istanbul',
       reporter: ['lcov', 'text'],
       include: ['src/**/*.{ts,tsx}'],
       exclude: ['node_modules', 'dist']
     }
-  },
-  resolve: {
-    alias: [
-      {
-        find: /^@necto-react\/hooks\/(.*)$/,
-        replacement: path.resolve(__dirname, 'src/$1')
-      },
-      {
-        find: '@necto-react/hooks',
-        replacement: path.resolve(__dirname, 'src/index.ts')
-      }
-    ]
   }
 });

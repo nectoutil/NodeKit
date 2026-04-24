@@ -84,7 +84,9 @@ describe('Box', () => {
 
     it('sets boxShadow when shadow is provided', () => {
       const { container } = render(<Box shadow="0 0 5px #000">x</Box>);
-      expect(getEl(container).style.boxShadow).toBe('0 0 5px #000');
+      // Browsers normalize boxShadow strings (colors → rgb(), offsets → px).
+      // Match on the offset+blur part which stays stable across engines.
+      expect(getEl(container).style.boxShadow).toMatch(/0px\s+0px\s+5px/);
     });
 
     it('does not set background when omitted', () => {

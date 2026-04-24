@@ -7,24 +7,11 @@
  */
 
 import { renderHook } from '@testing-library/react';
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect } from 'vitest';
 
-vi.mock('@necto-react/hooks', async (importOriginal) => {
-  const actual = await importOriginal();
-  return {
-    ...(typeof actual === 'object' && actual !== null ? actual : {}),
-    useFocusVisibleListener: vi.fn(),
-    getInteractionModality: vi.fn(() => 'keyboard')
-  };
-});
-
-import { useFocusVisible } from '@necto-react/hooks';
+import { useFocusVisible } from '../src/useFocusVisible/useFocusVisible';
 
 describe('useFocusVisible', () => {
-  beforeEach(() => {
-    vi.clearAllMocks();
-  });
-
   it('should return an object with isFocusVisible property', () => {
     const { result } = renderHook(() => useFocusVisible());
 

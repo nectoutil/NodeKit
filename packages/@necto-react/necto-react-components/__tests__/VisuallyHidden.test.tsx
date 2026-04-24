@@ -12,16 +12,15 @@ import { render, screen } from '@testing-library/react';
 
 import { VisuallyHidden } from '../src';
 
+// Only the styles whose inline values stay stable across browsers.
+// CSS shorthand longhand normalization (border/margin/padding) varies by engine,
+// so we check the semantically critical visually-hidden contract instead.
 const HIDDEN_STYLE = {
-  border: '0px',
-  clip: 'rect(0 0 0 0)',
-  clipPath: 'inset(50%)',
-  height: '1px',
-  margin: '-1px',
-  overflow: 'hidden',
-  padding: '0px',
   position: 'absolute',
   width: '1px',
+  height: '1px',
+  overflow: 'hidden',
+  clipPath: 'inset(50%)',
   whiteSpace: 'nowrap',
 };
 

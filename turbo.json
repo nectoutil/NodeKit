@@ -16,6 +16,17 @@
       ],
       "outputs": ["packages/**/dist/**"],
       "env": ["CODECOV_TOKEN"]
+    },
+    "//#test:vitest": {
+      "dependsOn": ["//#build:tsdown"],
+      "inputs": [
+        "packages/**/src/**",
+        "packages/**/__tests__/**",
+        "packages/**/vitest.config.*",
+        "packages/**/vitest.setup.*",
+        "vitest.config.*"
+      ],
+      "outputs": []
     }
   }
 }
