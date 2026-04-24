@@ -1,6 +1,6 @@
 {
   "name": "@necto/constants",
-  "version": "1.4.5",
+  "version": "2.0.0",
   "description": "Necto's library defining common constant values for programs.",
   "scripts": {
     "build": "tsdown --dts",

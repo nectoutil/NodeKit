@@ -1,6 +1,6 @@
 {
   "name": "@necto/react",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Necto's React package aggregating all React utilities and components.",
   "main": "index.js",
   "repository": {
