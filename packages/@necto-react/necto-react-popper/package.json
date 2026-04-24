@@ -45,10 +45,10 @@
     "@vitejs/plugin-react": "^4.7.0",
     "@vitest/browser": "^3.2.4",
     "@vitest/coverage-istanbul": "^3.2.4",
-    "axe-core": "^4.10.3",
+    "axe-core": "^4.11.3",
     "playwright": "^1.59.1",
     "tsdown": "^0.12.7",
-    "vitest-axe": "^1.0.0-pre.3"
+    "vitest-axe": "^1.0.0-pre.5"
   },
   "peerDependencies": {
     "react": "catalog:"

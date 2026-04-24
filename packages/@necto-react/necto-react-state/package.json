@@ -46,12 +46,12 @@
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "@vitejs/plugin-react": "^4.7.0",
-    "axe-core": "^4.10.3",
+    "axe-core": "^4.11.3",
     "jsdom": "^26.1.0",
     "react": "catalog:",
     "react-dom": "catalog:",
     "tsdown": "^0.12.7",
-    "vitest-axe": "^1.0.0-pre.3",
+    "vitest-axe": "^1.0.0-pre.5",
     "@vitest/coverage-istanbul": "^3.2.4"
   }
 }
