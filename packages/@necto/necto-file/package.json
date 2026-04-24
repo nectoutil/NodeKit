@@ -25,7 +25,7 @@
   "author": "Corinvo OSS Team",
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^22.19.17",
+    "@types/node": "^24.12.2",
     "@types/sax": "^1.2.7",
     "tsdown": "^0.12.7",
     "typescript": "^5.9.3"

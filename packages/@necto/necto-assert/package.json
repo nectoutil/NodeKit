@@ -25,7 +25,7 @@
     "test:coverage": "vitest run --coverage --passWithNoTests"
   },
   "devDependencies": {
-    "@types/node": "^22.19.17",
+    "@types/node": "^24.12.2",
     "tsdown": "^0.12.7",
     "vitest": "^3.2.4",
     "@vitest/coverage-istanbul": "^3.2.4"
