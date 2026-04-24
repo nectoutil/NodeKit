@@ -38,7 +38,7 @@ export function useId(options: UseIdOptions = {}): string {
   })();
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && !!window.document?.createElement) {
+    if (typeof window !== 'undefined' && window.document?.createElement) {
       const cachedRefs = idsUpdaterMap.get(id) || [];
       const nextIdWrapper = { current: nextIdRef.current };
 
