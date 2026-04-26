@@ -77,6 +77,12 @@ jobs:
           NPM_TOKEN: ''
           NPM_CONFIG_PROVENANCE: true
           NPM_CONFIG_ACCESS: public
+          # The "Strip devDependencies" step above mutates package.json files
+          # in place, which makes pnpm's pre-exec deps-status check (added in
+          # v10) see the lockfile as stale and abort `pnpm exec` before the
+          # publish runs. The mutation is intentional and runner-local — it
+          # never lands in the repo — so disable the check for this step only.
+          npm_config_verify_deps_before_run: 'false'
 
       - name: Enable auto-merge on release PR
         if: steps.create_release_pr.outputs.pullRequestNumber
