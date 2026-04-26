@@ -1,6 +1,7 @@
 {
   "name": "@necto/fetch",
   "version": "0.0.0",
+  "private": true,
   "description": "Necto's HTTP client. ky + axios DX with first-class schema validation, lazy auth, tuple errors, and resource definitions.",
   "scripts": {
     "build": "tsdown --minify",
