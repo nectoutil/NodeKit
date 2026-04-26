@@ -27,17 +27,17 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Install PNPM
-        uses: pnpm/action-setup@v6
-
       - name: Setup Node
         uses: actions/setup-node@v6
         with:
-          node-version: '24'
           cache: pnpm
+          node-version-file: '.nvmrc'
 
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Install PNPM
+        uses: pnpm/action-setup@v6
+        with:
+          run_install: |
+            - args: [--frozen-lockfile, --ignore-scripts]
 
       - name: Build packages
         run: pnpm build

@@ -20,8 +20,6 @@ jobs:
   danger:
     name: Run Danger
     runs-on: ubuntu-latest
-    # Skip bot-authored PRs (Renovate, Dependabot, necto-bot, etc.) — the
-    # welcome message and PR-title check don't add value for them.
     if: github.event.pull_request.user.type != 'Bot'
 
     steps:
