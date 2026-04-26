@@ -9,9 +9,7 @@ on:
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 env:
-  CI: true
-  LEFTHOOK: 0
-  PNPM_CONFIG_VERIFY_DEPS_BEFORE_RUN: 'false'
+  pnpm_config_verify_deps_before_run: 'false'
 
 jobs:
   build:
@@ -33,7 +31,7 @@ jobs:
         id: generate_token
         uses: actions/create-github-app-token@v3
         with:
-          app-id: ${{ secrets.NECTO_BOT_ID }}
+          client-id: ${{ secrets.NECTO_BOT_ID }}
           private-key: ${{ secrets.NECTO_BOT_KEY }}
 
       - name: Checkout Repo
@@ -44,7 +42,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v6
         with:
-          node-version: '24'
+          node-version-file: '.nvmrc'
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install PNPM & Dependencies
@@ -75,7 +73,6 @@ jobs:
           publish: pnpm exec changeset publish
         env:
           NPM_TOKEN: ''
-          # NPM_CONFIG_ACCESS: public
           NPM_CONFIG_PROVENANCE: true
           GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
 
