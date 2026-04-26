@@ -51,7 +51,7 @@
     "clsx": "^2.1.1",
     "react": "catalog:",
     "react-dom": "catalog:",
-    "tsdown": "^0.12.7",
+    "tsdown": "^0.21.10",
     "vitest": "^3.2.4",
     "vitest-axe": "^1.0.0-pre.5"
   },
