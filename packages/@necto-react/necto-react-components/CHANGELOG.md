@@ -1,5 +1,57 @@
 # @necto-react/components
 
+## 3.3.0
+
+### Minor Changes
+
+- ad6a4aa: Rename Overflow component renderer props for clarity.
+
+  - `renderItem` (unchanged from original API)
+  - `renderMore` → `renderOverflow`
+
+  Earlier 3.2.x releases shipped these props but had broken type imports due to a
+  build issue (hashed `.d.ts` filenames), so adoption is expected to be minimal.
+  The rename clarifies that the prop renders the overflow indicator slot, not
+  literally "more" content.
+
+  Migration:
+
+  ```tsx
+  // Before
+  <Overflow
+    items={tags}
+    renderItem={(tag) => <Tag key={tag.id}>{tag.label}</Tag>}
+    renderMore={({ count }) => <Chip>+{count}</Chip>}
+  />
+
+  // After
+  <Overflow
+    items={tags}
+    renderItem={(tag) => <Tag key={tag.id}>{tag.label}</Tag>}
+    renderOverflow={({ count, hidden }) => <Chip>+{count}</Chip>}
+  />
+  ```
+
+### Patch Changes
+
+- ad6a4aa: Fix TypeScript imports broken in previous releases due to hashed `.d.ts` filenames.
+
+  Previous releases shipped `dist/index-{hash}.d.ts` and `dist/index-{hash}.d.cts` while
+  `package.json` `types` and `exports.types` pointed at `dist/index.d.ts` — causing
+  `TS2306` / `TS2307` errors in any consumer importing types. Root cause was a bug in
+  `rolldown-plugin-dts@0.13.x` (transitive of `tsdown@0.12.x`) where entry chunks fell
+  through to the hashed-filename template instead of the flat one.
+
+  Resolved by bumping `tsdown` to `^0.21.10` (which pulls `rolldown-plugin-dts@^0.23.x`
+  containing the fix from sxzz/rolldown-plugin-dts#132). Build now produces flat
+  `dist/index.d.ts` and `dist/index.d.cts`, restoring type resolution for all consumers.
+
+- Updated dependencies [ad6a4aa]
+  - @necto-react/hooks@2.19.1
+  - @necto/constants@2.0.1
+  - @necto/dom@1.11.1
+  - @necto/strings@1.9.2
+
 ## 3.2.0
 
 ### Minor Changes

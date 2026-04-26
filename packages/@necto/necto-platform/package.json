@@ -1,6 +1,6 @@
 {
   "name": "@necto/platform",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "Necto's library for detecting platforms, devices, other device related information.",
   "scripts": {
     "build": "tsdown --minify",
