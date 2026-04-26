@@ -17,12 +17,6 @@ concurrency:
 jobs:
   build:
     name: Build
-    # Skip on metadata-only automated PRs. `test` has `needs: build` so it
-    # cascades. Push-to-main is unaffected (main always gets verified).
-    # - changeset-release/main: version bumps + CHANGELOG, already tested in
-    #   the feature PRs that produced each changeset.
-    # - chore/license-headers: top-of-file comment blocks only, cannot affect
-    #   runtime behavior.
     if: |
       github.event_name != 'pull_request' ||
       (github.head_ref != 'changeset-release/main' && github.head_ref != 'chore/license-headers')
@@ -74,10 +68,6 @@ jobs:
       - name: Run tests with coverage
         run: pnpm test:coverage
 
-      # lcov files emit `SF:src/foo.ts` relative to each package. Codecov
-      # needs repo-root-relative paths to match files, so prepend each
-      # package directory. Done here (not in codecov.yml) so the artifact
-      # we upload is "ready to consume" by any downstream uploader.
       - name: Fix lcov paths
         run: |
           find packages -name lcov.info -path "*/coverage/*" | while IFS= read -r f; do
@@ -85,11 +75,9 @@ jobs:
             sed -i "s|^SF:|SF:${pkg}|g" "$f"
           done
 
-      # Hand off to codecov.yml via artifacts. The Codecov workflow is
-      # triggered by `workflow_run` on this workflow's completion.
       - name: Upload test results artifact
         if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v8
+        uses: actions/upload-artifact@v7
         with:
           name: test-results
           path: test-report.junit.xml
@@ -98,7 +86,7 @@ jobs:
 
       - name: Upload coverage artifact
         if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v8
+        uses: actions/upload-artifact@v7
         with:
           name: coverage-lcov
           path: packages/**/coverage/lcov.info
