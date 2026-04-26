@@ -1,6 +1,6 @@
 {
   "name": "@necto/crypto",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "description": "Necto's cryptographic utilities.",
   "author": "Corinvo OSS Team",

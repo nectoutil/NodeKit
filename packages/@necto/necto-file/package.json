@@ -1,6 +1,6 @@
 {
   "name": "@necto/file",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "description": "File type detection utilities for Necto",
   "scripts": {

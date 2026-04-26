@@ -1,6 +1,6 @@
 {
   "name": "@necto-react/types",
-  "version": "2.4.1",
+  "version": "2.4.2",
   "description": "Necto's shared TypeScript type definitions for React packages.",
   "scripts": {
     "build": "tsdown --minify"

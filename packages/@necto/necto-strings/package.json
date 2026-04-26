@@ -1,6 +1,6 @@
 {
   "name": "@necto/strings",
-  "version": "1.9.1",
+  "version": "1.9.2",
   "description": "Necto's library providing string manipulation methods.",
   "scripts": {
     "build": "tsdown --minify",
