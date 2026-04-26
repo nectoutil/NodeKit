@@ -23,10 +23,15 @@ jobs:
     outputs:
       matrix: ${{ steps.discover.outputs.matrix }}
     steps:
+      # Download into `packages/` (not `.`) because upload-artifact strips
+      # the longest common parent (`packages/`) on upload — files inside the
+      # artifact look like `@necto/necto-dom/coverage/lcov.info`. Extracting
+      # under `packages/` restores the original structure so the glob below
+      # and the matrix `file` paths match the layout test.yml produced.
       - name: Download coverage artifact
         uses: actions/download-artifact@v8
         with:
-          path: .
+          path: packages
           name: coverage-lcov
           run-id: ${{ github.event.workflow_run.id }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -62,8 +67,12 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload to Codecov
-        uses: codecov/test-results-action@v1
+        uses: codecov/codecov-action@v6
         with:
+          report_type: test_results
+          files: test-report.junit.xml
+          disable_search: true
+          fail_ci_if_error: true
           token: ${{ secrets.CODECOV_TOKEN }}
 
   upload-coverage:
@@ -82,7 +91,7 @@ jobs:
       - name: Download coverage artifact
         uses: actions/download-artifact@v8
         with:
-          path: .
+          path: packages
           name: coverage-lcov
           github-token: ${{ secrets.GITHUB_TOKEN }}
           run-id: ${{ github.event.workflow_run.id }}
