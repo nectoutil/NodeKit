@@ -54,11 +54,13 @@ export function injectStyle(
         ? document
         : null;
 
-    if (!doc) return () => {};
+    if (!doc) {
+      return (): void => {};
+    }
 
     const internalId = `necto-<:${Math.random().toString(36).slice(2, 9)}:>`;
 
-    const style = doc.createElement('style');
+    const style: HTMLStyleElement = doc.createElement('style');
     style.setAttribute('type', 'text/css');
     style.setAttribute(STYLE_ATTRIBUTE, internalId);
 
@@ -86,6 +88,7 @@ export function injectStyle(
 
     if (currentEntry?.element) {
       currentEntry.count--;
+
       if (currentEntry.count < 1) {
         currentEntry.element.remove();
         currentEntry.element = null;
