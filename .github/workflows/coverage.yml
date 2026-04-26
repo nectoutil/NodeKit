@@ -23,11 +23,6 @@ jobs:
     outputs:
       matrix: ${{ steps.discover.outputs.matrix }}
     steps:
-      # Download into `packages/` (not `.`) because upload-artifact strips
-      # the longest common parent (`packages/`) on upload — files inside the
-      # artifact look like `@necto/necto-dom/coverage/lcov.info`. Extracting
-      # under `packages/` restores the original structure so the glob below
-      # and the matrix `file` paths match the layout test.yml produced.
       - name: Download coverage artifact
         uses: actions/download-artifact@v8
         with:
@@ -41,6 +36,7 @@ jobs:
         uses: tj-actions/glob@v22
         with:
           files: packages/**/coverage/lcov.info
+          separator: "\n"
 
       - name: Build matrix
         id: discover
