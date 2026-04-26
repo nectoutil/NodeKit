@@ -19,7 +19,7 @@ export interface OverflowRenderState<T> {
  *
  * Inherits all polymorphic Primitive props (`as`, `className`, `style`, plus
  * any DOM attributes for the rendered element). `children` is omitted because
- * Overflow drives rendering through `renderItem` and `renderMore` instead.
+ * Overflow drives rendering through `renderItem` and `renderOverflow` instead.
  */
 export type OverflowProps<T> = Omit<PrimitiveProps<ElementType>, 'children'> & {
   /** Items to lay out. */
@@ -29,10 +29,10 @@ export type OverflowProps<T> = Omit<PrimitiveProps<ElementType>, 'children'> & {
   renderItem: (item: T, index: number) => ReactNode;
 
   /**
-   * Renders the "+N more" indicator. Receives the hidden items + count.
-   * Skipped entirely when nothing overflows.
+   * Renders the overflow indicator (typically a "+N more" chip). Receives
+   * the hidden items + count. Skipped entirely when nothing overflows.
    */
-  renderMore?: (state: OverflowRenderState<T>) => ReactNode;
+  renderOverflow?: (state: OverflowRenderState<T>) => ReactNode;
 
   /** Side that collapses first when items don't fit. Default `'end'`. */
   collapseFrom?: CollapseFrom;

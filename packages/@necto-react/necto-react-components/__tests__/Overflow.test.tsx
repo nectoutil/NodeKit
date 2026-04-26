@@ -103,12 +103,12 @@ describe('Overflow', () => {
     });
   });
 
-  test('does not call renderMore when nothing overflows', async () => {
+  test('does not call renderOverflow when nothing overflows', async () => {
     render(
       <Overflow
         items={tags}
         renderItem={(tag) => <span key={tag.id}>{tag.label}</span>}
-        renderMore={({ count }) => <span data-testid="overflow">+{count}</span>}
+        renderOverflow={({ count }) => <span data-testid="overflow">+{count}</span>}
       />
     );
 

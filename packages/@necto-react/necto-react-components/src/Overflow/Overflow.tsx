@@ -28,9 +28,9 @@ function OverflowFn<T>(
     minVisible = 1,
     collapseFrom = 'end',
 
-    // Component renderers
+    // Slot renderers
     renderItem,
-    renderMore,
+    renderOverflow,
     ...rest
   } = props;
 
@@ -44,8 +44,8 @@ function OverflowFn<T>(
   } = useOverflow({ items, collapseFrom, minVisible });
 
   const overflowSlot: ReactElement | null =
-    hiddenCount > 0 && renderMore
-      ? (renderMore({
+    hiddenCount > 0 && renderOverflow
+      ? (renderOverflow({
           hidden: hiddenItems,
           count: hiddenCount
         }) as ReactElement)
