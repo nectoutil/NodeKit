@@ -63,7 +63,7 @@
     "@necto/strings": "workspace:*",
     "@necto/types": "workspace:*",
     "defu": "^6.1.7",
-    "react-aria": "^3.39.0",
+    "react-aria": "^3.48.0",
     "std-env": "^4.1.0"
   }
 }
