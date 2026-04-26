@@ -1,0 +1,41 @@
+{
+  "name": "@necto/fetch",
+  "version": "0.0.0",
+  "description": "Necto's HTTP client. ky + axios DX with first-class schema validation, lazy auth, tuple errors, and resource definitions.",
+  "scripts": {
+    "build": "tsdown --minify",
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage --passWithNoTests"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./openapi": {
+      "types": "./dist/openapi/index.d.ts",
+      "import": "./dist/openapi/index.js",
+      "require": "./dist/openapi/index.cjs"
+    }
+  },
+  "author": "Corinvo OSS Team",
+  "license": "MIT",
+  "devDependencies": {
+    "tsdown": "^0.12.7",
+    "@vitest/coverage-istanbul": "^3.2.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nectoutil/NodeKit",
+    "directory": "packages/@necto/necto-fetch"
+  }
+}

@@ -19,3 +19,4 @@ export * from './aria-props';
 export * from './filterDOMProps';
 export * from './isVirtualClick';
 export * from './isKeyboardFocusEvent';
+export * from './resize-observer';

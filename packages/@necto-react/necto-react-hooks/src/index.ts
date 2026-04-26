@@ -31,6 +31,8 @@ export * from './useStyleInjection';
 export * from './useLatestRef';
 export * from './useIsomorphicInsertionEffect';
 export * from './useIsomorphicLayoutEffect';
+export * from './useResizeObserver';
+export * from './useOverflow';
 export * from './useLongPress';
 export * from './useAnimation';
 export * from './useCollectionNavigation';
