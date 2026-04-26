@@ -12,8 +12,6 @@ on:
         value: ${{ jobs.build.outputs.artifact-name }}
 
 env:
-  CI: true
-  LEFTHOOK: 0
   DEFAULT_ARTIFACT_NAME: dist-${{ github.sha }}
 
 jobs:
