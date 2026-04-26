@@ -17,8 +17,6 @@ import type {
 } from './useOverflow.types';
 import type { RefObject } from 'react';
 
-const SPACER_MIN_WIDTH: number = 0.9;
-
 export function useOverflow<T>({
   items,
   collapseFrom = 'end',
@@ -99,7 +97,7 @@ export function useOverflow<T>({
       const spacerWidth: number =
         spacerRef.current.getBoundingClientRect().width;
 
-      if (spacerWidth >= SPACER_MIN_WIDTH) {
+      if (spacerWidth >= 0.9) {
         setState(
           (current: PartitionState<T>): PartitionState<T> =>
             current.overflowDirection === 'none'
