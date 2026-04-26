@@ -11,6 +11,7 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 env:
   CI: true
   LEFTHOOK: 0
+  PNPM_CONFIG_VERIFY_DEPS_BEFORE_RUN: 'false'
 
 jobs:
   build:
@@ -68,16 +69,15 @@ jobs:
         id: create_release_pr
         uses: changesets/action@v1
         with:
-          title: 'Automated Package Release'
           createGithubReleases: true
           commit: 'Package Versioning'
+          title: 'Automated Package Release'
           publish: pnpm exec changeset publish
         env:
-          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
           NPM_TOKEN: ''
-          NPM_CONFIG_ACCESS: public
+          # NPM_CONFIG_ACCESS: public
           NPM_CONFIG_PROVENANCE: true
-          pnpm_config_verify_deps_before_run: 'false'
+          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
 
       - name: Enable auto-merge on release PR
         if: steps.create_release_pr.outputs.pullRequestNumber
