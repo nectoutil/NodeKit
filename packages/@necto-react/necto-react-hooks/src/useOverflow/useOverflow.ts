@@ -5,18 +5,31 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { useLatestRef } from '../useLatestRef';
 import { useResizeObserver } from '../useResizeObserver';
 
 import type {
-  PartitionState,
   UseOverflowReturn,
   UseOverflowOptions
 } from './useOverflow.types';
 import type { RefObject } from 'react';
 
+/**
+ * Stores partition state as a single COUNT (number of visible items), not
+ * as arrays of item references. `visibleItems` and `hiddenItems` are derived
+ * from the `items` prop + count at render time.
+ *
+ * Why: this decouples internal state from items prop identity. Consumers
+ * that build their items array inline (`.map(...)` producing new objects on
+ * every render, plain literals like `['a', 'b']`, etc.) used to either
+ * (a) trigger a setState loop or (b) cause a flicker on every parent
+ * re-render. With count-based state, items ref churn requires zero state
+ * updates — partition only changes when the layout actually demands it.
+ *
+ * The same approach is used by react-overflow-list and similar libraries.
+ */
 export function useOverflow<T>({
   items,
   collapseFrom = 'end',
@@ -29,50 +42,48 @@ export function useOverflow<T>({
   );
   const containerRef: RefObject<HTMLElement | null> =
     useRef<HTMLElement | null>(null);
-  const lastResetItemsRef: RefObject<ReadonlyArray<T>> =
-    useRef<ReadonlyArray<T>>(items);
 
-  const [state, setState] = useState<PartitionState<T>>({
-    hidden: [],
-    visible: items,
-    lastOverflowCount: 0,
-    overflowDirection: 'none'
-  });
-
+  const [visibleCount, setVisibleCount] = useState<number>(items.length);
   const [isReady, setReady] = useState<boolean>(false);
-  useEffect((): void => {
-    const previous: ReadonlyArray<T> = lastResetItemsRef.current;
 
-    if (previous === items) {
+  // Track length separately so we can detect "items added/removed" without
+  // tracking item references (which would defeat the whole point).
+  const previousLengthRef: RefObject<number> = useRef<number>(items.length);
+
+  // Reset on length change. Length is the only signal we trust as "items
+  // genuinely changed". Reference changes alone are no-ops; visibleItems /
+  // hiddenItems are derived below from the latest items prop.
+  useEffect((): void => {
+    if (previousLengthRef.current === items.length) {
       return;
     }
 
-    if (previous.length === items.length) {
-      let isContentEqual: boolean = true;
-      for (let index: number = 0; index < items.length; index += 1) {
-        if (previous[index] !== items[index]) {
-          isContentEqual = false;
-          break;
-        }
-      }
-
-      if (isContentEqual) {
-        return;
-      }
-    }
-
-    lastResetItemsRef.current = items;
-
-    setState({
-      hidden: [],
-      visible: items,
-      lastOverflowCount: 0,
-      overflowDirection: 'none'
-    });
-
+    previousLengthRef.current = items.length;
+    setVisibleCount(items.length);
     setReady(false);
     previousWidth.current = null;
-  }, [items]);
+  }, [items.length]);
+
+  const splitFromStart: boolean = collapseFrom === 'start';
+
+  // Memoize the slice operations so the returned arrays are stable across
+  // renders when neither `items` nor `visibleCount` changed. Consumers can
+  // safely use them in dep arrays without thrashing.
+  const visibleItems: ReadonlyArray<T> = useMemo(
+    (): ReadonlyArray<T> =>
+      splitFromStart
+        ? items.slice(items.length - visibleCount)
+        : items.slice(0, visibleCount),
+    [items, visibleCount, splitFromStart]
+  );
+
+  const hiddenItems: ReadonlyArray<T> = useMemo(
+    (): ReadonlyArray<T> =>
+      splitFromStart
+        ? items.slice(0, items.length - visibleCount)
+        : items.slice(visibleCount),
+    [items, visibleCount, splitFromStart]
+  );
 
   const repartition = useCallback(
     (isGrowing: boolean): void => {
@@ -81,75 +92,39 @@ export function useOverflow<T>({
       }
 
       if (isGrowing) {
-        setState((current: PartitionState<T>) => ({
-          visible: itemsRef.current,
-          hidden: [],
-          lastOverflowCount:
-            current.overflowDirection === 'none'
-              ? current.hidden.length
-              : current.lastOverflowCount,
-          overflowDirection: 'grow'
-        }));
-
+        // Container grew: re-expand to all-visible and let the shrink loop
+        // re-settle on the new equilibrium.
+        setVisibleCount(itemsRef.current.length);
         return;
       }
 
       const spacerWidth: number =
         spacerRef.current.getBoundingClientRect().width;
 
+      // Spacer has room → currently-visible items fit. Stop shrinking.
       if (spacerWidth >= 0.9) {
-        setState(
-          (current: PartitionState<T>): PartitionState<T> =>
-            current.overflowDirection === 'none'
-              ? current
-              : { ...current, overflowDirection: 'none' }
-        );
-
         return;
       }
 
-      setState((current: PartitionState<T>): PartitionState<T> => {
-        if (current.visible.length <= minVisible) {
-          return current;
-        }
-
-        const collapseFromStart: boolean = collapseFrom === 'start';
-        const nextVisible: Array<T> = current.visible.slice();
-        const movedItem: T | undefined = collapseFromStart
-          ? nextVisible.shift()
-          : nextVisible.pop();
-
-        if (movedItem === undefined) {
-          return current;
-        }
-
-        const nextHidden: Array<T> = collapseFromStart
-          ? [...current.hidden, movedItem]
-          : [movedItem, ...current.hidden];
-
-        return {
-          ...current,
-          visible: nextVisible,
-          hidden: nextHidden,
-          overflowDirection:
-            current.overflowDirection === 'none'
-              ? 'shrink'
-              : current.overflowDirection
-        };
-      });
+      setVisibleCount((current: number): number =>
+        current > minVisible ? current - 1 : current
+      );
     },
-    [collapseFrom, minVisible, itemsRef]
+    [minVisible, itemsRef]
   );
 
-  useEffect(() => {
+  // Re-run partition whenever the visible count changes. This is the
+  // iterative-shrink loop: each render measures the spacer, removes one
+  // item if needed, re-renders, re-measures, until the spacer fits.
+  useEffect((): void => {
     repartition(false);
 
     if (!isReady) {
       setReady(true);
     }
-  }, [state.visible, repartition, isReady]);
+  }, [visibleCount, repartition, isReady]);
 
-  useResizeObserver(containerRef, () => {
+  useResizeObserver(containerRef, (): void => {
     const containerElement: HTMLElement | null = containerRef.current;
     if (!containerElement) {
       return;
@@ -161,7 +136,6 @@ export function useOverflow<T>({
 
     if (recordedPreviousWidth === null) {
       repartition(false);
-
       return;
     }
 
@@ -172,8 +146,8 @@ export function useOverflow<T>({
     isReady,
     spacerRef,
     containerRef,
-    hiddenItems: state.hidden,
-    visibleItems: state.visible,
-    hiddenCount: state.hidden.length
+    hiddenItems,
+    visibleItems,
+    hiddenCount: hiddenItems.length
   };
 }
