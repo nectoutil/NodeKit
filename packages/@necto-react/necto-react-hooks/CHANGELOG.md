@@ -1,5 +1,11 @@
 # @necto-react/hooks
 
+## 2.19.0
+
+### Minor Changes
+
+- 1633aec: Released to backfill changes
+
 ## 2.18.0
 
 ### Minor Changes

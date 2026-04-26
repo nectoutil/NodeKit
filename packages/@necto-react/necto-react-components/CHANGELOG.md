@@ -1,5 +1,16 @@
 # @necto-react/components
 
+## 3.2.0
+
+### Minor Changes
+
+- 1633aec: Released to backfill changes
+
+### Patch Changes
+
+- Updated dependencies [1633aec]
+  - @necto-react/hooks@2.19.0
+
 ## 3.1.0
 
 ### Minor Changes
