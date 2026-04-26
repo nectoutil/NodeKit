@@ -21,6 +21,15 @@ env:
 jobs:
   build:
     name: Build
+    # Skip on metadata-only automated PRs. `test` has `needs: build` so it
+    # cascades. Push-to-main is unaffected (main always gets verified).
+    # - changeset-release/main: version bumps + CHANGELOG, already tested in
+    #   the feature PRs that produced each changeset.
+    # - chore/license-headers: top-of-file comment blocks only, cannot affect
+    #   runtime behavior.
+    if: |
+      github.event_name != 'pull_request' ||
+      (github.head_ref != 'changeset-release/main' && github.head_ref != 'chore/license-headers')
     uses: ./.github/workflows/build.yml
     secrets:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
