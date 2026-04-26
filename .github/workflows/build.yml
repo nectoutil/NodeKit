@@ -14,18 +14,24 @@ on:
 env:
   CI: true
   LEFTHOOK: 0
+  DEFAULT_ARTIFACT_NAME: dist-${{ github.sha }}
 
 jobs:
   build:
     name: Build packages
     runs-on: ubuntu-latest
     outputs:
-      artifact-name: ${{ steps.artifact-meta.outputs.name }}
+      artifact-name: ${{ env.DEFAULT_ARTIFACT_NAME }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: '.nvmrc'
 
       - name: Install PNPM
         uses: pnpm/action-setup@v6
@@ -33,27 +39,17 @@ jobs:
           run_install: |
             - args: [--frozen-lockfile, --ignore-scripts]
 
-      - name: Setup Node
-        uses: actions/setup-node@v6
-        with:
-          cache: pnpm
-          node-version-file: '.nvmrc'
-
       - name: Build packages
         run: pnpm build
         env:
           CODECOV_TOKEN: ${{ github.event_name != 'merge_group' && secrets.CODECOV_TOKEN || '' }}
 
-      - name: Compute artifact name
-        id: artifact-meta
-        run: echo "name=dist-${{ github.sha }}" >> "$GITHUB_OUTPUT"
-
       - name: Upload build artifact
         uses: actions/upload-artifact@v7
         with:
-          name: ${{ steps.artifact-meta.outputs.name }}
-          path: packages/**/dist
+          name: ${{ env.DEFAULT_ARTIFACT_NAME }}
+          overwrite: true
           retention-days: 1
           compression-level: 6
-          overwrite: true
+          path: packages/**/dist
           if-no-files-found: error

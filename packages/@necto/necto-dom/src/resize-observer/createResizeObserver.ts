@@ -57,7 +57,6 @@ export function createResizeObserver(
 
   return {
     observer,
-
     subscribe(target: Element, handler: ResizeObserverHandler): void {
       const existing: ResizeObserverHandler[] | undefined =
         subscribers.get(target);
@@ -69,7 +68,6 @@ export function createResizeObserver(
       subscribers.set(target, [handler]);
       observer.observe(target);
     },
-
     unsubscribe(target: Element, handler: ResizeObserverHandler): void {
       const existing: ResizeObserverHandler[] | undefined =
         subscribers.get(target);
@@ -89,7 +87,6 @@ export function createResizeObserver(
         observer.unobserve(target);
       }
     },
-
     disconnect(): void {
       observer.disconnect();
       subscribers.clear();

@@ -4,9 +4,6 @@ on:
   push:
     branches: [main]
 
-env:
-  LEFTHOOK: 0
-
 jobs:
   license_header:
     runs-on: ubuntu-latest
@@ -19,7 +16,7 @@ jobs:
         id: generate_token
         uses: actions/create-github-app-token@v3
         with:
-          app-id: ${{ secrets.NECTO_BOT_ID }}
+          client-id: ${{ secrets.NECTO_BOT_ID }}
           private-key: ${{ secrets.NECTO_BOT_KEY }}
 
       - name: Checkout repository

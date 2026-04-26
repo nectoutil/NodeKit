@@ -14,10 +14,6 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-env:
-  CI: true
-  LEFTHOOK: 0
-
 jobs:
   build:
     name: Build
@@ -35,7 +31,7 @@ jobs:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   test:
-    name: Run tests and upload coverage
+    name: Run tests
     needs: build
     runs-on: ubuntu-latest
 
@@ -75,35 +71,36 @@ jobs:
       - name: Run tests
         run: pnpm vitest run --reporter=default --reporter=junit --outputFile=test-report.junit.xml
 
-      - name: Upload test results to Codecov
-        if: ${{ !cancelled() && github.event_name != 'merge_group' }}
-        uses: codecov/test-results-action@v1
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-
       - name: Run tests with coverage
         run: pnpm test:coverage
 
-      - name: Fix lcov paths for Codecov flags
+      # lcov files emit `SF:src/foo.ts` relative to each package. Codecov
+      # needs repo-root-relative paths to match files, so prepend each
+      # package directory. Done here (not in codecov.yml) so the artifact
+      # we upload is "ready to consume" by any downstream uploader.
+      - name: Fix lcov paths
         run: |
-          find packages -name "lcov.info" -path "*/coverage/*" | while IFS= read -r f; do
+          find packages -name lcov.info -path "*/coverage/*" | while IFS= read -r f; do
             pkg=$(dirname "$(dirname "$f")")/
             sed -i "s|^SF:|SF:${pkg}|g" "$f"
           done
 
-      - name: Upload coverage to Codecov
-        if: ${{ !cancelled() && github.event_name != 'merge_group' }}
-        run: |
-          curl -Os https://cli.codecov.io/latest/linux/codecov
-          chmod +x codecov
-          find packages -name "lcov.info" -path "*/coverage/*" | while IFS= read -r f; do
-            flag=$(basename "$(dirname "$(dirname "$f")")")
-            ./codecov upload-coverage \
-              --token "$CODECOV_TOKEN" \
-              --file "$f" \
-              --flag "$flag" \
-              --git-service github \
-              --fail-on-error
-          done
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      # Hand off to codecov.yml via artifacts. The Codecov workflow is
+      # triggered by `workflow_run` on this workflow's completion.
+      - name: Upload test results artifact
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v8
+        with:
+          name: test-results
+          path: test-report.junit.xml
+          if-no-files-found: error
+          retention-days: 1
+
+      - name: Upload coverage artifact
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v8
+        with:
+          name: coverage-lcov
+          path: packages/**/coverage/lcov.info
+          if-no-files-found: error
+          retention-days: 1

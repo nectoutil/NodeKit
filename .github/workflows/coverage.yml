@@ -1,0 +1,97 @@
+name: Coverage
+
+on:
+  workflow_run:
+    workflows: [Test]
+    types: [completed]
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.workflow_run.head_branch }}
+  cancel-in-progress: true
+
+jobs:
+  discover-coverage:
+    name: Discover coverage files
+    if: |
+      github.event.workflow_run.conclusion != 'cancelled' &&
+      github.event.workflow_run.event != 'merge_group'
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.discover.outputs.matrix }}
+    steps:
+      - name: Download coverage artifact
+        uses: actions/download-artifact@v8
+        with:
+          path: .
+          name: coverage-lcov
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Glob lcov files
+        id: glob
+        uses: tj-actions/glob@v22
+        with:
+          files: packages/**/coverage/lcov.info
+
+      - name: Build matrix
+        id: discover
+        run: |
+          MATRIX=$(jq -Rsc 'split("\n") | map(select(length > 0)) | map({
+            file: .,
+            flag: (split("/")[-3])
+          })' "${{ steps.glob.outputs.paths-output-file }}")
+          echo "matrix=$MATRIX" >> "$GITHUB_OUTPUT"
+
+  upload-test-results:
+    name: Upload test results
+    if: |
+      github.event.workflow_run.conclusion != 'cancelled' &&
+      github.event.workflow_run.event != 'merge_group'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download test results artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: test-results
+          path: .
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload to Codecov
+        uses: codecov/test-results-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+
+  upload-coverage:
+    name: Upload coverage (${{ matrix.flag }})
+    needs: discover-coverage
+    if: |
+      needs.discover-coverage.outputs.matrix != '[]' &&
+      needs.discover-coverage.outputs.matrix != ''
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJson(needs.discover-coverage.outputs.matrix) }}
+
+    steps:
+      - name: Download coverage artifact
+        uses: actions/download-artifact@v8
+        with:
+          path: .
+          name: coverage-lcov
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.workflow_run.id }}
+
+      - name: Upload to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          files: ${{ matrix.file }}
+          flags: ${{ matrix.flag }}
+          disable_search: true
+          fail_ci_if_error: true
+          token: ${{ secrets.CODECOV_TOKEN }}

@@ -12,10 +12,6 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-env:
-  CI: true
-  LEFTHOOK: 0
-
 jobs:
   danger:
     name: Run Danger
@@ -27,7 +23,7 @@ jobs:
         id: generate_token
         uses: actions/create-github-app-token@v3
         with:
-          app-id: ${{ secrets.NECTO_BOT_ID }}
+          client-id: ${{ secrets.NECTO_BOT_ID }}
           private-key: ${{ secrets.NECTO_BOT_KEY }}
 
       - name: Checkout
