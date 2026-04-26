@@ -6,8 +6,8 @@
  *
  */
 
-export * from './layouts';
-export * from './Overflow';
-export * from './Primitive';
-export * from './ShadowBevel';
-export * from './VisuallyHidden';
+import { HTMLElements } from '@necto/dom';
+
+export const OVERFLOW_NAME: string = 'Overflow' as const;
+export const DEFAULT_OVERFLOW_TAG: keyof HTMLElementTagNameMap =
+  HTMLElements.Div;

@@ -15,8 +15,9 @@
   },
   "devDependencies": {
     "@types/node": "^22.19.17",
-    "tsdown": "^0.12.7",
-    "@vitest/coverage-istanbul": "^3.2.4"
+    "@vitest/coverage-istanbul": "^3.2.4",
+    "jsdom-testing-mocks": "^1.16.0",
+    "tsdown": "^0.12.7"
   },
   "files": [
     "dist",
@@ -34,8 +35,8 @@
     }
   },
   "dependencies": {
-    "@necto/types": "workspace:*",
+    "@necto/constants": "workspace:*",
     "@necto/platform": "workspace:*",
-    "@necto/constants": "workspace:*"
+    "@necto/types": "workspace:*"
   }
 }
