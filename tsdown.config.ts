@@ -18,6 +18,7 @@ export default defineConfig({
   clean: true,
   minify: true,
   sourcemap: true,
+  fixedExtension: false,
   plugins: [
     codecovRollupPlugin({
       bundleName: 'nodekit',

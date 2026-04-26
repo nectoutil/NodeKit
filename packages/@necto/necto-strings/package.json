@@ -28,7 +28,7 @@
     "@necto/constants": "workspace:*"
   },
   "devDependencies": {
-    "tsdown": "^0.12.7",
+    "tsdown": "^0.21.10",
     "@vitest/coverage-istanbul": "^3.2.4"
   },
   "repository": {
