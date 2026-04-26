@@ -309,6 +309,136 @@ describe('useOverflow', () => {
     expect(last.hiddenCount).toBe(last.hiddenItems.length);
   });
 
+  test('does not flicker isReady when parent re-renders with new array refs but same length', async () => {
+    // Regression: parents that build the items array inline (`.map(...)` on
+    // every render) used to trigger a full reset + setReady(false), causing
+    // the wrapper to flicker visibility:hidden on every re-render. Same-
+    // length item changes should keep the current partition + ready state.
+    const states: Array<{
+      visibleItems: ReadonlyArray<{ id: string }>;
+      hiddenItems: ReadonlyArray<{ id: string }>;
+      hiddenCount: number;
+      isReady: boolean;
+    }> = [];
+
+    function ObjectHarness({
+      items,
+      containerWidth
+    }: {
+      items: ReadonlyArray<{ id: string }>;
+      containerWidth: number;
+    }) {
+      const overflow = useOverflow({ items });
+
+      useEffect(() => {
+        states.push({
+          visibleItems: overflow.visibleItems,
+          hiddenItems: overflow.hiddenItems,
+          hiddenCount: overflow.hiddenCount,
+          isReady: overflow.isReady
+        });
+      });
+
+      return (
+        <div
+          ref={(node) => {
+            if (!node) return;
+            overflow.containerRef.current = node;
+            Object.defineProperty(node, 'getBoundingClientRect', {
+              value: () => ({
+                width: containerWidth,
+                height: 32,
+                top: 0,
+                left: 0,
+                right: containerWidth,
+                bottom: 32,
+                x: 0,
+                y: 0,
+                toJSON() {
+                  return this;
+                }
+              }),
+              configurable: true
+            });
+          }}
+        >
+          {overflow.visibleItems.map((item) => (
+            <span key={item.id} style={{ width: ITEM_WIDTH }}>
+              {item.id}
+            </span>
+          ))}
+          <div
+            ref={(node) => {
+              if (!node) return;
+              overflow.spacerRef.current = node;
+              const usedWidth: number = overflow.visibleItems.length * ITEM_WIDTH;
+              const remaining: number = Math.max(0, containerWidth - usedWidth);
+              Object.defineProperty(node, 'getBoundingClientRect', {
+                value: () => ({
+                  width: remaining,
+                  height: 32,
+                  top: 0,
+                  left: 0,
+                  right: remaining,
+                  bottom: 32,
+                  x: 0,
+                  y: 0,
+                  toJSON() {
+                    return this;
+                  }
+                }),
+                configurable: true
+              });
+            }}
+          />
+        </div>
+      );
+    }
+
+    // Initial render with 3 items, container fits 2 → 1 must hide.
+    const { rerender } = render(
+      <ObjectHarness
+        items={[{ id: 'a' }, { id: 'b' }, { id: 'c' }]}
+        containerWidth={80}
+      />
+    );
+
+    await waitFor(() => {
+      const last = states.at(-1)!;
+      expect(last.isReady).toBe(true);
+      expect(last.hiddenCount).toBeGreaterThan(0);
+    });
+
+    const visibleAfterSettle: number = states.at(-1)!.visibleItems.length;
+    const hiddenAfterSettle: number = states.at(-1)!.hiddenItems.length;
+
+    states.length = 0;
+
+    // Re-render with NEW object refs at the same indices, same length.
+    // This simulates a parent component that rebuilds the items array on
+    // every render (e.g. mapping over children to build descriptors).
+    await act(async () => {
+      rerender(
+        <ObjectHarness
+          items={[{ id: 'a' }, { id: 'b' }, { id: 'c' }]}
+          containerWidth={80}
+        />
+      );
+    });
+
+    // After the same-length re-render: isReady must NOT flip to false
+    // (no flicker), and the partition counts must be preserved.
+    for (const state of states) {
+      expect(state.isReady).toBe(true);
+    }
+
+    const last = states.at(-1)!;
+    expect(last.visibleItems.length).toBe(visibleAfterSettle);
+    expect(last.hiddenItems.length).toBe(hiddenAfterSettle);
+    // The visible/hidden arrays should reference the NEW objects.
+    expect(last.visibleItems[0]?.id).toBe('a');
+  });
+
   test('marks isReady true after the first partition pass', async () => {
     const states: Array<{
       visibleItems: ReadonlyArray<string>;

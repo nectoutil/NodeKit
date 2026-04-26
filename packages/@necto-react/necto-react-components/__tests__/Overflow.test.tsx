@@ -158,4 +158,112 @@ describe('Overflow', () => {
       expect(indices).toContain(2);
     });
   });
+
+  test('renders nothing when items is empty', async () => {
+    const { container } = render(
+      <Overflow
+        items={[]}
+        className="empty-target"
+        renderItem={(tag: Tag) => <span key={tag.id}>{tag.label}</span>}
+      />
+    );
+
+    await waitFor(() => {
+      const wrapper = container.querySelector('.empty-target');
+      expect(wrapper).toBeInTheDocument();
+      // Wrapper exists but contains no items (only the aria-hidden spacer).
+      const items = wrapper!.querySelectorAll('span');
+      expect(items.length).toBe(0);
+    });
+  });
+
+  test('skips overflowRenderer entirely when prop is omitted', async () => {
+    // Even if items overflow (constrained container), no overflow slot
+    // should render when renderOverflow is not provided.
+    const { container } = render(
+      <div style={{ width: '60px' }}>
+        <Overflow
+          items={tags}
+          renderItem={(tag) => (
+            <span key={tag.id} data-testid="item" style={{ minWidth: '40px' }}>
+              {tag.label}
+            </span>
+          )}
+        />
+      </div>
+    );
+
+    await waitFor(() => {
+      expect(container.querySelectorAll('[data-testid="item"]').length).toBeGreaterThan(0);
+    });
+
+    // No overflow chip should exist anywhere in the rendered tree.
+    expect(container.querySelector('[data-testid="more"]')).not.toBeInTheDocument();
+  });
+
+  test('forwards a function ref to the container element', async () => {
+    let captured: HTMLElement | null = null;
+
+    render(
+      <Overflow
+        ref={(node) => {
+          captured = node;
+        }}
+        items={tags}
+        renderItem={(tag) => <span key={tag.id}>{tag.label}</span>}
+      />
+    );
+
+    await waitFor(() => {
+      expect(captured).toBeInstanceOf(HTMLElement);
+    });
+  });
+
+  test('forwards an object ref to the container element', async () => {
+    const ref = { current: null as HTMLElement | null };
+
+    render(
+      <Overflow
+        ref={ref}
+        items={tags}
+        renderItem={(tag) => <span key={tag.id}>{tag.label}</span>}
+      />
+    );
+
+    await waitFor(() => {
+      expect(ref.current).toBeInstanceOf(HTMLElement);
+    });
+  });
+
+  test('passes hidden items array to renderOverflow when overflow occurs', async () => {
+    const hiddenSeen: Array<ReadonlyArray<Tag>> = [];
+
+    render(
+      <div style={{ width: '50px' }}>
+        <Overflow
+          items={tags}
+          minVisible={1}
+          renderItem={(tag) => (
+            <span key={tag.id} data-testid="item" style={{ minWidth: '40px' }}>
+              {tag.label}
+            </span>
+          )}
+          renderOverflow={({ hidden, count }) => {
+            hiddenSeen.push(hidden);
+            return <span data-testid="more">+{count}</span>;
+          }}
+        />
+      </div>
+    );
+
+    await waitFor(() => {
+      expect(screen.queryByTestId('more')).toBeInTheDocument();
+    });
+
+    const lastHidden = hiddenSeen.at(-1);
+    expect(lastHidden).toBeDefined();
+    expect(lastHidden!.length).toBeGreaterThan(0);
+    // Hidden items should be from `tags` (same object references).
+    expect(tags).toEqual(expect.arrayContaining(lastHidden as Tag[]));
+  });
 });
