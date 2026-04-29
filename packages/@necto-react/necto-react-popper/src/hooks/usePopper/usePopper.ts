@@ -8,7 +8,13 @@
  *
  */
 
-import { useRef, useMemo, useCallback, useLayoutEffect } from 'react';
+import {
+  useRef,
+  useMemo,
+  useEffect,
+  useCallback,
+  useLayoutEffect
+} from 'react';
 import { defu } from 'defu';
 import { flushSync } from 'react-dom';
 import { computePosition } from '@necto/popper';
@@ -42,11 +48,15 @@ export function usePopper(options: UsePopperOptions = {}): UsePopperReturn {
     transform: true
   });
 
-  const [latestMiddleware, setLatestMiddleware] = useLocalState(middleware);
-
-  if (!deepEqual(latestMiddleware, middleware)) {
-    setLatestMiddleware(middleware);
+  // Stable reference to the latest middleware. We avoid useState here because
+  // middleware is only consumed inside `update()` (never in render output), so
+  // a ref is sufficient and skips the extra render that setState-during-render
+  // would trigger when the middleware contents change.
+  const latestMiddlewareRef = useRef(middleware);
+  if (!deepEqual(latestMiddlewareRef.current, middleware)) {
+    latestMiddlewareRef.current = middleware;
   }
+  const latestMiddleware = latestMiddlewareRef.current;
 
   const [data, setData] = useLocalState<
     ComputePositionResult & { isPositioned: boolean }
@@ -95,6 +105,31 @@ export function usePopper(options: UsePopperOptions = {}): UsePopperReturn {
   const whileElementsMountedRef = useLatestRef(whileElementsMounted);
   const openRef = useLatestRef(open);
 
+  // rAF-coalesce position updates so multiple `update()` calls within a single
+  // frame (e.g. during fast scroll/resize bursts) collapse into one synchronous
+  // commit instead of many. flushSync is preserved so the floating element
+  // still positions before paint — we just don't pay for it more than once
+  // per frame.
+  const pendingDataRef = useRef<
+    (ComputePositionResult & { isPositioned: boolean }) | null
+  >(null);
+  const rafIdRef = useRef<number | null>(null);
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: isMountedRef is a stable ref from useMounted, not a reactive dependency.
+  const flushPending = useCallback(() => {
+    rafIdRef.current = null;
+    const next = pendingDataRef.current;
+    if (!next) return;
+    pendingDataRef.current = null;
+
+    if (isMountedRef.current && !deepEqual(dataRef.current, next)) {
+      dataRef.current = next;
+      flushSync(() => {
+        setData(next);
+      });
+    }
+  }, [setData]);
+
   // biome-ignore lint/correctness/useExhaustiveDependencies: isMountedRef is a stable ref from useMounted, not a reactive dependency.
   const update = useCallback(() => {
     if (!referenceRef.current || !floatingRef.current) return;
@@ -104,19 +139,24 @@ export function usePopper(options: UsePopperOptions = {}): UsePopperReturn {
       strategy,
       middleware: latestMiddleware
     }).then((positionData) => {
-      const fullData = {
+      pendingDataRef.current = {
         ...positionData,
         isPositioned: openRef.current !== false
       };
-
-      if (isMountedRef.current && !deepEqual(dataRef.current, fullData)) {
-        dataRef.current = fullData;
-        flushSync(() => {
-          setData(fullData);
-        });
+      if (rafIdRef.current === null) {
+        rafIdRef.current = requestAnimationFrame(flushPending);
       }
     });
-  }, [latestMiddleware, placement, strategy, openRef, setData]);
+  }, [latestMiddleware, placement, strategy, openRef, flushPending]);
+
+  useEffect(() => {
+    return () => {
+      if (rafIdRef.current !== null) {
+        cancelAnimationFrame(rafIdRef.current);
+        rafIdRef.current = null;
+      }
+    };
+  }, []);
 
   useLayoutEffect(() => {
     if (open === false && dataRef.current.isPositioned) {
