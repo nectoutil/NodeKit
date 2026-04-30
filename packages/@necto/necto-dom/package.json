@@ -14,7 +14,7 @@
     "directory": "packages/@necto/necto-dom"
   },
   "devDependencies": {
-    "@types/node": "^22.19.17",
+    "@types/node": "^24.12.2",
     "@vitest/coverage-istanbul": "^3.2.4",
     "jsdom-testing-mocks": "^1.16.0",
     "tsdown": "^0.21.10"
