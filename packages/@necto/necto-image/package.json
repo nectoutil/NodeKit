@@ -17,7 +17,7 @@
     "@necto/url": "workspace:*"
   },
   "devDependencies": {
-    "@types/node": "^22.19.17",
+    "@types/node": "^24.12.2",
     "tsdown": "^0.21.10"
   },
   "files": [
