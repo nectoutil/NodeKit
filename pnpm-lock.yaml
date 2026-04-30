@@ -39,7 +39,7 @@ importers:
         version: 20.5.3
       '@commitlint/load':
         specifier: ^20.5.3
-        version: 20.5.3(@types/node@22.19.17)(typescript@5.9.3)
+        version: 20.5.3(@types/node@22.19.17)(typescript@6.0.3)
       '@vitest/coverage-istanbul':
         specifier: ^3.2.4
         version: 3.2.4(vitest@3.2.4)
@@ -48,7 +48,7 @@ importers:
         version: 3.2.4(vitest@3.2.4)
       commitlint:
         specifier: ^20.5.3
-        version: 20.5.3(@types/node@22.19.17)(conventional-commits-parser@6.4.0)(typescript@5.9.3)
+        version: 20.5.3(@types/node@22.19.17)(conventional-commits-parser@6.4.0)(typescript@6.0.3)
       conventional-changelog-conventionalcommits:
         specifier: ^9.3.1
         version: 9.3.1
@@ -87,16 +87,16 @@ importers:
         version: 6.1.3
       ts-node:
         specifier: ^10.9.2
-        version: 10.9.2(@types/node@22.19.17)(typescript@5.9.3)
+        version: 10.9.2(@types/node@22.19.17)(typescript@6.0.3)
       tsdown:
         specifier: ^0.21.10
-        version: 0.21.10(typescript@5.9.3)
+        version: 0.21.10(typescript@6.0.3)
       turbo:
         specifier: ^2.9.6
         version: 2.9.6
       vite-tsconfig-paths:
         specifier: ^6.1.1
-        version: 6.1.1(typescript@5.9.3)(vite@7.2.2(@types/node@22.19.17)(jiti@2.6.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.1))
+        version: 6.1.1(typescript@6.0.3)(vite@7.2.2(@types/node@22.19.17)(jiti@2.6.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.1))
       vitest:
         specifier: ^3.2.4
         version: 3.2.4(@types/debug@4.1.12)(@types/node@22.19.17)(@vitest/browser@3.2.4)(@vitest/ui@3.2.4)(jiti@2.6.1)(jsdom@26.1.0)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.1)
@@ -169,7 +169,7 @@ importers:
         version: 19.2.5(react@19.2.5)
       tsdown:
         specifier: ^0.21.10
-        version: 0.21.10(typescript@5.9.3)
+        version: 0.21.10(typescript@6.0.3)
       vitest:
         specifier: ^3.2.4
         version: 3.2.4(@types/debug@4.1.12)(@types/node@22.19.17)(@vitest/browser@3.2.4)(@vitest/ui@3.2.4)(jiti@2.6.1)(jsdom@26.1.0)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.1)
@@ -248,7 +248,7 @@ importers:
         version: 1.59.1
       tsdown:
         specifier: ^0.21.10
-        version: 0.21.10(typescript@5.9.3)
+        version: 0.21.10(typescript@6.0.3)
       vitest-axe:
         specifier: ^1.0.0-pre.5
         version: 1.0.0-pre.5(vitest@3.2.4)
@@ -324,7 +324,7 @@ importers:
         version: 1.59.1
       tsdown:
         specifier: ^0.21.10
-        version: 0.21.10(typescript@5.9.3)
+        version: 0.21.10(typescript@6.0.3)
       vitest-axe:
         specifier: ^1.0.0-pre.5
         version: 1.0.0-pre.5(vitest@3.2.4)
@@ -367,7 +367,7 @@ importers:
         version: 19.2.5(react@19.2.5)
       tsdown:
         specifier: ^0.21.10
-        version: 0.21.10(typescript@5.9.3)
+        version: 0.21.10(typescript@6.0.3)
       vitest-axe:
         specifier: ^1.0.0-pre.5
         version: 1.0.0-pre.5(vitest@3.2.4)
@@ -392,7 +392,7 @@ importers:
         version: 19.2.3(@types/react@19.2.14)
       tsdown:
         specifier: ^0.21.10
-        version: 0.21.10(typescript@5.9.3)
+        version: 0.21.10(typescript@6.0.3)
 
   packages/@necto/necto-assert:
     devDependencies:
@@ -404,7 +404,7 @@ importers:
         version: 3.2.4(vitest@3.2.4)
       tsdown:
         specifier: ^0.21.10
-        version: 0.21.10(typescript@5.9.3)
+        version: 0.21.10(typescript@6.0.3)
       vitest:
         specifier: ^3.2.4
         version: 3.2.4(@types/debug@4.1.12)(@types/node@22.19.17)(@vitest/browser@3.2.4)(@vitest/ui@3.2.4)(jiti@2.6.1)(jsdom@26.1.0)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.1)
@@ -456,7 +456,7 @@ importers:
         version: 3.0.1
       tsdown:
         specifier: ^0.21.10
-        version: 0.21.10(typescript@5.9.3)
+        version: 0.21.10(typescript@6.0.3)
 
   packages/@necto/necto-crypto:
     devDependencies:
@@ -519,7 +519,7 @@ importers:
         version: 1.4.0
       tsdown:
         specifier: ^0.21.10
-        version: 0.21.10(typescript@5.9.3)
+        version: 0.21.10(typescript@6.0.3)
       vitest:
         specifier: ^3.2.4
         version: 3.2.4(@types/debug@4.1.12)(@types/node@22.19.17)(@vitest/browser@3.2.4)(@vitest/ui@3.2.4)(jiti@2.6.1)(jsdom@26.1.0)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.1)
@@ -547,7 +547,7 @@ importers:
         version: 1.16.0
       tsdown:
         specifier: ^0.21.10
-        version: 0.21.10(typescript@5.9.3)
+        version: 0.21.10(typescript@6.0.3)
 
   packages/@necto/necto-env:
     dependencies:
@@ -569,7 +569,7 @@ importers:
         version: 3.2.4(vitest@3.2.4)
       tsdown:
         specifier: ^0.21.10
-        version: 0.21.10(typescript@5.9.3)
+        version: 0.21.10(typescript@6.0.3)
 
   packages/@necto/necto-fetch:
     devDependencies:
@@ -578,7 +578,7 @@ importers:
         version: 3.2.4(vitest@3.2.4)
       tsdown:
         specifier: ^0.21.10
-        version: 0.21.10(typescript@5.9.3)
+        version: 0.21.10(typescript@6.0.3)
 
   packages/@necto/necto-file:
     dependencies:
@@ -594,10 +594,10 @@ importers:
         version: 1.2.7
       tsdown:
         specifier: ^0.21.10
-        version: 0.21.10(typescript@5.9.3)
+        version: 0.21.10(typescript@6.0.3)
       typescript:
-        specifier: ^5.9.3
-        version: 5.9.3
+        specifier: ^6.0.3
+        version: 6.0.3
 
   packages/@necto/necto-flags: {}
 
@@ -624,7 +624,7 @@ importers:
         version: 3.2.4(vitest@3.2.4)
       tsdown:
         specifier: ^0.21.10
-        version: 0.21.10(typescript@5.9.3)
+        version: 0.21.10(typescript@6.0.3)
 
   packages/@necto/necto-idb: {}
 
@@ -642,7 +642,7 @@ importers:
         version: 22.19.17
       tsdown:
         specifier: ^0.21.10
-        version: 0.21.10(typescript@5.9.3)
+        version: 0.21.10(typescript@6.0.3)
 
   packages/@necto/necto-math:
     devDependencies:
@@ -651,7 +651,7 @@ importers:
         version: 22.19.17
       tsdown:
         specifier: ^0.21.10
-        version: 0.21.10(typescript@5.9.3)
+        version: 0.21.10(typescript@6.0.3)
 
   packages/@necto/necto-mergers:
     devDependencies:
@@ -669,7 +669,7 @@ importers:
         version: 19.2.5
       tsdown:
         specifier: ^0.21.10
-        version: 0.21.10(typescript@5.9.3)
+        version: 0.21.10(typescript@6.0.3)
 
   packages/@necto/necto-platform:
     devDependencies:
@@ -678,7 +678,7 @@ importers:
         version: 3.2.4(vitest@3.2.4)
       tsdown:
         specifier: ^0.21.10
-        version: 0.21.10(typescript@5.9.3)
+        version: 0.21.10(typescript@6.0.3)
 
   packages/@necto/necto-popper:
     dependencies:
@@ -700,7 +700,7 @@ importers:
         version: 3.2.4(vitest@3.2.4)
       tsdown:
         specifier: ^0.21.10
-        version: 0.21.10(typescript@5.9.3)
+        version: 0.21.10(typescript@6.0.3)
 
   packages/@necto/necto-react:
     dependencies:
@@ -724,7 +724,7 @@ importers:
         version: 3.2.4(vitest@3.2.4)
       tsdown:
         specifier: ^0.21.10
-        version: 0.21.10(typescript@5.9.3)
+        version: 0.21.10(typescript@6.0.3)
 
   packages/@necto/necto-strings:
     dependencies:
@@ -737,13 +737,13 @@ importers:
         version: 3.2.4(vitest@3.2.4)
       tsdown:
         specifier: ^0.21.10
-        version: 0.21.10(typescript@5.9.3)
+        version: 0.21.10(typescript@6.0.3)
 
   packages/@necto/necto-types:
     devDependencies:
       tsdown:
         specifier: ^0.21.10
-        version: 0.21.10(typescript@5.9.3)
+        version: 0.21.10(typescript@6.0.3)
 
   packages/@necto/necto-url:
     devDependencies:
@@ -752,7 +752,7 @@ importers:
         version: 22.19.17
       tsdown:
         specifier: ^0.21.10
-        version: 0.21.10(typescript@5.9.3)
+        version: 0.21.10(typescript@6.0.3)
 
 packages:
 
@@ -4132,8 +4132,8 @@ packages:
     resolution: {integrity: sha512-+v2QJey7ZUeUiuigkU+uFfklvNUyPI2VO2vBpMYJA+a1hKFLFiKtUYlRHdb3P9CrAvMzi0upbjI4WT+zKtqkBg==}
     hasBin: true
 
-  typescript@5.9.3:
-    resolution: {integrity: sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==}
+  typescript@6.0.3:
+    resolution: {integrity: sha512-y2TvuxSZPDyQakkFRPZHKFm+KKVqIisdg9/CZwm9ftvKXLP8NRWj38/ODjNbr43SsoXqNuAisEf1GdCxqWcdBw==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -4811,11 +4811,11 @@ snapshots:
       rollup: 4.53.2
       unplugin: 1.16.1
 
-  '@commitlint/cli@20.5.3(@types/node@22.19.17)(conventional-commits-parser@6.4.0)(typescript@5.9.3)':
+  '@commitlint/cli@20.5.3(@types/node@22.19.17)(conventional-commits-parser@6.4.0)(typescript@6.0.3)':
     dependencies:
       '@commitlint/format': 20.5.0
       '@commitlint/lint': 20.5.3
-      '@commitlint/load': 20.5.3(@types/node@22.19.17)(typescript@5.9.3)
+      '@commitlint/load': 20.5.3(@types/node@22.19.17)(typescript@6.0.3)
       '@commitlint/read': 20.5.0(conventional-commits-parser@6.4.0)
       '@commitlint/types': 20.5.0
       tinyexec: 1.1.1
@@ -4860,14 +4860,14 @@ snapshots:
       '@commitlint/rules': 20.5.3
       '@commitlint/types': 20.5.0
 
-  '@commitlint/load@20.5.3(@types/node@22.19.17)(typescript@5.9.3)':
+  '@commitlint/load@20.5.3(@types/node@22.19.17)(typescript@6.0.3)':
     dependencies:
       '@commitlint/config-validator': 20.5.0
       '@commitlint/execute-rule': 20.0.0
       '@commitlint/resolve-extends': 20.5.3
       '@commitlint/types': 20.5.0
-      cosmiconfig: 9.0.1(typescript@5.9.3)
-      cosmiconfig-typescript-loader: 6.2.0(@types/node@22.19.17)(cosmiconfig@9.0.1(typescript@5.9.3))(typescript@5.9.3)
+      cosmiconfig: 9.0.1(typescript@6.0.3)
+      cosmiconfig-typescript-loader: 6.2.0(@types/node@22.19.17)(cosmiconfig@9.0.1(typescript@6.0.3))(typescript@6.0.3)
       es-toolkit: 1.46.1
       is-plain-obj: 4.1.0
       picocolors: 1.1.1
@@ -6183,9 +6183,9 @@ snapshots:
 
   commander@8.3.0: {}
 
-  commitlint@20.5.3(@types/node@22.19.17)(conventional-commits-parser@6.4.0)(typescript@5.9.3):
+  commitlint@20.5.3(@types/node@22.19.17)(conventional-commits-parser@6.4.0)(typescript@6.0.3):
     dependencies:
-      '@commitlint/cli': 20.5.3(@types/node@22.19.17)(conventional-commits-parser@6.4.0)(typescript@5.9.3)
+      '@commitlint/cli': 20.5.3(@types/node@22.19.17)(conventional-commits-parser@6.4.0)(typescript@6.0.3)
       '@commitlint/types': 20.5.0
     transitivePeerDependencies:
       - '@types/node'
@@ -6219,12 +6219,12 @@ snapshots:
 
   core-js@3.49.0: {}
 
-  cosmiconfig-typescript-loader@6.2.0(@types/node@22.19.17)(cosmiconfig@9.0.1(typescript@5.9.3))(typescript@5.9.3):
+  cosmiconfig-typescript-loader@6.2.0(@types/node@22.19.17)(cosmiconfig@9.0.1(typescript@6.0.3))(typescript@6.0.3):
     dependencies:
       '@types/node': 22.19.17
-      cosmiconfig: 9.0.1(typescript@5.9.3)
+      cosmiconfig: 9.0.1(typescript@6.0.3)
       jiti: 2.6.1
-      typescript: 5.9.3
+      typescript: 6.0.3
 
   cosmiconfig@7.1.0:
     dependencies:
@@ -6234,14 +6234,14 @@ snapshots:
       path-type: 4.0.0
       yaml: 1.10.2
 
-  cosmiconfig@9.0.1(typescript@5.9.3):
+  cosmiconfig@9.0.1(typescript@6.0.3):
     dependencies:
       env-paths: 2.2.1
       import-fresh: 3.3.1
       js-yaml: 4.1.1
       parse-json: 5.2.0
     optionalDependencies:
-      typescript: 5.9.3
+      typescript: 6.0.3
 
   create-require@1.1.1: {}
 
@@ -7439,7 +7439,7 @@ snapshots:
       glob: 13.0.6
       package-json-from-dist: 1.0.1
 
-  rolldown-plugin-dts@0.23.2(rolldown@1.0.0-rc.17)(typescript@5.9.3):
+  rolldown-plugin-dts@0.23.2(rolldown@1.0.0-rc.17)(typescript@6.0.3):
     dependencies:
       '@babel/generator': 8.0.0-rc.3
       '@babel/helper-validator-identifier': 8.0.0-rc.3
@@ -7453,7 +7453,7 @@ snapshots:
       picomatch: 4.0.4
       rolldown: 1.0.0-rc.17
     optionalDependencies:
-      typescript: 5.9.3
+      typescript: 6.0.3
     transitivePeerDependencies:
       - oxc-resolver
 
@@ -7851,7 +7851,7 @@ snapshots:
 
   tree-kill@1.2.2: {}
 
-  ts-node@10.9.2(@types/node@22.19.17)(typescript@5.9.3):
+  ts-node@10.9.2(@types/node@22.19.17)(typescript@6.0.3):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.11
@@ -7865,15 +7865,15 @@ snapshots:
       create-require: 1.1.1
       diff: 4.0.2
       make-error: 1.3.6
-      typescript: 5.9.3
+      typescript: 6.0.3
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
 
-  tsconfck@3.1.6(typescript@5.9.3):
+  tsconfck@3.1.6(typescript@6.0.3):
     optionalDependencies:
-      typescript: 5.9.3
+      typescript: 6.0.3
 
-  tsdown@0.21.10(typescript@5.9.3):
+  tsdown@0.21.10(typescript@6.0.3):
     dependencies:
       ansis: 4.2.0
       cac: 7.0.0
@@ -7884,7 +7884,7 @@ snapshots:
       obug: 2.1.1
       picomatch: 4.0.4
       rolldown: 1.0.0-rc.17
-      rolldown-plugin-dts: 0.23.2(rolldown@1.0.0-rc.17)(typescript@5.9.3)
+      rolldown-plugin-dts: 0.23.2(rolldown@1.0.0-rc.17)(typescript@6.0.3)
       semver: 7.7.4
       tinyexec: 1.1.1
       tinyglobby: 0.2.16
@@ -7892,7 +7892,7 @@ snapshots:
       unconfig-core: 7.5.0
       unrun: 0.2.37
     optionalDependencies:
-      typescript: 5.9.3
+      typescript: 6.0.3
     transitivePeerDependencies:
       - '@ts-macro/tsc'
       - '@typescript/native-preview'
@@ -7913,7 +7913,7 @@ snapshots:
       '@turbo/windows-64': 2.9.6
       '@turbo/windows-arm64': 2.9.6
 
-  typescript@5.9.3: {}
+  typescript@6.0.3: {}
 
   uc.micro@2.1.0: {}
 
@@ -7973,11 +7973,11 @@ snapshots:
       - tsx
       - yaml
 
-  vite-tsconfig-paths@6.1.1(typescript@5.9.3)(vite@7.2.2(@types/node@22.19.17)(jiti@2.6.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.1)):
+  vite-tsconfig-paths@6.1.1(typescript@6.0.3)(vite@7.2.2(@types/node@22.19.17)(jiti@2.6.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.1)):
     dependencies:
       debug: 4.4.3
       globrex: 0.1.2
-      tsconfck: 3.1.6(typescript@5.9.3)
+      tsconfck: 3.1.6(typescript@6.0.3)
       vite: 7.2.2(@types/node@22.19.17)(jiti@2.6.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.1)
     transitivePeerDependencies:
       - supports-color
