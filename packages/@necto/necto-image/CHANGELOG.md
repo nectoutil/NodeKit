@@ -1,5 +1,11 @@
 # @necto/image
 
+## 1.0.22
+
+### Patch Changes
+
+- @necto/dom@1.11.2
+
 ## 1.0.21
 
 ### Patch Changes
