@@ -12,6 +12,27 @@
 export type PointerType = 'mouse' | 'touch' | 'keyboard' | 'pen' | 'virtual';
 
 /**
+ * DOM event names for tracking pointer-down/up, touch-start/end, and focus
+ * transitions. The set hooks like `useOnClickOutside`, `useDismiss`, focus
+ * traps, and press-tracking utilities consume.
+ *
+ * Each option models a different point in the interaction lifecycle:
+ * - `'mousedown'` / `'touchstart'` fire BEFORE click is finalized — fastest
+ *   to react, but consumer can't drag out to cancel.
+ * - `'mouseup'` / `'touchend'` fire AFTER release — gives the user a chance
+ *   to cancel by dragging away before lifting.
+ * - `'focusin'` / `'focusout'` track focus changes (keyboard navigation,
+ *   click-to-focus). Pair with pointer events for full coverage.
+ */
+export type InteractionEventName =
+  | 'mousedown'
+  | 'mouseup'
+  | 'touchstart'
+  | 'touchend'
+  | 'focusin'
+  | 'focusout';
+
+/**
  * Standardized event for press-like interactions.
  */
 export interface PressEvent {
