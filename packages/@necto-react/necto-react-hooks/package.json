@@ -55,14 +55,14 @@
     "react-dom": "catalog:"
   },
   "dependencies": {
-    "@necto-react/types": "workspace:*",
-    "@necto/dom": "workspace:*",
+    "defu": "^6.1.7",
+    "std-env": "^4.1.0",
     "@necto/id": "workspace:*",
+    "@necto/dom": "workspace:*",
+    "@necto/types": "workspace:*",
+    "@necto/strings": "workspace:*",
     "@necto/mergers": "workspace:*",
     "@necto/platform": "workspace:*",
-    "@necto/strings": "workspace:*",
-    "@necto/types": "workspace:*",
-    "defu": "^6.1.7",
-    "std-env": "^4.1.0"
+    "@necto-react/types": "workspace:*"
   }
 }

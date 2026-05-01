@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { useRef } from 'react';
+import { useCallback, useMemo, useRef } from 'react';
 import { state } from '@necto/state';
 
 import { useState } from '../useState';
@@ -45,14 +45,36 @@ export function useLocalState<Value>(
     stateRef.current = state(resolved);
   }
 
-  const result = useState(stateRef.current, options) as LocalStateResult<Value>;
+  const [value, setValue] = useState(stateRef.current, options);
 
-  Object.defineProperty(result, 'reset', {
-    value: (): void => result[1](initialRef.current as SetStateAction<Value>),
-    writable: true,
-    enumerable: false,
-    configurable: true
-  });
+  // Stable identity across renders so consumers can put `result.reset` in
+  // dep arrays without re-running effects. The setter from useState is
+  // already stable, so this callback's identity only depends on it.
+  const reset = useCallback((): void => {
+    setValue(initialRef.current as SetStateAction<Value>);
+  }, [setValue]);
 
-  return result;
+  // Functional updater wrapper. Same identity story as `reset`.
+  const update = useCallback(
+    (updater: (previous: Value) => Value): void => {
+      setValue(updater as SetStateAction<Value>);
+    },
+    [setValue]
+  );
+
+  // Build the tuple+signal hybrid once per state change. `Object.assign` on
+  // an array gives us the same shape as before (`[value, setValue]`), with
+  // signal-style accessors (`value`, `set`, `update`, `reset`) attached so
+  // both API styles work on the same result object. Recomputed only when
+  // the value or setters change, so identity is stable across no-op renders.
+  return useMemo(
+    (): LocalStateResult<Value> =>
+      Object.assign([value, setValue] as const, {
+        value,
+        set: setValue,
+        update,
+        reset
+      }) as LocalStateResult<Value>,
+    [value, setValue, update, reset]
+  );
 }
