@@ -1,5 +1,13 @@
 # @necto-react/components
 
+## 3.3.2
+
+### Patch Changes
+
+- Updated dependencies [d435091]
+  - @necto-react/hooks@2.20.0
+  - @necto/dom@1.11.2
+
 ## 3.3.1
 
 ### Patch Changes

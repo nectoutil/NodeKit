@@ -1,5 +1,12 @@
 # @necto/dom
 
+## 1.11.2
+
+### Patch Changes
+
+- Updated dependencies [d435091]
+  - @necto/types@1.4.0
+
 ## 1.11.1
 
 ### Patch Changes
