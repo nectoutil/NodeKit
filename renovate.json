@@ -8,6 +8,11 @@
   "rebaseWhen": "conflicted",
   "packageRules": [
     {
+      "description": "Only open PRs with neutral, high, or very high confidence",
+      "matchPackagePatterns": ["*"],
+      "minimumConfidence": "neutral" 
+    },
+    {
       "description": "Group React and React types together so they always stay in sync",
       "groupName": "react",
       "matchPackageNames": [
