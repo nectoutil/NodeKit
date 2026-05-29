@@ -41,7 +41,7 @@
     "danger": "^13.0.7",
     "dedent": "^1.7.2",
     "fast-glob": "^3.3.3",
-    "lefthook": "^2.1.8",
+    "lefthook": "^2.1.9",
     "markdownlint": "^0.40.0",
     "markdownlint-cli": "^0.48.0",
     "playwright": "^1.60.0",
