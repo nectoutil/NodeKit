@@ -37,7 +37,7 @@ jobs:
           version-file: package.json
           run_install: |
             - recursive: true
-            - args: [--frozen-lockfile, --ignore-scripts]
+              args: [--frozen-lockfile, --ignore-scripts]
 
       - name: Build packages
         run: pnpm build
