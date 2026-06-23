@@ -1,7 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended"],
-  "prConcurrentLimit": 999
+  "prConcurrentLimit": 999,
   "dependencyDashboard": false,
   "labels": ["dependencies"],
   "rangeStrategy": "bump",
