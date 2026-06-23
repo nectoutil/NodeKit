@@ -33,7 +33,7 @@
   "devDependencies": {
     "@types/node": "^22.19.20",
     "@types/randombytes": "^2.0.3",
-    "tsdown": "^0.21.10",
+    "tsdown": "^0.22.3",
     "@vitest/coverage-istanbul": "^3.2.6"
   },
   "dependencies": {

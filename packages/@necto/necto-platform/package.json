@@ -24,7 +24,7 @@
   "author": "Corinvo OSS Team",
   "license": "MIT",
   "devDependencies": {
-    "tsdown": "^0.21.10",
+    "tsdown": "^0.22.3",
     "@vitest/coverage-istanbul": "^3.2.6"
   },
   "repository": {
