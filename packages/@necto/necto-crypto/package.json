@@ -25,7 +25,6 @@
     "test:coverage": "vitest run --coverage --passWithNoTests"
   },
   "devDependencies": {
-    "@peculiar/webcrypto": "^1.5.0",
     "@stablelib/aes": "^2.0.1",
     "@stablelib/base64": "^2.0.1",
     "@stablelib/bytes": "^2.0.1",
