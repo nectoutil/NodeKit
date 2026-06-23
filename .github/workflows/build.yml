@@ -34,7 +34,7 @@ jobs:
       - name: Install PNPM
         uses: pnpm/action-setup@v6
         with:
-          version: 9
+          version-file: package.json
           run_install: |
             - recursive: true
             - args: [--frozen-lockfile, --ignore-scripts]
