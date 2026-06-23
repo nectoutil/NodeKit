@@ -34,8 +34,10 @@ jobs:
       - name: Install PNPM
         uses: pnpm/action-setup@v6
         with:
-          run_install: |
+          version: 9
+          run_install:
             - args: [--frozen-lockfile, --ignore-scripts]
+
 
       - name: Build packages
         run: pnpm build
