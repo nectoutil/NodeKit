@@ -1,6 +1,8 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended"],
+  "prConcurrentLimit": 999
+  "prHourlyLimit": 999,
   "dependencyDashboard": false,
   "labels": ["dependencies"],
   "rangeStrategy": "bump",
@@ -10,7 +12,7 @@
     {
       "description": "Only open PRs with neutral, high, or very high confidence",
       "matchPackagePatterns": ["*"],
-      "minimumConfidence": "neutral" 
+      "minimumConfidence": "medium" 
     },
     {
       "description": "Group React and React types together so they always stay in sync",
