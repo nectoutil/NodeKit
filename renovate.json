@@ -1,8 +1,8 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended"],
-  "prConcurrentLimit": 999
-  "prHourlyLimit": 999,
+  "prConcurrentLimit": 99
+  "prHourlyLimit": 99,
   "dependencyDashboard": false,
   "labels": ["dependencies"],
   "rangeStrategy": "bump",
