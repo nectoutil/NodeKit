@@ -1,0 +1,38 @@
+{
+  "name": "@necto/bolt",
+  "version": "1.0.1",
+  "type": "module",
+  "description": "Necto's super fast and easy HTTP server.",
+  "author": "Corinvo OSS Team",
+  "license": "MIT",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage --passWithNoTests"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.20",
+    "tsdown": "^0.21.10",
+    "vitest": "^3.2.6",
+    "@vitest/coverage-istanbul": "^3.2.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nectoutil/NodeKit",
+    "directory": "packages/@necto/necto-bolt"
+  }
+}
