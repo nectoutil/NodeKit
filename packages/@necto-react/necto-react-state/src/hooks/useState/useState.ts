@@ -10,12 +10,7 @@ import { useMemo } from 'react';
 import { useSetState } from '../useSetState';
 import { useStateValue } from '../useStateValue';
 
-import type {
-  State,
-  WritableState,
-  PrimitiveState,
-  SetStateAction
-} from '@necto/state';
+import type { State, WritableState, PrimitiveState, SetStateAction } from '@necto/state';
 import type { SetState } from '../useSetState/useSetState.types';
 import type { UseStateOptions, StateResult } from './useState.types';
 

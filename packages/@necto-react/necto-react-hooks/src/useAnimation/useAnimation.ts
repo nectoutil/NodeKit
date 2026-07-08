@@ -9,10 +9,7 @@ import { flushSync } from 'react-dom';
 import { useCallback, useLayoutEffect, useState } from 'react';
 
 import type { RefObject } from 'react';
-import type {
-  UseAnimationOptions,
-  UseAnimationReturn
-} from './useAnimation.types';
+import type { UseAnimationOptions, UseAnimationReturn } from './useAnimation.types';
 
 /**
  * Manages enter and exit CSS animations/transitions on a ref element.

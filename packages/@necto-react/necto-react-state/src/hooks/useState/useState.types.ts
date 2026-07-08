@@ -11,10 +11,7 @@ export type UseStateOptions = {
   store?: Store;
 };
 
-export type StateResult<Value> = [
-  Awaited<Value>,
-  (value: SetStateAction<Value>) => void
-] & {
+export type StateResult<Value> = [Awaited<Value>, (value: SetStateAction<Value>) => void] & {
   value: Awaited<Value>;
   set: (value: Value) => void;
   update: (fn: (prev: Value) => Value) => void;

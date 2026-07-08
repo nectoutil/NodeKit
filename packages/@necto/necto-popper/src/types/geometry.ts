@@ -78,12 +78,7 @@ export interface OverflowData {
  * @returns True if any side has overflow.
  */
 export function hasAnyOverflow(overflow: OverflowData): boolean {
-  return (
-    overflow.top > 0 ||
-    overflow.right > 0 ||
-    overflow.bottom > 0 ||
-    overflow.left > 0
-  );
+  return overflow.top > 0 || overflow.right > 0 || overflow.bottom > 0 || overflow.left > 0;
 }
 
 export type RootBoundary = 'viewport' | 'document' | Element;

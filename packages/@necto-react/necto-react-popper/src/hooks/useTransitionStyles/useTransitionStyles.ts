@@ -44,9 +44,7 @@ export function useTransitionStyles(
         ...Object.keys(closeStyles ?? {})
       ])
     ]
-      .filter(
-        (key) => key !== 'transitionProperty' && key !== 'transitionDuration'
-      )
+      .filter((key) => key !== 'transitionProperty' && key !== 'transitionDuration')
       .join(', ');
 
     const baseTransition = {

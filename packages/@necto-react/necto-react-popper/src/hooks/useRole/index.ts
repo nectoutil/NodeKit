@@ -8,8 +8,4 @@
 
 export { useRole } from './useRole';
 
-export type {
-  PopperRole,
-  UseRoleReturn,
-  UseRoleOptions
-} from './useRole.types';
+export type { PopperRole, UseRoleReturn, UseRoleOptions } from './useRole.types';

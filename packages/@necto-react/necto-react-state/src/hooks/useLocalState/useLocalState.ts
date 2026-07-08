@@ -10,10 +10,7 @@ import { state } from '@necto/state';
 
 import { useState } from '../useState';
 
-import type {
-  LocalStateResult,
-  UseLocalStateOptions
-} from './useLocalState.types';
+import type { LocalStateResult, UseLocalStateOptions } from './useLocalState.types';
 import type { RefObject } from 'react';
 import type { SetStateAction, PrimitiveState } from '@necto/state';
 
@@ -32,14 +29,11 @@ export function useLocalState<Value>(
   options?: UseLocalStateOptions
 ): LocalStateResult<Value> {
   const initialRef: RefObject<Value | null> = useRef<Value>(null);
-  const stateRef: RefObject<PrimitiveState<Value> | null> =
-    useRef<PrimitiveState<Value>>(null);
+  const stateRef: RefObject<PrimitiveState<Value> | null> = useRef<PrimitiveState<Value>>(null);
 
   if (stateRef.current === null) {
     const resolved: Value =
-      typeof initialValue === 'function'
-        ? (initialValue as () => Value)()
-        : initialValue;
+      typeof initialValue === 'function' ? (initialValue as () => Value)() : initialValue;
 
     initialRef.current = resolved;
     stateRef.current = state(resolved);

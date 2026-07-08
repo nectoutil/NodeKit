@@ -15,10 +15,7 @@ import { AssertionError } from './errors';
  * @param message - Optional error message for the assertion failure.
  * @throws {AssertionError} If the expression is falsy.
  */
-export function assert(
-  expression: unknown,
-  message: string = ''
-): asserts expression {
+export function assert(expression: unknown, message: string = ''): asserts expression {
   if (!expression) {
     throw new AssertionError(message);
   }

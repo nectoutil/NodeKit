@@ -5,18 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type {
-  HTTPError,
-  NetworkError,
-  SchemaError,
-  TimeoutError
-} from '../errors';
+import type { HTTPError, NetworkError, SchemaError, TimeoutError } from '../errors';
 
 export type FetchError = HTTPError | SchemaError | TimeoutError | NetworkError;
 
-export type FetchTuple<T> =
-  | [error: FetchError, data: null]
-  | [error: null, data: T];
+export type FetchTuple<T> = [error: FetchError, data: null] | [error: null, data: T];
 
 export interface ResponsePromise<T> extends Promise<T> {
   text(): Promise<string>;

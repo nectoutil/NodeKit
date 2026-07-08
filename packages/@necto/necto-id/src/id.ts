@@ -18,10 +18,7 @@ import { randomBytes } from '@necto/crypto';
  */
 export function id(
   length = 21,
-  charset: string[] = Array.from([
-    ...ALPHABET.LOWERCASE,
-    ...ALPHABET.CAPITALIZED
-  ])
+  charset: string[] = Array.from([...ALPHABET.LOWERCASE, ...ALPHABET.CAPITALIZED])
 ): string {
   assert(length > 0, 'Length must be a positive integer.');
 

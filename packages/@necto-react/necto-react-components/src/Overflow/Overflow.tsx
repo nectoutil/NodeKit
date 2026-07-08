@@ -34,14 +34,11 @@ function OverflowFn<T>(
     ...rest
   } = props;
 
-  const {
-    isReady,
-    spacerRef,
-    containerRef,
-    visibleItems,
-    hiddenItems,
-    hiddenCount
-  } = useOverflow({ items, collapseFrom, minVisible });
+  const { isReady, spacerRef, containerRef, visibleItems, hiddenItems, hiddenCount } = useOverflow({
+    items,
+    collapseFrom,
+    minVisible
+  });
 
   const overflowSlot: ReactElement | null =
     hiddenCount > 0 && renderOverflow

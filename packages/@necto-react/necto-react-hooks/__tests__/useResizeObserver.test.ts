@@ -66,9 +66,7 @@ afterEach(() => {
 describe('useResizeObserver', () => {
   test('returns the controller object on mount', () => {
     const target = document.createElement('div');
-    const { result } = renderHook(() =>
-      useResizeObserver({ current: target }, () => {})
-    );
+    const { result } = renderHook(() => useResizeObserver({ current: target }, () => {}));
 
     expect(result.current).not.toBeNull();
     expect(typeof result.current?.subscribe).toBe('function');
@@ -100,9 +98,7 @@ describe('useResizeObserver', () => {
 
   test('unobserves the target when the hook unmounts', () => {
     const target = document.createElement('div');
-    const { unmount } = renderHook(() =>
-      useResizeObserver({ current: target }, () => {})
-    );
+    const { unmount } = renderHook(() => useResizeObserver({ current: target }, () => {}));
     expect(RecordingResizeObserver.latest().observed.has(target)).toBe(true);
 
     unmount();
@@ -114,10 +110,9 @@ describe('useResizeObserver', () => {
     const firstTarget = document.createElement('div');
     const secondTarget = document.createElement('div');
 
-    const { rerender } = renderHook(
-      ({ targetRef }) => useResizeObserver(targetRef, () => {}),
-      { initialProps: { targetRef: { current: firstTarget } } }
-    );
+    const { rerender } = renderHook(({ targetRef }) => useResizeObserver(targetRef, () => {}), {
+      initialProps: { targetRef: { current: firstTarget } }
+    });
 
     expect(RecordingResizeObserver.latest().observed.has(firstTarget)).toBe(true);
 
@@ -156,9 +151,7 @@ describe('useResizeObserver', () => {
     RecordingResizeObserver.latest().trigger(target);
 
     // Factory batches dispatches via requestAnimationFrame.
-    await new Promise<void>((resolve) =>
-      globalThis.requestAnimationFrame(() => resolve())
-    );
+    await new Promise<void>((resolve) => globalThis.requestAnimationFrame(() => resolve()));
 
     expect(firstCallback).not.toHaveBeenCalled();
     expect(secondCallback).toHaveBeenCalledTimes(1);

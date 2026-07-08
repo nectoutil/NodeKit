@@ -8,65 +8,38 @@
 import type { RequestOptions } from './types/request';
 import type { ResponsePromise } from './types/response';
 
-type InlineOptions<TSchema = unknown> = Omit<
-  RequestOptions<TSchema>,
-  'method' | 'url'
->;
+type InlineOptions<TSchema = unknown> = Omit<RequestOptions<TSchema>, 'method' | 'url'>;
 
-export function fetch<T = unknown>(
-  _url: string,
-  _options?: RequestOptions
-): ResponsePromise<T> {
+export function fetch<T = unknown>(_url: string, _options?: RequestOptions): ResponsePromise<T> {
   throw new Error('NOT_IMPLEMENTED');
 }
 
-export function get<T = unknown>(
-  _url: string,
-  _options?: InlineOptions
-): ResponsePromise<T> {
+export function get<T = unknown>(_url: string, _options?: InlineOptions): ResponsePromise<T> {
   throw new Error('NOT_IMPLEMENTED');
 }
 
-export function post<T = unknown>(
-  _url: string,
-  _options?: InlineOptions
-): ResponsePromise<T> {
+export function post<T = unknown>(_url: string, _options?: InlineOptions): ResponsePromise<T> {
   throw new Error('NOT_IMPLEMENTED');
 }
 
-export function put<T = unknown>(
-  _url: string,
-  _options?: InlineOptions
-): ResponsePromise<T> {
+export function put<T = unknown>(_url: string, _options?: InlineOptions): ResponsePromise<T> {
   throw new Error('NOT_IMPLEMENTED');
 }
 
-export function patch<T = unknown>(
-  _url: string,
-  _options?: InlineOptions
-): ResponsePromise<T> {
+export function patch<T = unknown>(_url: string, _options?: InlineOptions): ResponsePromise<T> {
   throw new Error('NOT_IMPLEMENTED');
 }
 
-export function del<T = unknown>(
-  _url: string,
-  _options?: InlineOptions
-): ResponsePromise<T> {
+export function del<T = unknown>(_url: string, _options?: InlineOptions): ResponsePromise<T> {
   throw new Error('NOT_IMPLEMENTED');
 }
 
 export { del as delete };
 
-export function head(
-  _url: string,
-  _options?: InlineOptions
-): ResponsePromise<void> {
+export function head(_url: string, _options?: InlineOptions): ResponsePromise<void> {
   throw new Error('NOT_IMPLEMENTED');
 }
 
-export function options<T = unknown>(
-  _url: string,
-  _options?: InlineOptions
-): ResponsePromise<T> {
+export function options<T = unknown>(_url: string, _options?: InlineOptions): ResponsePromise<T> {
   throw new Error('NOT_IMPLEMENTED');
 }

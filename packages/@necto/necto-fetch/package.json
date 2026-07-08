@@ -4,7 +4,7 @@
   "private": true,
   "description": "Necto's HTTP client. ky + axios DX with first-class schema validation, lazy auth, tuple errors, and resource definitions.",
   "scripts": {
-    "build": "tsdown --minify",
+    "build": "vp pack --format esm,cjs --dts --minify --sourcemap",
     "test": "vitest",
     "test:coverage": "vitest run --coverage --passWithNoTests"
   },
@@ -13,26 +13,25 @@
     "README.md"
   ],
   "type": "module",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/index.d.mts",
   "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     },
     "./openapi": {
-      "types": "./dist/openapi/index.d.ts",
-      "import": "./dist/openapi/index.js",
+      "types": "./dist/openapi/index.d.mts",
+      "import": "./dist/openapi/index.mjs",
       "require": "./dist/openapi/index.cjs"
     }
   },
   "author": "Corinvo OSS Team",
   "license": "MIT",
   "devDependencies": {
-    "tsdown": "^0.21.10",
-    "@vitest/coverage-istanbul": "^3.2.6"
+    "@vitest/coverage-istanbul": "^4.1.10"
   },
   "repository": {
     "type": "git",

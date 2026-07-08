@@ -57,9 +57,7 @@ export interface UseGlobalListenersReturn {
     type: K,
     listener: (
       this: Document,
-      ev: K extends keyof WindowEventMap
-        ? WindowEventMap[K]
-        : DocumentEventMap[K]
+      ev: K extends keyof WindowEventMap ? WindowEventMap[K] : DocumentEventMap[K]
     ) => void,
     options?: boolean | EventListenerOptions
   ): void;

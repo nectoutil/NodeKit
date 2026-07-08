@@ -35,9 +35,7 @@ export function isSvg(content: string, options: IsSvgOptions = {}): boolean {
     let offset = 0;
 
     while (trimmed.length > offset && !detector.onEnd) {
-      detector.write(
-        trimmed.slice(offset, Math.min(offset + chunkSize, trimmed.length))
-      );
+      detector.write(trimmed.slice(offset, Math.min(offset + chunkSize, trimmed.length)));
       offset += chunkSize;
     }
   }

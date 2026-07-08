@@ -16,8 +16,22 @@ describe('supportsPreventScroll', () => {
 
 describe('scrollIntoView', () => {
   function makeRects(
-    container: { top: number; bottom: number; left: number; right: number; height: number; width: number },
-    element: { top: number; bottom: number; left: number; right: number; height: number; width: number }
+    container: {
+      top: number;
+      bottom: number;
+      left: number;
+      right: number;
+      height: number;
+      width: number;
+    },
+    element: {
+      top: number;
+      bottom: number;
+      left: number;
+      right: number;
+      height: number;
+      width: number;
+    }
   ) {
     const toRect = (r: typeof container) =>
       ({ ...r, x: r.left, y: r.top, toJSON: () => {} }) as DOMRect;

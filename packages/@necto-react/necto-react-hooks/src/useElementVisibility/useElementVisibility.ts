@@ -36,48 +36,45 @@ export function useElementVisibility<T extends Element = Element>(
 
   const [element, setElement] = useState<T | null>(null);
   const [isVisible, setIsVisible] = useState<boolean>(false);
-  const [intersectionDetails, setIntersectionDetails] =
-    useState<IntersectionDetails | null>(null);
+  const [intersectionDetails, setIntersectionDetails] = useState<IntersectionDetails | null>(null);
   const hasBeenVisible = useRef<boolean>(false);
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   // Use useEffectEvent to create a stable reference that doesn't cause re-renders
-  const handleIntersection = useEffectEvent(
-    (entries: IntersectionObserverEntry[]) => {
-      const entry = entries[0];
-      const visible = entry.isIntersecting;
+  const handleIntersection = useEffectEvent((entries: IntersectionObserverEntry[]) => {
+    const entry = entries[0];
+    const visible = entry.isIntersecting;
 
-      const details: IntersectionDetails = {
-        isIntersecting: entry.isIntersecting,
-        intersectionRatio: entry.intersectionRatio,
-        intersectionRect: entry.intersectionRect,
-        boundingClientRect: entry.boundingClientRect,
-        rootBounds: entry.rootBounds,
-        time: entry.time
-      };
+    const details: IntersectionDetails = {
+      isIntersecting: entry.isIntersecting,
+      intersectionRatio: entry.intersectionRatio,
+      intersectionRect: entry.intersectionRect,
+      boundingClientRect: entry.boundingClientRect,
+      rootBounds: entry.rootBounds,
+      time: entry.time
+    };
 
-      setIntersectionDetails(details);
+    setIntersectionDetails(details);
 
-      setIsVisible((prev) => {
-        if (once && hasBeenVisible.current) {
-          return true;
-        }
+    setIsVisible((prev) => {
+      if (once && hasBeenVisible.current) {
+        return true;
+      }
 
-        if (visible && once) {
-          hasBeenVisible.current = true;
-          if (prev !== true && onChange) onChange(true);
-          return true;
-        }
+      if (visible && once) {
+        hasBeenVisible.current = true;
+        if (prev !== true && onChange) onChange(true);
+        return true;
+      }
 
-        if (prev !== visible) {
-          if (onChange) onChange(visible);
-          return visible;
-        }
+      if (prev !== visible) {
+        if (onChange) onChange(visible);
+        return visible;
+      }
 
-        return prev;
-      });
-    }
-  );
+      return prev;
+    });
+  });
 
   const nodeRef = useCallback((node: T | null) => {
     setElement(node);
@@ -110,15 +107,7 @@ export function useElementVisibility<T extends Element = Element>(
       }
     };
     // Notice: handleIntersection is no longer in the dependency array!
-  }, [
-    active,
-    element,
-    root,
-    rootMargin,
-    threshold,
-    partialVisibility,
-    handleIntersection
-  ]);
+  }, [active, element, root, rootMargin, threshold, partialVisibility, handleIntersection]);
 
   return [nodeRef, isVisible, intersectionDetails];
 }

@@ -9,10 +9,7 @@
 import { useMemo } from 'react';
 import { mergeProps, mergeRefs } from '@necto/mergers';
 
-import type {
-  InteractionReturn,
-  UseInteractionsReturn
-} from './useInteractions.types';
+import type { InteractionReturn, UseInteractionsReturn } from './useInteractions.types';
 import type { Ref } from 'react';
 import type { ElementProps } from '../types';
 
@@ -24,15 +21,10 @@ import type { ElementProps } from '../types';
 export function useInteractions(
   interactions: Array<InteractionReturn | undefined | null> = []
 ): UseInteractionsReturn {
-  const filteredInteractions = interactions.filter(
-    Boolean
-  ) as InteractionReturn[];
+  const filteredInteractions = interactions.filter(Boolean) as InteractionReturn[];
 
   const buildProps = useMemo(() => {
-    return (
-      key: 'reference' | 'floating' | 'item',
-      userProps?: ElementProps
-    ): ElementProps => {
+    return (key: 'reference' | 'floating' | 'item', userProps?: ElementProps): ElementProps => {
       const allProps = filteredInteractions
         .map((interaction) => interaction[key])
         .filter(Boolean) as ElementProps[];
@@ -52,18 +44,15 @@ export function useInteractions(
   }, [filteredInteractions]);
 
   const getReferenceProps = useMemo(() => {
-    return (userProps?: ElementProps): ElementProps =>
-      buildProps('reference', userProps);
+    return (userProps?: ElementProps): ElementProps => buildProps('reference', userProps);
   }, [buildProps]);
 
   const getFloatingProps = useMemo(() => {
-    return (userProps?: ElementProps): ElementProps =>
-      buildProps('floating', userProps);
+    return (userProps?: ElementProps): ElementProps => buildProps('floating', userProps);
   }, [buildProps]);
 
   const getItemProps = useMemo(() => {
-    return (userProps?: ElementProps): ElementProps =>
-      buildProps('item', userProps);
+    return (userProps?: ElementProps): ElementProps => buildProps('item', userProps);
   }, [buildProps]);
 
   return {

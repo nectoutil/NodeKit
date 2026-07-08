@@ -20,27 +20,21 @@ describe('useTransitionStatus', () => {
   });
 
   it('should start unmounted when closed', () => {
-    const { result } = renderHook(() =>
-      useTransitionStatus({ open: false })
-    );
+    const { result } = renderHook(() => useTransitionStatus({ open: false }));
 
     expect(result.current.isMounted).toBe(false);
     expect(result.current.status).toBe('unmounted');
   });
 
   it('should mount and set initial status when opened', () => {
-    const { result } = renderHook(() =>
-      useTransitionStatus({ open: true })
-    );
+    const { result } = renderHook(() => useTransitionStatus({ open: true }));
 
     expect(result.current.isMounted).toBe(true);
     expect(result.current.status).toBe('initial');
   });
 
   it('should transition to open on next animation frame', async () => {
-    const { result } = renderHook(() =>
-      useTransitionStatus({ open: true })
-    );
+    const { result } = renderHook(() => useTransitionStatus({ open: true }));
 
     expect(result.current.status).toBe('initial');
 
@@ -100,8 +94,7 @@ describe('useTransitionStatus', () => {
 
   it('should support separate open/close durations', async () => {
     const { result, rerender } = renderHook(
-      ({ open }) =>
-        useTransitionStatus({ open, duration: { open: 200, close: 300 } }),
+      ({ open }) => useTransitionStatus({ open, duration: { open: 200, close: 300 } }),
       { initialProps: { open: true } }
     );
 

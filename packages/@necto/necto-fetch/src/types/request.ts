@@ -9,22 +9,11 @@ import type { Hooks } from './hooks';
 import type { RetryConfig } from './retry';
 import type { SchemaAdapter } from './schema';
 
-export type HTTPMethod =
-  | 'GET'
-  | 'POST'
-  | 'PUT'
-  | 'PATCH'
-  | 'DELETE'
-  | 'HEAD'
-  | 'OPTIONS';
+export type HTTPMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'HEAD' | 'OPTIONS';
 
 export type ErrorMode = 'throw' | 'tuple';
 
-export type AuthBuilder = () =>
-  | string
-  | null
-  | undefined
-  | Promise<string | null | undefined>;
+export type AuthBuilder = () => string | null | undefined | Promise<string | null | undefined>;
 
 export type RequestBody =
   | Record<string, unknown>
@@ -63,12 +52,7 @@ export interface RequestOptions<TSchema = unknown> {
   body?: RequestBody;
   query?: Record<
     string,
-    | string
-    | number
-    | boolean
-    | null
-    | undefined
-    | Array<string | number | boolean>
+    string | number | boolean | null | undefined | Array<string | number | boolean>
   >;
   headers?: HeadersInit;
   timeout?: number;

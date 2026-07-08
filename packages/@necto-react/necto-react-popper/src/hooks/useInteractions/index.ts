@@ -8,7 +8,4 @@
 
 export { useInteractions } from './useInteractions';
 
-export type {
-  InteractionReturn,
-  UseInteractionsReturn
-} from './useInteractions.types';
+export type { InteractionReturn, UseInteractionsReturn } from './useInteractions.types';

@@ -41,9 +41,7 @@ describe('usePopper', () => {
   });
 
   it('should merge custom props with defaults', () => {
-    const { result } = renderHook(() =>
-      usePopper({ placement: 'top', strategy: 'fixed' })
-    );
+    const { result } = renderHook(() => usePopper({ placement: 'top', strategy: 'fixed' }));
 
     expect(result.current.placement).toBe('top');
     expect(result.current.strategy).toBe('fixed');
@@ -97,9 +95,7 @@ describe('usePopper', () => {
     const refElement = document.createElement('div');
     const floatingElement = document.createElement('div');
 
-    renderHook(() =>
-      usePopper({ reference: refElement, floating: floatingElement })
-    );
+    renderHook(() => usePopper({ reference: refElement, floating: floatingElement }));
 
     await waitFor(() => {
       expect(computePosition).toHaveBeenCalledWith(
@@ -163,10 +159,9 @@ describe('usePopper', () => {
     const ref1 = document.createElement('div');
     const ref2 = document.createElement('div');
 
-    const { result, rerender } = renderHook(
-      ({ reference }) => usePopper({ reference }),
-      { initialProps: { reference: ref1 } }
-    );
+    const { result, rerender } = renderHook(({ reference }) => usePopper({ reference }), {
+      initialProps: { reference: ref1 }
+    });
 
     expect(result.current.elements.reference).toBe(ref1);
 
@@ -182,10 +177,9 @@ describe('usePopper', () => {
   });
 
   it('should handle open=false by setting isPositioned to false', () => {
-    const { result, rerender } = renderHook(
-      ({ open }) => usePopper({ open }),
-      { initialProps: { open: true } }
-    );
+    const { result, rerender } = renderHook(({ open }) => usePopper({ open }), {
+      initialProps: { open: true }
+    });
 
     rerender({ open: false });
     expect(result.current.isPositioned).toBe(false);
@@ -281,9 +275,7 @@ describe('usePopper', () => {
 
   it('should return left/top styles with a floating element when transform is false', () => {
     const floatingElement = document.createElement('div');
-    const { result } = renderHook(() =>
-      usePopper({ floating: floatingElement, transform: false })
-    );
+    const { result } = renderHook(() => usePopper({ floating: floatingElement, transform: false }));
 
     expect(result.current.floatingStyles.position).toBe('absolute');
     expect(result.current.floatingStyles.transform).toBeUndefined();
@@ -301,9 +293,7 @@ describe('usePopper', () => {
 
     try {
       const floatingElement = document.createElement('div');
-      const { result } = renderHook(() =>
-        usePopper({ floating: floatingElement })
-      );
+      const { result } = renderHook(() => usePopper({ floating: floatingElement }));
 
       expect(result.current.floatingStyles.willChange).toBe('transform');
     } finally {
@@ -323,9 +313,7 @@ describe('usePopper', () => {
 
     try {
       const floatingElement = document.createElement('div');
-      const { result } = renderHook(() =>
-        usePopper({ floating: floatingElement })
-      );
+      const { result } = renderHook(() => usePopper({ floating: floatingElement }));
 
       expect(result.current.floatingStyles.willChange).toBeUndefined();
     } finally {

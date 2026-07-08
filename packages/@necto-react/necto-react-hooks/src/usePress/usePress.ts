@@ -5,11 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {
-  getOwnerWindow,
-  disableTextSelection,
-  restoreTextSelection
-} from '@necto/dom';
+import { getOwnerWindow, disableTextSelection, restoreTextSelection } from '@necto/dom';
 import { useState, useRef, useCallback, useEffect, useMemo } from 'react';
 import { useStyleInjection } from '../useStyleInjection';
 
@@ -173,10 +169,7 @@ export function usePress(props: UsePressProps = {}): UsePressReturn {
       setIsPressed(false);
 
       // Restore text selection
-      if (
-        !allowTextSelectionOnPress &&
-        e.currentTarget instanceof HTMLElement
-      ) {
+      if (!allowTextSelectionOnPress && e.currentTarget instanceof HTMLElement) {
         restoreTextSelection(e.currentTarget);
       }
 
@@ -184,21 +177,11 @@ export function usePress(props: UsePressProps = {}): UsePressReturn {
       onPressEnd?.(evt);
       onPressUp?.(evt);
 
-      if (
-        e.currentTarget instanceof Node &&
-        e.currentTarget.contains(e.target as Node)
-      ) {
+      if (e.currentTarget instanceof Node && e.currentTarget.contains(e.target as Node)) {
         onPress?.(createPressEvent('press', 'mouse', e));
       }
     },
-    [
-      isDisabled,
-      onPress,
-      onPressEnd,
-      onPressUp,
-      setIsPressed,
-      allowTextSelectionOnPress
-    ]
+    [isDisabled, onPress, onPressEnd, onPressUp, setIsPressed, allowTextSelectionOnPress]
   );
 
   // --- Mouse Leave Handler ---
@@ -208,10 +191,7 @@ export function usePress(props: UsePressProps = {}): UsePressReturn {
         setIsPressed(false);
         onPressEnd?.(createPressEvent('pressend', 'mouse', e));
         // Restore text selection if needed
-        if (
-          !allowTextSelectionOnPress &&
-          e.currentTarget instanceof HTMLElement
-        ) {
+        if (!allowTextSelectionOnPress && e.currentTarget instanceof HTMLElement) {
           restoreTextSelection(e.currentTarget);
         }
       }
@@ -323,10 +303,7 @@ export function usePress(props: UsePressProps = {}): UsePressReturn {
       setIsPressed(false);
 
       // Restore text selection
-      if (
-        !allowTextSelectionOnPress &&
-        e.currentTarget instanceof HTMLElement
-      ) {
+      if (!allowTextSelectionOnPress && e.currentTarget instanceof HTMLElement) {
         restoreTextSelection(e.currentTarget);
       }
 
@@ -334,21 +311,11 @@ export function usePress(props: UsePressProps = {}): UsePressReturn {
       onPressEnd?.(evt);
       onPressUp?.(evt);
 
-      if (
-        e.currentTarget instanceof Node &&
-        e.currentTarget.contains(e.target as Node)
-      ) {
+      if (e.currentTarget instanceof Node && e.currentTarget.contains(e.target as Node)) {
         onPress?.(createPressEvent('press', 'touch', e));
       }
     },
-    [
-      isDisabled,
-      onPress,
-      onPressEnd,
-      onPressUp,
-      setIsPressed,
-      allowTextSelectionOnPress
-    ]
+    [isDisabled, onPress, onPressEnd, onPressUp, setIsPressed, allowTextSelectionOnPress]
   );
 
   // --- Keyboard Key Down Handler ---
@@ -373,13 +340,7 @@ export function usePress(props: UsePressProps = {}): UsePressReturn {
         onPressStart?.(createPressEvent('pressstart', 'keyboard', e));
       }
     },
-    [
-      isDisabled,
-      isPressed,
-      onPressStart,
-      setIsPressed,
-      allowTextSelectionOnPress
-    ]
+    [isDisabled, isPressed, onPressStart, setIsPressed, allowTextSelectionOnPress]
   );
 
   // --- Keyboard Key Up Handler ---
@@ -403,15 +364,7 @@ export function usePress(props: UsePressProps = {}): UsePressReturn {
         onPress?.(createPressEvent('press', 'keyboard', e));
       }
     },
-    [
-      isDisabled,
-      isPressed,
-      onPress,
-      onPressEnd,
-      onPressUp,
-      setIsPressed,
-      allowTextSelectionOnPress
-    ]
+    [isDisabled, isPressed, onPress, onPressEnd, onPressUp, setIsPressed, allowTextSelectionOnPress]
   );
 
   // --- Click Handler (for compatibility) ---

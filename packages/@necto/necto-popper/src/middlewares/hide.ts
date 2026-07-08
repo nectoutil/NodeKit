@@ -60,10 +60,7 @@ export function hide(options: HideOptions = {}): Middleware {
 
     const overflow = detectOverflow(rects.floating, detectOverflowOptions);
     const escaped =
-      overflow.top < 0 ||
-      overflow.bottom < 0 ||
-      overflow.left < 0 ||
-      overflow.right < 0;
+      overflow.top < 0 || overflow.bottom < 0 || overflow.left < 0 || overflow.right < 0;
 
     return {
       data: {

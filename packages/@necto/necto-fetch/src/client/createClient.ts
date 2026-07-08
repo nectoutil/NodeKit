@@ -9,10 +9,7 @@ import type { ResponsePromise } from '../types/response';
 import type { ClientConfig, RequestOptions } from '../types/request';
 import type { ResourceClient, ResourceMap } from '../resource/types';
 
-type CallOptions<TSchema = unknown> = Omit<
-  RequestOptions<TSchema>,
-  'method' | 'url'
->;
+type CallOptions<TSchema = unknown> = Omit<RequestOptions<TSchema>, 'method' | 'url'>;
 
 export interface Client {
   readonly config: Readonly<ClientConfig>;
@@ -26,9 +23,7 @@ export interface Client {
   options<T = unknown>(url: string, options?: CallOptions): ResponsePromise<T>;
   extend(config: ClientConfig): Client;
   with(config: ClientConfig): Client;
-  resources<TResources extends ResourceMap>(
-    map: TResources
-  ): Client & ResourceClient<TResources>;
+  resources<TResources extends ResourceMap>(map: TResources): Client & ResourceClient<TResources>;
 }
 
 export function create(_config?: ClientConfig): Client {

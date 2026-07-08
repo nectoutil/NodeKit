@@ -4,19 +4,19 @@
   "type": "module",
   "description": "File type detection utilities for Necto",
   "scripts": {
-    "build": "tsdown --minify",
-    "dev": "tsdown --watch"
+    "build": "vp pack --format esm,cjs --dts --minify --sourcemap",
+    "dev": "vp pack --format esm,cjs --dts --sourcemap --watch"
   },
   "files": [
     "dist"
   ],
   "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     },
     "./package.json": "./package.json"
@@ -27,7 +27,6 @@
   "devDependencies": {
     "@types/node": "^22.19.20",
     "@types/sax": "^1.2.7",
-    "tsdown": "^0.21.10",
     "typescript": "^5.9.3"
   },
   "dependencies": {

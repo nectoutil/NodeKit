@@ -72,4 +72,3 @@ describe('assert', () => {
     expect(() => assert(false, 'must be true')).toThrow('must be true');
   });
 });
-

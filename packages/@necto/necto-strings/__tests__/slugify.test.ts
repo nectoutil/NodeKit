@@ -183,19 +183,23 @@ describe('slugify', () => {
 
   describe('combined options', () => {
     it('should handle all options together', () => {
-      expect(slugify('  Héllo Wörld!  ', {
-        replacement: '_',
-        lower: true,
-        strict: true,
-        trim: true,
-      })).toBe('hello_world');
+      expect(
+        slugify('  Héllo Wörld!  ', {
+          replacement: '_',
+          lower: true,
+          strict: true,
+          trim: true
+        })
+      ).toBe('hello_world');
     });
 
     it('should handle locale with strict mode', () => {
-      expect(slugify('Ärger & Ärger!', {
-        locale: 'de',
-        strict: true,
-      })).toBe('aerger-and-aerger');
+      expect(
+        slugify('Ärger & Ärger!', {
+          locale: 'de',
+          strict: true
+        })
+      ).toBe('aerger-and-aerger');
     });
   });
 });

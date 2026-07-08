@@ -5,17 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export {
-  fetch,
-  get,
-  post,
-  put,
-  patch,
-  del,
-  delete as deleteFn,
-  head,
-  options
-} from './inline';
+export { fetch, get, post, put, patch, del, delete as deleteFn, head, options } from './inline';
 
 export { create } from './client';
 export type { Client } from './client';

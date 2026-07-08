@@ -11,10 +11,9 @@ import { useEffectEvent } from '@necto-react/hooks';
 
 describe('useEffectEvent', () => {
   it('returns a stable function reference across re-renders', () => {
-    const { result, rerender } = renderHook(
-      ({ fn }) => useEffectEvent(fn),
-      { initialProps: { fn: vi.fn() } }
-    );
+    const { result, rerender } = renderHook(({ fn }) => useEffectEvent(fn), {
+      initialProps: { fn: vi.fn() }
+    });
     const first = result.current;
     rerender({ fn: vi.fn() });
     expect(result.current).toBe(first);
@@ -23,10 +22,9 @@ describe('useEffectEvent', () => {
   it('always invokes the latest provided function', () => {
     const fn1 = vi.fn().mockReturnValue('first');
     const fn2 = vi.fn().mockReturnValue('second');
-    const { result, rerender } = renderHook(
-      ({ fn }) => useEffectEvent(fn),
-      { initialProps: { fn: fn1 } }
-    );
+    const { result, rerender } = renderHook(({ fn }) => useEffectEvent(fn), {
+      initialProps: { fn: fn1 }
+    });
     rerender({ fn: fn2 });
     result.current();
     expect(fn2).toHaveBeenCalledTimes(1);

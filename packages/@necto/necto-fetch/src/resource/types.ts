@@ -27,20 +27,13 @@ export interface RouteDefinition<
   query?: Q;
   response?: R;
   hooks?: Hooks;
-  tags?:
-    | ReadonlyArray<string>
-    | ((params: PathParams<P>) => ReadonlyArray<string>);
-  invalidates?:
-    | ReadonlyArray<string>
-    | ((params: PathParams<P>) => ReadonlyArray<string>);
+  tags?: ReadonlyArray<string> | ((params: PathParams<P>) => ReadonlyArray<string>);
+  invalidates?: ReadonlyArray<string> | ((params: PathParams<P>) => ReadonlyArray<string>);
 }
 
 export interface ResourceDefinition<
   TBase extends string = string,
-  TRoutes extends Record<string, RouteDefinition> = Record<
-    string,
-    RouteDefinition
-  >
+  TRoutes extends Record<string, RouteDefinition> = Record<string, RouteDefinition>
 > {
   base: TBase;
   routes: TRoutes;
@@ -49,10 +42,7 @@ export interface ResourceDefinition<
 
 export type Resource<
   TBase extends string = string,
-  TRoutes extends Record<string, RouteDefinition> = Record<
-    string,
-    RouteDefinition
-  >
+  TRoutes extends Record<string, RouteDefinition> = Record<string, RouteDefinition>
 > = ResourceDefinition<TBase, TRoutes>;
 
 export type ResourceMap = Record<string, Resource>;
@@ -76,8 +66,9 @@ export type RouteCallArgs<TRoute extends RouteDefinition> = (IsParameterized<
     onDownloadProgress?: ProgressHandler;
   };
 
-export type RouteCallReturn<TRoute extends RouteDefinition> =
-  TRoute['response'] extends Schema ? Promise<unknown> : Promise<unknown>;
+export type RouteCallReturn<TRoute extends RouteDefinition> = TRoute['response'] extends Schema
+  ? Promise<unknown>
+  : Promise<unknown>;
 
 export type CallableResource<TResource extends Resource> = {
   [K in keyof TResource['routes']]: (

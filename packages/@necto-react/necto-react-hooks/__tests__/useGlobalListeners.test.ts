@@ -22,7 +22,9 @@ describe('useGlobalListeners', () => {
     const listener = vi.fn();
     const div = document.createElement('div');
 
-    act(() => { result.current.addGlobalListener(div, 'click', listener); });
+    act(() => {
+      result.current.addGlobalListener(div, 'click', listener);
+    });
     div.dispatchEvent(new Event('click'));
 
     expect(listener).toHaveBeenCalledTimes(1);
@@ -65,7 +67,9 @@ describe('useGlobalListeners', () => {
     const listener = vi.fn();
     const div = document.createElement('div');
 
-    act(() => { result.current.addGlobalListener(div, 'click', listener); });
+    act(() => {
+      result.current.addGlobalListener(div, 'click', listener);
+    });
     unmount();
     div.dispatchEvent(new Event('click'));
 

@@ -8,13 +8,7 @@
 
 // biome-ignore-all lint/suspicious/noExplicitAny: Polymorphic component requires any for dynamic element types.
 
-import {
-  Children,
-  forwardRef,
-  cloneElement,
-  createElement,
-  isValidElement
-} from 'react';
+import { Children, forwardRef, cloneElement, createElement, isValidElement } from 'react';
 import { DOM } from '@necto/constants';
 import { capitalize } from '@necto/strings';
 
@@ -60,11 +54,7 @@ const PrimitiveFn = <E extends ElementType = (typeof HTMLElements)['Div']>(
     });
   }
 
-  return createElement(
-    as ?? DEFAULT_PRIMITIVE_TAG,
-    { ref, ...rest } as any,
-    children
-  );
+  return createElement(as ?? DEFAULT_PRIMITIVE_TAG, { ref, ...rest } as any, children);
 };
 
 /**
@@ -88,15 +78,10 @@ export const Primitive: (<E extends ElementType = (typeof HTMLElements)['Div']>(
       tagComponents = {};
 
       for (const tag of DOM.HTML_TAGS) {
-        const Component: ForwardRefExoticComponent<
-          Omit<any, 'ref'> & RefAttributes<any>
-        > = forwardRef<any, any>(
-          (props: Omit<any, 'ref'>, ref: ForwardedRef<any>) =>
-            PrimitiveFn(
-              { ...(props as any), as: tag } as PrimitiveProps<any>,
-              ref
-            )
-        );
+        const Component: ForwardRefExoticComponent<Omit<any, 'ref'> & RefAttributes<any>> =
+          forwardRef<any, any>((props: Omit<any, 'ref'>, ref: ForwardedRef<any>) =>
+            PrimitiveFn({ ...(props as any), as: tag } as PrimitiveProps<any>, ref)
+          );
 
         tagComponents[tag] = Component;
         tagComponents[capitalize(tag)] = Component;

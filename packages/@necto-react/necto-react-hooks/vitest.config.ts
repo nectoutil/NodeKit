@@ -6,6 +6,7 @@
  */
 
 import { defineConfig } from 'vitest/config';
+import { playwright } from '@vitest/browser-playwright';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
@@ -17,7 +18,7 @@ export default defineConfig({
     browser: {
       enabled: true,
       headless: true,
-      provider: 'playwright',
+      provider: playwright(),
       screenshotFailures: false,
       instances: [
         {

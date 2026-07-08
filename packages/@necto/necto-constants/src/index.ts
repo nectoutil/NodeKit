@@ -16,15 +16,4 @@ import * as NUMBERS from './numbers.json';
 import * as CHARS from './characters.json';
 import * as ALPHABET from './alphabet.json';
 
-export {
-  CHARS,
-  ALPHABET,
-  NUMBERS,
-  DOM,
-  SVG,
-  CSS,
-  HTTP,
-  ANCHOR,
-  CHAR_MAP,
-  LOCALE_MAP
-};
+export { CHARS, ALPHABET, NUMBERS, DOM, SVG, CSS, HTTP, ANCHOR, CHAR_MAP, LOCALE_MAP };

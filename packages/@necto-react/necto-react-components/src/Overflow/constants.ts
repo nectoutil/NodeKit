@@ -9,5 +9,4 @@
 import { HTMLElements } from '@necto/dom';
 
 export const OVERFLOW_NAME: string = 'Overflow' as const;
-export const DEFAULT_OVERFLOW_TAG: keyof HTMLElementTagNameMap =
-  HTMLElements.Div;
+export const DEFAULT_OVERFLOW_TAG: keyof HTMLElementTagNameMap = HTMLElements.Div;

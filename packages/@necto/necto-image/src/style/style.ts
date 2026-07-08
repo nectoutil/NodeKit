@@ -55,10 +55,7 @@ export function getImageStyle({
 }
 
 /** Generates the HTML sizes attribute for responsive images */
-export function getImageSizes(
-  width?: number,
-  layout?: ImageLayout
-): string | undefined {
+export function getImageSizes(width?: number, layout?: ImageLayout): string | undefined {
   if (!width || !layout) return undefined;
 
   switch (layout) {

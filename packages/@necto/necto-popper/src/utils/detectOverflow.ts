@@ -17,10 +17,7 @@ import type { Rect, OverflowData, BoundaryOptions } from '../types';
  * @param options - Boundary and padding options.
  * @returns Overflow amounts for each side (positive values indicate overflow).
  */
-export function detectOverflow(
-  rect: Rect,
-  options: BoundaryOptions = {}
-): OverflowData {
+export function detectOverflow(rect: Rect, options: BoundaryOptions = {}): OverflowData {
   const { boundary, padding: paddingOption = 0 } = options;
   const padding = resolvePadding(paddingOption);
   const boundaryRect = getContainmentRect(boundary);
@@ -39,10 +36,7 @@ export function detectOverflow(
  * @param options - Boundary and padding options.
  * @returns True if the rect overflows on any side.
  */
-export function hasOverflow(
-  rect: Rect,
-  options: BoundaryOptions = {}
-): boolean {
+export function hasOverflow(rect: Rect, options: BoundaryOptions = {}): boolean {
   const overflow = detectOverflow(rect, options);
   return hasAnyOverflow(overflow);
 }

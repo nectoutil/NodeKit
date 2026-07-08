@@ -20,7 +20,6 @@ export type HTMLElementsKeys = keyof HTMLElementsMap;
  * Type for a specific HTMLElement given its tag name.
  * @template Tag - The tag name of the HTMLElement.
  */
-export type HTMLElementType<Tag extends keyof HTMLElementTagNameMap> =
-  HTMLElementTagNameMap[Tag];
+export type HTMLElementType<Tag extends keyof HTMLElementTagNameMap> = HTMLElementTagNameMap[Tag];
 
 export interface FocusableElement extends Element, HTMLOrSVGElement {}

@@ -38,9 +38,7 @@ describe('randomBytes', () => {
         const ours = randomBytes(size);
         const ref = stablelibRandomBytes(size);
         return (
-          ours instanceof Uint8Array &&
-          ref instanceof Uint8Array &&
-          ours.length === ref.length
+          ours instanceof Uint8Array && ref instanceof Uint8Array && ours.length === ref.length
         );
       })
     );

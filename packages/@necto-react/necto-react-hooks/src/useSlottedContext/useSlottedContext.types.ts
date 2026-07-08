@@ -15,9 +15,7 @@ export interface UseSlottedContextProps<T> {
   /**
    * The React context to consume, which may be a slotted context value or a direct value.
    */
-  context: Context<
-    { slots?: Record<string | symbol, T> } | T | null | undefined
-  >;
+  context: Context<{ slots?: Record<string | symbol, T> } | T | null | undefined>;
 
   /**
    * The slot name to retrieve from the context. If null, context is not used.

@@ -21,16 +21,35 @@ function Pressable(props: Parameters<typeof usePress>[0] & { 'data-testid'?: str
     tabIndex: 0,
     'data-testid': testId,
     'data-pressed': String(isPressed),
-    ...(pressProps as any),
+    ...(pressProps as any)
   });
 }
 
 function mouseEvent(overrides: Record<string, any> = {}) {
-  return { button: 0, currentTarget: document.body, target: document.body, shiftKey: false, ctrlKey: false, metaKey: false, altKey: false, preventDefault: vi.fn(), ...overrides } as any;
+  return {
+    button: 0,
+    currentTarget: document.body,
+    target: document.body,
+    shiftKey: false,
+    ctrlKey: false,
+    metaKey: false,
+    altKey: false,
+    preventDefault: vi.fn(),
+    ...overrides
+  } as any;
 }
 
 function touchEvent(overrides: Record<string, any> = {}) {
-  return { currentTarget: document.body, target: document.body, shiftKey: false, ctrlKey: false, metaKey: false, altKey: false, preventDefault: vi.fn(), ...overrides } as any;
+  return {
+    currentTarget: document.body,
+    target: document.body,
+    shiftKey: false,
+    ctrlKey: false,
+    metaKey: false,
+    altKey: false,
+    preventDefault: vi.fn(),
+    ...overrides
+  } as any;
 }
 
 describe('usePress', () => {
@@ -94,7 +113,9 @@ describe('usePress', () => {
     const user = userEvent.setup();
     render(createElement(Pressable, { onPress, onPressEnd, onPressUp }));
     await user.click(screen.getByTestId('pressable'));
-    expect(onPressEnd).toHaveBeenCalledWith(expect.objectContaining({ type: 'pressend', pointerType: 'mouse' }));
+    expect(onPressEnd).toHaveBeenCalledWith(
+      expect.objectContaining({ type: 'pressend', pointerType: 'mouse' })
+    );
     expect(onPressUp).toHaveBeenCalled();
     expect(onPress).toHaveBeenCalled();
   });
@@ -119,10 +140,14 @@ describe('usePress', () => {
   it('calls onPressEnd on mouseleave while pressed', async () => {
     const onPressEnd = vi.fn();
     const user = userEvent.setup();
-    render(createElement('div', null,
-      createElement(Pressable, { onPressEnd }),
-      createElement('div', { 'data-testid': 'outside', style: { width: 100, height: 100 } })
-    ));
+    render(
+      createElement(
+        'div',
+        null,
+        createElement(Pressable, { onPressEnd }),
+        createElement('div', { 'data-testid': 'outside', style: { width: 100, height: 100 } })
+      )
+    );
     const el = screen.getByTestId('pressable');
     await user.pointer({ keys: '[MouseLeft]', target: el });
     await user.pointer({ target: screen.getByTestId('outside') });
@@ -135,10 +160,16 @@ describe('usePress', () => {
     const onPressStart = vi.fn();
     const { result } = renderHook(() => usePress({ onPressStart }));
     const e = mouseEvent();
-    act(() => { result.current.pressProps.onMouseDown?.(e); });
-    act(() => { result.current.pressProps.onMouseLeave?.(e); });
+    act(() => {
+      result.current.pressProps.onMouseDown?.(e);
+    });
+    act(() => {
+      result.current.pressProps.onMouseLeave?.(e);
+    });
     onPressStart.mockClear();
-    act(() => { result.current.pressProps.onMouseEnter?.(e); });
+    act(() => {
+      result.current.pressProps.onMouseEnter?.(e);
+    });
     expect(onPressStart).toHaveBeenCalledWith(
       expect.objectContaining({ type: 'pressstart', pointerType: 'mouse' })
     );
@@ -148,7 +179,9 @@ describe('usePress', () => {
   it('registers a window mouseup listener on mousedown', () => {
     const addSpy = vi.spyOn(window, 'addEventListener');
     const { result } = renderHook(() => usePress({}));
-    act(() => { result.current.pressProps.onMouseDown?.(mouseEvent()); });
+    act(() => {
+      result.current.pressProps.onMouseDown?.(mouseEvent());
+    });
     expect(addSpy).toHaveBeenCalledWith('mouseup', expect.any(Function), { once: true });
     addSpy.mockRestore();
   });
@@ -156,7 +189,9 @@ describe('usePress', () => {
   it('calls e.preventDefault on mousedown when preventFocusOnPress is true', () => {
     const e = mouseEvent();
     const { result } = renderHook(() => usePress({ preventFocusOnPress: true }));
-    act(() => { result.current.pressProps.onMouseDown?.(e); });
+    act(() => {
+      result.current.pressProps.onMouseDown?.(e);
+    });
     expect(e.preventDefault).toHaveBeenCalled();
   });
 
@@ -195,7 +230,9 @@ describe('usePress', () => {
   it('calls onPressStart with touch pointerType on touchstart', () => {
     const onPressStart = vi.fn();
     const { result } = renderHook(() => usePress({ onPressStart }));
-    act(() => { result.current.pressProps.onTouchStart?.(touchEvent()); });
+    act(() => {
+      result.current.pressProps.onTouchStart?.(touchEvent());
+    });
     expect(onPressStart).toHaveBeenCalledWith(
       expect.objectContaining({ type: 'pressstart', pointerType: 'touch' })
     );
@@ -206,7 +243,10 @@ describe('usePress', () => {
     const user = userEvent.setup();
     render(createElement(Pressable, { onPress }));
     const el = screen.getByTestId('pressable');
-    await user.pointer([{ keys: '[TouchA]', target: el }, { keys: '[/TouchA]', target: el }]);
+    await user.pointer([
+      { keys: '[TouchA]', target: el },
+      { keys: '[/TouchA]', target: el }
+    ]);
     expect(onPress).toHaveBeenCalled();
   });
 
@@ -215,14 +255,19 @@ describe('usePress', () => {
     const user = userEvent.setup();
     render(createElement(Pressable, { isDisabled: true, onPressStart }));
     const el = screen.getByTestId('pressable');
-    await user.pointer([{ keys: '[TouchA]', target: el }, { keys: '[/TouchA]', target: el }]);
+    await user.pointer([
+      { keys: '[TouchA]', target: el },
+      { keys: '[/TouchA]', target: el }
+    ]);
     expect(onPressStart).not.toHaveBeenCalled();
   });
 
   it('registers window touchend and touchcancel listeners on touchstart', () => {
     const addSpy = vi.spyOn(window, 'addEventListener');
     const { result } = renderHook(() => usePress({}));
-    act(() => { result.current.pressProps.onTouchStart?.(touchEvent()); });
+    act(() => {
+      result.current.pressProps.onTouchStart?.(touchEvent());
+    });
     expect(addSpy).toHaveBeenCalledWith('touchend', expect.any(Function), { once: true });
     expect(addSpy).toHaveBeenCalledWith('touchcancel', expect.any(Function), { once: true });
     addSpy.mockRestore();
@@ -343,11 +388,19 @@ describe('usePress', () => {
     const onPress = vi.fn();
     const { result } = renderHook(() => usePress({ onPressEnd, onPressUp, onPress }));
     const el = document.createElement('div');
-    act(() => { result.current.pressProps.onTouchStart?.(touchEvent({ currentTarget: el, target: el })); });
-    act(() => { result.current.pressProps.onTouchEnd?.(touchEvent({ currentTarget: el, target: el })); });
-    expect(onPressEnd).toHaveBeenCalledWith(expect.objectContaining({ type: 'pressend', pointerType: 'touch' }));
+    act(() => {
+      result.current.pressProps.onTouchStart?.(touchEvent({ currentTarget: el, target: el }));
+    });
+    act(() => {
+      result.current.pressProps.onTouchEnd?.(touchEvent({ currentTarget: el, target: el }));
+    });
+    expect(onPressEnd).toHaveBeenCalledWith(
+      expect.objectContaining({ type: 'pressend', pointerType: 'touch' })
+    );
     expect(onPressUp).toHaveBeenCalled();
-    expect(onPress).toHaveBeenCalledWith(expect.objectContaining({ type: 'press', pointerType: 'touch' }));
+    expect(onPress).toHaveBeenCalledWith(
+      expect.objectContaining({ type: 'press', pointerType: 'touch' })
+    );
   });
 
   it('does not call onPress on touchend when target is outside currentTarget', () => {
@@ -355,15 +408,21 @@ describe('usePress', () => {
     const { result } = renderHook(() => usePress({ onPress }));
     const el = document.createElement('div');
     const outside = document.createElement('span');
-    act(() => { result.current.pressProps.onTouchStart?.(touchEvent({ currentTarget: el, target: el })); });
-    act(() => { result.current.pressProps.onTouchEnd?.(touchEvent({ currentTarget: el, target: outside })); });
+    act(() => {
+      result.current.pressProps.onTouchStart?.(touchEvent({ currentTarget: el, target: el }));
+    });
+    act(() => {
+      result.current.pressProps.onTouchEnd?.(touchEvent({ currentTarget: el, target: outside }));
+    });
     expect(onPress).not.toHaveBeenCalled();
   });
 
   it('ignores touchend when pressStarted is false', () => {
     const onPressEnd = vi.fn();
     const { result } = renderHook(() => usePress({ onPressEnd }));
-    act(() => { result.current.pressProps.onTouchEnd?.(touchEvent()); });
+    act(() => {
+      result.current.pressProps.onTouchEnd?.(touchEvent());
+    });
     expect(onPressEnd).not.toHaveBeenCalled();
   });
 
@@ -402,7 +461,9 @@ describe('usePress', () => {
     document.body.appendChild(el);
     const ref = { current: el };
     // JSDOM returns '' for touchAction, but the hook checks for 'auto'; mock it
-    const spy = vi.spyOn(window, 'getComputedStyle').mockReturnValue({ touchAction: 'auto' } as CSSStyleDeclaration);
+    const spy = vi
+      .spyOn(window, 'getComputedStyle')
+      .mockReturnValue({ touchAction: 'auto' } as CSSStyleDeclaration);
     renderHook(() => usePress({ styleInjection: 'inline', ref }));
     await act(async () => {});
     expect(el.style.touchAction).toBe('pan-x pan-y pinch-zoom');
@@ -422,10 +483,16 @@ describe('usePress', () => {
     const onClick = vi.fn();
     const { result } = renderHook(() => usePress({ onClick }));
     const el = document.createElement('div');
-    act(() => { result.current.pressProps.onTouchStart?.(touchEvent({ currentTarget: el, target: el })); });
+    act(() => {
+      result.current.pressProps.onTouchStart?.(touchEvent({ currentTarget: el, target: el }));
+    });
     // After 100ms the flag resets and click handler fires normally
-    act(() => { vi.advanceTimersByTime(100); });
-    act(() => { result.current.pressProps.onClick?.(mouseEvent()); });
+    act(() => {
+      vi.advanceTimersByTime(100);
+    });
+    act(() => {
+      result.current.pressProps.onClick?.(mouseEvent());
+    });
     expect(onClick).toHaveBeenCalled();
     vi.useRealTimers();
   });

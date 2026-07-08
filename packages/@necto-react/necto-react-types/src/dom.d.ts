@@ -38,9 +38,7 @@ export interface FocusableDOMProps extends DOMProps {
  *
  * @template T The element type, defaults to FocusableElement.
  */
-export interface DOMAttributes<T = FocusableElement>
-  extends AriaAttributes,
-    ReactDOMAttributes<T> {
+export interface DOMAttributes<T = FocusableElement> extends AriaAttributes, ReactDOMAttributes<T> {
   /** The unique id for the DOM element. */
   id?: string | undefined;
 

@@ -18,7 +18,11 @@ function makeEl() {
   return el;
 }
 
-function makeFocusEvent(currentTarget: Element, target: Element, relatedTarget: Element | null = null) {
+function makeFocusEvent(
+  currentTarget: Element,
+  target: Element,
+  relatedTarget: Element | null = null
+) {
   return { currentTarget, target, relatedTarget, nativeEvent: { target } } as any;
 }
 
@@ -45,7 +49,9 @@ describe('useFocusWithin', () => {
     const { result } = renderHook(() => useFocusWithin({ onFocusWithin }));
     const el = makeEl();
 
-    act(() => { result.current.focusWithinProps.onFocus?.(makeFocusEvent(el, el)); });
+    act(() => {
+      result.current.focusWithinProps.onFocus?.(makeFocusEvent(el, el));
+    });
 
     expect(onFocusWithin).toHaveBeenCalled();
     document.body.removeChild(el);
@@ -56,7 +62,9 @@ describe('useFocusWithin', () => {
     const { result } = renderHook(() => useFocusWithin({ onFocusWithinChange }));
     const el = makeEl();
 
-    act(() => { result.current.focusWithinProps.onFocus?.(makeFocusEvent(el, el)); });
+    act(() => {
+      result.current.focusWithinProps.onFocus?.(makeFocusEvent(el, el));
+    });
 
     expect(onFocusWithinChange).toHaveBeenCalledWith(true);
     document.body.removeChild(el);
@@ -67,8 +75,12 @@ describe('useFocusWithin', () => {
     const { result } = renderHook(() => useFocusWithin({ onFocusWithinChange }));
     const el = makeEl();
 
-    act(() => { result.current.focusWithinProps.onFocus?.(makeFocusEvent(el, el)); });
-    act(() => { result.current.focusWithinProps.onBlur?.(makeFocusEvent(el, el, null)); });
+    act(() => {
+      result.current.focusWithinProps.onFocus?.(makeFocusEvent(el, el));
+    });
+    act(() => {
+      result.current.focusWithinProps.onBlur?.(makeFocusEvent(el, el, null));
+    });
 
     expect(onFocusWithinChange).toHaveBeenCalledWith(false);
     document.body.removeChild(el);
@@ -79,8 +91,12 @@ describe('useFocusWithin', () => {
     const { result } = renderHook(() => useFocusWithin({ onBlurWithin }));
     const el = makeEl();
 
-    act(() => { result.current.focusWithinProps.onFocus?.(makeFocusEvent(el, el)); });
-    act(() => { result.current.focusWithinProps.onBlur?.(makeFocusEvent(el, el, null)); });
+    act(() => {
+      result.current.focusWithinProps.onFocus?.(makeFocusEvent(el, el));
+    });
+    act(() => {
+      result.current.focusWithinProps.onBlur?.(makeFocusEvent(el, el, null));
+    });
 
     expect(onBlurWithin).toHaveBeenCalled();
     document.body.removeChild(el);

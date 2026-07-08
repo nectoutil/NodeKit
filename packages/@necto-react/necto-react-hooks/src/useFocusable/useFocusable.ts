@@ -7,11 +7,7 @@
 
 // biome-ignore-all lint/suspicious/noExplicitAny: Focusable hook requires any.
 
-import {
-  useFocus,
-  useKeyboard,
-  getInteractionModality
-} from '@necto-react/hooks';
+import { useFocus, useKeyboard, getInteractionModality } from '@necto-react/hooks';
 import {
   getOwnerDocument,
   getActiveElement,
@@ -21,10 +17,7 @@ import {
 import { useEffect, useRef } from 'react';
 import { mergeProps } from '@necto/mergers';
 
-import type {
-  UseFocusableReturn,
-  UseFocusableOptions
-} from './useFocusable.types';
+import type { UseFocusableReturn, UseFocusableOptions } from './useFocusable.types';
 import type { RefObject } from 'react';
 import type { FocusableElement } from '@necto/types';
 
@@ -47,9 +40,7 @@ export function useFocusable(
   const autoFocusRef: RefObject<any> = useRef(autoFocus);
 
   const ownerDocument = getOwnerDocument(domRef.current);
-  const activeElement: Element | null = ownerDocument
-    ? getActiveElement(ownerDocument)
-    : null;
+  const activeElement: Element | null = ownerDocument ? getActiveElement(ownerDocument) : null;
 
   useEffect(() => {
     if (autoFocusRef.current && domRef.current) {

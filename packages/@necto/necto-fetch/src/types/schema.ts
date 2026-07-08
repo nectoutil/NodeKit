@@ -16,10 +16,7 @@ export type SchemaParseResult<T> =
     };
 
 export interface SchemaAdapter {
-  parse<T>(
-    schema: unknown,
-    value: unknown
-  ): SchemaParseResult<T> | Promise<SchemaParseResult<T>>;
+  parse<T>(schema: unknown, value: unknown): SchemaParseResult<T> | Promise<SchemaParseResult<T>>;
 }
 
 export type Schema = unknown;

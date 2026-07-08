@@ -24,7 +24,5 @@ export function kebabCase(str: string, keepLeadingDash = false): string {
 }
 
 kebabCase.reverse = (str: string): string => {
-  return str.replace(/-\p{Ll}/gu, (match: string): string =>
-    match.slice(1).toUpperCase()
-  );
+  return str.replace(/-\p{Ll}/gu, (match: string): string => match.slice(1).toUpperCase());
 };

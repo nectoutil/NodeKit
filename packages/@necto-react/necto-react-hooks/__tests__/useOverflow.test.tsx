@@ -121,9 +121,7 @@ describe('useOverflow', () => {
       isReady: boolean;
     }> = [];
 
-    render(
-      <Harness items={[...items]} containerWidth={500} onState={(s) => states.push(s)} />
-    );
+    render(<Harness items={[...items]} containerWidth={500} onState={(s) => states.push(s)} />);
 
     await waitFor(() => {
       expect(states.at(-1)?.isReady).toBe(true);
@@ -254,11 +252,7 @@ describe('useOverflow', () => {
     }> = [];
 
     const { rerender } = render(
-      <Harness
-        items={['a', 'b', 'c']}
-        containerWidth={80}
-        onState={(s) => states.push(s)}
-      />
+      <Harness items={['a', 'b', 'c']} containerWidth={80} onState={(s) => states.push(s)} />
     );
 
     await waitFor(() => {
@@ -269,13 +263,7 @@ describe('useOverflow', () => {
     states.length = 0;
 
     await act(async () => {
-      rerender(
-        <Harness
-          items={['x', 'y']}
-          containerWidth={500}
-          onState={(s) => states.push(s)}
-        />
-      );
+      rerender(<Harness items={['x', 'y']} containerWidth={500} onState={(s) => states.push(s)} />);
     });
 
     await waitFor(() => {
@@ -293,13 +281,7 @@ describe('useOverflow', () => {
       isReady: boolean;
     }> = [];
 
-    render(
-      <Harness
-        items={['a', 'b', 'c']}
-        containerWidth={80}
-        onState={(s) => states.push(s)}
-      />
-    );
+    render(<Harness items={['a', 'b', 'c']} containerWidth={80} onState={(s) => states.push(s)} />);
 
     await waitFor(() => {
       expect(states.at(-1)?.isReady).toBe(true);
@@ -397,10 +379,7 @@ describe('useOverflow', () => {
 
     // Initial render with 3 items, container fits 2 → 1 must hide.
     const { rerender } = render(
-      <ObjectHarness
-        items={[{ id: 'a' }, { id: 'b' }, { id: 'c' }]}
-        containerWidth={80}
-      />
+      <ObjectHarness items={[{ id: 'a' }, { id: 'b' }, { id: 'c' }]} containerWidth={80} />
     );
 
     await waitFor(() => {
@@ -419,10 +398,7 @@ describe('useOverflow', () => {
     // every render (e.g. mapping over children to build descriptors).
     await act(async () => {
       rerender(
-        <ObjectHarness
-          items={[{ id: 'a' }, { id: 'b' }, { id: 'c' }]}
-          containerWidth={80}
-        />
+        <ObjectHarness items={[{ id: 'a' }, { id: 'b' }, { id: 'c' }]} containerWidth={80} />
       );
     });
 

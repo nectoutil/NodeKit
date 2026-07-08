@@ -7,10 +7,7 @@
  */
 
 import type { CSSProperties } from 'react';
-import type {
-  UseTransitionStatusOptions,
-  UseTransitionStatusReturn
-} from '../useTransitionStatus';
+import type { UseTransitionStatusOptions, UseTransitionStatusReturn } from '../useTransitionStatus';
 
 export interface UseTransitionStylesOptions extends UseTransitionStatusOptions {
   /**

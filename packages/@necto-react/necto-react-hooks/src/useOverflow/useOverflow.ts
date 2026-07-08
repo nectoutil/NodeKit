@@ -10,10 +10,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useLatestRef } from '../useLatestRef';
 import { useResizeObserver } from '../useResizeObserver';
 
-import type {
-  UseOverflowReturn,
-  UseOverflowOptions
-} from './useOverflow.types';
+import type { UseOverflowReturn, UseOverflowOptions } from './useOverflow.types';
 import type { RefObject } from 'react';
 
 /**
@@ -37,11 +34,8 @@ export function useOverflow<T>({
 }: UseOverflowOptions<T>): UseOverflowReturn<T> {
   const itemsRef: RefObject<ReadonlyArray<T>> = useLatestRef(items);
   const previousWidth: RefObject<number | null> = useRef<number | null>(null);
-  const spacerRef: RefObject<HTMLElement | null> = useRef<HTMLElement | null>(
-    null
-  );
-  const containerRef: RefObject<HTMLElement | null> =
-    useRef<HTMLElement | null>(null);
+  const spacerRef: RefObject<HTMLElement | null> = useRef<HTMLElement | null>(null);
+  const containerRef: RefObject<HTMLElement | null> = useRef<HTMLElement | null>(null);
 
   const [visibleCount, setVisibleCount] = useState<number>(items.length);
   const [isReady, setReady] = useState<boolean>(false);
@@ -71,17 +65,13 @@ export function useOverflow<T>({
   // safely use them in dep arrays without thrashing.
   const visibleItems: ReadonlyArray<T> = useMemo(
     (): ReadonlyArray<T> =>
-      splitFromStart
-        ? items.slice(items.length - visibleCount)
-        : items.slice(0, visibleCount),
+      splitFromStart ? items.slice(items.length - visibleCount) : items.slice(0, visibleCount),
     [items, visibleCount, splitFromStart]
   );
 
   const hiddenItems: ReadonlyArray<T> = useMemo(
     (): ReadonlyArray<T> =>
-      splitFromStart
-        ? items.slice(0, items.length - visibleCount)
-        : items.slice(visibleCount),
+      splitFromStart ? items.slice(0, items.length - visibleCount) : items.slice(visibleCount),
     [items, visibleCount, splitFromStart]
   );
 
@@ -98,17 +88,14 @@ export function useOverflow<T>({
         return;
       }
 
-      const spacerWidth: number =
-        spacerRef.current.getBoundingClientRect().width;
+      const spacerWidth: number = spacerRef.current.getBoundingClientRect().width;
 
       // Spacer has room → currently-visible items fit. Stop shrinking.
       if (spacerWidth >= 0.9) {
         return;
       }
 
-      setVisibleCount((current: number): number =>
-        current > minVisible ? current - 1 : current
-      );
+      setVisibleCount((current: number): number => (current > minVisible ? current - 1 : current));
     },
     [minVisible, itemsRef]
   );

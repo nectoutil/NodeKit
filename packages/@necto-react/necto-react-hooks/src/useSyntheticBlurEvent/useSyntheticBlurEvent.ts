@@ -102,9 +102,7 @@ export function useSyntheticBlurEvent<T extends Element = Element>(
             stateRef.current.observer?.disconnect();
             const relatedTargetEl =
               target === document.activeElement ? null : document.activeElement;
-            target.dispatchEvent(
-              new FocusEvent('blur', { relatedTarget: relatedTargetEl })
-            );
+            target.dispatchEvent(new FocusEvent('blur', { relatedTarget: relatedTargetEl }));
             target.dispatchEvent(
               new FocusEvent('focusout', {
                 bubbles: true,

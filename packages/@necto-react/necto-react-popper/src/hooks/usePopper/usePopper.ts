@@ -8,24 +8,14 @@
  *
  */
 
-import {
-  useRef,
-  useMemo,
-  useEffect,
-  useCallback,
-  useLayoutEffect
-} from 'react';
+import { useRef, useMemo, useEffect, useCallback, useLayoutEffect } from 'react';
 import { defu } from 'defu';
 import { flushSync } from 'react-dom';
 import { computePosition } from '@necto/popper';
 import { useLocalState } from '@necto-react/state';
 import { useLatestRef, useMounted } from '@necto-react/hooks';
 
-import {
-  deepEqual,
-  getDevicePixelRatio,
-  roundByDevicePixelRatio
-} from './utils';
+import { deepEqual, getDevicePixelRatio, roundByDevicePixelRatio } from './utils';
 
 import type { CSSProperties, RefObject } from 'react';
 import type { ComputePositionResult } from '@necto/popper';
@@ -58,9 +48,7 @@ export function usePopper(options: UsePopperOptions = {}): UsePopperReturn {
   }
   const latestMiddleware = latestMiddlewareRef.current;
 
-  const [data, setData] = useLocalState<
-    ComputePositionResult & { isPositioned: boolean }
-  >({
+  const [data, setData] = useLocalState<ComputePositionResult & { isPositioned: boolean }>({
     x: 0,
     y: 0,
     placement,
@@ -75,9 +63,7 @@ export function usePopper(options: UsePopperOptions = {}): UsePopperReturn {
   const dataRef = useRef(data);
   const isMountedRef: RefObject<boolean> = useMounted({ type: 'ref' });
   const referenceRef: RefObject<Element | null> = useRef<Element | null>(null);
-  const floatingRef: RefObject<HTMLElement | null> = useRef<HTMLElement | null>(
-    null
-  );
+  const floatingRef: RefObject<HTMLElement | null> = useRef<HTMLElement | null>(null);
 
   const setReference = useCallback(
     (node: Element | null) => {
@@ -110,9 +96,7 @@ export function usePopper(options: UsePopperOptions = {}): UsePopperReturn {
   // commit instead of many. flushSync is preserved so the floating element
   // still positions before paint — we just don't pay for it more than once
   // per frame.
-  const pendingDataRef = useRef<
-    (ComputePositionResult & { isPositioned: boolean }) | null
-  >(null);
+  const pendingDataRef = useRef<(ComputePositionResult & { isPositioned: boolean }) | null>(null);
   const rafIdRef = useRef<number | null>(null);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: isMountedRef is a stable ref from useMounted, not a reactive dependency.
@@ -221,14 +205,7 @@ export function usePopper(options: UsePopperOptions = {}): UsePopperReturn {
       top: y,
       ...(!data.isPositioned && { visibility: 'hidden' as const })
     };
-  }, [
-    strategy,
-    transform,
-    elements.floating,
-    data.x,
-    data.y,
-    data.isPositioned
-  ]);
+  }, [strategy, transform, elements.floating, data.x, data.y, data.isPositioned]);
 
   return useMemo(
     () => ({

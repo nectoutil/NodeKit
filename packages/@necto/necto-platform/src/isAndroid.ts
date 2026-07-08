@@ -15,8 +15,8 @@ function testUserAgent(re: RegExp) {
   }
   return (
     //@ts-expect-error
-    window.navigator.userAgentData?.brands.some(
-      (brand: { brand: string; version: string }) => re.test(brand.brand)
+    window.navigator.userAgentData?.brands.some((brand: { brand: string; version: string }) =>
+      re.test(brand.brand)
     ) || re.test(window.navigator.userAgent)
   );
 }

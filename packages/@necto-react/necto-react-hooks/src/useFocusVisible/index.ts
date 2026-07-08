@@ -7,7 +7,4 @@
 
 export { useFocusVisible } from './useFocusVisible';
 
-export type {
-  UseFocusVisibleReturn,
-  UseFocusVisibleOptions
-} from './useFocusVisible.types';
+export type { UseFocusVisibleReturn, UseFocusVisibleOptions } from './useFocusVisible.types';

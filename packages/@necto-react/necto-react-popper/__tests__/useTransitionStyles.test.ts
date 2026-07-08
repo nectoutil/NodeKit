@@ -20,9 +20,7 @@ describe('useTransitionStyles', () => {
 
   describe('default behavior', () => {
     it('should return isMounted=false, status=unmounted, and empty-ish styles when closed', () => {
-      const { result } = renderHook(() =>
-        useTransitionStyles({ open: false })
-      );
+      const { result } = renderHook(() => useTransitionStyles({ open: false }));
 
       expect(result.current.isMounted).toBe(false);
       expect(result.current.status).toBe('unmounted');
@@ -40,9 +38,7 @@ describe('useTransitionStyles', () => {
 
   describe('opening transition', () => {
     it('should mount and set initial status when opened', () => {
-      const { result } = renderHook(() =>
-        useTransitionStyles({ open: true })
-      );
+      const { result } = renderHook(() => useTransitionStyles({ open: true }));
 
       expect(result.current.isMounted).toBe(true);
       expect(result.current.status).toBe('initial');
@@ -93,8 +89,7 @@ describe('useTransitionStyles', () => {
   describe('closing transition', () => {
     it('should set status to close then unmounted after duration', async () => {
       const { result, rerender } = renderHook(
-        ({ open }) =>
-          useTransitionStyles({ open, duration: 100 }),
+        ({ open }) => useTransitionStyles({ open, duration: 100 }),
         { initialProps: { open: true } }
       );
 
@@ -204,9 +199,7 @@ describe('useTransitionStyles', () => {
         })
       );
 
-      expect(result.current.styles.transitionProperty).toBe(
-        'opacity, transform'
-      );
+      expect(result.current.styles.transitionProperty).toBe('opacity, transform');
     });
 
     it('should include properties from closeStyles in transitionProperty', () => {
@@ -219,9 +212,7 @@ describe('useTransitionStyles', () => {
         })
       );
 
-      expect(result.current.styles.transitionProperty).toBe(
-        'opacity, transform'
-      );
+      expect(result.current.styles.transitionProperty).toBe('opacity, transform');
     });
 
     it('should deduplicate properties across initial, openStyles, and closeStyles', () => {
@@ -234,9 +225,7 @@ describe('useTransitionStyles', () => {
         })
       );
 
-      expect(result.current.styles.transitionProperty).toBe(
-        'opacity, transform'
-      );
+      expect(result.current.styles.transitionProperty).toBe('opacity, transform');
     });
 
     it('should not include transitionProperty or transitionDuration keys in transitionProperty value', () => {
@@ -257,8 +246,7 @@ describe('useTransitionStyles', () => {
   describe('custom duration', () => {
     it('should use a number duration for both open and close', async () => {
       const { result, rerender } = renderHook(
-        ({ open }) =>
-          useTransitionStyles({ open, duration: 400 }),
+        ({ open }) => useTransitionStyles({ open, duration: 400 }),
         { initialProps: { open: true } }
       );
 
@@ -297,9 +285,7 @@ describe('useTransitionStyles', () => {
     });
 
     it('should default to 250ms when duration is not specified', () => {
-      const { result } = renderHook(() =>
-        useTransitionStyles({ open: true })
-      );
+      const { result } = renderHook(() => useTransitionStyles({ open: true }));
 
       expect(result.current.styles.transitionDuration).toBe('250ms');
     });
@@ -433,9 +419,7 @@ describe('useTransitionStyles', () => {
     });
 
     it('should default to empty common styles', () => {
-      const { result } = renderHook(() =>
-        useTransitionStyles({ open: false })
-      );
+      const { result } = renderHook(() => useTransitionStyles({ open: false }));
 
       expect(result.current.styles).toEqual({});
     });

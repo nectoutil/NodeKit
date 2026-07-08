@@ -7,9 +7,7 @@
 
 import type { Store } from '@necto/state';
 
-export type SetState<Args extends unknown[], Result> = (
-  ...args: Args
-) => Result;
+export type SetState<Args extends unknown[], Result> = (...args: Args) => Result;
 
 export type UseSetStateOptions = {
   store?: Store;

@@ -15,7 +15,5 @@ preferWorkspacePackages: true
 
 onlyBuiltDependencies:
   - esbuild
-  - lefthook
   - playwright
   - unrs-resolver
-  - '@biomejs/biome'

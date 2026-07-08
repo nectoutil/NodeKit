@@ -5,12 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { defineConfig } from 'tsdown';
+import { defineConfig } from 'vite-plus/pack';
 
-export default defineConfig([
-  {
-    entry: ['src/index.ts'],
-    format: ['cjs', 'esm'],
-    external: ['@necto/constants']
-  }
-]);
+export default defineConfig({
+  entry: ['src/index.ts']
+});

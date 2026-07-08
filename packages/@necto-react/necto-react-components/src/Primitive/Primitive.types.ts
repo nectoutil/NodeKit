@@ -6,11 +6,7 @@
  *
  */
 
-import type {
-  ElementType,
-  ComponentPropsWithRef,
-  ForwardRefExoticComponent
-} from 'react';
+import type { ElementType, ComponentPropsWithRef, ForwardRefExoticComponent } from 'react';
 import type { DOM } from '@necto/constants';
 
 /**

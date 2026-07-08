@@ -9,20 +9,20 @@
     "test:visual": "playwright test",
     "test:visual:update": "playwright test --update-snapshots",
     "test:all": "pnpm test:unit && pnpm test:visual",
-    "build": "tsdown",
-    "dev": "tsdown --watch",
+    "build": "vp pack --format esm,cjs --dts --minify --sourcemap",
+    "dev": "vp pack --format esm,cjs --dts --sourcemap --watch",
     "test:coverage": "vitest run --coverage --passWithNoTests"
   },
   "files": [
     "dist"
   ],
   "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     },
     "./package.json": "./package.json"
@@ -45,15 +45,15 @@
     "@testing-library/react": "^16.3.2",
     "@types/node": "^22.19.20",
     "@vitejs/plugin-react": "^4.7.0",
-    "@vitest/browser": "^3.2.6",
-    "@vitest/coverage-istanbul": "^3.2.6",
+    "@vitest/browser": "^4.1.10",
+    "@vitest/coverage-istanbul": "^4.1.10",
     "axe-core": "^4.12.1",
     "clsx": "^2.1.1",
     "react": "catalog:",
     "react-dom": "catalog:",
-    "tsdown": "^0.21.10",
-    "vitest": "^3.2.6",
-    "vitest-axe": "^1.0.0-pre.5"
+    "vitest": "^4.1.10",
+    "vitest-axe": "^1.0.0-pre.5",
+    "@vitest/browser-playwright": "^4.1.10"
   },
   "peerDependencies": {
     "@types/react": "catalog:",

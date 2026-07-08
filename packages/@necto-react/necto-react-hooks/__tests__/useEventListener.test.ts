@@ -40,10 +40,7 @@ const refRemoveEventListenerSpy = vi.spyOn(ref.current, 'removeEventListener');
 
 const docRef = { current: window.document };
 const docAddEventListenerSpy = vi.spyOn(docRef.current, 'addEventListener');
-const docRemoveEventListenerSpy = vi.spyOn(
-  docRef.current,
-  'removeEventListener'
-);
+const docRemoveEventListenerSpy = vi.spyOn(docRef.current, 'removeEventListener');
 
 describe('useEventListener', () => {
   afterEach((): void => {
@@ -84,11 +81,7 @@ describe('useEventListener', () => {
     });
 
     expect(refAddEventListenerSpy).toHaveBeenCalledTimes(1);
-    expect(refAddEventListenerSpy).toHaveBeenCalledWith(
-      eventName,
-      expect.any(Function),
-      options
-    );
+    expect(refAddEventListenerSpy).toHaveBeenCalledWith(eventName, expect.any(Function), options);
 
     unmount();
 
@@ -109,11 +102,7 @@ describe('useEventListener', () => {
     });
 
     expect(docAddEventListenerSpy).toHaveBeenCalledTimes(1);
-    expect(docAddEventListenerSpy).toHaveBeenCalledWith(
-      eventName,
-      expect.any(Function),
-      options
-    );
+    expect(docAddEventListenerSpy).toHaveBeenCalledWith(eventName, expect.any(Function), options);
 
     unmount();
 
@@ -202,10 +191,8 @@ describe('useEventListener', () => {
     rerender({ enabled: true });
 
     expect(windowAddEventListenerSpy).toHaveBeenCalledTimes(1);
-    expect(windowAddEventListenerSpy).toHaveBeenCalledWith(
-      eventName,
-      expect.any(Function),
-      { enabled: true }
-    );
+    expect(windowAddEventListenerSpy).toHaveBeenCalledWith(eventName, expect.any(Function), {
+      enabled: true
+    });
   });
 });

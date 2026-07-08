@@ -8,11 +8,7 @@
 
 import { AssertionError } from './errors';
 
-export function assertMatch(
-  actual: string,
-  expected: RegExp,
-  message?: string
-): void {
+export function assertMatch(actual: string, expected: RegExp, message?: string): void {
   if (expected.test(actual)) {
     return;
   }

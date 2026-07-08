@@ -25,8 +25,7 @@ export function useTransitionStatus(
 ): UseTransitionStatusReturn {
   const { open, duration = 250 } = options;
 
-  const closeDuration: number =
-    typeof duration === 'number' ? duration : (duration.close ?? 250);
+  const closeDuration: number = typeof duration === 'number' ? duration : (duration.close ?? 250);
 
   const [status, setStatus] = useLocalState<TransitionStatus>('unmounted');
   const [isMounted, setIsMounted] = useLocalState(false);

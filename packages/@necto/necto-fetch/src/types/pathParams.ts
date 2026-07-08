@@ -5,15 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export type ExtractPathParams<P extends string> =
-  P extends `${string}{${infer Param}}${infer Rest}`
-    ? Param | ExtractPathParams<Rest>
-    : never;
+export type ExtractPathParams<P extends string> = P extends `${string}{${infer Param}}${infer Rest}`
+  ? Param | ExtractPathParams<Rest>
+  : never;
 
 export type PathParams<P extends string> =
   ExtractPathParams<P> extends never
     ? Record<string, never>
     : { [K in ExtractPathParams<P>]: string | number };
 
-export type IsParameterized<P extends string> =
-  ExtractPathParams<P> extends never ? false : true;
+export type IsParameterized<P extends string> = ExtractPathParams<P> extends never ? false : true;

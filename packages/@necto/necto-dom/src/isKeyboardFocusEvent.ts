@@ -7,12 +7,7 @@
 
 import { getOwnerDocument, getOwnerWindow } from './owner';
 
-export type HandlerEvent =
-  | PointerEvent
-  | MouseEvent
-  | KeyboardEvent
-  | FocusEvent
-  | null;
+export type HandlerEvent = PointerEvent | MouseEvent | KeyboardEvent | FocusEvent | null;
 export type Modality = 'keyboard' | 'pointer' | 'virtual';
 
 const nonTextInputTypes = new Set([
@@ -47,17 +42,11 @@ export function isKeyboardFocusEvent(
 
   // Use window-specific constructors for cross-frame support
   const IHTMLInputElement =
-    typeof window !== 'undefined'
-      ? ownerWin.HTMLInputElement
-      : HTMLInputElement;
+    typeof window !== 'undefined' ? ownerWin.HTMLInputElement : HTMLInputElement;
   const IHTMLTextAreaElement =
-    typeof window !== 'undefined'
-      ? ownerWin.HTMLTextAreaElement
-      : HTMLTextAreaElement;
-  const IHTMLElement =
-    typeof window !== 'undefined' ? ownerWin.HTMLElement : HTMLElement;
-  const IKeyboardEvent =
-    typeof window !== 'undefined' ? ownerWin.KeyboardEvent : KeyboardEvent;
+    typeof window !== 'undefined' ? ownerWin.HTMLTextAreaElement : HTMLTextAreaElement;
+  const IHTMLElement = typeof window !== 'undefined' ? ownerWin.HTMLElement : HTMLElement;
+  const IKeyboardEvent = typeof window !== 'undefined' ? ownerWin.KeyboardEvent : KeyboardEvent;
 
   const activeElement: Element | null = ownerDocument.activeElement;
 
@@ -66,8 +55,7 @@ export function isKeyboardFocusEvent(
     (activeElement instanceof IHTMLInputElement &&
       !nonTextInputTypes.has((activeElement as HTMLInputElement).type)) ||
     activeElement instanceof IHTMLTextAreaElement ||
-    (activeElement instanceof IHTMLElement &&
-      (activeElement as HTMLElement).isContentEditable);
+    (activeElement instanceof IHTMLElement && (activeElement as HTMLElement).isContentEditable);
 
   if (
     isTextInput &&

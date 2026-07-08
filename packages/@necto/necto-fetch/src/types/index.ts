@@ -21,8 +21,4 @@ export type { ResponsePromise, FetchError, FetchTuple } from './response';
 export type { Hooks, RequestContext, RetryContext } from './hooks';
 export type { Backoff, RetryConfig } from './retry';
 export type { Schema, SchemaAdapter, SchemaParseResult } from './schema';
-export type {
-  ExtractPathParams,
-  PathParams,
-  IsParameterized
-} from './pathParams';
+export type { ExtractPathParams, PathParams, IsParameterized } from './pathParams';

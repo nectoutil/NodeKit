@@ -31,9 +31,7 @@ export function useId(options: UseIdOptions = {}): string {
   const id: string = (() => {
     if (defaultId) return defaultId;
     const reactId =
-      typeof React['useId'] === 'function'
-        ? useReactId()
-        : String(++defaultContext.current);
+      typeof React['useId'] === 'function' ? useReactId() : String(++defaultContext.current);
     return `${prefix}-${reactId}`;
   })();
 

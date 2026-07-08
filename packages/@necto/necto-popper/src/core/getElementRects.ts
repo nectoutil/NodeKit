@@ -45,8 +45,7 @@ function isContainingBlock(element: Element): boolean {
     /transform|perspective/.test(style.willChange || '') ||
     style.filter !== 'none' ||
     style.contain === 'paint' ||
-    ('backdropFilter' in style &&
-      (style as CSSStyleDeclaration).backdropFilter !== 'none')
+    ('backdropFilter' in style && (style as CSSStyleDeclaration).backdropFilter !== 'none')
   );
 }
 
@@ -65,9 +64,7 @@ function getRectRelativeToOffsetParent(
   strategy: Strategy
 ): Rect {
   if (!isNode(element)) {
-    throw new Error(
-      'Invalid element provided to getRectRelativeToOffsetParent'
-    );
+    throw new Error('Invalid element provided to getRectRelativeToOffsetParent');
   }
 
   const elementRect = element.getBoundingClientRect();
@@ -79,15 +76,11 @@ function getRectRelativeToOffsetParent(
   let offsetY = 0;
 
   const isOffsetParentAnElement =
-    offsetParent instanceof HTMLElement &&
-    offsetParent !== element.ownerDocument.documentElement;
+    offsetParent instanceof HTMLElement && offsetParent !== element.ownerDocument.documentElement;
 
   if (isOffsetParentAnElement || !isFixed) {
     // Account for scroll of the offset parent
-    if (
-      offsetParent instanceof HTMLElement &&
-      offsetParent !== element.ownerDocument.body
-    ) {
+    if (offsetParent instanceof HTMLElement && offsetParent !== element.ownerDocument.body) {
       scrollLeft = offsetParent.scrollLeft;
       scrollTop = offsetParent.scrollTop;
     } else {

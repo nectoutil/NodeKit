@@ -16,10 +16,7 @@ import type { Placement, Coordinates, ElementRects } from '../types';
  * @param rects - The bounding rectangles of reference and floating elements.
  * @returns The computed x,y coordinates.
  */
-export function computeCoords(
-  placement: Placement,
-  rects: ElementRects
-): Coordinates {
+export function computeCoords(placement: Placement, rects: ElementRects): Coordinates {
   const { reference, floating } = rects;
   const side = getSide(placement);
   const alignment = getAlignment(placement);

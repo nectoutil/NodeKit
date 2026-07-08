@@ -17,7 +17,7 @@ function cssVars(container: HTMLElement) {
     content: el.style.getPropertyValue('--necto-shadow-bevel-content'),
     zIndex: el.style.getPropertyValue('--necto-shadow-bevel-z-index'),
     boxShadow: el.style.getPropertyValue('--necto-shadow-bevel-box-shadow'),
-    borderRadius: el.style.getPropertyValue('--necto-shadow-bevel-border-radius'),
+    borderRadius: el.style.getPropertyValue('--necto-shadow-bevel-border-radius')
   };
 }
 
@@ -120,9 +120,7 @@ describe('ShadowBevel', () => {
 
   describe('style prop', () => {
     it('merges user styles with CSS variables', () => {
-      const { container } = render(
-        <ShadowBevel style={{ color: 'red' }}>x</ShadowBevel>
-      );
+      const { container } = render(<ShadowBevel style={{ color: 'red' }}>x</ShadowBevel>);
       const el = container.firstChild as HTMLElement;
       expect(el.style.color).toBe('red');
       expect(cssVars(container).content).toBe('""');
@@ -162,12 +160,18 @@ describe('ShadowBevel', () => {
 
     it('references box-shadow via CSS var', () => {
       const { container } = render(<ShadowBevel>x</ShadowBevel>);
-      expect(container.firstChild).toHaveStyleRule('box-shadow', 'var(--necto-shadow-bevel-box-shadow)');
+      expect(container.firstChild).toHaveStyleRule(
+        'box-shadow',
+        'var(--necto-shadow-bevel-box-shadow)'
+      );
     });
 
     it('references border-radius via CSS var', () => {
       const { container } = render(<ShadowBevel>x</ShadowBevel>);
-      expect(container.firstChild).toHaveStyleRule('border-radius', 'var(--necto-shadow-bevel-border-radius)');
+      expect(container.firstChild).toHaveStyleRule(
+        'border-radius',
+        'var(--necto-shadow-bevel-border-radius)'
+      );
     });
 
     it('::before has position absolute', () => {
@@ -177,17 +181,23 @@ describe('ShadowBevel', () => {
 
     it('::before has pointer-events none', () => {
       const { container } = render(<ShadowBevel>x</ShadowBevel>);
-      expect(container.firstChild).toHaveStyleRule('pointer-events', 'none', { target: '::before' });
+      expect(container.firstChild).toHaveStyleRule('pointer-events', 'none', {
+        target: '::before'
+      });
     });
 
     it('::before has mix-blend-mode luminosity', () => {
       const { container } = render(<ShadowBevel>x</ShadowBevel>);
-      expect(container.firstChild).toHaveStyleRule('mix-blend-mode', 'luminosity', { target: '::before' });
+      expect(container.firstChild).toHaveStyleRule('mix-blend-mode', 'luminosity', {
+        target: '::before'
+      });
     });
 
     it('::before has border-radius inherit', () => {
       const { container } = render(<ShadowBevel>x</ShadowBevel>);
-      expect(container.firstChild).toHaveStyleRule('border-radius', 'inherit', { target: '::before' });
+      expect(container.firstChild).toHaveStyleRule('border-radius', 'inherit', {
+        target: '::before'
+      });
     });
   });
 
@@ -199,7 +209,9 @@ describe('ShadowBevel', () => {
 
     it('applies CSS variables the same as ShadowBevel', () => {
       const { container } = render(
-        <ShadowBevel.Root bevel={false} borderRadius={4} boxShadow={1}>x</ShadowBevel.Root>
+        <ShadowBevel.Root bevel={false} borderRadius={4} boxShadow={1}>
+          x
+        </ShadowBevel.Root>
       );
       const vars = cssVars(container);
       expect(vars.content).toBe('none');

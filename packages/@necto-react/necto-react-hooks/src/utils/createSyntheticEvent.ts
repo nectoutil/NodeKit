@@ -15,9 +15,7 @@ import type { SyntheticEvent } from 'react';
  * @param nativeEvent - The original native DOM event.
  * @returns The synthetic React event.
  */
-export function createSyntheticEvent<T extends SyntheticEvent>(
-  nativeEvent: Event
-): T {
+export function createSyntheticEvent<T extends SyntheticEvent>(nativeEvent: Event): T {
   const event = nativeEvent as unknown as T;
   Object.assign(event, {
     nativeEvent,

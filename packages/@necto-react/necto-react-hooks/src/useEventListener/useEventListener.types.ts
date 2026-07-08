@@ -5,12 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export type EventListenerTarget =
-  | Window
-  | Document
-  | HTMLElement
-  | SVGElement
-  | MediaQueryList;
+export type EventListenerTarget = Window | Document | HTMLElement | SVGElement | MediaQueryList;
 
 export interface UseEventListenerOptions extends AddEventListenerOptions {
   /**

@@ -13,12 +13,7 @@ import styled from '@emotion/styled';
 import { Primitive } from '../Primitive';
 import { SHADOW_BEVEL_NAME } from './constants';
 
-import type {
-  Ref,
-  ReactElement,
-  RefAttributes,
-  ForwardRefExoticComponent
-} from 'react';
+import type { Ref, ReactElement, RefAttributes, ForwardRefExoticComponent } from 'react';
 import type { ShadowBevelProps } from './ShadowBevel.types';
 
 const StyledShadowBevel = styled(Primitive)`
@@ -52,10 +47,7 @@ const StyledShadowBevel = styled(Primitive)`
   }
 `;
 
-const ShadowBevelFn = (
-  props: ShadowBevelProps,
-  ref: Ref<HTMLElement>
-): ReactElement => {
+const ShadowBevelFn = (props: ShadowBevelProps, ref: Ref<HTMLElement>): ReactElement => {
   const {
     style,
     children,
@@ -77,13 +69,9 @@ const ShadowBevelFn = (
         '--necto-shadow-bevel-z-index': zIndex,
         '--necto-shadow-bevel-content': bevel ? '""' : 'none',
         '--necto-shadow-bevel-box-shadow':
-          typeof boxShadow === 'number'
-            ? `var(--necto-shadow-${boxShadow})`
-            : boxShadow || 'none',
+          typeof boxShadow === 'number' ? `var(--necto-shadow-${boxShadow})` : boxShadow || 'none',
         '--necto-shadow-bevel-border-radius':
-          typeof borderRadius === 'number'
-            ? `${borderRadius}px`
-            : borderRadius || '0'
+          typeof borderRadius === 'number' ? `${borderRadius}px` : borderRadius || '0'
       }}
     >
       {children}
@@ -94,18 +82,12 @@ const ShadowBevelFn = (
 export const ShadowBevel: ((
   props: ShadowBevelProps & { ref?: Ref<HTMLElement> }
 ) => ReactElement) & {
-  Root: ForwardRefExoticComponent<
-    ShadowBevelProps & RefAttributes<HTMLElement>
-  >;
+  Root: ForwardRefExoticComponent<ShadowBevelProps & RefAttributes<HTMLElement>>;
   displayName?: string;
 } = Object.assign(forwardRef(ShadowBevelFn), {
   Root: forwardRef(ShadowBevelFn)
-}) as unknown as ((
-  props: ShadowBevelProps & { ref?: Ref<HTMLElement> }
-) => ReactElement) & {
-  Root: ForwardRefExoticComponent<
-    ShadowBevelProps & RefAttributes<HTMLElement>
-  >;
+}) as unknown as ((props: ShadowBevelProps & { ref?: Ref<HTMLElement> }) => ReactElement) & {
+  Root: ForwardRefExoticComponent<ShadowBevelProps & RefAttributes<HTMLElement>>;
   displayName?: string;
 };
 

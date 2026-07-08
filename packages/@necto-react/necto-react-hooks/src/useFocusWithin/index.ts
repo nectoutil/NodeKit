@@ -8,7 +8,4 @@
 
 export { useFocusWithin } from './useFocusWithin';
 
-export type {
-  UseFocusWithinOptions,
-  FocusWithinReturn
-} from './useFocusWithin.types';
+export type { UseFocusWithinOptions, FocusWithinReturn } from './useFocusWithin.types';

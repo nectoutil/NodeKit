@@ -9,11 +9,7 @@ import { useCallback } from 'react';
 
 import { useStore } from '../useStore';
 
-import type {
-  WritableState,
-  ExtractStateArgs,
-  ExtractStateResult
-} from '@necto/state';
+import type { WritableState, ExtractStateArgs, ExtractStateResult } from '@necto/state';
 import type { SetState, UseSetStateOptions } from './useSetState.types';
 
 export function useSetState<Value, Args extends unknown[], Result>(

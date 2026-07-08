@@ -5,11 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export type Backoff =
-  | 'constant'
-  | 'linear'
-  | 'exponential'
-  | ((attempt: number) => number);
+export type Backoff = 'constant' | 'linear' | 'exponential' | ((attempt: number) => number);
 
 export interface RetryConfig {
   attempts?: number;

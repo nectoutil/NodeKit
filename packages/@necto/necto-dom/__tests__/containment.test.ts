@@ -12,8 +12,15 @@ describe('getContainmentRect', () => {
   it('returns the bounding rect of a containment element', () => {
     const el = document.createElement('div');
     vi.spyOn(el, 'getBoundingClientRect').mockReturnValue({
-      top: 10, left: 20, bottom: 110, right: 220,
-      width: 200, height: 100, x: 20, y: 10, toJSON: () => {}
+      top: 10,
+      left: 20,
+      bottom: 110,
+      right: 220,
+      width: 200,
+      height: 100,
+      x: 20,
+      y: 10,
+      toJSON: () => {}
     } as DOMRect);
 
     expect(getContainmentRect(el)).toEqual({ top: 10, left: 20, bottom: 110, right: 220 });

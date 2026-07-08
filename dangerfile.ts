@@ -12,17 +12,17 @@ import { danger, fail, warn, message, schedule } from 'danger';
 
 schedule(async () => {
   const { rules, parserPreset } = await load({
-    extends: ['@commitlint/config-conventional'],
+    extends: ['@commitlint/config-conventional']
   });
 
   const report = await lint(
     danger.github.pr.title,
     rules,
-    parserPreset ? { parserOpts: parserPreset.parserOpts } : {},
+    parserPreset ? { parserOpts: parserPreset.parserOpts } : {}
   );
 
   if (!report.valid) {
-    const errors = report.errors.map(e => `- ${e.message}`).join('\n');
+    const errors = report.errors.map((e) => `- ${e.message}`).join('\n');
     fail(dedent`
       **PR title doesn't follow conventional commits.**
 
@@ -36,11 +36,11 @@ schedule(async () => {
     `);
   }
 
-  report.warnings.forEach(w => warn(`PR title: ${w.message}`));
+  report.warnings.forEach((w) => warn(`PR title: ${w.message}`));
 });
 
 const isFirstTimer = ['FIRST_TIME_CONTRIBUTOR', 'FIRST_TIMER', 'NONE'].includes(
-  danger.github.pr.author_association,
+  danger.github.pr.author_association
 );
 
 if (isFirstTimer) {

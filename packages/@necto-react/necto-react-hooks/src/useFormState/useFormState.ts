@@ -7,14 +7,7 @@
 
 // biome-ignore-all lint/correctness/useHookAtTopLevel: Conditional hook usage is intentional.
 
-import {
-  useRef,
-  useMemo,
-  useState,
-  useEffect,
-  useContext,
-  createContext
-} from 'react';
+import { useRef, useMemo, useState, useEffect, useContext, createContext } from 'react';
 
 import type {
   ValidationErrors,
@@ -54,8 +47,7 @@ export const DEFAULT_VALIDATION_RESULT: ValidationResult = {
 };
 
 /** Context for propagating server-side validation errors to form fields. */
-export const FormValidationContext: Context<ValidationErrors> =
-  createContext<ValidationErrors>({});
+export const FormValidationContext: Context<ValidationErrors> = createContext<ValidationErrors>({});
 
 /**
  * Private prop key used by parent form components (e.g. a future `useForm`)
@@ -70,13 +62,9 @@ export const privateValidationStateProp: string = `__formValidationState${Date.n
  * Returns realtime and display validation results along with methods
  * to update, reset, and commit validation.
  */
-export function useFormState<T>(
-  props: UseFormStateOptions<T>
-): UseFormStateReturn {
+export function useFormState<T>(props: UseFormStateOptions<T>): UseFormStateReturn {
   // If a parent component already computed the validation state, use it directly.
-  if (
-    (props as unknown as Record<string, unknown>)[privateValidationStateProp]
-  ) {
+  if ((props as unknown as Record<string, unknown>)[privateValidationStateProp]) {
     const {
       realtimeValidation,
       displayValidation,
@@ -99,9 +87,7 @@ export function useFormState<T>(
   return useFormStateImpl(props);
 }
 
-function useFormStateImpl<T>(
-  props: UseFormStateOptions<T>
-): UseFormStateReturn {
+function useFormStateImpl<T>(props: UseFormStateOptions<T>): UseFormStateReturn {
   let {
     isInvalid,
     validationState,
@@ -167,9 +153,7 @@ function useFormStateImpl<T>(
 
   // Track the next validation state in a ref until commitValidation is called.
   const nextValidation = useRef(DEFAULT_VALIDATION_RESULT);
-  const [currentValidity, setCurrentValidity] = useState(
-    DEFAULT_VALIDATION_RESULT
-  );
+  const [currentValidity, setCurrentValidity] = useState(DEFAULT_VALIDATION_RESULT);
 
   const lastError = useRef(DEFAULT_VALIDATION_RESULT);
   const commitValidationEffect = () => {
@@ -192,29 +176,18 @@ function useFormStateImpl<T>(
   // displayValidation is the currently displayed state the user sees (e.g. on input change/form submit).
   // With validationBehavior="aria", all errors are displayed in realtime rather than on submit.
   const realtimeValidation =
-    controlledError ||
-    serverError ||
-    clientError ||
-    builtinValidation ||
-    DEFAULT_VALIDATION_RESULT;
+    controlledError || serverError || clientError || builtinValidation || DEFAULT_VALIDATION_RESULT;
 
   const displayValidation =
     validationBehavior === 'native'
       ? controlledError || serverError || currentValidity
-      : controlledError ||
-        serverError ||
-        clientError ||
-        builtinValidation ||
-        currentValidity;
+      : controlledError || serverError || clientError || builtinValidation || currentValidity;
 
   return {
     realtimeValidation,
     displayValidation,
     updateValidation(result) {
-      if (
-        validationBehavior === 'aria' &&
-        !isEqualValidation(currentValidity, result)
-      ) {
+      if (validationBehavior === 'aria' && !isEqualValidation(currentValidity, result)) {
         setCurrentValidity(result);
       } else {
         nextValidation.current = result;
@@ -274,10 +247,7 @@ function getValidationResult(errors: string[]): ValidationResult | null {
     : null;
 }
 
-function isEqualValidation(
-  a: ValidationResult | null,
-  b: ValidationResult | null
-): boolean {
+function isEqualValidation(a: ValidationResult | null, b: ValidationResult | null): boolean {
   if (a === b) {
     return true;
   }
@@ -298,9 +268,7 @@ function isEqualValidation(
  * Merges multiple validation results into one, combining error messages
  * and validity details. Useful for group components (e.g. checkbox groups).
  */
-export function mergeValidation(
-  ...results: ValidationResult[]
-): ValidationResult {
+export function mergeValidation(...results: ValidationResult[]): ValidationResult {
   const errors = new Set<string>();
   let isInvalid = false;
   const validationDetails: Record<string, boolean> = {
@@ -313,9 +281,7 @@ export function mergeValidation(
     }
     isInvalid ||= v.isInvalid;
     for (const key in validationDetails) {
-      validationDetails[key] ||= v.validationDetails[
-        key as keyof ValidityState
-      ] as boolean;
+      validationDetails[key] ||= v.validationDetails[key as keyof ValidityState] as boolean;
     }
   }
 

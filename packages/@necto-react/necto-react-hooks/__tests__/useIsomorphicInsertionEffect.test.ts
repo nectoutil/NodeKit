@@ -25,7 +25,9 @@ describe('useIsomorphicInsertionEffect', () => {
 
   it('runs the effect callback', () => {
     const callback = vi.fn();
-    renderHook(() => { useIsomorphicInsertionEffect(callback); });
+    renderHook(() => {
+      useIsomorphicInsertionEffect(callback);
+    });
     expect(callback).toHaveBeenCalledOnce();
   });
 
@@ -43,7 +45,9 @@ describe('useIsomorphicInsertionEffect', () => {
   it('re-runs when dependencies change', () => {
     const callback = vi.fn();
     const { rerender } = renderHook(
-      ({ dep }: { dep: number }) => { useIsomorphicInsertionEffect(callback, [dep]); },
+      ({ dep }: { dep: number }) => {
+        useIsomorphicInsertionEffect(callback, [dep]);
+      },
       { initialProps: { dep: 1 } }
     );
 
@@ -55,7 +59,9 @@ describe('useIsomorphicInsertionEffect', () => {
   it('does not re-run when dependencies are unchanged', () => {
     const callback = vi.fn();
     const { rerender } = renderHook(
-      ({ dep }: { dep: number }) => { useIsomorphicInsertionEffect(callback, [dep]); },
+      ({ dep }: { dep: number }) => {
+        useIsomorphicInsertionEffect(callback, [dep]);
+      },
       { initialProps: { dep: 1 } }
     );
 

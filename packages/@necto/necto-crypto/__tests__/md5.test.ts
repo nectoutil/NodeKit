@@ -13,12 +13,7 @@ import { md5 } from '../src/index';
 
 function forgeMd5(data: string | Uint8Array): string {
   const md = forge.md.md5.create();
-  md.update(
-    typeof data === 'string'
-      ? data
-      : forge.util.createBuffer(data).getBytes(),
-    'raw'
-  );
+  md.update(typeof data === 'string' ? data : forge.util.createBuffer(data).getBytes(), 'raw');
   return md.digest().toHex();
 }
 
@@ -56,13 +51,10 @@ describe('md5', () => {
 
   it('should produce different hashes for different inputs', () => {
     fc.assert(
-      fc.property(
-        fc.string(), fc.string(),
-        (a, b) => {
-          fc.pre(a !== b);
-          return md5(a) !== md5(b);
-        }
-      )
+      fc.property(fc.string(), fc.string(), (a, b) => {
+        fc.pre(a !== b);
+        return md5(a) !== md5(b);
+      })
     );
   });
 });

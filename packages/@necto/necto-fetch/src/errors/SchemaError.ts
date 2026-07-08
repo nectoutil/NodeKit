@@ -15,12 +15,7 @@ export class SchemaError extends Error {
   readonly received!: unknown;
   readonly request!: Request;
 
-  constructor(
-    _issues: Issues,
-    _received: unknown,
-    _request: Request,
-    _message?: string
-  ) {
+  constructor(_issues: Issues, _received: unknown, _request: Request, _message?: string) {
     super(_message ?? 'Response failed schema validation');
     throw new Error('NOT_IMPLEMENTED');
   }

@@ -62,10 +62,7 @@ const StyledBox = styled(Primitive)`
   z-index: var(--necto-box-z-index);
 `;
 
-const BoxFn = <T extends ElementType = 'div'>(
-  props: BoxProps<T>,
-  ref: Ref<any>
-): ReactElement => {
+const BoxFn = <T extends ElementType = 'div'>(props: BoxProps<T>, ref: Ref<any>): ReactElement => {
   const {
     as,
     asChild,
@@ -171,18 +168,10 @@ const BoxFn = <T extends ElementType = 'div'>(
         '--necto-box-width': width,
         '--necto-box-overflow-x': overflowX,
         '--necto-box-overflow-y': overflowY,
-        '--necto-box-padding-block-start': px(
-          paddingBlockStart ?? paddingBlock ?? padding
-        ),
-        '--necto-box-padding-block-end': px(
-          paddingBlockEnd ?? paddingBlock ?? padding
-        ),
-        '--necto-box-padding-inline-start': px(
-          paddingInlineStart ?? paddingInline ?? padding
-        ),
-        '--necto-box-padding-inline-end': px(
-          paddingInlineEnd ?? paddingInline ?? padding
-        ),
+        '--necto-box-padding-block-start': px(paddingBlockStart ?? paddingBlock ?? padding),
+        '--necto-box-padding-block-end': px(paddingBlockEnd ?? paddingBlock ?? padding),
+        '--necto-box-padding-inline-start': px(paddingInlineStart ?? paddingInline ?? padding),
+        '--necto-box-padding-inline-end': px(paddingInlineEnd ?? paddingInline ?? padding),
         '--necto-box-opacity': opacity,
         '--necto-box-z-index': zIndex
       }}
@@ -196,6 +185,6 @@ export const Box: (<T extends ElementType = 'div'>(
   props: BoxProps<T> & { ref?: Ref<any> }
 ) => ReactElement) & { Root: any } = Object.assign(forwardRef(BoxFn), {
   Root: forwardRef(BoxFn)
-}) as (<T extends ElementType = 'div'>(
-  props: BoxProps<T> & { ref?: Ref<any> }
-) => ReactElement) & { Root: any };
+}) as (<T extends ElementType = 'div'>(props: BoxProps<T> & { ref?: Ref<any> }) => ReactElement) & {
+  Root: any;
+};

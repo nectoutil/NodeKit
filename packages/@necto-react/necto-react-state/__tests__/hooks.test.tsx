@@ -27,7 +27,7 @@ describe('useState', () => {
     const store = createStore();
 
     const { result } = renderHook(() => useState(count), {
-      wrapper: createWrapper(store),
+      wrapper: createWrapper(store)
     });
 
     expect(result.current[0]).toBe(0);
@@ -39,7 +39,7 @@ describe('useState', () => {
     const store = createStore();
 
     const { result } = renderHook(() => useState(count), {
-      wrapper: createWrapper(store),
+      wrapper: createWrapper(store)
     });
 
     act(() => {
@@ -54,7 +54,7 @@ describe('useState', () => {
     const store = createStore();
 
     const { result } = renderHook(() => useState(count), {
-      wrapper: createWrapper(store),
+      wrapper: createWrapper(store)
     });
 
     act(() => {
@@ -74,7 +74,7 @@ describe('useState', () => {
         renderCount();
         return useState(count);
       },
-      { wrapper: createWrapper(store) },
+      { wrapper: createWrapper(store) }
     );
 
     const initialRenders = renderCount.mock.calls.length;
@@ -91,7 +91,7 @@ describe('useState', () => {
     const store = createStore();
 
     const { result } = renderHook(() => useState(count), {
-      wrapper: createWrapper(store),
+      wrapper: createWrapper(store)
     });
 
     act(() => {
@@ -108,7 +108,7 @@ describe('useStateValue', () => {
     const store = createStore();
 
     const { result } = renderHook(() => useStateValue(name), {
-      wrapper: createWrapper(store),
+      wrapper: createWrapper(store)
     });
 
     expect(result.current).toBe('hello');
@@ -120,7 +120,7 @@ describe('useStateValue', () => {
     const store = createStore();
 
     const { result } = renderHook(() => useStateValue(doubled), {
-      wrapper: createWrapper(store),
+      wrapper: createWrapper(store)
     });
 
     expect(result.current).toBe(4);
@@ -139,7 +139,7 @@ describe('useStateValue', () => {
     const store = createStore();
 
     const { result } = renderHook(() => useStateValue(fullName), {
-      wrapper: createWrapper(store),
+      wrapper: createWrapper(store)
     });
 
     expect(result.current).toBe('John Doe');
@@ -158,7 +158,7 @@ describe('useSetState', () => {
     const store = createStore();
 
     const { result, rerender } = renderHook(() => useSetState(count), {
-      wrapper: createWrapper(store),
+      wrapper: createWrapper(store)
     });
 
     const setter1 = result.current;
@@ -173,7 +173,7 @@ describe('useSetState', () => {
     const store = createStore();
 
     const { result } = renderHook(() => useSetState(count), {
-      wrapper: createWrapper(store),
+      wrapper: createWrapper(store)
     });
 
     act(() => {
@@ -188,7 +188,7 @@ describe('useSetState', () => {
     const store = createStore();
 
     const { result } = renderHook(() => useSetState(count), {
-      wrapper: createWrapper(store),
+      wrapper: createWrapper(store)
     });
 
     act(() => {
@@ -206,11 +206,11 @@ describe('Provider', () => {
     const store2 = createStore();
 
     const { result: result1 } = renderHook(() => useState(count), {
-      wrapper: createWrapper(store1),
+      wrapper: createWrapper(store1)
     });
 
     const { result: result2 } = renderHook(() => useState(count), {
-      wrapper: createWrapper(store2),
+      wrapper: createWrapper(store2)
     });
 
     act(() => {
@@ -226,9 +226,7 @@ describe('Provider', () => {
     const store = createStore();
     store.set(count, 99);
 
-    const { result } = renderHook(
-      () => useStateValue(count, { store }),
-    );
+    const { result } = renderHook(() => useStateValue(count, { store }));
 
     expect(result.current).toBe(99);
   });
@@ -239,12 +237,12 @@ describe('derived read-write state with hooks', () => {
     const raw = state(0);
     const clamped = state(
       (get) => get(raw),
-      (_get, set, value: number) => set(raw, Math.max(0, Math.min(100, value))),
+      (_get, set, value: number) => set(raw, Math.max(0, Math.min(100, value)))
     );
     const store = createStore();
 
     const { result } = renderHook(() => useState(clamped), {
-      wrapper: createWrapper(store),
+      wrapper: createWrapper(store)
     });
 
     act(() => {
@@ -267,7 +265,7 @@ describe('useState signal-style API', () => {
     const store = createStore();
 
     const { result } = renderHook(() => useState(count), {
-      wrapper: createWrapper(store),
+      wrapper: createWrapper(store)
     });
 
     expect(result.current.value).toBe(42);
@@ -278,7 +276,7 @@ describe('useState signal-style API', () => {
     const store = createStore();
 
     const { result } = renderHook(() => useState(count), {
-      wrapper: createWrapper(store),
+      wrapper: createWrapper(store)
     });
 
     act(() => {
@@ -293,7 +291,7 @@ describe('useState signal-style API', () => {
     const store = createStore();
 
     const { result } = renderHook(() => useState(count), {
-      wrapper: createWrapper(store),
+      wrapper: createWrapper(store)
     });
 
     act(() => {
@@ -308,7 +306,7 @@ describe('useState signal-style API', () => {
     const store = createStore();
 
     const { result } = renderHook(() => useState(count), {
-      wrapper: createWrapper(store),
+      wrapper: createWrapper(store)
     });
 
     act(() => {

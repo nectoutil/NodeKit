@@ -6,8 +6,4 @@
  */
 
 export { useOverflow } from './useOverflow';
-export type {
-  CollapseFrom,
-  UseOverflowOptions,
-  UseOverflowReturn
-} from './useOverflow.types';
+export type { CollapseFrom, UseOverflowOptions, UseOverflowReturn } from './useOverflow.types';

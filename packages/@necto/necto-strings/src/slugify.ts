@@ -17,18 +17,9 @@ const ESCAPE_REGEX: RegExp = new RegExp(/[.*+?^${}()|[\]\\]/g);
 const COMBINING_MARKS_REGEX: RegExp = new RegExp(/[\u0300-\u036f]/g);
 
 export function slugify(input: string, options: SlugifyOptions = {}): string {
-  const {
-    remove,
-    locale,
-    trim = true,
-    lower = true,
-    strict = false,
-    replacement = '-'
-  } = options;
+  const { remove, locale, trim = true, lower = true, strict = false, replacement = '-' } = options;
 
-  const localeCharMap: CharMap | undefined = locale
-    ? localeMap[locale]
-    : undefined;
+  const localeCharMap: CharMap | undefined = locale ? localeMap[locale] : undefined;
   const escaped: string = replacement.replace(ESCAPE_REGEX, '\\$&');
 
   let slug: string = '';

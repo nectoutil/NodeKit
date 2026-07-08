@@ -12,12 +12,7 @@ export class HTTPError<TBody = unknown> extends Error {
   readonly request!: Request;
   readonly body!: TBody;
 
-  constructor(
-    _response: Response,
-    _request: Request,
-    _body: TBody,
-    _message?: string
-  ) {
+  constructor(_response: Response, _request: Request, _body: TBody, _message?: string) {
     super(_message ?? `Request failed with status ${_response.status}`);
     throw new Error('NOT_IMPLEMENTED');
   }

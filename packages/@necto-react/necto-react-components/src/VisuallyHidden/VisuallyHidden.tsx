@@ -21,10 +21,7 @@ import type {
 } from 'react';
 import type { VisuallyHiddenProps } from './VisuallyHidden.types';
 
-const VisuallyHiddenFn = (
-  props: VisuallyHiddenProps,
-  ref: Ref<HTMLElement>
-): ReactElement => {
+const VisuallyHiddenFn = (props: VisuallyHiddenProps, ref: Ref<HTMLElement>): ReactElement => {
   const { as, style, children, isFocusable, ...others } = props;
 
   const [isFocused, setFocused] = useState(false);
@@ -33,9 +30,7 @@ const VisuallyHiddenFn = (
     onFocusWithinChange: setFocused
   });
 
-  const combinedStyle: CSSProperties | undefined = useMemo<
-    CSSProperties | undefined
-  >(() => {
+  const combinedStyle: CSSProperties | undefined = useMemo<CSSProperties | undefined>(() => {
     if (isFocused) {
       return style;
     }
@@ -57,13 +52,7 @@ const VisuallyHiddenFn = (
   }, [isFocused, style]);
 
   return (
-    <Primitive
-      as={as}
-      ref={ref}
-      style={combinedStyle}
-      {...others}
-      {...focusWithinProps}
-    >
+    <Primitive as={as} ref={ref} style={combinedStyle} {...others} {...focusWithinProps}>
       {children}
     </Primitive>
   );
@@ -72,18 +61,12 @@ const VisuallyHiddenFn = (
 export const VisuallyHidden: ((
   props: VisuallyHiddenProps & { ref?: Ref<HTMLElement> }
 ) => ReactElement) & {
-  Root: ForwardRefExoticComponent<
-    VisuallyHiddenProps & RefAttributes<HTMLElement>
-  >;
+  Root: ForwardRefExoticComponent<VisuallyHiddenProps & RefAttributes<HTMLElement>>;
   displayName?: string;
 } = Object.assign(forwardRef(VisuallyHiddenFn), {
   Root: forwardRef(VisuallyHiddenFn)
-}) as unknown as ((
-  props: VisuallyHiddenProps & { ref?: Ref<HTMLElement> }
-) => ReactElement) & {
-  Root: ForwardRefExoticComponent<
-    VisuallyHiddenProps & RefAttributes<HTMLElement>
-  >;
+}) as unknown as ((props: VisuallyHiddenProps & { ref?: Ref<HTMLElement> }) => ReactElement) & {
+  Root: ForwardRefExoticComponent<VisuallyHiddenProps & RefAttributes<HTMLElement>>;
   displayName?: string;
 };
 

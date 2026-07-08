@@ -24,12 +24,7 @@ import type { UseFocusOptions, UseFocusReturn } from './useFocus.types';
 export function useFocus<T extends FocusableElement = FocusableElement>(
   options: UseFocusOptions<T> = {}
 ): UseFocusReturn<T> {
-  const {
-    isDisabled,
-    onFocus: onFocusProp,
-    onBlur: onBlurProp,
-    onFocusChange
-  } = options;
+  const { isDisabled, onFocus: onFocusProp, onBlur: onBlurProp, onFocusChange } = options;
 
   // Unified handler for focus change
   const handleFocusChange = useCallback(
@@ -62,13 +57,8 @@ export function useFocus<T extends FocusableElement = FocusableElement>(
   const onFocus = useCallback(
     (e: ReactFocusEvent<T>) => {
       const ownerDocument = getOwnerDocument(e.target);
-      const activeElement = ownerDocument
-        ? getActiveElement(ownerDocument)
-        : getActiveElement();
-      if (
-        e.target === e.currentTarget &&
-        activeElement === getEventTarget(e.nativeEvent)
-      ) {
+      const activeElement = ownerDocument ? getActiveElement(ownerDocument) : getActiveElement();
+      if (e.target === e.currentTarget && activeElement === getEventTarget(e.nativeEvent)) {
         handleFocusChange(true, e);
         onSyntheticFocus(e);
       }
@@ -77,8 +67,6 @@ export function useFocus<T extends FocusableElement = FocusableElement>(
   );
 
   return {
-    focusProps: {
-      ...(isDisabled ? {} : { onFocus, onBlur })
-    } as DOMAttributes<T>
+    focusProps: (isDisabled ? {} : { onFocus, onBlur }) as DOMAttributes<T>
   };
 }

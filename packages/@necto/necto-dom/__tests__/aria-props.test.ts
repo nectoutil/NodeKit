@@ -6,7 +6,13 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { AriaProps, ALL_ARIA_PROPS, ARIA_PROPS_SET, isAriaAttribute, hasAriaPrefix } from '../src/aria-props';
+import {
+  AriaProps,
+  ALL_ARIA_PROPS,
+  ARIA_PROPS_SET,
+  isAriaAttribute,
+  hasAriaPrefix
+} from '../src/aria-props';
 
 describe('AriaProps', () => {
   it('maps capitalized keys to aria attribute names', () => {

@@ -21,7 +21,7 @@ const HIDDEN_STYLE = {
   height: '1px',
   overflow: 'hidden',
   clipPath: 'inset(50%)',
-  whiteSpace: 'nowrap',
+  whiteSpace: 'nowrap'
 };
 
 describe('VisuallyHidden', () => {
@@ -48,9 +48,7 @@ describe('VisuallyHidden', () => {
     });
 
     it('merges user styles on top of hidden styles', () => {
-      const { container } = render(
-        <VisuallyHidden style={{ color: 'red' }}>x</VisuallyHidden>
-      );
+      const { container } = render(<VisuallyHidden style={{ color: 'red' }}>x</VisuallyHidden>);
       const el = container.firstChild as HTMLElement;
       expect(el.style.color).toBe('red');
       expect(el).toHaveStyle({ position: 'absolute' });
@@ -65,38 +63,56 @@ describe('VisuallyHidden', () => {
   describe('isFocusable prop', () => {
     it('keeps hidden styles when isFocusable is false and element is focused', async () => {
       const { container } = render(
-        <VisuallyHidden isFocusable={false} tabIndex={0}>x</VisuallyHidden>
+        <VisuallyHidden isFocusable={false} tabIndex={0}>
+          x
+        </VisuallyHidden>
       );
       const el = container.firstChild as HTMLElement;
-      await act(async () => { el.focus(); });
+      await act(async () => {
+        el.focus();
+      });
       expect(el).toHaveStyle({ position: 'absolute' });
     });
 
     it('removes hidden styles when isFocusable is true and element is focused', async () => {
       const { container } = render(
-        <VisuallyHidden isFocusable tabIndex={0}>x</VisuallyHidden>
+        <VisuallyHidden isFocusable tabIndex={0}>
+          x
+        </VisuallyHidden>
       );
       const el = container.firstChild as HTMLElement;
-      await act(async () => { el.focus(); });
+      await act(async () => {
+        el.focus();
+      });
       expect(el.style.position).toBe('');
     });
 
     it('restores hidden styles when focus leaves', async () => {
       const { container } = render(
-        <VisuallyHidden isFocusable tabIndex={0}>x</VisuallyHidden>
+        <VisuallyHidden isFocusable tabIndex={0}>
+          x
+        </VisuallyHidden>
       );
       const el = container.firstChild as HTMLElement;
-      await act(async () => { el.focus(); });
-      await act(async () => { el.blur(); });
+      await act(async () => {
+        el.focus();
+      });
+      await act(async () => {
+        el.blur();
+      });
       expect(el).toHaveStyle({ position: 'absolute' });
     });
 
     it('preserves user styles when focused', async () => {
       const { container } = render(
-        <VisuallyHidden isFocusable tabIndex={0} style={{ color: 'blue' }}>x</VisuallyHidden>
+        <VisuallyHidden isFocusable tabIndex={0} style={{ color: 'blue' }}>
+          x
+        </VisuallyHidden>
       );
       const el = container.firstChild as HTMLElement;
-      await act(async () => { el.focus(); });
+      await act(async () => {
+        el.focus();
+      });
       expect(el.style.color).toBe('blue');
       expect(el.style.position).toBe('');
     });

@@ -68,7 +68,7 @@ const { x, y, placement } = await computePosition(button, tooltip, {
     shift({
       padding: 8,
       maxShift: 100, // Don't shift more than 100px
-      axis: 'x'      // Only shift horizontally
+      axis: 'x' // Only shift horizontally
     })
   ]
 });

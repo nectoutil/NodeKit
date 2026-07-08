@@ -21,7 +21,11 @@ describe('Arrow', () => {
   });
 
   it('should render custom children instead of the default SVG', () => {
-    const { container } = render(<Arrow placement="top"><span data-testid="custom" /></Arrow>);
+    const { container } = render(
+      <Arrow placement="top">
+        <span data-testid="custom" />
+      </Arrow>
+    );
     expect(screen.getByTestId('custom')).toBeInTheDocument();
     expect(container.querySelector('svg')).toBeNull();
   });
@@ -71,9 +75,7 @@ describe('Arrow', () => {
   });
 
   it('should offset arrowY by (width - height) / 2 for horizontal placements', () => {
-    const { container } = render(
-      <Arrow placement="left" arrowY={10} width={10} height={5} />
-    );
+    const { container } = render(<Arrow placement="left" arrowY={10} width={10} height={5} />);
     const span = container.querySelector('span');
     expect(span?.style.top).toBe('12.5px');
   });

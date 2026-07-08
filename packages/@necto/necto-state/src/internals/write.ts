@@ -31,8 +31,7 @@ export function writeStateRecord<Value, Args extends unknown[], Result>(
 ): Result {
   let isSync = true;
 
-  const getter: Getter = <V>(a: State<V>) =>
-    unwrapValue(ctx.methods.readStateRecord(a));
+  const getter: Getter = <V>(a: State<V>) => unwrapValue(ctx.methods.readStateRecord(a));
 
   const setter: Setter = <V, As extends unknown[], R>(
     a: WritableState<V, As, R>,
@@ -87,11 +86,7 @@ export function setValueOrPromise<Value>(
 
   if (isPromiseLike(valueOrPromise)) {
     for (const a of stateRecord.dependencies.keys()) {
-      addPendingPromise(
-        state,
-        valueOrPromise,
-        ctx.methods.ensureStateRecord(a)
-      );
+      addPendingPromise(state, valueOrPromise, ctx.methods.ensureStateRecord(a));
     }
   }
 

@@ -10,6 +10,4 @@ import { createContext } from 'react';
 import type { Context } from 'react';
 import type { Store } from '@necto/state';
 
-export const StoreContext: Context<Store | undefined> = createContext<
-  Store | undefined
->(undefined);
+export const StoreContext: Context<Store | undefined> = createContext<Store | undefined>(undefined);

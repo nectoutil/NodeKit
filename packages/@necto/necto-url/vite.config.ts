@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { defineConfig } from 'tsdown';
+import { defineConfig } from 'vite-plus/pack';
 
 export default defineConfig({
-  entry: ['./src/index.ts'],
-  format: ['esm', 'cjs'],
-  external: ['react', 'react-dom']
+  entry: ['src/index.ts'],
+  splitting: false,
+  platform: 'neutral'
 });

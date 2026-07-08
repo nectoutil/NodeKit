@@ -26,9 +26,7 @@ describe('useDismiss', () => {
   });
 
   it('should return reference and floating prop objects', () => {
-    const { result } = renderHook(() =>
-      useDismiss({ open: true, onOpenChange })
-    );
+    const { result } = renderHook(() => useDismiss({ open: true, onOpenChange }));
 
     expect(result.current.reference).toBeDefined();
     expect(result.current.floating).toBeDefined();
@@ -43,9 +41,7 @@ describe('useDismiss', () => {
   });
 
   it('should not close on Escape when escapeKey is false', async () => {
-    renderHook(() =>
-      useDismiss({ open: true, onOpenChange, escapeKey: false })
-    );
+    renderHook(() => useDismiss({ open: true, onOpenChange, escapeKey: false }));
 
     await user.keyboard('{Escape}');
 
@@ -61,9 +57,7 @@ describe('useDismiss', () => {
   });
 
   it('should not close on outside click when outsidePress is false', async () => {
-    renderHook(() =>
-      useDismiss({ open: true, onOpenChange, outsidePress: false })
-    );
+    renderHook(() => useDismiss({ open: true, onOpenChange, outsidePress: false }));
 
     await user.click(document.body);
 
@@ -80,9 +74,7 @@ describe('useDismiss', () => {
   });
 
   it('should not fire when disabled', async () => {
-    renderHook(() =>
-      useDismiss({ open: true, onOpenChange, enabled: false })
-    );
+    renderHook(() => useDismiss({ open: true, onOpenChange, enabled: false }));
 
     await user.keyboard('{Escape}');
 
@@ -90,27 +82,21 @@ describe('useDismiss', () => {
   });
 
   it('should return empty props when disabled', () => {
-    const { result } = renderHook(() =>
-      useDismiss({ open: true, onOpenChange, enabled: false })
-    );
+    const { result } = renderHook(() => useDismiss({ open: true, onOpenChange, enabled: false }));
 
     expect(result.current.reference).toEqual({});
     expect(result.current.floating).toEqual({});
   });
 
   it('should provide ref callbacks when enabled', () => {
-    const { result } = renderHook(() =>
-      useDismiss({ open: true, onOpenChange })
-    );
+    const { result } = renderHook(() => useDismiss({ open: true, onOpenChange }));
 
     expect(typeof result.current.reference.ref).toBe('function');
     expect(typeof result.current.floating.ref).toBe('function');
   });
 
   it('should provide onPointerDown on floating for inside tree detection', () => {
-    const { result } = renderHook(() =>
-      useDismiss({ open: true, onOpenChange })
-    );
+    const { result } = renderHook(() => useDismiss({ open: true, onOpenChange }));
 
     expect(typeof result.current.floating.onPointerDown).toBe('function');
   });
@@ -127,9 +113,7 @@ describe('useDismiss', () => {
     const addSpy = vi.spyOn(document, 'addEventListener');
     const removeSpy = vi.spyOn(document, 'removeEventListener');
 
-    const { unmount } = renderHook(() =>
-      useDismiss({ open: true, onOpenChange })
-    );
+    const { unmount } = renderHook(() => useDismiss({ open: true, onOpenChange }));
 
     expect(addSpy).toHaveBeenCalled();
 
@@ -196,9 +180,7 @@ describe('useDismiss', () => {
   });
 
   it('should stopPropagation for outside press when bubbles is false', () => {
-    renderHook(() =>
-      useDismiss({ open: true, onOpenChange, bubbles: false })
-    );
+    renderHook(() => useDismiss({ open: true, onOpenChange, bubbles: false }));
 
     const evt = new MouseEvent('mousedown', { bubbles: true });
     const stopSpy = vi.spyOn(evt, 'stopPropagation');
@@ -216,9 +198,7 @@ describe('useDismiss', () => {
     floatingEl.appendChild(child);
     document.body.appendChild(floatingEl);
 
-    const { result } = renderHook(() =>
-      useDismiss({ open: true, onOpenChange })
-    );
+    const { result } = renderHook(() => useDismiss({ open: true, onOpenChange }));
 
     act(() => {
       (result.current.floating.ref as RefFn)(floatingEl);
@@ -235,9 +215,7 @@ describe('useDismiss', () => {
     const referenceEl = document.createElement('button');
     document.body.appendChild(referenceEl);
 
-    const { result } = renderHook(() =>
-      useDismiss({ open: true, onOpenChange })
-    );
+    const { result } = renderHook(() => useDismiss({ open: true, onOpenChange }));
 
     act(() => {
       (result.current.reference.ref as RefFn)(referenceEl);
@@ -292,9 +270,7 @@ describe('useDismiss', () => {
   });
 
   it('should skip close once after onPointerDown marks the tree as inside', () => {
-    const { result } = renderHook(() =>
-      useDismiss({ open: true, onOpenChange })
-    );
+    const { result } = renderHook(() => useDismiss({ open: true, onOpenChange }));
 
     act(() => {
       (result.current.floating.onPointerDown as PointerFn)();
@@ -320,8 +296,7 @@ describe('useDismiss', () => {
     document.body.appendChild(parent);
 
     const { result, rerender } = renderHook(
-      ({ open }) =>
-        useDismiss({ open, onOpenChange, ancestorScroll: true }),
+      ({ open }) => useDismiss({ open, onOpenChange, ancestorScroll: true }),
       { initialProps: { open: false } }
     );
 
@@ -345,8 +320,7 @@ describe('useDismiss', () => {
     document.body.appendChild(referenceEl);
 
     const { result, rerender } = renderHook(
-      ({ open }) =>
-        useDismiss({ open, onOpenChange, ancestorScroll: true }),
+      ({ open }) => useDismiss({ open, onOpenChange, ancestorScroll: true }),
       { initialProps: { open: false } }
     );
 
@@ -377,9 +351,7 @@ describe('useDismiss', () => {
 
   it('should store the element when reference.ref is invoked', () => {
     const el = document.createElement('div');
-    const { result } = renderHook(() =>
-      useDismiss({ open: true, onOpenChange })
-    );
+    const { result } = renderHook(() => useDismiss({ open: true, onOpenChange }));
 
     expect(() => {
       act(() => {
@@ -390,9 +362,7 @@ describe('useDismiss', () => {
 
   it('should store the element when floating.ref is invoked', () => {
     const el = document.createElement('div');
-    const { result } = renderHook(() =>
-      useDismiss({ open: true, onOpenChange })
-    );
+    const { result } = renderHook(() => useDismiss({ open: true, onOpenChange }));
 
     expect(() => {
       act(() => {

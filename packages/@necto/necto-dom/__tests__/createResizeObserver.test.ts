@@ -5,16 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {
-  afterAll,
-  afterEach,
-  beforeAll,
-  beforeEach,
-  describe,
-  expect,
-  test,
-  vi
-} from 'vitest';
+import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, test, vi } from 'vitest';
 import { configMocks, mockResizeObserver } from 'jsdom-testing-mocks';
 
 import { createResizeObserver } from '../src';
