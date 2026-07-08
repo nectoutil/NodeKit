@@ -10,7 +10,7 @@
     "test:vitest": "vp test run",
     "test:watch": "vp test",
     "test:ui": "vp test --ui",
-    "test:coverage": "vp test run --coverage",
+    "test:coverage": "pnpm --filter './packages/**' run test:coverage",
     "test:visual": "pnpm --filter './packages/**' run test:visual",
     "build": "pnpm --filter './packages/**' run build",
     "lint": "vp lint --fix",
