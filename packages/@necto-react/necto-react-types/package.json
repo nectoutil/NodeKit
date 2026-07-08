@@ -1,6 +1,6 @@
 {
   "name": "@necto-react/types",
-  "version": "2.4.2",
+  "version": "2.4.3",
   "description": "Necto's shared TypeScript type definitions for React packages.",
   "scripts": {
     "build": "vp pack --format esm,cjs --dts --minify --sourcemap"

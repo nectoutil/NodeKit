@@ -1,6 +1,6 @@
 {
   "name": "@necto/state",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Necto's atomic state management library.",
   "scripts": {
     "build": "vp pack --format esm,cjs --dts --minify --sourcemap",
