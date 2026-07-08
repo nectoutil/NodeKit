@@ -1,6 +1,6 @@
 {
   "name": "@necto/math",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Universal math library.",
   "scripts": {
     "build": "vp pack --format esm,cjs --dts --minify --sourcemap"

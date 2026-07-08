@@ -1,6 +1,6 @@
 {
   "name": "@necto-react/state",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "React bindings for @necto/state.",
   "scripts": {
     "build": "vp pack --format esm,cjs --dts --minify --sourcemap",

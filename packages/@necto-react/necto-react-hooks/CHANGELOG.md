@@ -1,5 +1,22 @@
 # @necto-react/hooks
 
+## 2.20.1
+
+### Patch Changes
+
+- 04aba51: Migrate the build toolchain from tsdown to Vite+ (`vp pack`). The ESM build now emits `.mjs` (previously `.js`) and its types `.d.mts`; the CommonJS build (`.cjs`/`.d.cts`) is unchanged. Each package's `exports`, `main`, `module`, and `types` fields are updated to match, so normal package imports resolve exactly as before — only direct-to-`dist/index.js` deep imports are affected.
+
+  This also migrates lint/format from Biome to oxlint/oxfmt (`vp lint` / `vp fmt`), the task runner from Turbo to pnpm, and bumps Vitest 3 → 4. Node 24+ is now required.
+
+- Updated dependencies [04aba51]
+  - @necto-react/types@2.4.3
+  - @necto/dom@1.11.3
+  - @necto/id@1.6.9
+  - @necto/mergers@1.5.3
+  - @necto/platform@1.5.3
+  - @necto/strings@1.9.3
+  - @necto/types@1.4.1
+
 ## 2.20.0
 
 ### Minor Changes
@@ -13,15 +30,15 @@
 
   ```tsx
   // Window event (default target)
-  useEventListener('resize', handleResize);
+  useEventListener("resize", handleResize);
 
   // Element event — `event` typed as MouseEvent automatically
   const buttonRef = useRef<HTMLButtonElement>(null);
-  useEventListener('click', (event) => console.log(event.button), buttonRef);
+  useEventListener("click", (event) => console.log(event.button), buttonRef);
 
   // MediaQueryList — `event` typed as MediaQueryListEvent automatically
-  const mql = useRef(window.matchMedia('(prefers-color-scheme: dark)'));
-  useEventListener('change', (event) => setDark(event.matches), mql);
+  const mql = useRef(window.matchMedia("(prefers-color-scheme: dark)"));
+  useEventListener("change", (event) => setDark(event.matches), mql);
   ```
 
   Supports targets: `Window`, `Document`, `HTMLElement`, `SVGElement`,
@@ -38,7 +55,7 @@
   useOnClickOutside(menuRef, () => setOpen(false));
 
   // Multiple refs — handler only fires when target is outside all of them
-  useOnClickOutside([menuRef, triggerRef], close, { eventType: 'mouseup' });
+  useOnClickOutside([menuRef, triggerRef], close, { eventType: "mouseup" });
   ```
 
   Defaults: `eventType: 'mousedown'` (fastest dismiss), listener attached

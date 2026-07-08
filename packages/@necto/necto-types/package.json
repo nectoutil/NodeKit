@@ -1,6 +1,6 @@
 {
   "name": "@necto/types",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Necto's universal types library",
   "type": "module",
   "scripts": {

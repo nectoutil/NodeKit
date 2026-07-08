@@ -1,5 +1,23 @@
 # @necto-react/popper
 
+## 0.10.14
+
+### Patch Changes
+
+- 04aba51: Migrate the build toolchain from tsdown to Vite+ (`vp pack`). The ESM build now emits `.mjs` (previously `.js`) and its types `.d.mts`; the CommonJS build (`.cjs`/`.d.cts`) is unchanged. Each package's `exports`, `main`, `module`, and `types` fields are updated to match, so normal package imports resolve exactly as before — only direct-to-`dist/index.js` deep imports are affected.
+
+  This also migrates lint/format from Biome to oxlint/oxfmt (`vp lint` / `vp fmt`), the task runner from Turbo to pnpm, and bumps Vitest 3 → 4. Node 24+ is now required.
+
+- Updated dependencies [04aba51]
+  - @necto-react/components@3.3.3
+  - @necto-react/hooks@2.20.1
+  - @necto-react/state@0.3.1
+  - @necto-react/types@2.4.3
+  - @necto/dom@1.11.3
+  - @necto/mergers@1.5.3
+  - @necto/popper@0.5.12
+  - @necto/types@1.4.1
+
 ## 0.10.13
 
 ### Patch Changes

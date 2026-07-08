@@ -1,6 +1,6 @@
 {
   "name": "@necto/assert",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "type": "module",
   "description": "Necto's assertion utility.",
   "author": "Corinvo OSS Team",

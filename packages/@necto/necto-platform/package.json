@@ -1,6 +1,6 @@
 {
   "name": "@necto/platform",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "description": "Necto's library for detecting platforms, devices, other device related information.",
   "scripts": {
     "build": "vp pack --format esm,cjs --dts --minify --sourcemap",

@@ -1,6 +1,6 @@
 {
   "name": "@necto/bolt",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "type": "module",
   "description": "Necto's super fast and easy HTTP server.",
   "author": "Corinvo OSS Team",
