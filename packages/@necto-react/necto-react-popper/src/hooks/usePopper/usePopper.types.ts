@@ -6,10 +6,7 @@
  *
  */
 
-import type {
-  ComputePositionResult,
-  ComputePositionOptions
-} from '@necto/popper';
+import type { ComputePositionResult, ComputePositionOptions } from '@necto/popper';
 
 /**
  * Options for usePopper hook

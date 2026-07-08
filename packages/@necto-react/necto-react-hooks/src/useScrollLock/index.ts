@@ -8,7 +8,4 @@
 
 export { useScrollLock } from './useScrollLock';
 
-export type {
-  UseScrollLockOptions,
-  UseScrollLockReturn
-} from './useScrollLock.types';
+export type { UseScrollLockOptions, UseScrollLockReturn } from './useScrollLock.types';

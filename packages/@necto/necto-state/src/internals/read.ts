@@ -42,16 +42,12 @@ export function ensureStateRecord<Value>(
   return stateRecord as StateRecord<Value>;
 }
 
-export function readStateRecord<Value>(
-  ctx: StoreContext,
-  state: State<Value>
-): StateRecord<Value> {
+export function readStateRecord<Value>(ctx: StoreContext, state: State<Value>): StateRecord<Value> {
   const stateRecord = ctx.methods.ensureStateRecord(state);
 
   if (isInitialized(stateRecord)) {
     if (
-      (ctx.mountedMap.has(state) &&
-        ctx.invalidatedStates.get(state) !== stateRecord.epoch) ||
+      (ctx.mountedMap.has(state) && ctx.invalidatedStates.get(state) !== stateRecord.epoch) ||
       stateRecord.validatedEpoch === ctx.storeEpoch
     ) {
       stateRecord.validatedEpoch = ctx.storeEpoch;
@@ -166,9 +162,7 @@ export function readStateRecord<Value>(
     const valueOrPromise = state.read(getter, options as never);
     ctx.methods.setValueOrPromise(state, valueOrPromise);
     if (isPromiseLike(valueOrPromise)) {
-      ctx.methods.registerAbortHandler(valueOrPromise, () =>
-        controller?.abort()
-      );
+      ctx.methods.registerAbortHandler(valueOrPromise, () => controller?.abort());
 
       const settle = () => {
         pruneDeps();

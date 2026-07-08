@@ -28,28 +28,40 @@ describe('useScrollLock', () => {
 
   it('sets isLocked to true when lock is called', () => {
     const { result } = renderHook(() => useScrollLock());
-    act(() => { result.current.lock(); });
+    act(() => {
+      result.current.lock();
+    });
     expect(result.current.isLocked).toBe(true);
   });
 
   it('sets isLocked to false when unlock is called', () => {
     const { result } = renderHook(() => useScrollLock());
-    act(() => { result.current.lock(); });
-    act(() => { result.current.unlock(); });
+    act(() => {
+      result.current.lock();
+    });
+    act(() => {
+      result.current.unlock();
+    });
     expect(result.current.isLocked).toBe(false);
   });
 
   it('sets overflow hidden on document.body when locked', () => {
     const { result } = renderHook(() => useScrollLock());
-    act(() => { result.current.lock(); });
+    act(() => {
+      result.current.lock();
+    });
     expect(document.body.style.overflow).toBe('hidden');
   });
 
   it('restores original overflow on document.body when unlocked', () => {
     document.body.style.overflow = 'auto';
     const { result } = renderHook(() => useScrollLock());
-    act(() => { result.current.lock(); });
-    act(() => { result.current.unlock(); });
+    act(() => {
+      result.current.lock();
+    });
+    act(() => {
+      result.current.unlock();
+    });
     expect(document.body.style.overflow).toBe('auto');
   });
 
@@ -72,7 +84,9 @@ describe('useScrollLock', () => {
     document.body.appendChild(div);
 
     const { result } = renderHook(() => useScrollLock({ target: '#scroll-target' }));
-    act(() => { result.current.lock(); });
+    act(() => {
+      result.current.lock();
+    });
     expect(div.style.overflow).toBe('hidden');
 
     document.body.removeChild(div);

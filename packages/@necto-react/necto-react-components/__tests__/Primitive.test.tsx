@@ -28,7 +28,11 @@ describe('Primitive', () => {
     });
 
     it('passes arbitrary props through', () => {
-      render(<Primitive data-testid="prim" aria-label="test">x</Primitive>);
+      render(
+        <Primitive data-testid="prim" aria-label="test">
+          x
+        </Primitive>
+      );
       expect(screen.getByTestId('prim')).toHaveAttribute('aria-label', 'test');
     });
 
@@ -44,14 +48,22 @@ describe('Primitive', () => {
     });
 
     it('renders as a button with correct attributes', () => {
-      render(<Primitive as="button" type="submit">Submit</Primitive>);
+      render(
+        <Primitive as="button" type="submit">
+          Submit
+        </Primitive>
+      );
       const el = screen.getByText('Submit');
       expect(el.tagName).toBe('BUTTON');
       expect(el).toHaveAttribute('type', 'submit');
     });
 
     it('renders as an anchor with href', () => {
-      render(<Primitive as="a" href="/test">Link</Primitive>);
+      render(
+        <Primitive as="a" href="/test">
+          Link
+        </Primitive>
+      );
       const el = screen.getByText('Link');
       expect(el.tagName).toBe('A');
       expect(el).toHaveAttribute('href', '/test');
@@ -67,7 +79,11 @@ describe('Primitive', () => {
 
     it('forwards ref when using the as prop', () => {
       const ref = createRef<HTMLButtonElement>();
-      render(<Primitive as="button" ref={ref}>x</Primitive>);
+      render(
+        <Primitive as="button" ref={ref}>
+          x
+        </Primitive>
+      );
       expect(ref.current).toBeInstanceOf(HTMLButtonElement);
     });
   });
@@ -148,7 +164,11 @@ describe('Primitive', () => {
     });
 
     it('tag component passes props through', () => {
-      render(<Primitive.div data-testid="tag-div" className="c">x</Primitive.div>);
+      render(
+        <Primitive.div data-testid="tag-div" className="c">
+          x
+        </Primitive.div>
+      );
       const el = screen.getByTestId('tag-div');
       expect(el).toHaveClass('c');
     });

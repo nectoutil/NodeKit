@@ -16,9 +16,7 @@ export type Setter = <Value, Args extends unknown[], Result>(
   ...args: Args
 ) => Result;
 
-type SetState<Args extends unknown[], Result> = <A extends Args>(
-  ...args: A
-) => Result;
+type SetState<Args extends unknown[], Result> = <A extends Args>(...args: A) => Result;
 
 export type Read<Value, SetSelf = never> = (
   get: Getter,
@@ -37,9 +35,7 @@ export type WithInitialValue<Value> = {
 
 type OnUnmount = () => void;
 
-type OnMount<Args extends unknown[], Result> = <
-  S extends SetState<Args, Result>
->(
+type OnMount<Args extends unknown[], Result> = <S extends SetState<Args, Result>>(
   setState: S
 ) => OnUnmount | void;
 
@@ -52,8 +48,7 @@ export interface State<Value> {
 }
 
 /** A state unit that can be both read and written to. */
-export interface WritableState<Value, Args extends unknown[], Result>
-  extends State<Value> {
+export interface WritableState<Value, Args extends unknown[], Result> extends State<Value> {
   read: Read<Value, SetState<Args, unknown>>;
   write: Write<Args, Result>;
   onMount?: OnMount<Args, Result>;
@@ -62,11 +57,7 @@ export interface WritableState<Value, Args extends unknown[], Result>
 export type SetStateAction<Value> = Value | ((prev: Value) => Value);
 
 /** A simple state unit holding a value that can be directly updated. */
-export type PrimitiveState<Value> = WritableState<
-  Value,
-  [SetStateAction<Value>],
-  void
->;
+export type PrimitiveState<Value> = WritableState<Value, [SetStateAction<Value>], void>;
 
 export type ExtractStateValue<S> = S extends State<infer Value> ? Value : never;
 

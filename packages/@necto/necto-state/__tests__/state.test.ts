@@ -281,7 +281,7 @@ describe('state', () => {
       const count = state(0);
       const doubledRW = state(
         (get) => get(count) * 2,
-        (_get, set, value: number) => set(count, Math.floor(value / 2)),
+        (_get, set, value: number) => set(count, Math.floor(value / 2))
       );
       const store = createStore();
 
@@ -295,12 +295,9 @@ describe('state', () => {
 
     it('should support write-only derived state with initial value', () => {
       const log: string[] = [];
-      const logger = state(
-        'idle',
-        (_get, _set, message: string) => {
-          log.push(message);
-        },
-      );
+      const logger = state('idle', (_get, _set, message: string) => {
+        log.push(message);
+      });
       const store = createStore();
 
       expect(store.get(logger)).toBe('idle');
@@ -314,7 +311,7 @@ describe('state', () => {
       const raw = state(50);
       const clamped = state(
         (get) => get(raw),
-        (_get, set, value: number) => set(raw, Math.max(0, Math.min(100, value))),
+        (_get, set, value: number) => set(raw, Math.max(0, Math.min(100, value)))
       );
       const store = createStore();
 
@@ -336,7 +333,7 @@ describe('state', () => {
         (_get, set) => {
           set(x, 0);
           set(y, 0);
-        },
+        }
       );
       const store = createStore();
 

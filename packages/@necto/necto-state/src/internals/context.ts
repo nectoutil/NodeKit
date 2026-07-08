@@ -5,14 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type {
-  State,
-  Store,
-  Mounted,
-  EpochNumber,
-  StateRecord,
-  WritableState
-} from '../types';
+import type { State, Store, Mounted, EpochNumber, StateRecord, WritableState } from '../types';
 
 type AnyValue = unknown;
 type AnyState = State<AnyValue>;
@@ -45,10 +38,7 @@ export type StoreMethods = {
   mountState: <Value>(s: State<Value>) => Mounted;
   unmountState: <Value>(s: State<Value>) => Mounted | undefined;
   mountDependencies: (s: AnyState) => void;
-  registerAbortHandler: (
-    promise: PromiseLike<unknown>,
-    handler: () => void
-  ) => void;
+  registerAbortHandler: (promise: PromiseLike<unknown>, handler: () => void) => void;
   abortPromise: (promise: PromiseLike<unknown>) => void;
 };
 

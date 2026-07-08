@@ -6,9 +6,7 @@
  */
 
 /** Parses a dimension value to a number */
-export function parseDimension(
-  value: number | string | undefined
-): number | undefined {
+export function parseDimension(value: number | string | undefined): number | undefined {
   if (value === undefined) return undefined;
   if (typeof value === 'number') return value;
   const parsed: number = Number.parseInt(value, 10);

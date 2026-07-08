@@ -7,11 +7,7 @@
 
 import { useRef, useState, useCallback, useEffect } from 'react';
 
-import type {
-  UseMountedOptions,
-  UseMountedReturn,
-  MountedAccessType
-} from './useMounted.types';
+import type { UseMountedOptions, UseMountedReturn, MountedAccessType } from './useMounted.types';
 
 /**
  * React hook that tracks whether a component is mounted.

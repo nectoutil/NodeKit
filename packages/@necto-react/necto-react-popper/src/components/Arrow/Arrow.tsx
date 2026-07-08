@@ -43,12 +43,8 @@ const ArrowFn = (props: ArrowProps, ref: Ref<HTMLDivElement>): ReactElement => {
       style={{
         position: 'absolute',
         left: arrowX != null ? arrowX : undefined,
-        top:
-          arrowY != null
-            ? arrowY + (isVertical ? 0 : (width - height) / 2)
-            : undefined,
-        [{ top: 'bottom', bottom: 'top', left: 'right', right: 'left' }[side]]:
-          0,
+        top: arrowY != null ? arrowY + (isVertical ? 0 : (width - height) / 2) : undefined,
+        [{ top: 'bottom', bottom: 'top', left: 'right', right: 'left' }[side]]: 0,
         transformOrigin: {
           top: '',
           right: '0 0',

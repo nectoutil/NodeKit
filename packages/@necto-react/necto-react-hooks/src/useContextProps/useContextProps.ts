@@ -11,10 +11,7 @@ import { useRef, useCallback } from 'react';
 import { mergeProps } from '@necto/mergers';
 import { useSlottedContext } from '@necto-react/hooks';
 
-import type {
-  UseContextPropsOptions,
-  UseContextPropsReturn
-} from './useContextProps.types';
+import type { UseContextPropsOptions, UseContextPropsReturn } from './useContextProps.types';
 import type { RefObject } from 'react';
 
 /**
@@ -60,16 +57,8 @@ export function useContextProps<T, E extends Element>({
 
   const mergedProps = mergeProps(contextProps, props) as unknown as T;
 
-  if (
-    'style' in contextProps &&
-    contextProps.style &&
-    'style' in props &&
-    props.style
-  ) {
-    if (
-      typeof contextProps.style === 'function' ||
-      typeof props.style === 'function'
-    ) {
+  if ('style' in contextProps && contextProps.style && 'style' in props && props.style) {
+    if (typeof contextProps.style === 'function' || typeof props.style === 'function') {
       (mergedProps as any).style = (renderProps: any) => {
         const contextStyle =
           typeof contextProps.style === 'function'

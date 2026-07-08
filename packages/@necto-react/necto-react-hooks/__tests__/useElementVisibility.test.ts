@@ -15,9 +15,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 // Mock IntersectionObserver
 const mockObserve = vi.fn();
 const mockDisconnect = vi.fn();
-let intersectionObserverCallback:
-  | ((entries: IntersectionObserverEntry[]) => void)
-  | null = null;
+let intersectionObserverCallback: ((entries: IntersectionObserverEntry[]) => void) | null = null;
 
 const mockIntersectionObserver = vi.fn().mockImplementation((callback) => {
   intersectionObserverCallback = callback;

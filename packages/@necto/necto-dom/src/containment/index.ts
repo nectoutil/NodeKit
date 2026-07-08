@@ -40,8 +40,7 @@ export function getContainmentRect(
   return {
     top: 0,
     left: 0,
-    bottom:
-      ownerWin?.innerHeight || ownerDoc?.documentElement?.clientHeight || 0,
+    bottom: ownerWin?.innerHeight || ownerDoc?.documentElement?.clientHeight || 0,
     right: ownerWin?.innerWidth || ownerDoc?.documentElement?.clientWidth || 0
   };
 }

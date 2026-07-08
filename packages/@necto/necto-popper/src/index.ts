@@ -38,9 +38,4 @@ export { detectOverflow, hasOverflow } from './utils/detectOverflow';
 export { autoUpdate } from './utils/autoUpdate';
 export type { AutoUpdateOptions } from './utils/autoUpdate';
 
-export {
-  getContainmentRect,
-  isNode,
-  getOwnerWindow,
-  getOwnerDocument
-} from '@necto/dom';
+export { getContainmentRect, isNode, getOwnerWindow, getOwnerDocument } from '@necto/dom';

@@ -41,10 +41,7 @@ export function focusWithoutScrolling(element: FocusableElement): void {
         : null;
 
     while (parent instanceof HTMLElement && parent !== rootScrollingElement) {
-      if (
-        parent.offsetHeight < parent.scrollHeight ||
-        parent.offsetWidth < parent.scrollWidth
-      ) {
+      if (parent.offsetHeight < parent.scrollHeight || parent.offsetWidth < parent.scrollWidth) {
         scrollableElements.push({
           element: parent,
           scrollTop: parent.scrollTop,

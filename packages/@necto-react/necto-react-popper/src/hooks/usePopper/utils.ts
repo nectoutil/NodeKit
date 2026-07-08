@@ -57,10 +57,7 @@ export function getDevicePixelRatio(element: Element): number {
 /**
  * Rounds a value to the nearest device pixel to avoid sub-pixel rendering.
  */
-export function roundByDevicePixelRatio(
-  element: Element,
-  value: number
-): number {
+export function roundByDevicePixelRatio(element: Element, value: number): number {
   const dpr: number = getDevicePixelRatio(element);
 
   return Math.round(value * dpr) / dpr;

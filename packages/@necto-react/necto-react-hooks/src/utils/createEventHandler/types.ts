@@ -21,6 +21,4 @@ export type EventHandler<T extends SyntheticEvent> = (e: T) => void;
  *
  * @template T The type of the SyntheticEvent.
  */
-export type BaseEventHandler<T extends SyntheticEvent> = (
-  e: BaseEvent<T>
-) => void;
+export type BaseEventHandler<T extends SyntheticEvent> = (e: BaseEvent<T>) => void;

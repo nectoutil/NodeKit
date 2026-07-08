@@ -78,8 +78,7 @@ export const ARIA_PROPS_SET: Set<string> = new Set(ALL_ARIA_PROPS);
  * isAriaAttribute('onClick');      // false
  * ```
  */
-export const isAriaAttribute = (prop: string): boolean =>
-  ARIA_PROPS_SET.has(prop);
+export const isAriaAttribute = (prop: string): boolean => ARIA_PROPS_SET.has(prop);
 
 /**
  * Checks if a string starts with 'aria-' prefix.
@@ -87,7 +86,6 @@ export const isAriaAttribute = (prop: string): boolean =>
  * @param prop - The property name to check.
  * @returns True if the property starts with 'aria-'.
  */
-export const hasAriaPrefix = (prop: string): boolean =>
-  prop.startsWith('aria-');
+export const hasAriaPrefix = (prop: string): boolean => prop.startsWith('aria-');
 
 export type { AriaAttribute } from './types';

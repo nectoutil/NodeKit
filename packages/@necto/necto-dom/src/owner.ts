@@ -26,9 +26,7 @@ export function getOwnerWindow(
     return el;
   }
 
-  const ownerDocument: Document = getOwnerDocument(
-    el as Element | null | undefined
-  );
+  const ownerDocument: Document = getOwnerDocument(el as Element | null | undefined);
   if (ownerDocument?.defaultView) {
     return ownerDocument.defaultView;
   }

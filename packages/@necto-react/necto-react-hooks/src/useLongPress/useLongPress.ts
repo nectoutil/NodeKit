@@ -13,19 +13,13 @@ import { useRef, useCallback, useEffect } from 'react';
 import { DEFAULT_LONG_PRESS_THRESHOLD } from './constants';
 
 import type { PointerType } from '@necto/types';
-import type {
-  LongPressEvent,
-  UseLongPressOptions,
-  UseLongPressReturn
-} from './useLongPress.types';
+import type { LongPressEvent, UseLongPressOptions, UseLongPressReturn } from './useLongPress.types';
 
 /**
  * Handles long press interactions for touch and pointer devices.
  * A long press is triggered when the user holds down a pointer for a specified duration.
  */
-export function useLongPress(
-  options: UseLongPressOptions = {}
-): UseLongPressReturn {
+export function useLongPress(options: UseLongPressOptions = {}): UseLongPressReturn {
   const {
     isDisabled,
     onLongPressStart,
@@ -79,9 +73,7 @@ export function useLongPress(
 
         // Dispatch pointercancel to prevent other interactions
         const target = e.currentTarget as HTMLElement;
-        target?.dispatchEvent(
-          new PointerEvent('pointercancel', { bubbles: true })
-        );
+        target?.dispatchEvent(new PointerEvent('pointercancel', { bubbles: true }));
 
         onLongPress?.(createEvent('longpress'));
 
@@ -123,8 +115,7 @@ export function useLongPress(
   }, []);
 
   // Only add accessibility description if long press is enabled and has a handler
-  const shouldAddDescription: boolean =
-    !isDisabled && !!onLongPress && !!accessibilityDescription;
+  const shouldAddDescription: boolean = !isDisabled && !!onLongPress && !!accessibilityDescription;
 
   const longPressProps: UseLongPressReturn['longPressProps'] = isDisabled
     ? {}

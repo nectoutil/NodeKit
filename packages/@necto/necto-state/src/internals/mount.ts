@@ -31,9 +31,7 @@ export function flushCallbacks(ctx: StoreContext): void {
     const add = callbacks.add.bind(callbacks);
 
     // biome-ignore lint/suspicious/useIterableCallbackReturn: Implicit void return is intentional and harmless here.
-    [...ctx.changedStates].forEach((s) =>
-      ctx.mountedMap.get(s)?.listeners.forEach(add)
-    );
+    [...ctx.changedStates].forEach((s) => ctx.mountedMap.get(s)?.listeners.forEach(add));
     ctx.changedStates.clear();
 
     [...ctx.unmountCallbacks, ...ctx.mountCallbacks].forEach(add);
@@ -45,11 +43,7 @@ export function flushCallbacks(ctx: StoreContext): void {
     if (ctx.changedStates.size) {
       ctx.methods.recomputeInvalidated();
     }
-  } while (
-    ctx.changedStates.size ||
-    ctx.unmountCallbacks.size ||
-    ctx.mountCallbacks.size
-  );
+  } while (ctx.changedStates.size || ctx.unmountCallbacks.size || ctx.mountCallbacks.size);
 
   if (errors.length) {
     throw new AggregateError(errors);
@@ -143,10 +137,7 @@ export function mountState<Value>(ctx: StoreContext, s: State<Value>): Mounted {
   return mounted;
 }
 
-export function unmountState<Value>(
-  ctx: StoreContext,
-  state: State<Value>
-): Mounted | undefined {
+export function unmountState<Value>(ctx: StoreContext, state: State<Value>): Mounted | undefined {
   const stateRecord = ctx.methods.ensureStateRecord(state);
   let mounted = ctx.mountedMap.get(state);
 

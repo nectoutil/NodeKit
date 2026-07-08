@@ -7,9 +7,7 @@
 
 import type { ResizeObserverHandler, ResizeObserverController } from './types';
 
-export function createResizeObserver(
-  polyfill?: typeof ResizeObserver
-): ResizeObserverController {
+export function createResizeObserver(polyfill?: typeof ResizeObserver): ResizeObserverController {
   let flushScheduled: boolean = false;
   let pendingEntries: ResizeObserverEntry[] = [];
 
@@ -18,10 +16,7 @@ export function createResizeObserver(
   const ResizeObserverImpl = polyfill ?? globalThis.ResizeObserver;
 
   const observer: ResizeObserver = new ResizeObserverImpl(
-    (
-      entries: ResizeObserverEntry[],
-      observerInstance: ResizeObserver
-    ): void => {
+    (entries: ResizeObserverEntry[], observerInstance: ResizeObserver): void => {
       pendingEntries = pendingEntries.concat(entries);
 
       if (flushScheduled) {
@@ -40,8 +35,7 @@ export function createResizeObserver(
         flushScheduled = false;
 
         for (const [target, entry] of latestPerTarget) {
-          const handlersForTarget: ResizeObserverHandler[] | undefined =
-            subscribers.get(target);
+          const handlersForTarget: ResizeObserverHandler[] | undefined = subscribers.get(target);
 
           if (!handlersForTarget) {
             continue;
@@ -58,8 +52,7 @@ export function createResizeObserver(
   return {
     observer,
     subscribe(target: Element, handler: ResizeObserverHandler): void {
-      const existing: ResizeObserverHandler[] | undefined =
-        subscribers.get(target);
+      const existing: ResizeObserverHandler[] | undefined = subscribers.get(target);
       if (existing) {
         existing.push(handler);
         return;
@@ -69,8 +62,7 @@ export function createResizeObserver(
       observer.observe(target);
     },
     unsubscribe(target: Element, handler: ResizeObserverHandler): void {
-      const existing: ResizeObserverHandler[] | undefined =
-        subscribers.get(target);
+      const existing: ResizeObserverHandler[] | undefined = subscribers.get(target);
       if (!existing) {
         return;
       }

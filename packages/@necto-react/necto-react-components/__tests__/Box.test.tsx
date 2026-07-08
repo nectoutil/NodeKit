@@ -118,13 +118,10 @@ describe('Box', () => {
       ['borderBlockEndWidth'],
       ['borderInlineStartWidth'],
       ['borderInlineEndWidth']
-    ] as const)(
-      'defaults to solid when only %s is provided',
-      (prop) => {
-        const { container } = render(<Box {...{ [prop]: '2px' }}>x</Box>);
-        expect(getEl(container).style.borderStyle).toBe('solid');
-      }
-    );
+    ] as const)('defaults to solid when only %s is provided', (prop) => {
+      const { container } = render(<Box {...{ [prop]: '2px' }}>x</Box>);
+      expect(getEl(container).style.borderStyle).toBe('solid');
+    });
 
     it('does not set borderStyle when no border-related prop is provided', () => {
       const { container } = render(<Box>x</Box>);

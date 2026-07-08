@@ -52,9 +52,7 @@ describe('useInteractions', () => {
       reference: { onClick: handler2 }
     };
 
-    const { result } = renderHook(() =>
-      useInteractions([interaction1, interaction2])
-    );
+    const { result } = renderHook(() => useInteractions([interaction1, interaction2]));
 
     const props = result.current.getReferenceProps();
     (props.onClick as Function)();
@@ -103,9 +101,7 @@ describe('useInteractions', () => {
       reference: { role: 'button' }
     };
 
-    const { result } = renderHook(() =>
-      useInteractions([null, interaction, undefined])
-    );
+    const { result } = renderHook(() => useInteractions([null, interaction, undefined]));
 
     const props = result.current.getReferenceProps();
     expect(props.role).toBe('button');

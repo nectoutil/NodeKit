@@ -36,9 +36,7 @@ export function unwrapValue<Value>(stateRecord: StateRecord<Value>): Value {
   return stateRecord.value!;
 }
 
-export function isPromiseLike(
-  promise: unknown
-): promise is PromiseLike<unknown> {
+export function isPromiseLike(promise: unknown): promise is PromiseLike<unknown> {
   return typeof (promise as any)?.then === 'function';
 }
 

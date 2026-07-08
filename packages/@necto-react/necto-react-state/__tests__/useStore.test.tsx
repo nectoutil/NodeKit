@@ -37,10 +37,9 @@ describe('useStore', () => {
     const contextStore = createStore();
     const explicitStore = createStore();
 
-    const { result } = renderHook(
-      () => useStore({ store: explicitStore }),
-      { wrapper: createWrapper(contextStore) }
-    );
+    const { result } = renderHook(() => useStore({ store: explicitStore }), {
+      wrapper: createWrapper(contextStore)
+    });
 
     expect(result.current).toBe(explicitStore);
   });

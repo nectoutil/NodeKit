@@ -5,30 +5,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {
-  nodeContains,
-  getEventTarget,
-  getOwnerDocument,
-  getActiveElement
-} from '@necto/dom';
+import { nodeContains, getEventTarget, getOwnerDocument, getActiveElement } from '@necto/dom';
 import { useCallback, useRef } from 'react';
 import { useGlobalListeners, useSyntheticBlurEvent } from '@necto-react/hooks';
 
 import { createSyntheticEvent } from '../utils';
 
-import type {
-  FocusWithinReturn,
-  UseFocusWithinOptions
-} from './useFocusWithin.types';
+import type { FocusWithinReturn, UseFocusWithinOptions } from './useFocusWithin.types';
 import type { RefObject, FocusEvent } from 'react';
 import type { DOMAttributes } from '@necto-react/types';
 import type { UseSyntheticBlurEventReturn } from '@necto-react/hooks';
 
-export function useFocusWithin(
-  options: UseFocusWithinOptions
-): FocusWithinReturn {
-  const { isDisabled, onFocusWithin, onBlurWithin, onFocusWithinChange } =
-    options;
+export function useFocusWithin(options: UseFocusWithinOptions): FocusWithinReturn {
+  const { isDisabled, onFocusWithin, onBlurWithin, onFocusWithinChange } = options;
   const state: RefObject<{ isFocusWithin: boolean }> = useRef({
     isFocusWithin: false
   });
@@ -40,9 +29,7 @@ export function useFocusWithin(
 
       if (
         state.current.isFocusWithin &&
-        !(event.currentTarget as Element).contains(
-          event.relatedTarget as Element
-        )
+        !(event.currentTarget as Element).contains(event.relatedTarget as Element)
       ) {
         state.current.isFocusWithin = false;
         removeAllGlobalListeners();
@@ -54,8 +41,7 @@ export function useFocusWithin(
     [onBlurWithin, onFocusWithinChange, removeAllGlobalListeners]
   );
 
-  const onSyntheticFocus: UseSyntheticBlurEventReturn<Element> =
-    useSyntheticBlurEvent({ onBlur });
+  const onSyntheticFocus: UseSyntheticBlurEventReturn<Element> = useSyntheticBlurEvent({ onBlur });
   const onFocus: (event: FocusEvent<Element, Element>) => void = useCallback(
     (event: FocusEvent) => {
       if (!event.currentTarget.contains(event.target)) return;
@@ -64,10 +50,7 @@ export function useFocusWithin(
       if (!ownerDocument) return;
       const activeElement: Element | null = getActiveElement(ownerDocument);
 
-      if (
-        !state.current.isFocusWithin &&
-        activeElement === getEventTarget(event.nativeEvent)
-      ) {
+      if (!state.current.isFocusWithin && activeElement === getEventTarget(event.nativeEvent)) {
         if (onFocusWithin) onFocusWithin(event);
         if (onFocusWithinChange) onFocusWithinChange(true);
 
@@ -79,18 +62,14 @@ export function useFocusWithin(
           ownerDocument,
           'focus',
           (e) => {
-            if (
-              state.current.isFocusWithin &&
-              !nodeContains(currentTarget, e.target as Element)
-            ) {
+            if (state.current.isFocusWithin && !nodeContains(currentTarget, e.target as Element)) {
               if (
                 ownerDocument.defaultView &&
                 typeof ownerDocument.defaultView.FocusEvent === 'function'
               ) {
-                const nativeEvent = new ownerDocument.defaultView.FocusEvent(
-                  'blur',
-                  { relatedTarget: e.target }
-                );
+                const nativeEvent = new ownerDocument.defaultView.FocusEvent('blur', {
+                  relatedTarget: e.target
+                });
 
                 Object.defineProperty(nativeEvent, 'target', {
                   value: currentTarget
@@ -100,8 +79,7 @@ export function useFocusWithin(
                   value: currentTarget
                 });
 
-                const event: FocusEvent =
-                  createSyntheticEvent<FocusEvent>(nativeEvent);
+                const event: FocusEvent = createSyntheticEvent<FocusEvent>(nativeEvent);
                 onBlur(event);
               }
             }
@@ -110,13 +88,7 @@ export function useFocusWithin(
         );
       }
     },
-    [
-      onFocusWithin,
-      onFocusWithinChange,
-      onSyntheticFocus,
-      addGlobalListener,
-      onBlur
-    ]
+    [onFocusWithin, onFocusWithinChange, onSyntheticFocus, addGlobalListener, onBlur]
   );
 
   if (isDisabled) {

@@ -31,10 +31,7 @@ function isNonContiguousSelectionModifier(e: KeyboardEvent): boolean {
 /**
  * Gets the DOM element for a collection item by key.
  */
-function getItemElement(
-  ref: React.RefObject<HTMLElement | null>,
-  key: Key
-): HTMLElement | null {
+function getItemElement(ref: React.RefObject<HTMLElement | null>, key: Key): HTMLElement | null {
   return ref.current?.querySelector(`[data-key="${key}"]`) ?? null;
 }
 
@@ -89,11 +86,7 @@ export function useCollectionNavigation(
    * Navigate to a key and optionally select it.
    */
   const navigateToKey = useCallback(
-    (
-      key: Key | null | undefined,
-      e?: KeyboardEvent,
-      childFocus?: FocusStrategy
-    ): void => {
+    (key: Key | null | undefined, e?: KeyboardEvent, childFocus?: FocusStrategy): void => {
       if (key == null) return;
 
       manager.setFocusedKey(key, childFocus);
@@ -101,10 +94,7 @@ export function useCollectionNavigation(
 
       if (e?.shiftKey && manager.selectionMode === 'multiple') {
         manager.extendSelection(key);
-      } else if (
-        selectOnFocus &&
-        !isNonContiguousSelectionModifier(e as KeyboardEvent)
-      ) {
+      } else if (selectOnFocus && !isNonContiguousSelectionModifier(e as KeyboardEvent)) {
         manager.replaceSelection(key);
       }
     },
@@ -135,13 +125,7 @@ export function useCollectionNavigation(
   const onKeyDown = useCallback(
     (e: KeyboardEvent): void => {
       // Handle type-ahead
-      if (
-        !disallowTypeAhead &&
-        e.key.length === 1 &&
-        !e.ctrlKey &&
-        !e.metaKey &&
-        !e.altKey
-      ) {
+      if (!disallowTypeAhead && e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
         if (typeAheadTimeout.current) {
           clearTimeout(typeAheadTimeout.current);
         }
@@ -149,10 +133,7 @@ export function useCollectionNavigation(
         typeAheadBuffer.current += e.key;
 
         const key: Key | null =
-          delegate.getKeyForSearch?.(
-            typeAheadBuffer.current,
-            manager.focusedKey
-          ) ?? null;
+          delegate.getKeyForSearch?.(typeAheadBuffer.current, manager.focusedKey) ?? null;
         if (key != null) {
           e.preventDefault();
           navigateToKey(key, e);
@@ -209,9 +190,7 @@ export function useCollectionNavigation(
         case 'ArrowLeft': {
           if (delegate.getKeyLeftOf) {
             let nextKey: Key | null =
-              manager.focusedKey != null
-                ? delegate.getKeyLeftOf(manager.focusedKey)
-                : null;
+              manager.focusedKey != null ? delegate.getKeyLeftOf(manager.focusedKey) : null;
 
             if (nextKey == null && shouldFocusWrap) {
               nextKey = isRtl
@@ -230,9 +209,7 @@ export function useCollectionNavigation(
         case 'ArrowRight': {
           if (delegate.getKeyRightOf) {
             let nextKey: Key | null =
-              manager.focusedKey != null
-                ? delegate.getKeyRightOf(manager.focusedKey)
-                : null;
+              manager.focusedKey != null ? delegate.getKeyRightOf(manager.focusedKey) : null;
 
             if (nextKey == null && shouldFocusWrap) {
               nextKey = isRtl
@@ -255,11 +232,7 @@ export function useCollectionNavigation(
             manager.setFocusedKey(firstKey);
 
             if (firstKey != null) {
-              if (
-                isCtrlKeyPressed(e) &&
-                e.shiftKey &&
-                manager.selectionMode === 'multiple'
-              ) {
+              if (isCtrlKeyPressed(e) && e.shiftKey && manager.selectionMode === 'multiple') {
                 manager.extendSelection(firstKey);
               } else if (selectOnFocus) {
                 manager.replaceSelection(firstKey);
@@ -276,11 +249,7 @@ export function useCollectionNavigation(
             manager.setFocusedKey(lastKey);
 
             if (lastKey != null) {
-              if (
-                isCtrlKeyPressed(e) &&
-                e.shiftKey &&
-                manager.selectionMode === 'multiple'
-              ) {
+              if (isCtrlKeyPressed(e) && e.shiftKey && manager.selectionMode === 'multiple') {
                 manager.extendSelection(lastKey);
               } else if (selectOnFocus) {
                 manager.replaceSelection(lastKey);
@@ -292,9 +261,7 @@ export function useCollectionNavigation(
 
         case 'PageDown': {
           if (delegate.getKeyPageBelow && manager.focusedKey != null) {
-            const nextKey: Key | null = delegate.getKeyPageBelow(
-              manager.focusedKey
-            );
+            const nextKey: Key | null = delegate.getKeyPageBelow(manager.focusedKey);
             if (nextKey != null) {
               e.preventDefault();
               navigateToKey(nextKey, e);
@@ -305,9 +272,7 @@ export function useCollectionNavigation(
 
         case 'PageUp': {
           if (delegate.getKeyPageAbove && manager.focusedKey != null) {
-            const nextKey: Key | null = delegate.getKeyPageAbove(
-              manager.focusedKey
-            );
+            const nextKey: Key | null = delegate.getKeyPageAbove(manager.focusedKey);
             if (nextKey != null) {
               e.preventDefault();
               navigateToKey(nextKey, e);
@@ -317,11 +282,7 @@ export function useCollectionNavigation(
         }
 
         case 'a': {
-          if (
-            isCtrlKeyPressed(e) &&
-            manager.selectionMode === 'multiple' &&
-            !disallowSelectAll
-          ) {
+          if (isCtrlKeyPressed(e) && manager.selectionMode === 'multiple' && !disallowSelectAll) {
             e.preventDefault();
             manager.selectAll();
           }
@@ -383,17 +344,15 @@ export function useCollectionNavigation(
           relatedTarget != null &&
           Boolean(
             e.currentTarget.compareDocumentPosition(relatedTarget) &
-              Node.DOCUMENT_POSITION_FOLLOWING
+            Node.DOCUMENT_POSITION_FOLLOWING
           );
 
         let keyToFocus: Key | null = null;
 
         if (isBackward) {
-          keyToFocus =
-            manager.lastSelectedKey ?? delegate.getLastKey?.() ?? null;
+          keyToFocus = manager.lastSelectedKey ?? delegate.getLastKey?.() ?? null;
         } else {
-          keyToFocus =
-            manager.firstSelectedKey ?? delegate.getFirstKey?.() ?? null;
+          keyToFocus = manager.firstSelectedKey ?? delegate.getFirstKey?.() ?? null;
         }
 
         if (keyToFocus != null) {

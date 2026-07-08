@@ -57,11 +57,8 @@ jobs:
           name: ${{ needs.build.outputs.artifact-name }}
           path: packages
 
-      - name: Strip devDependencies from packages
-        uses: actions/github-script@v9
-        with:
-          github-token: ${{ steps.generate_token.outputs.token }}
-          script: await import(`${process.env.GITHUB_WORKSPACE}/scripts/clean-publish.mjs`)
+      - name: Clean package.json files for publish
+        run: pnpm clean-publish
 
       - name: Create Release PR
         id: create_release_pr

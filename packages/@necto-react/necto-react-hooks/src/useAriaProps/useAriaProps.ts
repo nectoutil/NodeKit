@@ -10,10 +10,7 @@
 import { useMemo } from 'react';
 import { AriaProps } from '@necto/dom';
 
-import type {
-  UseAriaPropsOptions,
-  UseAriaPropsReturn
-} from './useAriaProps.types';
+import type { UseAriaPropsOptions, UseAriaPropsReturn } from './useAriaProps.types';
 import type { AriaAttributes } from 'react';
 
 /**
@@ -23,9 +20,7 @@ import type { AriaAttributes } from 'react';
  * @param {UseAriaPropsOptions} options - State flags to convert to ARIA attributes.
  * @returns {UseAriaPropsReturn} The ARIA attributes object with only defined values.
  */
-export function useAriaProps(
-  options: UseAriaPropsOptions = {}
-): UseAriaPropsReturn {
+export function useAriaProps(options: UseAriaPropsOptions = {}): UseAriaPropsReturn {
   const {
     isInvalid,
     isDisabled,
@@ -73,18 +68,15 @@ export function useAriaProps(
     }
 
     if (isPressed !== undefined) {
-      ariaAttributes[AriaProps.Pressed] =
-        isPressed === false ? undefined : isPressed;
+      ariaAttributes[AriaProps.Pressed] = isPressed === false ? undefined : isPressed;
     }
 
     if (isChecked !== undefined) {
-      ariaAttributes[AriaProps.Checked] =
-        isChecked === false ? undefined : isChecked;
+      ariaAttributes[AriaProps.Checked] = isChecked === false ? undefined : isChecked;
     }
 
     if (hasPopup !== undefined) {
-      ariaAttributes[AriaProps.Haspopup] =
-        hasPopup === false ? undefined : hasPopup;
+      ariaAttributes[AriaProps.Haspopup] = hasPopup === false ? undefined : hasPopup;
     }
 
     if (valueCurrent !== undefined) {

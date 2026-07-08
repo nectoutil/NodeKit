@@ -16,20 +16,18 @@ describe('useLatestRef', () => {
   });
 
   it('updates to the latest value on re-render', () => {
-    const { result, rerender } = renderHook(
-      ({ value }) => useLatestRef(value),
-      { initialProps: { value: 1 } }
-    );
+    const { result, rerender } = renderHook(({ value }) => useLatestRef(value), {
+      initialProps: { value: 1 }
+    });
     expect(result.current.current).toBe(1);
     rerender({ value: 2 });
     expect(result.current.current).toBe(2);
   });
 
   it('returns the same ref object across re-renders', () => {
-    const { result, rerender } = renderHook(
-      ({ value }) => useLatestRef(value),
-      { initialProps: { value: 'a' } }
-    );
+    const { result, rerender } = renderHook(({ value }) => useLatestRef(value), {
+      initialProps: { value: 'a' }
+    });
     const first = result.current;
     rerender({ value: 'b' });
     expect(result.current).toBe(first);

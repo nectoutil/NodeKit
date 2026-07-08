@@ -70,9 +70,7 @@ describe('useKeyboard', () => {
 
   it('does not call onKeyDown when disabled', () => {
     const onKeyDown = vi.fn();
-    const { result } = renderHook(() =>
-      useKeyboard({ isDisabled: true, onKeyDown })
-    );
+    const { result } = renderHook(() => useKeyboard({ isDisabled: true, onKeyDown }));
     expect(result.current.keyboardProps.onKeyDown).toBeUndefined();
     expect(onKeyDown).not.toHaveBeenCalled();
   });

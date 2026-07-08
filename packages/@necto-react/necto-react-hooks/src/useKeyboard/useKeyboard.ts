@@ -7,10 +7,7 @@
 
 import { createEventHandler } from '../utils';
 
-import type {
-  UseKeyboardOptions,
-  UseKeyboardReturn
-} from './useKeyboard.types';
+import type { UseKeyboardOptions, UseKeyboardReturn } from './useKeyboard.types';
 
 /**
  * React hook that provides keyboard event handlers based on the disabled state.
@@ -24,14 +21,10 @@ export function useKeyboard(options: UseKeyboardOptions): UseKeyboardReturn {
       ? {}
       : {
           onKeyDown: options.onKeyDown
-            ? createEventHandler((e) =>
-                options.onKeyDown?.(e.nativeEvent as KeyboardEvent)
-              )
+            ? createEventHandler((e) => options.onKeyDown?.(e.nativeEvent as KeyboardEvent))
             : undefined,
           onKeyUp: options.onKeyUp
-            ? createEventHandler((e) =>
-                options.onKeyUp?.(e.nativeEvent as KeyboardEvent)
-              )
+            ? createEventHandler((e) => options.onKeyUp?.(e.nativeEvent as KeyboardEvent))
             : undefined
         }
   };

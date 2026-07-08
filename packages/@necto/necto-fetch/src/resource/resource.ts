@@ -7,9 +7,8 @@
 
 import type { Resource, ResourceDefinition, RouteDefinition } from './types';
 
-export function resource<
-  TBase extends string,
-  TRoutes extends Record<string, RouteDefinition>
->(_definition: ResourceDefinition<TBase, TRoutes>): Resource<TBase, TRoutes> {
+export function resource<TBase extends string, TRoutes extends Record<string, RouteDefinition>>(
+  _definition: ResourceDefinition<TBase, TRoutes>
+): Resource<TBase, TRoutes> {
   throw new Error('NOT_IMPLEMENTED');
 }

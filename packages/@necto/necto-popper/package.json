@@ -4,7 +4,7 @@
   "description": "Necto's library for providing positioning and popover utilities.",
   "scripts": {
     "test": "vitest",
-    "build": "tsdown --minify",
+    "build": "vp pack --format esm,cjs --dts --minify --sourcemap",
     "test:coverage": "vitest run --coverage --passWithNoTests"
   },
   "repository": {
@@ -15,21 +15,20 @@
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^22.19.20",
-    "tsdown": "^0.21.10",
-    "@vitest/coverage-istanbul": "^3.2.6"
+    "@vitest/coverage-istanbul": "^4.1.10"
   },
   "files": [
     "dist",
     "README.md"
   ],
   "type": "module",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/index.d.mts",
   "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     }
   },

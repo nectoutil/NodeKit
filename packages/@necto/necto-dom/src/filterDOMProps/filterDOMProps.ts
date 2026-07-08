@@ -16,10 +16,7 @@ const DOM_PROP_NAMES = new Set(['id']);
  * @param {FilterOptions} options - Options to control which props are allowed.
  * @returns {FilterDOMReturn} An object containing only the allowed DOM props.
  */
-export function filterDOMProps(
-  props: FilterDOMProps,
-  options: FilterOptions
-): FilterDOMReturn {
+export function filterDOMProps(props: FilterDOMProps, options: FilterOptions): FilterDOMReturn {
   const {
     allowLabelableProps = false,
     allowLinkProps = false,

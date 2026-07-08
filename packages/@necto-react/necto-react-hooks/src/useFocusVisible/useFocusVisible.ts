@@ -5,16 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {
-  getInteractionModality,
-  useFocusVisibleListener
-} from '@necto-react/hooks';
+import { getInteractionModality, useFocusVisibleListener } from '@necto-react/hooks';
 import { useState } from 'react';
 
-import type {
-  UseFocusVisibleReturn,
-  UseFocusVisibleOptions
-} from './useFocusVisible.types';
+import type { UseFocusVisibleReturn, UseFocusVisibleOptions } from './useFocusVisible.types';
 
 /**
  * React hook that provides focus visibility tracking.
@@ -22,9 +16,7 @@ import type {
  * @param {UseFocusVisibleOptions} [options] - Options for focus visibility behavior.
  * @returns {UseFocusVisibleReturn} An object containing the focus visibility state.
  */
-export function useFocusVisible(
-  options: UseFocusVisibleOptions = {}
-): UseFocusVisibleReturn {
+export function useFocusVisible(options: UseFocusVisibleOptions = {}): UseFocusVisibleReturn {
   const { isTextInput, autoFocus } = options;
   const [isFocusVisibleState, setFocusVisible] = useState(
     autoFocus || getInteractionModality() !== 'pointer'

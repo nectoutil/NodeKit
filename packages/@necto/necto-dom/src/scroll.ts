@@ -73,14 +73,11 @@ export function scrollIntoView(
     let scrollTop: number = scrollContainer.scrollTop;
 
     if (block === 'start' || (block === 'nearest' && isAbove)) {
-      scrollTop =
-        scrollContainer.scrollTop + (elementRect.top - containerRect.top);
+      scrollTop = scrollContainer.scrollTop + (elementRect.top - containerRect.top);
     } else if (block === 'end' || (block === 'nearest' && isBelow)) {
-      scrollTop =
-        scrollContainer.scrollTop + (elementRect.bottom - containerRect.bottom);
+      scrollTop = scrollContainer.scrollTop + (elementRect.bottom - containerRect.bottom);
     } else if (block === 'center') {
-      const containerCenter: number =
-        containerRect.top + containerRect.height / 2;
+      const containerCenter: number = containerRect.top + containerRect.height / 2;
       const elementCenter: number = elementRect.top + elementRect.height / 2;
       scrollTop = scrollContainer.scrollTop + (elementCenter - containerCenter);
     }
@@ -93,17 +90,13 @@ export function scrollIntoView(
     let scrollLeft: number = scrollContainer.scrollLeft;
 
     if (inline === 'start' || (inline === 'nearest' && isLeft)) {
-      scrollLeft =
-        scrollContainer.scrollLeft + (elementRect.left - containerRect.left);
+      scrollLeft = scrollContainer.scrollLeft + (elementRect.left - containerRect.left);
     } else if (inline === 'end' || (inline === 'nearest' && isRight)) {
-      scrollLeft =
-        scrollContainer.scrollLeft + (elementRect.right - containerRect.right);
+      scrollLeft = scrollContainer.scrollLeft + (elementRect.right - containerRect.right);
     } else if (inline === 'center') {
-      const containerCenter: number =
-        containerRect.left + containerRect.width / 2;
+      const containerCenter: number = containerRect.left + containerRect.width / 2;
       const elementCenter: number = elementRect.left + elementRect.width / 2;
-      scrollLeft =
-        scrollContainer.scrollLeft + (elementCenter - containerCenter);
+      scrollLeft = scrollContainer.scrollLeft + (elementCenter - containerCenter);
     }
 
     scrollContainer.scrollLeft = scrollLeft;

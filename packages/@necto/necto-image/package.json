@@ -3,7 +3,7 @@
   "version": "1.0.22",
   "description": "Framework-agnostic image transformation utilities for CDN providers",
   "scripts": {
-    "build": "tsdown --minify"
+    "build": "vp pack --format esm,cjs --dts --minify --sourcemap"
   },
   "author": "Corinvo OSS Team",
   "license": "MIT",
@@ -17,21 +17,20 @@
     "@necto/url": "workspace:*"
   },
   "devDependencies": {
-    "@types/node": "^22.19.20",
-    "tsdown": "^0.21.10"
+    "@types/node": "^22.19.20"
   },
   "files": [
     "dist",
     "README.md"
   ],
   "type": "module",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/index.d.mts",
   "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     }
   }

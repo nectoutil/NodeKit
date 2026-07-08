@@ -40,9 +40,7 @@ describe('useRole', () => {
   });
 
   it('should use tooltip role correctly', () => {
-    const { result } = renderHook(() =>
-      useRole({ open: true, role: 'tooltip' })
-    );
+    const { result } = renderHook(() => useRole({ open: true, role: 'tooltip' }));
 
     expect(result.current.floating.role).toBe('tooltip');
     expect(result.current.floating['aria-modal']).toBeUndefined();
@@ -51,43 +49,33 @@ describe('useRole', () => {
   });
 
   it('should unset aria-describedby for tooltip when closed', () => {
-    const { result } = renderHook(() =>
-      useRole({ open: false, role: 'tooltip' })
-    );
+    const { result } = renderHook(() => useRole({ open: false, role: 'tooltip' }));
 
     expect(result.current.reference['aria-describedby']).toBeUndefined();
   });
 
   it('should use menu role with aria-haspopup=menu', () => {
-    const { result } = renderHook(() =>
-      useRole({ open: true, role: 'menu' })
-    );
+    const { result } = renderHook(() => useRole({ open: true, role: 'menu' }));
 
     expect(result.current.floating.role).toBe('menu');
     expect(result.current.reference['aria-haspopup']).toBe('menu');
   });
 
   it('should use listbox role with aria-haspopup=listbox', () => {
-    const { result } = renderHook(() =>
-      useRole({ open: true, role: 'listbox' })
-    );
+    const { result } = renderHook(() => useRole({ open: true, role: 'listbox' }));
 
     expect(result.current.reference['aria-haspopup']).toBe('listbox');
   });
 
   it('should set aria-modal for alertdialog', () => {
-    const { result } = renderHook(() =>
-      useRole({ open: true, role: 'alertdialog' })
-    );
+    const { result } = renderHook(() => useRole({ open: true, role: 'alertdialog' }));
 
     expect(result.current.floating.role).toBe('alertdialog');
     expect(result.current.floating['aria-modal']).toBe('true');
   });
 
   it('should return empty props when disabled', () => {
-    const { result } = renderHook(() =>
-      useRole({ open: true, enabled: false })
-    );
+    const { result } = renderHook(() => useRole({ open: true, enabled: false }));
 
     expect(result.current.reference).toEqual({});
     expect(result.current.floating).toEqual({});

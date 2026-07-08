@@ -12,11 +12,7 @@
 
 import { isMacOS } from 'std-env';
 import { useEffect } from 'react';
-import {
-  getOwnerDocument,
-  getOwnerWindow,
-  isKeyboardFocusEvent
-} from '@necto/dom';
+import { getOwnerDocument, getOwnerWindow, isKeyboardFocusEvent } from '@necto/dom';
 import { globalListeners, changeHandlers, focusState } from './focusContext';
 
 import type {
@@ -126,8 +122,7 @@ function tearDownGlobalFocusEvents(element?: HTMLElement | null) {
   const windowObject = getOwnerWindow(element);
   const documentObject = getOwnerDocument(element);
 
-  if (!windowObject || !documentObject || !globalListeners.has(windowObject))
-    return;
+  if (!windowObject || !documentObject || !globalListeners.has(windowObject)) return;
 
   const { focus } = globalListeners.get(windowObject)!;
 
@@ -150,9 +145,7 @@ function tearDownGlobalFocusEvents(element?: HTMLElement | null) {
   globalListeners.delete(windowObject);
 }
 
-export function addWindowFocusTracking(
-  element?: HTMLElement | null
-): () => void {
+export function addWindowFocusTracking(element?: HTMLElement | null): () => void {
   const documentObject = getOwnerDocument(element);
 
   if (!documentObject) {
@@ -162,9 +155,7 @@ export function addWindowFocusTracking(
   if (documentObject.readyState !== 'loading') {
     setupGlobalFocusEvents(element);
   } else {
-    documentObject.addEventListener('DOMContentLoaded', () =>
-      setupGlobalFocusEvents(element)
-    );
+    documentObject.addEventListener('DOMContentLoaded', () => setupGlobalFocusEvents(element));
   }
 
   return () => tearDownGlobalFocusEvents(element);
@@ -180,9 +171,7 @@ export function getInteractionModality(): Modality | null {
  * @param {UseFocusVisibleListenerOptions} options - The options for the focus visible listener.
  * @returns {void}
  */
-export function useFocusVisibleListener(
-  options: UseFocusVisibleListenerOptions
-): void {
+export function useFocusVisibleListener(options: UseFocusVisibleListenerOptions): void {
   const { fn, deps, opts } = options;
 
   if (typeof window === 'undefined' || typeof document === 'undefined') {

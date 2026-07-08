@@ -34,29 +34,20 @@ export function size(options: SizeOptions = {}): Middleware {
     const { x, y, rects, elements, placement } = state;
     const side = getSide(placement);
 
-    const overflow = detectOverflow(
-      { ...rects.floating, x, y },
-      detectOverflowOptions
-    );
+    const overflow = detectOverflow({ ...rects.floating, x, y }, detectOverflowOptions);
 
     const availableHeight =
       side === 'top'
         ? rects.reference.y - overflow.top
         : side === 'bottom'
-          ? window.innerHeight -
-            rects.reference.y -
-            rects.reference.height -
-            overflow.bottom
+          ? window.innerHeight - rects.reference.y - rects.reference.height - overflow.bottom
           : rects.floating.height - Math.max(overflow.top, overflow.bottom);
 
     const availableWidth =
       side === 'left'
         ? rects.reference.x - overflow.left
         : side === 'right'
-          ? window.innerWidth -
-            rects.reference.x -
-            rects.reference.width -
-            overflow.right
+          ? window.innerWidth - rects.reference.x - rects.reference.width - overflow.right
           : rects.floating.width - Math.max(overflow.left, overflow.right);
 
     apply?.({

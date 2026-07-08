@@ -19,10 +19,7 @@ export interface SelectionManager {
   /** The currently focused key. */
   readonly focusedKey: (string | number) | null;
   /** Set the focused key. */
-  setFocusedKey(
-    key: (string | number) | null,
-    childFocus?: FocusStrategy
-  ): void;
+  setFocusedKey(key: (string | number) | null, childFocus?: FocusStrategy): void;
   /** Whether the collection is focused. */
   readonly isFocused: boolean;
   /** Set whether the collection is focused. */
@@ -48,9 +45,7 @@ export interface SelectionManager {
   /** Check if a key is a link. */
   isLink?(key: string | number): boolean;
   /** Get props for an item. */
-  getItemProps?(
-    key: string | number
-  ): { href?: string; routerOptions?: unknown } | undefined;
+  getItemProps?(key: string | number): { href?: string; routerOptions?: unknown } | undefined;
   /** Whether the user can select an item. */
   canSelectItem?(key: string | number): boolean;
   /** The first selected key. */

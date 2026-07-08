@@ -7,20 +7,12 @@
  */
 
 import type { RefObject } from 'react';
-import type {
-  DOMAttributes,
-  SelectionManager,
-  FocusStrategy
-} from '@necto-react/types';
+import type { DOMAttributes, SelectionManager, FocusStrategy } from '@necto-react/types';
 import type { Key, KeyboardDelegate } from '@necto/types';
 
 // Re-export for convenience
 export type { KeyboardDelegate } from '@necto/types';
-export type {
-  SelectionManager,
-  SelectionMode,
-  FocusStrategy
-} from '@necto-react/types';
+export type { SelectionManager, SelectionMode, FocusStrategy } from '@necto-react/types';
 
 /** Direction for text/layout. */
 export type Direction = 'ltr' | 'rtl';

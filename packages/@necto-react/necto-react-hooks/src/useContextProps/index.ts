@@ -8,7 +8,4 @@
 
 export { useContextProps } from './useContextProps';
 
-export type {
-  UseContextPropsOptions,
-  UseContextPropsReturn
-} from './useContextProps.types';
+export type { UseContextPropsOptions, UseContextPropsReturn } from './useContextProps.types';

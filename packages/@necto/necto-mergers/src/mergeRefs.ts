@@ -34,9 +34,7 @@ function setRef<T>(ref: Ref<T> | RefObject<T> | null | undefined, value: T) {
  * @param {...Array<Ref<T> | RefObject<T> | null | undefined>} refs - The refs to merge.
  * @returns {Ref<T>} A single ref callback that updates all provided refs and handles cleanup if necessary.
  */
-export function mergeRefs<T>(
-  ...refs: Array<Ref<T> | RefObject<T> | null | undefined>
-): Ref<T> {
+export function mergeRefs<T>(...refs: Array<Ref<T> | RefObject<T> | null | undefined>): Ref<T> {
   if (refs.length === 1 && refs[0]) {
     return refs[0];
   }

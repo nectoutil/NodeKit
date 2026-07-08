@@ -15,9 +15,6 @@ import { isMac } from './isMac';
  * @param event - The keyboard or mouse event to check.
  * @returns True if Ctrl (or Cmd on Mac) is pressed.
  */
-export function isCtrlKeyPressed(event: {
-  ctrlKey?: boolean;
-  metaKey?: boolean;
-}): boolean {
+export function isCtrlKeyPressed(event: { ctrlKey?: boolean; metaKey?: boolean }): boolean {
   return isMac() ? (event.metaKey ?? false) : (event.ctrlKey ?? false);
 }

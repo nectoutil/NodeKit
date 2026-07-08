@@ -19,12 +19,7 @@ export type Modality = 'keyboard' | 'pointer' | 'virtual';
 /**
  * Union type of possible events that can trigger focus handling.
  */
-export type HandlerEvent =
-  | PointerEvent
-  | MouseEvent
-  | KeyboardEvent
-  | FocusEvent
-  | null;
+export type HandlerEvent = PointerEvent | MouseEvent | KeyboardEvent | FocusEvent | null;
 
 /**
  * Function signature for focus modality change handlers.

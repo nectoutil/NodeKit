@@ -7,12 +7,7 @@
  */
 
 import { detectOverflow, hasOverflow } from '../utils/detectOverflow';
-import {
-  createMiddleware,
-  getSide,
-  getAlignment,
-  getOppositeSide
-} from '../types';
+import { createMiddleware, getSide, getAlignment, getOppositeSide } from '../types';
 
 import type { Middleware, Placement, BoundaryOptions } from '../types';
 
@@ -64,9 +59,7 @@ export function flip(options: FlipOptions = {}): Middleware {
     }
 
     const oppositeSide = getOppositeSide(side);
-    const oppositePlacement: Placement = alignment
-      ? `${oppositeSide}-${alignment}`
-      : oppositeSide;
+    const oppositePlacement: Placement = alignment ? `${oppositeSide}-${alignment}` : oppositeSide;
 
     return {
       placement: oppositePlacement,

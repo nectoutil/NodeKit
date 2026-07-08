@@ -33,9 +33,7 @@ export function useDismiss(options: UseDismissOptions): UseDismissReturn {
 
   const insideTreeRef: RefObject<boolean> = useRef(false);
   const referenceRef: RefObject<Element | null> = useRef<Element | null>(null);
-  const floatingRef: RefObject<HTMLElement | null> = useRef<HTMLElement | null>(
-    null
-  );
+  const floatingRef: RefObject<HTMLElement | null> = useRef<HTMLElement | null>(null);
 
   const escapeKeyBubbles: boolean =
     typeof bubbles === 'boolean' ? bubbles : (bubbles.escapeKey ?? false);
@@ -115,14 +113,7 @@ export function useDismiss(options: UseDismissOptions): UseDismissReturn {
       ownerDocument.removeEventListener('keydown', closeOnEscapeKey);
       ownerDocument.removeEventListener('mousedown', closeOnOutsidePress);
     };
-  }, [
-    open,
-    enabled,
-    escapeKey,
-    outsidePress,
-    closeOnEscapeKey,
-    closeOnOutsidePress
-  ]);
+  }, [open, enabled, escapeKey, outsidePress, closeOnEscapeKey, closeOnOutsidePress]);
 
   useEffect(() => {
     if (!enabled || !open || !ancestorScroll) {

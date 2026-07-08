@@ -32,10 +32,7 @@ export function useRole(options: UseRoleOptions): UseRoleReturn {
     return {
       'aria-expanded': open,
       'aria-haspopup':
-        role === 'menu' ||
-        role === 'listbox' ||
-        role === 'tree' ||
-        role === 'grid'
+        role === 'menu' || role === 'listbox' || role === 'tree' || role === 'grid'
           ? role
           : 'dialog',
       'aria-controls': open ? nectoId : undefined

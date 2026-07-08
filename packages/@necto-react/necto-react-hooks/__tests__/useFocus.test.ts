@@ -22,9 +22,7 @@ describe('useFocus', () => {
   });
 
   it('should return focusProps with onFocus and onBlur if not disabled', () => {
-    const { result } = renderHook(() =>
-      useFocus({ onFocus, onBlur, onFocusChange })
-    );
+    const { result } = renderHook(() => useFocus({ onFocus, onBlur, onFocusChange }));
     expect(result.current.focusProps).toHaveProperty('onFocus');
     expect(result.current.focusProps).toHaveProperty('onBlur');
   });
@@ -38,9 +36,7 @@ describe('useFocus', () => {
   });
 
   it('should call onFocus and onFocusChange(true) on focus event', () => {
-    const { result } = renderHook(() =>
-      useFocus({ onFocus, onBlur, onFocusChange })
-    );
+    const { result } = renderHook(() => useFocus({ onFocus, onBlur, onFocusChange }));
     const evt = {
       target: document.body,
       currentTarget: document.body,
@@ -54,9 +50,7 @@ describe('useFocus', () => {
   });
 
   it('should call onBlur and onFocusChange(false) on blur event', () => {
-    const { result } = renderHook(() =>
-      useFocus({ onFocus, onBlur, onFocusChange })
-    );
+    const { result } = renderHook(() => useFocus({ onFocus, onBlur, onFocusChange }));
     const evt = {
       target: document.body,
       currentTarget: document.body,

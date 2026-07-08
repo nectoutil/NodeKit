@@ -10,10 +10,7 @@
  * underlying ResizeObserver instance. Distinct from the standard
  * `ResizeObserverCallback` global, which receives an array of entries.
  */
-export type ResizeObserverHandler = (
-  entry: ResizeObserverEntry,
-  observer: ResizeObserver
-) => void;
+export type ResizeObserverHandler = (entry: ResizeObserverEntry, observer: ResizeObserver) => void;
 
 export interface ResizeObserverController {
   readonly observer: ResizeObserver;

@@ -11,8 +11,7 @@ import { toHex } from './utils';
 
 function compute(data: string | Uint8Array): Uint8Array {
   if (typeof process !== 'undefined' && process.versions?.node) {
-    const { createHash } =
-      require('node:crypto') as typeof import('node:crypto');
+    const { createHash } = require('node:crypto') as typeof import('node:crypto');
     const buffer = createHash('md5').update(data).digest();
     return new Uint8Array(buffer.buffer, buffer.byteOffset, buffer.byteLength);
   }

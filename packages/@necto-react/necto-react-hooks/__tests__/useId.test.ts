@@ -11,11 +11,7 @@ import { describe, it, expect, afterEach } from 'vitest';
 import { renderHook } from '@testing-library/react';
 
 import { useId } from '../src/useId/useId';
-import {
-  defaultContext,
-  idsUpdaterMap,
-  registry
-} from '../src/useId/hookContext';
+import { defaultContext, idsUpdaterMap, registry } from '../src/useId/hookContext';
 
 describe('useId Hook', () => {
   afterEach(() => {
@@ -33,9 +29,7 @@ describe('useId Hook', () => {
   });
 
   it('returns the provided defaultId if given', () => {
-    const { result } = renderHook(() =>
-      useId({ prefix: 'custom', defaultId: 'my-default-id' })
-    );
+    const { result } = renderHook(() => useId({ prefix: 'custom', defaultId: 'my-default-id' }));
     expect(result.current).toBe('my-default-id');
   });
 
@@ -64,9 +58,7 @@ describe('useId Hook', () => {
   });
 
   it('removes the id from idsUpdaterMap on unmount', () => {
-    const { result, unmount } = renderHook(() =>
-      useId({ prefix: 'cleanup' })
-    );
+    const { result, unmount } = renderHook(() => useId({ prefix: 'cleanup' }));
     const id = result.current;
     expect(idsUpdaterMap.has(id)).toBe(true);
 
@@ -83,12 +75,8 @@ describe('useId Hook', () => {
   });
 
   it('tracks distinct ids for two concurrently-mounted hooks', () => {
-    const { result: a, unmount: unmountA } = renderHook(() =>
-      useId({ prefix: 'a' })
-    );
-    const { result: b, unmount: unmountB } = renderHook(() =>
-      useId({ prefix: 'b' })
-    );
+    const { result: a, unmount: unmountA } = renderHook(() => useId({ prefix: 'a' }));
+    const { result: b, unmount: unmountB } = renderHook(() => useId({ prefix: 'b' }));
 
     expect(idsUpdaterMap.has(a.current)).toBe(true);
     expect(idsUpdaterMap.has(b.current)).toBe(true);

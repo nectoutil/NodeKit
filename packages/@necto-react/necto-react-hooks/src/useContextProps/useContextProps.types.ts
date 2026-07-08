@@ -61,7 +61,4 @@ export interface UseContextPropsOptions<T, E extends Element> {
 /**
  * Return type for the useContextProps hook.
  */
-export type UseContextPropsReturn<T, E extends Element> = [
-  T,
-  (value: E | null) => void
-];
+export type UseContextPropsReturn<T, E extends Element> = [T, (value: E | null) => void];

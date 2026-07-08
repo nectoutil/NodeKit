@@ -22,14 +22,9 @@ export function Provider({
 }): ReactElement {
   const storeRef: RefObject<Store | null> = useRef<Store>(null);
 
-  if (store)
-    return createElement(StoreContext.Provider, { value: store }, children);
+  if (store) return createElement(StoreContext.Provider, { value: store }, children);
 
   if (storeRef.current === null) storeRef.current = createStore();
 
-  return createElement(
-    StoreContext.Provider,
-    { value: storeRef.current },
-    children
-  );
+  return createElement(StoreContext.Provider, { value: storeRef.current }, children);
 }

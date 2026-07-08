@@ -25,8 +25,6 @@ describe('assertMatch', () => {
   });
 
   it('should append a custom message as suffix on mismatch', () => {
-    expect(() => assertMatch('hello', /world/, 'needs world')).toThrow(
-      ': needs world'
-    );
+    expect(() => assertMatch('hello', /world/, 'needs world')).toThrow(': needs world');
   });
 });

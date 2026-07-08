@@ -22,9 +22,7 @@ import type {
 let keyCount: number = 0;
 
 /** state(initialValue) — primitive state holding a value */
-export function state<Value>(
-  initialValue: Value
-): PrimitiveState<Value> & WithInitialValue<Value>;
+export function state<Value>(initialValue: Value): PrimitiveState<Value> & WithInitialValue<Value>;
 
 /** state() — primitive state initialized as undefined */
 export function state<Value>(): PrimitiveState<Value | undefined> &
@@ -82,8 +80,5 @@ function defaultWrite<Value>(
   set: Setter,
   arg: SetStateAction<Value>
 ) {
-  return set(
-    this,
-    typeof arg === 'function' ? (arg as (prev: Value) => Value)(get(this)) : arg
-  );
+  return set(this, typeof arg === 'function' ? (arg as (prev: Value) => Value)(get(this)) : arg);
 }

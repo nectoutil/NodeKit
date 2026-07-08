@@ -44,9 +44,7 @@ export function arrow(options: ArrowOptions): Middleware {
     // For left/right, the arrow rotates 90deg so its width becomes the cross-axis length.
     const arrowLength = element.offsetWidth;
 
-    const floatingLength = isVertical
-      ? rects.floating.width
-      : rects.floating.height;
+    const floatingLength = isVertical ? rects.floating.width : rects.floating.height;
 
     const minPadding: number = padding;
     const maxPadding: number = floatingLength - arrowLength - padding;

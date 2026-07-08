@@ -9,13 +9,7 @@
 import { detectOverflow } from '../utils/detectOverflow';
 import { createMiddleware, getSide, getAlignment } from '../types';
 
-import type {
-  Middleware,
-  Placement,
-  Side,
-  Alignment,
-  BoundaryOptions
-} from '../types';
+import type { Middleware, Placement, Side, Alignment, BoundaryOptions } from '../types';
 
 export interface AutoPlacementOptions extends BoundaryOptions {
   /**
@@ -31,11 +25,7 @@ export interface AutoPlacementOptions extends BoundaryOptions {
 }
 
 const ALL_SIDES: Side[] = ['top', 'right', 'bottom', 'left'];
-const ALL_ALIGNMENTS: Array<Alignment | undefined> = [
-  undefined,
-  'start',
-  'end'
-];
+const ALL_ALIGNMENTS: Array<Alignment | undefined> = [undefined, 'start', 'end'];
 
 /**
  * Creates an auto-placement middleware that picks the best placement.
@@ -43,11 +33,7 @@ const ALL_ALIGNMENTS: Array<Alignment | undefined> = [
  * @returns A middleware that automatically selects optimal placement.
  */
 export function autoPlacement(options: AutoPlacementOptions = {}): Middleware {
-  const {
-    allowedPlacements,
-    autoAlignment = true,
-    ...detectOverflowOptions
-  } = options;
+  const { allowedPlacements, autoAlignment = true, ...detectOverflowOptions } = options;
 
   return createMiddleware('autoPlacement', (state) => {
     const { rects, placement } = state;

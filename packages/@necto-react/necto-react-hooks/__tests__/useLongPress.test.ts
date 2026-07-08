@@ -11,15 +11,21 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 
 if (typeof window !== 'undefined' && typeof window.PointerEvent === 'undefined') {
   (window as any).PointerEvent = class PointerEvent extends Event {
-    constructor(type: string, init?: PointerEventInit) { super(type, init); }
+    constructor(type: string, init?: PointerEventInit) {
+      super(type, init);
+    }
   };
 }
 import { renderHook, act } from '@testing-library/react';
 import { useLongPress } from '@necto-react/hooks';
 
 describe('useLongPress', () => {
-  beforeEach(() => { vi.useFakeTimers(); });
-  afterEach(() => { vi.useRealTimers(); });
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+  afterEach(() => {
+    vi.useRealTimers();
+  });
 
   it('returns longPressProps', () => {
     const { result } = renderHook(() => useLongPress());
@@ -37,7 +43,9 @@ describe('useLongPress', () => {
 
     act(() => {
       result.current.longPressProps.onPointerDown?.({
-        button: 0, pointerType: 'touch', currentTarget: document.body
+        button: 0,
+        pointerType: 'touch',
+        currentTarget: document.body
       } as any);
     });
 
@@ -52,7 +60,9 @@ describe('useLongPress', () => {
 
     act(() => {
       result.current.longPressProps.onPointerDown?.({
-        button: 0, pointerType: 'mouse', currentTarget: document.body
+        button: 0,
+        pointerType: 'mouse',
+        currentTarget: document.body
       } as any);
     });
 
@@ -65,7 +75,9 @@ describe('useLongPress', () => {
 
     act(() => {
       result.current.longPressProps.onPointerDown?.({
-        button: 2, pointerType: 'touch', currentTarget: document.body
+        button: 2,
+        pointerType: 'touch',
+        currentTarget: document.body
       } as any);
     });
 
@@ -81,15 +93,17 @@ describe('useLongPress', () => {
 
     act(() => {
       result.current.longPressProps.onPointerDown?.({
-        button: 0, pointerType: 'touch', currentTarget: el
+        button: 0,
+        pointerType: 'touch',
+        currentTarget: el
       } as any);
     });
     expect(onLongPress).not.toHaveBeenCalled();
 
-    act(() => { vi.advanceTimersByTime(500); });
-    expect(onLongPress).toHaveBeenCalledWith(
-      expect.objectContaining({ type: 'longpress' })
-    );
+    act(() => {
+      vi.advanceTimersByTime(500);
+    });
+    expect(onLongPress).toHaveBeenCalledWith(expect.objectContaining({ type: 'longpress' }));
 
     document.body.removeChild(el);
   });
@@ -100,11 +114,17 @@ describe('useLongPress', () => {
 
     act(() => {
       result.current.longPressProps.onPointerDown?.({
-        button: 0, pointerType: 'touch', currentTarget: document.body
+        button: 0,
+        pointerType: 'touch',
+        currentTarget: document.body
       } as any);
     });
-    act(() => { vi.advanceTimersByTime(200); });
-    act(() => { result.current.longPressProps.onPointerUp?.({} as any); });
+    act(() => {
+      vi.advanceTimersByTime(200);
+    });
+    act(() => {
+      result.current.longPressProps.onPointerUp?.({} as any);
+    });
 
     expect(onLongPress).not.toHaveBeenCalled();
   });
@@ -115,14 +135,16 @@ describe('useLongPress', () => {
 
     act(() => {
       result.current.longPressProps.onPointerDown?.({
-        button: 0, pointerType: 'touch', currentTarget: document.body
+        button: 0,
+        pointerType: 'touch',
+        currentTarget: document.body
       } as any);
     });
-    act(() => { result.current.longPressProps.onPointerUp?.({} as any); });
+    act(() => {
+      result.current.longPressProps.onPointerUp?.({} as any);
+    });
 
-    expect(onLongPressEnd).toHaveBeenCalledWith(
-      expect.objectContaining({ type: 'longpressend' })
-    );
+    expect(onLongPressEnd).toHaveBeenCalledWith(expect.objectContaining({ type: 'longpressend' }));
   });
 
   it('calls onLongPressEnd on pointer cancel', () => {
@@ -131,14 +153,16 @@ describe('useLongPress', () => {
 
     act(() => {
       result.current.longPressProps.onPointerDown?.({
-        button: 0, pointerType: 'touch', currentTarget: document.body
+        button: 0,
+        pointerType: 'touch',
+        currentTarget: document.body
       } as any);
     });
-    act(() => { result.current.longPressProps.onPointerCancel?.({} as any); });
+    act(() => {
+      result.current.longPressProps.onPointerCancel?.({} as any);
+    });
 
-    expect(onLongPressEnd).toHaveBeenCalledWith(
-      expect.objectContaining({ type: 'longpressend' })
-    );
+    expect(onLongPressEnd).toHaveBeenCalledWith(expect.objectContaining({ type: 'longpressend' }));
   });
 
   it('adds aria-description when accessibilityDescription and onLongPress are provided', () => {

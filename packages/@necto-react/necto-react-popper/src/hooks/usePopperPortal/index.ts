@@ -8,7 +8,4 @@
 
 export { usePopperPortal } from './usePopperPortal';
 
-export type {
-  UsePopperPortalOptions,
-  UsePopperPortalReturn
-} from './usePopperPortal.types';
+export type { UsePopperPortalOptions, UsePopperPortalReturn } from './usePopperPortal.types';

@@ -51,9 +51,7 @@ export function nodeContains(
 }
 
 export const getActiveElement = (
-  doc: Document = typeof document !== 'undefined'
-    ? document
-    : (null as unknown as Document),
+  doc: Document = typeof document !== 'undefined' ? document : (null as unknown as Document),
   supportShadowDOM = true
 ): Element | null => {
   if (!doc) return null;
@@ -73,10 +71,7 @@ export const getActiveElement = (
   return activeElement;
 };
 
-export function getEventTarget<T extends Event>(
-  event: T,
-  supportShadowDOM = true
-): Element {
+export function getEventTarget<T extends Event>(event: T, supportShadowDOM = true): Element {
   if (supportShadowDOM && (event.target as HTMLElement).shadowRoot) {
     if (event.composedPath) {
       return event.composedPath()[0] as Element;

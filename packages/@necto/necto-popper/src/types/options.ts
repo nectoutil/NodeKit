@@ -37,9 +37,7 @@ export interface ComputePositionResult {
   middlewareData?: Record<string, unknown>;
 }
 
-export const DEFAULT_OPTIONS: Required<
-  Omit<ComputePositionOptions, 'middleware'>
-> = {
+export const DEFAULT_OPTIONS: Required<Omit<ComputePositionOptions, 'middleware'>> = {
   placement: 'bottom',
   strategy: 'absolute'
 };

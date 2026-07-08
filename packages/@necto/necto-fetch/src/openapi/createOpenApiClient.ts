@@ -5,11 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type {
-  OpenApiClient,
-  OpenApiClientConfig,
-  OpenApiPathsBase
-} from './types';
+import type { OpenApiClient, OpenApiClientConfig, OpenApiPathsBase } from './types';
 
 export function createOpenApiClient<TPaths extends OpenApiPathsBase>(
   _config?: OpenApiClientConfig

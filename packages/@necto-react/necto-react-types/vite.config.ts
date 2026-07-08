@@ -5,14 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { defineConfig } from 'vitest/config';
+import { defineConfig } from 'vite-plus/pack';
 
 export default defineConfig({
-  test: {
-    coverage: {
-      provider: 'istanbul',
-      reporter: ['lcov', 'text'],
-    },
-    projects: ['packages/**/vitest.config.*'],
-  },
+  entry: ['src/index.ts']
 });

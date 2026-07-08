@@ -54,7 +54,7 @@ describe('useFormState', () => {
   describe('client validation — aria mode (default)', () => {
     it('shows error in realtimeValidation when validate returns an error string', () => {
       const { result } = renderHook(() =>
-        useFormState({ value: 'bad', validate: (v) => v === 'bad' ? 'Invalid' : undefined })
+        useFormState({ value: 'bad', validate: (v) => (v === 'bad' ? 'Invalid' : undefined) })
       );
       expect(result.current.realtimeValidation.isInvalid).toBe(true);
       expect(result.current.realtimeValidation.validationErrors).toContain('Invalid');
@@ -62,7 +62,7 @@ describe('useFormState', () => {
 
     it('shows no error when validate returns undefined', () => {
       const { result } = renderHook(() =>
-        useFormState({ value: 'good', validate: (v) => v === 'bad' ? 'Invalid' : undefined })
+        useFormState({ value: 'good', validate: (v) => (v === 'bad' ? 'Invalid' : undefined) })
       );
       expect(result.current.realtimeValidation.isInvalid).toBe(false);
     });
@@ -75,9 +75,7 @@ describe('useFormState', () => {
     });
 
     it('returns null for validate returning true (valid)', () => {
-      const { result } = renderHook(() =>
-        useFormState({ value: 'x', validate: () => true })
-      );
+      const { result } = renderHook(() => useFormState({ value: 'x', validate: () => true }));
       expect(result.current.realtimeValidation.isInvalid).toBe(false);
     });
   });
@@ -94,7 +92,9 @@ describe('useFormState', () => {
       const { result } = renderHook(() =>
         useFormState({ value: 'bad', validate: () => 'Error', validationBehavior: 'native' })
       );
-      act(() => { result.current.commitValidation(); });
+      act(() => {
+        result.current.commitValidation();
+      });
       act(() => {});
       expect(result.current.displayValidation.isInvalid).toBe(true);
     });
@@ -105,9 +105,13 @@ describe('useFormState', () => {
       const { result } = renderHook(() =>
         useFormState({ value: 'bad', validate: () => 'Error', validationBehavior: 'native' })
       );
-      act(() => { result.current.commitValidation(); });
+      act(() => {
+        result.current.commitValidation();
+      });
       act(() => {});
-      act(() => { result.current.resetValidation(); });
+      act(() => {
+        result.current.resetValidation();
+      });
       expect(result.current.displayValidation.isInvalid).toBe(false);
     });
   });
@@ -115,12 +119,13 @@ describe('useFormState', () => {
   describe('server errors via FormValidationContext', () => {
     it('shows server errors from context', () => {
       const wrapper = ({ children }: { children: React.ReactNode }) =>
-        createElement(FormValidationContext.Provider, { value: { email: 'Email taken' } }, children);
+        createElement(
+          FormValidationContext.Provider,
+          { value: { email: 'Email taken' } },
+          children
+        );
 
-      const { result } = renderHook(
-        () => useFormState({ value: '', name: 'email' }),
-        { wrapper }
-      );
+      const { result } = renderHook(() => useFormState({ value: '', name: 'email' }), { wrapper });
       expect(result.current.realtimeValidation.isInvalid).toBe(true);
       expect(result.current.realtimeValidation.validationErrors).toContain('Email taken');
     });
@@ -140,8 +145,16 @@ describe('mergeValidation', () => {
   });
 
   it('merges errors from multiple invalid results', () => {
-    const a = { isInvalid: true, validationErrors: ['Error A'], validationDetails: INVALID_DETAILS };
-    const b = { isInvalid: true, validationErrors: ['Error B'], validationDetails: INVALID_DETAILS };
+    const a = {
+      isInvalid: true,
+      validationErrors: ['Error A'],
+      validationDetails: INVALID_DETAILS
+    };
+    const b = {
+      isInvalid: true,
+      validationErrors: ['Error B'],
+      validationDetails: INVALID_DETAILS
+    };
     const merged = mergeValidation(a, b);
     expect(merged.isInvalid).toBe(true);
     expect(merged.validationErrors).toContain('Error A');
@@ -155,13 +168,21 @@ describe('mergeValidation', () => {
   });
 
   it('is invalid when any result is invalid', () => {
-    const invalid = { isInvalid: true, validationErrors: ['Err'], validationDetails: INVALID_DETAILS };
+    const invalid = {
+      isInvalid: true,
+      validationErrors: ['Err'],
+      validationDetails: INVALID_DETAILS
+    };
     const merged = mergeValidation(DEFAULT_VALIDATION_RESULT, invalid);
     expect(merged.isInvalid).toBe(true);
   });
 
   it('has valid:false when merged result is invalid', () => {
-    const invalid = { isInvalid: true, validationErrors: ['Err'], validationDetails: INVALID_DETAILS };
+    const invalid = {
+      isInvalid: true,
+      validationErrors: ['Err'],
+      validationDetails: INVALID_DETAILS
+    };
     const merged = mergeValidation(DEFAULT_VALIDATION_RESULT, invalid);
     expect(merged.validationDetails.valid).toBe(false);
   });

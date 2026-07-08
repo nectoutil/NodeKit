@@ -9,5 +9,4 @@
 import { HTMLElements } from '@necto/dom';
 
 export const PRIMITIVE_NAME: string = 'Primitive' as const;
-export const DEFAULT_PRIMITIVE_TAG: keyof HTMLElementTagNameMap =
-  HTMLElements.Div;
+export const DEFAULT_PRIMITIVE_TAG: keyof HTMLElementTagNameMap = HTMLElements.Div;

@@ -82,10 +82,7 @@ export const env = new Proxy<EnvObject>({} as EnvObject, {
     return false;
   },
   ownKeys() {
-    if (
-      typeof Deno !== 'undefined' &&
-      typeof Deno.env?.toObject === 'function'
-    ) {
+    if (typeof Deno !== 'undefined' && typeof Deno.env?.toObject === 'function') {
       // @ts-expect-error
       return Object.keys(Deno.env.toObject());
     }

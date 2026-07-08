@@ -11,10 +11,7 @@ import { getOwnerDocument } from '../owner';
 import type { StyleEntry, InjectStyleOptions, StyleMap } from './types';
 
 const STYLE_ATTRIBUTE: string = 'data-style-id' as const;
-const WINDOW_STYLES_MAP: WeakMap<Window, StyleMap> = new WeakMap<
-  Window,
-  StyleMap
->();
+const WINDOW_STYLES_MAP: WeakMap<Window, StyleMap> = new WeakMap<Window, StyleMap>();
 
 /**
  * Injects a CSS string into the document head as a `<style>` element.
@@ -24,10 +21,7 @@ const WINDOW_STYLES_MAP: WeakMap<Window, StyleMap> = new WeakMap<
  * @param options - Configuration options (id, window, insertionPoint).
  * @returns A cleanup function that decrements the reference count and removes the style when no longer needed.
  */
-export function injectStyle(
-  css: string,
-  options: InjectStyleOptions = {}
-): () => void {
+export function injectStyle(css: string, options: InjectStyleOptions = {}): () => void {
   const {
     id,
     insertionPoint,

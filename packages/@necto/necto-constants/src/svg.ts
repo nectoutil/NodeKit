@@ -20,5 +20,4 @@ export const TAGS: readonly string[] = svgTagNames;
  *
  * Sourced from `svg-element-attributes` and bundled at build time.
  */
-export const ELEMENT_ATTRIBUTES: Readonly<Record<string, readonly string[]>> =
-  svgElementAttributes;
+export const ELEMENT_ATTRIBUTES: Readonly<Record<string, readonly string[]>> = svgElementAttributes;

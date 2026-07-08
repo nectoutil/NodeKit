@@ -12,10 +12,7 @@ import { useHover } from '@necto-react/hooks';
 import { describe, it, expect, vi } from 'vitest';
 import { renderHook, act } from '@testing-library/react';
 
-if (
-  typeof window !== 'undefined' &&
-  typeof window.PointerEvent === 'undefined'
-) {
+if (typeof window !== 'undefined' && typeof window.PointerEvent === 'undefined') {
   window.PointerEvent = class PointerEvent {
     constructor(type: string, eventInitDict?: PointerEventInit) {}
   } as any;
@@ -35,9 +32,7 @@ describe('useHover', () => {
   it('should call onHoverStart and set isHovered to true on pointer enter', () => {
     const onHoverStart = vi.fn();
     const onHoverChange = vi.fn();
-    const { result } = renderHook(() =>
-      useHover({ onHoverStart, onHoverChange })
-    );
+    const { result } = renderHook(() => useHover({ onHoverStart, onHoverChange }));
     act(() => {
       result.current.hoverProps.onPointerEnter?.({
         pointerType: 'mouse',
@@ -53,9 +48,7 @@ describe('useHover', () => {
   it('should call onHoverEnd and set isHovered to false on pointer leave', () => {
     const onHoverEnd = vi.fn();
     const onHoverChange = vi.fn();
-    const { result } = renderHook(() =>
-      useHover({ onHoverEnd, onHoverChange })
-    );
+    const { result } = renderHook(() => useHover({ onHoverEnd, onHoverChange }));
     act(() => {
       result.current.hoverProps.onPointerEnter?.({
         pointerType: 'mouse',
@@ -76,9 +69,7 @@ describe('useHover', () => {
   it('should not trigger hover events if isDisabled is true', () => {
     const onHoverStart = vi.fn();
     const onHoverEnd = vi.fn();
-    const { result } = renderHook(() =>
-      useHover({ isDisabled: true, onHoverStart, onHoverEnd })
-    );
+    const { result } = renderHook(() => useHover({ isDisabled: true, onHoverStart, onHoverEnd }));
     act(() => {
       result.current.hoverProps.onPointerEnter?.({
         pointerType: 'mouse',

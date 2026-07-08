@@ -15,8 +15,7 @@ export function useOnClickOutside<T extends Element = Element>(
   handler: (event: MouseEvent | TouchEvent | FocusEvent) => void,
   options?: UseOnClickOutsideOptions
 ): void {
-  const { eventType = 'mousedown', eventListenerOptions = { passive: true } } =
-    options ?? {};
+  const { eventType = 'mousedown', eventListenerOptions = { passive: true } } = options ?? {};
 
   useEventListener(
     eventType,
@@ -27,13 +26,9 @@ export function useOnClickOutside<T extends Element = Element>(
         return;
       }
 
-      const refs: ReadonlyArray<RefObject<T | null>> = Array.isArray(ref)
-        ? ref
-        : [ref];
+      const refs: ReadonlyArray<RefObject<T | null>> = Array.isArray(ref) ? ref : [ref];
 
-      const isInside: boolean = refs.some((r): boolean =>
-        Boolean(r.current?.contains(target))
-      );
+      const isInside: boolean = refs.some((r): boolean => Boolean(r.current?.contains(target)));
 
       if (!isInside) {
         handler(event as MouseEvent | TouchEvent | FocusEvent);

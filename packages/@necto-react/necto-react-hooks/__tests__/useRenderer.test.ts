@@ -12,9 +12,7 @@ import { renderHook } from '@testing-library/react';
 describe('useRenderer', () => {
   describe('className', () => {
     it('uses defaultClassName when no className is provided', () => {
-      const { result } = renderHook(() =>
-        useRenderer({ values: {}, defaultClassName: 'necto' })
-      );
+      const { result } = renderHook(() => useRenderer({ values: {}, defaultClassName: 'necto' }));
       expect(result.current.className).toBe('necto');
     });
 
@@ -30,8 +28,13 @@ describe('useRenderer', () => {
         useRenderer({
           values: { isActive: true },
           defaultClassName: 'necto',
-          className: ({ defaultClassName, isActive }: { defaultClassName: string; isActive: boolean }) =>
-            `${defaultClassName}${isActive ? ' active' : ''}`
+          className: ({
+            defaultClassName,
+            isActive
+          }: {
+            defaultClassName: string;
+            isActive: boolean;
+          }) => `${defaultClassName}${isActive ? ' active' : ''}`
         })
       );
       expect(result.current.className).toBe('necto active');
@@ -80,9 +83,7 @@ describe('useRenderer', () => {
 
   describe('children', () => {
     it('returns defaultChildren when no children are provided', () => {
-      const { result } = renderHook(() =>
-        useRenderer({ values: {}, defaultChildren: 'default' })
-      );
+      const { result } = renderHook(() => useRenderer({ values: {}, defaultChildren: 'default' }));
       expect(result.current.children).toBe('default');
     });
 

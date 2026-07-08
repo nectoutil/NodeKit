@@ -6,23 +6,17 @@
  *
  */
 
-import type {
-  ReactNode,
-  RefObject,
-  CSSProperties,
-  HTMLAttributes
-} from 'react';
+import type { ReactNode, RefObject, CSSProperties, HTMLAttributes } from 'react';
 import type { Side } from '@necto/popper';
 
 export interface ArrowRenderProps {
   placement: Side | null;
 }
 
-export interface ArrowProps
-  extends Omit<
-    HTMLAttributes<HTMLDivElement>,
-    'className' | 'style' | 'children'
-  > {
+export interface ArrowProps extends Omit<
+  HTMLAttributes<HTMLDivElement>,
+  'className' | 'style' | 'children'
+> {
   ref?: RefObject<HTMLDivElement | null>;
   children?: ReactNode | ((renderProps: ArrowRenderProps) => ReactNode);
   style?: CSSProperties;

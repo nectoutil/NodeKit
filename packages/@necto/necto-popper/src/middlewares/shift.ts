@@ -48,10 +48,7 @@ export function shift(options: ShiftOptions = {}): Middleware {
         const shiftAmount = Math.min(overflow.left, maxShift ?? overflow.left);
         newX += shiftAmount;
       } else if (overflow.right > 0) {
-        const shiftAmount = Math.min(
-          overflow.right,
-          maxShift ?? overflow.right
-        );
+        const shiftAmount = Math.min(overflow.right, maxShift ?? overflow.right);
         newX -= shiftAmount;
       }
     }
@@ -61,10 +58,7 @@ export function shift(options: ShiftOptions = {}): Middleware {
         const shiftAmount = Math.min(overflow.top, maxShift ?? overflow.top);
         newY += shiftAmount;
       } else if (overflow.bottom > 0) {
-        const shiftAmount = Math.min(
-          overflow.bottom,
-          maxShift ?? overflow.bottom
-        );
+        const shiftAmount = Math.min(overflow.bottom, maxShift ?? overflow.bottom);
         newY -= shiftAmount;
       }
     }

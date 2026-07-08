@@ -25,21 +25,13 @@ export interface RetryContext {
 
 export interface Hooks {
   beforeRequest?: Array<
-    (
-      req: RequestContext
-    ) => RequestContext | void | Promise<RequestContext | void>
+    (req: RequestContext) => RequestContext | void | Promise<RequestContext | void>
   >;
   afterResponse?: Array<
-    (
-      res: Response,
-      req: RequestContext
-    ) => Response | void | Promise<Response | void>
+    (res: Response, req: RequestContext) => Response | void | Promise<Response | void>
   >;
   onError?: Array<
-    (
-      err: FetchError,
-      req: RequestContext
-    ) => FetchError | void | Promise<FetchError | void>
+    (err: FetchError, req: RequestContext) => FetchError | void | Promise<FetchError | void>
   >;
   onRetry?: Array<(ctx: RetryContext) => void | Promise<void>>;
 }

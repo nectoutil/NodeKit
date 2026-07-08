@@ -27,9 +27,7 @@ export type ValidationError = string | string[];
 export type ValidationErrors = Record<string, ValidationError>;
 
 /** A function that validates a value and returns error messages, or `true`/`null` for valid. */
-export type ValidationFunction<T> = (
-  value: T
-) => ValidationError | true | null | undefined;
+export type ValidationFunction<T> = (value: T) => ValidationError | true | null | undefined;
 
 /** The result of validating a form field value. */
 export interface ValidationResult {

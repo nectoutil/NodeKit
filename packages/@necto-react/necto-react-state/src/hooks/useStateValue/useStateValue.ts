@@ -28,22 +28,21 @@ export function useStateValue<Value>(
 ): Awaited<Value> {
   const store = useStore(options);
 
-  const [[valueFromReducer, storeFromReducer, stateFromReducer], rerender] =
-    useReducer<readonly [Value, Store, typeof state], undefined, []>(
-      (prev) => {
-        const nextValue = store.get(state);
-        if (
-          Object.is(prev[0], nextValue) &&
-          prev[1] === store &&
-          prev[2] === state
-        ) {
-          return prev;
-        }
-        return [nextValue, store, state];
-      },
-      undefined,
-      () => [store.get(state), store, state]
-    );
+  const [[valueFromReducer, storeFromReducer, stateFromReducer], rerender] = useReducer<
+    readonly [Value, Store, typeof state],
+    undefined,
+    []
+  >(
+    (prev) => {
+      const nextValue = store.get(state);
+      if (Object.is(prev[0], nextValue) && prev[1] === store && prev[2] === state) {
+        return prev;
+      }
+      return [nextValue, store, state];
+    },
+    undefined,
+    () => [store.get(state), store, state]
+  );
 
   let value = valueFromReducer;
   if (storeFromReducer !== store || stateFromReducer !== state) {

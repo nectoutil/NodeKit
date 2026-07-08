@@ -62,11 +62,11 @@ jobs:
         run: pnpm exec playwright install --with-deps
 
       - name: Run tests
-        run: pnpm vitest run --reporter=default --reporter=junit --outputFile=test-report.junit.xml
+        run: pnpm exec vp test run --reporter=default --reporter=junit --outputFile=test-report.junit.xml
 
       - name: Run tests with coverage
         if: github.event_name != 'merge_group'
-        run: pnpm test:coverage
+        run: pnpm exec vp test run --coverage
 
       - name: Fix lcov paths
         if: github.event_name != 'merge_group'

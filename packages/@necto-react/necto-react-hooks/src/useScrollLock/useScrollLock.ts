@@ -9,10 +9,7 @@ import { useEffectEvent } from '@necto-react/hooks';
 import { useRef, useState, useEffect } from 'react';
 
 import type { RefObject } from 'react';
-import type {
-  UseScrollLockOptions,
-  UseScrollLockReturn
-} from './useScrollLock.types';
+import type { UseScrollLockOptions, UseScrollLockReturn } from './useScrollLock.types';
 
 /**
  * React hook that locks scrolling on a target element or the entire page.
@@ -20,15 +17,11 @@ import type {
  * @param {UseScrollLockOptions} [options] - Options to configure scroll lock behavior.
  * @returns {UseScrollLockReturn} An object with isLocked state and lock/unlock functions.
  */
-export function useScrollLock(
-  options: UseScrollLockOptions = {}
-): UseScrollLockReturn {
+export function useScrollLock(options: UseScrollLockOptions = {}): UseScrollLockReturn {
   const { autoLock = false, target: targetProp, widthReflow = true } = options;
 
   const [isLocked, setIsLocked] = useState(false);
-  const target: RefObject<HTMLElement | null> = useRef<HTMLElement | null>(
-    null
-  );
+  const target: RefObject<HTMLElement | null> = useRef<HTMLElement | null>(null);
   const originalStyle = useRef<{
     overflow: string;
     paddingRight: string;
@@ -43,9 +36,7 @@ export function useScrollLock(
 
     if (widthReflow) {
       const offsetWidth =
-        target.current === document.body
-          ? window.innerWidth
-          : target.current.offsetWidth;
+        target.current === document.body ? window.innerWidth : target.current.offsetWidth;
 
       const currentPaddingRight: number =
         parseInt(window.getComputedStyle(target.current).paddingRight, 10) || 0;
@@ -72,14 +63,11 @@ export function useScrollLock(
   });
 
   useEffect(() => {
-    if (typeof window === 'undefined' || typeof document === 'undefined')
-      return;
+    if (typeof window === 'undefined' || typeof document === 'undefined') return;
 
     if (targetProp) {
       target.current =
-        typeof targetProp === 'string'
-          ? document.querySelector(targetProp)
-          : targetProp;
+        typeof targetProp === 'string' ? document.querySelector(targetProp) : targetProp;
     }
 
     if (!target.current) {

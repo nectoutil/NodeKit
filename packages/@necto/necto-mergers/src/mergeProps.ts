@@ -26,9 +26,7 @@
  * @param listOfObjects - An array of objects to merge.
  * @returns A single object with merged properties.
  */
-export function mergeProps(
-  ...listOfObjects: Record<string, any>[]
-): Record<string, any> {
+export function mergeProps(...listOfObjects: Record<string, any>[]): Record<string, any> {
   if (listOfObjects.length === 0) return {};
   if (listOfObjects.length === 1) {
     return typeof listOfObjects[0] === 'object' && listOfObjects[0] !== null
@@ -63,10 +61,7 @@ export function mergeProps(
   }
 
   for (const eventName in eventHandlers) {
-    if (
-      Object.hasOwn(eventHandlers, eventName) &&
-      eventHandlers[eventName].length > 0
-    ) {
+    if (Object.hasOwn(eventHandlers, eventName) && eventHandlers[eventName].length > 0) {
       target[eventName] = (...args: any[]) => {
         for (const handler of eventHandlers[eventName]) {
           handler?.(...args);
@@ -77,11 +72,7 @@ export function mergeProps(
 
   for (let i = listOfObjects.length - 1; i >= 0; i--) {
     const lastObj = listOfObjects[i];
-    if (
-      typeof lastObj === 'object' &&
-      lastObj !== null &&
-      'children' in lastObj
-    ) {
+    if (typeof lastObj === 'object' && lastObj !== null && 'children' in lastObj) {
       target.children = lastObj.children;
       break;
     }

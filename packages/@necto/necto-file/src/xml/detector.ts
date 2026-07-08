@@ -38,10 +38,7 @@ const rootNameMapping: Record<string, FileTypeResult> = {
   svg: { ext: 'svg', mime: 'image/svg+xml' }
 };
 
-function startsWith(
-  array: Uint8Array | number[],
-  prefix: Uint8Array | number[]
-): boolean {
+function startsWith(array: Uint8Array | number[], prefix: Uint8Array | number[]): boolean {
   if (prefix.length > array.length) return false;
   for (let i = 0; i < prefix.length; i++) {
     if (array[i] !== prefix[i]) return false;
@@ -80,10 +77,7 @@ export function isXml(array: Uint8Array): XmlDetection {
   if (startsWith(array, [0xfe, 0xff])) {
     const encoding: XmlTextEncoding = 'utf-16be';
     if (
-      startsWith(
-        array.subarray(2),
-        [0, 60, 0, 63, 0, 120, 0, 109, 0, 108, 0, 32]
-      ) ||
+      startsWith(array.subarray(2), [0, 60, 0, 63, 0, 120, 0, 109, 0, 108, 0, 32]) ||
       hasArrayXmlTag(array, encoding)
     ) {
       return { xml: true, encoding, offset: 2 };
@@ -94,10 +88,7 @@ export function isXml(array: Uint8Array): XmlDetection {
   if (startsWith(array, [0xff, 0xfe])) {
     const encoding: XmlTextEncoding = 'utf-16le';
     if (
-      startsWith(
-        array.subarray(2),
-        [60, 0, 63, 0, 120, 0, 109, 0, 108, 0, 32, 0]
-      ) ||
+      startsWith(array.subarray(2), [60, 0, 63, 0, 120, 0, 109, 0, 108, 0, 32, 0]) ||
       hasArrayXmlTag(array, encoding)
     ) {
       return { xml: true, encoding, offset: 2 };

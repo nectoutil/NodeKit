@@ -26,9 +26,7 @@ export interface MiddlewareResult {
   data?: Record<string, unknown>;
 }
 
-export type MiddlewareFn = (
-  state: MiddlewareState
-) => MiddlewareResult | Promise<MiddlewareResult>;
+export type MiddlewareFn = (state: MiddlewareState) => MiddlewareResult | Promise<MiddlewareResult>;
 
 export interface Middleware {
   readonly name: string;
@@ -49,5 +47,4 @@ export type MiddlewareFactory<TOptions = void> = TOptions extends void
   ? () => Middleware
   : (options: TOptions) => Middleware;
 
-export type MiddlewareOptions<T> =
-  T extends MiddlewareFactory<infer O> ? O : never;
+export type MiddlewareOptions<T> = T extends MiddlewareFactory<infer O> ? O : never;

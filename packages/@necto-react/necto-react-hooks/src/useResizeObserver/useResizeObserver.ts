@@ -15,10 +15,7 @@ import type {
   UseResizeObserverCallback
 } from './useResizeObserver.types';
 import type { ForwardedRef, RefObject } from 'react';
-import type {
-  ResizeObserverController,
-  ResizeObserverHandler
-} from '@necto/dom';
+import type { ResizeObserverController, ResizeObserverHandler } from '@necto/dom';
 
 let sharedObserver: ResizeObserverController | null = null;
 
@@ -27,16 +24,12 @@ export function useResizeObserver<TElement extends Element>(
   callback: UseResizeObserverCallback,
   options: UseResizeObserverOptions = {}
 ): ResizeObserverController | null {
-  if (
-    !sharedObserver &&
-    (typeof globalThis.ResizeObserver !== 'undefined' || options.polyfill)
-  ) {
+  if (!sharedObserver && (typeof globalThis.ResizeObserver !== 'undefined' || options.polyfill)) {
     sharedObserver = createResizeObserver(options.polyfill);
   }
 
   const observer = sharedObserver;
-  const latestCallback: RefObject<ResizeObserverHandler> =
-    useLatestRef(callback);
+  const latestCallback: RefObject<ResizeObserverHandler> = useLatestRef(callback);
 
   useIsomorphicLayoutEffect(() => {
     if (!observer) {
@@ -54,10 +47,7 @@ export function useResizeObserver<TElement extends Element>(
 
     let isUnsubscribed: boolean = false;
 
-    function handleResize(
-      entry: ResizeObserverEntry,
-      observerInstance: ResizeObserver
-    ): void {
+    function handleResize(entry: ResizeObserverEntry, observerInstance: ResizeObserver): void {
       if (isUnsubscribed) {
         return;
       }

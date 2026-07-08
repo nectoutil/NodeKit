@@ -10,10 +10,7 @@ import { useState, useEffect, useId } from 'react';
 
 import { PORTAL_ROOT_ID } from './constants';
 
-import type {
-  UsePopperPortalReturn,
-  UsePopperPortalOptions
-} from './usePopperPortal.types';
+import type { UsePopperPortalReturn, UsePopperPortalOptions } from './usePopperPortal.types';
 
 /**
  * Provides portal functionality for popper elements.
@@ -22,9 +19,7 @@ import type {
  * @param options - Configuration options.
  * @returns Portal node and ID.
  */
-export function usePopperPortal(
-  options: UsePopperPortalOptions = {}
-): UsePopperPortalReturn {
+export function usePopperPortal(options: UsePopperPortalOptions = {}): UsePopperPortalReturn {
   const { id, enabled = true, root } = options;
 
   const uniqueId: string = useId();
@@ -38,8 +33,7 @@ export function usePopperPortal(
       return;
     }
 
-    let portalRoot: HTMLElement | null =
-      root ?? document.getElementById(PORTAL_ROOT_ID);
+    let portalRoot: HTMLElement | null = root ?? document.getElementById(PORTAL_ROOT_ID);
 
     if (!portalRoot) {
       portalRoot = document.createElement('div');
