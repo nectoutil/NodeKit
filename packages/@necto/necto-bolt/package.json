@@ -19,14 +19,8 @@
     "dist",
     "README.md"
   ],
-  "scripts": {
-    "test": "vitest",
-    "test:coverage": "vitest run --coverage --passWithNoTests"
-  },
   "devDependencies": {
-    "@types/node": "^22.19.20",
-    "vitest": "^4.1.10",
-    "@vitest/coverage-istanbul": "^4.1.10"
+    "@types/node": "^22.19.20"
   },
   "repository": {
     "type": "git",
