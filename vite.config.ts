@@ -40,7 +40,7 @@ export default defineConfig({
       '**/dist/**',
       '**/coverage/**',
 
-      // Will be removed once stable
+      // Node: Will be removed once stable
       'packages/@necto/necto-color/**'
     ]
   },
