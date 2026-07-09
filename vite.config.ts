@@ -13,7 +13,7 @@ export default defineConfig({
       provider: 'istanbul',
       reporter: ['lcov', 'text']
     },
-    projects: ['packages/**/vitest.config.*']
+    projects: ['packages/**/vite.config.*']
   },
   lint: {
     ignorePatterns: [
