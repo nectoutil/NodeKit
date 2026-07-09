@@ -63,7 +63,7 @@
   Usage:
 
   ```ts
-  import { DOM, SVG, CSS, HTTP, ANCHOR, NUMBERS } from "@necto/constants";
+  import { DOM, SVG, CSS, HTTP, ANCHOR, NUMBERS } from '@necto/constants';
 
   DOM.HTML_TAGS; // spec-sourced HTML tag list
   DOM.ARIA_ATTRIBUTES; // spec-sourced ARIA attribute list

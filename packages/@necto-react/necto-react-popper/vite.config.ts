@@ -5,8 +5,38 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite-plus/pack';
+import { playwright } from '@vitest/browser-playwright';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
-  entry: ['./src/index.ts']
+  entry: ['./src/index.ts'],
+  plugins: [react(), tsconfigPaths()],
+  test: {
+    setupFiles: ['./vitest.setup.ts'],
+    browser: {
+      enabled: true,
+      headless: true,
+      provider: playwright(),
+      screenshotFailures: false,
+      instances: [
+        {
+          browser: 'chromium'
+        },
+        {
+          browser: 'firefox'
+        },
+        {
+          browser: 'webkit'
+        }
+      ]
+    },
+    coverage: {
+      provider: 'istanbul',
+      reporter: ['lcov', 'text'],
+      include: ['src/**/*.{ts,tsx}'],
+      exclude: ['node_modules', 'dist']
+    }
+  }
 });

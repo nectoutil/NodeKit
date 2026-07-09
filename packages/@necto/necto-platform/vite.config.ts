@@ -8,5 +8,13 @@
 import { defineConfig } from 'vite-plus/pack';
 
 export default defineConfig({
-  entry: ['src/index.ts']
+  entry: ['src/index.ts'],
+  test: {
+    coverage: {
+      provider: 'istanbul',
+      reporter: ['lcov', 'text'],
+      include: ['src/**/*.{ts,tsx}'],
+      exclude: ['node_modules', 'dist']
+    }
+  }
 });

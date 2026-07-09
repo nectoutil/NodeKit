@@ -11,9 +11,7 @@ import { playwright } from '@vitest/browser-playwright';
 
 export default defineConfig({
   entry: ['./src/index.ts'],
-  plugins: [
-    react()
-  ],
+  plugins: [react()],
   test: {
     globals: true,
     setupFiles: ['./vitest.setup.ts'],
@@ -24,13 +22,13 @@ export default defineConfig({
       provider: playwright(),
       screenshotFailures: false,
       instances: [
-        { 
-          browser: 'chromium' 
+        {
+          browser: 'chromium'
         },
-        { 
-          browser: 'firefox' 
+        {
+          browser: 'firefox'
         },
-        { 
+        {
           browser: 'webkit'
         }
       ]
