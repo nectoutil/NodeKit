@@ -9,6 +9,7 @@ import * as DOM from './dom';
 import * as SVG from './svg';
 import * as CSS from './css';
 import * as HTTP from './http';
+import * as IMAGE from './image';
 import CHAR_MAP from './charmap.json';
 import * as ANCHOR from './anchor.json';
 import LOCALE_MAP from './localemap.json';
@@ -16,4 +17,4 @@ import * as NUMBERS from './numbers.json';
 import * as CHARS from './characters.json';
 import * as ALPHABET from './alphabet.json';
 
-export { CHARS, ALPHABET, NUMBERS, DOM, SVG, CSS, HTTP, ANCHOR, CHAR_MAP, LOCALE_MAP };
+export { CHARS, ALPHABET, NUMBERS, DOM, SVG, CSS, HTTP, ANCHOR, CHAR_MAP, LOCALE_MAP, IMAGE };

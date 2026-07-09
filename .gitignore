@@ -5,8 +5,9 @@
 .turbo
 .idea
 
-# Vite Hooks
+# Vite
 .vite-hooks
+*_tmp_*
 
 # Logs
 logs

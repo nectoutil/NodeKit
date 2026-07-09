@@ -47,7 +47,7 @@ export default defineConfig({
   staged: {
     '**/package.json': 'pnpm install --frozen-lockfile --ignore-scripts',
     '*.{js,ts,tsx,vue}': 'vp check --fix',
-    '**/*.md': 'pnpm exec markdownlint --ignore .changeset',
+    '**/*.md': 'pnpm exec markdownlint',
     '**/*.{yml,yaml}': 'pnpm exec yamllint'
   }
 });

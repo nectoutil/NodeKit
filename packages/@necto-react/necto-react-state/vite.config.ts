@@ -5,8 +5,22 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite-plus/pack';
 
 export default defineConfig({
-  entry: ['src/index.ts']
+  entry: ['src/index.ts'],
+  plugins: [react()],
+  test: {
+    include: ['__tests__/**/*.test.{ts,tsx}'],
+    exclude: ['node_modules', 'dist'],
+    environment: 'jsdom',
+
+    coverage: {
+      provider: 'istanbul',
+      reporter: ['lcov', 'text'],
+      include: ['src/**/*.{ts,tsx}'],
+      exclude: ['node_modules', 'dist']
+    }
+  }
 });

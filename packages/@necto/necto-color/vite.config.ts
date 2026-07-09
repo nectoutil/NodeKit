@@ -5,10 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { defineConfig } from 'vitest/config';
+import { defineConfig } from 'vite-plus/pack';
 
 export default defineConfig({
   test: {
+    include: ['__tests__/**/*.test.{ts,js}'],
+    exclude: ['node_modules', 'dist'],
+
     coverage: {
       provider: 'istanbul',
       reporter: ['lcov', 'text'],
