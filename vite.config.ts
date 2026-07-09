@@ -40,12 +40,12 @@ export default defineConfig({
       '**/dist/**',
       '**/coverage/**',
 
-      // Will be removed once stable
+      // Node: Will be removed once stable
       'packages/@necto/necto-color/**'
     ]
   },
   staged: {
-    '**/package.json': 'pnpm install --frozen-lockfile --ignore-scripts',
+    '**/package.json': "bash -c 'pnpm install --frozen-lockfile --ignore-scripts'",
     '*.{js,ts,tsx,vue}': 'vp check --fix',
     '**/*.md': 'pnpm exec markdownlint',
     '**/*.{yml,yaml}': 'pnpm exec yamllint'
