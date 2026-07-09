@@ -6,8 +6,9 @@
  *
  */
 
-import { expect } from 'vitest';
 import '@testing-library/jest-dom';
+
+import { expect } from 'vitest';
 import { matchers as emotionMatchers } from '@emotion/jest';
 
 expect.extend(emotionMatchers);
