@@ -17,7 +17,11 @@ export default defineConfig({
   test: {
     globals: true,
     setupFiles: ['./vitest.setup.ts'],
-    exclude: ['node_modules', 'dist', '**/*.visual.spec.*'],
+    exclude: [
+      'dist', 
+      'node_modules', 
+      '**/*.visual.spec.*',
+    ],
     browser: {
       enabled: true,
       headless: true,
