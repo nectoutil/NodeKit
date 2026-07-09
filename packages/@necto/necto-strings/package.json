@@ -1,6 +1,6 @@
 {
   "name": "@necto/strings",
-  "version": "1.9.3",
+  "version": "1.9.4",
   "description": "Necto's library providing string manipulation methods.",
   "scripts": {
     "build": "vp pack --format esm,cjs --dts --minify --sourcemap",

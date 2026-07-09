@@ -1,6 +1,6 @@
 {
   "name": "@necto/constants",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "Necto's library defining common constant values for programs.",
   "scripts": {
     "build": "vp pack --format esm,cjs --dts --minify --sourcemap",

@@ -1,5 +1,11 @@
 # @necto/constants
 
+## 2.1.0
+
+### Minor Changes
+
+- 0849e9a: Added image name constants
+
 ## 2.0.2
 
 ### Patch Changes
@@ -63,7 +69,7 @@
   Usage:
 
   ```ts
-  import { DOM, SVG, CSS, HTTP, ANCHOR, NUMBERS } from '@necto/constants';
+  import { DOM, SVG, CSS, HTTP, ANCHOR, NUMBERS } from "@necto/constants";
 
   DOM.HTML_TAGS; // spec-sourced HTML tag list
   DOM.ARIA_ATTRIBUTES; // spec-sourced ARIA attribute list
