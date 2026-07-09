@@ -1,5 +1,13 @@
 # @necto-react/hooks
 
+## 2.20.2
+
+### Patch Changes
+
+- @necto/dom@1.11.4
+- @necto/id@1.6.10
+- @necto/strings@1.9.4
+
 ## 2.20.1
 
 ### Patch Changes
@@ -30,15 +38,15 @@
 
   ```tsx
   // Window event (default target)
-  useEventListener('resize', handleResize);
+  useEventListener("resize", handleResize);
 
   // Element event — `event` typed as MouseEvent automatically
   const buttonRef = useRef<HTMLButtonElement>(null);
-  useEventListener('click', (event) => console.log(event.button), buttonRef);
+  useEventListener("click", (event) => console.log(event.button), buttonRef);
 
   // MediaQueryList — `event` typed as MediaQueryListEvent automatically
-  const mql = useRef(window.matchMedia('(prefers-color-scheme: dark)'));
-  useEventListener('change', (event) => setDark(event.matches), mql);
+  const mql = useRef(window.matchMedia("(prefers-color-scheme: dark)"));
+  useEventListener("change", (event) => setDark(event.matches), mql);
   ```
 
   Supports targets: `Window`, `Document`, `HTMLElement`, `SVGElement`,
@@ -55,7 +63,7 @@
   useOnClickOutside(menuRef, () => setOpen(false));
 
   // Multiple refs — handler only fires when target is outside all of them
-  useOnClickOutside([menuRef, triggerRef], close, { eventType: 'mouseup' });
+  useOnClickOutside([menuRef, triggerRef], close, { eventType: "mouseup" });
   ```
 
   Defaults: `eventType: 'mousedown'` (fastest dismiss), listener attached

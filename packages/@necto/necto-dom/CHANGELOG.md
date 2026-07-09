@@ -1,5 +1,12 @@
 # @necto/dom
 
+## 1.11.4
+
+### Patch Changes
+
+- Updated dependencies [0849e9a]
+  - @necto/constants@2.1.0
+
 ## 1.11.3
 
 ### Patch Changes
