@@ -5,8 +5,35 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite-plus/pack';
+import { playwright } from '@vitest/browser-playwright';
 
 export default defineConfig({
-  entry: ['./src/index.ts']
+  entry: ['./src/index.ts'],
+  plugins: [
+    react()
+  ],
+  test: {
+    globals: true,
+    setupFiles: ['./vitest.setup.ts'],
+    exclude: ['node_modules', 'dist', '**/*.visual.spec.*'],
+    browser: {
+      enabled: true,
+      headless: true,
+      provider: playwright(),
+      screenshotFailures: false,
+      instances: [
+        { 
+          browser: 'chromium' 
+        },
+        { 
+          browser: 'firefox' 
+        },
+        { 
+          browser: 'webkit'
+        }
+      ]
+    }
+  }
 });
