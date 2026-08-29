@@ -17,10 +17,10 @@ import type { UseMountedOptions, UseMountedReturn, MountedAccessType } from './u
  * @param {UseMountedOptions & { type: T }} [options] - Options to configure the hook behavior.
  * @returns {UseMountedReturn<T>} The mounted state in the requested format.
  */
-export function useMounted<T extends MountedAccessType = 'function'>(
-   options: UseMountedOptions & { type?: T } = {}
+export function useMounted<T extends MountedAccessType = 'boolean'>(
+  options: UseMountedOptions & { type?: T } = {}
 ): UseMountedReturn<T> {
-  const { defer = false, type = 'function' } = options;
+  const { defer = false, type = 'boolean' } = options;
 
   const [mountedState, setMountedState] = useState(false);
   const mountedRef: RefObject<boolean> = useRef<boolean>(false);
@@ -53,9 +53,9 @@ export function useMounted<T extends MountedAccessType = 'function'>(
     return mountedRef as UseMountedReturn<T>;
   }
 
-  if (type === 'boolean') {
-    return mountedState as UseMountedReturn<T>;
+  if (type === 'function') {
+    return get as UseMountedReturn<T>;
   }
 
-  return get as UseMountedReturn<T>;
+  return mountedState as UseMountedReturn<T>;
 }

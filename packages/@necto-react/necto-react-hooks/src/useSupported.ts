@@ -16,11 +16,11 @@ import { useMounted } from '@necto-react/hooks';
  * @returns {boolean} Whether the feature is supported in the current environment.
  */
 export function useSupported(fn: () => unknown): boolean {
-  const isMounted: () => boolean = useMounted();
+  const isMounted: boolean = useMounted();
   const [isSupported, setIsSupported] = useState(false);
 
-  useEffect(() => {
-    if (isMounted()) {
+  useEffect((): void => {
+    if (isMounted) {
       /* istanbul ignore else -- defensive guard, unreachable in browser */
       setIsSupported(Boolean(fn()));
     }
