@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// biome-ignore-all lint/suspicious/noExplicitAny: Explicit any is required for generic state handling.
+// oxlint-disable typescript/no-explicit-any -- Explicit any is required for generic state handling.
 
 import { readStateRecord, ensureStateRecord, recomputeInvalidated } from './internals/read';
 import { mountState, unmountState, flushCallbacks, mountDependencies } from './internals/mount';

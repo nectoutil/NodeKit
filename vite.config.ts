@@ -16,6 +16,7 @@ export default defineConfig({
     projects: ['packages/**/vite.config.*']
   },
   lint: {
+    plugins: ['typescript', 'react', 'react-hooks', 'jsx-a11y'],
     ignorePatterns: [
       '**/node_modules/**',
       '**/dist/**',
@@ -24,7 +25,13 @@ export default defineConfig({
       'packages/@necto/necto-color/**'
     ],
     rules: {
-      'react-hooks/rules-of-hooks': ['off']
+      'react-hooks/rules-of-hooks': 'off',
+      'typescript/no-explicit-any': 'warn',
+      'typescript/no-non-null-assertion': 'warn',
+      'react-hooks/exhaustive-deps': 'warn',
+      eqeqeq: ['error', 'always', { null: 'ignore' }],
+      'no-shadow': 'warn',
+      'typescript/ban-ts-comment': 'warn'
     }
   },
   fmt: {

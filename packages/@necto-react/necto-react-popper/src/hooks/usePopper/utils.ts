@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// biome-ignore-all lint/suspicious/noExplicitAny: Utility functions require any for generic comparison.
+// oxlint-disable typescript/no-explicit-any -- Utility functions require any for generic comparison.
 
 /**
  * Copyright (c) Corinvo, LLC. and affiliates.

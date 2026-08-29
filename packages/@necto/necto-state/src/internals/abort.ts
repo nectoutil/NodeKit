@@ -5,8 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// biome-ignore-all lint/suspicious/useIterableCallbackReturn: Implicit return is intentional and harmless here.
-
 import type { StoreContext } from './context';
 
 export function registerAbortHandler(

@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// biome-ignore-all lint/style/noNonNullAssertion: Non-null assertions are intentional in state internals.
-// biome-ignore-all lint/suspicious/noExplicitAny: Explicit any is required for generic state handling.
+// oxlint-disable typescript/no-non-null-assertion -- Non-null assertions are intentional in state internals.
+// oxlint-disable typescript/no-explicit-any -- Explicit any is required for generic state handling.
 
 import type { State, WritableState, StateRecord, Mounted } from '../types';
 

@@ -79,8 +79,8 @@ export function useFocusWithin(options: UseFocusWithinOptions): FocusWithinRetur
                   value: currentTarget
                 });
 
-                const event: FocusEvent = createSyntheticEvent<FocusEvent>(nativeEvent);
-                onBlur(event);
+                const syntheticEvent: FocusEvent = createSyntheticEvent<FocusEvent>(nativeEvent);
+                onBlur(syntheticEvent);
               }
             }
           },

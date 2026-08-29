@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// biome-ignore-all lint/suspicious/noExplicitAny: React internal type compatibility.
+// oxlint-disable typescript/no-explicit-any -- React internal type compatibility.
 
 import React, { useLayoutEffect } from 'react';
 

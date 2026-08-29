@@ -30,10 +30,10 @@ export function getEnv(key: string, options?: EnvOptions): string | undefined {
 
   switch (currentRuntime) {
     case 'deno':
-      // @ts-expect-error
+      // @ts-expect-error -- Deno/Bun runtime globals are not present in the Node type definitions
       return Deno.env.get(key);
     case 'bun':
-      // @ts-expect-error
+      // @ts-expect-error -- Deno/Bun runtime globals are not present in the Node type definitions
       return Bun.env[key];
     case 'node':
       return process.env[key];
@@ -83,11 +83,11 @@ export const env = new Proxy<EnvObject>({} as EnvObject, {
   },
   ownKeys() {
     if (typeof Deno !== 'undefined' && typeof Deno.env?.toObject === 'function') {
-      // @ts-expect-error
+      // @ts-expect-error -- Deno/Bun runtime globals are not present in the Node type definitions
       return Object.keys(Deno.env.toObject());
     }
     if (typeof Bun !== 'undefined' && Bun.env) {
-      // @ts-expect-error
+      // @ts-expect-error -- Deno/Bun runtime globals are not present in the Node type definitions
       return Object.keys(Bun.env);
     }
     if (typeof process !== 'undefined' && process.env) {

@@ -79,8 +79,19 @@ describe('slugify', () => {
       expect(slugify('hello! world!', { strict: true })).toBe('hello-world');
     });
 
-    it('should not strip special characters when strict is false', () => {
-      expect(slugify('hello!world', { strict: false })).toBe('hello!world');
+    it('should not strip special characters when strip is false', () => {
+      expect(slugify('hello!world', { strip: false })).toBe('hello!world');
+    });
+  });
+
+  describe('strip option', () => {
+    it('should strip symbols by default', () => {
+      expect(slugify('hello!world')).toBe('helloworld');
+      expect(slugify('100% done')).toBe('100-done');
+    });
+
+    it('should keep symbols when strip is false', () => {
+      expect(slugify('foo@bar#baz', { strip: false })).toBe('foo@bar#baz');
     });
   });
 

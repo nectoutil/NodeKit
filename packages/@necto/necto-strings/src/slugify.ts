@@ -14,13 +14,22 @@ const localeMap = LOCALE_MAP as LocaleMap;
 
 const SEPARATOR_REGEX: RegExp = new RegExp(/[\s\-_~]+/g);
 const ESCAPE_REGEX: RegExp = new RegExp(/[.*+?^${}()|[\]\\]/g);
+const SYMBOLS_REGEX: RegExp = new RegExp(/[^\p{L}\p{N}\s\-_~.]/gu);
 const COMBINING_MARKS_REGEX: RegExp = new RegExp(/[\u0300-\u036f]/g);
 
 export function slugify(input: string, options: SlugifyOptions = {}): string {
-  const { remove, locale, trim = true, lower = true, strict = false, replacement = '-' } = options;
+  const {
+    remove,
+    locale,
+    trim = true,
+    lower = true,
+    strip = true,
+    strict = false,
+    replacement = '-'
+  } = options;
 
   const localeCharMap: CharMap | undefined = locale ? localeMap[locale] : undefined;
-  const escaped: string = replacement.replace(ESCAPE_REGEX, '\\$&');
+  const escaped: string = replacement.replaceAll(ESCAPE_REGEX, '\\$&');
 
   let slug: string = '';
 
@@ -35,6 +44,10 @@ export function slugify(input: string, options: SlugifyOptions = {}): string {
   }
 
   slug = slug.normalize('NFKD').replace(COMBINING_MARKS_REGEX, '');
+
+  if (strip) {
+    slug = slug.replace(SYMBOLS_REGEX, '');
+  }
 
   if (replacement) {
     slug = slug.replace(SEPARATOR_REGEX, replacement);

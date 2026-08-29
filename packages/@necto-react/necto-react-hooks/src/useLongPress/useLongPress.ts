@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// biome-ignore-all lint/style/noNonNullAssertion: Intentional non-null assertion for event targets.
+// oxlint-disable typescript/no-non-null-assertion -- Intentional non-null assertion for event targets.
 
 import { defu } from 'defu';
 import { useRef, useCallback, useEffect } from 'react';

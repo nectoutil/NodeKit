@@ -107,7 +107,7 @@ export function useElementVisibility<T extends Element = Element>(
       }
     };
     // Notice: handleIntersection is no longer in the dependency array!
-  }, [active, element, root, rootMargin, threshold, partialVisibility, handleIntersection]);
+  }, [active, element, root, rootMargin, threshold, partialVisibility]);
 
   return [nodeRef, isVisible, intersectionDetails];
 }

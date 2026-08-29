@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// biome-ignore-all lint/suspicious/noExplicitAny: Explicit any is okay here.
+// oxlint-disable typescript/no-explicit-any -- Explicit any is okay here.
 
 import { useRef, useCallback } from 'react';
 import { mergeProps } from '@necto/mergers';

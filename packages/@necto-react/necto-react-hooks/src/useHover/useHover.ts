@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// biome-ignore-all lint/suspicious/noExplicitAny: Any is fine here as some stuff will not work without it.
+// oxlint-disable typescript/no-explicit-any -- Any is fine here as some stuff will not work without it.
 
 import { isTest } from 'std-env';
 import { useGlobalListeners } from '@necto-react/hooks';
@@ -74,7 +74,7 @@ export function useHover(props: UseHoverProps = {}): UseHoverReturn {
   }, [setGlobalIgnoreEmulatedMouseEvents]);
 
   // --- Trigger Hover Start Handler ---
-  // biome-ignore lint/correctness/useExhaustiveDependencies: triggerHoverEnd is declared below and referenced lazily at call time; listing it in deps would cause a TDZ ReferenceError.
+  // oxlint-disable-next-line react-hooks/exhaustive-deps -- triggerHoverEnd is declared below and referenced lazily at call time; listing it in deps would cause a TDZ ReferenceError.
   const triggerHoverStart = useCallback(
     (event: PointerEvent | MouseEvent, pointerType: string) => {
       if (
@@ -112,7 +112,7 @@ export function useHover(props: UseHoverProps = {}): UseHoverReturn {
       );
 
       onHoverStart?.({
-        // @ts-expect-error
+        // @ts-expect-error -- synthetic hover event shape is not assignable to the base event type
         type: 'hoverstart',
         target: event.currentTarget,
         pointerType
@@ -121,6 +121,7 @@ export function useHover(props: UseHoverProps = {}): UseHoverReturn {
       onHoverChange?.(true);
       setHovered(true);
     },
+    // oxlint-disable-next-line react-hooks/exhaustive-deps -- triggerHoverEnd is declared below and referenced lazily; adding it would cause a TDZ ReferenceError
     [isDisabled, onHoverStart, onHoverChange, addGlobalListener, state]
   );
 
@@ -138,7 +139,7 @@ export function useHover(props: UseHoverProps = {}): UseHoverReturn {
       removeAllGlobalListeners();
 
       onHoverEnd?.({
-        // @ts-expect-error
+        // @ts-expect-error -- synthetic hover event shape is not assignable to the base event type
         type: 'hoverend',
         target: event.currentTarget,
         pointerType
@@ -147,20 +148,19 @@ export function useHover(props: UseHoverProps = {}): UseHoverReturn {
       onHoverChange?.(false);
       setHovered(false);
     },
-    // This might cause shit to break, Biome was bitching at me so I added these dependencies.
-    [onHoverEnd, onHoverChange, removeAllGlobalListeners, state.target, state]
+    [onHoverEnd, onHoverChange, removeAllGlobalListeners, state]
   );
 
   const hoverProps = useMemo(() => {
-    const props: DOMAttributes = {};
+    const hoverAttrs: DOMAttributes = {};
 
     if (typeof PointerEvent !== 'undefined') {
-      props.onPointerEnter = (e: PointerEvent<Element>) => {
+      hoverAttrs.onPointerEnter = (e: PointerEvent<Element>) => {
         if (globalRef.current.ignoreEmulated && e.pointerType === 'mouse') return;
         triggerHoverStart(e as unknown as PointerEvent, e.pointerType);
       };
 
-      props.onPointerLeave = (e: PointerEvent<Element>) => {
+      hoverAttrs.onPointerLeave = (e: PointerEvent<Element>) => {
         if (
           !isDisabled &&
           e.currentTarget instanceof Element &&
@@ -170,25 +170,25 @@ export function useHover(props: UseHoverProps = {}): UseHoverReturn {
         }
       };
     } else if (isTest) {
-      props.onTouchStart = () => {
+      hoverAttrs.onTouchStart = () => {
         state.ignoreEmulatedMouseEvents = true;
       };
 
-      props.onMouseEnter = (e: MouseEvent<Element>) => {
+      hoverAttrs.onMouseEnter = (e: MouseEvent<Element>) => {
         if (!state.ignoreEmulatedMouseEvents && !globalRef.current.ignoreEmulated) {
           triggerHoverStart(e.nativeEvent as unknown as MouseEvent, 'mouse');
         }
         state.ignoreEmulatedMouseEvents = false;
       };
 
-      props.onMouseLeave = (e: MouseEvent<Element>) => {
+      hoverAttrs.onMouseLeave = (e: MouseEvent<Element>) => {
         if (!isDisabled && e.currentTarget.contains(e.target as Node)) {
           triggerHoverEnd(e.nativeEvent as unknown as MouseEvent, 'mouse');
         }
       };
     }
 
-    return props;
+    return hoverAttrs;
   }, [isDisabled, triggerHoverStart, triggerHoverEnd, state]);
 
   useEffect(() => {

@@ -62,9 +62,9 @@ export function focusWithoutScrolling(element: FocusableElement): void {
 
     element.focus();
 
-    for (const { element, scrollTop, scrollLeft } of scrollableElements) {
-      element.scrollTop = scrollTop;
-      element.scrollLeft = scrollLeft;
+    for (const { element: el, scrollTop, scrollLeft } of scrollableElements) {
+      el.scrollTop = scrollTop;
+      el.scrollLeft = scrollLeft;
     }
   }
 }

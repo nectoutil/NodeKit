@@ -13,7 +13,7 @@ import { isMac } from './isMac';
 
 function testPlatform(re: RegExp) {
   return typeof window !== 'undefined' && window.navigator != null
-    ? //@ts-ignore
+    ? // @ts-expect-error -- navigator.platform is deprecated and absent from the Navigator type
       re.test(window.navigator.platform)
     : false;
 }

@@ -5,8 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// biome-ignore-all lint/style/useTemplate: String concatenation is intentional here.
-
 import type {
   Getter,
   PrimitiveState,
