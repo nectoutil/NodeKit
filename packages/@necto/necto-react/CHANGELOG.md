@@ -1,5 +1,14 @@
 # @necto/react
 
+## 1.3.8
+
+### Patch Changes
+
+- Updated dependencies [839ae42]
+  - @necto-react/hooks@2.21.0
+  - @necto-react/components@3.3.5
+  - @necto-react/popper@0.10.16
+
 ## 1.3.7
 
 ### Patch Changes

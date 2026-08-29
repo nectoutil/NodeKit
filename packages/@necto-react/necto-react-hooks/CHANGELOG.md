@@ -1,5 +1,11 @@
 # @necto-react/hooks
 
+## 2.21.0
+
+### Minor Changes
+
+- 839ae42: Added defer to useMounted hook
+
 ## 2.20.2
 
 ### Patch Changes
