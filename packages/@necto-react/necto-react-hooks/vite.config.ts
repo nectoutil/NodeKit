@@ -6,8 +6,8 @@
  */
 
 import { defineConfig } from 'vite-plus/pack';
-import { playwright } from '@vitest/browser-playwright';
 import tsconfigPaths from 'vite-tsconfig-paths';
+import { playwright } from '@vitest/browser-playwright';
 
 export default defineConfig({
   entry: ['src/index.ts'],
