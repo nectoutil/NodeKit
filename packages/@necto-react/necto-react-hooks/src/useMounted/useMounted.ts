@@ -18,9 +18,7 @@ import type { UseMountedOptions, UseMountedReturn, MountedAccessType } from './u
  * @returns {UseMountedReturn<T>} The mounted state in the requested format.
  */
 export function useMounted<T extends MountedAccessType = 'function'>(
-  options: UseMountedOptions & { type: T } = {} as UseMountedOptions & {
-    type: T;
-  }
+   options: UseMountedOptions & { type?: T } = {}
 ): UseMountedReturn<T> {
   const { defer = false, type = 'function' } = options;
 
