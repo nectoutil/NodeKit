@@ -1,5 +1,11 @@
 # @necto/strings
 
+## 1.10.0
+
+### Minor Changes
+
+- c5fe910: Fxied Slugify
+
 ## 1.9.4
 
 ### Patch Changes
