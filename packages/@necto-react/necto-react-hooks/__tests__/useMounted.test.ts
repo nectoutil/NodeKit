@@ -21,6 +21,12 @@ describe('useMounted', () => {
     expect(typeof result.current).toBe('function');
   });
 
+  it('should accept options without a type', () => {
+    const { result } = renderHook(() => useMounted({ defer: true }));
+  
+    expect(typeof result.current).toBe('function');
+  });
+
   it('should return true when component is mounted', () => {
     const { result } = renderHook(() => useMounted());
 
