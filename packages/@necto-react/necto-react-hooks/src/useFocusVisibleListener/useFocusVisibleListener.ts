@@ -5,10 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// biome-ignore-all lint/suspicious/noExplicitAny: Explicit any okay here.
-// biome-ignore-all lint/style/noNonNullAssertion: Null assertions okay here.
-// biome-ignore-all lint/correctness/useExhaustiveDependencies: Intentional dependency management.
-// biome-ignore-all lint/correctness/useHookAtTopLevel: Conditional hook usage is intentional.
+// oxlint-disable typescript/no-explicit-any -- Explicit any okay here.
+// oxlint-disable typescript/no-non-null-assertion -- Null assertions okay here.
+// oxlint-disable react-hooks/exhaustive-deps -- Intentional dependency management.
 
 import { isMacOS } from 'std-env';
 import { useEffect } from 'react';
@@ -23,7 +22,6 @@ import type {
 } from './useFocusVisibleListener.types';
 
 function triggerChangeHandlers(modality: Modality, e: HandlerEvent) {
-  // biome-ignore lint/suspicious/useIterableCallbackReturn: Implicit return is intentional and harmless here.
   changeHandlers.forEach((handler: Handler) => handler(modality, e));
 }
 

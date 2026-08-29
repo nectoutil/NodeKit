@@ -15,6 +15,9 @@ export interface SlugifyOptions {
   /** Convert to lowercase. Defaults to `true`. */
   lower?: boolean;
 
+  /** Remove symbols (anything that isn't a letter, number, separator or dot). Defaults to `true`. */
+  strip?: boolean;
+
   /** Strip all characters that aren't alphanumeric or the replacement. Defaults to `false`. */
   strict?: boolean;
 

@@ -1,4 +1,4 @@
-// biome-ignore-all lint/suspicious/noExplicitAny: Popper hook requires any.
+// oxlint-disable typescript/no-explicit-any -- Popper hook requires any.
 
 /**
  * Copyright (c) Corinvo, LLC. and affiliates.
@@ -99,7 +99,7 @@ export function usePopper(options: UsePopperOptions = {}): UsePopperReturn {
   const pendingDataRef = useRef<(ComputePositionResult & { isPositioned: boolean }) | null>(null);
   const rafIdRef = useRef<number | null>(null);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: isMountedRef is a stable ref from useMounted, not a reactive dependency.
+  // oxlint-disable-next-line react-hooks/exhaustive-deps -- isMountedRef is a stable ref from useMounted, not a reactive dependency.
   const flushPending = useCallback(() => {
     rafIdRef.current = null;
     const next = pendingDataRef.current;
@@ -112,9 +112,10 @@ export function usePopper(options: UsePopperOptions = {}): UsePopperReturn {
         setData(next);
       });
     }
+    // oxlint-disable-next-line react-hooks/exhaustive-deps -- isMountedRef is a stable ref from useMounted, not a reactive dependency
   }, [setData]);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: isMountedRef is a stable ref from useMounted, not a reactive dependency.
+  // oxlint-disable-next-line react-hooks/exhaustive-deps -- isMountedRef is a stable ref from useMounted, not a reactive dependency.
   const update = useCallback(() => {
     if (!referenceRef.current || !floatingRef.current) return;
 
@@ -145,7 +146,7 @@ export function usePopper(options: UsePopperOptions = {}): UsePopperReturn {
   useLayoutEffect(() => {
     if (open === false && dataRef.current.isPositioned) {
       dataRef.current.isPositioned = false;
-      setData((data) => ({ ...data, isPositioned: false }));
+      setData((current) => ({ ...current, isPositioned: false }));
     }
   }, [open, setData]);
 

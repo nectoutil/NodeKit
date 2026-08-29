@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// biome-ignore-all lint/suspicious/noExplicitAny: Explicit any is required for generic state handling.
-// biome-ignore-all lint/style/noNonNullAssertion: Non-null assertions are intentional in state internals.
+// oxlint-disable typescript/no-explicit-any -- Explicit any is required for generic state handling.
+// oxlint-disable typescript/no-non-null-assertion -- Non-null assertions are intentional in state internals.
 
 import { isWritableState } from './helpers';
 
@@ -30,12 +30,10 @@ export function flushCallbacks(ctx: StoreContext): void {
     const callbacks = new Set<() => void>();
     const add = callbacks.add.bind(callbacks);
 
-    // biome-ignore lint/suspicious/useIterableCallbackReturn: Implicit void return is intentional and harmless here.
     [...ctx.changedStates].forEach((s) => ctx.mountedMap.get(s)?.listeners.forEach(add));
     ctx.changedStates.clear();
 
     [...ctx.unmountCallbacks, ...ctx.mountCallbacks].forEach(add);
-    // biome-ignore lint/suspicious/useIterableCallbackReturn: Implicit void return is intentional and harmless here.
     [ctx.unmountCallbacks, ctx.mountCallbacks].forEach((c) => c.clear());
 
     callbacks.forEach(call);

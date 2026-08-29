@@ -5,8 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// biome-ignore-all lint/suspicious/noExplicitAny: Explicit any okay for tests.
-
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 
 if (typeof window !== 'undefined' && typeof window.PointerEvent === 'undefined') {

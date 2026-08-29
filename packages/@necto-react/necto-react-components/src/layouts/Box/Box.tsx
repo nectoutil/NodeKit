@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// biome-ignore-all lint/correctness/noUnusedVariables: Polymorphic props destructuring.
-// biome-ignore-all lint/suspicious/noExplicitAny: Polymorphic component requires any for dynamic element types.
+// oxlint-disable no-unused-vars -- Polymorphic props destructuring.
+// oxlint-disable typescript/no-explicit-any -- Polymorphic component requires any for dynamic element types.
 /**
  * Copyright (c) Corinvo, LLC. and affiliates.
  *

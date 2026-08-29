@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// biome-ignore-all lint/suspicious/noExplicitAny: This file intentionally uses 'any' for generic prop merging.
+// oxlint-disable typescript/no-explicit-any -- This file intentionally uses 'any' for generic prop merging.
 
 /**
  * Copyright (c) Corinvo, LLC. and affiliates.

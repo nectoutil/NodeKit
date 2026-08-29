@@ -5,8 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// biome-ignore-all lint/suspicious/noConfusingVoidType: void is intentional in callback return types.
-
 import type { Store } from './store';
 
 export type Getter = <Value>(state: State<Value>) => Value;

@@ -6,7 +6,7 @@
  *
  */
 
-// biome-ignore-all lint/suspicious/noExplicitAny: Polymorphic component requires any for dynamic element types.
+// oxlint-disable typescript/no-explicit-any -- Polymorphic component requires any for dynamic element types.
 
 import { Children, forwardRef, cloneElement, createElement, isValidElement } from 'react';
 import { DOM } from '@necto/constants';

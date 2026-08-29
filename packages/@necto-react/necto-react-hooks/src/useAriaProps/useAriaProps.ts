@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// biome-ignore-all lint/suspicious/noExplicitAny: Any for aria props is fine.
+// oxlint-disable typescript/no-explicit-any -- Any for aria props is fine.
 
 import { useMemo } from 'react';
 import { AriaProps } from '@necto/dom';

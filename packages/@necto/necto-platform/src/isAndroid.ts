@@ -14,7 +14,7 @@ function testUserAgent(re: RegExp) {
     return false;
   }
   return (
-    //@ts-expect-error
+    // @ts-expect-error -- userAgentData is experimental and absent from the Navigator type
     window.navigator.userAgentData?.brands.some((brand: { brand: string; version: string }) =>
       re.test(brand.brand)
     ) || re.test(window.navigator.userAgent)

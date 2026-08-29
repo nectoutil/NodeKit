@@ -5,9 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// biome-ignore-all lint/complexity/useLiteralKeys: Key literals are okay here for React backwards compatibility.
-// biome-ignore-all lint/correctness/useHookAtTopLevel: Conditional hook calls OK since it is for backwards compatibility.
-
 import { registry, defaultContext, idsUpdaterMap } from './hookContext';
 import React, { useRef, useState, useEffect, useId as useReactId } from 'react';
 
@@ -51,6 +48,7 @@ export function useId(options: UseIdOptions = {}): string {
 
     return () => {
       if (registry) {
+        // oxlint-disable-next-line react-hooks/exhaustive-deps -- cleanupRef.current is read intentionally at cleanup time
         registry.unregister(cleanupRef.current);
       }
       idsUpdaterMap.delete(id);

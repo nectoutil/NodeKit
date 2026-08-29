@@ -81,7 +81,7 @@ export function useScrollLock(options: UseScrollLockOptions = {}): UseScrollLock
     return (): void => {
       unlock();
     };
-  }, [autoLock, targetProp, lock, unlock]);
+  }, [autoLock, targetProp]);
 
   return { isLocked, lock, unlock };
 }

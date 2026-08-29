@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// biome-ignore-all lint/style/noNonNullAssertion: Non-null assertions are intentional in state internals.
+// oxlint-disable typescript/no-non-null-assertion -- Non-null assertions are intentional in state internals.
 
 import {
   hasInitialValue,

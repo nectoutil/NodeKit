@@ -1,5 +1,3 @@
-// biome-ignore-all lint/suspicious/noExplicitAny: Explicit any okay for tests.
-
 /**
  * Copyright (c) Corinvo, LLC. and affiliates.
  *

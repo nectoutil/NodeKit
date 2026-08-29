@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// biome-ignore-all lint/suspicious/noExplicitAny: Polymorphic + generic component requires any for forwardRef typing.
+// oxlint-disable typescript/no-explicit-any -- Polymorphic + generic component requires any for forwardRef typing.
 
 import { forwardRef } from 'react';
 import { useOverflow } from '@necto-react/hooks';

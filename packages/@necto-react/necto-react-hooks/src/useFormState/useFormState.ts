@@ -5,8 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// biome-ignore-all lint/correctness/useHookAtTopLevel: Conditional hook usage is intentional.
-
 import { useRef, useMemo, useState, useEffect, useContext, createContext } from 'react';
 
 import type {

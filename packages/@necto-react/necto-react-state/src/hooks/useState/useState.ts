@@ -42,7 +42,7 @@ export function useState<Value>(
         configurable: true
       },
       set: {
-        value: (value: Value): void => setter(value),
+        value: (next: Value): void => setter(next),
         writable: true,
         configurable: true,
         enumerable: false

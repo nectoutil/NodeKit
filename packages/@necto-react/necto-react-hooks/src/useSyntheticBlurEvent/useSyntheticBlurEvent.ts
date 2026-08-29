@@ -66,59 +66,55 @@ export function useSyntheticBlurEvent<T extends Element = Element>(
   });
 
   // Callback to handle the blur event logic.
-  return useCallback(
-    (e: FocusEvent<T>) => {
-      if (
-        e.target instanceof HTMLButtonElement ||
-        e.target instanceof HTMLInputElement ||
-        e.target instanceof HTMLTextAreaElement ||
-        e.target instanceof HTMLSelectElement
-      ) {
-        stateRef.current.isFocused = true;
+  return useCallback((e: FocusEvent<T>) => {
+    if (
+      e.target instanceof HTMLButtonElement ||
+      e.target instanceof HTMLInputElement ||
+      e.target instanceof HTMLTextAreaElement ||
+      e.target instanceof HTMLSelectElement
+    ) {
+      stateRef.current.isFocused = true;
 
-        const target = e.target;
-        const onBlurHandler: EventListenerOrEventListenerObject = (event) => {
-          stateRef.current.isFocused = false;
+      const target = e.target;
+      const onBlurHandler: EventListenerOrEventListenerObject = (event) => {
+        stateRef.current.isFocused = false;
 
-          if (target.disabled) {
-            // Dispatch a synthetic React event for backward compatibility.
-            const syntheticEvent = createSyntheticEvent<FocusEvent<T>>(event);
-            dispatchBlur(syntheticEvent);
-          }
+        if (target.disabled) {
+          // Dispatch a synthetic React event for backward compatibility.
+          const syntheticEvent = createSyntheticEvent<FocusEvent<T>>(event);
+          dispatchBlur(syntheticEvent);
+        }
 
-          // Cleanup the MutationObserver once the target is blurred.
-          if (stateRef.current.observer) {
-            stateRef.current.observer.disconnect();
-            stateRef.current.observer = null;
-          }
-        };
+        // Cleanup the MutationObserver once the target is blurred.
+        if (stateRef.current.observer) {
+          stateRef.current.observer.disconnect();
+          stateRef.current.observer = null;
+        }
+      };
 
-        // Add a one-time blur event listener.
-        target.addEventListener('focusout', onBlurHandler, { once: true });
+      // Add a one-time blur event listener.
+      target.addEventListener('focusout', onBlurHandler, { once: true });
 
-        // Set up a MutationObserver to monitor changes to the 'disabled' attribute.
-        stateRef.current.observer = new MutationObserver(() => {
-          if (stateRef.current.isFocused && target.disabled) {
-            stateRef.current.observer?.disconnect();
-            const relatedTargetEl =
-              target === document.activeElement ? null : document.activeElement;
-            target.dispatchEvent(new FocusEvent('blur', { relatedTarget: relatedTargetEl }));
-            target.dispatchEvent(
-              new FocusEvent('focusout', {
-                bubbles: true,
-                relatedTarget: relatedTargetEl
-              })
-            );
-          }
-        });
+      // Set up a MutationObserver to monitor changes to the 'disabled' attribute.
+      stateRef.current.observer = new MutationObserver(() => {
+        if (stateRef.current.isFocused && target.disabled) {
+          stateRef.current.observer?.disconnect();
+          const relatedTargetEl = target === document.activeElement ? null : document.activeElement;
+          target.dispatchEvent(new FocusEvent('blur', { relatedTarget: relatedTargetEl }));
+          target.dispatchEvent(
+            new FocusEvent('focusout', {
+              bubbles: true,
+              relatedTarget: relatedTargetEl
+            })
+          );
+        }
+      });
 
-        // Observe changes to the 'disabled' attribute of the target element.
-        stateRef.current.observer.observe(target, {
-          attributes: true,
-          attributeFilter: ['disabled']
-        });
-      }
-    },
-    [dispatchBlur]
-  );
+      // Observe changes to the 'disabled' attribute of the target element.
+      stateRef.current.observer.observe(target, {
+        attributes: true,
+        attributeFilter: ['disabled']
+      });
+    }
+  }, []);
 }

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// biome-ignore-all lint/suspicious/noExplicitAny: Explicit any okay for this function context.
+// oxlint-disable typescript/no-explicit-any -- Explicit any okay for this function context.
 
 import { useCallback, useRef, useLayoutEffect, useEffect } from 'react';
 

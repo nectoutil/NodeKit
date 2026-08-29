@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// biome-ignore-all lint/suspicious/noExplicitAny: Focusable hook requires any.
+// oxlint-disable typescript/no-explicit-any -- Focusable hook requires any.
 
 import { useFocus, useKeyboard, getInteractionModality } from '@necto-react/hooks';
 import {

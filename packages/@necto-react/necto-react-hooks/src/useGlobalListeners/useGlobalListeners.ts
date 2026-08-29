@@ -50,7 +50,7 @@ export function useGlobalListeners(): UseGlobalListenersReturn {
       options?: boolean | EventListenerOptions
     ) => {
       const storedListener = globalListeners.current.get(listener);
-      // @ts-expect-error
+      // @ts-expect-error -- stored listener union is narrowed at runtime based on the saved options
       const fn = storedListener?.options?.once ? storedListener.fn : listener;
 
       eventTarget.removeEventListener(type, fn as EventListener, options);

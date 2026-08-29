@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// biome-ignore-all lint/suspicious/noExplicitAny: Event type requires any.
+// oxlint-disable typescript/no-explicit-any -- Event type requires any.
 
 import { isAndroid } from '@necto/platform';
 
