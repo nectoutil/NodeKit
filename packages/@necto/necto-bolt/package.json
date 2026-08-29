@@ -1,10 +1,13 @@
 {
   "name": "@necto/bolt",
-  "version": "1.0.2",
+  "version": "0.0.0",
   "type": "module",
   "description": "Necto's super fast and easy HTTP server.",
   "author": "Corinvo OSS Team",
   "license": "MIT",
+  "scripts": {
+    "build": "vp pack --format esm,cjs --dts --minify --sourcemap"
+  },
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",

@@ -18,6 +18,9 @@ export type MountedAccessType = 'function' | 'ref' | 'boolean';
 export interface UseMountedOptions {
   /** The type of access to the mounted state. */
   type?: MountedAccessType;
+
+  /** Turn true one task after mount instead of during it */
+  defer?: boolean;
 }
 
 /**

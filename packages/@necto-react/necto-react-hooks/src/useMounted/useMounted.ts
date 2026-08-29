@@ -7,6 +7,7 @@
 
 import { useRef, useState, useCallback, useEffect } from 'react';
 
+import type { RefObject } from 'react';
 import type { UseMountedOptions, UseMountedReturn, MountedAccessType } from './useMounted.types';
 
 /**
@@ -21,24 +22,42 @@ export function useMounted<T extends MountedAccessType = 'function'>(
     type: T;
   }
 ): UseMountedReturn<T> {
-  const { type = 'function' } = options;
+  const { defer = false, type = 'function' } = options;
 
-  const mountedRef = useRef<boolean>(false);
   const [mountedState, setMountedState] = useState(false);
-  const get = useCallback(() => mountedRef.current, []);
+  const mountedRef: RefObject<boolean> = useRef<boolean>(false);
+
+  const get = useCallback((): boolean => mountedRef.current, []);
 
   useEffect(() => {
-    mountedRef.current = true;
-    setMountedState(true);
+    let timeout: ReturnType<typeof setTimeout> | undefined;
 
-    return () => {
+    const mount = (): void => {
+      mountedRef.current = true;
+      setMountedState(true);
+    };
+
+    if (defer) {
+      timeout = setTimeout(mount);
+    } else {
+      mount();
+    }
+
+    return (): void => {
+      clearTimeout(timeout);
+
       mountedRef.current = false;
       setMountedState(false);
     };
-  }, []);
+  }, [defer]);
 
-  if (type === 'ref') return mountedRef as UseMountedReturn<T>;
-  if (type === 'boolean') return mountedState as UseMountedReturn<T>;
+  if (type === 'ref') {
+    return mountedRef as UseMountedReturn<T>;
+  }
+
+  if (type === 'boolean') {
+    return mountedState as UseMountedReturn<T>;
+  }
 
   return get as UseMountedReturn<T>;
 }
