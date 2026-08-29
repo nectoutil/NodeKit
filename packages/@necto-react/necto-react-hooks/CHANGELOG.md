@@ -1,5 +1,11 @@
 # @necto-react/hooks
 
+## 2.23.0
+
+### Minor Changes
+
+- cb2fb22: Added type boolean as default prop
+
 ## 2.22.0
 
 ### Minor Changes
