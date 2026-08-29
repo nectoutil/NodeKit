@@ -8,9 +8,9 @@
 
 // oxlint-disable typescript/no-explicit-any -- Polymorphic component requires any for dynamic element types.
 
-import { Children, forwardRef, cloneElement, createElement, isValidElement } from 'react';
 import { DOM } from '@necto/constants';
 import { capitalize } from '@necto/strings';
+import { Children, forwardRef, cloneElement, createElement, isValidElement } from 'react';
 
 import { DEFAULT_PRIMITIVE_TAG, PRIMITIVE_NAME } from './constants';
 
