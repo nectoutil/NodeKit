@@ -15,27 +15,27 @@ describe('useMounted', () => {
     vi.useRealTimers();
   });
 
-  it('should return a function by default', () => {
+  it('should return a boolean by default', () => {
     const { result } = renderHook(() => useMounted());
 
-    expect(typeof result.current).toBe('function');
+    expect(typeof result.current).toBe('boolean');
   });
 
   it('should accept options without a type', () => {
     const { result } = renderHook(() => useMounted({ defer: true }));
-  
-    expect(typeof result.current).toBe('function');
+
+    expect(typeof result.current).toBe('boolean');
   });
 
   it('should return true when component is mounted', () => {
-    const { result } = renderHook(() => useMounted());
+    const { result } = renderHook(() => useMounted({ type: 'function' }));
 
     act(() => {});
     expect(result.current()).toBe(true);
   });
 
   it('should return false after unmount', () => {
-    const { result, unmount } = renderHook(() => useMounted());
+    const { result, unmount } = renderHook(() => useMounted({ type: 'function' }));
 
     act(() => {});
     expect(result.current()).toBe(true);
@@ -91,7 +91,7 @@ describe('useMounted', () => {
     vi.useFakeTimers();
 
     const ref = renderHook(() => useMounted({ type: 'ref', defer: true }));
-    const get = renderHook(() => useMounted({ defer: true }));
+    const get = renderHook(() => useMounted({ type: 'function', defer: true }));
 
     expect(ref.result.current.current).toBe(false);
     expect(get.result.current()).toBe(false);
