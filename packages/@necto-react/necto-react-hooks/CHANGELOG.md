@@ -1,5 +1,11 @@
 # @necto-react/hooks
 
+## 2.22.0
+
+### Minor Changes
+
+- 956c338: Made type prop optional
+
 ## 2.21.1
 
 ### Patch Changes
