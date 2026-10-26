@@ -6,6 +6,8 @@
  *
  */
 
+import { min } from '@necto/math';
+
 /**
  * Generates cryptographically secure random bytes.
  *
@@ -16,30 +18,13 @@
  * @returns A Uint8Array of cryptographically secure random bytes.
  */
 export function randomBytes(size: number): Uint8Array {
-  if (typeof process !== 'undefined' && process.versions?.node) {
-    const nodeCrypto = require('node:crypto') as typeof import('node:crypto');
-    const buf: Buffer<ArrayBuffer> = nodeCrypto.randomBytes(size);
-
-    return new Uint8Array(buf.buffer, buf.byteOffset, buf.byteLength);
-  }
-
+  const maxBytes: number = 65_536;
   const bytes: Uint8Array<ArrayBuffer> = new Uint8Array(size);
 
-  if (size > 0) {
-    const MAX_BYTES = 65536;
-
-    if (size > MAX_BYTES) {
-      for (let offset: number = 0; offset < size; offset += MAX_BYTES) {
-        const slice: Uint8Array<ArrayBuffer> = bytes.subarray(
-          offset,
-          Math.min(offset + MAX_BYTES, size)
-        );
-
-        crypto.getRandomValues(slice);
-      }
-    } else {
-      crypto.getRandomValues(bytes);
-    }
+  for (let offset: number = 0; offset < size; offset += maxBytes) {
+    globalThis.crypto.getRandomValues(
+      bytes.subarray(offset, min(offset + maxBytes, size))
+    );
   }
 
   return bytes;

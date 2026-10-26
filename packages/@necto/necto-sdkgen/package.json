@@ -1,0 +1,9 @@
+{
+  "name": "@necto/sdkgen",
+  "scripts": {
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@redocly/openapi-core": "^2.71.1"
+  }
+}
