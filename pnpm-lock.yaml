@@ -676,13 +676,21 @@ importers:
         specifier: workspace:*
         version: link:../../@necto-react/necto-react-state
 
-  packages/@necto/necto-sdk-ir: {}
-
   packages/@necto/necto-sdkgen:
     dependencies:
+      '@necto/strings':
+        specifier: workspace:*
+        version: link:../necto-strings
+    devDependencies:
       '@redocly/openapi-core':
         specifier: ^2.71.1
         version: 2.71.1
+      '@types/ejs':
+        specifier: ^3.1.5
+        version: 3.1.5
+      ejs:
+        specifier: ^7.0.2
+        version: 7.0.2
 
   packages/@necto/necto-state:
     devDependencies:
@@ -2132,6 +2140,9 @@ packages:
   '@types/deno@2.7.0':
     resolution: {integrity: sha512-Y6fWcV8KpYeO3Lik/RiYnUxtr/LWqoeACciU0CA+dr1U/45tGgaX3HWQQAPCNN53raN4Rr4Fht4y6qsUH57fDA==}
 
+  '@types/ejs@3.1.5':
+    resolution: {integrity: sha512-nv+GSx77ZtXiJzwKdsASqi+YQ5Z7vwHsTP0JY2SiQgjGckkBRKZnk8nIM+7oUZ1VCtuTz0+By4qVR7fqzp/Dfg==}
+
   '@types/estree@1.0.8':
     resolution: {integrity: sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w==}
 
@@ -2710,6 +2721,11 @@ packages:
 
   ecdsa-sig-formatter@1.0.11:
     resolution: {integrity: sha512-nagl3RYrbNv6kQkeJIpt6NJZy8twLB/2vtz6yN9Z4vRKHN4/QZJIEbqohALSgwKdnksuY3k5Addp5lg8sVoVcQ==}
+
+  ejs@7.0.2:
+    resolution: {integrity: sha512-LcDSEP6Oclb9sTiSyG0MpG0RuKvLDRxCOOt+2sIk+kdk1rMkFU8SRnT0qaNt5zvU0LOV1YXXOvIoZL/sKwabvw==}
+    engines: {node: '>=0.12.18'}
+    hasBin: true
 
   electron-to-chromium@1.5.249:
     resolution: {integrity: sha512-5vcfL3BBe++qZ5kuFhD/p8WOM1N9m3nwvJPULJx+4xf2usSlZFJ0qoNYO2fOX4hi3ocuDcmDobtA+5SFr4OmBg==}
@@ -5726,6 +5742,8 @@ snapshots:
 
   '@types/deno@2.7.0': {}
 
+  '@types/ejs@3.1.5': {}
+
   '@types/estree@1.0.8': {}
 
   '@types/estree@1.0.9': {}
@@ -6279,6 +6297,8 @@ snapshots:
   ecdsa-sig-formatter@1.0.11:
     dependencies:
       safe-buffer: 5.2.1
+
+  ejs@7.0.2: {}
 
   electron-to-chromium@1.5.249: {}
 

@@ -6,7 +6,10 @@
  */
 
 export { slugify } from './slugify';
+export { undoCase } from './undo-case';
+export { camelCase } from './camel-case';
+export { snakeCase } from './snake-case';
 export { kebabCase } from './kebab-case';
+export { spaceCase } from './space-case';
 export { capitalize } from './capitalize';
-
 export type { SlugifyOptions, CharMap, LocaleMap } from './types';

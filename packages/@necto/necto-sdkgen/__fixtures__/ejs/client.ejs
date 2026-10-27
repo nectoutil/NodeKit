@@ -1,0 +1,19 @@
+<%_ for (const service of services) { -%>
+import { <%- service.name %> } from './resources/<%- kebabCase(service.name) %>.js';
+<%_ } -%>
+import type { ClientConfig } from './config.js';
+
+export class <%- namespacePascal %>Client {
+  private readonly config: ClientConfig;
+
+<%_ for (const service of services) { -%>
+  readonly <%- camelCase(service.name) %>: <%- service.name %>;
+<%_ } -%>
+
+  constructor(config: ClientConfig) {
+    this.config = config;
+<%_ for (const service of services) { -%>
+    this.<%- camelCase(service.name) %> = new <%- service.name %>(this.config);
+<%_ } -%>
+  }
+}

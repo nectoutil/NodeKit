@@ -4,6 +4,11 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@redocly/openapi-core": "^2.71.1"
+    "@necto/strings": "workspace:*"
+  },
+  "devDependencies": {
+    "@redocly/openapi-core": "^2.71.1",
+    "@types/ejs": "^3.1.5",
+    "ejs": "^7.0.2"
   }
 }
