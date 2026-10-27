@@ -6,12 +6,27 @@
  *
  */
 
-export type SpecFormat = 'openapi' | 'asyncapi';
+export interface Model {
+  name: string;
+}
+
+export interface Enum {
+  name: string;
+  values: string[];
+}
+
+export interface Service {
+  name: string;
+}
 
 export interface ApiSpec {
-  format: SpecFormat;
+  name: string;
   version: string;
   document: Record<string, unknown>;
   sourceUrl: string;
   dependencies: string[];
+
+  models: Model[];
+  enums: Enum[];
+  services: Service[];
 }

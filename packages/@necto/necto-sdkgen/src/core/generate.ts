@@ -6,16 +6,26 @@
  *
  */
 
-import type { ApiSpec } from "../ir/types";
+import { generateFiles } from './generate-files';
+
+import type { ApiSpec } from '../ir';
+import type { Emitter } from '../emitter';
+import type { GeneratedFile } from './types';
 
 export async function generate(
-  spec: any,
+  spec: ApiSpec,
+  emitter: Emitter,
   options: {
+    namespace: string;
+    outDir?: string;
     dryRun?: boolean;
   }
-): Promise<any[]> {
+): Promise<GeneratedFile[]> {
+  const { dryRun, outDir, namespace } = options;
 
-  console.log(spec);
+  const files = generateFiles(spec, emitter, {
+    namespace
+  });
 
   return [];
 }
