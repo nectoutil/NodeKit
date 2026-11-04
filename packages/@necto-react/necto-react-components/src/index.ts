@@ -6,6 +6,7 @@
  *
  */
 
+export * from './Portal';
 export * from './layouts';
 export * from './Overflow';
 export * from './Primitive';

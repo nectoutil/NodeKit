@@ -6,8 +6,8 @@
  *
  */
 
-import type { ElementType, ComponentPropsWithRef, ForwardRefExoticComponent } from 'react';
 import type { DOM } from '@necto/constants';
+import type { ElementType, ComponentPropsWithRef, ForwardRefExoticComponent } from 'react';
 
 /**
  * Props for the polymorphic Primitive component.
@@ -29,5 +29,9 @@ export type PrimitiveProps<E extends ElementType> = ComponentPropsWithRef<E> & {
 export type Primitives = {
   [E in (typeof DOM.HTML_TAGS)[number] as E extends ElementType
     ? E
+    : never]: ForwardRefExoticComponent<PrimitiveProps<E & ElementType>>;
+} & {
+  [E in (typeof DOM.HTML_TAGS)[number] as E extends ElementType
+    ? Capitalize<E>
     : never]: ForwardRefExoticComponent<PrimitiveProps<E & ElementType>>;
 };

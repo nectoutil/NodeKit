@@ -46,7 +46,9 @@ const PrimitiveFn = <E extends ElementType = (typeof HTMLElements)['Div']>(
   if (asChild) {
     const child: Element = Children.only(children);
 
-    if (!isValidElement(child)) return null;
+    if (!isValidElement(child)) {
+      return null;
+    }
 
     return cloneElement(child as ReactElement<any>, {
       ...props,
@@ -70,9 +72,9 @@ export const Primitive: (<E extends ElementType = (typeof HTMLElements)['Div']>(
   FunctionComponent<PrimitiveProps<ElementType>> &
   Primitives & { [k: string]: any } = new Proxy(forwardRef(PrimitiveFn), {
   get(
-    target: ForwardRefExoticComponent<Omit<any, 'ref'> & RefAttributes<any>>,
+    receiver: any,
     prop: string | symbol,
-    receiver: any
+    target: ForwardRefExoticComponent<Omit<any, 'ref'> & RefAttributes<any>>
   ): any {
     if (!tagComponents) {
       tagComponents = {};
