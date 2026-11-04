@@ -97,6 +97,9 @@ importers:
       '@necto-react/hooks':
         specifier: workspace:*
         version: link:../necto-react-hooks
+      '@necto-react/state':
+        specifier: workspace:*
+        version: link:../necto-react-state
       '@necto/constants':
         specifier: workspace:*
         version: link:../../@necto/necto-constants
@@ -517,6 +520,9 @@ importers:
       '@necto/platform':
         specifier: workspace:*
         version: link:../necto-platform
+      '@necto/strings':
+        specifier: workspace:*
+        version: link:../necto-strings
       '@necto/types':
         specifier: workspace:*
         version: link:../necto-types

@@ -8,4 +8,4 @@
 
 export { Primitive } from './Primitive';
 
-export type { PrimitiveProps } from './Primitive.types';
+export type { Primitives, PrimitiveProps } from './Primitive.types';

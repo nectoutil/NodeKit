@@ -34,6 +34,7 @@
     }
   },
   "dependencies": {
+    "@necto/strings": "workspace:*",
     "@necto/constants": "workspace:*",
     "@necto/platform": "workspace:*",
     "@necto/types": "workspace:*"

@@ -13,8 +13,8 @@ import styled from '@emotion/styled';
 import { Primitive } from '../Primitive';
 import { SHADOW_BEVEL_NAME } from './constants';
 
-import type { Ref, ReactElement, RefAttributes, ForwardRefExoticComponent } from 'react';
 import type { ShadowBevelProps } from './ShadowBevel.types';
+import type { Ref, ReactElement, RefAttributes, ForwardRefExoticComponent } from 'react';
 
 const StyledShadowBevel = styled(Primitive)`
   --necto-shadow-bevel-content: '';
