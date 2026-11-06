@@ -1,5 +1,11 @@
 # @necto-react/hooks
 
+## 2.24.0
+
+### Minor Changes
+
+- 3a2feee: Added new features to useHover hook to spread more useful props.
+
 ## 2.23.0
 
 ### Minor Changes
