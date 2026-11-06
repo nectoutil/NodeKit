@@ -49,7 +49,7 @@ jobs:
         with:
           name: ${{ env.DEFAULT_ARTIFACT_NAME }}
           overwrite: true
-          retention-days: 1
+          retention-days: 7
           compression-level: 6
           path: packages/**/dist
           if-no-files-found: error
