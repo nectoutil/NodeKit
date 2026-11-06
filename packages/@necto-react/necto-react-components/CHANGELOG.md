@@ -1,5 +1,11 @@
 # @necto-react/components
 
+## 3.4.0
+
+### Minor Changes
+
+- 5a27817: Release the `Portal` component, which renders content into a supplied container or the default portal root.
+
 ## 3.3.9
 
 ### Patch Changes
