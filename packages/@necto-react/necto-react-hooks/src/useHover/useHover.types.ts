@@ -15,6 +15,12 @@ export interface UseHoverProps extends HoverEvent {
   /** Whether hover events are disabled. */
   isDisabled?: boolean;
 
+  /** The delay from hover start. */
+  openDelay?: number;
+
+  /** The delay from hover end. */
+  closeDelay?: number;
+
   /** Called when a hover interaction starts. */
   onHoverStart?: (event: HoverEvent) => void;
 
