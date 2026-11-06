@@ -1,4 +1,5 @@
 {
+  "private": true,
   "name": "@necto/bolt",
   "version": "1.0.0",
   "type": "module",
