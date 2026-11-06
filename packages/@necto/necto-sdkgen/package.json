@@ -1,4 +1,5 @@
 {
+  "private": true,
   "name": "@necto/sdkgen",
   "scripts": {
     "test": "vitest run"
