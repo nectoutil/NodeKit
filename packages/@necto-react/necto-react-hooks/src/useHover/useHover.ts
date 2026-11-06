@@ -12,6 +12,7 @@ import { useGlobalListeners } from '@necto-react/hooks';
 import { getOwnerDocument, nodeContains } from '@necto/dom';
 import { useRef, useState, useCallback, useEffect, useMemo } from 'react';
 
+import type { FocusableElement } from '@necto/types';
 import type { PointerEvent, MouseEvent } from 'react';
 import type { DOMAttributes } from '@necto-react/types';
 import type { UseHoverProps, UseHoverReturn } from './useHover.types';
@@ -23,15 +24,29 @@ import type { UseHoverProps, UseHoverReturn } from './useHover.types';
  * @returns {UseHoverReturn} An object containing hover state and props to spread on the target element.
  */
 export function useHover(props: UseHoverProps = {}): UseHoverReturn {
-  const { onHoverStart, onHoverChange, onHoverEnd, isDisabled } = props;
+  const {
+    isDisabled,
+    onHoverEnd,
+    onHoverStart,
+    onHoverChange,
+    openDelay = 0,
+    closeDelay = 0
+  } = props;
 
   const [isHovered, setHovered] = useState(false);
-  const globalRef = useRef({ hoverCount: 0, ignoreEmulated: false });
+
+  const globalRef = useRef({
+    hoverCount: 0,
+    ignoreEmulated: false
+  });
+
   const state = useRef({
-    isHovered: false,
-    ignoreEmulatedMouseEvents: false,
+    targets: new Set<Element>(),
+    active: false,
     pointerType: '',
-    target: null as EventTarget | null
+    ignoreEmulatedMouseEvents: false,
+    ending: undefined as ReturnType<typeof setTimeout> | undefined,
+    starting: undefined as ReturnType<typeof setTimeout> | undefined
   }).current;
 
   const { addGlobalListener, removeAllGlobalListeners } = useGlobalListeners();
@@ -50,7 +65,9 @@ export function useHover(props: UseHoverProps = {}): UseHoverReturn {
       }
     };
 
-    if (typeof document === 'undefined') return;
+    if (typeof document === 'undefined') {
+      return;
+    }
 
     const global = globalRef.current;
     global.hoverCount++;
@@ -65,7 +82,7 @@ export function useHover(props: UseHoverProps = {}): UseHoverReturn {
       global.hoverCount--;
       if (global.hoverCount === 0) {
         if (typeof PointerEvent !== 'undefined') {
-          document.removeEventListener('pointerup', handleGlobalPointerEvent as any); // cast to any for compiler errors
+          document.removeEventListener('pointerup', handleGlobalPointerEvent as any);
         } else if (isTest) {
           document.removeEventListener('touchend', setGlobalIgnoreEmulatedMouseEvents);
         }
@@ -73,100 +90,151 @@ export function useHover(props: UseHoverProps = {}): UseHoverReturn {
     };
   }, [setGlobalIgnoreEmulatedMouseEvents]);
 
-  // --- Trigger Hover Start Handler ---
+  const scheduleEnd = useCallback(
+    (target: Element | null, pointerType: string) => {
+      clearTimeout(state.starting);
+      state.starting = undefined;
+      clearTimeout(state.ending);
+
+      state.ending = setTimeout(() => {
+        state.ending = undefined;
+
+        if (state.targets.size > 0) {
+          return;
+        }
+
+        removeAllGlobalListeners();
+
+        if (!state.active) {
+          state.pointerType = '';
+          return;
+        }
+
+        state.active = false;
+        state.pointerType = '';
+
+        onHoverEnd?.({
+          // @ts-expect-error -- synthetic hover event shape is not assignable to the base event type
+          type: 'hovered',
+          target,
+          pointerType
+        });
+
+        onHoverChange?.(false);
+        setHovered(false);
+      }, closeDelay);
+    },
+    [closeDelay, onHoverEnd, onHoverChange, removeAllGlobalListeners, state]
+  );
+
+  const triggerHoverEnd = useCallback(
+    (event: PointerEvent | MouseEvent, pointerType: string) => {
+      if (pointerType === 'touch') {
+        return;
+      }
+
+      state.targets.delete(event.currentTarget as Element);
+
+      if (state.targets.size > 0) {
+        return;
+      }
+
+      scheduleEnd(event.currentTarget as Element, pointerType);
+    },
+    [scheduleEnd, state]
+  );
+
   // oxlint-disable-next-line react-hooks/exhaustive-deps -- triggerHoverEnd is declared below and referenced lazily at call time; listing it in deps would cause a TDZ ReferenceError.
   const triggerHoverStart = useCallback(
     (event: PointerEvent | MouseEvent, pointerType: string) => {
       if (
         isDisabled ||
         pointerType === 'touch' ||
-        state.isHovered ||
         !(event.currentTarget && (event.currentTarget as Element).contains(event.target as Node))
       ) {
         return;
       }
 
-      state.isHovered = true;
+      clearTimeout(state.ending);
+      state.ending = undefined;
+
+      const entered = event.currentTarget as Element;
+      const first = state.targets.size === 0;
+
+      state.targets.add(entered);
       state.pointerType = pointerType;
-      state.target = event.currentTarget;
 
-      const hoverDoc = getOwnerDocument(event.target instanceof Element ? event.target : null);
-      if (!hoverDoc) return;
+      if (!first || state.active || state.starting) {
+        return;
+      }
 
-      addGlobalListener(
-        hoverDoc,
-        'pointerover',
-        (e: Event) => {
-          if (
-            state.isHovered &&
-            state.target &&
-            !nodeContains(state.target as Element, e.target as Element)
-          ) {
-            triggerHoverEnd(
-              e as unknown as PointerEvent,
-              (e as unknown as PointerEvent).pointerType
-            );
-          }
-        },
-        { capture: true }
+      const hoverDoc: Document = getOwnerDocument(
+        event.target instanceof Element ? event.target : null
       );
 
-      onHoverStart?.({
-        // @ts-expect-error -- synthetic hover event shape is not assignable to the base event type
-        type: 'hoverstart',
-        target: event.currentTarget,
-        pointerType
-      });
+      if (hoverDoc) {
+        addGlobalListener(
+          hoverDoc,
+          'pointerover',
+          (event: Event) => {
+            const inside = [...state.targets].some((target) =>
+              nodeContains(target, event.target as Element)
+            );
 
-      onHoverChange?.(true);
-      setHovered(true);
+            if (state.targets.size > 0 && !inside) {
+              state.targets.clear();
+              scheduleEnd(entered, (event as unknown as PointerEvent).pointerType);
+            }
+          },
+          {
+            capture: true
+          }
+        );
+      }
+
+      const begin = () => {
+        state.starting = undefined;
+        state.active = true;
+
+        onHoverStart?.({
+          // @ts-expect-error -- synthetic hover event shape is not assignable to the base event type
+          type: 'hoverstart',
+          target: entered,
+          pointerType
+        });
+
+        onHoverChange?.(true);
+        setHovered(true);
+      };
+
+      if (openDelay > 0) {
+        state.starting = setTimeout(begin, openDelay);
+
+        return;
+      }
+
+      begin();
     },
     // oxlint-disable-next-line react-hooks/exhaustive-deps -- triggerHoverEnd is declared below and referenced lazily; adding it would cause a TDZ ReferenceError
     [isDisabled, onHoverStart, onHoverChange, addGlobalListener, state]
   );
 
-  // --- Trigger Hover End Handler ---
-  const triggerHoverEnd = useCallback(
-    (event: PointerEvent | MouseEvent, pointerType: string) => {
-      if (pointerType === 'touch' || !state.isHovered || !state.target) {
-        return;
-      }
-
-      state.isHovered = false;
-      state.pointerType = '';
-      state.target = null;
-
-      removeAllGlobalListeners();
-
-      onHoverEnd?.({
-        // @ts-expect-error -- synthetic hover event shape is not assignable to the base event type
-        type: 'hoverend',
-        target: event.currentTarget,
-        pointerType
-      });
-
-      onHoverChange?.(false);
-      setHovered(false);
-    },
-    [onHoverEnd, onHoverChange, removeAllGlobalListeners, state]
-  );
-
-  const hoverProps = useMemo(() => {
+  const hoverProps: DOMAttributes<FocusableElement> = useMemo(() => {
     const hoverAttrs: DOMAttributes = {};
 
     if (typeof PointerEvent !== 'undefined') {
-      hoverAttrs.onPointerEnter = (e: PointerEvent<Element>) => {
-        if (globalRef.current.ignoreEmulated && e.pointerType === 'mouse') return;
-        triggerHoverStart(e as unknown as PointerEvent, e.pointerType);
+      hoverAttrs.onPointerEnter = (event: PointerEvent<Element>) => {
+        if (globalRef.current.ignoreEmulated && event.pointerType === 'mouse') return;
+        triggerHoverStart(event as unknown as PointerEvent, event.pointerType);
       };
 
-      hoverAttrs.onPointerLeave = (e: PointerEvent<Element>) => {
+      hoverAttrs.onPointerLeave = (event: PointerEvent<Element>) => {
         if (
           !isDisabled &&
-          e.currentTarget instanceof Element &&
-          e.currentTarget.contains(e.target as Node)
+          event.currentTarget instanceof Element &&
+          event.currentTarget.contains(event.target as Node)
         ) {
-          triggerHoverEnd(e as unknown as PointerEvent, e.pointerType);
+          triggerHoverEnd(event as unknown as PointerEvent, event.pointerType);
         }
       };
     } else if (isTest) {
@@ -174,16 +242,17 @@ export function useHover(props: UseHoverProps = {}): UseHoverReturn {
         state.ignoreEmulatedMouseEvents = true;
       };
 
-      hoverAttrs.onMouseEnter = (e: MouseEvent<Element>) => {
+      hoverAttrs.onMouseEnter = (event: MouseEvent<Element>) => {
         if (!state.ignoreEmulatedMouseEvents && !globalRef.current.ignoreEmulated) {
-          triggerHoverStart(e.nativeEvent as unknown as MouseEvent, 'mouse');
+          triggerHoverStart(event.nativeEvent as unknown as MouseEvent, 'mouse');
         }
+
         state.ignoreEmulatedMouseEvents = false;
       };
 
-      hoverAttrs.onMouseLeave = (e: MouseEvent<Element>) => {
-        if (!isDisabled && e.currentTarget.contains(e.target as Node)) {
-          triggerHoverEnd(e.nativeEvent as unknown as MouseEvent, 'mouse');
+      hoverAttrs.onMouseLeave = (event: MouseEvent<Element>) => {
+        if (!isDisabled && event.currentTarget.contains(event.target as Node)) {
+          triggerHoverEnd(event.nativeEvent as unknown as MouseEvent, 'mouse');
         }
       };
     }
@@ -192,10 +261,24 @@ export function useHover(props: UseHoverProps = {}): UseHoverReturn {
   }, [isDisabled, triggerHoverStart, triggerHoverEnd, state]);
 
   useEffect(() => {
-    if (isDisabled && state.isHovered) {
-      triggerHoverEnd({ currentTarget: state.target } as PointerEvent, state.pointerType);
-    }
-  }, [isDisabled, triggerHoverEnd, state.isHovered, state.pointerType, state.target]);
+    if (isDisabled && (state.active || state.targets.size > 0)) {
+      const [target] = state.targets;
 
-  return { hoverProps, isHovered };
+      state.targets.clear();
+      scheduleEnd(target ?? null, state.pointerType);
+    }
+  }, [isDisabled, scheduleEnd, state]);
+
+  useEffect(
+    () => () => {
+      clearTimeout(state.starting);
+      clearTimeout(state.ending);
+    },
+    [state]
+  );
+
+  return {
+    isHovered,
+    hoverProps
+  };
 }
