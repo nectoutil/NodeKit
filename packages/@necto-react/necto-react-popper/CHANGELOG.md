@@ -1,5 +1,12 @@
 # @necto-react/popper
 
+## 0.10.21
+
+### Patch Changes
+
+- Updated dependencies [5a27817]
+  - @necto-react/components@3.4.0
+
 ## 0.10.20
 
 ### Patch Changes
