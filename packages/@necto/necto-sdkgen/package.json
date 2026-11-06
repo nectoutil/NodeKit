@@ -1,0 +1,14 @@
+{
+  "name": "@necto/sdkgen",
+  "scripts": {
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@necto/strings": "workspace:*"
+  },
+  "devDependencies": {
+    "@redocly/openapi-core": "^2.71.1",
+    "@types/ejs": "^3.1.5",
+    "ejs": "^7.0.2"
+  }
+}

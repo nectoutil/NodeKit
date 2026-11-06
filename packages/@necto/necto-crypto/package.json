@@ -24,6 +24,9 @@
     "test": "vitest run",
     "test:coverage": "vitest run --coverage --passWithNoTests"
   },
+  "dependencies": {
+    "@necto/math": "workspace:*"
+  },
   "devDependencies": {
     "@peculiar/webcrypto": "^1.7.1",
     "@stablelib/aes": "^2.0.1",
