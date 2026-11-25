@@ -182,6 +182,9 @@ importers:
       '@necto/id':
         specifier: workspace:*
         version: link:../../@necto/necto-id
+      '@necto/idb':
+        specifier: workspace:*
+        version: link:../../@necto/necto-idb
       '@necto/mergers':
         specifier: workspace:*
         version: link:../../@necto/necto-mergers

@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { KeyValStore } from './keyval-store';
+import { KVStore } from './kv-store';
 
-export const keyval: KeyValStore = new KeyValStore();
+export const kv = new KVStore();
+
+export { kv as keyvalue };

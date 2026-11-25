@@ -7,7 +7,11 @@
 
 export function getIndexedDB(): IDBFactory {
   if (typeof indexedDB === 'undefined') {
-    throw new Error('IndexedDB is not available in this environment');
+    throw new Error(
+      __DEV__
+        ? '[necto.idb] NT0241: IndexedDB is not available in this environment'
+        : '[necto.idb] NT0241: https://necto.dev/errors/NT0241'
+    );
   }
 
   return indexedDB;

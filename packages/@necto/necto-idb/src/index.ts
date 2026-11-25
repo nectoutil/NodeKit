@@ -5,14 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { keyval, KeyValStore } from './keyval';
+export { kv, keyvalue, KVStore } from './keyval';
+export { KVOperations } from './constants';
 export { getIndexedDB, openDatabase, deleteDatabase, promisifyRequest } from './core';
 
 export type {
-  IdbIndex,
-  IdbTable,
-  IdbTableSchema,
-  KeyValListener,
-  KeyValStoreOptions,
+  KVKey,
+  KVValue,
+  KVListener,
+  KVOperation,
+  KVStoreOptions,
   OpenDatabaseOptions
 } from './types';

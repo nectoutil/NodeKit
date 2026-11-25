@@ -5,5 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { keyval } from './keyval';
-export { KeyValStore } from './keyval-store';
+export * from './keyval';
+export * from './kv-store';

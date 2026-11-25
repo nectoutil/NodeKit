@@ -1,10 +1,9 @@
 {
   "name": "@necto/idb",
   "version": "0.1.0",
-  "private": true,
   "description": "Necto's IndexedDB library: promise-based primitives and a key-value store with change subscriptions.",
   "scripts": {
-    "build": "vp pack --format esm,cjs --dts --minify --sourcemap",
+    "build": "vp pack",
     "test": "vitest",
     "test:coverage": "vitest run --coverage --passWithNoTests"
   },
@@ -19,9 +18,19 @@
   "sideEffects": false,
   "exports": {
     ".": {
-      "types": "./dist/index.d.mts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
+      "development": {
+        "types": "./dist/index.d.mts",
+        "import": "./dist/dev/index.mjs",
+        "require": "./dist/dev/index.cjs"
+      },
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     }
   },
   "author": "Corinvo OSS Team",

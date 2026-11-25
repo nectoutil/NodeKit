@@ -7,93 +7,54 @@
 
 import { BROADCAST_CHANNEL_NAME } from '../constants';
 
-import type { Notify, IdbChangeMessage } from '../types';
+import type { Notify, Watcher, IdbChangeMessage } from '../types';
 
-const ALL_KEYS: string = '*';
-
-const scopes: Map<string, Map<string, Set<Notify>>> = new Map();
+const watchers: Set<Watcher> = new Set();
 
 let channel: BroadcastChannel | null = null;
 
-function toKeyId(key: IDBValidKey): string {
-  if (typeof key === 'string') {
-    return `s${key}`;
-  }
-
-  if (typeof key === 'number') {
-    return `n${key}`;
-  }
-
-  if (key instanceof Date) {
-    return `d${key.getTime()}`;
-  }
-
-  if (Array.isArray(key)) {
-    return `[${key.map(toKeyId).join(',')}]`;
-  }
-
-  const bytes: Uint8Array = ArrayBuffer.isView(key)
-    ? new Uint8Array(key.buffer, key.byteOffset, key.byteLength)
-    : new Uint8Array(key);
-
-  return `b${bytes.join(',')}`;
-}
-
-function getChannel(): BroadcastChannel | null {
-  if (channel === null && typeof BroadcastChannel !== 'undefined') {
+function listen(): BroadcastChannel | null {
+  if (!channel && typeof BroadcastChannel !== 'undefined') {
     channel = new BroadcastChannel(BROADCAST_CHANNEL_NAME);
     channel.onmessage = ({ data }: MessageEvent<IdbChangeMessage>): void =>
-      emit(data.scope, data.key);
+      deliver(data.scope, data.key);
   }
 
   return channel;
 }
 
-function emit(scope: string, key?: IDBValidKey): void {
-  const keys = scopes.get(scope);
-
-  // No key means the store was cleared, which affects every subscriber.
-  if (key === undefined) {
-    keys?.forEach((callbacks) => callbacks.forEach((callback) => callback()));
-    return;
+function same(left: IDBValidKey, right: IDBValidKey): boolean {
+  try {
+    return indexedDB.cmp(left, right) === 0;
+  } catch {
+    return false;
   }
+}
 
-  keys?.get(toKeyId(key))?.forEach((callback) => callback());
-  keys?.get(ALL_KEYS)?.forEach((callback) => callback());
+function deliver(scope: string, key?: IDBValidKey): void {
+  for (const watcher of watchers) {
+    if (watcher.scope !== scope) {
+      continue;
+    }
+
+    if (key === undefined || watcher.key === null || same(watcher.key, key)) {
+      watcher.listener(key);
+    }
+  }
 }
 
 export function notify(scope: string, key?: IDBValidKey): void {
-  emit(scope, key);
-  getChannel()?.postMessage(key === undefined ? { scope } : { scope, key });
+  deliver(scope, key);
+
+  listen()?.postMessage(key === undefined ? { scope } : { scope, key });
 }
 
-export function subscribe(scope: string, key: IDBValidKey | null, callback: Notify): () => void {
-  const id: string = key === null ? ALL_KEYS : toKeyId(key);
+export function subscribe(scope: string, key: IDBValidKey | null, listener: Notify): () => void {
+  const watcher: Watcher = { scope, key, listener };
 
-  const keys = scopes.get(scope) ?? new Map<string, Set<Notify>>();
-  const callbacks = keys.get(id) ?? new Set<Notify>();
+  watchers.add(watcher);
 
-  callbacks.add(callback);
-  keys.set(id, callbacks);
-  scopes.set(scope, keys);
+  listen();
 
-  // Opening the channel starts listening for writes from other tabs.
-  getChannel();
-
-  return (): void => {
-    callbacks.delete(callback);
-
-    if (callbacks.size === 0) {
-      keys.delete(id);
-    }
-
-    if (keys.size === 0) {
-      scopes.delete(scope);
-    }
-
-    if (scopes.size === 0 && channel) {
-      channel.close();
-      channel = null;
-    }
-  };
+  return (): void => void watchers.delete(watcher);
 }

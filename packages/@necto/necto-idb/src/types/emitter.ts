@@ -5,7 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export type Notify = () => void;
+export type Notify = (key?: IDBValidKey) => void;
+
+/** One subscription. `key` is null when the listener wants every key in its scope. */
+export interface Watcher {
+  scope: string;
+  key: IDBValidKey | null;
+  listener: Notify;
+}
 
 /** Message sent to other tabs after a write. `key` is omitted when the whole store was cleared. */
 export interface IdbChangeMessage {

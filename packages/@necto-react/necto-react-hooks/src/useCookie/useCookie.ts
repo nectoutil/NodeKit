@@ -47,10 +47,13 @@ export function useCookie<T = string, D extends T | undefined = undefined>(
 
   const raw: string | undefined = useSyncExternalStore(
     subscribe,
-    () => client.get(name),
-    () => serverValue
+    (): string | undefined => client.get(name),
+    (): string | undefined => serverValue
   );
-  const value = useMemo(() => parseValue(raw, parse), [raw]) ?? defaultValue;
+  const value: D | NonNullable<T> | undefined =
+    useMemo(() => {
+      return parseValue(raw, parse);
+    }, [raw]) ?? defaultValue;
 
   const set: UseCookieSetter<T> = useEffectEvent((next, attributes) => {
     const resolved =
@@ -73,7 +76,7 @@ export function useCookie<T = string, D extends T | undefined = undefined>(
   });
 
   return useMemo(
-    () =>
+    (): UseCookieReturn<T, D> =>
       Object.assign([value, set, remove], {
         value,
         set,
@@ -84,6 +87,7 @@ export function useCookie<T = string, D extends T | undefined = undefined>(
   );
 }
 
+/** Reads a cookie value without letting parse errors throw into the hook. */
 function parseValue<T>(raw: string | undefined, parse?: (raw: string) => T): T | undefined {
   if (raw === undefined || !parse) {
     return raw as T | undefined;

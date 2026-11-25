@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export type { Notify, IdbChangeMessage } from './emitter';
 export type { OpenDatabaseOptions } from './open-database';
-export type { IdbIndex, IdbTable, IdbTableSchema } from './db';
-export type { KeyValListener, KeyValStoreOptions } from './keyval-store';
+export type { Notify, Watcher, IdbChangeMessage } from './emitter';
+export type { KVKey, KVValue, KVListener, KVOperation, KVStoreOptions } from './kv-store';

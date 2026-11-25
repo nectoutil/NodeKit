@@ -5,35 +5,37 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { describe, it, expect, vi, afterEach } from 'vitest';
+import { describe, it, expect, expectTypeOf, vi, afterEach } from 'vitest';
 
-import { keyval, KeyValStore, deleteDatabase, openDatabase } from '../src/index';
+import { kv, KVStore, deleteDatabase, openDatabase } from '../src/index';
 
 let counter = 0;
 const created: string[] = [];
 
-function createStore(options: { store?: string; database?: string } = {}): KeyValStore {
-  const store = new KeyValStore({ database: `test-${Date.now()}-${counter++}`, ...options });
+function createStore<Schema = never>(
+  options: { store?: string; database?: string; scope?: string } = {}
+): KVStore<Schema> {
+  const store = new KVStore<Schema>({ database: `test-${Date.now()}-${counter++}`, ...options });
   created.push(store.databaseName);
   return store;
 }
 
 afterEach(async () => {
-  await keyval.clear();
+  await kv.clear();
   await Promise.all(created.splice(0).map((name) => deleteDatabase(name)));
 });
 
-describe('KeyValStore', () => {
+describe('KVStore', () => {
   describe('naming', () => {
     it('prefixes database names with necto', () => {
-      expect(keyval.databaseName).toBe('necto:keyval');
-      expect(keyval.storeName).toBe('keyval');
-      expect(new KeyValStore({ database: 'app', store: 'drafts' }).databaseName).toBe('necto:app');
+      expect(kv.databaseName).toBe('necto:keyval');
+      expect(kv.storeName).toBe('keyval');
+      expect(new KVStore({ database: 'app', store: 'drafts' }).databaseName).toBe('necto:app');
     });
 
     it('supports a custom prefix or no prefix', () => {
-      expect(new KeyValStore({ database: 'app', prefix: 'acme' }).databaseName).toBe('acme:app');
-      expect(new KeyValStore({ database: 'app', prefix: false }).databaseName).toBe('app');
+      expect(new KVStore({ database: 'app', prefix: 'acme' }).databaseName).toBe('acme:app');
+      expect(new KVStore({ database: 'app', prefix: false }).databaseName).toBe('app');
     });
 
     it('creates the database under the prefixed name', async () => {
@@ -81,25 +83,21 @@ describe('KeyValStore', () => {
       expect(await store.get(new Date(0))).toBe('date');
     });
 
-    it('works on the default keyval instance', async () => {
-      await keyval.set('a', 1);
+    it('works on the default kv instance', async () => {
+      await kv.set('a', 1);
 
-      expect(await keyval.get('a')).toBe(1);
+      expect(await kv.get('a')).toBe(1);
     });
   });
 
   describe('many', () => {
     it('sets, gets and deletes many keys', async () => {
       const store = createStore();
-      await store.setMany([
-        ['a', 1],
-        ['b', 2],
-        ['c', 3]
-      ]);
+      await store.setMany({ a: 1, b: 2, c: 3 });
 
       expect(await store.getMany(['a', 'b', 'x'])).toEqual([1, 2, undefined]);
 
-      await store.deleteMany(['a', 'b']);
+      await store.delete('a', 'b');
 
       expect(await store.keys()).toEqual(['c']);
     });
@@ -107,18 +105,18 @@ describe('KeyValStore', () => {
 
   describe('update', () => {
     it('updates from the previous value and returns the new value', async () => {
-      const store = createStore();
+      const store = createStore<{ n: number }>();
 
-      expect(await store.update<number>('n', (prev = 0) => prev + 1)).toBe(1);
-      expect(await store.update<number>('n', (prev = 0) => prev + 1)).toBe(2);
+      expect(await store.update('n', (prev = 0) => prev + 1)).toBe(1);
+      expect(await store.update('n', (prev = 0) => prev + 1)).toBe(2);
       expect(await store.get('n')).toBe(2);
     });
 
     it('does not lose concurrent updates', async () => {
-      const store = createStore();
+      const store = createStore<{ n: number }>();
 
       await Promise.all(
-        Array.from({ length: 20 }, () => store.update<number>('n', (prev = 0) => prev + 1))
+        Array.from({ length: 20 }, () => store.update('n', (prev = 0) => prev + 1))
       );
 
       expect(await store.get('n')).toBe(20);
@@ -149,10 +147,7 @@ describe('KeyValStore', () => {
 
     it('clears the store', async () => {
       const store = createStore();
-      await store.setMany([
-        ['a', 1],
-        ['b', 2]
-      ]);
+      await store.setMany({ a: 1, b: 2 });
       await store.clear();
 
       expect(await store.keys()).toEqual([]);
@@ -162,10 +157,7 @@ describe('KeyValStore', () => {
   describe('keys, values and entries', () => {
     it('lists keys, values and entries in key order', async () => {
       const store = createStore();
-      await store.setMany([
-        ['b', 2],
-        ['a', 1]
-      ]);
+      await store.setMany({ b: 2, a: 1 });
 
       expect(await store.keys()).toEqual(['a', 'b']);
       expect(await store.values()).toEqual([1, 2]);
@@ -189,7 +181,7 @@ describe('KeyValStore', () => {
     it('adds a second store to an existing database', async () => {
       const database = `shared-${Date.now()}`;
       const drafts = createStore({ database, store: 'drafts' });
-      const settings = new KeyValStore({ database, store: 'settings' });
+      const settings = new KVStore({ database, store: 'settings' });
 
       await drafts.set('a', 'draft');
       await settings.set('a', 'setting');
@@ -215,11 +207,11 @@ describe('KeyValStore', () => {
     });
 
     it('notifies on update and clear', async () => {
-      const store = createStore();
+      const store = createStore<{ n: number }>();
       const listener = vi.fn();
       const unsubscribe = store.subscribe('n', listener);
 
-      await store.update<number>('n', (prev = 0) => prev + 5);
+      await store.update('n', (prev = 0) => prev + 5);
       await vi.waitFor(() => expect(listener).toHaveBeenLastCalledWith(5));
 
       await store.clear();
@@ -230,7 +222,7 @@ describe('KeyValStore', () => {
 
     it('notifies subscribers of another instance for the same store', async () => {
       const store = createStore();
-      const other = new KeyValStore({ database: store.databaseName, prefix: false });
+      const other = new KVStore({ database: store.databaseName, prefix: false });
       const listener = vi.fn();
       const unsubscribe = other.subscribe('a', listener);
 
@@ -287,7 +279,6 @@ describe('KeyValStore', () => {
       const listener = vi.fn();
       const unsubscribe = store.subscribe('a', listener);
 
-      // Simulate another tab: it writes directly and broadcasts the change.
       const database = await openDatabase(store.databaseName);
       const tx = database.transaction('keyval', 'readwrite');
       tx.objectStore('keyval').put('from-other-tab', 'a');
@@ -311,12 +302,163 @@ describe('KeyValStore', () => {
       const unsubscribe = store.subscribeAll(listener);
 
       await store.set('a', 1);
-      await store.setMany([['b', 2]]);
+      await store.setMany({ b: 2 });
       await store.clear();
 
       expect(listener).toHaveBeenCalledTimes(3);
 
       unsubscribe();
+    });
+  });
+
+  describe('has', () => {
+    it('reports presence without reading the value', async () => {
+      const store = createStore();
+      await store.set('a', 1);
+
+      expect(await store.has('a')).toBe(true);
+      expect(await store.has('missing')).toBe(false);
+    });
+
+    it('is true for a stored undefined', async () => {
+      const store = createStore();
+      await store.set('a', undefined);
+
+      expect(await store.get('a')).toBeUndefined();
+      expect(await store.has('a')).toBe(true);
+    });
+  });
+
+  describe('scope', () => {
+    it('keeps sibling scopes apart in one object store', async () => {
+      const store = createStore();
+      const first = store.scope('one');
+      const second = store.scope('two');
+
+      await first.set('a', 1);
+      await second.set('a', 2);
+
+      expect(await first.get('a')).toBe(1);
+      expect(await second.get('a')).toBe(2);
+      expect(await store.get('a')).toBeUndefined();
+    });
+
+    it('lists only its own keys, unprefixed', async () => {
+      const store = createStore();
+      const scoped = store.scope('one');
+
+      await scoped.setMany({ b: 2, a: 1 });
+      await store.scope('two').set('c', 3);
+
+      expect(await scoped.keys()).toEqual(['a', 'b']);
+      expect(await scoped.values()).toEqual([1, 2]);
+      expect(await scoped.entries()).toEqual([
+        ['a', 1],
+        ['b', 2]
+      ]);
+    });
+
+    it('clears only its own keys', async () => {
+      const store = createStore();
+      const scoped = store.scope('one');
+      const other = store.scope('two');
+
+      await scoped.set('a', 1);
+      await other.set('a', 2);
+
+      await scoped.clear();
+
+      expect(await scoped.get('a')).toBeUndefined();
+      expect(await other.get('a')).toBe(2);
+    });
+
+    it('nests', async () => {
+      const store = createStore();
+      const nested = store.scope('one').scope('two');
+
+      await nested.set('a', 1);
+
+      expect(nested.scopeName).toBe('one:two:');
+      expect(await nested.get('a')).toBe(1);
+      expect(await store.scope('one').get('a')).toBeUndefined();
+    });
+
+    it('refuses a non-string key', async () => {
+      const scoped = createStore().scope('one');
+
+      await expect(scoped.set(1, 'nope')).rejects.toThrow(TypeError);
+    });
+
+    it('notifies the unscoped parent and the scope that changed', async () => {
+      const store = createStore();
+      const scoped = store.scope('one');
+
+      const everything = vi.fn();
+      const mine = vi.fn();
+
+      const unsubscribeAll = store.subscribeAll(everything);
+      const unsubscribe = scoped.subscribe('a', mine);
+
+      await scoped.set('a', 1);
+
+      await vi.waitFor(() => expect(mine).toHaveBeenCalledWith(1));
+      await vi.waitFor(() => expect(everything).toHaveBeenCalledWith('one:a'));
+
+      unsubscribe();
+      unsubscribeAll();
+    });
+  });
+
+  describe('onError', () => {
+    it('reports and resolves empty instead of rejecting', async () => {
+      const onError = vi.fn();
+      const store = new KVStore({ database: `test-${Date.now()}-${counter++}`, onError });
+
+      created.push(store.databaseName);
+
+      // A function cannot be structured-cloned, so the write fails inside the transaction.
+      expect(await store.set('a', () => undefined)).toBe(false);
+      expect(onError).toHaveBeenCalledTimes(1);
+      expect(onError.mock.calls[0]?.[1]).toBe('write');
+
+      expect(await store.get('a')).toBeUndefined();
+    });
+
+    it('rejects when it is not given', async () => {
+      const store = createStore();
+
+      await expect(store.set('a', () => undefined)).rejects.toThrow();
+    });
+
+    it('returns true from a write that lands', async () => {
+      const store = createStore();
+
+      expect(await store.set('a', 1)).toBe(true);
+      expect(await store.delete('a')).toBe(true);
+      expect(await store.clear()).toBe(true);
+    });
+  });
+
+  describe('schema', () => {
+    it('narrows each key to its own value type', async () => {
+      const store = createStore<{ count: number; label: string }>();
+
+      await store.setMany({ count: 1, label: 'a' });
+
+      const [count, label] = await store.getMany(['count', 'label']);
+
+      expectTypeOf(count).toEqualTypeOf<number | undefined>();
+      expectTypeOf(label).toEqualTypeOf<string | undefined>();
+
+      expect(count).toBe(1);
+      expect(label).toBe('a');
+    });
+
+    it('leaves values unknown and keys open without one', async () => {
+      const store = createStore();
+
+      expectTypeOf(store.get).parameter(0).toEqualTypeOf<IDBValidKey>();
+      expectTypeOf(await store.get('a')).toEqualTypeOf<unknown>();
     });
   });
 
