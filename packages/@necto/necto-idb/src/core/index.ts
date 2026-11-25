@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { getIndexedDB } from './get-indexed-db';
 export { openDatabase } from './open-database';
+export { getIndexedDB } from './get-indexed-db';
 export { deleteDatabase } from './delete-database';
 export { promisifyRequest } from './promisify-request';
