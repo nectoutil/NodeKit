@@ -18,7 +18,7 @@ import type { UseIdOptions } from './useId.types';
  * @returns {string} The generated or provided unique ID.
  */
 export function useId(options: UseIdOptions = {}): string {
-  const { prefix = 'necto', defaultId } = options;
+  const { defaultId, prefix = 'necto' } = options;
 
   // Initialize state only once with a function to avoid unnecessary calculations
   const [_, setValue] = useState<string | undefined>(() => defaultId);
@@ -33,9 +33,12 @@ export function useId(options: UseIdOptions = {}): string {
   })();
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && window.document?.createElement) {
+    if (typeof window !== 'undefined') {
       const cachedRefs = idsUpdaterMap.get(id) || [];
-      const nextIdWrapper = { current: nextIdRef.current };
+
+      const nextIdWrapper = {
+        current: nextIdRef.current
+      };
 
       if (!cachedRefs.some((ref) => ref === nextIdWrapper)) {
         idsUpdaterMap.set(id, [...cachedRefs, nextIdWrapper]);
@@ -56,7 +59,8 @@ export function useId(options: UseIdOptions = {}): string {
   }, [id]);
 
   useEffect(() => {
-    const newId = nextIdRef.current;
+    const newId: string | null = nextIdRef.current;
+
     if (newId) {
       setValue(newId);
       nextIdRef.current = null;

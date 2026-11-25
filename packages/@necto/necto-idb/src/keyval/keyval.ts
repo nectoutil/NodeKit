@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { IndexDBTable } from '../types';
+import { KVStore } from './kv-store';
 
-function _createIndexDBTable(): IndexDBTable {}
+export const kv = new KVStore();
+
+export { kv as keyvalue };

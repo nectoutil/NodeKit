@@ -11,22 +11,12 @@ import { useCallback, useLayoutEffect, useState } from 'react';
 import type { RefObject } from 'react';
 import type { UseAnimationOptions, UseAnimationReturn } from './useAnimation.types';
 
-/**
- * Manages enter and exit CSS animations/transitions on a ref element.
- *
- * - When `isOpen` becomes `true`, the element enters an entering phase until all animations finish.
- * - When `isOpen` becomes `false`, the element enters an exiting phase and stays mounted until all animations complete.
- * - `isRendered` indicates whether the element should remain in the DOM (open or still exiting).
- */
 export function useAnimation(options: UseAnimationOptions): UseAnimationReturn {
   const { ref, isOpen, isReady = true } = options;
 
-  // --- Enter animation ---
   const [isEntering, setEntering] = useState(isOpen);
   const isAnimationReady: boolean = isEntering && isReady;
 
-  // Cancel premature CSS transitions that fired before the entering state was cleared.
-  // This can happen when isReady starts as false (e.g. popovers before placement calculation).
   useLayoutEffect(() => {
     if (isAnimationReady && ref.current && 'getAnimations' in ref.current) {
       for (const animation of ref.current.getAnimations()) {
@@ -43,8 +33,8 @@ export function useAnimation(options: UseAnimationOptions): UseAnimationReturn {
     useCallback(() => setEntering(false), [])
   );
 
-  // Re-trigger enter animation when isOpen transitions from false to true.
   const [wasOpen, setWasOpen] = useState(isOpen);
+
   if (isOpen && !wasOpen) {
     setEntering(true);
     setWasOpen(true);
@@ -52,23 +42,27 @@ export function useAnimation(options: UseAnimationOptions): UseAnimationReturn {
     setWasOpen(false);
   }
 
-  // --- Exit animation ---
   const [exitState, setExitState] = useState<'closed' | 'open' | 'exiting'>(
     isOpen ? 'open' : 'closed'
   );
 
   switch (exitState) {
-    case 'open':
+    case 'open': {
       if (!isOpen) {
         setExitState('exiting');
       }
+
       break;
+    }
+
     case 'closed':
-    case 'exiting':
+    case 'exiting': {
       if (isOpen) {
         setExitState('open');
       }
+
       break;
+    }
   }
 
   const isExiting: boolean = exitState === 'exiting';
@@ -82,8 +76,8 @@ export function useAnimation(options: UseAnimationOptions): UseAnimationReturn {
   );
 
   return {
-    isEntering: isAnimationReady,
     isExiting,
+    isEntering: isAnimationReady,
     isRendered: isOpen || isExiting
   };
 }
@@ -99,19 +93,18 @@ function useAnimationEnd(
 ): void {
   useLayoutEffect(() => {
     if (isActive && ref.current) {
-      // JSDOM doesn't support getAnimations
       if (!('getAnimations' in ref.current)) {
         onEnd();
         return;
       }
 
-      const animations = ref.current.getAnimations();
+      const animations: Array<Animation> = ref.current.getAnimations();
       if (animations.length === 0) {
         onEnd();
         return;
       }
 
-      let canceled = false;
+      let canceled: boolean = false;
       Promise.all(animations.map((a) => a.finished))
         .then(() => {
           if (!canceled) {
