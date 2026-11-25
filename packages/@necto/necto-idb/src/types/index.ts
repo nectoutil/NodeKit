@@ -5,4 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export * from './indexdb';
+export type { Notify, IdbChangeMessage } from './emitter';
+export type { OpenDatabaseOptions } from './open-database';
+export type { IdbIndex, IdbTable, IdbTableSchema } from './db';
+export type { KeyValListener, KeyValStoreOptions } from './keyval-store';

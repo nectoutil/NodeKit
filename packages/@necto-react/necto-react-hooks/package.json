@@ -63,6 +63,7 @@
     "@necto/strings": "workspace:*",
     "@necto/mergers": "workspace:*",
     "@necto/platform": "workspace:*",
-    "@necto-react/types": "workspace:*"
+    "@necto-react/types": "workspace:*",
+    "@necto/cookie": "workspace:*"
   }
 }

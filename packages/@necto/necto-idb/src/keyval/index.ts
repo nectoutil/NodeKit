@@ -5,6 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { IndexDBTable } from '../types';
-
-function _createIndexDBTable(): IndexDBTable {}
+export { keyval } from './keyval';
+export { KeyValStore } from './keyval-store';

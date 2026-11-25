@@ -5,17 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export interface IndexDBIndex {
+export interface IdbIndex {
   readonly name: string | null;
   readonly isPrimaryKey?: boolean;
 }
 
-export interface IndexDBTableSchema {
+export interface IdbTableSchema {
   readonly name: string;
-  readonly primaryKey: IndexDBIndex;
+  readonly primaryKey: IdbIndex;
 }
 
-export interface IndexDBTable {
+export interface IdbTable {
   readonly name: string;
-  readonly schema: IndexDBTableSchema;
+  readonly schema: IdbTableSchema;
 }

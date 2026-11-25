@@ -2,6 +2,36 @@
   "name": "@necto/idb",
   "version": "0.1.0",
   "private": true,
+  "description": "Necto's IndexedDB library: promise-based primitives and a key-value store with change subscriptions.",
+  "scripts": {
+    "build": "vp pack --format esm,cjs --dts --minify --sourcemap",
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage --passWithNoTests"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "type": "module",
+  "types": "./dist/index.d.mts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "author": "Corinvo OSS Team",
+  "license": "MIT",
+  "devDependencies": {
+    "@vitest/browser": "^4.1.10",
+    "@vitest/browser-playwright": "^4.1.10",
+    "@vitest/coverage-istanbul": "^4.1.10",
+    "playwright": "^1.60.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/nectoutil/NodeKit",

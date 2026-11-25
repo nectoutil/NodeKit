@@ -1,0 +1,54 @@
+{
+  "name": "@necto/cookie",
+  "version": "1.0.0",
+  "description": "Necto's library for parsing, serializing and managing cookies in the browser and on the server.",
+  "scripts": {
+    "build": "vp pack src/index.ts src/browser/index.ts --format esm,cjs --dts --minify --sourcemap",
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage --passWithNoTests"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "type": "module",
+  "types": "./dist/index.d.mts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./browser": {
+      "types": "./dist/browser/index.d.mts",
+      "import": "./dist/browser/index.mjs",
+      "require": "./dist/browser/index.cjs"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "browser": [
+        "./dist/browser/index.d.mts"
+      ]
+    }
+  },
+  "author": "Corinvo OSS Team",
+  "license": "MIT",
+  "dependencies": {
+    "@necto/constants": "workspace:*",
+    "@necto/dom": "workspace:*",
+    "@necto/strings": "workspace:*"
+  },
+  "devDependencies": {
+    "@vitest/coverage-istanbul": "^4.1.10",
+    "jsdom": "^26.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nectoutil/NodeKit",
+    "directory": "packages/@necto/necto-cookie"
+  }
+}
