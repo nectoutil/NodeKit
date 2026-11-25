@@ -1,6 +1,6 @@
 {
   "name": "@necto/idb",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Necto's IndexedDB library: promise-based primitives and a key-value store with change subscriptions.",
   "scripts": {
     "build": "vp pack",
