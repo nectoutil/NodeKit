@@ -1,5 +1,22 @@
 # @necto-react/hooks
 
+## 2.25.0
+
+### Minor Changes
+
+- 3c0e17f: Added `useKV` hook for reading, writing and deleting a single IndexedDB record through `@necto/idb`. Returns a `[value, set, remove]` tuple that also exposes `value`, `set`, `update`, `remove` and `pending`, supports `defaultValue`, a custom or scoped `store`, and `serverValue` for SSR. Stays in sync across components and tabs.
+
+  Because IndexedDB cannot be read synchronously, the first render is always `pending` with no value; give `defaultValue` to render something in the meantime. Components sharing a store and key share one read and one subscription, `set` with an updater commits through a single transaction, and `serverValue` is returned during server rendering so hydration matches.
+
+- 3c0e17f: Added `useCookie` hook for reading, writing and deleting cookies through `@necto/cookie`. Returns a `[value, set, remove]` tuple that also exposes `value`, `set`, `update` and `remove`, supports `defaultValue`, `parse`/`serialize` for typed values, shared `attributes`, a custom `client`, and `serverValue` for SSR. Stays in sync across components and tabs.
+
+### Patch Changes
+
+- Updated dependencies [3c0e17f]
+- Updated dependencies [3c0e17f]
+  - @necto/cookie@1.1.0
+  - @necto/idb@0.2.0
+
 ## 2.24.0
 
 ### Minor Changes
