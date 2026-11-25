@@ -1,6 +1,6 @@
 {
   "name": "@necto/cookie",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Necto's library for parsing, serializing and managing cookies in the browser and on the server.",
   "scripts": {
     "build": "vp pack src/index.ts src/browser/index.ts --format esm,cjs --dts --minify --sourcemap",
