@@ -1,5 +1,12 @@
 # @necto-react/hooks
 
+## 2.25.2
+
+### Patch Changes
+
+- Updated dependencies [d60640b]
+  - @necto/idb@0.3.2
+
 ## 2.25.1
 
 ### Patch Changes
