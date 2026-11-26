@@ -12,7 +12,7 @@ export const KVOperations = {
   Delete: 'delete'
 } as const;
 
-export const DATABASE_PREFIX: string = '__necto';
+export const DATABASE_PREFIX: string = '_necto';
 export const DEFAULT_STORE_NAME: string = 'keyval';
 export const DEFAULT_DATABASE_NAME: string = 'keyval';
 export const BROADCAST_CHANNEL_NAME: string = 'necto:idb';
