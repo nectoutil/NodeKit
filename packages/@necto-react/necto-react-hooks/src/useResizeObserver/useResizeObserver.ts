@@ -28,7 +28,7 @@ export function useResizeObserver<TElement extends Element>(
     sharedObserver = createResizeObserver(options.polyfill);
   }
 
-  const observer = sharedObserver;
+  const observer: ResizeObserverController | null = sharedObserver;
   const latestCallback: RefObject<ResizeObserverHandler> = useLatestRef(callback);
 
   useIsomorphicLayoutEffect(() => {

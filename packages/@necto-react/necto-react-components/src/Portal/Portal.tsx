@@ -11,12 +11,12 @@ import { createPortal } from 'react-dom';
 import { useLocalState } from '@necto-react/state';
 import { useMounted, useIsomorphicLayoutEffect } from '@necto-react/hooks';
 
-import { PORTAL_NAME, DEFAULT_PORTAL_ROOT_ID, DEFAULT_PORTAL_ELEMENT_TYPE } from './constants';
 import { Primitive } from '../Primitive';
+import { PORTAL_NAME, DEFAULT_PORTAL_ROOT_ID, DEFAULT_PORTAL_ELEMENT_TYPE } from './constants';
 
+import type { ForwardedRef } from 'react';
 import type { PortalProps } from './Portal.types';
 import type { LocalStateResult } from '@necto-react/state';
-import type { ForwardedRef } from 'react';
 
 const PortalFn = (props: PortalProps, forwardedRef: ForwardedRef<HTMLDivElement>) => {
   const { container, children, ...rest } = props;
@@ -25,7 +25,7 @@ const PortalFn = (props: PortalProps, forwardedRef: ForwardedRef<HTMLDivElement>
   const defaultContainer: LocalStateResult<HTMLDivElement | null> =
     useLocalState<HTMLDivElement | null>(null);
 
-  useIsomorphicLayoutEffect(() => {
+  useIsomorphicLayoutEffect((): void => {
     if (!mounted || container) {
       return;
     }
@@ -40,6 +40,7 @@ const PortalFn = (props: PortalProps, forwardedRef: ForwardedRef<HTMLDivElement>
     const createdContainer: HTMLDivElement = document.createElement(
       DEFAULT_PORTAL_ELEMENT_TYPE
     ) as HTMLDivElement;
+
     createdContainer.id = DEFAULT_PORTAL_ROOT_ID;
     document.body.appendChild(createdContainer);
 

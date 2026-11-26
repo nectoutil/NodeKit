@@ -16,8 +16,8 @@ import type {
   Ref,
   ReactElement,
   CSSProperties,
-  ForwardRefExoticComponent,
-  RefAttributes
+  RefAttributes,
+  ForwardRefExoticComponent
 } from 'react';
 import type { VisuallyHiddenProps } from './VisuallyHidden.types';
 
@@ -25,6 +25,7 @@ const VisuallyHiddenFn = (props: VisuallyHiddenProps, ref: Ref<HTMLElement>): Re
   const { as, style, children, isFocusable, ...others } = props;
 
   const [isFocused, setFocused] = useState(false);
+
   const { focusWithinProps } = useFocusWithin({
     isDisabled: !isFocusable,
     onFocusWithinChange: setFocused

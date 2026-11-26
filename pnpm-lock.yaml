@@ -137,6 +137,9 @@ importers:
       '@types/node':
         specifier: ^22.19.20
         version: 22.19.20
+      '@types/react-dom':
+        specifier: 19.2.3
+        version: 19.2.3(@types/react@19.2.17)
       '@vitejs/plugin-react':
         specifier: ^4.7.0
         version: 4.7.0(vite@7.2.2(@types/node@22.19.20)(jiti@2.6.1)(lightningcss@1.33.0))
@@ -679,6 +682,15 @@ importers:
       react:
         specifier: 'catalog:'
         version: 19.2.7
+
+  packages/@necto/necto-path:
+    devDependencies:
+      '@vitest/coverage-istanbul':
+        specifier: ^4.1.10
+        version: 4.1.10(vitest@4.1.10)
+      fast-check:
+        specifier: ^4.8.0
+        version: 4.8.0
 
   packages/@necto/necto-platform:
     devDependencies:
