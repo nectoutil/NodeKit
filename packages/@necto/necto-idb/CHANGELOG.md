@@ -1,5 +1,11 @@
 # @necto/idb
 
+## 0.3.0
+
+### Minor Changes
+
+- 1135421: Renamed default idb prefix
+
 ## 0.2.0
 
 ### Minor Changes
