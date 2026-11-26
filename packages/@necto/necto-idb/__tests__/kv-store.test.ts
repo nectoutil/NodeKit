@@ -27,10 +27,10 @@ afterEach(async () => {
 
 describe('KVStore', () => {
   describe('naming', () => {
-    it('prefixes database names with __necto', () => {
-      expect(kv.databaseName).toBe('__necto:keyval');
+    it('prefixes database names with _necto', () => {
+      expect(kv.databaseName).toBe('_necto:keyval');
       expect(kv.storeName).toBe('keyval');
-      expect(new KVStore({ database: 'app', store: 'drafts' }).databaseName).toBe('__necto:app');
+      expect(new KVStore({ database: 'app', store: 'drafts' }).databaseName).toBe('_necto:app');
     });
 
     it('supports a custom prefix or no prefix', () => {
