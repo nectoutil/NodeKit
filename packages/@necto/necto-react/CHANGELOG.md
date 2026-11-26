@@ -1,5 +1,13 @@
 # @necto/react
 
+## 1.3.16
+
+### Patch Changes
+
+- @necto-react/hooks@2.25.2
+- @necto-react/components@3.4.3
+- @necto-react/popper@0.10.24
+
 ## 1.3.15
 
 ### Patch Changes

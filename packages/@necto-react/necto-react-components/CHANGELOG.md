@@ -1,5 +1,11 @@
 # @necto-react/components
 
+## 3.4.3
+
+### Patch Changes
+
+- @necto-react/hooks@2.25.2
+
 ## 3.4.2
 
 ### Patch Changes
