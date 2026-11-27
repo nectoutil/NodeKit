@@ -1,6 +1,6 @@
 {
   "name": "@necto/path",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Necto's cross-platform, drop in replacement to Node's path utilities",
   "scripts": {
     "build": "vp pack",
