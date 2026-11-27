@@ -5,18 +5,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { forwardRef, useId, useEffect, useState, useSyncExternalStore } from 'react';
-import { useScript } from '@necto-react/hooks';
+import { useScript, useId } from '@necto-react/hooks';
+import { useLocalState } from '@necto-react/state';
+import { forwardRef, useEffect, useSyncExternalStore } from 'react';
 
 import { Primitive } from '../Primitive';
-import { SCRIPT_NAME } from './constants';
+import { SCRIPT_METHOD_SHORTHAND_PATTERN, SCRIPT_NAME } from './constants';
 
 import type { ScriptProps } from './Script.types';
 import type { ForwardedRef, ReactElement, Ref } from 'react';
 
-const subscribeToHydration = (): (() => void) => () => {};
 const getClientSnapshot = (): boolean => false;
 const getServerSnapshot = (): boolean => true;
+const subscribeToHydration = (): (() => void) => () => {};
 
 function ScriptFn<Args extends unknown[]>(
   props: ScriptProps<Args>,
@@ -38,13 +39,16 @@ function ScriptFn<Args extends unknown[]>(
     window: targetWindow
   } = props;
 
-  const serverSnapshot = useSyncExternalStore(
+  const serverSnapshot: boolean = useSyncExternalStore(
     subscribeToHydration,
     getClientSnapshot,
     getServerSnapshot
   );
-  // Keep the original server element mounted after hydration.
-  const [renderServerScript] = useState(serverSnapshot && !src && enabled && Boolean(script));
+
+  const renderServerScript: boolean = useLocalState(
+    serverSnapshot && !src && enabled && Boolean(script)
+  ).value;
+
   const generatedId: string = useId();
   const scriptId: string = id ?? generatedId;
 
@@ -70,8 +74,8 @@ function ScriptFn<Args extends unknown[]>(
       return;
     }
 
-    const ownerWindow = targetWindow === undefined ? window : targetWindow;
-    const element = ownerWindow?.document.getElementById(scriptId);
+    const ownerWindow: Window | null = targetWindow === undefined ? window : targetWindow;
+    const element: HTMLElement | null | undefined = ownerWindow?.document.getElementById(scriptId);
 
     if (element?.tagName !== 'SCRIPT' || element.dataset.nectoScript !== `inline:${scriptId}`) {
       return;
@@ -103,11 +107,11 @@ function ScriptFn<Args extends unknown[]>(
       {...scriptProps}
       type={type}
       id={scriptId}
+      nonce={nonce}
       ref={forwardedRef}
       suppressHydrationWarning
       data-necto-script-status="loading"
       data-necto-script={`inline:${scriptId}`}
-      nonce={nonce}
     >
       {inlineScript}
     </Primitive.Script>
@@ -127,7 +131,9 @@ function serializeInlineScript<Args extends unknown[]>(
   scriptId: string
 ): string {
   function runInlineScript(fn: (...args: unknown[]) => unknown, args: unknown[], id: string): void {
-    const element = document.currentScript ?? document.getElementById(id);
+    const element: HTMLElement | SVGScriptElement | null =
+      document.currentScript ?? document.getElementById(id);
+
     const report = (status: 'ready' | 'error'): void => {
       element?.setAttribute('data-necto-script-status', status);
       if (element && !document.currentScript) {
@@ -144,14 +150,14 @@ function serializeInlineScript<Args extends unknown[]>(
     }
   }
 
-  const source = Function.prototype.toString.call(script);
-  // Method shorthand is valid as an object member, but not as a function expression.
-  const method =
-    /^(?:(async)\s+)?(\*)?\s*(?!function\b|async\s*\()[$_\p{ID_Start}][$\u200c\u200d\p{ID_Continue}]*\s*(?=\()/u;
-  const expression = source.replace(
-    method,
-    (_match, asyncKeyword, generator) => `${asyncKeyword ? 'async ' : ''}function${generator ?? ''}`
-  );
+  const expression: string = Function.prototype.toString
+    .call(script)
+    .replace(
+      SCRIPT_METHOD_SHORTHAND_PATTERN,
+      (_match, asyncKeyword, generator) =>
+        `${asyncKeyword ? 'async ' : ''}function${generator ?? ''}`
+    );
+
   const args = (JSON.stringify(scriptArgs) ?? '[]').replace(/</g, '\\u003c');
   const id = JSON.stringify(scriptId).replace(/</g, '\\u003c');
 

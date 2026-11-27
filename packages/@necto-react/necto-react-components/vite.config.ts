@@ -11,6 +11,9 @@ import { playwright } from '@vitest/browser-playwright';
 
 export default defineConfig({
   entry: ['./src/index.ts'],
+  resolve: {
+    dedupe: ['react', 'react-dom']
+  },
   plugins: [react()],
   test: {
     globals: true,

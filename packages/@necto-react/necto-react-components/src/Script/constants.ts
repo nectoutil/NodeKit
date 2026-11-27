@@ -6,3 +6,7 @@
  */
 
 export const SCRIPT_NAME: string = 'Script' as const;
+
+export const SCRIPT_METHOD_SHORTHAND_PATTERN: RegExp = new RegExp(
+  /^(?:(async)\s+)?(\*)?\s*(?!function\b|async\s*\()[$_\p{ID_Start}][$\u200c\u200d\p{ID_Continue}]*\s*(?=\()/u
+);
