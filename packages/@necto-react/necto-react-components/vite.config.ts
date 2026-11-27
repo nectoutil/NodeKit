@@ -7,6 +7,7 @@
 
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite-plus/pack';
+import { coverageConfigDefaults } from 'vitest/config';
 import { playwright } from '@vitest/browser-playwright';
 
 export default defineConfig({
@@ -40,7 +41,11 @@ export default defineConfig({
       provider: 'istanbul',
       reporter: ['lcov', 'text'],
       include: ['src/**/*.{ts,tsx}'],
-      exclude: ['node_modules', 'dist']
+      // Keep Vitest's defaults (they exclude test files, whose fixtures are
+      // serialized into inline scripts) and also drop run-inline-script, which is
+      // itself stringified — instrumenting either injects cov_* references that
+      // are undefined in the injected <script> scope and throw at runtime.
+      exclude: [...coverageConfigDefaults.exclude, 'dist', 'src/Script/run-inline-script.ts']
     }
   }
 });

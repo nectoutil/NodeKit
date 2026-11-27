@@ -10,6 +10,7 @@ import { useScript, useId } from '@necto-react/hooks';
 import { forwardRef, useEffect, useSyncExternalStore } from 'react';
 
 import { Primitive } from '../Primitive';
+import { runInlineScript } from './run-inline-script';
 import { SCRIPT_METHOD_SHORTHAND_PATTERN, SCRIPT_NAME } from './constants';
 
 import type { ScriptProps } from './Script.types';
@@ -52,9 +53,22 @@ function ScriptFn<Args extends unknown[]>(
   const generatedId: string = useId();
   const scriptId: string = id ?? generatedId;
 
-  const inlineScript: string | undefined = script
-    ? serializeInlineScript(script, scriptArgs, scriptId)
-    : undefined;
+  let inlineScript: string | undefined;
+
+  if (script) {
+    const expression: string = Function.prototype.toString
+      .call(script)
+      .replace(
+        SCRIPT_METHOD_SHORTHAND_PATTERN,
+        (_match, asyncKeyword, generator) =>
+          `${asyncKeyword ? 'async ' : ''}function${generator ?? ''}`
+      );
+
+    const args = (JSON.stringify(scriptArgs) ?? '[]').replace(/</g, '\\u003c');
+    const serializedId = JSON.stringify(scriptId).replace(/</g, '\\u003c');
+
+    inlineScript = `(${runInlineScript})((${expression}), ${args}, ${serializedId})`;
+  }
 
   useScript(src, {
     type,
@@ -123,43 +137,3 @@ export const Script = forwardRef(ScriptFn) as (<Args extends unknown[]>(
 ) => ReactElement | null) & { displayName?: string };
 
 Script.displayName = SCRIPT_NAME;
-
-// Serializes an inline script and its args into a self-reporting IIFE for SSR injection.
-function serializeInlineScript<Args extends unknown[]>(
-  script: (...args: Args) => unknown,
-  scriptArgs: Args | undefined,
-  scriptId: string
-): string {
-  function runInlineScript(fn: (...args: unknown[]) => unknown, args: unknown[], id: string): void {
-    const element: HTMLElement | SVGScriptElement | null =
-      document.currentScript ?? document.getElementById(id);
-
-    const report = (status: 'ready' | 'error'): void => {
-      element?.setAttribute('data-necto-script-status', status);
-      if (element && !document.currentScript) {
-        element.dispatchEvent(new Event(`necto:script-${status}`));
-      }
-    };
-
-    try {
-      fn.apply(null, args);
-      report('ready');
-    } catch (error) {
-      report('error');
-      throw error;
-    }
-  }
-
-  const expression: string = Function.prototype.toString
-    .call(script)
-    .replace(
-      SCRIPT_METHOD_SHORTHAND_PATTERN,
-      (_match, asyncKeyword, generator) =>
-        `${asyncKeyword ? 'async ' : ''}function${generator ?? ''}`
-    );
-
-  const args = (JSON.stringify(scriptArgs) ?? '[]').replace(/</g, '\\u003c');
-  const id = JSON.stringify(scriptId).replace(/</g, '\\u003c');
-
-  return `(${runInlineScript})((${expression}), ${args}, ${id})`;
-}
