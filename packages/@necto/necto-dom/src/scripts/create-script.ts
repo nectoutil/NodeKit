@@ -41,6 +41,15 @@ export function createScript(targetDocument: Document, descriptor: ScriptDescrip
 
     if (adopted.status === 'loading') {
       attachLoadListeners(adopted);
+
+      if (!resolvedSrc) {
+        adopted.element.addEventListener('necto:script-ready', () => setStatus(adopted, 'ready'), {
+          once: true
+        });
+        adopted.element.addEventListener('necto:script-error', () => setStatus(adopted, 'error'), {
+          once: true
+        });
+      }
     }
 
     return adopted;
@@ -72,7 +81,7 @@ export function createScript(targetDocument: Document, descriptor: ScriptDescrip
     element.integrity = descriptor.integrity;
   }
 
-  if (descriptor.crossOrigin) {
+  if (descriptor.crossOrigin != null) {
     element.crossOrigin = descriptor.crossOrigin;
   }
 
@@ -100,17 +109,22 @@ export function createScript(targetDocument: Document, descriptor: ScriptDescrip
     return record;
   }
 
+  if (element.type.trim().toLowerCase() === 'module') {
+    attachLoadListeners(record);
+    element.addEventListener('necto:script-ready', () => setStatus(record, 'ready'), {
+      once: true
+    });
+    // Inline modules do not fire load. Signal after evaluation, including top-level await.
+    element.textContent += `\n;globalThis.document.querySelector('[data-necto-script="' + globalThis.CSS.escape(${JSON.stringify(key)}) + '"]').dispatchEvent(new globalThis.Event('necto:script-ready'));`;
+    parent.append(element);
+    return record;
+  }
+
   parent.append(element);
 
   const reported: ScriptStatus | null = normalizeStatus(element.dataset.nectoScriptStatus);
 
-  if (reported) {
-    setStatus(record, reported);
-  } else if (descriptor.type === 'module') {
-    attachLoadListeners(record);
-  } else {
-    setStatus(record, 'ready');
-  }
+  setStatus(record, reported ?? 'ready');
 
   return record;
 }

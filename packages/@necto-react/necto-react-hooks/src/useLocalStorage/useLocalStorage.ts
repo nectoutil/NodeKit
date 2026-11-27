@@ -84,7 +84,7 @@ export function useLocalStorage<T>(
     try {
       const raw: string | null = ownerWindow.localStorage.getItem(key);
 
-      return raw ? deserializer(raw) : getInitialValue();
+      return raw === null ? getInitialValue() : deserializer(raw);
     } catch (error) {
       if (__DEV__) {
         throw new TypeError(
@@ -154,7 +154,17 @@ export function useLocalStorage<T>(
       return;
     }
 
-    ownerWindow.localStorage.removeItem(key);
+    try {
+      ownerWindow.localStorage.removeItem(key);
+    } catch (error) {
+      console.warn(
+        __DEV__
+          ? `[necto-react.hooks] NT0203: Error removing localStorage key "${key}": ${error}`
+          : '[necto-react.hooks] NT0203: https://necto.dev/errors/NT0203'
+      );
+      return;
+    }
+
     setStoredValue(getInitialValue());
 
     ownerWindow.dispatchEvent(

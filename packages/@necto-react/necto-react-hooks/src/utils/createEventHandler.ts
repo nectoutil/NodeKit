@@ -8,6 +8,9 @@
 import type { SyntheticEvent } from 'react';
 import type { BaseEvent } from '@necto-react/types';
 
+export type EventHandler<T extends SyntheticEvent> = (event: T) => void;
+export type BaseEventHandler<T extends SyntheticEvent> = (event: BaseEvent<T>) => void;
+
 /**
  * Creates an event handler that wraps a callback, providing custom propagation control.
  *
@@ -16,8 +19,8 @@ import type { BaseEvent } from '@necto-react/types';
  * @returns A standard event handler, or undefined if no callback is provided.
  */
 export function createEventHandler<T extends SyntheticEvent>(
-  handler?: (event: BaseEvent<T>) => void
-): ((event: T) => void) | undefined {
+  handler?: BaseEventHandler<T>
+): EventHandler<T> | undefined {
   if (!handler) return undefined;
 
   let stopPropagation: boolean = true;

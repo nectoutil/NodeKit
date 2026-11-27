@@ -25,10 +25,20 @@ export function adoptExistingScript(
 
   const reported: ScriptStatus | null = normalizeStatus(existing.dataset.nectoScriptStatus);
 
+  // Modern scripts can report completion with the status marker. Older browsers
+  // may expose a readyState even if the load event fired before adoption.
+  const readyState = (existing as HTMLScriptElement & { readyState?: string }).readyState;
+  const loading = existing.dataset.nectoScriptStatus === 'loading';
+  const status =
+    reported ??
+    (readyState === 'loaded' || readyState === 'complete' || (!resolvedSrc && !loading)
+      ? 'ready'
+      : 'loading');
+
   return {
     element: existing,
     createdHere: false,
     listeners: new Set(),
-    status: reported ?? (resolvedSrc ? 'loading' : 'ready')
+    status
   };
 }

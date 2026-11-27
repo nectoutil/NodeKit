@@ -66,6 +66,43 @@ describe('createScript', () => {
     expect(record.element.textContent).toBe('void 0');
   });
 
+  it('adopts a finished untracked script when its readyState is available', () => {
+    const existing = document.createElement('script');
+    existing.src = '/scripts/dom-finished.js';
+    Object.defineProperty(existing, 'readyState', { value: 'complete' });
+    document.head.append(existing);
+    try {
+      const record = createScript(document, { src: existing.src });
+
+      expect(record.element).toBe(existing);
+      expect(record.status).toBe('ready');
+    } finally {
+      existing.remove();
+    }
+  });
+
+  it('waits for load when adopting a script with no completion signal', () => {
+    const existing = document.createElement('script');
+    existing.src = '/scripts/dom-pending.js';
+    document.head.append(existing);
+    try {
+      const record = createScript(document, { src: existing.src });
+
+      expect(record.element).toBe(existing);
+      expect(record.status).toBe('loading');
+      existing.dispatchEvent(new Event('load'));
+      expect(record.status).toBe('ready');
+    } finally {
+      existing.remove();
+    }
+  });
+
+  it('preserves an explicitly empty crossorigin attribute', () => {
+    const record = createScript(document, { id: 'dom-empty-cors', crossOrigin: '' });
+
+    expect(record.element.getAttribute('crossorigin')).toBe('');
+  });
+
   it('adopts an existing script and respects its reported status', () => {
     const existing = document.createElement('script');
     existing.dataset.nectoScript = 'inline:dom-adopt';

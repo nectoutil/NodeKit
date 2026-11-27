@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { forwardRef, useId } from 'react';
+import { forwardRef, useId, useEffect, useState, useSyncExternalStore } from 'react';
 import { useScript } from '@necto-react/hooks';
 
 import { Primitive } from '../Primitive';
@@ -13,6 +13,10 @@ import { SCRIPT_NAME } from './constants';
 
 import type { ScriptProps } from './Script.types';
 import type { ForwardedRef, ReactElement, Ref } from 'react';
+
+const subscribeToHydration = (): (() => void) => () => {};
+const getClientSnapshot = (): boolean => false;
+const getServerSnapshot = (): boolean => true;
 
 function ScriptFn<Args extends unknown[]>(
   props: ScriptProps<Args>,
@@ -34,11 +38,18 @@ function ScriptFn<Args extends unknown[]>(
     window: targetWindow
   } = props;
 
+  const serverSnapshot = useSyncExternalStore(
+    subscribeToHydration,
+    getClientSnapshot,
+    getServerSnapshot
+  );
+  // Keep the original server element mounted after hydration.
+  const [renderServerScript] = useState(serverSnapshot && !src && enabled && Boolean(script));
   const generatedId: string = useId();
   const scriptId: string = id ?? generatedId;
 
   const inlineScript: string | undefined = script
-    ? serializeInlineScript(script, scriptArgs)
+    ? serializeInlineScript(script, scriptArgs, scriptId)
     : undefined;
 
   useScript(src, {
@@ -54,7 +65,36 @@ function ScriptFn<Args extends unknown[]>(
     inlineContent: src ? undefined : inlineScript
   });
 
-  if (src || !enabled || !inlineScript) {
+  useEffect(() => {
+    if (renderServerScript || !forwardedRef || src || !enabled || !inlineScript) {
+      return;
+    }
+
+    const ownerWindow = targetWindow === undefined ? window : targetWindow;
+    const element = ownerWindow?.document.getElementById(scriptId);
+
+    if (element?.tagName !== 'SCRIPT' || element.dataset.nectoScript !== `inline:${scriptId}`) {
+      return;
+    }
+
+    const scriptElement = element as HTMLScriptElement;
+
+    if (typeof forwardedRef === 'function') {
+      const cleanup = forwardedRef(scriptElement);
+      return typeof cleanup === 'function'
+        ? cleanup
+        : () => {
+            forwardedRef(null);
+          };
+    }
+
+    forwardedRef.current = scriptElement;
+    return () => {
+      forwardedRef.current = null;
+    };
+  }, [renderServerScript, forwardedRef, src, enabled, inlineScript, targetWindow, scriptId]);
+
+  if (!renderServerScript || src || !enabled || !inlineScript) {
     return null;
   }
 
@@ -67,9 +107,10 @@ function ScriptFn<Args extends unknown[]>(
       suppressHydrationWarning
       data-necto-script-status="loading"
       data-necto-script={`inline:${scriptId}`}
-      nonce={typeof window === 'undefined' ? nonce : ''}
-      dangerouslySetInnerHTML={{ __html: inlineScript }}
-    />
+      nonce={nonce}
+    >
+      {inlineScript}
+    </Primitive.Script>
   );
 }
 
@@ -82,28 +123,37 @@ Script.displayName = SCRIPT_NAME;
 // Serializes an inline script and its args into a self-reporting IIFE for SSR injection.
 function serializeInlineScript<Args extends unknown[]>(
   script: (...args: Args) => unknown,
-  scriptArgs?: Args
+  scriptArgs: Args | undefined,
+  scriptId: string
 ): string {
-  function runInlineScript(fn: (...args: unknown[]) => unknown, args: unknown[]): void {
-    const element: HTMLOrSVGScriptElement | null = document.currentScript;
+  function runInlineScript(fn: (...args: unknown[]) => unknown, args: unknown[], id: string): void {
+    const element = document.currentScript ?? document.getElementById(id);
+    const report = (status: 'ready' | 'error'): void => {
+      element?.setAttribute('data-necto-script-status', status);
+      if (element && !document.currentScript) {
+        element.dispatchEvent(new Event(`necto:script-${status}`));
+      }
+    };
 
     try {
       fn.apply(null, args);
-
-      if (element) {
-        element.setAttribute('data-necto-script-status', 'ready');
-      }
+      report('ready');
     } catch (error) {
-      if (element) {
-        element.setAttribute('data-necto-script-status', 'error');
-      }
-
+      report('error');
       throw error;
     }
   }
 
-  const source: string = script.toString().replace(/<\/script/gi, '<\\/script');
-  const args: string = (JSON.stringify(scriptArgs) ?? '[]').replace(/</g, '\\u003c');
+  const source = Function.prototype.toString.call(script);
+  // Method shorthand is valid as an object member, but not as a function expression.
+  const method =
+    /^(?:(async)\s+)?(\*)?\s*(?!function\b|async\s*\()[$_\p{ID_Start}][$\u200c\u200d\p{ID_Continue}]*\s*(?=\()/u;
+  const expression = source.replace(
+    method,
+    (_match, asyncKeyword, generator) => `${asyncKeyword ? 'async ' : ''}function${generator ?? ''}`
+  );
+  const args = (JSON.stringify(scriptArgs) ?? '[]').replace(/</g, '\\u003c');
+  const id = JSON.stringify(scriptId).replace(/</g, '\\u003c');
 
-  return `(${runInlineScript})(${source}, ${args})`;
+  return `(${runInlineScript})((${expression}), ${args}, ${id})`;
 }

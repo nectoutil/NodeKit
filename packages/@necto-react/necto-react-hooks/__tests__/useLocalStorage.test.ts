@@ -7,7 +7,7 @@
 
 import { useLocalStorage } from '@necto-react/hooks';
 import { renderHook, act } from '@testing-library/react';
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 
 describe('useLocalStorage', () => {
   beforeEach(() => {
@@ -32,6 +32,37 @@ describe('useLocalStorage', () => {
     const { result } = renderHook(() => useLocalStorage('user', { name: '' }));
 
     expect(result.current[0]).toEqual({ name: 'ada' });
+  });
+
+  it('passes an empty stored string to a custom deserializer', () => {
+    window.localStorage.setItem('empty', '');
+    const { result } = renderHook(() =>
+      useLocalStorage('empty', 'fallback', { deserializer: (raw) => `[${raw}]` })
+    );
+
+    expect(result.current[0]).toBe('[]');
+  });
+
+  it('keeps the value and does not notify when removal fails', () => {
+    window.localStorage.setItem('protected', '"stored"');
+    const { result } = renderHook(() => useLocalStorage('protected', 'fallback'));
+    const remove = vi.spyOn(Storage.prototype, 'removeItem').mockImplementation(() => {
+      throw new DOMException('Access denied', 'SecurityError');
+    });
+    const warning = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const listener = vi.fn();
+    window.addEventListener('necto:local-storage', listener);
+
+    try {
+      expect(() => act(() => result.current[2]())).not.toThrow();
+      expect(result.current[0]).toBe('stored');
+      expect(listener).not.toHaveBeenCalled();
+      expect(warning).toHaveBeenCalledWith(expect.stringContaining('NT0203'));
+    } finally {
+      remove.mockRestore();
+      warning.mockRestore();
+      window.removeEventListener('necto:local-storage', listener);
+    }
   });
 
   it('writes the value and persists it as JSON', () => {

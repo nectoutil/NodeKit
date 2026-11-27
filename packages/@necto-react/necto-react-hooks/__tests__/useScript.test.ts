@@ -31,6 +31,26 @@ describe('useScript', () => {
     expect(result.current).toBe('ready');
   });
 
+  it('reports readiness after inline module evaluation', async () => {
+    const { result } = renderHook(() =>
+      useScript(undefined, {
+        id: 'use-script-inline-module',
+        type: 'module',
+        inlineContent:
+          'await Promise.resolve(); document.documentElement.dataset.moduleRan = "yes";'
+      })
+    );
+
+    try {
+      expect(result.current).toBe('loading');
+      await expect.poll(() => result.current).toBe('ready');
+      expect(document.documentElement.dataset.moduleRan).toBe('yes');
+    } finally {
+      document.getElementById('use-script-inline-module')?.remove();
+      delete document.documentElement.dataset.moduleRan;
+    }
+  });
+
   it('deduplicates the same script across hook instances', () => {
     const src = '/scripts/use-script-dedupe.test.js';
     const first = renderHook(() => useScript(src));

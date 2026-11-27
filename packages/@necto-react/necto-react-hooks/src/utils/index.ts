@@ -8,3 +8,5 @@
 
 export { createEventHandler } from './createEventHandler';
 export { createSyntheticEvent } from './createSyntheticEvent';
+
+export type { EventHandler, BaseEventHandler } from './createEventHandler';
