@@ -10,5 +10,6 @@ export * from './Portal';
 export * from './layouts';
 export * from './Overflow';
 export * from './Primitive';
+export * from './Script';
 export * from './ShadowBevel';
 export * from './VisuallyHidden';

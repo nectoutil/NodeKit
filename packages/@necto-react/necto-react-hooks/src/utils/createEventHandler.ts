@@ -5,22 +5,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { isProduction } from 'std-env';
-
 import type { SyntheticEvent } from 'react';
 import type { BaseEvent } from '@necto-react/types';
-import type { BaseEventHandler, EventHandler } from './types';
 
 /**
- * Creates an event handler that wraps a BaseEventHandler, providing custom propagation control.
+ * Creates an event handler that wraps a callback, providing custom propagation control.
  *
  * @template T The type of the SyntheticEvent.
- * @param {BaseEventHandler<T>} [handler] - The handler function to invoke with the extended event.
- * @returns {EventHandler<T> | undefined} A standard event handler or undefined if no handler is provided.
+ * @param handler - The callback to invoke with the extended event.
+ * @returns A standard event handler, or undefined if no callback is provided.
  */
 export function createEventHandler<T extends SyntheticEvent>(
-  handler?: BaseEventHandler<T>
-): EventHandler<T> | undefined {
+  handler?: (event: BaseEvent<T>) => void
+): ((event: T) => void) | undefined {
   if (!handler) return undefined;
 
   let stopPropagation: boolean = true;
@@ -34,13 +31,15 @@ export function createEventHandler<T extends SyntheticEvent>(
         return e.isDefaultPrevented();
       },
       stopPropagation(): void {
-        if (stopPropagation && isProduction) {
-          console.error(
-            'stopPropagation is now the default behavior for events in Necto. You can use continuePropagation() to revert this behavior.'
+        if (stopPropagation) {
+          throw new TypeError(
+            __DEV__
+              ? '[necto-react.hooks] NT0205: stopPropagation() is redundant because events stop propagation by default. Use continuePropagation() to allow propagation.'
+              : '[necto-react.hooks] NT0205: https://necto.dev/errors/NT0205'
           );
-        } else {
-          stopPropagation = true;
         }
+
+        stopPropagation = true;
       },
       continuePropagation(): void {
         stopPropagation = false;
@@ -50,10 +49,12 @@ export function createEventHandler<T extends SyntheticEvent>(
       }
     };
 
-    handler(event);
-
-    if (stopPropagation) {
-      e.stopPropagation();
+    try {
+      handler(event);
+    } finally {
+      if (stopPropagation) {
+        e.stopPropagation();
+      }
     }
   };
 }

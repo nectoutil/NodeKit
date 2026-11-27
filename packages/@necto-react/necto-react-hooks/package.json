@@ -5,8 +5,8 @@
   "description": "Necto's standard library for providing utility hooks for React applications.",
   "scripts": {
     "test": "vitest",
-    "build": "vp pack --format esm,cjs --dts --minify --sourcemap",
-    "dev": "vp pack --format esm,cjs --dts --sourcemap --watch",
+    "build": "vp pack",
+    "dev": "vp pack --watch",
     "test:coverage": "vitest run --coverage --passWithNoTests"
   },
   "files": [
