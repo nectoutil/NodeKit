@@ -29,13 +29,17 @@ export function useTheme<Theme extends string = string>(): UseThemeReturn<Theme>
     (): ThemeSnapshot => EMPTY_SNAPSHOT
   );
 
+  const config: ThemeConfig | undefined = useSyncExternalStore(
+    subscribeTheme,
+    getThemeConfig,
+    (): ThemeConfig | undefined => undefined
+  );
+
   const setTheme = useCallback((value: Theme | ((previous: Theme | undefined) => Theme)): void => {
     const previous = getThemeSnapshot()?.theme as Theme | undefined;
 
     setRuntimeTheme(typeof value === 'function' ? value(previous) : value);
   }, []);
-
-  const config: ThemeConfig | undefined = getThemeConfig();
 
   return {
     setTheme,

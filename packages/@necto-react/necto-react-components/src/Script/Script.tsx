@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { useScript, useId } from '@necto-react/hooks';
 import { useLocalState } from '@necto-react/state';
+import { useScript, useId } from '@necto-react/hooks';
 import { forwardRef, useEffect, useSyncExternalStore } from 'react';
 
 import { Primitive } from '../Primitive';

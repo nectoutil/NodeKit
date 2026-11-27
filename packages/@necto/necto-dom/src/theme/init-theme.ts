@@ -38,7 +38,10 @@ export function initTheme(config: ThemeConfig): void {
 
     for (const attr of attrs) {
       if (attr === 'class') {
-        root.classList.remove(...config.themes);
+        root.classList.remove(
+          ...config.themes.map((name) => (config.value && config.value[name]) || name)
+        );
+
         root.classList.add(applied);
       } else {
         root.setAttribute(attr, applied);
@@ -103,7 +106,8 @@ export function initTheme(config: ThemeConfig): void {
   }
 
   window.addEventListener('storage', (event: StorageEvent): void => {
-    if (event.key === config.storageKey) {
+    // A null key means the whole store was cleared, so re-resolve either way.
+    if (event.key === config.storageKey || event.key === null) {
       applyToDocument(readStoredTheme());
       notify();
     }

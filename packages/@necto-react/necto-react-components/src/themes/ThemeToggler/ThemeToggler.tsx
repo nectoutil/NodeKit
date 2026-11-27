@@ -6,6 +6,7 @@
  */
 
 import { Fragment } from 'react';
+import { getThemeSnapshot } from '@necto/dom';
 import { useTheme } from '@necto-react/hooks';
 
 import { Primitive } from '../../Primitive';
@@ -23,7 +24,12 @@ export function ThemeToggler(props: ThemeTogglerProps): ReactElement {
   const { theme, themes, setTheme, systemTheme, forcedTheme, resolvedTheme } = useTheme();
 
   const toggleTheme = (next?: string): void => {
-    setTheme(next ?? (resolvedTheme === 'dark' ? 'light' : 'dark'));
+    if (next !== undefined) {
+      setTheme(next);
+      return;
+    }
+
+    setTheme((getThemeSnapshot()?.resolvedTheme ?? resolvedTheme) === 'dark' ? 'light' : 'dark');
   };
 
   if (typeof children === 'function') {
@@ -42,6 +48,7 @@ export function ThemeToggler(props: ThemeTogglerProps): ReactElement {
 
   return (
     <Primitive.Button
+      type="button"
       {...rest}
       onClick={(event: MouseEvent<HTMLButtonElement>): void => {
         toggleTheme();
