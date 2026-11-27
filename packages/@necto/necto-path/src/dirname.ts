@@ -7,15 +7,9 @@
  * Portions adapted from Node.js (lib/path.js) and unjs/pathe, both MIT licensed.
  */
 
-import {
-  BACKSLASH_RE,
-  PathPlatforms,
-  IS_ABSOLUTE_RE,
-  DRIVE_LETTER_RE,
-  TRAILING_SLASH_RE
-} from './constants';
+import { BACKSLASH_RE, PathPlatforms, IS_ABSOLUTE_RE, DRIVE_LETTER_RE } from './constants';
 
-import type { PathOptions } from './types';
+import type { PathOptions, PathPlatform } from './types';
 
 export function dirname(path: string, options?: PathOptions): string {
   if (typeof path !== 'string') {
@@ -26,10 +20,16 @@ export function dirname(path: string, options?: PathOptions): string {
     );
   }
 
-  const platform = options?.platform ?? PathPlatforms.Windows;
+  const platform: PathPlatform = options?.platform ?? PathPlatforms.Windows;
   const isPosix: boolean = platform === PathPlatforms.Posix;
   const input: string = isPosix ? path : path.replace(BACKSLASH_RE, '/');
-  const segments: string[] = input.replace(TRAILING_SLASH_RE, '').split('/').slice(0, -1);
+
+  let end: number = input.length;
+  while (end > 0 && input[end - 1] === '/') {
+    end--;
+  }
+
+  const segments: string[] = input.slice(0, end).split('/').slice(0, -1);
 
   if (!isPosix && segments.length === 1 && DRIVE_LETTER_RE.test(segments[0])) {
     segments[0] += '/';

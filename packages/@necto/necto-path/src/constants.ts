@@ -11,7 +11,6 @@ export const PathPlatforms = {
 } as const;
 
 export const BACKSLASH_RE: RegExp = new RegExp(/\\/g);
-export const TRAILING_SLASH_RE: RegExp = new RegExp(/\/+$/);
 export const EXTNAME_RE: RegExp = new RegExp(/.(\.[^./]+|\.)$/);
 export const DRIVE_LETTER_RE: RegExp = new RegExp(/^[A-Za-z]:$/);
 export const IS_ABSOLUTE_RE: RegExp = new RegExp(/^[/\\](?![/\\])|^[/\\]{2}(?!\.)|^[A-Za-z]:[/\\]/);

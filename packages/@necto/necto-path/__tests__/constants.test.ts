@@ -12,8 +12,7 @@ import {
   DRIVE_LETTER_RE,
   EXTNAME_RE,
   IS_ABSOLUTE_RE,
-  PathPlatforms,
-  TRAILING_SLASH_RE
+  PathPlatforms
 } from '../src/constants';
 
 describe('constants', () => {
@@ -23,10 +22,6 @@ describe('constants', () => {
 
   it('BACKSLASH_RE replaces every backslash', () => {
     expect('a\\b\\c'.replace(BACKSLASH_RE, '/')).toBe('a/b/c');
-  });
-
-  it('TRAILING_SLASH_RE strips trailing slashes', () => {
-    expect('a/b///'.replace(TRAILING_SLASH_RE, '')).toBe('a/b');
   });
 
   it('DRIVE_LETTER_RE matches only a bare drive', () => {
