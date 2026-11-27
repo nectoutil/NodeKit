@@ -6,4 +6,5 @@
  */
 
 export { Overflow } from './Overflow';
+
 export type { OverflowProps, OverflowRenderState } from './Overflow.types';

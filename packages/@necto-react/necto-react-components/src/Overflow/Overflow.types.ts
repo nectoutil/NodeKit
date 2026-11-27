@@ -14,13 +14,6 @@ export interface OverflowRenderState<T> {
   count: number;
 }
 
-/**
- * Props for the Overflow component.
- *
- * Inherits all polymorphic Primitive props (`as`, `className`, `style`, plus
- * any DOM attributes for the rendered element). `children` is omitted because
- * Overflow drives rendering through `renderItem` and `renderOverflow` instead.
- */
 export type OverflowProps<T> = Omit<PrimitiveProps<ElementType>, 'children'> & {
   /** Items to lay out. */
   items: ReadonlyArray<T>;

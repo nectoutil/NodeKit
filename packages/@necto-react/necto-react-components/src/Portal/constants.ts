@@ -10,4 +10,4 @@ import { HTMLElements } from '@necto/dom';
 
 export const PORTAL_NAME = 'Portal' as const;
 export const DEFAULT_PORTAL_ROOT_ID = 'necto-portal-root' as const;
-export const DEFAULT_PORTAL_ELEMENT_TYPE = HTMLElements.Div;
+export const DEFAULT_PORTAL_ELEMENT_TYPE: keyof HTMLElementTagNameMap = HTMLElements.Div;

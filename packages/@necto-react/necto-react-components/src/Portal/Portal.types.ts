@@ -7,10 +7,10 @@
  */
 
 import type { ReactNode } from 'react';
-import type { Primitives } from '../Primitive';
+import type { Primitive } from '../Primitive';
 import type { ComponentPropsWithoutRef } from 'react';
 
-export interface PortalProps extends ComponentPropsWithoutRef<Primitives.Div> {
+export interface PortalProps extends ComponentPropsWithoutRef<typeof Primitive.Div> {
   children?: ReactNode;
   container?: Element | DocumentFragment | null;
 }

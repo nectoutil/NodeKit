@@ -13,8 +13,8 @@ import { useOverflow } from '@necto-react/hooks';
 import { Primitive } from '../Primitive';
 import { OVERFLOW_NAME } from './constants';
 
-import type { Ref, ForwardedRef, ReactElement } from 'react';
 import type { OverflowProps } from './Overflow.types';
+import type { Ref, ForwardedRef, ReactElement } from 'react';
 
 function OverflowFn<T>(
   props: OverflowProps<T>,
@@ -94,6 +94,6 @@ export const Overflow: (<T>(
   props: OverflowProps<T> & { ref?: Ref<HTMLElement> }
 ) => ReactElement | null) & {
   displayName?: string;
-} = forwardRef(OverflowFn) as any;
+} = forwardRef(OverflowFn as any) as any;
 
-(Overflow as any).displayName = OVERFLOW_NAME;
+Overflow.displayName = OVERFLOW_NAME;
