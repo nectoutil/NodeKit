@@ -16,10 +16,11 @@ export * from './transitions';
 export * from './html-elements';
 export * from './text-selection';
 export * from './aria-props';
-export * from './filterDOMProps';
-export * from './isVirtualClick';
-export * from './isKeyboardFocusEvent';
+export * from './filter-dom-props';
+export * from './is-virtual-click';
+export * from './is-keyboard-focus-event';
 export * from './resize-observer';
 export * from './scripts';
+export * from './theme';
 
 export type * from './types';

@@ -31,6 +31,7 @@ export * from './useScrollLock';
 export * from './useAriaProps';
 export * from './useStyleInjection';
 export * from './useScript';
+export * from './useTheme';
 export * from './useLatestRef';
 export * from './useIsomorphicInsertionEffect';
 export * from './useIsomorphicLayoutEffect';

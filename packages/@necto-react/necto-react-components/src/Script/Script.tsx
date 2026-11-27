@@ -34,8 +34,9 @@ function ScriptFn<Args extends unknown[]>(
     window: targetWindow
   } = props;
 
-  const generatedId = useId();
-  const scriptId = id ?? generatedId;
+  const generatedId: string = useId();
+  const scriptId: string = id ?? generatedId;
+
   const inlineScript: string | undefined = script
     ? serializeInlineScript(script, scriptArgs)
     : undefined;
@@ -60,9 +61,9 @@ function ScriptFn<Args extends unknown[]>(
   return (
     <Primitive.Script
       {...scriptProps}
-      ref={forwardedRef}
       type={type}
       id={scriptId}
+      ref={forwardedRef}
       suppressHydrationWarning
       data-necto-script-status="loading"
       data-necto-script={`inline:${scriptId}`}

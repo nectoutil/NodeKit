@@ -5,6 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { createScript } from './createScript';
-export { observeScript } from './observeScript';
+export { createScript } from './create-script';
+export { observeScript } from './observe-script';
 export { getScriptKey, getScriptStatus } from './helpers';

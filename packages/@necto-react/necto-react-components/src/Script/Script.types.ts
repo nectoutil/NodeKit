@@ -10,18 +10,18 @@ import type { UseScriptOptions } from '@necto-react/hooks';
 
 export type ScriptAttributes = Omit<
   ScriptHTMLAttributes<HTMLScriptElement>,
+  | 'id'
+  | 'as'
+  | 'src'
+  | 'type'
+  | 'nonce'
   | 'async'
   | 'children'
-  | 'crossOrigin'
-  | 'dangerouslySetInnerHTML'
-  | 'id'
   | 'integrity'
-  | 'nonce'
+  | 'crossOrigin'
   | 'referrerPolicy'
-  | 'src'
+  | 'dangerouslySetInnerHTML'
   | 'suppressHydrationWarning'
-  | 'type'
-  | 'as'
 > & {
   as?: never;
 };
