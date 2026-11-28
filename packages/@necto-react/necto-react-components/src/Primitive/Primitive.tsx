@@ -37,10 +37,10 @@ let tagComponents: Record<string, any> | undefined;
  * @param {Ref<any>} ref - Forwarded ref for the rendered element or cloned child.
  * @returns {ReactElement | null} The rendered element, or null when cloning fails.
  */
-const PrimitiveFn = <E extends ElementType = (typeof HTMLElements)['Div']>(
+function PrimitiveFn<E extends ElementType = (typeof HTMLElements)['Div']>(
   props: PrimitiveProps<E>,
   ref: Ref<any>
-): ReactElement | null => {
+): ReactElement | null {
   const { as, asChild, children, ...rest } = props;
 
   if (asChild) {
@@ -57,7 +57,7 @@ const PrimitiveFn = <E extends ElementType = (typeof HTMLElements)['Div']>(
   }
 
   return createElement(as ?? DEFAULT_PRIMITIVE_TAG, { ref, ...rest } as any, children);
-};
+}
 
 /**
  * The public Primitive component for Necto.

@@ -6,6 +6,8 @@
  *
  */
 
+export * from './Script';
+export * from './themes';
 export * from './Portal';
 export * from './layouts';
 export * from './Overflow';

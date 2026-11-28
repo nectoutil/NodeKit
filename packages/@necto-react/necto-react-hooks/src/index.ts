@@ -7,6 +7,8 @@
  */
 
 export * from './useContextProps';
+export * from './useLocalStorage';
+export * from './useEventCallback';
 export * from './useElementVisibility';
 export * from './useFocus';
 export * from './useFocusable';
@@ -28,6 +30,8 @@ export * from './useSupported';
 export * from './useScrollLock';
 export * from './useAriaProps';
 export * from './useStyleInjection';
+export * from './useScript';
+export * from './useTheme';
 export * from './useLatestRef';
 export * from './useIsomorphicInsertionEffect';
 export * from './useIsomorphicLayoutEffect';
@@ -37,8 +41,8 @@ export * from './useLongPress';
 export * from './useAnimation';
 export * from './useCollectionNavigation';
 export * from './useFormState';
-export * from './utils';
 export * from './useEventListener';
 export * from './useOnClickOutside';
 export * from './useCookie';
 export * from './useKV';
+export * from './utils';

@@ -5,12 +5,28 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { defineConfig } from 'vite-plus/pack';
+import { defineConfig } from 'vite-plus';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import { playwright } from '@vitest/browser-playwright';
 
 export default defineConfig({
-  entry: ['src/index.ts'],
+  pack: [
+    {
+      entry: ['src/index.ts'],
+      format: ['esm', 'cjs'],
+      fixedExtension: true,
+      sourcemap: true,
+      dts: true,
+      minify: true,
+      outDir: 'dist',
+      define: {
+        __DEV__: 'process.env.NODE_ENV !== "production"'
+      }
+    }
+  ],
+  define: {
+    __DEV__: 'true'
+  },
   plugins: [tsconfigPaths()],
   test: {
     setupFiles: ['./vitest.setup.ts'],

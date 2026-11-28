@@ -7,6 +7,9 @@
 
 /** Converts a number to CSS pixels, passes strings through unchanged */
 export function toPx(value?: number | string): string | undefined {
-  if (value === undefined) return undefined;
+  if (value === undefined) {
+    return undefined;
+  }
+
   return typeof value === 'number' ? `${value}px` : value;
 }

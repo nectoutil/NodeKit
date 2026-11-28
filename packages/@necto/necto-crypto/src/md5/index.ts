@@ -6,8 +6,8 @@
  *
  */
 
-import { md5Core } from './core';
 import { toHex } from './utils';
+import { md5Core } from './core';
 
 function compute(data: string | Uint8Array): Uint8Array {
   if (typeof process !== 'undefined' && process.versions?.node) {
@@ -25,7 +25,9 @@ function compute(data: string | Uint8Array): Uint8Array {
  * never for security-sensitive operations.
  */
 export function md5(data: string | Uint8Array, encoding?: 'hex'): string;
+
 export function md5(data: string | Uint8Array, encoding: 'raw'): Uint8Array;
+
 export function md5(
   data: string | Uint8Array,
   encoding: 'hex' | 'raw' = 'hex'

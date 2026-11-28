@@ -19,6 +19,6 @@
     "noEmit": false,
     "skipLibCheck": true
   },
-  "include": ["src", "__tests__"],
+  "include": ["src", "__tests__", "../../../globals.d.ts"],
   "exclude": ["node_modules", "dist"]
 }
