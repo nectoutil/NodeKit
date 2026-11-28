@@ -1,5 +1,13 @@
 # @necto-react/hooks
 
+## 2.26.1
+
+### Patch Changes
+
+- Updated dependencies [3e16777]
+  - @necto/dom@1.13.0
+  - @necto/cookie@1.1.3
+
 ## 2.26.0
 
 ### Minor Changes

@@ -1,5 +1,17 @@
 # @necto-react/components
 
+## 3.6.0
+
+### Minor Changes
+
+- 3e16777: Fixed theme flashing error on SPA pages.
+
+### Patch Changes
+
+- Updated dependencies [3e16777]
+  - @necto/dom@1.13.0
+  - @necto-react/hooks@2.26.1
+
 ## 3.5.0
 
 ### Minor Changes

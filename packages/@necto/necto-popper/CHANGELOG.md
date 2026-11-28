@@ -1,5 +1,12 @@
 # @necto/popper
 
+## 0.5.15
+
+### Patch Changes
+
+- Updated dependencies [3e16777]
+  - @necto/dom@1.13.0
+
 ## 0.5.14
 
 ### Patch Changes
