@@ -1,5 +1,12 @@
 # @necto/cookie
 
+## 1.1.2
+
+### Patch Changes
+
+- Updated dependencies [b0227ba]
+  - @necto/dom@1.12.0
+
 ## 1.1.0
 
 ### Minor Changes
