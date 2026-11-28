@@ -1,5 +1,11 @@
 # @necto/dom
 
+## 1.13.0
+
+### Minor Changes
+
+- 3e16777: Fixed theme flashing error on SPA pages.
+
 ## 1.12.0
 
 ### Minor Changes
