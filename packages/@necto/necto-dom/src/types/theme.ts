@@ -51,6 +51,9 @@ export interface NectoThemeRuntime {
   /** The resolved configuration the runtime was installed with. */
   config: ThemeConfig;
 
+  /** Re-assert the stored theme on the document. */
+  apply(): void;
+
   /** The current snapshot (stable reference until it changes). */
   getSnapshot(): ThemeSnapshot;
 

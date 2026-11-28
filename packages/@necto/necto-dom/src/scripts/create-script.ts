@@ -17,7 +17,7 @@ export function createScript(targetDocument: Document, descriptor: ScriptDescrip
   const records: Map<string, ScriptRecord> = getRecords(targetDocument);
   const cached: ScriptRecord | undefined = records.get(key);
 
-  if (cached) {
+  if (cached && cached.element.isConnected) {
     return cached;
   }
 
