@@ -10,7 +10,6 @@ import { useScript, useId } from '@necto-react/hooks';
 import { forwardRef, useEffect, useSyncExternalStore } from 'react';
 
 import { Primitive } from '../Primitive';
-import { runInlineScript } from './run-inline-script';
 import { SCRIPT_METHOD_SHORTHAND_PATTERN, SCRIPT_NAME } from './constants';
 
 import type { ScriptProps } from './Script.types';
@@ -137,3 +136,24 @@ export const Script = forwardRef(ScriptFn) as (<Args extends unknown[]>(
 ) => ReactElement | null) & { displayName?: string };
 
 Script.displayName = SCRIPT_NAME;
+
+// Runs the serialized script and records its execution status on the element.
+function runInlineScript(fn: (...args: unknown[]) => unknown, args: unknown[], id: string): void {
+  const element: HTMLElement | SVGScriptElement | null =
+    document.currentScript ?? document.getElementById(id);
+
+  const report = (status: 'ready' | 'error'): void => {
+    element?.setAttribute('data-necto-script-status', status);
+    if (element && !document.currentScript) {
+      element.dispatchEvent(new Event(`necto:script-${status}`));
+    }
+  };
+
+  try {
+    fn.apply(null, args);
+    report('ready');
+  } catch (error) {
+    report('error');
+    throw error;
+  }
+}

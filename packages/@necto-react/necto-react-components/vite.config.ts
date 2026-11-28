@@ -41,11 +41,10 @@ export default defineConfig({
       provider: 'istanbul',
       reporter: ['lcov', 'text'],
       include: ['src/**/*.{ts,tsx}'],
-      // Keep Vitest's defaults (they exclude test files, whose fixtures are
-      // serialized into inline scripts) and also drop run-inline-script, which is
-      // itself stringified — instrumenting either injects cov_* references that
-      // are undefined in the injected <script> scope and throw at runtime.
-      exclude: [...coverageConfigDefaults.exclude, 'dist', 'src/Script/run-inline-script.ts']
+      // Script.tsx serializes runInlineScript into an inline <script> via
+      // toString(); instrumenting it injects cov_* references that are undefined
+      // in the injected scope and throw at runtime, so it is excluded here.
+      exclude: [...coverageConfigDefaults.exclude, 'dist', 'src/Script/Script.tsx']
     }
   }
 });
