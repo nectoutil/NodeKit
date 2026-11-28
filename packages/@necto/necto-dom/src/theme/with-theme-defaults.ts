@@ -14,9 +14,9 @@ export function withThemeDefaults(config: Partial<ThemeConfig> = {}): ThemeConfi
     enableSystem,
     value: config.value,
     forcedTheme: config.forcedTheme,
-    storageKey: config.storageKey ?? 'theme',
     attribute: config.attribute ?? 'data-theme',
     themes: config.themes ?? ['light', 'dark'],
+    storageKey: config.storageKey ?? 'necto:theme',
     enableColorScheme: config.enableColorScheme ?? true,
     disableTransitionOnChange: config.disableTransitionOnChange ?? false,
     defaultTheme: config.defaultTheme ?? (enableSystem ? 'system' : 'light')
