@@ -1,5 +1,11 @@
 # @necto/dom
 
+## 1.12.0
+
+### Minor Changes
+
+- b0227ba: Added new features, including bug fixes
+
 ## 1.11.4
 
 ### Patch Changes

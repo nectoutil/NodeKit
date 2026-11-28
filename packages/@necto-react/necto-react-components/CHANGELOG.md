@@ -1,5 +1,17 @@
 # @necto-react/components
 
+## 3.5.0
+
+### Minor Changes
+
+- b0227ba: Added new features, including bug fixes
+
+### Patch Changes
+
+- Updated dependencies [b0227ba]
+  - @necto-react/hooks@2.26.0
+  - @necto/dom@1.12.0
+
 ## 3.4.3
 
 ### Patch Changes
