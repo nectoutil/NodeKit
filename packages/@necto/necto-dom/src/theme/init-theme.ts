@@ -75,6 +75,7 @@ export function initTheme(config: ThemeConfig): void {
 
   necto.theme = {
     config,
+    apply: (): void => applyToDocument(readStoredTheme()),
     getSnapshot: (): ThemeSnapshot => snapshot,
     setTheme: (theme: string): void => {
       try {

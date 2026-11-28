@@ -9,10 +9,10 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 
 import {
   initTheme,
-  withThemeDefaults,
-  getThemeSnapshot,
   setTheme,
-  subscribeTheme
+  subscribeTheme,
+  getThemeSnapshot,
+  withThemeDefaults
 } from '../src/theme';
 
 beforeEach(() => {
@@ -40,7 +40,7 @@ afterEach(() => {
 describe('withThemeDefaults', () => {
   it('fills defaults', () => {
     expect(withThemeDefaults()).toEqual({
-      storageKey: 'theme',
+      storageKey: 'necto:theme',
       attribute: 'data-theme',
       themes: ['light', 'dark'],
       defaultTheme: 'system',
@@ -59,7 +59,7 @@ describe('withThemeDefaults', () => {
 
 describe('initTheme', () => {
   it('applies the stored theme and installs the runtime', () => {
-    window.localStorage.setItem('theme', 'dark');
+    window.localStorage.setItem('necto:theme', 'dark');
 
     initTheme(withThemeDefaults({ attribute: 'data-theme' }));
 
@@ -77,7 +77,7 @@ describe('initTheme', () => {
   });
 
   it('adds the class for the class attribute', () => {
-    window.localStorage.setItem('theme', 'dark');
+    window.localStorage.setItem('necto:theme', 'dark');
 
     initTheme(withThemeDefaults({ attribute: 'class' }));
 
@@ -85,7 +85,7 @@ describe('initTheme', () => {
   });
 
   it('mirrors color-scheme when enabled', () => {
-    window.localStorage.setItem('theme', 'dark');
+    window.localStorage.setItem('necto:theme', 'dark');
 
     initTheme(withThemeDefaults({ attribute: 'data-theme', enableColorScheme: true }));
 
@@ -102,7 +102,7 @@ describe('initTheme', () => {
 
     window._necto?.theme?.setTheme('dark');
 
-    expect(window.localStorage.getItem('theme')).toBe('dark');
+    expect(window.localStorage.getItem('necto:theme')).toBe('dark');
     expect(document.documentElement.getAttribute('data-theme')).toBe('dark');
     expect(window._necto?.theme?.getSnapshot().theme).toBe('dark');
     expect(listener).toHaveBeenCalled();

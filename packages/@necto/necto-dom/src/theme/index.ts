@@ -7,4 +7,4 @@
 
 export { initTheme } from './init-theme';
 export { withThemeDefaults } from './with-theme-defaults';
-export { getThemeSnapshot, setTheme, subscribeTheme, getThemeConfig } from './runtime';
+export { applyTheme, getThemeSnapshot, setTheme, subscribeTheme, getThemeConfig } from './runtime';

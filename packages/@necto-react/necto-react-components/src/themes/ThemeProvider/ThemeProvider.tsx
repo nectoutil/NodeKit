@@ -6,7 +6,8 @@
  */
 
 import { Fragment } from 'react';
-import { initTheme, withThemeDefaults } from '@necto/dom';
+import { useIsomorphicLayoutEffect } from '@necto-react/hooks';
+import { applyTheme, initTheme, withThemeDefaults } from '@necto/dom';
 
 import { Script } from '../../Script';
 
@@ -18,6 +19,8 @@ export function ThemeProvider(props: ThemeProviderProps): ReactElement {
   const { children, ...options } = props;
 
   const config: ThemeConfig = withThemeDefaults(options);
+
+  useIsomorphicLayoutEffect(applyTheme);
 
   return (
     <Fragment>
